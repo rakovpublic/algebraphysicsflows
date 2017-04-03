@@ -5,6 +5,7 @@ import algebra.imp.Algebra;
 import algebra.imp.SuperAlgebra;
 import distribalgebra.IAlgebraFlow;
 import distribalgebra.imp.AlgebraFlow;
+import operations.simple.IOperation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,27 @@ public class Test {
                 Algebra<Integer> integerAlgebra= new Algebra<>("integer",Integer.class);
                 Algebra<Boolean> booleanAlgebra= new Algebra<>("boolean",Boolean.class);
                 integerAlgebra.addOperation("sum", new IntSumOperation());
+                integerAlgebra.addOperation("minus", new IOperation<Integer>() {
+                    @Override
+                    public Integer performOperation(Integer first, Integer second) {
+                        return first-second;
+                    }
+
+                    @Override
+                    public String getDescription() {
+                        return "minus integer operation";
+                    }
+
+                    @Override
+                    public String getAlgebraName() {
+                        return "integer";
+                    }
+
+                    @Override
+                    public Class getResultBaseClass() {
+                        return Integer.class;
+                    }
+                });
                 integerAlgebra.addCustomOperation("higher",new HigherIntOperation(booleanAlgebra));
                 booleanAlgebra.addOperation("and",new BooleanAndOperation());
                 superAlgebra.addAlgebra(integerAlgebra);
