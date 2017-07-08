@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class Test {
     public static void main(String [] args){
-        List<Integer> in= new ArrayList<>();
+      /*  List<Integer> in= new ArrayList<>();
         in.add(5);
         in.add(10);
         ISuperAlgebraInitializer superAlgebraInitializer = new ISuperAlgebraInitializer() {
@@ -58,7 +58,11 @@ public class Test {
         List<String> result= algebraFlow.performOperation("sum",5).performCustomOperation("higher",11).performOperation("and",true).collect();
         for(String r:result){
             System.out.println(r);
-        }
+        }*/
+     ArrayList<String> i= new ArrayList<>();
+        i.add("a");
+        i.add("b");
+      System.out.println(i.size());
 
     }
 }

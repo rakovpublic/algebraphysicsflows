@@ -152,4 +152,14 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
     public <K> List<AlgebraItem<K>> collectAlgebraItems() {
         return null;
     }
+
+    @Override
+    public Class getCurrentAlgebraItemClass() {
+        return null;
+    }
+
+    @Override
+    public String getCurrentAlgebraName() {
+        return null;
+    }
 }
