@@ -1,7 +1,6 @@
 package operations.flat;
 
 import algebra.IAlgebraItem;
-import algebra.imp.SuperAlgebra;
 import distribalgebra.imp.KeyValuePair;
 import operations.IAbsOperation;
 

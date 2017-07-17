@@ -1,7 +1,7 @@
 package operations.flat;
 
 import algebra.IAlgebraItem;
-import algebra.imp.SuperAlgebra;
+import algebra.imp.MathModel;
 
 import java.io.Serializable;
 
@@ -11,5 +11,5 @@ import java.io.Serializable;
 public interface ITransferFlatOperation<K > extends Serializable {
     <V>IAlgebraItem<V> performOperation(K input);
     String getAlgebraName();
-    void setSuperAlgebra(SuperAlgebra superAlgebra);
+    void setSuperAlgebra(MathModel mathModel);
 }

@@ -48,6 +48,7 @@ public  class Group<T> implements IGroup<T> {
         }
         return  res;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

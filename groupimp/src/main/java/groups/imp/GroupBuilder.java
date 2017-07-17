@@ -33,7 +33,7 @@ public class GroupBuilder<T > {
         return  res;
     }
 
-    public void seteElement(T eElement) {
+    public void setElement(T eElement) {
         this.eElement = eElement;
     }
     public IGroup<T> buildEMember(){

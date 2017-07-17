@@ -5,7 +5,7 @@ import algebra.IOperationInvoke;
 import algebra.ISuperAlgebraInitializer;
 import algebra.imp.Algebra;
 import algebra.imp.AlgebraItem;
-import algebra.imp.SuperAlgebra;
+import algebra.imp.MathModel;
 import distribalgebra.IAlgebraKeyValueFlow;
 import distribalgebra.IAlgebraFlow;
 import distribalgebra.IFlowInvoke;
@@ -20,27 +20,27 @@ import java.util.List;
  * Created by Rakovskyi Dmytro on 02.04.2017.
  */
 public class AlgebraFlow<T> implements IAlgebraFlow<T> {
-    private SuperAlgebra superAlgebra;
+    private MathModel mathModel;
     private List<?extends IAlgebraItem> currentFlow;
     private Algebra<?> currentAlgebra;
     private List< IFlowInvoke<?>> currentInvokes;
 
-    private AlgebraFlow(List<IAlgebraItem<T>> currentFlow, Algebra<T> currentAlgebra, SuperAlgebra superAlgebra) {
-        this.superAlgebra = superAlgebra;
+    private AlgebraFlow(List<IAlgebraItem<T>> currentFlow, Algebra<T> currentAlgebra, MathModel mathModel) {
+        this.mathModel = mathModel;
         this.currentFlow = currentFlow;
         this.currentAlgebra = currentAlgebra;
     }
 
-    private AlgebraFlow(SuperAlgebra superAlgebra,List<?extends IAlgebraItem> currentFlow, Algebra<T> currentAlgebra, List<IFlowInvoke<?>> currentInvokes) {
-        this.superAlgebra = superAlgebra;
+    private AlgebraFlow(MathModel mathModel, List<?extends IAlgebraItem> currentFlow, Algebra<T> currentAlgebra, List<IFlowInvoke<?>> currentInvokes) {
+        this.mathModel = mathModel;
         this.currentFlow = currentFlow;
         this.currentAlgebra = currentAlgebra;
         this.currentInvokes = currentInvokes;
     }
 
     public AlgebraFlow(InputFormat<T> inputFormat, ISuperAlgebraInitializer algebraInitializer, String startAlgebra) {
-        superAlgebra=algebraInitializer.initialize();
-        currentAlgebra=superAlgebra.getAlgebra(startAlgebra);
+        mathModel =algebraInitializer.initialize();
+        currentAlgebra= mathModel.getAlgebra(startAlgebra);
         currentInvokes= new LinkedList< IFlowInvoke<?>>();
         if(currentAlgebra.getParamClass().equals(inputFormat.getInputType())){
         IFlowInvoke<T> invoke=  new IFlowInvoke<T>() {
@@ -111,8 +111,8 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
             //TODO: add exception throw and logging
             return null;
         }
-        if(superAlgebra.hasAlgebra(customOperation.getAlgebraName())){
-            return new AlgebraFlow<K>(this.superAlgebra,this.currentFlow,(Algebra<K>) superAlgebra.getAlgebra(customOperation.getAlgebraName()),this.currentInvokes);
+        if(mathModel.hasAlgebra(customOperation.getAlgebraName())){
+            return new AlgebraFlow<K>(this.mathModel,this.currentFlow,(Algebra<K>) mathModel.getAlgebra(customOperation.getAlgebraName()),this.currentInvokes);
 
         }else {
             //TODO: add exception throw and logging

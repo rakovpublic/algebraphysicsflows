@@ -1,7 +1,6 @@
 package operations.flat;
 
 import algebra.IAlgebraItem;
-import algebra.imp.SuperAlgebra;
 import operations.IAbsOperation;
 
 import java.io.Serializable;

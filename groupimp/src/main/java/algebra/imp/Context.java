@@ -5,7 +5,7 @@ package algebra.imp;
  */
 public class Context {
 
-    public static SuperAlgebra getSuperAlgebra(){
+    public static MathModel getSuperAlgebra(){
         return null;
     }
 }

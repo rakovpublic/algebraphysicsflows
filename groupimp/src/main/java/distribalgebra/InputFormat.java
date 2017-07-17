@@ -2,7 +2,6 @@ package distribalgebra;
 
 import algebra.IAlgebraItem;
 import algebra.imp.Algebra;
-import algebra.imp.SuperAlgebra;
 
 import java.io.Serializable;
 import java.util.List;
