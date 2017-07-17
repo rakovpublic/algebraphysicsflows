@@ -2,7 +2,7 @@ package test;
 
 import algebra.ISuperAlgebraInitializer;
 import algebra.imp.Algebra;
-import algebra.imp.MathModel;
+import algebra.imp.MathTool;
 import distribalgebra.imp.AlgebraFlow;
 import operations.simple.IOperation;
 
@@ -19,8 +19,8 @@ public class Test {
         in.add(10);
         ISuperAlgebraInitializer superAlgebraInitializer = new ISuperAlgebraInitializer() {
             @Override
-            public MathModel initialize() {
-                MathModel mathModel = new MathModel();
+            public MathTool initialize() {
+                MathTool mathTool = new MathTool();
                 Algebra<Integer> integerAlgebra= new Algebra<>("integer",Integer.class);
                 Algebra<Boolean> booleanAlgebra= new Algebra<>("boolean",Boolean.class);
                 integerAlgebra.addOperation("sum", new IntSumOperation());
@@ -47,9 +47,9 @@ public class Test {
                 });
                 integerAlgebra.addCustomOperation("higher",new HigherIntOperation(booleanAlgebra));
                 booleanAlgebra.addOperation("and",new BooleanAndOperation());
-                mathModel.addAlgebra(integerAlgebra);
-                mathModel.addAlgebra(booleanAlgebra);
-                return mathModel;
+                mathTool.addAlgebra(integerAlgebra);
+                mathTool.addAlgebra(booleanAlgebra);
+                return mathTool;
             }
         };
         ListInput listInput= new ListInput(in);

@@ -6,10 +6,10 @@ import java.util.HashMap;
 /**
  * Created by Rakovskyi Dmytro on 31.03.2017.
  */
-public final class MathModel implements Serializable {
+public final class MathTool implements Serializable {
     private final HashMap<String,Algebra<?>>algebras;
 
-    public MathModel() {
+    public MathTool() {
         algebras = new HashMap<String,Algebra<?>>();
     }
     public boolean addAlgebra(Algebra<?> algebra){
