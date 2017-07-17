@@ -1,7 +1,6 @@
 package algebra.imp;
 
 import algebra.IAlgebraItem;
-import algebra.IOperationInvoke;
 import exceptions.NotMemberException;
 import operations.simple.ICustomOperation;
 import operations.simple.ITransferOperation;
@@ -32,10 +31,7 @@ public abstract class AbstractAlgebra<T> implements IAlgebraItem<T> {
         throw ex;
     }
 
-    @Override
-    public IAlgebraItem<T> performOperations(List<IOperationInvoke<T>> iOperationInvokes) {
-        return null;
-    }
+
 
     @Override
     public <K>IAlgebraItem<K> performCustomOperation(String operationName, T sElement) {

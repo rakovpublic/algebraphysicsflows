@@ -10,7 +10,6 @@ import java.util.List;
  */
 public interface IAlgebraItem<T> extends Serializable {
     public IAlgebraItem<T> performOperation(String operationName, T sElement);
-    public IAlgebraItem<T> performOperations(List<IOperationInvoke<T>> operationInvokes);
     public <K>IAlgebraItem<K> performCustomOperation(String operationName, T sElement);
     public <K>IAlgebraItem<K> performAlgebraTransfer(String operationName);
     public T getResult();

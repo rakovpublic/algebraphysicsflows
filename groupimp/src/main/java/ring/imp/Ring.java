@@ -52,7 +52,11 @@ private IRing<T> getNewMember(T member){
 
     @Override
     public IRing<T> sum(IRing<T> ringMember) {
-        return null;
+        IRing<T> res=null;
+        if(ringMember!=null){
+            res= getNewMember(this.sumOperation.performOperation(this.ringMember,ringMember.getMemberValue()));
+        }
+        return res;
     }
 
     @Override

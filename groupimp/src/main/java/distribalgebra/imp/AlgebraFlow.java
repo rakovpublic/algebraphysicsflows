@@ -1,7 +1,6 @@
 package distribalgebra.imp;
 
 import algebra.IAlgebraItem;
-import algebra.IOperationInvoke;
 import algebra.ISuperAlgebraInitializer;
 import algebra.imp.Algebra;
 import algebra.imp.AlgebraItem;
@@ -84,10 +83,7 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
         return this;
     }
 
-    @Override
-    public IAlgebraFlow<T> performOperations(List<IOperationInvoke<T>> iOperationInvokes) {
-        return null;
-    }
+
 
     @Override
     public <K> IAlgebraFlow<K> performCustomOperation(String operationName, T sElement) {
@@ -155,11 +151,11 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
 
     @Override
     public Class getCurrentAlgebraItemClass() {
-        return null;
+        return this.currentAlgebra.getParamClass();
     }
 
     @Override
     public String getCurrentAlgebraName() {
-        return null;
+        return this.currentAlgebra.getAlgebraName();
     }
 }

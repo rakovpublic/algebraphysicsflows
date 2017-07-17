@@ -1,6 +1,5 @@
 package distribalgebra;
 
-import algebra.IOperationInvoke;
 import algebra.imp.AlgebraItem;
 
 import java.io.Serializable;
@@ -11,7 +10,6 @@ import java.util.List;
  */
 public interface IAlgebraFlow<T > extends Serializable {
     public IAlgebraFlow<T> performOperation(String operation, T element);
-    public IAlgebraFlow<T> performOperations(List<IOperationInvoke<T>> operationInvokes);
     public <K> IAlgebraFlow<K> performCustomOperation(String operationName, T sElement);
     public <K > IAlgebraFlow<K> performAlgebraTransfer(String operationName);
     public List<String> collect();
