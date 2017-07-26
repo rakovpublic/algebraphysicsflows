@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class GroupValidator <T >{
     private GroupBuilder<T> groupBuilder;
-    private static final Logger logger = LogManager.getLogger(InfiniteGroupValidator.class);
+    private static final Logger logger = LogManager.getLogger(GroupValidator.class);
     private List<IGroup<T>> groupElements;
     public GroupValidator(GroupBuilder<T> builder, List<T> groupElements){
         groupBuilder=builder;
@@ -92,15 +92,6 @@ public class GroupValidator <T >{
                 }
             }
         }
-        return true;
-    }
-    public boolean isLeftIdeal(List<T> elements){
-        return true;
-    }
-    public boolean isRightIdeal(List<T> elements){
-        return true;
-    }
-    public boolean isIdeal(List<T> elements){
         return true;
     }
 
