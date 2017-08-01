@@ -2,6 +2,7 @@ package ring.imp;
 
 import ring.IRing;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -10,10 +11,17 @@ import java.util.List;
 public class RingValidator<T> {
     private RingBuilder<T> ringBuilder;
     private List<IRing<T>> ringList;
+    private HashSet<T> memberSet;
 
     public RingValidator(RingBuilder<T> ringBuilder, List<T> ringList) {
         this.ringBuilder = ringBuilder;
         this.ringList = ringBuilder.buildRing(ringList);
+    }
+    private void buildSet( List<T> ringList){
+        for(T elem:ringList){
+            memberSet.add(elem);
+        }
+
     }
 
     public boolean isCommutativeSum() {
@@ -97,16 +105,38 @@ public class RingValidator<T> {
         return true;
     }
     public boolean isLeftIdeal(List<T> elements){
+        for(int i=0;i<ringList.size();i++){
+            for (int j=0;j<ringList.size();j++){
+                if(!memberSet.contains(ringList.get(i).multiply(ringList.get(j)).getMemberValue())){
+                    return false;
+                }
+
+            }
+        }
         return true;
     }
     public boolean isRightIdeal(List<T> elements){
+        for(int i=0;i<ringList.size();i++){
+            for (int j=0;j<ringList.size();j++){
+                if(!memberSet.contains(ringList.get(j).multiply(ringList.get(i)).getMemberValue())){
+                    return false;
+                }
+
+            }
+        }
         return true;
     }
     public boolean isIdeal(List<T> elements){
+        for(int i=0;i<ringList.size();i++){
+            for (int j=0;j<ringList.size();j++){
+                if((!memberSet.contains(ringList.get(j).multiply(ringList.get(i)).getMemberValue()))||(!memberSet.contains(ringList.get(i).multiply(ringList.get(j)).getMemberValue()))){
+                    return false;
+                }
+
+            }
+        }
         return true;
     }
-    public IdealMeta getIdealMeta(List<T> elements){
-        return null;
-    }
+
 
 }
