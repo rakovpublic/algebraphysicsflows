@@ -4,6 +4,7 @@ import operations.simple.IOperation;
 import ring.IRing;
 import rules.IValidationRule;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -28,6 +29,10 @@ public class RingBuilder<T> {
         return new Ring<T>(this.sumOperation,this.multOperation,this.memberRules,this.neutralElement);
     }
     public List<IRing<T>> buildRing(List<T> members){
-        return null;
+        LinkedList<IRing<T>> res= new LinkedList<IRing<T>>();
+        for(T elem:members){
+            res.add(this.buildMember(elem));
+        }
+        return res;
     }
 }

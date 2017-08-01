@@ -1,5 +1,6 @@
 package ring.imp;
 
+import field.IField;
 import operations.simple.IOperation;
 import ring.IRing;
 import rules.IValidationRule;
@@ -10,7 +11,7 @@ import java.util.List;
 /**
  * Created by Rakovskyi Dmytro on 27.03.2017.
  */
-public class Ring<T extends Object> implements IRing<T> {
+public class Ring<T extends Object> implements IRing<T>{
 
     private IOperation<T> sumOperation=null;
     private  IOperation<T> multOperation=null;
