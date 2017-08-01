@@ -107,7 +107,7 @@ public class RingValidator<T> {
     public boolean isLeftIdeal(List<T> elements){
         for(int i=0;i<ringList.size();i++){
             for (int j=0;j<ringList.size();j++){
-                if(!memberSet.contains(ringList.get(i).multiply(ringList.get(j)).getMemberValue())){
+                if(!memberSet.contains(ringList.get(i).multiply(ringBuilder.buildMember(elements.get(j))).getMemberValue())){
                     return false;
                 }
 
@@ -118,7 +118,7 @@ public class RingValidator<T> {
     public boolean isRightIdeal(List<T> elements){
         for(int i=0;i<ringList.size();i++){
             for (int j=0;j<ringList.size();j++){
-                if(!memberSet.contains(ringList.get(j).multiply(ringList.get(i)).getMemberValue())){
+                if(!memberSet.contains(ringBuilder.buildMember(elements.get(j)).multiply(ringList.get(i)).getMemberValue())){
                     return false;
                 }
 
@@ -129,7 +129,7 @@ public class RingValidator<T> {
     public boolean isIdeal(List<T> elements){
         for(int i=0;i<ringList.size();i++){
             for (int j=0;j<ringList.size();j++){
-                if((!memberSet.contains(ringList.get(j).multiply(ringList.get(i)).getMemberValue()))||(!memberSet.contains(ringList.get(i).multiply(ringList.get(j)).getMemberValue()))){
+                if((!memberSet.contains(ringBuilder.buildMember(elements.get(j)).multiply(ringList.get(i)).getMemberValue()))||(!memberSet.contains(ringList.get(i).multiply(ringBuilder.buildMember(elements.get(j))).getMemberValue()))){
                     return false;
                 }
 
