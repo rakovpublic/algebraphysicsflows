@@ -3,11 +3,9 @@ package algebra.imp;
 import algebra.IAlgebraItem;
 import operations.flat.ICustomFlatOperation;
 import operations.flat.IFlatOperation;
-import operations.flat.ISplitFlatOperation;
 import operations.flat.ITransferFlatOperation;
 import operations.simple.ICustomOperation;
 import operations.simple.IOperation;
-import operations.simple.ISplitOperation;
 import operations.simple.ITransferOperation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,8 +28,7 @@ public final class Algebra<T> implements Serializable{
     private final HashMap<String, IFlatOperation<T>>algebraFlatOperations;
     private final HashMap<String, ICustomFlatOperation<T>> customFlatOperations;
     private final HashMap<String, ITransferFlatOperation<T>> transferFlatOperations;
-    private final HashMap<String, ISplitOperation<T>> splitOperations;
-    private final HashMap<String, ISplitFlatOperation<T>> splitFlatOperations;
+
 
     public Class getParamClass() {
         return paramClass;
@@ -52,8 +49,7 @@ public final class Algebra<T> implements Serializable{
         transferFlatOperations = new HashMap<String,ITransferFlatOperation<T>>();
         customFlatOperations = new HashMap<String,ICustomFlatOperation<T>>();
         algebraFlatOperations = new HashMap<String,IFlatOperation<T>>();
-        splitFlatOperations = new HashMap<String,ISplitFlatOperation<T>>();
-        splitOperations = new HashMap<String,ISplitOperation<T>>();
+
     }
     public boolean addOperation(String name, IOperation<T> operation ){
         if(!algebraOperations.containsKey(name)){
@@ -97,33 +93,12 @@ public final class Algebra<T> implements Serializable{
         return false;
     }
     public boolean addAlgebraFlatTransfer(String name, ITransferFlatOperation<T> transferFlatOperation){
-        if(!splitOperations.containsKey(name)){
+        if(!transferFlatOperations.containsKey(name)){
             transferFlatOperations.put(name,transferFlatOperation);
             return true;
         }
         return false;
     }
-    public boolean addSplitOperation(String name,ISplitOperation<T> splitOperation){
-        if(!splitOperations.containsKey(name)){
-            splitOperations.put(name,splitOperation);
-            return true;
-        }
-        return false;
-    }
-    public boolean addSplitFlatOperation(String name,ISplitFlatOperation<T> splitFlatOperation){
-        if(!splitFlatOperations.containsKey(name)){
-            splitFlatOperations.put(name,splitFlatOperation);
-            return true;
-        }
-        return false;
-    }
-    public boolean hasSplitOperation(String name){
-        return splitOperations.containsKey(name);
-    }
-    public boolean hasSplitFlatOperation(String name){
-        return splitFlatOperations.containsKey(name);
-    }
-
     public boolean hasOperation(String name){
         return algebraOperations.containsKey(name);
     }
@@ -145,29 +120,23 @@ public final class Algebra<T> implements Serializable{
     public IAlgebraItem<T> buildAlgebraItem(T value){
         return new AlgebraItem<T>(this,value);
     }
-    IOperation<T> getOperation(String name){
+    public IOperation<T> getOperation(String name){
         return algebraOperations.get(name);
     }
     public ICustomOperation<T>  getCustomOperation(String name){
         return customOperations.get(name);
     }
-    ITransferOperation<T> getTransferOperation(String name){
+    public ITransferOperation<T> getTransferOperation(String name){
         return transferOperations.get(name);
     }
-    IFlatOperation<T> getFlatOperation(String name){
+    public IFlatOperation<T> getFlatOperation(String name){
         return algebraFlatOperations.get(name);
     }
-    ICustomFlatOperation<T>  getCustomFlatOperation(String name){
+    public ICustomFlatOperation<T>  getCustomFlatOperation(String name){
         return customFlatOperations.get(name);
     }
-    ITransferFlatOperation<T> getTransferFlatOperation(String name){
+    public ITransferFlatOperation<T> getTransferFlatOperation(String name){
         return transferFlatOperations.get(name);
-    }
-    ISplitOperation<T>  getSplitOperation(String name){
-        return splitOperations.get(name);
-    }
-    ISplitFlatOperation<T> getSplitFlatOperation(String name){
-        return splitFlatOperations.get(name);
     }
     boolean validate(T value){
         for(IValidationRule<T>rule:validationRules){

@@ -17,6 +17,5 @@ public interface IAlgebraFlow<T > extends Serializable {
     public <K>List<AlgebraItem<K>> collectAlgebraItems();
     public Class getCurrentAlgebraItemClass();
     public String getCurrentAlgebraName();
-    public<K,V> IAlgebraKeyValueFlow<K,V> splitToKeyValue(String operationName);
 
 }

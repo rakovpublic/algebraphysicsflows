@@ -5,11 +5,11 @@ import algebra.ISuperAlgebraInitializer;
 import algebra.imp.Algebra;
 import algebra.imp.AlgebraItem;
 import algebra.imp.MathTool;
-import distribalgebra.IAlgebraKeyValueFlow;
 import distribalgebra.IAlgebraFlow;
 import distribalgebra.IFlowInvoke;
 import distribalgebra.InputFormat;
 import operations.simple.ICustomOperation;
+import operations.simple.ITransferOperation;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -119,13 +119,38 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
 
     @Override
     public <K> IAlgebraFlow<K> performAlgebraTransfer(String operationName) {
-        return null;
+
+        ITransferOperation<K> transferOperation =null;
+        if (currentAlgebra.hasAlgebraTransfer(operationName)){
+            transferOperation=( ITransferOperation<K>)currentAlgebra.getTransferOperation(operationName);
+            IFlowInvoke<K> invoke=  new IFlowInvoke<K>() {
+
+                @Override
+                public List<IAlgebraItem<K>> perform() {
+                    List<IAlgebraItem<K>> flow = new ArrayList<IAlgebraItem<K>>();
+                    for(IAlgebraItem<T> item:currentFlow){
+                        flow.add(item.performAlgebraTransfer(operationName));
+                    }
+                    currentFlow=flow;
+                    return  flow;
+                }
+            };
+            currentInvokes.add(invoke);
+        }else {
+            //TODO: add exception throw and logging
+            return null;
+        }
+        if(mathTool.hasAlgebra(transferOperation.getAlgebraName())){
+            return new AlgebraFlow<K>(this.mathTool,this.currentFlow,(Algebra<K>) mathTool.getAlgebra(transferOperation.getAlgebraName()),this.currentInvokes);
+
+        }else {
+            //TODO: add exception throw and logging
+            return null;
+        }
+
     }
 
-    @Override
-    public <K, V> IAlgebraKeyValueFlow<K, V> splitToKeyValue(String operationName) {
-        return null;
-    }
+
 
     @Override
     public  List<String> collect() {
@@ -148,6 +173,7 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
     public <K> List<AlgebraItem<K>> collectAlgebraItems() {
         return null;
     }
+
 
     @Override
     public Class getCurrentAlgebraItemClass() {
