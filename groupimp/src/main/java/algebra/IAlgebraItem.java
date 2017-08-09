@@ -19,5 +19,7 @@ public interface IAlgebraItem<T> extends Serializable {
     public <K>List<IAlgebraItem<K>> performCustomFlatOperation(String operationName, T sElement);
     public <K>List<IAlgebraItem<K>> performAlgebraFlatTransfer(String operationName);
     public List<IAlgebraItem<T>> performFlatOperation(String operationName, T sElement);
+    public <K,V>IAlgebraItem<K> performUnsafeOperation(String operationName,V element);
+    public <K,V>List<IAlgebraItem<K>> performUnsafeFlatOperation(String operationName,V element);
 
 }

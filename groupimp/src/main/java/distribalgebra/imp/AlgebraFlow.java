@@ -150,6 +150,30 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
 
     }
 
+    @Override
+    public <K, V> IAlgebraFlow<K> performAlgebraUnsafe(String operationName, V element) {
+        return null;
+    }
+
+    @Override
+    public IAlgebraFlow<T> performFlatOperation(String operation, T element) {
+        return null;
+    }
+
+    @Override
+    public <K> IAlgebraFlow<K> performFlatCustomOperation(String operationName, T sElement) {
+        return null;
+    }
+
+    @Override
+    public <K> IAlgebraFlow<K> performFlatAlgebraTransfer(String operationName) {
+        return null;
+    }
+
+    @Override
+    public <K, V> IAlgebraFlow<K> performFlatAlgebraUnsafe(String operationName, V element) {
+        return null;
+    }
 
 
     @Override

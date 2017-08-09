@@ -4,9 +4,11 @@ import algebra.IAlgebraItem;
 import operations.flat.ICustomFlatOperation;
 import operations.flat.IFlatOperation;
 import operations.flat.ITransferFlatOperation;
+import operations.flat.IUnsafeFlatOperation;
 import operations.simple.ICustomOperation;
 import operations.simple.IOperation;
 import operations.simple.ITransferOperation;
+import operations.simple.IUnsafeOperation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import rules.IValidationRule;
@@ -28,6 +30,8 @@ public final class Algebra<T> implements Serializable{
     private final HashMap<String, IFlatOperation<T>>algebraFlatOperations;
     private final HashMap<String, ICustomFlatOperation<T>> customFlatOperations;
     private final HashMap<String, ITransferFlatOperation<T>> transferFlatOperations;
+    private final HashMap<String, IUnsafeOperation<T>> unsafeOperations;
+    private final HashMap<String, IUnsafeFlatOperation<T>> unsafeFlatOperations;
 
 
     public Class getParamClass() {
@@ -49,6 +53,24 @@ public final class Algebra<T> implements Serializable{
         transferFlatOperations = new HashMap<String,ITransferFlatOperation<T>>();
         customFlatOperations = new HashMap<String,ICustomFlatOperation<T>>();
         algebraFlatOperations = new HashMap<String,IFlatOperation<T>>();
+        unsafeOperations = new HashMap<String,IUnsafeOperation<T>>();
+        unsafeFlatOperations= new HashMap<String,IUnsafeFlatOperation<T>>();
+
+    }
+    public boolean addUnsafeOperation(String name, IUnsafeOperation<T> operation ){
+        if(!unsafeOperations.containsKey(name)){
+            unsafeOperations.put(name,operation);
+            return true;
+        }
+        return false;
+
+    }
+    public boolean addUnsafeOperationFlat(String name, IUnsafeFlatOperation<T> operation ){
+        if(!unsafeFlatOperations.containsKey(name)){
+            unsafeFlatOperations.put(name,operation);
+            return true;
+        }
+        return false;
 
     }
     public boolean addOperation(String name, IOperation<T> operation ){
@@ -99,6 +121,12 @@ public final class Algebra<T> implements Serializable{
         }
         return false;
     }
+    public boolean hasUnsafeOperation(String name){
+        return unsafeOperations.containsKey(name);
+    }
+    public boolean hasUnsafeFlatOperation(String name){
+        return unsafeFlatOperations.containsKey(name);
+    }
     public boolean hasOperation(String name){
         return algebraOperations.containsKey(name);
     }
@@ -119,6 +147,12 @@ public final class Algebra<T> implements Serializable{
     }
     public IAlgebraItem<T> buildAlgebraItem(T value){
         return new AlgebraItem<T>(this,value);
+    }
+    public IUnsafeOperation<T> getUnsafeOperation(String name){
+        return unsafeOperations.get(name);
+    }
+    public IUnsafeFlatOperation<T> getUnsafeFlatOperation(String name){
+        return unsafeFlatOperations.get(name);
     }
     public IOperation<T> getOperation(String name){
         return algebraOperations.get(name);

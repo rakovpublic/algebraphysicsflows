@@ -11,6 +11,5 @@ import java.io.Serializable;
  */
 public interface ITransferFlatOperation<K > extends Serializable, IAbsOperation {
     <V>IAlgebraItem<V> performOperation(K input);
-    String getAlgebraName();
-    void setSuperAlgebra(MathTool mathTool);
+
 }
