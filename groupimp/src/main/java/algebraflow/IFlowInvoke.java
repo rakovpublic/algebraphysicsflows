@@ -1,4 +1,4 @@
-package distribalgebra;
+package algebraflow;
 
 import algebra.IAlgebraItem;
 

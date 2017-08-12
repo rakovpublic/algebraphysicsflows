@@ -3,7 +3,7 @@ package test;
 import algebra.ISuperAlgebraInitializer;
 import algebra.imp.Algebra;
 import algebra.imp.MathTool;
-import distribalgebra.imp.AlgebraFlow;
+import algebraflow.imp.AlgebraFlow;
 import operations.simple.IOperation;
 
 import java.util.ArrayList;

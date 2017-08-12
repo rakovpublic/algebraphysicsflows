@@ -1,7 +1,6 @@
-package distribalgebra;
+package algebraflow;
 
 import algebra.IAlgebraItem;
-import algebra.imp.AlgebraItem;
 
 import java.util.List;
 

@@ -2,7 +2,7 @@ package test;
 
 import algebra.IAlgebraItem;
 import algebra.imp.Algebra;
-import distribalgebra.InputFormat;
+import algebraflow.InputFormat;
 
 import java.util.ArrayList;
 import java.util.List;

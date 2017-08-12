@@ -1,13 +1,13 @@
-package distribalgebra.imp;
+package algebraflow.imp;
 
 import algebra.IAlgebraItem;
 import algebra.ISuperAlgebraInitializer;
 import algebra.imp.Algebra;
 import algebra.imp.MathTool;
-import distribalgebra.IAlgebraFlow;
-import distribalgebra.IFlowInvoke;
-import distribalgebra.IWriter;
-import distribalgebra.InputFormat;
+import algebraflow.IAlgebraFlow;
+import algebraflow.IFlowInvoke;
+import algebraflow.IWriter;
+import algebraflow.InputFormat;
 import operations.flat.ICustomMemberFlatOperation;
 import operations.flat.ICustomResultFlatOperation;
 import operations.flat.IUnsafeFlatOperation;
