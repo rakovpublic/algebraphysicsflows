@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * Created by Rakovskyi Dmytro on 28.03.2017.
  */
-public interface ICustomOperation<K> extends Serializable, IAbsOperation {
+public interface ICustomResultOperation<K> extends Serializable, IAbsOperation {
     <V>IAlgebraItem<V> performOperation(K  first, K second);
 
 }

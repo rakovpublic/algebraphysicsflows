@@ -1,7 +1,5 @@
 package test;
 
-import algebra.IAlgebraItem;
-import operations.simple.ICustomOperation;
 import operations.simple.IOperation;
 
 /**

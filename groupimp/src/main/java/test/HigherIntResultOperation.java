@@ -2,14 +2,14 @@ package test;
 
 import algebra.IAlgebraItem;
 import algebra.imp.Algebra;
-import operations.simple.ICustomOperation;
+import operations.simple.ICustomResultOperation;
 
 /**
  * Created by Rakovskyi Dmytro on 03.04.2017.
  */
-public class HigherIntOperation implements ICustomOperation<Integer>{
+public class HigherIntResultOperation implements ICustomResultOperation<Integer> {
     private Algebra<Boolean> algebra;
-    public HigherIntOperation(Algebra<Boolean> algebra){
+    public HigherIntResultOperation(Algebra<Boolean> algebra){
         this.algebra=algebra;
     }
     @Override

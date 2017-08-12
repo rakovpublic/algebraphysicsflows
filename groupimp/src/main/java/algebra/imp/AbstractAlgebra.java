@@ -2,11 +2,9 @@ package algebra.imp;
 
 import algebra.IAlgebraItem;
 import exceptions.NotMemberException;
-import operations.flat.ICustomFlatOperation;
-import operations.flat.IFlatOperation;
-import operations.flat.ITransferFlatOperation;
-import operations.flat.IUnsafeFlatOperation;
-import operations.simple.ICustomOperation;
+import operations.flat.*;
+import operations.simple.ICustomMemberOperation;
+import operations.simple.ICustomResultOperation;
 import operations.simple.ITransferOperation;
 import operations.simple.IUnsafeOperation;
 import org.apache.logging.log4j.LogManager;
@@ -39,10 +37,10 @@ public abstract class AbstractAlgebra<T> implements IAlgebraItem<T> {
 
 
     @Override
-    public <K>IAlgebraItem<K> performCustomOperation(String operationName, T sElement) {
+    public <K>IAlgebraItem<K> performCustomResultOperation(String operationName, T sElement) {
         Algebra<T> algebra=this.getAlgebra();
-        if(this.getAlgebra().hasCustomOperation(operationName)){
-            ICustomOperation<T> op=algebra.getCustomOperation(operationName);
+        if(this.getAlgebra().hasCustomResultOperation(operationName)){
+            ICustomResultOperation<T> op=algebra.getCustomResultOperation(operationName);
             if(algebra.validate(sElement)){
                 return op.performOperation(perform().getResult(),sElement);
             }
@@ -69,10 +67,10 @@ public abstract class AbstractAlgebra<T> implements IAlgebraItem<T> {
     }
 
     @Override
-    public <K>List<IAlgebraItem<K>> performCustomFlatOperation(String operationName, T sElement) {
+    public <K>List<IAlgebraItem<K>> performCustomResultFlatOperation(String operationName, T sElement) {
         Algebra<T> algebra=this.getAlgebra();
-        if(this.getAlgebra().hasCustomFlatOperation(operationName)){
-            ICustomFlatOperation<T> op=algebra.getCustomFlatOperation(operationName);
+        if(this.getAlgebra().hasCustomResultFlatOperation(operationName)){
+            ICustomResultFlatOperation<T> op=algebra.getCustomResultFlatOperation(operationName);
             if(algebra.validate(sElement)){
                 return op.performOperation(perform().getResult(),sElement);
             }
@@ -133,6 +131,33 @@ public abstract class AbstractAlgebra<T> implements IAlgebraItem<T> {
         if(this.getAlgebra().hasUnsafeFlatOperation(operationName)){
             IUnsafeFlatOperation<T> op=algebra.getUnsafeFlatOperation(operationName);
             return op.<K,V>performOperation(perform().getResult(),element);
+        }
+        UnsupportedOperationException ex= new UnsupportedOperationException("Operation"+operationName+" is not exists in this algebra.");
+        logger.error("Invalid operation name.",ex);
+        throw ex;
+    }
+
+    @Override
+    public <K> IAlgebraItem<T> performCustomMemberOperation(String operationName, K element) {
+        Algebra<T> algebra=this.getAlgebra();
+        if(this.getAlgebra().hasCustomMemberOperation(operationName)){
+            ICustomMemberOperation<T> op=algebra.getCustomMemberOperation(operationName);
+
+                return op.performOperation(perform().getResult(),element);
+
+        }
+        UnsupportedOperationException ex= new UnsupportedOperationException("Operation"+operationName+" is not exists in this algebra.");
+        logger.error("Invalid operation name.",ex);
+        throw ex;
+    }
+
+    @Override
+    public <K> List<IAlgebraItem<T>> performCustomMemberFlatOperation(String operationName, K element) {
+        Algebra<T> algebra=this.getAlgebra();
+        if(this.getAlgebra().hasCustomMemberFlatOperation(operationName)){
+            ICustomMemberFlatOperation<T> op=algebra.getCustomMemberFlatOperation(operationName);
+                return op.performOperation(perform().getResult(),element);
+
         }
         UnsupportedOperationException ex= new UnsupportedOperationException("Operation"+operationName+" is not exists in this algebra.");
         logger.error("Invalid operation name.",ex);

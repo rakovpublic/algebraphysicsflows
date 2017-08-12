@@ -45,7 +45,7 @@ public class Test {
                         return Integer.class;
                     }
                 });
-                integerAlgebra.addCustomOperation("higher",new HigherIntOperation(booleanAlgebra));
+                integerAlgebra.addCustomResultOperation("higher",new HigherIntResultOperation(booleanAlgebra));
                 booleanAlgebra.addOperation("and",new BooleanAndOperation());
                 mathTool.addAlgebra(integerAlgebra);
                 mathTool.addAlgebra(booleanAlgebra);
@@ -54,7 +54,7 @@ public class Test {
         };
         ListInput listInput= new ListInput(in);
         AlgebraFlow<Integer> algebraFlow= new AlgebraFlow<>(listInput,superAlgebraInitializer,"integer");
-        List<String> result= algebraFlow.performOperation("sum",5).performCustomOperation("higher",11).performOperation("and",true).collect();
+        List<String> result= algebraFlow.performOperation("sum",5).performCustomResultOperation("higher",11).performOperation("and",true).collect();
         for(String r:result){
             System.out.println(r);
         }
