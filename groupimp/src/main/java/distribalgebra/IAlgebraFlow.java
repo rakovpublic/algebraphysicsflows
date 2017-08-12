@@ -1,6 +1,6 @@
 package distribalgebra;
 
-import algebra.imp.AlgebraItem;
+import algebra.IAlgebraItem;
 
 import java.io.Serializable;
 import java.util.List;
@@ -20,8 +20,8 @@ public interface IAlgebraFlow<T > extends Serializable {
     public <K> IAlgebraFlow<T> performCustomMemberOperation(String operationName, K sElement);
     public <K> IAlgebraFlow<T> performFlatCustomMemberOperation(String operationName, K sElement);
     public List<String> collect();
-    public void write();
-    public <K>List<AlgebraItem<K>> collectAlgebraItems();
+    public<K> void write(IWriter<K> writer);
+    public <K>List<IAlgebraItem<K>> collectAlgebraItems();
     public Class getCurrentAlgebraItemClass();
     public String getCurrentAlgebraName();
 

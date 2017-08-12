@@ -3,10 +3,10 @@ package distribalgebra.imp;
 import algebra.IAlgebraItem;
 import algebra.ISuperAlgebraInitializer;
 import algebra.imp.Algebra;
-import algebra.imp.AlgebraItem;
 import algebra.imp.MathTool;
 import distribalgebra.IAlgebraFlow;
 import distribalgebra.IFlowInvoke;
+import distribalgebra.IWriter;
 import distribalgebra.InputFormat;
 import operations.flat.ICustomMemberFlatOperation;
 import operations.flat.ICustomResultFlatOperation;
@@ -336,13 +336,21 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
     }
 
     @Override
-    public void write() {
+    public<K> void write(IWriter<K> writer) {
+        writer.write(this.collectAlgebraItems());
 
     }
 
     @Override
-    public <K> List<AlgebraItem<K>> collectAlgebraItems() {
-        return null;
+    public <K> List<IAlgebraItem<K>> collectAlgebraItems() {
+        List<IAlgebraItem<K>> result = new ArrayList<>();
+        for(IFlowInvoke invoke:currentInvokes){
+            currentFlow=invoke.perform();
+        }
+        for(IAlgebraItem<K> item:currentFlow){
+            result.add(item.perform());
+        }
+        return result;
     }
 
 
