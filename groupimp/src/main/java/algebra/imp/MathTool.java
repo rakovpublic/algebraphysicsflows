@@ -8,8 +8,10 @@ import java.util.HashMap;
  */
 public final class MathTool implements Serializable {
     private final HashMap<String,Algebra<?>>algebras;
+    private String name;
 
-    public MathTool() {
+    public MathTool(String name) {
+        this.name=name;
         algebras = new HashMap<String,Algebra<?>>();
     }
     public boolean addAlgebra(Algebra<?> algebra){
@@ -24,5 +26,8 @@ public final class MathTool implements Serializable {
     }
     public boolean hasAlgebra(String name){
         return algebras.containsKey(name);
+    }
+    public String getName(){
+        return this.name;
     }
 }

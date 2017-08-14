@@ -20,7 +20,7 @@ public class Test {
         ISuperAlgebraInitializer superAlgebraInitializer = new ISuperAlgebraInitializer() {
             @Override
             public MathTool initialize() {
-                MathTool mathTool = new MathTool();
+                MathTool mathTool = new MathTool("test");
                 Algebra<Integer> integerAlgebra= new Algebra<>("integer",Integer.class);
                 Algebra<Boolean> booleanAlgebra= new Algebra<>("boolean",Boolean.class);
                 integerAlgebra.addOperation("sum", new IntSumOperation());

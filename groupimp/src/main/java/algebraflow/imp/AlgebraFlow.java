@@ -8,13 +8,19 @@ import algebraflow.IAlgebraFlow;
 import algebraflow.IFlowInvoke;
 import algebraflow.IWriter;
 import algebraflow.InputFormat;
+import exceptions.AlgebraNotExistsException;
+import exceptions.NotMemberException;
+import exceptions.UnsupportedOperationException;
 import operations.flat.ICustomMemberFlatOperation;
 import operations.flat.ICustomResultFlatOperation;
+import operations.flat.ITransferFlatOperation;
 import operations.flat.IUnsafeFlatOperation;
 import operations.simple.ICustomMemberOperation;
 import operations.simple.ICustomResultOperation;
 import operations.simple.ITransferOperation;
 import operations.simple.IUnsafeOperation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -24,6 +30,7 @@ import java.util.List;
  * Created by Rakovskyi Dmytro on 02.04.2017.
  */
 public class AlgebraFlow<T> implements IAlgebraFlow<T> {
+    private static final Logger logger = LogManager.getLogger(AlgebraFlow.class);
     private MathTool mathTool;
     private List<?extends IAlgebraItem> currentFlow;
     private Algebra<?> currentAlgebra;
@@ -58,7 +65,7 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
         };
         currentInvokes.add(invoke);
         }else{
-            //TODO: add exception throw and logging
+            logger.error("Incorrect param type expected:"+currentAlgebra.getParamClass()+"found:"+inputFormat.getInputType());
         }
 
 
@@ -66,7 +73,12 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
 
     @Override
     public IAlgebraFlow<T> performOperation(String operation, T element) {
-        if (currentAlgebra.hasOperation(operation)&&currentAlgebra.getParamClass().equals(element.getClass())){
+        if(!currentAlgebra.getParamClass().equals(element.getClass())){
+            NotMemberException exception= new NotMemberException("Incorrect param type expected:"+currentAlgebra.getParamClass()+"found:"+element.getClass());
+            logger.error("Incorrect param type expected:"+currentAlgebra.getParamClass()+"found:"+element.getClass(),exception);
+            throw exception;
+        }
+        if (currentAlgebra.hasOperation(operation)){
             IFlowInvoke<T> invoke=  new IFlowInvoke<T>() {
 
                 @Override
@@ -82,8 +94,9 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
             };
             currentInvokes.add(invoke);
         }else {
-            //TODO: add exception throw and logging
-            return null;
+            UnsupportedOperationException exception= new UnsupportedOperationException("Algebra "+currentAlgebra.getAlgebraName()+" has not operation"+operation+"operation type simple");
+            logger.error("Algebra "+currentAlgebra.getAlgebraName()+" has not operation"+operation+"operation type simple",exception);
+            throw exception;
         }
         return this;
     }
@@ -93,7 +106,12 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
     @Override
     public <K> IAlgebraFlow<K> performCustomResultOperation(String operationName, T sElement) {
         ICustomResultOperation<K> customOperation=null;
-        if (currentAlgebra.hasCustomResultOperation(operationName)&&currentAlgebra.getParamClass().equals(sElement.getClass())){
+        if(!currentAlgebra.getParamClass().equals(sElement.getClass())){
+            NotMemberException exception= new NotMemberException("Incorrect param type expected:"+currentAlgebra.getParamClass()+"found:"+sElement.getClass());
+            logger.error("Incorrect param type expected:"+currentAlgebra.getParamClass()+"found:"+sElement.getClass(),exception);
+            throw exception;
+        }
+        if (currentAlgebra.hasCustomResultOperation(operationName)){
             customOperation=(ICustomResultOperation<K>)currentAlgebra.getCustomResultOperation(operationName);
             IFlowInvoke<K> invoke=  new IFlowInvoke<K>() {
 
@@ -109,15 +127,17 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
             };
             currentInvokes.add(invoke);
         }else {
-            //TODO: add exception throw and logging
-            return null;
+            UnsupportedOperationException exception= new UnsupportedOperationException("Algebra "+currentAlgebra.getAlgebraName()+" has not operation"+operationName+"operation type customresult");
+            logger.error("Algebra "+currentAlgebra.getAlgebraName()+" has not operation"+operationName+"operation type customresult",exception);
+            throw exception;
         }
         if(mathTool.hasAlgebra(customOperation.getAlgebraName())){
             return new AlgebraFlow<K>(this.mathTool,this.currentFlow,(Algebra<K>) mathTool.getAlgebra(customOperation.getAlgebraName()),this.currentInvokes);
 
         }else {
-            //TODO: add exception throw and logging
-            return null;
+            AlgebraNotExistsException  exception= new AlgebraNotExistsException("Cannot find algebra"+customOperation.getAlgebraName()+" in math tool: "+mathTool.getName());
+            logger.error("Cannot find algebra"+customOperation.getAlgebraName()+" in math tool: "+mathTool.getName());
+            throw exception;
         }
 
     }
@@ -142,15 +162,17 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
             };
             currentInvokes.add(invoke);
         }else {
-            //TODO: add exception throw and logging
-            return null;
+            UnsupportedOperationException exception= new UnsupportedOperationException("Algebra "+currentAlgebra.getAlgebraName()+" has not operation"+operationName+"operation type transfer");
+            logger.error("Algebra "+currentAlgebra.getAlgebraName()+" has not operation"+operationName,exception);
+            throw exception;
         }
         if(mathTool.hasAlgebra(transferOperation.getAlgebraName())){
             return new AlgebraFlow<K>(this.mathTool,this.currentFlow,(Algebra<K>) mathTool.getAlgebra(transferOperation.getAlgebraName()),this.currentInvokes);
 
         }else {
-            //TODO: add exception throw and logging
-            return null;
+            AlgebraNotExistsException  exception= new AlgebraNotExistsException("Cannot find algebra"+transferOperation.getAlgebraName()+" in math tool: "+mathTool.getName()+"operation type transfer");
+            logger.error("Cannot find algebra"+transferOperation.getAlgebraName()+" in math tool: "+mathTool.getName());
+            throw exception;
         }
 
     }
@@ -158,6 +180,7 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
     @Override
     public <K, V> IAlgebraFlow<K> performAlgebraUnsafe(String operationName, V element) {
         IUnsafeOperation<K> customOperation=null;
+        if (currentAlgebra.hasUnsafeOperation(operationName)){
             customOperation=(IUnsafeOperation<K>)currentAlgebra.getUnsafeOperation(operationName);
             IFlowInvoke<K> invoke=  new IFlowInvoke<K>() {
 
@@ -172,18 +195,29 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
                 }
             };
             currentInvokes.add(invoke);
+        }else{
+            UnsupportedOperationException exception= new UnsupportedOperationException("Algebra "+currentAlgebra.getAlgebraName()+" has not operation"+operationName+"operation type unsafe");
+            logger.error("Algebra "+currentAlgebra.getAlgebraName()+" has not operation"+operationName+"operation type unsafe",exception);
+            throw exception;
+        }
         if(mathTool.hasAlgebra(customOperation.getAlgebraName())){
             return new AlgebraFlow<K>(this.mathTool,this.currentFlow,(Algebra<K>) mathTool.getAlgebra(customOperation.getAlgebraName()),this.currentInvokes);
 
         }else {
-            //TODO: add exception throw and logging
-            return null;
+            AlgebraNotExistsException  exception= new AlgebraNotExistsException("Cannot find algebra"+customOperation.getAlgebraName()+" in math tool: "+mathTool.getName());
+            logger.error("Cannot find algebra"+customOperation.getAlgebraName()+" in math tool: "+mathTool.getName());
+            throw exception;
         }
     }
 
     @Override
     public IAlgebraFlow<T> performFlatOperation(String operation, T element) {
-        if (currentAlgebra.hasFlatOperation(operation)&&currentAlgebra.getParamClass().equals(element.getClass())){
+        if(currentAlgebra.getParamClass().equals(element.getClass())){
+            NotMemberException exception= new NotMemberException("Incorrect param type expected:"+currentAlgebra.getParamClass()+"found:"+element.getClass());
+            logger.error("Incorrect param type expected:"+currentAlgebra.getParamClass()+"found:"+element.getClass(),exception);
+            throw exception;
+        }
+        if (currentAlgebra.hasFlatOperation(operation)){
             IFlowInvoke<T> invoke=  new IFlowInvoke<T>() {
 
                 @Override
@@ -199,8 +233,9 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
             };
             currentInvokes.add(invoke);
         }else {
-            //TODO: add exception throw and logging
-            return null;
+            UnsupportedOperationException exception= new UnsupportedOperationException("Algebra "+currentAlgebra.getAlgebraName()+" has not operation"+operation+"operation type simpleflat");
+            logger.error("Algebra "+currentAlgebra.getAlgebraName()+" has not operation"+operation+"operation type simpleflat",exception);
+            throw exception;
         }
         return this;
     }
@@ -208,7 +243,12 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
     @Override
     public <K> IAlgebraFlow<K> performFlatCustomResultOperation(String operationName, T sElement) {
         ICustomResultFlatOperation<K> customOperation=null;
-        if (currentAlgebra.hasCustomResultFlatOperation(operationName)&&currentAlgebra.getParamClass().equals(sElement.getClass())){
+        if(!currentAlgebra.getParamClass().equals(sElement.getClass())){
+            NotMemberException exception= new NotMemberException("Incorrect param type expected:"+currentAlgebra.getParamClass()+"found:"+sElement.getClass());
+            logger.error("Incorrect param type expected:"+currentAlgebra.getParamClass()+"found:"+sElement.getClass(),exception);
+            throw exception;
+        }
+        if (currentAlgebra.hasCustomResultFlatOperation(operationName)){
             customOperation=(ICustomResultFlatOperation<K>)currentAlgebra.getCustomResultFlatOperation(operationName);
             IFlowInvoke<K> invoke=  new IFlowInvoke<K>() {
 
@@ -224,27 +264,58 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
             };
             currentInvokes.add(invoke);
         }else {
-            //TODO: add exception throw and logging
-            return null;
+            UnsupportedOperationException exception= new UnsupportedOperationException("Algebra "+currentAlgebra.getAlgebraName()+" has not operation"+operationName+"operation type customresultflat");
+            logger.error("Algebra "+currentAlgebra.getAlgebraName()+" has not operation"+operationName+"operation type customresultflat",exception);
+            throw exception;
         }
         if(mathTool.hasAlgebra(customOperation.getAlgebraName())){
             return new AlgebraFlow<K>(this.mathTool,this.currentFlow,(Algebra<K>) mathTool.getAlgebra(customOperation.getAlgebraName()),this.currentInvokes);
 
         }else {
-            //TODO: add exception throw and logging
-            return null;
+            AlgebraNotExistsException  exception= new AlgebraNotExistsException("Cannot find algebra"+customOperation.getAlgebraName()+" in math tool: "+mathTool.getName());
+            logger.error("Cannot find algebra"+customOperation.getAlgebraName()+" in math tool: "+mathTool.getName());
+            throw exception;
         }
 
     }
 
     @Override
     public <K> IAlgebraFlow<K> performFlatAlgebraTransfer(String operationName) {
-        return null;
+        ITransferFlatOperation<K> transferOperation =null;
+        if (currentAlgebra.hasAlgebraTransfer(operationName)){
+            transferOperation=(ITransferFlatOperation<K>)currentAlgebra.getTransferFlatOperation(operationName);
+            IFlowInvoke<K> invoke=  new IFlowInvoke<K>() {
+
+                @Override
+                public List<IAlgebraItem<K>> perform() {
+                    List<IAlgebraItem<K>> flow = new ArrayList<IAlgebraItem<K>>();
+                    for(IAlgebraItem<T> item:currentFlow){
+                        flow.addAll(item.performAlgebraFlatTransfer(operationName));
+                    }
+                    currentFlow=flow;
+                    return  flow;
+                }
+            };
+            currentInvokes.add(invoke);
+        }else {
+            UnsupportedOperationException exception= new UnsupportedOperationException("Algebra "+currentAlgebra.getAlgebraName()+" has not operation"+operationName+"operation type transferflat");
+            logger.error("Algebra "+currentAlgebra.getAlgebraName()+" has not operation"+operationName+"operation type transferflat",exception);
+            throw exception;
+        }
+        if(mathTool.hasAlgebra(transferOperation.getAlgebraName())){
+            return new AlgebraFlow<K>(this.mathTool,this.currentFlow,(Algebra<K>) mathTool.getAlgebra(transferOperation.getAlgebraName()),this.currentInvokes);
+
+        }else {
+            AlgebraNotExistsException  exception= new AlgebraNotExistsException("Cannot find algebra"+transferOperation.getAlgebraName()+" in math tool: "+mathTool.getName());
+            logger.error("Cannot find algebra"+transferOperation.getAlgebraName()+" in math tool: "+mathTool.getName());
+            throw exception;
+        }
     }
 
     @Override
     public <K, V> IAlgebraFlow<K> performFlatAlgebraUnsafe(String operationName, V element) {
         IUnsafeFlatOperation<K> customOperation=null;
+        if (currentAlgebra.hasUnsafeFlatOperation(operationName)){
         customOperation=(IUnsafeFlatOperation<K>)currentAlgebra.getUnsafeFlatOperation(operationName);
         IFlowInvoke<K> invoke=  new IFlowInvoke<K>() {
 
@@ -259,18 +330,25 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
             }
         };
         currentInvokes.add(invoke);
+        }else {
+            UnsupportedOperationException exception= new UnsupportedOperationException("Algebra "+currentAlgebra.getAlgebraName()+" has not operation"+operationName+"operation type unsafeflat");
+            logger.error("Algebra "+currentAlgebra.getAlgebraName()+" has not operation"+operationName+"operation type unsafeflat",exception);
+            throw exception;
+        }
         if(mathTool.hasAlgebra(customOperation.getAlgebraName())){
             return new AlgebraFlow<K>(this.mathTool,this.currentFlow,(Algebra<K>) mathTool.getAlgebra(customOperation.getAlgebraName()),this.currentInvokes);
 
         }else {
-            //TODO: add exception throw and logging
-            return null;
+            AlgebraNotExistsException  exception= new AlgebraNotExistsException("Cannot find algebra"+customOperation.getAlgebraName()+" in math tool: "+mathTool.getName());
+            logger.error("Cannot find algebra"+customOperation.getAlgebraName()+" in math tool: "+mathTool.getName());
+            throw exception;
         }
     }
 
     @Override
     public <K> IAlgebraFlow<T> performCustomMemberOperation(String operationName, K sElement) {
         ICustomMemberOperation<K> customOperation=null;
+        if(currentAlgebra.hasCustomMemberOperation(operationName)){
             customOperation=(ICustomMemberOperation<K>)currentAlgebra.getCustomMemberOperation(operationName);
             IFlowInvoke<T> invoke=  new IFlowInvoke<T>() {
 
@@ -285,19 +363,26 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
                 }
             };
             currentInvokes.add(invoke);
+        }else {
+            UnsupportedOperationException exception= new UnsupportedOperationException("Algebra "+currentAlgebra.getAlgebraName()+" has not operation"+operationName+"operation type custommeber");
+            logger.error("Algebra "+currentAlgebra.getAlgebraName()+" has not operation"+operationName+"operation type custommeber",exception);
+            throw exception;
+        }
 
         if(mathTool.hasAlgebra(customOperation.getAlgebraName())){
             return new AlgebraFlow<T>(this.mathTool,this.currentFlow,(Algebra<T>) mathTool.getAlgebra(customOperation.getAlgebraName()),this.currentInvokes);
 
         }else {
-            //TODO: add exception throw and logging
-            return null;
+            AlgebraNotExistsException  exception= new AlgebraNotExistsException("Cannot find algebra"+customOperation.getAlgebraName()+" in math tool: "+mathTool.getName());
+            logger.error("Cannot find algebra"+customOperation.getAlgebraName()+" in math tool: "+mathTool.getName());
+            throw exception;
         }
     }
 
     @Override
     public <K> IAlgebraFlow<T> performFlatCustomMemberOperation(String operationName, K sElement) {
         ICustomMemberFlatOperation<K> customOperation=null;
+        if(currentAlgebra.hasCustomMemberFlatOperation(operationName)){
         customOperation=(ICustomMemberFlatOperation<K>)currentAlgebra.getCustomMemberFlatOperation(operationName);
         IFlowInvoke<T> invoke=  new IFlowInvoke<T>() {
 
@@ -312,13 +397,19 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
             }
         };
         currentInvokes.add(invoke);
+        }else {
+            UnsupportedOperationException exception= new UnsupportedOperationException("Algebra "+currentAlgebra.getAlgebraName()+" has not operation"+operationName+"operation type custommeberflat");
+            logger.error("Algebra "+currentAlgebra.getAlgebraName()+" has not operation"+operationName+"operation type custommeberflat",exception);
+            throw exception;
+        }
 
         if(mathTool.hasAlgebra(customOperation.getAlgebraName())){
             return new AlgebraFlow<T>(this.mathTool,this.currentFlow,(Algebra<T>) mathTool.getAlgebra(customOperation.getAlgebraName()),this.currentInvokes);
 
         }else {
-            //TODO: add exception throw and logging
-            return null;
+            AlgebraNotExistsException  exception= new AlgebraNotExistsException("Cannot find algebra"+customOperation.getAlgebraName()+" in math tool: "+mathTool.getName());
+            logger.error("Cannot find algebra"+customOperation.getAlgebraName()+" in math tool: "+mathTool.getName());
+            throw exception;
         }
     }
 
