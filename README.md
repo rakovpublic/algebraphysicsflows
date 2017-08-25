@@ -1,0 +1,1 @@
+This framework designed for math modelling and analysis. It's based on group theory (https://en.wikipedia.org/wiki/Group_theory) and my expirience with big data tools. You can read about key concepts and how to use in manual.

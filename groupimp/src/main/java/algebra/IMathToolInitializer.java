@@ -7,6 +7,6 @@ import java.io.Serializable;
 /**
  * Created by Rakovskyi Dmytro on 02.04.2017.
  */
-public interface ISuperAlgebraInitializer extends Serializable {
+public interface IMathToolInitializer extends Serializable {
     MathTool initialize();
 }

@@ -1,6 +1,6 @@
-package test;
+package example;
 
-import algebra.ISuperAlgebraInitializer;
+import algebra.IMathToolInitializer;
 import algebra.imp.Algebra;
 import algebra.imp.MathTool;
 import algebraflow.imp.AlgebraFlow;
@@ -17,10 +17,10 @@ public class Test {
         List<Integer> in= new ArrayList<>();
         in.add(5);
         in.add(10);
-        ISuperAlgebraInitializer superAlgebraInitializer = new ISuperAlgebraInitializer() {
+        IMathToolInitializer superAlgebraInitializer = new IMathToolInitializer() {
             @Override
             public MathTool initialize() {
-                MathTool mathTool = new MathTool("test");
+                MathTool mathTool = new MathTool("example");
                 Algebra<Integer> integerAlgebra= new Algebra<>("integer",Integer.class);
                 Algebra<Boolean> booleanAlgebra= new Algebra<>("boolean",Boolean.class);
                 integerAlgebra.addOperation("sum", new IntSumOperation());
@@ -46,22 +46,18 @@ public class Test {
                     }
                 });
                 integerAlgebra.addCustomResultOperation("higher",new HigherIntResultOperation(booleanAlgebra));
-                booleanAlgebra.addOperation("and",new BooleanAndOperation());
-                mathTool.addAlgebra(integerAlgebra);
-                mathTool.addAlgebra(booleanAlgebra);
-                return mathTool;
-            }
-        };
-        ListInput listInput= new ListInput(in);
-        AlgebraFlow<Integer> algebraFlow= new AlgebraFlow<>(listInput,superAlgebraInitializer,"integer");
-        List<String> result= algebraFlow.performOperation("sum",5).performCustomResultOperation("higher",11).performOperation("and",true).collect();
-        for(String r:result){
-            System.out.println(r);
+            booleanAlgebra.addOperation("and",new BooleanAndOperation());
+            mathTool.addAlgebra(integerAlgebra);
+            mathTool.addAlgebra(booleanAlgebra);
+            return mathTool;
         }
-     ArrayList<String> i= new ArrayList<>();
-        i.add("a");
-        i.add("b");
-      System.out.println(i.size());
+    };
+    ListInput listInput= new ListInput(in);
+    AlgebraFlow<Integer> algebraFlow= new AlgebraFlow<>(listInput,superAlgebraInitializer,"integer");
+    List<String> result= algebraFlow.performOperation("sum",5).performCustomResultOperation("higher",11).performOperation("and",true).collect();
+        for(String r:result){
+        System.out.println(r);
+        }
 
     }
 }

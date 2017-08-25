@@ -1,4 +1,4 @@
-package test;
+package example;
 
 import algebra.IAlgebraItem;
 import algebra.imp.Algebra;

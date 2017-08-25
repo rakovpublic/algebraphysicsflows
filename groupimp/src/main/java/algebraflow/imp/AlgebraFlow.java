@@ -1,7 +1,7 @@
 package algebraflow.imp;
 
 import algebra.IAlgebraItem;
-import algebra.ISuperAlgebraInitializer;
+import algebra.IMathToolInitializer;
 import algebra.imp.Algebra;
 import algebra.imp.MathTool;
 import algebraflow.IAlgebraFlow;
@@ -49,7 +49,7 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
         this.currentInvokes = currentInvokes;
     }
 
-    public AlgebraFlow(InputFormat<T> inputFormat, ISuperAlgebraInitializer algebraInitializer, String startAlgebra) {
+    public AlgebraFlow(InputFormat<T> inputFormat, IMathToolInitializer algebraInitializer, String startAlgebra) {
         mathTool =algebraInitializer.initialize();
         currentAlgebra= mathTool.getAlgebra(startAlgebra);
         currentInvokes= new LinkedList< IFlowInvoke<?>>();

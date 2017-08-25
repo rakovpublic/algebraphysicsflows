@@ -11,7 +11,7 @@ import java.io.Serializable;
 public interface ICustomMemberOperation<K > extends Serializable, IAbsOperation {
     /**
      *
-     * Operation between 2 different type return first type(initial type) example:  matrix multiply integer.
+     * Operation between 2 different params type return first type(initial type) example:  matrix multiply integer.
      * @param first
      * @param second
      * @return  IAlgebraItem parametrized by type of param first
