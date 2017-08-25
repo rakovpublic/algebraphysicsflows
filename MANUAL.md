@@ -14,7 +14,8 @@ int(natural numbers) with 2 operations sum betwen 2 int values and comparison op
 boolean with 1 logical operation and 
 
 The algebraflow class constructor takes as params object which implement InputFormat interface, objetc which implement IMathToolInitializer interface and name of the initial algebra for the items from input. 
-        List<Integer> in= new ArrayList<>();
+    
+     List<Integer> in= new ArrayList<>();
         in.add(5);
         in.add(10);
         IMathToolInitializer superAlgebraInitializer = new IMathToolInitializer() {
@@ -29,7 +30,6 @@ The algebraflow class constructor takes as params object which implement InputFo
                     public Integer performOperation(Integer first, Integer second) {
                         return first-second;
                     }
-
                     @Override
                     public String getDescription() {
                         return "minus integer operation";
