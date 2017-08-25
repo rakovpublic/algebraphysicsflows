@@ -1,6 +1,6 @@
 Task list
 1. Change input interface to iterator
-2. Prepare input interface for cluster mode(batching).
-3. Add cluster mode(design/choose container, resource manager, property sharing)
+2. Prepare input interface for cluster mode(split for node processor input).
+3. Add cluster mode(design/choose container, resource manager, property sharing, input sharing)
 Optional:
 Integrate with opensource(apache) big data stack 
