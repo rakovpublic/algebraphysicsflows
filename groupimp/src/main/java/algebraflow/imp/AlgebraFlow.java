@@ -70,6 +70,13 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
 
 
     }
+    /**
+     * perform operation for each element in flow with two elements of type T and return result type T
+     * @param operation operation name
+     * @param element second element for operation
+     * @return IAlgebraFlow parametrized T
+     * @see operations.simple.IOperation
+     * */
 
     @Override
     public IAlgebraFlow<T> performOperation(String operation, T element) {
@@ -101,7 +108,13 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
         return this;
     }
 
-
+    /**
+     * perform custom result operation for each element in flow with two elements of type T and return result type K
+     * @param operationName operation name
+     * @param sElement second element for operation
+     * @return IAlgebraFlow parametrized K
+     * @see operations.simple.ICustomResultOperation
+     * */
 
     @Override
     public <K> IAlgebraFlow<K> performCustomResultOperation(String operationName, T sElement) {
@@ -141,7 +154,12 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
         }
 
     }
-
+    /**
+     * perform transfer operation for each element in flow with  element of type T and return result type K
+     * @param operationName operation name
+     * @return IAlgebraFlow parametrized K
+     * @see operations.simple.ITransferOperation
+     * */
     @Override
     public <K> IAlgebraFlow<K> performAlgebraTransfer(String operationName) {
 
@@ -176,7 +194,13 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
         }
 
     }
-
+    /**
+     * perform operation for each element in flow with  elements type T and  element type V return result type K
+     * @param operationName operation name
+     * @param element second element for operation
+     * @return IAlgebraFlow parametrized K
+     * @see operations.simple.IUnsafeOperation
+     * */
     @Override
     public <K, V> IAlgebraFlow<K> performAlgebraUnsafe(String operationName, V element) {
         IUnsafeOperation<K> customOperation=null;
@@ -209,7 +233,13 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
             throw exception;
         }
     }
-
+    /**
+     * perform unsafe operation for each element in flow with two elements of type T and return result type T
+     * @param operation operation name
+     * @param element second element for operation
+     * @return IAlgebraFlow parametrized T
+     * @see operations.flat.IFlatOperation
+     * */
     @Override
     public IAlgebraFlow<T> performFlatOperation(String operation, T element) {
         if(currentAlgebra.getParamClass().equals(element.getClass())){
@@ -239,7 +269,13 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
         }
         return this;
     }
-
+    /**
+     * perform operation for each element in flow with two elements of type T and return result type K
+     * @param operationName operation name
+     * @param sElement second element for operation
+     * @return IAlgebraFlow parametrized K
+     * @see operations.flat.ICustomResultFlatOperation
+     * */
     @Override
     public <K> IAlgebraFlow<K> performFlatCustomResultOperation(String operationName, T sElement) {
         ICustomResultFlatOperation<K> customOperation=null;
@@ -278,7 +314,12 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
         }
 
     }
-
+    /**
+     * perform transfer operation for each element in flow with  element of type T and return result type K
+     * @param operationName operation name
+     * @return IAlgebraFlow parametrized K
+     * @see operations.flat.ITransferFlatOperation
+     * */
     @Override
     public <K> IAlgebraFlow<K> performFlatAlgebraTransfer(String operationName) {
         ITransferFlatOperation<K> transferOperation =null;
@@ -311,7 +352,13 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
             throw exception;
         }
     }
-
+    /**
+     * perform operation for each element in flow with  elements type T and  element type V return result type K
+     * @param operationName operation name
+     * @param element second element for operation
+     * @return IAlgebraFlow parametrized K
+     * @see operations.flat.IUnsafeFlatOperation
+     * */
     @Override
     public <K, V> IAlgebraFlow<K> performFlatAlgebraUnsafe(String operationName, V element) {
         IUnsafeFlatOperation<K> customOperation=null;
@@ -344,7 +391,13 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
             throw exception;
         }
     }
-
+    /**
+     * perform operation for each element in flow with  elements type T and  element type K return result type T
+     * @param operationName operation name
+     * @param sElement second element for operation
+     * @return IAlgebraFlow parametrized K
+     * @see operations.simple.ICustomMemberOperation
+     * */
     @Override
     public <K> IAlgebraFlow<T> performCustomMemberOperation(String operationName, K sElement) {
         ICustomMemberOperation<K> customOperation=null;
@@ -378,7 +431,13 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
             throw exception;
         }
     }
-
+    /**
+     * perform operation for each element in flow with  elements type T and  element type K return result type T
+     * @param operationName operation name
+     * @param sElement second element for operation
+     * @return IAlgebraFlow parametrized K
+     * @see operations.flat.ICustomMemberFlatOperation
+     * */
     @Override
     public <K> IAlgebraFlow<T> performFlatCustomMemberOperation(String operationName, K sElement) {
         ICustomMemberFlatOperation<K> customOperation=null;
@@ -412,7 +471,10 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
             throw exception;
         }
     }
-
+    /**
+     *collect items from flow and return it as list of strings, toString method used
+     *@return List of items in string view
+     * */
 
     @Override
     public  List<String> collect() {
@@ -425,13 +487,21 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
         }
         return result;
     }
-
+    /**
+     *writes items to storage
+     * @param writer
+     *@see IWriter
+     * */
     @Override
     public<K> void write(IWriter<K> writer) {
         writer.write(this.collectAlgebraItems());
 
     }
-
+    /**
+     *collects elements from flow as list of IAlgebraItems
+     * @return list of IAlgebraItems
+     * @see IAlgebraItem
+     * */
     @Override
     public <K> List<IAlgebraItem<K>> collectAlgebraItems() {
         List<IAlgebraItem<K>> result = new ArrayList<>();
@@ -443,13 +513,17 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
         }
         return result;
     }
-
+    /**
+     *@return class which used for current AlgebraItem  parametrization
+     * */
 
     @Override
     public Class getCurrentAlgebraItemClass() {
         return this.currentAlgebra.getParamClass();
     }
-
+    /**
+     *@return current algebra name
+     * */
     @Override
     public String getCurrentAlgebraName() {
         return this.currentAlgebra.getAlgebraName();

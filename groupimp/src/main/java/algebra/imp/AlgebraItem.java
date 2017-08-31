@@ -13,21 +13,31 @@ public final class AlgebraItem<T> extends AbstractAlgebra<T> implements IAlgebra
         this.algebra = algebra;
         this.value = value;
     }
-
+    /**
+     * @return the value of AlgebraItem
+     * */
     @Override
     public T getResult() {
         return value;
     }
+    /**
+     *@return algebra object
+     * */
     @Override
     public Algebra<T> getAlgebra() {
         return algebra;
     }
-
+    /**
+     * @return  this object
+     * */
     @Override
     public IAlgebraItem<T> getCurrentItem() {
         return this;
     }
-
+    /**
+     * perform stored operations
+     * @return IAlgebraItem
+     * */
     @Override
     public IAlgebraItem<T> perform() {
         return this;
