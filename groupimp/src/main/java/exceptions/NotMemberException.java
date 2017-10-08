@@ -5,6 +5,7 @@ package exceptions;
  */
 public class NotMemberException extends NullPointerException {
     public NotMemberException() {
+        super();
     }
 
     public NotMemberException(String s) {

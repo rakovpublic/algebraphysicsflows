@@ -5,6 +5,7 @@ package exceptions;
  */
 public class InvalidGroupException  extends NullPointerException {
     public InvalidGroupException() {
+        super();
     }
 
     public InvalidGroupException(String s) {

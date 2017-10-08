@@ -1,6 +1,7 @@
 package algebraflow;
 
 import algebra.IAlgebraItem;
+import cluster.IPart;
 
 import java.io.Serializable;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 /**
  * Created by Rakovskyi Dmytro on 30.03.2017.
  */
-public interface IAlgebraFlow<T > extends Serializable {
+public interface IAlgebraFlow<T> extends Serializable {
     /**
      * perform operation for each element in flow with two elements of type T and return result type T
      * @param operation operation name
@@ -113,5 +114,6 @@ public interface IAlgebraFlow<T > extends Serializable {
      * */
     public String getCurrentAlgebraName();
 
+    public void setInput(IPart<T> part,String startAlgebra);
 
 }

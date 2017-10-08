@@ -13,6 +13,7 @@ import java.util.List;
 public class ListInput implements InputFormat<Integer>{
     private List<Integer> input;
 
+
     public ListInput(List<Integer> input) {
         this.input = input;
     }
@@ -29,5 +30,10 @@ public class ListInput implements InputFormat<Integer>{
             res.add(algebra.buildAlgebraItem(i));
         }
         return res;
+    }
+
+    @Override
+    public Algebra<Integer> getAlgebra() {
+        return null;
     }
 }

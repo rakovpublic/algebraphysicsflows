@@ -5,6 +5,7 @@ package exceptions;
  */
 public class UnsupportedOperationException extends NullPointerException{
     public UnsupportedOperationException() {
+        super();
     }
 
     public UnsupportedOperationException(String s) {

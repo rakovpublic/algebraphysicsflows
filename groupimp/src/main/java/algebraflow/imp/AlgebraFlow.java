@@ -8,6 +8,7 @@ import algebraflow.IAlgebraFlow;
 import algebraflow.IFlowInvoke;
 import algebraflow.IWriter;
 import algebraflow.InputFormat;
+import cluster.IPart;
 import exceptions.AlgebraNotExistsException;
 import exceptions.NotMemberException;
 import exceptions.UnsupportedOperationException;
@@ -62,6 +63,8 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
                 currentFlow=flow;
                 return flow;
             }
+
+
         };
         currentInvokes.add(invoke);
         }else{
@@ -98,6 +101,7 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
                     currentFlow=flow;
                     return  flow;
                 }
+
             };
             currentInvokes.add(invoke);
         }else {
@@ -137,6 +141,7 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
                     currentFlow=flow;
                     return  flow;
                 }
+
             };
             currentInvokes.add(invoke);
         }else {
@@ -527,5 +532,23 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
     @Override
     public String getCurrentAlgebraName() {
         return this.currentAlgebra.getAlgebraName();
+    }
+
+    @Override
+    public void setInput(IPart<T> part, String startAlgebra) {
+        Algebra<T>algebra=(Algebra<T>) mathTool.getAlgebra(startAlgebra);
+        IFlowInvoke<T> invoke=  new IFlowInvoke<T>() {
+
+            @Override
+            public List<IAlgebraItem<T>> perform() {
+                List<IAlgebraItem<T>> flow= new ArrayList<>();
+                for (T item:part.getContent()){
+                flow.add(algebra.buildAlgebraItem(item));
+                }
+                currentFlow=flow;
+                return flow;
+            }
+        };
+        currentInvokes.set(0,invoke);
     }
 }

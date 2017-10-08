@@ -1,6 +1,7 @@
 package algebraflow;
 
 import algebra.IAlgebraItem;
+import algebra.imp.Algebra;
 
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface IFlowInvoke<T> {
      *
      * */
     List<IAlgebraItem<T>> perform();
+
 }
