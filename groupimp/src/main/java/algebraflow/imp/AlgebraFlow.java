@@ -533,7 +533,13 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
     public String getCurrentAlgebraName() {
         return this.currentAlgebra.getAlgebraName();
     }
-
+    /**
+     * Set part of input for worker.
+     * @param part part of input
+     * @see IPart
+     * @param startAlgebra name of initial algebra
+     *
+     * */
     @Override
     public void setInput(IPart<T> part, String startAlgebra) {
         Algebra<T>algebra=(Algebra<T>) mathTool.getAlgebra(startAlgebra);

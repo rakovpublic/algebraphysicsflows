@@ -114,6 +114,14 @@ public interface IAlgebraFlow<T> extends Serializable {
      * */
     public String getCurrentAlgebraName();
 
+
+    /**
+     * Set part of input for worker.
+     * @param part part of input
+     * @see IPart
+     * @param startAlgebra name of initial algebra
+     *
+     * */
     public void setInput(IPart<T> part,String startAlgebra);
 
 }
