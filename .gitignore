@@ -10,7 +10,11 @@
 */target/*
 */.idea/*
 */.idea/copyright/*
-*.xml
+*/.idea/compiler.xml
+*/.idea/misc.xml
+*/.idea/modules.xml
+*/.idea/vcs.xml
+*/.idea/workspace.xml
 *.iml
 *.log
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
