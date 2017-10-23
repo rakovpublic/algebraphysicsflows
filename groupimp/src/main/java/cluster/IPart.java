@@ -1,9 +1,5 @@
 package cluster;
 
-import filesystems.IFileSystem;
-import filesystems.IPath;
-
-import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -11,6 +7,7 @@ import java.util.List;
  */
 public interface IPart<T> {
     List<T> getContent();
+
     String toStr();
-    IPart<T> fromStr(String str);
+
 }

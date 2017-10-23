@@ -9,9 +9,11 @@ import operations.simple.ICustomResultOperation;
  */
 public class HigherIntResultOperation implements ICustomResultOperation<Integer> {
     private Algebra<Boolean> algebra;
-    public HigherIntResultOperation(Algebra<Boolean> algebra){
-        this.algebra=algebra;
+
+    public HigherIntResultOperation(Algebra<Boolean> algebra) {
+        this.algebra = algebra;
     }
+
     @Override
     public String getDescription() {
         return "Integer higher operation";
@@ -23,12 +25,12 @@ public class HigherIntResultOperation implements ICustomResultOperation<Integer>
     }
 
     @Override
-    public  Class getResultBaseClass() {
+    public Class getResultBaseClass() {
         return Boolean.class;
     }
 
     @Override
-    public  IAlgebraItem<Boolean> performOperation(Integer first, Integer second) {
-        return algebra.buildAlgebraItem(first>second);
+    public IAlgebraItem<Boolean> performOperation(Integer first, Integer second) {
+        return algebra.buildAlgebraItem(first > second);
     }
 }

@@ -1,19 +1,10 @@
 package example;
 
-import algebra.IMathToolInitializer;
-import algebra.imp.Algebra;
-import algebra.imp.MathTool;
-import algebraflow.imp.AlgebraFlow;
-import operations.simple.IOperation;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Rakovskyi Dmytro on 02.04.2017.
  */
 public class Test {
-    public static void main(String [] args){
+   /* public static void main(String [] args){
         List<Integer> in= new ArrayList<>();
         in.add(5);
         in.add(10);
@@ -59,5 +50,5 @@ public class Test {
         System.out.println(r);
         }
 
-    }
+    }*/
 }

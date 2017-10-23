@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by Rakovskyi Dmytro on 03.04.2017.
  */
-public class ListInput implements InputFormat<Integer>{
+public class ListInput implements InputFormat<Integer> {
     private List<Integer> input;
 
 
@@ -25,8 +25,8 @@ public class ListInput implements InputFormat<Integer>{
 
     @Override
     public List<IAlgebraItem<Integer>> read(Algebra<Integer> algebra) {
-        List<IAlgebraItem<Integer>> res= new ArrayList<>();
-        for(Integer i:input){
+        List<IAlgebraItem<Integer>> res = new ArrayList<>();
+        for (Integer i : input) {
             res.add(algebra.buildAlgebraItem(i));
         }
         return res;

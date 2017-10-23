@@ -12,10 +12,11 @@ import java.util.List;
 public interface IFlatOperation<T extends Object> extends Serializable, IAbsOperation {
     /**
      * Operation between two params T type return collection of IAlgebraItems parametrized T
+     *
      * @param first
      * @param second
      * @return collection of IAlgebraItems parametrized T
      * @see IAlgebraItem
-     * */
-    List<IAlgebraItem<T>> performOperation(T  first, T second);
+     */
+    List<IAlgebraItem<T>> performOperation(T first, T second);
 }

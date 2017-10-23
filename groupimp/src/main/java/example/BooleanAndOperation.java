@@ -18,12 +18,12 @@ public class BooleanAndOperation implements IOperation<Boolean> {
     }
 
     @Override
-    public  Class getResultBaseClass() {
+    public Class getResultBaseClass() {
         return Boolean.class;
     }
 
     @Override
     public Boolean performOperation(Boolean first, Boolean second) {
-        return first&&second;
+        return first && second;
     }
 }

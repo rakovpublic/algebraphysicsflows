@@ -1,7 +1,6 @@
 package algebraflow;
 
 import algebra.IAlgebraItem;
-import algebra.imp.Algebra;
 
 import java.util.List;
 
@@ -11,9 +10,11 @@ import java.util.List;
 public interface IFlowInvoke<T> {
     /**
      * encapsulate operation invoke in flow
-     * @return IAlgebraItems list
      *
-     * */
+     * @return IAlgebraItems list
+     */
     List<IAlgebraItem<T>> perform();
+
+    String getAlgebraName();
 
 }

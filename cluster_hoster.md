@@ -1,0 +1,2 @@
+Hoster should provide clients with file system classes(which will be used distributed filesystem on hoster's side), input queue, property holder and node starter(thing which will start jar on nodes).
+InputQueue and PropertyHolder should be set in RunnerFactory.

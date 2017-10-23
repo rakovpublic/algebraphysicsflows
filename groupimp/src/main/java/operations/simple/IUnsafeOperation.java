@@ -10,13 +10,13 @@ import java.io.Serializable;
  */
 public interface IUnsafeOperation<T> extends Serializable, IAbsOperation {
     /**
-     *
      * perform operation with 2 params types T and V return the result K.
+     *
      * @param t
      * @param v
      * @return IAlgebraItem parameterized K
      * @see IAlgebraItem
-     * **/
-    <K,V>IAlgebraItem<K> performOperation(T t,V v);
+     **/
+    <K, V> IAlgebraItem<K> performOperation(T t, V v);
 
 }

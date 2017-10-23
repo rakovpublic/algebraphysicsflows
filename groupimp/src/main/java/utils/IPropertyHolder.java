@@ -5,6 +5,7 @@ package utils;
  */
 public interface IPropertyHolder {
     String getProperty(String propertyName);
-    String setProperty(String propertyName);
+
+    String setProperty(String propertyName, String propertyValue);
 
 }

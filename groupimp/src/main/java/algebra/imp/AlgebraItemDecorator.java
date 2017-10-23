@@ -16,7 +16,7 @@ public final class AlgebraItemDecorator<T> extends AbstractAlgebra<T> implements
     private final T value;
     private final IOperation<T> operation;
 
-     AlgebraItemDecorator(Algebra<T> algebra, IAlgebraItem<T> algebraOperation, T value, IOperation<T> operation) {
+    AlgebraItemDecorator(Algebra<T> algebra, IAlgebraItem<T> algebraOperation, T value, IOperation<T> operation) {
 
         this.algebra = algebra;
         this.algebraOperation = algebraOperation;
@@ -25,37 +25,40 @@ public final class AlgebraItemDecorator<T> extends AbstractAlgebra<T> implements
     }
 
 
-
     /**
      * @return the value of AlgebraItem
-     * */
+     */
 
     @Override
     public T getResult() {
         return value;
     }
+
     /**
-     *@return algebra object
-     * */
+     * @return algebra object
+     */
     @Override
     public Algebra<T> getAlgebra() {
         return algebra;
     }
+
     /**
-     * @return  this object
-     * */
+     * @return this object
+     */
     @Override
     public IAlgebraItem<T> getCurrentItem() {
         return this;
     }
+
     /**
      * perform stored operations
+     *
      * @return IAlgebraItem
-     * */
+     */
     @Override
     public IAlgebraItem<T> perform() {
 
-            return algebra.buildAlgebraItem(operation.performOperation(algebraOperation.perform().getResult(),value));
+        return algebra.buildAlgebraItem(operation.performOperation(algebraOperation.perform().getResult(), value));
 
     }
 }

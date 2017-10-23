@@ -1,7 +1,6 @@
 package operations.simple;
 
 import algebra.IAlgebraItem;
-import algebra.imp.Algebra;
 import operations.IAbsOperation;
 
 import java.io.Serializable;
@@ -11,12 +10,12 @@ import java.io.Serializable;
  */
 public interface ITransferOperation<K> extends Serializable, IAbsOperation {
     /**
-     *
      * transfer element from one algebra to other
+     *
      * @param input
      * @return IAlgebraItem parametrized V
      * @see IAlgebraItem
-     * */
-    <V>IAlgebraItem<V> performOperation(K input);
+     */
+    <V> IAlgebraItem<V> performOperation(K input);
 
 }

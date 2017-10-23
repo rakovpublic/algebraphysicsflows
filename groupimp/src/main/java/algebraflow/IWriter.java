@@ -10,7 +10,8 @@ import java.util.List;
 public interface IWriter<T> {
     /**
      * write result to storage(DWH)
+     *
      * @param input
-     * */
+     */
     public void write(List<IAlgebraItem<T>> input);
 }

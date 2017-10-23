@@ -10,8 +10,9 @@ import java.io.Serializable;
 public interface IMathToolInitializer extends Serializable {
     /**
      * Encapsulate algebra initialization
-     * @return  mathtool instance
+     *
+     * @return mathtool instance
      * @see MathTool
-     * */
+     */
     MathTool initialize();
 }
