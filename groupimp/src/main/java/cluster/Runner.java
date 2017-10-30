@@ -16,7 +16,7 @@ public final class Runner {
        RunnerFactory<T,O,A> runnerFactory = null;//init configuration here
         if (args[0].equalsIgnoreCase("master")) {
             runnerFactory.build("master").run();
-            INodeStarter iNodeStarter = null;
+            INodeStarter iNodeStarter = null;// init node starter here
             iNodeStarter.startNodes();
         } else {
             while (true) {

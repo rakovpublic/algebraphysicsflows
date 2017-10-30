@@ -15,6 +15,10 @@ public interface IFlowInvoke<T> {
      */
     List<IAlgebraItem<T>> perform();
 
+    /**
+     * get algebra name
+     * @return algebraName-string
+     * */
     String getAlgebraName();
 
 }

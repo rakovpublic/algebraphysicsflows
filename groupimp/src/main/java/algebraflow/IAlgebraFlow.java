@@ -150,6 +150,11 @@ public interface IAlgebraFlow<T> extends Serializable {
      */
     public void setInput(IPart<T> part);
 
+    /***
+     * Get the initial algebra name;
+     * @return algebraName - string
+     */
+
     public String getInitAlgebraName();
 
 }

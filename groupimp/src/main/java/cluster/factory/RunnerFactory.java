@@ -3,7 +3,6 @@ package cluster.factory;
 import algebraflow.IAlgebraFlow;
 import algebraflow.IWriter;
 import cluster.*;
-import filesystems.IFileSystem;
 import filesystems.IPath;
 import utils.IInputQueue;
 import utils.IPropertyHolder;
@@ -20,15 +19,23 @@ public class RunnerFactory<T,O,P extends IPath> implements IRunnerFactory<T,O,P>
     protected IPropertyHolder propertyHolder;
 
 
+
     public RunnerFactory(IInputSpliter<T> tiInputSpliter, IWriter<O> oiWriter, IAlgebraFlow<T> tiAlgebraFlow) {
         this.tiInputSpliter = tiInputSpliter;
         this.oiWriter = oiWriter;
         this.tiAlgebraFlow = tiAlgebraFlow;
         /**
          *
-         * for host holders. please add initiating of holders part here or inherit this class
+         * for host holders. please add initiating holders part(property holder and input queue) here or inherit this class
          * */
     }
+
+    /**
+     * build launcher for mode
+     * @param mode launcher mode
+     * @return
+     * @see ILauncher
+     * */
 
     @Override
     public ILauncher<T,O,P> build(String mode) {

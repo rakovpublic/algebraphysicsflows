@@ -10,7 +10,7 @@ import java.util.List;
  * Created by Rakovskyi Dmytro on 30.03.2017.
  */
 public interface InputFormat<T> extends Serializable {
-    // P extends IPath,F extends IFileSystem<P>
+
 
     /**
      * @return type of desired input
@@ -23,5 +23,10 @@ public interface InputFormat<T> extends Serializable {
      */
     List<IAlgebraItem<T>> read(Algebra<T> algebra);
 
+    /**
+     * Get algebra which used to create input instances
+     * @return
+     * @see Algebra
+     * */
     Algebra<T> getAlgebra();
 }
