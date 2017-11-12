@@ -556,6 +556,7 @@ public final class Algebra<T> implements Serializable {
             sb.append(",\"customMemberFlatOperations\":");
             sb.append(getOperationsDescription(customMemberFlatOperations));
         }
+        sb.append("}");
         return sb.toString();
     }
     private <K extends IAbsOperation> String getOperationsDescription(HashMap<String,K> op){
