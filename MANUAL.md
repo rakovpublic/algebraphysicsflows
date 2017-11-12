@@ -10,8 +10,10 @@ AlgebraFlow -  provide operation invoke api (see IAlgebraFlow interafce and Alge
 You can find the small example how to use in package examples
 
 This code describes 2 algebras: 
-int(natural numbers) with 2 operations sum betwen 2 int values and comparison operation > which return the element of boolean algebra 
-boolean with 1 logical operation and 
+
+-int(natural numbers) with 2 operations sum betwen 2 int values and comparison operation > which return the element of boolean algebra 
+
+-boolean with 1 logical operation and 
 
 The algebraflow class constructor takes as params object which implement InputFormat interface, objetc which implement IMathToolInitializer interface and name of the initial algebra for the items from input. 
     

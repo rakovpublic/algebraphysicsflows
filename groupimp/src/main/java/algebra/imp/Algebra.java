@@ -1,6 +1,7 @@
 package algebra.imp;
 
 import algebra.IAlgebraItem;
+import operations.IAbsOperation;
 import operations.flat.*;
 import operations.simple.*;
 import org.apache.logging.log4j.LogManager;
@@ -11,6 +12,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Rakovskyi Dmytro on 30.03.2017.
@@ -38,8 +40,11 @@ public final class Algebra<T> implements Serializable {
 
     private final String algebraName;
 
+    private final String description;
 
-    public Algebra(String algebraName, Class paramClass) {
+
+    public Algebra(String algebraName, Class paramClass,String description) {
+        this.description=description;
         this.paramClass = paramClass;
         this.validationRules = new LinkedList<IValidationRule<T>>();
         this.algebraOperations = new HashMap<String, IOperation<T>>();
@@ -489,4 +494,86 @@ public final class Algebra<T> implements Serializable {
     public String getAlgebraName() {
         return algebraName;
     }
+/**
+ * @return algebra short description
+ * */
+    public String getDescription() {
+        return description;
+    }
+    /**
+     * @return full algebra description(with methods) as json
+     * */
+    /**
+     *
+     *     private final HashMap<String, IOperation<T>> algebraOperations;
+     private final HashMap<String, ICustomResultOperation<T>> customOperations;
+     private final HashMap<String, ITransferOperation<T>> transferOperations;
+     private final HashMap<String, IFlatOperation<T>> algebraFlatOperations;
+     private final HashMap<String, ICustomResultFlatOperation<T>> customFlatOperations;
+     private final HashMap<String, ITransferFlatOperation<T>> transferFlatOperations;
+     private final HashMap<String, IUnsafeOperation<T>> unsafeOperations;
+     private final HashMap<String, IUnsafeFlatOperation<T>> unsafeFlatOperations;
+     private final HashMap<String, ICustomMemberOperation<T>> customMemberOperations;
+     private final HashMap<String, ICustomMemberFlatOperation<T>> customMemberFlatOperations;
+
+
+     * */
+    public String generateDescription(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("{\"algebraName\":\"");
+        sb.append(this.getAlgebraName());
+        sb.append("\",\"algebraDescription\":\"");
+        sb.append(getDescription());
+        sb.append("\"");
+       if(algebraOperations.size()>0){
+           sb.append(",\"simpleOperations\":");
+           sb.append(getOperationsDescription(algebraOperations));
+       }if(customOperations.size()>0){
+            sb.append(",\"customOperations\":");
+            sb.append(getOperationsDescription(customOperations));
+        }if(transferOperations.size()>0){
+            sb.append(",\"transferOperations\":");
+            sb.append(getOperationsDescription(transferOperations));
+        }if(customMemberOperations.size()>0){
+            sb.append(",\"customMemberOperations\":");
+            sb.append(getOperationsDescription(customMemberOperations));
+        }if(unsafeOperations.size()>0){
+            sb.append(",\"unsafeOperations\":");
+            sb.append(getOperationsDescription(unsafeOperations));
+        }if(algebraFlatOperations.size()>0){
+            sb.append(",\"simpleFlatOperations\":");
+            sb.append(getOperationsDescription(algebraFlatOperations));
+        }if(customFlatOperations.size()>0){
+            sb.append(",\"customFlatOperations\":");
+            sb.append(getOperationsDescription(customFlatOperations));
+        }if(transferFlatOperations.size()>0){
+            sb.append(",\"transferFlatOperations\":");
+            sb.append(getOperationsDescription(transferFlatOperations));
+        }if(unsafeFlatOperations.size()>0){
+            sb.append(",\"unsafeFlatOperations\":");
+            sb.append(getOperationsDescription(unsafeFlatOperations));
+        }if(customMemberFlatOperations.size()>0){
+            sb.append(",\"customMemberFlatOperations\":");
+            sb.append(getOperationsDescription(customMemberFlatOperations));
+        }
+        return sb.toString();
+    }
+    private <K extends IAbsOperation> String getOperationsDescription(HashMap<String,K> op){
+        StringBuilder sb = new StringBuilder();
+        Set<String> keys=op.keySet();
+        if(keys.size()>0){
+            sb.append("[");
+            for(String name:op.keySet()){
+                sb.append("\"operationName\":\"");
+                sb.append(name);
+                sb.append("\",\"operationDescription\":\"");
+                sb.append(op.get(name).getDescription());
+                sb.append("\",");
+            }
+            sb.deleteCharAt(sb.length()-1);
+            sb.append("]");
+        }
+        return sb.toString();
+    }
+
 }
