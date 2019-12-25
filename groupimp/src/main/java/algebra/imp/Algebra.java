@@ -6,13 +6,11 @@ import operations.flat.*;
 import operations.simple.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.util.ArrayUtils;
 import rules.IValidationRule;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Rakovskyi Dmytro on 30.03.2017.
@@ -519,6 +517,7 @@ public final class Algebra<T> implements Serializable {
 
      * */
     public String generateDescription(){
+
         StringBuilder sb = new StringBuilder();
         sb.append("{\"algebraName\":\"");
         sb.append(this.getAlgebraName());

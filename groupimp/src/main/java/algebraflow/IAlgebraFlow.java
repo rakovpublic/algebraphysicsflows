@@ -157,4 +157,103 @@ public interface IAlgebraFlow<T> extends Serializable {
 
     public String getInitAlgebraName();
 
+
+    /**
+     * perform operation for each element in flow with two elements of type T and return result type T
+     *
+     * @param operation operation name
+     * @param element   second element for operation
+     * @return IAlgebraFlow parametrized T
+     * @see operations.simple.IOperation
+     */
+    public IPhysicsFlow performPhysicsOperation(String operation, T element);
+
+    /**
+     * perform custom result operation for each element in flow with two elements of type T and return result type K
+     *
+     * @param operationName operation name
+     * @param sElement      second element for operation
+     * @return IAlgebraFlow parametrized K
+     * @see operations.simple.ICustomResultOperation
+     */
+    public  IPhysicsFlow performCustomResultPhysicsOperation(String operationName, T sElement);
+
+    /**
+     * perform transfer operation for each element in flow with  element of type T and return result type K
+     *
+     * @param operationName operation name
+     * @return IAlgebraFlow parametrized K
+     * @see operations.simple.ITransferOperation
+     */
+    public  IPhysicsFlow performAlgebraPhysicsTransfer(String operationName);
+
+    /**
+     * perform operation for each element in flow with  elements type T and  element type V return result type K
+     *
+     * @param operationName operation name
+     * @param element       second element for operation
+     * @return IAlgebraFlow parametrized K
+     * @see operations.simple.IUnsafeOperation
+     */
+    public < V> IPhysicsFlow performAlgebraPhysicsUnsafe(String operationName, V element);
+
+    /**
+     * perform unsafe operation for each element in flow with two elements of type T and return result type T
+     *
+     * @param operation operation name
+     * @param element   second element for operation
+     * @return IAlgebraFlow parametrized T
+     * @see operations.flat.IFlatOperation
+     */
+    public <T>IPhysicsFlow performFlatPhysicsOperation(String operation, T element);
+
+    /**
+     * perform operation for each element in flow with two elements of type T and return result type K
+     *
+     * @param operationName operation name
+     * @param sElement      second element for operation
+     * @return IAlgebraFlow parametrized K
+     * @see operations.flat.ICustomResultFlatOperation
+     */
+    public  IPhysicsFlow performFlatCustomResultPhysicsOperation(String operationName, T sElement);
+
+    /**
+     * perform transfer operation for each element in flow with  element of type T and return result type K
+     *
+     * @param operationName operation name
+     * @return IAlgebraFlow parametrized K
+     * @see operations.flat.ITransferFlatOperation
+     */
+    public  IPhysicsFlow performFlatAlgebraPhysicsTransfer(String operationName);
+
+    /**
+     * perform operation for each element in flow with  elements type T and  element type V return result type K
+     *
+     * @param operationName operation name
+     * @param element       second element for operation
+     * @return IAlgebraFlow parametrized K
+     * @see operations.flat.IUnsafeFlatOperation
+     */
+    public < V> IPhysicsFlow performFlatAlgebraPhysicsUnsafe(String operationName, V element);
+
+    /**
+     * perform operation for each element in flow with  elements type T and  element type K return result type T
+     *
+     * @param operationName operation name
+     * @param sElement      second element for operation
+     * @return IAlgebraFlow parametrized K
+     * @see operations.simple.ICustomMemberOperation
+     */
+    public <K> IPhysicsFlow performCustomMemberPhysicsOperation(String operationName, K sElement);
+
+    /**
+     * perform operation for each element in flow with  elements type T and  element type K return result type T
+     *
+     * @param operationName operation name
+     * @param sElement      second element for operation
+     * @return IAlgebraFlow parametrized K
+     * @see operations.flat.ICustomMemberFlatOperation
+     */
+    public <K> IPhysicsFlow performFlatCustomMemberPhysicsOperation(String operationName, K sElement);
+
 }
