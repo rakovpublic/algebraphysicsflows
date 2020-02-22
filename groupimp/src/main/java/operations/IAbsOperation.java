@@ -10,4 +10,6 @@ public interface IAbsOperation {
 
     Class getResultBaseClass();
 
+    Class getSecondElementClass();
+
 }

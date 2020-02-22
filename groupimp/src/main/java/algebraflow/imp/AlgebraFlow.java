@@ -233,7 +233,7 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
     public <K, V> IAlgebraFlow<K> performAlgebraUnsafe(String operationName, V element) {
         IUnsafeOperation<K> customOperation = null;
         if (currentAlgebra.hasUnsafeOperation(operationName)) {
-            customOperation = (IUnsafeOperation<K>) currentAlgebra.getUnsafeOperation(operationName);
+            customOperation = (IUnsafeOperation<K>) currentAlgebra.getCustomMemberOperationWithParam(operationName,element.getClass());
             IFlowInvoke<K> invoke = new IFlowInvoke<K>() {
                 @Override
                 public String getAlgebraName() {
@@ -415,7 +415,7 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
     public <K, V> IAlgebraFlow<K> performFlatAlgebraUnsafe(String operationName, V element) {
         IUnsafeFlatOperation<K> customOperation = null;
         if (currentAlgebra.hasUnsafeFlatOperation(operationName)) {
-            customOperation = (IUnsafeFlatOperation<K>) currentAlgebra.getUnsafeFlatOperation(operationName);
+            customOperation = (IUnsafeFlatOperation<K>) currentAlgebra.getUnsafeFlatOperationWithParam(operationName,element.getClass());
             IFlowInvoke<K> invoke = new IFlowInvoke<K>() {
                 @Override
                 public String getAlgebraName() {
@@ -460,7 +460,7 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
     public <K> IAlgebraFlow<T> performCustomMemberOperation(String operationName, K sElement) {
         ICustomMemberOperation<K> customOperation = null;
         if (currentAlgebra.hasCustomMemberOperation(operationName)) {
-            customOperation = (ICustomMemberOperation<K>) currentAlgebra.getCustomMemberOperation(operationName);
+            customOperation = (ICustomMemberOperation<K>) currentAlgebra.getCustomMemberOperationWithParam(operationName,sElement.getClass());
             IFlowInvoke<T> invoke = new IFlowInvoke<T>() {
                 @Override
                 public String getAlgebraName() {
@@ -506,7 +506,7 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
     public <K> IAlgebraFlow<T> performFlatCustomMemberOperation(String operationName, K sElement) {
         ICustomMemberFlatOperation<K> customOperation = null;
         if (currentAlgebra.hasCustomMemberFlatOperation(operationName)) {
-            customOperation = (ICustomMemberFlatOperation<K>) currentAlgebra.getCustomMemberFlatOperation(operationName);
+            customOperation = (ICustomMemberFlatOperation<K>) currentAlgebra.getCustomMemberFlatOperationWithParam(operationName,sElement.getClass());
             IFlowInvoke<T> invoke = new IFlowInvoke<T>() {
                 @Override
                 public String getAlgebraName() {

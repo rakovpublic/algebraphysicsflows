@@ -24,10 +24,10 @@ public final class Algebra<T> implements Serializable {
     private final HashMap<String, IFlatOperation<T>> algebraFlatOperations;
     private final HashMap<String, ICustomResultFlatOperation<T>> customFlatOperations;
     private final HashMap<String, ITransferFlatOperation<T>> transferFlatOperations;
-    private final HashMap<String, IUnsafeOperation<T>> unsafeOperations;
-    private final HashMap<String, IUnsafeFlatOperation<T>> unsafeFlatOperations;
-    private final HashMap<String, ICustomMemberOperation<T>> customMemberOperations;
-    private final HashMap<String, ICustomMemberFlatOperation<T>> customMemberFlatOperations;
+    private final HashMap<String, List<IUnsafeOperation<T>>> unsafeOperations;
+    private final HashMap<String, List<IUnsafeFlatOperation<T>>> unsafeFlatOperations;
+    private final HashMap<String, List<ICustomMemberOperation<T>>> customMemberOperations;
+    private final HashMap<String, List<ICustomMemberFlatOperation<T>>> customMemberFlatOperations;
 
 
     public Class getParamClass() {
@@ -45,17 +45,17 @@ public final class Algebra<T> implements Serializable {
         this.description=description;
         this.paramClass = paramClass;
         this.validationRules = new LinkedList<IValidationRule<T>>();
-        this.algebraOperations = new HashMap<String, IOperation<T>>();
-        this.customOperations = new HashMap<String, ICustomResultOperation<T>>();
-        this.transferOperations = new HashMap<String, ITransferOperation<T>>();
+        this.algebraOperations = new HashMap<>();
+        this.customOperations = new HashMap<>();
+        this.transferOperations = new HashMap<>();
         this.algebraName = algebraName;
-        transferFlatOperations = new HashMap<String, ITransferFlatOperation<T>>();
-        customFlatOperations = new HashMap<String, ICustomResultFlatOperation<T>>();
-        algebraFlatOperations = new HashMap<String, IFlatOperation<T>>();
-        unsafeOperations = new HashMap<String, IUnsafeOperation<T>>();
-        unsafeFlatOperations = new HashMap<String, IUnsafeFlatOperation<T>>();
-        customMemberOperations = new HashMap<String, ICustomMemberOperation<T>>();
-        customMemberFlatOperations = new HashMap<String, ICustomMemberFlatOperation<T>>();
+        transferFlatOperations = new HashMap<>();
+        customFlatOperations = new HashMap<>();
+        algebraFlatOperations = new HashMap<>();
+        unsafeOperations = new HashMap<>();
+        unsafeFlatOperations = new HashMap<>();
+        customMemberOperations = new HashMap<>();
+        customMemberFlatOperations = new HashMap<>();
 
     }
 
@@ -69,11 +69,13 @@ public final class Algebra<T> implements Serializable {
      */
     public boolean addCustomMemberOperation(String name, ICustomMemberOperation<T> operation) {
         if (!customMemberOperations.containsKey(name)) {
-            customMemberOperations.put(name, operation);
-            return true;
+            customMemberOperations.get(name).add(operation);
+        }else {
+            List<ICustomMemberOperation<T>> operations=new LinkedList<>();
+            operations.add(operation);
+            customMemberOperations.put(name,operations);
         }
-        return false;
-
+        return true;
     }
 
     /**
@@ -86,11 +88,13 @@ public final class Algebra<T> implements Serializable {
      */
     public boolean addCustomMemberFlatOperation(String name, ICustomMemberFlatOperation<T> operation) {
         if (!customMemberFlatOperations.containsKey(name)) {
-            customMemberFlatOperations.put(name, operation);
-            return true;
+            customMemberFlatOperations.get(name).add(operation);
+        }else {
+            List<ICustomMemberFlatOperation<T>> operations=new LinkedList<>();
+            operations.add(operation);
+            customMemberFlatOperations.put(name,operations);
         }
-        return false;
-
+        return true;
     }
 
     /**
@@ -103,11 +107,13 @@ public final class Algebra<T> implements Serializable {
      */
     public boolean addUnsafeOperation(String name, IUnsafeOperation<T> operation) {
         if (!unsafeOperations.containsKey(name)) {
-            unsafeOperations.put(name, operation);
-            return true;
+            unsafeOperations.get(name).add(operation);
+        }else {
+            List<IUnsafeOperation<T>> operations=new LinkedList<>();
+            operations.add(operation);
+            unsafeOperations.put(name,operations);
         }
-        return false;
-
+        return true;
     }
 
     /**
@@ -120,11 +126,13 @@ public final class Algebra<T> implements Serializable {
      */
     public boolean addUnsafeOperationFlat(String name, IUnsafeFlatOperation<T> operation) {
         if (!unsafeFlatOperations.containsKey(name)) {
-            unsafeFlatOperations.put(name, operation);
-            return true;
+            unsafeFlatOperations.get(name).add(operation);
+        }else {
+            List<IUnsafeFlatOperation<T>> operations=new LinkedList<>();
+            operations.add(operation);
+            unsafeFlatOperations.put(name,operations);
         }
-        return false;
-
+        return true;
     }
 
     /**
@@ -136,12 +144,8 @@ public final class Algebra<T> implements Serializable {
      * @see IOperation
      */
     public boolean addOperation(String name, IOperation<T> operation) {
-        if (!algebraOperations.containsKey(name)) {
-            algebraOperations.put(name, operation);
-            return true;
-        }
-        return false;
-
+        algebraOperations.put(name,operation);
+        return true;
     }
 
     /**
@@ -163,11 +167,8 @@ public final class Algebra<T> implements Serializable {
      * @see ICustomResultOperation
      */
     public boolean addCustomResultOperation(String name, ICustomResultOperation<T> customOperation) {
-        if (!customOperations.containsKey(name)) {
-            customOperations.put(name, customOperation);
-            return true;
-        }
-        return false;
+        customOperations.put(name,customOperation);
+        return true;
     }
 
     /**
@@ -179,11 +180,8 @@ public final class Algebra<T> implements Serializable {
      * @see ITransferOperation
      */
     public boolean addAlgebraTransfer(String name, ITransferOperation<T> transferOperation) {
-        if (!transferOperations.containsKey(name)) {
-            transferOperations.put(name, transferOperation);
-            return true;
-        }
-        return false;
+        transferOperations.put(name,transferOperation);
+        return true;
     }
 
     /**
@@ -195,12 +193,8 @@ public final class Algebra<T> implements Serializable {
      * @see IFlatOperation
      */
     public boolean addFlatOperation(String name, IFlatOperation<T> flatOperation) {
-        if (!algebraFlatOperations.containsKey(name)) {
-            algebraFlatOperations.put(name, flatOperation);
-            return true;
-        }
-        return false;
-
+        algebraFlatOperations.put(name,flatOperation);
+        return true;
     }
 
     /**
@@ -212,11 +206,8 @@ public final class Algebra<T> implements Serializable {
      * @see ICustomResultFlatOperation
      */
     public boolean addCustomResultFlatOperation(String name, ICustomResultFlatOperation<T> customFlatOperation) {
-        if (!customFlatOperations.containsKey(name)) {
-            customFlatOperations.put(name, customFlatOperation);
-            return true;
-        }
-        return false;
+        customFlatOperations.put(name,customFlatOperation);
+        return true;
     }
 
     /**
@@ -228,11 +219,8 @@ public final class Algebra<T> implements Serializable {
      * @see ITransferFlatOperation
      */
     public boolean addAlgebraFlatTransfer(String name, ITransferFlatOperation<T> transferFlatOperation) {
-        if (!transferFlatOperations.containsKey(name)) {
-            transferFlatOperations.put(name, transferFlatOperation);
-            return true;
-        }
-        return false;
+        transferFlatOperations.put(name,transferFlatOperation);
+        return true;
     }
 
     /**
@@ -353,7 +341,7 @@ public final class Algebra<T> implements Serializable {
      * @see ICustomMemberOperation
      */
     public ICustomMemberOperation<T> getCustomMemberOperation(String name) {
-        return this.customMemberOperations.get(name);
+        return this.customMemberOperations.get(name).get(0);
     }
 
     /**
@@ -364,7 +352,7 @@ public final class Algebra<T> implements Serializable {
      * @see ICustomMemberFlatOperation
      */
     public ICustomMemberFlatOperation<T> getCustomMemberFlatOperation(String name) {
-        return this.customMemberFlatOperations.get(name);
+        return this.customMemberFlatOperations.get(name).get(0);
     }
 
     /**
@@ -390,7 +378,7 @@ public final class Algebra<T> implements Serializable {
      * @see IUnsafeOperation
      */
     public IUnsafeOperation<T> getUnsafeOperation(String name) {
-        return unsafeOperations.get(name);
+        return unsafeOperations.get(name).get(0);
     }
 
     /**
@@ -401,7 +389,7 @@ public final class Algebra<T> implements Serializable {
      * @see IUnsafeFlatOperation
      */
     public IUnsafeFlatOperation<T> getUnsafeFlatOperation(String name) {
-        return unsafeFlatOperations.get(name);
+        return unsafeFlatOperations.get(name).get(0);
     }
 
     /**
@@ -524,7 +512,8 @@ public final class Algebra<T> implements Serializable {
         sb.append("\",\"algebraDescription\":\"");
         sb.append(getDescription());
         sb.append("\"");
-       if(algebraOperations.size()>0){
+        //TODO: Make description
+    /*   if(algebraOperations.size()>0){
            sb.append(",\"simpleOperations\":");
            sb.append(getOperationsDescription(algebraOperations));
        }if(customOperations.size()>0){
@@ -554,7 +543,7 @@ public final class Algebra<T> implements Serializable {
         }if(customMemberFlatOperations.size()>0){
             sb.append(",\"customMemberFlatOperations\":");
             sb.append(getOperationsDescription(customMemberFlatOperations));
-        }
+        }*/
         sb.append("}");
         return sb.toString();
     }
@@ -574,6 +563,70 @@ public final class Algebra<T> implements Serializable {
             sb.append("]");
         }
         return sb.toString();
+    }
+
+
+    /**
+     * get unsafe operation instance
+     *
+     * @param name operation name
+     * @return
+     * @see IUnsafeOperation
+     */
+    public IUnsafeOperation<T> getUnsafeOperationWithParam(String name,Class<?> clazz) {
+        for(IUnsafeOperation operation:this.unsafeOperations.get(name)){
+            if(operation.getSecondElementClass()==clazz){
+                return operation;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * get unsafe flat operation instance
+     *
+     * @param name operation name
+     * @return
+     * @see IUnsafeFlatOperation
+     */
+    public IUnsafeFlatOperation<T> getUnsafeFlatOperationWithParam(String name,Class<?> clazz) {
+        for(IUnsafeFlatOperation operation:this.unsafeFlatOperations.get(name)){
+            if(operation.getSecondElementClass()==clazz){
+                return operation;
+            }
+        }
+        return null;
+    }
+    /**
+     * get custom member operation instance
+     *
+     * @param name operation name
+     * @return
+     * @see ICustomMemberOperation
+     */
+    public ICustomMemberOperation<T> getCustomMemberOperationWithParam(String name,Class<?> clazz) {
+        for(ICustomMemberOperation operation:this.customMemberOperations.get(name)){
+            if(operation.getSecondElementClass()==clazz){
+                return operation;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * get custom member flat operation instance
+     *
+     * @param name operation name
+     * @return
+     * @see ICustomMemberFlatOperation
+     */
+    public ICustomMemberFlatOperation<T> getCustomMemberFlatOperationWithParam(String name,Class<?> clazz) {
+        for(ICustomMemberFlatOperation operation:this.customMemberFlatOperations.get(name)){
+            if(operation.getSecondElementClass()==clazz){
+                return operation;
+            }
+        }
+        return null;
     }
 
 }
