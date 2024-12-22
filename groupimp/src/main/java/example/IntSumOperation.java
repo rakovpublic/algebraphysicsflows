@@ -22,6 +22,11 @@ public class IntSumOperation implements IOperation<Integer> {
     }
 
     @Override
+    public Class getSecondElementClass() {
+        return Integer.class;
+    }
+
+    @Override
     public Integer performOperation(Integer first, Integer second) {
         return first + second;
     }

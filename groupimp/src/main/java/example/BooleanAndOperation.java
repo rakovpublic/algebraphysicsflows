@@ -23,6 +23,11 @@ public class BooleanAndOperation implements IOperation<Boolean> {
     }
 
     @Override
+    public Class getSecondElementClass() {
+        return Boolean.class;
+    }
+
+    @Override
     public Boolean performOperation(Boolean first, Boolean second) {
         return first && second;
     }

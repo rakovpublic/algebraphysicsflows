@@ -30,6 +30,11 @@ public class HigherIntResultOperation implements ICustomResultOperation<Integer>
     }
 
     @Override
+    public Class getSecondElementClass() {
+        return Boolean.class;
+    }
+
+    @Override
     public IAlgebraItem<Boolean> performOperation(Integer first, Integer second) {
         return algebra.buildAlgebraItem(first > second);
     }
