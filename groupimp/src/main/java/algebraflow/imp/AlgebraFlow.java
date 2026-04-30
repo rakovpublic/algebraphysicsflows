@@ -276,7 +276,7 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
      */
     @Override
     public IAlgebraFlow<T> performFlatOperation(String operation, T element) {
-        if (currentAlgebra.getParamClass().equals(element.getClass())) {
+        if (!currentAlgebra.getParamClass().equals(element.getClass())) {
             NotMemberException exception = new NotMemberException("Incorrect param type expected:" + currentAlgebra.getParamClass() + "found:" + element.getClass());
             logger.error("Incorrect param type expected:" + currentAlgebra.getParamClass() + "found:" + element.getClass(), exception);
             throw exception;
