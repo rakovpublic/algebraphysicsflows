@@ -33,12 +33,28 @@ import java.util.List;
 public class AlgebraFlow<T> implements IAlgebraFlow<T> {
     private static final Logger logger = LogManager.getLogger(AlgebraFlow.class);
     private final MathTool mathTool;
-    private static final class FlowState {
+    private static final class FlowState implements java.io.Serializable {
+        private static final long serialVersionUID=1L;
         private List<? extends IAlgebraItem> values;
     }
     private final FlowState flowState;
     private final Algebra<?> currentAlgebra;
     private List<IFlowInvoke<?>> currentInvokes;
+
+    @Override
+    public IAlgebraFlow<T> performOneOperandFlatOperation(String operationName) {
+        if(!currentAlgebra.hasOneOperandFlatOperation(operationName)) throw new UnsupportedOperationException("No flat one-operand operation " + operationName);
+        currentInvokes.add(new IFlowInvoke<T>() {
+            public String getAlgebraName() { return currentAlgebra.getAlgebraName(); }
+            public List<IAlgebraItem<T>> perform() {
+                List<IAlgebraItem<T>> result=new ArrayList<>();
+                for(IAlgebraItem<T> item : flowState.values) result.addAll(item.performOneOperandFlatOperation(operationName));
+                flowState.values=result;
+                return result;
+            }
+        });
+        return this;
+    }
 
     @Override
     public IAlgebraFlow<T> performOneOperandOperation(String operationName) {
@@ -419,40 +435,22 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
      * @see operations.flat.ITransferFlatOperation
      */
     @Override
+    @SuppressWarnings("unchecked")
     public <K> IAlgebraFlow<K> performFlatAlgebraTransfer(String operationName) {
-        ITransferFlatOperation<K> transferOperation = null;
-        if (currentAlgebra.hasAlgebraTransfer(operationName)) {
-            transferOperation = (ITransferFlatOperation<K>) currentAlgebra.getTransferFlatOperation(operationName);
-            IFlowInvoke<K> invoke = new IFlowInvoke<K>() {
-                @Override
-                public String getAlgebraName() {
-                    return currentAlgebra.getAlgebraName();
-                }
-
-                @Override
-                public List<IAlgebraItem<K>> perform() {
-                    List<IAlgebraItem<K>> flow = new ArrayList<IAlgebraItem<K>>();
-                    for (IAlgebraItem<T> item : flowState.values) {
-                        flow.addAll(item.performAlgebraFlatTransfer(operationName));
-                    }
-                    flowState.values = flow;
-                    return flow;
-                }
-            };
-            currentInvokes.add(invoke);
-        } else {
-            UnsupportedOperationException exception = new UnsupportedOperationException("Algebra " + currentAlgebra.getAlgebraName() + " has not operation" + operationName + "operation type transferflat");
-            logger.error("Algebra " + currentAlgebra.getAlgebraName() + " has not operation" + operationName + "operation type transferflat", exception);
-            throw exception;
-        }
-        if (mathTool.hasAlgebra(transferOperation.getAlgebraName())) {
-            return new AlgebraFlow<K>(this.mathTool, this.flowState, (Algebra<K>) mathTool.getAlgebra(transferOperation.getAlgebraName()), this.currentInvokes);
-
-        } else {
-            AlgebraNotExistsException exception = new AlgebraNotExistsException("Cannot find algebra" + transferOperation.getAlgebraName() + " in math tool: " + mathTool.getName());
-            logger.error("Cannot find algebra" + transferOperation.getAlgebraName() + " in math tool: " + mathTool.getName());
-            throw exception;
-        }
+        ITransferFlatOperation<T> operation=(ITransferFlatOperation<T>)currentAlgebra.getTransferFlatOperation(operationName);
+        if(operation==null) throw new UnsupportedOperationException("No flat transfer " + operationName);
+        Algebra<K> result=(Algebra<K>)mathTool.getAlgebra(operation.getAlgebraName());
+        if(result==null) throw new AlgebraNotExistsException("Missing result algebra " + operation.getAlgebraName());
+        currentInvokes.add(new IFlowInvoke<K>() {
+            public String getAlgebraName() { return result.getAlgebraName(); }
+            public List<IAlgebraItem<K>> perform() {
+                List<IAlgebraItem<K>> values=new ArrayList<>();
+                for(IAlgebraItem<T> item : flowState.values) values.addAll(item.performAlgebraFlatTransfer(operationName));
+                flowState.values=values;
+                return values;
+            }
+        });
+        return new AlgebraFlow<K>(mathTool,flowState,result,currentInvokes);
     }
 
     /**

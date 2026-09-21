@@ -20,6 +20,7 @@ public final class Algebra<T> implements Serializable {
     private final List<IValidationRule<T>> validationRules;
     private final HashMap<String, IOperation<T>> algebraOperations;
     private final HashMap<String, IOneOperandOperation<T>> oneOperandOperations;
+    private final HashMap<String, IOneOperandFlatOperation<T>> oneOperandFlatOperations;
     private final HashMap<String, ICustomResultOperation<T>> customOperations;
     private final HashMap<String, ITransferOperation<T>> transferOperations;
     private final HashMap<String, IFlatOperation<T>> algebraFlatOperations;
@@ -50,6 +51,7 @@ public final class Algebra<T> implements Serializable {
         this.validationRules = new LinkedList<IValidationRule<T>>();
         this.algebraOperations = new HashMap<>();
         this.oneOperandOperations = new HashMap<>();
+        this.oneOperandFlatOperations = new HashMap<>();
         this.customOperations = new HashMap<>();
         this.transferOperations = new HashMap<>();
         this.algebraName = algebraName;
@@ -207,6 +209,13 @@ public final class Algebra<T> implements Serializable {
     public IOneOperandOperation<T> getOneOperandOperation(String name) {
         return oneOperandOperations.get(name);
     }
+
+    public boolean addOneOperandFlatOperation(String name, IOneOperandFlatOperation<T> operation) {
+        oneOperandFlatOperations.put(Objects.requireNonNull(name),Objects.requireNonNull(operation));
+        return true;
+    }
+    public boolean hasOneOperandFlatOperation(String name) { return oneOperandFlatOperations.containsKey(name); }
+    public IOneOperandFlatOperation<T> getOneOperandFlatOperation(String name) { return oneOperandFlatOperations.get(name); }
 
     /**
      * add validation rule which validate values on build

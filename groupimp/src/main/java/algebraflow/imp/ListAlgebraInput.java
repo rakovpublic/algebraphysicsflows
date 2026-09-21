@@ -7,7 +7,8 @@ import exceptions.NotMemberException;
 import java.util.*;
 
 /** Finite list input validated by the actual Algebra registered in MathTool. */
-public final class ListAlgebraInput<T> implements InputFormat<T> {
+public final class ListAlgebraInput<T> implements InputFormat<T>,java.io.Serializable {
+    private static final long serialVersionUID=1L;
     private final Algebra<T> algebra;
     private final List<T> values;
     public ListAlgebraInput(Algebra<T> algebra,List<T> values) {
@@ -32,4 +33,3 @@ public final class ListAlgebraInput<T> implements InputFormat<T> {
         return result;
     }
 }
-

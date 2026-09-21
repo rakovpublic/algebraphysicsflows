@@ -152,7 +152,7 @@ public abstract class AbstractAlgebra<T> implements IAlgebraItem<T> {
         Algebra<T> algebra = this.getAlgebra();
         if (this.getAlgebra().hasAlgebraFlatTransfer(operationName)) {
             ITransferFlatOperation<T> op = algebra.getTransferFlatOperation(operationName);
-            return (List<IAlgebraItem<V>>) op.performOperation(perform().getResult());
+            return op.performOperation(perform().getResult());
 
         }
         UnsupportedOperationException ex = new UnsupportedOperationException("Operation" + operationName + " is not exists in this algebra.");

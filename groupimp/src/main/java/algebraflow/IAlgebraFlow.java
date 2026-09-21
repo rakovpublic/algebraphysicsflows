@@ -30,6 +30,13 @@ public interface IAlgebraFlow<T> extends Serializable {
         return performOneOperandOperation(operationName);
     }
 
+    default IAlgebraFlow<T> performOneOperandFlatOperation(String operationName) {
+        throw new java.lang.UnsupportedOperationException("This flow implementation does not support flat unary operations");
+    }
+    default IAlgebraFlow<T> performFlatOperation(String operationName) {
+        return performOneOperandFlatOperation(operationName);
+    }
+
     /** A x B -> B; subsequent operations run in the result algebra B. */
     <V> IAlgebraFlow<V> performLeftProjectionOperation(String operationName, V second);
 

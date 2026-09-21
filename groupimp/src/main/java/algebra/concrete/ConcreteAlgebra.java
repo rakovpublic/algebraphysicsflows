@@ -85,6 +85,13 @@ public abstract class ConcreteAlgebra<T> implements Serializable {
         OperationMembers.require(algebra,value);
         unary(name,unit,algebra,false,ignored -> value);
     }
+    @SuppressWarnings("unchecked")
+    protected final <A,B> void unaryFlat(String name,Algebra<A> first,Algebra<B> result,boolean partial,operations.OperationBodies.Unary<A,List<B>> body) {
+        IAbsOperation operation=first==(Object)result
+                ?new OneOperandFlatOperation<>(name,first,(operations.OperationBodies.Unary<A,List<A>>)(Object)body)
+                :new TransferFlatOperation<>(name,first,result,body);
+        remember(name,first,null,result,true,partial,operation);
+    }
     @SuppressWarnings({"unchecked","rawtypes"})
     public final void register(MathTool tool) {
         for(Algebra<?> carrier : carriers.values()) {
@@ -97,6 +104,8 @@ public abstract class ConcreteAlgebra<T> implements Serializable {
             Algebra first=entry.first; IAbsOperation op=entry.operation;
             if(op instanceof IOperation) first.addOperation(entry.alias,(IOperation)op);
             else if(op instanceof IOneOperandOperation) first.addOneOperandOperation(entry.alias,(IOneOperandOperation)op);
+            else if(op instanceof IOneOperandFlatOperation) first.addOneOperandFlatOperation(entry.alias,(IOneOperandFlatOperation)op);
+            else if(op instanceof ITransferFlatOperation) first.addAlgebraFlatTransfer(entry.alias,(ITransferFlatOperation)op);
             else if(op instanceof ITransferOperation) first.addAlgebraTransfer(entry.alias,(ITransferOperation)op);
             else if(op instanceof ICustomResultOperation) first.addCustomResultOperation(entry.alias,(ICustomResultOperation)op);
             else if(op instanceof ICustomMemberOperation) first.addCustomMemberOperation(entry.alias,(ICustomMemberOperation)op);

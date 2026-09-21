@@ -20,7 +20,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all90RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all104RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         expected.put("BooleanAlgebra","false|true|true|false|false|false|false|true");
@@ -32,6 +32,7 @@ public class ConcreteAlgebrasTest {
         expected.put("RationalMatrixAlgebra","[[3, 2], [3, 6]]|[[2, 4], [6, 8]]|[[-1, 2], [3, 2]]|[[-1, -2], [-3, -4]]|[[1, 3], [2, 4]]|[[-2, 1], [3/2, -1/2]]|-2|5|[[2, 4], [6, 8]]|[11, 25]|[[0, 0], [0, 0]]|[[1, 0], [0, 1]]");
         expected.put("RationalPolynomialRing","Q[x][3, 3, 1]|Q[x][2, 5, 4, 1]|Q[x][-1, 1, 1]|Q[x][-1, -2, -1]|Q[x][2, 2]|9|Q[x][2, 1, 1, 1/3]|7/3|Q[x][0]|Q[x][1]");
         expected.put("PrimeField","0 (mod 5)|1 (mod 5)|1 (mod 5)|4 (mod 5)|2 (mod 5)|2 (mod 5)|0 (mod 5)|1 (mod 5)");
+        expected.put("FiniteSetAlgebra","[1, 2, 3]|[1, 2]|[]|[3]|true|false|true|[1, 2]|[1]|2|[1, 2]|[[], [1], [2], [1, 2]]|[3]|[]");
         int count=0;
         for(ConcreteAlgebra<?> algebra : math.algebras()) {
             String[] values=expected.get(algebra.getClass().getSimpleName()).split("\\|",-1);
@@ -41,7 +42,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(90,count);
+        assertEquals(104,count);
     }
     @SuppressWarnings({"unchecked","rawtypes"})
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
@@ -51,10 +52,12 @@ public class ConcreteAlgebrasTest {
         Object operation=entry.operation;
         if(operation instanceof IOneOperandOperation) return item.performOneOperandOperation(alias).perform().getResult().toString();
         if(operation instanceof ITransferOperation) return item.performAlgebraTransfer(alias).perform().getResult().toString();
-        Object second=sample(entry.second.getAlgebraName(),1);
+        Object second=entry.second==null?null:sample(entry.second.getAlgebraName(),1);
         if(entry.flat) {
             List<IAlgebraItem> results;
-            if(operation instanceof IFlatOperation) results=item.performFlatOperation(alias,second);
+            if(operation instanceof IOneOperandFlatOperation) results=item.performOneOperandFlatOperation(alias);
+            else if(operation instanceof ITransferFlatOperation) results=item.performAlgebraFlatTransfer(alias);
+            else if(operation instanceof IFlatOperation) results=item.performFlatOperation(alias,second);
             else if(operation instanceof ICustomMemberFlatOperation) results=item.performCustomMemberFlatOperation(alias,second);
             else if(operation instanceof ILeftProjectionFlatOperation) results=item.performLeftProjectionFlatOperation(alias,second);
             else if(operation instanceof ICustomResultFlatOperation) results=item.performCustomResultFlatOperation(alias,second);
@@ -83,6 +86,7 @@ public class ConcreteAlgebrasTest {
                     ?new Rational[][] {{Rational.ONE,Rational.of(2)},{Rational.of(3),Rational.of(4)}}
                     :new Rational[][] {{Rational.of(2),Rational.ZERO},{Rational.ZERO,Rational.of(2)}});
             case "Q[x]": return index==0?new Polynomial(Rational.ONE,Rational.of(2),Rational.ONE):new Polynomial(Rational.of(2),Rational.ONE);
+            case "FiniteSet(Z)": return index==0?FiniteSet.of(BigInteger.ONE,BigInteger.valueOf(2)):FiniteSet.of(BigInteger.ONE,BigInteger.valueOf(2),BigInteger.valueOf(3));
             case "QxQ.bounds": return new Pair<>(Rational.ZERO,Rational.ONE);
             case "Z/5Z": return new ModularInteger(index==0?3:2,5);
             default: throw new AssertionError("Missing test operand for "+domain);
