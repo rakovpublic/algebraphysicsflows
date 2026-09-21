@@ -5,6 +5,7 @@ import mathematics.core.MathFailure;
 import mathematics.calculus.Polynomial;
 import mathematics.foundations.*;
 import mathematics.numbers.Rational;
+import java.math.BigInteger;
 
 
 public final class RationalPolynomialRing extends ConcreteAlgebra<Polynomial> {
@@ -22,6 +23,12 @@ public final class RationalPolynomialRing extends ConcreteAlgebra<Polynomial> {
         constant("zero",new Polynomial(Rational.ZERO)); constant("one",new Polynomial(Rational.ONE));
         law("Q[x] is a commutative unital ring; polynomial multiplication distributes over addition.");
         law("The derivative is Q-linear and satisfies the product rule; primitive uses an explicit rational constant.");
+    }
+    public RationalPolynomialRing(RationalField rationals,NaturalSemiring naturals) {
+        this(rationals);
+        binary("derivative-order",algebra(),naturals.algebra(),algebra(),false,(polynomial,order) ->
+                order.compareTo(BigInteger.valueOf(polynomial.degree()))>0
+                        ?new Polynomial(Rational.ZERO):polynomial.derivative(order.intValueExact()));
     }
     @SuppressWarnings("unchecked")
     private static Algebra<Pair<Rational,Rational>> boundsCarrier(RationalField rationals) {

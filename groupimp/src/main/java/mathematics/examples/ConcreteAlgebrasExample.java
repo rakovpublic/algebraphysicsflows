@@ -36,13 +36,13 @@ public final class ConcreteAlgebrasExample {
     }
     /** Stable manifest used to keep the human/JSON coverage registry aligned with real registrations. */
     public static String catalogManifest(ConcreteMathematics math) {
-        StringBuilder result=new StringBuilder("id\tclass\talias\tfirst\tsecond\tresult\tsemantics\tpartiality\n");
+        StringBuilder result=new StringBuilder("id\tclass\talias\tfirst\tsecond\tresult\tsemantics\tpartiality\tinterface\n");
         for(ConcreteAlgebra<?> algebra : math.algebras()) for(OperationRegistration operation : algebra.operations().values()) {
             result.append(operation.id).append('\t').append(algebra.getClass().getSimpleName()).append('\t').append(operation.alias).append('\t')
                     .append(operation.first.getAlgebraName()).append('\t')
                     .append(operation.second==null?"-":operation.second.getAlgebraName()).append('\t')
                     .append(operation.result.getAlgebraName()).append('\t').append(operation.flat?"LIST":"SCALAR").append('\t')
-                    .append(operation.partial?"PARTIAL":"TOTAL").append('\n');
+                    .append(operation.partial?"PARTIAL":"TOTAL").append('\t').append(operation.operation.getClass().getInterfaces()[0].getSimpleName()).append('\n');
         }
         return result.toString();
     }

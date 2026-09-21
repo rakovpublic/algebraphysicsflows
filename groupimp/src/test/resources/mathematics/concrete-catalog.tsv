@@ -1,126 +1,129 @@
-id	class	alias	first	second	result	semantics	partiality
-Boolean.and	BooleanAlgebra	and	Boolean	Boolean	Boolean	SCALAR	TOTAL
-Boolean.or	BooleanAlgebra	or	Boolean	Boolean	Boolean	SCALAR	TOTAL
-Boolean.xor	BooleanAlgebra	xor	Boolean	Boolean	Boolean	SCALAR	TOTAL
-Boolean.implies	BooleanAlgebra	implies	Boolean	Boolean	Boolean	SCALAR	TOTAL
-Boolean.equal	BooleanAlgebra	equal	Boolean	Boolean	Boolean	SCALAR	TOTAL
-Boolean.not	BooleanAlgebra	not	Boolean	-	Boolean	SCALAR	TOTAL
-Boolean.zero	BooleanAlgebra	Boolean.zero	Unit	-	Boolean	SCALAR	TOTAL
-Boolean.one	BooleanAlgebra	Boolean.one	Unit	-	Boolean	SCALAR	TOTAL
-N.add	NaturalSemiring	add	N	N	N	SCALAR	TOTAL
-N.multiply	NaturalSemiring	multiply	N	N	N	SCALAR	TOTAL
-N.successor	NaturalSemiring	successor	N	-	N	SCALAR	TOTAL
-N.to-integer	NaturalSemiring	to-integer	N	-	Z	SCALAR	TOTAL
-N.zero	NaturalSemiring	N.zero	Unit	-	N	SCALAR	TOTAL
-N.one	NaturalSemiring	N.one	Unit	-	N	SCALAR	TOTAL
-Z.add	IntegerRing	add	Z	Z	Z	SCALAR	TOTAL
-Z.subtract	IntegerRing	subtract	Z	Z	Z	SCALAR	TOTAL
-Z.multiply	IntegerRing	multiply	Z	Z	Z	SCALAR	TOTAL
-Z.gcd	IntegerRing	gcd	Z	Z	Z	SCALAR	TOTAL
-Z.lcm	IntegerRing	lcm	Z	Z	Z	SCALAR	TOTAL
-Z.quotient	IntegerRing	quotient	Z	Z	Z	SCALAR	PARTIAL
-Z.remainder	IntegerRing	remainder	Z	Z	Z	SCALAR	PARTIAL
-Z.negate	IntegerRing	negate	Z	-	Z	SCALAR	TOTAL
-Z.to-rational	IntegerRing	to-rational	Z	-	Q	SCALAR	TOTAL
-Z.divide-rational	IntegerRing	divide-rational	Z	Z	Q	SCALAR	PARTIAL
-Z.greater	IntegerRing	greater	Z	Z	Boolean	SCALAR	TOTAL
-Z.equal	IntegerRing	equal	Z	Z	Boolean	SCALAR	TOTAL
-Z.quotient-remainder	IntegerRing	quotient-remainder	Z	Z	Z	LIST	PARTIAL
-Z.zero	IntegerRing	Z.zero	Unit	-	Z	SCALAR	TOTAL
-Z.one	IntegerRing	Z.one	Unit	-	Z	SCALAR	TOTAL
-Q.add	RationalField	add	Q	Q	Q	SCALAR	TOTAL
-Q.subtract	RationalField	subtract	Q	Q	Q	SCALAR	TOTAL
-Q.multiply	RationalField	multiply	Q	Q	Q	SCALAR	TOTAL
-Q.divide	RationalField	divide	Q	Q	Q	SCALAR	PARTIAL
-Q.negate	RationalField	negate	Q	-	Q	SCALAR	TOTAL
-Q.inverse	RationalField	inverse	Q	-	Q	SCALAR	PARTIAL
-Q.greater	RationalField	greater	Q	Q	Boolean	SCALAR	TOTAL
-Q.equal	RationalField	equal	Q	Q	Boolean	SCALAR	TOTAL
-Q.add-subtract	RationalField	add-subtract	Q	Q	Q	LIST	TOTAL
-Q.zero	RationalField	Q.zero	Unit	-	Q	SCALAR	TOTAL
-Q.one	RationalField	Q.one	Unit	-	Q	SCALAR	TOTAL
-Q(i).add	RationalComplexField	add	Q(i)	Q(i)	Q(i)	SCALAR	TOTAL
-Q(i).subtract	RationalComplexField	subtract	Q(i)	Q(i)	Q(i)	SCALAR	TOTAL
-Q(i).multiply	RationalComplexField	multiply	Q(i)	Q(i)	Q(i)	SCALAR	TOTAL
-Q(i).divide	RationalComplexField	divide	Q(i)	Q(i)	Q(i)	SCALAR	PARTIAL
-Q(i).negate	RationalComplexField	negate	Q(i)	-	Q(i)	SCALAR	TOTAL
-Q(i).conjugate	RationalComplexField	conjugate	Q(i)	-	Q(i)	SCALAR	TOTAL
-Q(i).norm-squared	RationalComplexField	norm-squared	Q(i)	-	Q	SCALAR	TOTAL
-Q(i).embed-rational	RationalComplexField	Q(i).embed-rational	Q	-	Q(i)	SCALAR	TOTAL
-Q(i).zero	RationalComplexField	Q(i).zero	Unit	-	Q(i)	SCALAR	TOTAL
-Q(i).one	RationalComplexField	Q(i).one	Unit	-	Q(i)	SCALAR	TOTAL
-Q^2.add	RationalVectorSpace	add	Q^2	Q^2	Q^2	SCALAR	TOTAL
-Q^2.subtract	RationalVectorSpace	subtract	Q^2	Q^2	Q^2	SCALAR	TOTAL
-Q^2.negate	RationalVectorSpace	negate	Q^2	-	Q^2	SCALAR	TOTAL
-Q^2.scale	RationalVectorSpace	scale	Q^2	Q	Q^2	SCALAR	TOTAL
-Q^2.scale-left	RationalVectorSpace	Q^2.scale-left	Q	Q^2	Q^2	SCALAR	TOTAL
-Q^2.scale-left-flat	RationalVectorSpace	Q^2.scale-left-flat	Q	Q^2	Q^2	LIST	TOTAL
-Q^2.dot	RationalVectorSpace	dot	Q^2	Q^2	Q	SCALAR	TOTAL
-Q^2.scale-flat	RationalVectorSpace	scale-flat	Q^2	Q	Q^2	LIST	TOTAL
-Q^2.scale-signs	RationalVectorSpace	scale-signs	Q^2	Q	Q^2	LIST	TOTAL
-Q^2.zero	RationalVectorSpace	Q^2.zero	Unit	-	Q^2	SCALAR	TOTAL
-Mat2(Q).add	RationalMatrixAlgebra	add	Mat2(Q)	Mat2(Q)	Mat2(Q)	SCALAR	TOTAL
-Mat2(Q).multiply	RationalMatrixAlgebra	multiply	Mat2(Q)	Mat2(Q)	Mat2(Q)	SCALAR	TOTAL
-Mat2(Q).subtract	RationalMatrixAlgebra	subtract	Mat2(Q)	Mat2(Q)	Mat2(Q)	SCALAR	TOTAL
-Mat2(Q).negate	RationalMatrixAlgebra	negate	Mat2(Q)	-	Mat2(Q)	SCALAR	TOTAL
-Mat2(Q).transpose	RationalMatrixAlgebra	transpose	Mat2(Q)	-	Mat2(Q)	SCALAR	TOTAL
-Mat2(Q).inverse	RationalMatrixAlgebra	inverse	Mat2(Q)	-	Mat2(Q)	SCALAR	PARTIAL
-Mat2(Q).determinant	RationalMatrixAlgebra	determinant	Mat2(Q)	-	Q	SCALAR	TOTAL
-Mat2(Q).trace	RationalMatrixAlgebra	trace	Mat2(Q)	-	Q	SCALAR	TOTAL
-Mat2(Q).scale	RationalMatrixAlgebra	scale	Mat2(Q)	Q	Mat2(Q)	SCALAR	TOTAL
-Mat2(Q).apply	RationalMatrixAlgebra	apply	Mat2(Q)	Q^2	Q^2	SCALAR	TOTAL
-Mat2(Q).zero	RationalMatrixAlgebra	Mat2(Q).zero	Unit	-	Mat2(Q)	SCALAR	TOTAL
-Mat2(Q).one	RationalMatrixAlgebra	Mat2(Q).one	Unit	-	Mat2(Q)	SCALAR	TOTAL
-Q[x].add	RationalPolynomialRing	add	Q[x]	Q[x]	Q[x]	SCALAR	TOTAL
-Q[x].multiply	RationalPolynomialRing	multiply	Q[x]	Q[x]	Q[x]	SCALAR	TOTAL
-Q[x].subtract	RationalPolynomialRing	subtract	Q[x]	Q[x]	Q[x]	SCALAR	TOTAL
-Q[x].negate	RationalPolynomialRing	negate	Q[x]	-	Q[x]	SCALAR	TOTAL
-Q[x].derivative	RationalPolynomialRing	derivative	Q[x]	-	Q[x]	SCALAR	TOTAL
-Q[x].evaluate	RationalPolynomialRing	evaluate	Q[x]	Q	Q	SCALAR	TOTAL
-Q[x].primitive	RationalPolynomialRing	primitive	Q[x]	Q	Q[x]	SCALAR	TOTAL
-Q[x].integrate	RationalPolynomialRing	integrate	Q[x]	QxQ.bounds	Q	SCALAR	TOTAL
-Q[x].zero	RationalPolynomialRing	Q[x].zero	Unit	-	Q[x]	SCALAR	TOTAL
-Q[x].one	RationalPolynomialRing	Q[x].one	Unit	-	Q[x]	SCALAR	TOTAL
-FiniteSet(Z).union	FiniteSetAlgebra	union	FiniteSet(Z)	FiniteSet(Z)	FiniteSet(Z)	SCALAR	TOTAL
-FiniteSet(Z).intersection	FiniteSetAlgebra	intersection	FiniteSet(Z)	FiniteSet(Z)	FiniteSet(Z)	SCALAR	TOTAL
-FiniteSet(Z).difference	FiniteSetAlgebra	difference	FiniteSet(Z)	FiniteSet(Z)	FiniteSet(Z)	SCALAR	TOTAL
-FiniteSet(Z).symmetric-difference	FiniteSetAlgebra	symmetric-difference	FiniteSet(Z)	FiniteSet(Z)	FiniteSet(Z)	SCALAR	TOTAL
-FiniteSet(Z).subset	FiniteSetAlgebra	subset	FiniteSet(Z)	FiniteSet(Z)	Boolean	SCALAR	TOTAL
-FiniteSet(Z).equal	FiniteSetAlgebra	equal	FiniteSet(Z)	FiniteSet(Z)	Boolean	SCALAR	TOTAL
-FiniteSet(Z).contains	FiniteSetAlgebra	contains	FiniteSet(Z)	Z	Boolean	SCALAR	TOTAL
-FiniteSet(Z).insert	FiniteSetAlgebra	insert	FiniteSet(Z)	Z	FiniteSet(Z)	SCALAR	TOTAL
-FiniteSet(Z).remove	FiniteSetAlgebra	remove	FiniteSet(Z)	Z	FiniteSet(Z)	SCALAR	TOTAL
-FiniteSet(Z).cardinality	FiniteSetAlgebra	cardinality	FiniteSet(Z)	-	N	SCALAR	TOTAL
-FiniteSet(Z).elements	FiniteSetAlgebra	elements	FiniteSet(Z)	-	Z	LIST	TOTAL
-FiniteSet(Z).subsets	FiniteSetAlgebra	subsets	FiniteSet(Z)	-	FiniteSet(Z)	LIST	TOTAL
-FiniteSet(Z).complement-in	FiniteSetAlgebra	complement-in	FiniteSet(Z)	FiniteSet(Z)	FiniteSet(Z)	SCALAR	PARTIAL
-FiniteSet(Z).empty	FiniteSetAlgebra	FiniteSet(Z).empty	Unit	-	FiniteSet(Z)	SCALAR	TOTAL
-Sample(Q).concatenate	RationalSampleAlgebra	concatenate	Sample(Q)	Sample(Q)	Sample(Q)	SCALAR	TOTAL
-Sample(Q).size	RationalSampleAlgebra	size	Sample(Q)	-	N	SCALAR	TOTAL
-Sample(Q).mean	RationalSampleAlgebra	mean	Sample(Q)	-	Q	SCALAR	PARTIAL
-Sample(Q).population-variance	RationalSampleAlgebra	population-variance	Sample(Q)	-	Q	SCALAR	PARTIAL
-Sample(Q).sample-variance	RationalSampleAlgebra	sample-variance	Sample(Q)	-	Q	SCALAR	PARTIAL
-Sample(Q).center	RationalSampleAlgebra	center	Sample(Q)	-	Sample(Q)	SCALAR	PARTIAL
-Sample(Q).population-covariance	RationalSampleAlgebra	population-covariance	Sample(Q)	Sample(Q)	Q	SCALAR	PARTIAL
-Sample(Q).sample-covariance	RationalSampleAlgebra	sample-covariance	Sample(Q)	Sample(Q)	Q	SCALAR	PARTIAL
-Sample(Q).scale	RationalSampleAlgebra	scale	Sample(Q)	Q	Sample(Q)	SCALAR	TOTAL
-Sample(Q).elements	RationalSampleAlgebra	elements	Sample(Q)	-	Q	LIST	TOTAL
-Sample(Q).empty	RationalSampleAlgebra	Sample(Q).empty	Unit	-	Sample(Q)	SCALAR	TOTAL
-FiniteDistribution(Z).event-probability	FiniteProbabilityAlgebra	event-probability	FiniteDistribution(Z)	FiniteSet(Z)	Q	SCALAR	TOTAL
-FiniteDistribution(Z).point-probability	FiniteProbabilityAlgebra	point-probability	FiniteDistribution(Z)	Z	Q	SCALAR	TOTAL
-FiniteDistribution(Z).condition	FiniteProbabilityAlgebra	condition	FiniteDistribution(Z)	FiniteSet(Z)	FiniteDistribution(Z)	SCALAR	PARTIAL
-FiniteDistribution(Z).support	FiniteProbabilityAlgebra	support	FiniteDistribution(Z)	-	FiniteSet(Z)	SCALAR	TOTAL
-FiniteDistribution(Z).support-size	FiniteProbabilityAlgebra	support-size	FiniteDistribution(Z)	-	N	SCALAR	TOTAL
-FiniteDistribution(Z).outcomes	FiniteProbabilityAlgebra	outcomes	FiniteDistribution(Z)	-	Z	LIST	TOTAL
-FiniteDistribution(Z).equal	FiniteProbabilityAlgebra	equal	FiniteDistribution(Z)	FiniteDistribution(Z)	Boolean	SCALAR	TOTAL
-FiniteDistribution(Z).point-mass	FiniteProbabilityAlgebra	FiniteDistribution(Z).point-mass	Z	-	FiniteDistribution(Z)	SCALAR	TOTAL
-FiniteDistribution(Z).expectation	FiniteProbabilityAlgebra	expectation	FiniteDistribution(Z)	-	Q	SCALAR	TOTAL
-FiniteDistribution(Z).variance	FiniteProbabilityAlgebra	variance	FiniteDistribution(Z)	-	Q	SCALAR	TOTAL
-Z/5Z.add	PrimeField	add	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL
-Z/5Z.subtract	PrimeField	subtract	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL
-Z/5Z.multiply	PrimeField	multiply	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL
-Z/5Z.divide	PrimeField	divide	Z/5Z	Z/5Z	Z/5Z	SCALAR	PARTIAL
-Z/5Z.negate	PrimeField	negate	Z/5Z	-	Z/5Z	SCALAR	TOTAL
-Z/5Z.inverse	PrimeField	inverse	Z/5Z	-	Z/5Z	SCALAR	PARTIAL
-Z/5Z.zero	PrimeField	Z/5Z.zero	Unit	-	Z/5Z	SCALAR	TOTAL
-Z/5Z.one	PrimeField	Z/5Z.one	Unit	-	Z/5Z	SCALAR	TOTAL
+id	class	alias	first	second	result	semantics	partiality	interface
+Boolean.and	BooleanAlgebra	and	Boolean	Boolean	Boolean	SCALAR	TOTAL	IOperation
+Boolean.or	BooleanAlgebra	or	Boolean	Boolean	Boolean	SCALAR	TOTAL	IOperation
+Boolean.xor	BooleanAlgebra	xor	Boolean	Boolean	Boolean	SCALAR	TOTAL	IOperation
+Boolean.implies	BooleanAlgebra	implies	Boolean	Boolean	Boolean	SCALAR	TOTAL	IOperation
+Boolean.equal	BooleanAlgebra	equal	Boolean	Boolean	Boolean	SCALAR	TOTAL	IOperation
+Boolean.not	BooleanAlgebra	not	Boolean	-	Boolean	SCALAR	TOTAL	IOneOperandOperation
+Boolean.zero	BooleanAlgebra	Boolean.zero	Unit	-	Boolean	SCALAR	TOTAL	ITransferOperation
+Boolean.one	BooleanAlgebra	Boolean.one	Unit	-	Boolean	SCALAR	TOTAL	ITransferOperation
+N.add	NaturalSemiring	add	N	N	N	SCALAR	TOTAL	IOperation
+N.multiply	NaturalSemiring	multiply	N	N	N	SCALAR	TOTAL	IOperation
+N.successor	NaturalSemiring	successor	N	-	N	SCALAR	TOTAL	IOneOperandOperation
+N.to-integer	NaturalSemiring	to-integer	N	-	Z	SCALAR	TOTAL	ITransferOperation
+N.zero	NaturalSemiring	N.zero	Unit	-	N	SCALAR	TOTAL	ITransferOperation
+N.one	NaturalSemiring	N.one	Unit	-	N	SCALAR	TOTAL	ITransferOperation
+Z.add	IntegerRing	add	Z	Z	Z	SCALAR	TOTAL	IOperation
+Z.subtract	IntegerRing	subtract	Z	Z	Z	SCALAR	TOTAL	IOperation
+Z.multiply	IntegerRing	multiply	Z	Z	Z	SCALAR	TOTAL	IOperation
+Z.gcd	IntegerRing	gcd	Z	Z	Z	SCALAR	TOTAL	IOperation
+Z.lcm	IntegerRing	lcm	Z	Z	Z	SCALAR	TOTAL	IOperation
+Z.quotient	IntegerRing	quotient	Z	Z	Z	SCALAR	PARTIAL	IOperation
+Z.remainder	IntegerRing	remainder	Z	Z	Z	SCALAR	PARTIAL	IOperation
+Z.negate	IntegerRing	negate	Z	-	Z	SCALAR	TOTAL	IOneOperandOperation
+Z.to-rational	IntegerRing	to-rational	Z	-	Q	SCALAR	TOTAL	ITransferOperation
+Z.divide-rational	IntegerRing	divide-rational	Z	Z	Q	SCALAR	PARTIAL	ICustomResultOperation
+Z.greater	IntegerRing	greater	Z	Z	Boolean	SCALAR	TOTAL	ICustomResultOperation
+Z.equal	IntegerRing	equal	Z	Z	Boolean	SCALAR	TOTAL	ICustomResultOperation
+Z.quotient-remainder	IntegerRing	quotient-remainder	Z	Z	Z	LIST	PARTIAL	IFlatOperation
+Z.zero	IntegerRing	Z.zero	Unit	-	Z	SCALAR	TOTAL	ITransferOperation
+Z.one	IntegerRing	Z.one	Unit	-	Z	SCALAR	TOTAL	ITransferOperation
+Q.add	RationalField	add	Q	Q	Q	SCALAR	TOTAL	IOperation
+Q.subtract	RationalField	subtract	Q	Q	Q	SCALAR	TOTAL	IOperation
+Q.multiply	RationalField	multiply	Q	Q	Q	SCALAR	TOTAL	IOperation
+Q.divide	RationalField	divide	Q	Q	Q	SCALAR	PARTIAL	IOperation
+Q.negate	RationalField	negate	Q	-	Q	SCALAR	TOTAL	IOneOperandOperation
+Q.inverse	RationalField	inverse	Q	-	Q	SCALAR	PARTIAL	IOneOperandOperation
+Q.greater	RationalField	greater	Q	Q	Boolean	SCALAR	TOTAL	ICustomResultOperation
+Q.equal	RationalField	equal	Q	Q	Boolean	SCALAR	TOTAL	ICustomResultOperation
+Q.add-subtract	RationalField	add-subtract	Q	Q	Q	LIST	TOTAL	IFlatOperation
+Q.zero	RationalField	Q.zero	Unit	-	Q	SCALAR	TOTAL	ITransferOperation
+Q.one	RationalField	Q.one	Unit	-	Q	SCALAR	TOTAL	ITransferOperation
+Q(i).add	RationalComplexField	add	Q(i)	Q(i)	Q(i)	SCALAR	TOTAL	IOperation
+Q(i).subtract	RationalComplexField	subtract	Q(i)	Q(i)	Q(i)	SCALAR	TOTAL	IOperation
+Q(i).multiply	RationalComplexField	multiply	Q(i)	Q(i)	Q(i)	SCALAR	TOTAL	IOperation
+Q(i).divide	RationalComplexField	divide	Q(i)	Q(i)	Q(i)	SCALAR	PARTIAL	IOperation
+Q(i).negate	RationalComplexField	negate	Q(i)	-	Q(i)	SCALAR	TOTAL	IOneOperandOperation
+Q(i).conjugate	RationalComplexField	conjugate	Q(i)	-	Q(i)	SCALAR	TOTAL	IOneOperandOperation
+Q(i).norm-squared	RationalComplexField	norm-squared	Q(i)	-	Q	SCALAR	TOTAL	ITransferOperation
+Q(i).embed-rational	RationalComplexField	Q(i).embed-rational	Q	-	Q(i)	SCALAR	TOTAL	ITransferOperation
+Q(i).zero	RationalComplexField	Q(i).zero	Unit	-	Q(i)	SCALAR	TOTAL	ITransferOperation
+Q(i).one	RationalComplexField	Q(i).one	Unit	-	Q(i)	SCALAR	TOTAL	ITransferOperation
+Q^2.add	RationalVectorSpace	add	Q^2	Q^2	Q^2	SCALAR	TOTAL	IOperation
+Q^2.subtract	RationalVectorSpace	subtract	Q^2	Q^2	Q^2	SCALAR	TOTAL	IOperation
+Q^2.negate	RationalVectorSpace	negate	Q^2	-	Q^2	SCALAR	TOTAL	IOneOperandOperation
+Q^2.scale	RationalVectorSpace	scale	Q^2	Q	Q^2	SCALAR	TOTAL	ICustomMemberOperation
+Q^2.scale-left	RationalVectorSpace	Q^2.scale-left	Q	Q^2	Q^2	SCALAR	TOTAL	ILeftProjectionOperation
+Q^2.scale-left-flat	RationalVectorSpace	Q^2.scale-left-flat	Q	Q^2	Q^2	LIST	TOTAL	ILeftProjectionFlatOperation
+Q^2.dot	RationalVectorSpace	dot	Q^2	Q^2	Q	SCALAR	TOTAL	ICustomResultOperation
+Q^2.scale-flat	RationalVectorSpace	scale-flat	Q^2	Q	Q^2	LIST	TOTAL	ICustomMemberFlatOperation
+Q^2.scale-signs	RationalVectorSpace	scale-signs	Q^2	Q	Q^2	LIST	TOTAL	ICustomMemberFlatOperation
+Q^2.zero	RationalVectorSpace	Q^2.zero	Unit	-	Q^2	SCALAR	TOTAL	ITransferOperation
+Mat2(Q).add	RationalMatrixAlgebra	add	Mat2(Q)	Mat2(Q)	Mat2(Q)	SCALAR	TOTAL	IOperation
+Mat2(Q).multiply	RationalMatrixAlgebra	multiply	Mat2(Q)	Mat2(Q)	Mat2(Q)	SCALAR	TOTAL	IOperation
+Mat2(Q).subtract	RationalMatrixAlgebra	subtract	Mat2(Q)	Mat2(Q)	Mat2(Q)	SCALAR	TOTAL	IOperation
+Mat2(Q).negate	RationalMatrixAlgebra	negate	Mat2(Q)	-	Mat2(Q)	SCALAR	TOTAL	IOneOperandOperation
+Mat2(Q).transpose	RationalMatrixAlgebra	transpose	Mat2(Q)	-	Mat2(Q)	SCALAR	TOTAL	IOneOperandOperation
+Mat2(Q).inverse	RationalMatrixAlgebra	inverse	Mat2(Q)	-	Mat2(Q)	SCALAR	PARTIAL	IOneOperandOperation
+Mat2(Q).determinant	RationalMatrixAlgebra	determinant	Mat2(Q)	-	Q	SCALAR	TOTAL	ITransferOperation
+Mat2(Q).trace	RationalMatrixAlgebra	trace	Mat2(Q)	-	Q	SCALAR	TOTAL	ITransferOperation
+Mat2(Q).scale	RationalMatrixAlgebra	scale	Mat2(Q)	Q	Mat2(Q)	SCALAR	TOTAL	ICustomMemberOperation
+Mat2(Q).apply	RationalMatrixAlgebra	apply	Mat2(Q)	Q^2	Q^2	SCALAR	TOTAL	ILeftProjectionOperation
+Mat2(Q).solve	RationalMatrixAlgebra	solve	Mat2(Q)	Q^2	Q^2	SCALAR	PARTIAL	ILeftProjectionOperation
+Mat2(Q).zero	RationalMatrixAlgebra	Mat2(Q).zero	Unit	-	Mat2(Q)	SCALAR	TOTAL	ITransferOperation
+Mat2(Q).one	RationalMatrixAlgebra	Mat2(Q).one	Unit	-	Mat2(Q)	SCALAR	TOTAL	ITransferOperation
+Mat2(Q).rank	RationalMatrixAlgebra	rank	Mat2(Q)	-	N	SCALAR	TOTAL	ITransferOperation
+Q[x].add	RationalPolynomialRing	add	Q[x]	Q[x]	Q[x]	SCALAR	TOTAL	IOperation
+Q[x].multiply	RationalPolynomialRing	multiply	Q[x]	Q[x]	Q[x]	SCALAR	TOTAL	IOperation
+Q[x].subtract	RationalPolynomialRing	subtract	Q[x]	Q[x]	Q[x]	SCALAR	TOTAL	IOperation
+Q[x].negate	RationalPolynomialRing	negate	Q[x]	-	Q[x]	SCALAR	TOTAL	IOneOperandOperation
+Q[x].derivative	RationalPolynomialRing	derivative	Q[x]	-	Q[x]	SCALAR	TOTAL	IOneOperandOperation
+Q[x].evaluate	RationalPolynomialRing	evaluate	Q[x]	Q	Q	SCALAR	TOTAL	ILeftProjectionOperation
+Q[x].primitive	RationalPolynomialRing	primitive	Q[x]	Q	Q[x]	SCALAR	TOTAL	ICustomMemberOperation
+Q[x].integrate	RationalPolynomialRing	integrate	Q[x]	QxQ.bounds	Q	SCALAR	TOTAL	IUnsafeOperation
+Q[x].zero	RationalPolynomialRing	Q[x].zero	Unit	-	Q[x]	SCALAR	TOTAL	ITransferOperation
+Q[x].one	RationalPolynomialRing	Q[x].one	Unit	-	Q[x]	SCALAR	TOTAL	ITransferOperation
+Q[x].derivative-order	RationalPolynomialRing	derivative-order	Q[x]	N	Q[x]	SCALAR	TOTAL	ICustomMemberOperation
+FiniteSet(Z).union	FiniteSetAlgebra	union	FiniteSet(Z)	FiniteSet(Z)	FiniteSet(Z)	SCALAR	TOTAL	IOperation
+FiniteSet(Z).intersection	FiniteSetAlgebra	intersection	FiniteSet(Z)	FiniteSet(Z)	FiniteSet(Z)	SCALAR	TOTAL	IOperation
+FiniteSet(Z).difference	FiniteSetAlgebra	difference	FiniteSet(Z)	FiniteSet(Z)	FiniteSet(Z)	SCALAR	TOTAL	IOperation
+FiniteSet(Z).symmetric-difference	FiniteSetAlgebra	symmetric-difference	FiniteSet(Z)	FiniteSet(Z)	FiniteSet(Z)	SCALAR	TOTAL	IOperation
+FiniteSet(Z).subset	FiniteSetAlgebra	subset	FiniteSet(Z)	FiniteSet(Z)	Boolean	SCALAR	TOTAL	ICustomResultOperation
+FiniteSet(Z).equal	FiniteSetAlgebra	equal	FiniteSet(Z)	FiniteSet(Z)	Boolean	SCALAR	TOTAL	ICustomResultOperation
+FiniteSet(Z).contains	FiniteSetAlgebra	contains	FiniteSet(Z)	Z	Boolean	SCALAR	TOTAL	IUnsafeOperation
+FiniteSet(Z).insert	FiniteSetAlgebra	insert	FiniteSet(Z)	Z	FiniteSet(Z)	SCALAR	TOTAL	ICustomMemberOperation
+FiniteSet(Z).remove	FiniteSetAlgebra	remove	FiniteSet(Z)	Z	FiniteSet(Z)	SCALAR	TOTAL	ICustomMemberOperation
+FiniteSet(Z).cardinality	FiniteSetAlgebra	cardinality	FiniteSet(Z)	-	N	SCALAR	TOTAL	ITransferOperation
+FiniteSet(Z).elements	FiniteSetAlgebra	elements	FiniteSet(Z)	-	Z	LIST	TOTAL	ITransferFlatOperation
+FiniteSet(Z).subsets	FiniteSetAlgebra	subsets	FiniteSet(Z)	-	FiniteSet(Z)	LIST	TOTAL	IOneOperandFlatOperation
+FiniteSet(Z).complement-in	FiniteSetAlgebra	complement-in	FiniteSet(Z)	FiniteSet(Z)	FiniteSet(Z)	SCALAR	PARTIAL	IOperation
+FiniteSet(Z).empty	FiniteSetAlgebra	FiniteSet(Z).empty	Unit	-	FiniteSet(Z)	SCALAR	TOTAL	ITransferOperation
+Sample(Q).concatenate	RationalSampleAlgebra	concatenate	Sample(Q)	Sample(Q)	Sample(Q)	SCALAR	TOTAL	IOperation
+Sample(Q).size	RationalSampleAlgebra	size	Sample(Q)	-	N	SCALAR	TOTAL	ITransferOperation
+Sample(Q).mean	RationalSampleAlgebra	mean	Sample(Q)	-	Q	SCALAR	PARTIAL	ITransferOperation
+Sample(Q).population-variance	RationalSampleAlgebra	population-variance	Sample(Q)	-	Q	SCALAR	PARTIAL	ITransferOperation
+Sample(Q).sample-variance	RationalSampleAlgebra	sample-variance	Sample(Q)	-	Q	SCALAR	PARTIAL	ITransferOperation
+Sample(Q).center	RationalSampleAlgebra	center	Sample(Q)	-	Sample(Q)	SCALAR	PARTIAL	IOneOperandOperation
+Sample(Q).population-covariance	RationalSampleAlgebra	population-covariance	Sample(Q)	Sample(Q)	Q	SCALAR	PARTIAL	ICustomResultOperation
+Sample(Q).sample-covariance	RationalSampleAlgebra	sample-covariance	Sample(Q)	Sample(Q)	Q	SCALAR	PARTIAL	ICustomResultOperation
+Sample(Q).scale	RationalSampleAlgebra	scale	Sample(Q)	Q	Sample(Q)	SCALAR	TOTAL	ICustomMemberOperation
+Sample(Q).elements	RationalSampleAlgebra	elements	Sample(Q)	-	Q	LIST	TOTAL	ITransferFlatOperation
+Sample(Q).empty	RationalSampleAlgebra	Sample(Q).empty	Unit	-	Sample(Q)	SCALAR	TOTAL	ITransferOperation
+FiniteDistribution(Z).event-probability	FiniteProbabilityAlgebra	event-probability	FiniteDistribution(Z)	FiniteSet(Z)	Q	SCALAR	TOTAL	IUnsafeOperation
+FiniteDistribution(Z).point-probability	FiniteProbabilityAlgebra	point-probability	FiniteDistribution(Z)	Z	Q	SCALAR	TOTAL	IUnsafeOperation
+FiniteDistribution(Z).condition	FiniteProbabilityAlgebra	condition	FiniteDistribution(Z)	FiniteSet(Z)	FiniteDistribution(Z)	SCALAR	PARTIAL	ICustomMemberOperation
+FiniteDistribution(Z).support	FiniteProbabilityAlgebra	support	FiniteDistribution(Z)	-	FiniteSet(Z)	SCALAR	TOTAL	ITransferOperation
+FiniteDistribution(Z).support-size	FiniteProbabilityAlgebra	support-size	FiniteDistribution(Z)	-	N	SCALAR	TOTAL	ITransferOperation
+FiniteDistribution(Z).outcomes	FiniteProbabilityAlgebra	outcomes	FiniteDistribution(Z)	-	Z	LIST	TOTAL	ITransferFlatOperation
+FiniteDistribution(Z).equal	FiniteProbabilityAlgebra	equal	FiniteDistribution(Z)	FiniteDistribution(Z)	Boolean	SCALAR	TOTAL	ICustomResultOperation
+FiniteDistribution(Z).point-mass	FiniteProbabilityAlgebra	FiniteDistribution(Z).point-mass	Z	-	FiniteDistribution(Z)	SCALAR	TOTAL	ITransferOperation
+FiniteDistribution(Z).expectation	FiniteProbabilityAlgebra	expectation	FiniteDistribution(Z)	-	Q	SCALAR	TOTAL	ITransferOperation
+FiniteDistribution(Z).variance	FiniteProbabilityAlgebra	variance	FiniteDistribution(Z)	-	Q	SCALAR	TOTAL	ITransferOperation
+Z/5Z.add	PrimeField	add	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL	IOperation
+Z/5Z.subtract	PrimeField	subtract	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL	IOperation
+Z/5Z.multiply	PrimeField	multiply	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL	IOperation
+Z/5Z.divide	PrimeField	divide	Z/5Z	Z/5Z	Z/5Z	SCALAR	PARTIAL	IOperation
+Z/5Z.negate	PrimeField	negate	Z/5Z	-	Z/5Z	SCALAR	TOTAL	IOneOperandOperation
+Z/5Z.inverse	PrimeField	inverse	Z/5Z	-	Z/5Z	SCALAR	PARTIAL	IOneOperandOperation
+Z/5Z.zero	PrimeField	Z/5Z.zero	Unit	-	Z/5Z	SCALAR	TOTAL	ITransferOperation
+Z/5Z.one	PrimeField	Z/5Z.one	Unit	-	Z/5Z	SCALAR	TOTAL	ITransferOperation

@@ -21,10 +21,15 @@ public final class RationalMatrixAlgebra extends ConcreteAlgebra<RationalMatrix>
         unary("trace",algebra(),rationals.algebra(),false,RationalMatrix::trace);
         binary("scale",algebra(),rationals.algebra(),algebra(),false,RationalMatrixAlgebra::scale);
         binary("apply",algebra(),vectors.algebra(),vectors.algebra(),false,RationalMatrix::multiply);
+        binary("solve",algebra(),vectors.algebra(),vectors.algebra(),true,(matrix,rhs) -> matrix.inverse().multiply(rhs));
         constant("zero",scale(RationalMatrix.identity(dimension),Rational.ZERO));
         constant("one",RationalMatrix.identity(dimension));
         law("Square matrices form an associative unital Q-algebra; multiplication need not commute.");
         law("Inverse is defined precisely for nonsingular matrices.");
+    }
+    public RationalMatrixAlgebra(RationalField rationals,RationalVectorSpace vectors,NaturalSemiring naturals) {
+        this(rationals,vectors);
+        unary("rank",algebra(),naturals.algebra(),false,m -> java.math.BigInteger.valueOf(m.rank()));
     }
     private static Algebra<RationalMatrix> carrier(int n) {
         if(n<=0) throw MathFailure.invalid("Matrix dimension must be positive");

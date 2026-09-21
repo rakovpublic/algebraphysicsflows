@@ -20,7 +20,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all125RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all128RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         expected.put("BooleanAlgebra","false|true|true|false|false|false|false|true");
@@ -29,8 +29,8 @@ public class ConcreteAlgebrasTest {
         expected.put("RationalField","8|4|12|3|-6|1/6|true|false|[8, 4]|0|1");
         expected.put("RationalComplexField","(4)+(3)i|(-2)+(1)i|(1)+(7)i|(1/2)+(1/2)i|(-1)+(-2)i|(1)+(-2)i|5|(6)+(0)i|(0)+(0)i|(1)+(0)i");
         expected.put("RationalVectorSpace","[4, 6]|[-2, -2]|[-1, -2]|[2, 4]|[18, 24]|[[18, 24]]|11|[[2, 4]]|[[2, 4], [-2, -4]]|[0, 0]");
-        expected.put("RationalMatrixAlgebra","[[3, 2], [3, 6]]|[[2, 4], [6, 8]]|[[-1, 2], [3, 2]]|[[-1, -2], [-3, -4]]|[[1, 3], [2, 4]]|[[-2, 1], [3/2, -1/2]]|-2|5|[[2, 4], [6, 8]]|[11, 25]|[[0, 0], [0, 0]]|[[1, 0], [0, 1]]");
-        expected.put("RationalPolynomialRing","Q[x][3, 3, 1]|Q[x][2, 5, 4, 1]|Q[x][-1, 1, 1]|Q[x][-1, -2, -1]|Q[x][2, 2]|9|Q[x][2, 1, 1, 1/3]|7/3|Q[x][0]|Q[x][1]");
+        expected.put("RationalMatrixAlgebra","[[3, 2], [3, 6]]|[[2, 4], [6, 8]]|[[-1, 2], [3, 2]]|[[-1, -2], [-3, -4]]|[[1, 3], [2, 4]]|[[-2, 1], [3/2, -1/2]]|-2|5|[[2, 4], [6, 8]]|[11, 25]|[-2, 5/2]|[[0, 0], [0, 0]]|[[1, 0], [0, 1]]|2");
+        expected.put("RationalPolynomialRing","Q[x][3, 3, 1]|Q[x][2, 5, 4, 1]|Q[x][-1, 1, 1]|Q[x][-1, -2, -1]|Q[x][2, 2]|9|Q[x][2, 1, 1, 1/3]|7/3|Q[x][0]|Q[x][1]|Q[x][2]");
         expected.put("PrimeField","0 (mod 5)|1 (mod 5)|1 (mod 5)|4 (mod 5)|2 (mod 5)|2 (mod 5)|0 (mod 5)|1 (mod 5)");
         expected.put("FiniteSetAlgebra","[1, 2, 3]|[1, 2]|[]|[3]|true|false|true|[1, 2]|[1]|2|[1, 2]|[[], [1], [2], [1, 2]]|[3]|[]");
         expected.put("RationalSampleAlgebra","Sample[1, 2, 3, 2, 4, 6]|3|2|2/3|1|Sample[-1, 0, 1]|4/3|2|Sample[2, 4, 6]|[1, 2, 3]|Sample[]");
@@ -44,7 +44,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(125,count);
+        assertEquals(128,count);
     }
     @SuppressWarnings({"unchecked","rawtypes"})
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
@@ -226,5 +226,28 @@ public class ConcreteAlgebrasTest {
         assertEquals(Rational.ONE,m.complexRationals.algebra().buildAlgebraItem(i).<Rational>performAlgebraTransfer("norm-squared").perform().getResult());
         assertEquals(Collections.singletonList("(2)+(0)i"),m.flow(m.rationals,Collections.singletonList(Rational.of(2)))
                 .<RationalComplex>performAlgebraTransfer("Q(i).embed-rational").collect());
+    }
+    @Test public void rankSolveAndHigherDerivativesUseNativeOperationsAndRespectTheirDomains() {
+        ConcreteMathematics m=new ConcreteMathematics();
+        RationalMatrix a=new RationalMatrix(new Rational[][] {{Rational.ZERO,Rational.of(2)},{Rational.of(3),Rational.ONE}});
+        RationalVector rhs=new RationalVector(Rational.of(4),Rational.of(5));
+        IAlgebraItem<RationalVector> solution=m.matrices.algebra().buildAlgebraItem(a).performLeftProjectionOperation("solve",rhs);
+        assertSame(m.vectors.algebra(),solution.getAlgebra());
+        assertEquals(new RationalVector(Rational.ONE,Rational.of(2)),solution.perform().getResult());
+        assertEquals(rhs,a.multiply(solution.getResult()));
+        RationalMatrix singular=new RationalMatrix(new Rational[][] {{Rational.ONE,Rational.of(2)},{Rational.of(2),Rational.of(4)}});
+        assertEquals(Arrays.asList("2","1","0"),m.flow(m.matrices,Arrays.asList(a,singular,
+                new RationalMatrix(new Rational[][] {{Rational.ZERO,Rational.ZERO},{Rational.ZERO,Rational.ZERO}})))
+                .<BigInteger>performAlgebraTransfer("rank").collect());
+        assertEquals(MathFailure.Kind.OPERATION_UNDEFINED,assertThrows(MathFailure.class,
+                () -> m.matrices.algebra().buildAlgebraItem(singular).performLeftProjectionOperation("solve",rhs)).kind());
+        Polynomial p=new Polynomial(Rational.ONE,Rational.of(2),Rational.of(3));
+        assertEquals(p,m.polynomials.algebra().buildAlgebraItem(p).performCustomMemberOperation("derivative-order",BigInteger.ZERO).getResult());
+        assertEquals(Collections.singletonList("Q[x][6]"),m.flow(m.polynomials,Collections.singletonList(p))
+                .performCustomMemberOperation("derivative-order",BigInteger.valueOf(2)).collect());
+        assertEquals(new Polynomial(Rational.ZERO),m.polynomials.algebra().buildAlgebraItem(p)
+                .performCustomMemberOperation("derivative-order",BigInteger.ONE.shiftLeft(100)).getResult());
+        assertThrows(exceptions.NotMemberException.class,() -> m.polynomials.algebra().buildAlgebraItem(p)
+                .performCustomMemberOperation("derivative-order",BigInteger.valueOf(-1)));
     }
 }

@@ -67,5 +67,18 @@ public class OperandOverloadTest {
         integers.addCustomMemberOperation("ambiguous",new CustomMemberOperation<>("Second",integers,comparable,(a,b) -> a+2));
         assertThrows(exceptions.UnsupportedOperationException.class,() -> integers.buildAlgebraItem(5).performCustomMemberOperation("ambiguous","x"));
     }
+    @Test public void transfersAndCustomResultsPreflightBeforeChangingTheFlow() {
+        integers.addAlgebraTransfer("to-text",new TransferOperation<>("Text",integers,text,Object::toString));
+        integers.addCustomResultOperation("compare",new CustomResultOperation<>("Compare",integers,booleans,(a,b) -> a>b));
+        integers.addCustomResultFlatOperation("compare-flat",new CustomResultFlatOperation<>("Compare twice",integers,booleans,(a,b) -> Arrays.asList(a>b,a>b)));
+        MathTool incomplete=new MathTool("incomplete"); incomplete.addAlgebra(integers);
+        AlgebraFlow<Integer> source=flow(incomplete);
+        assertThrows(exceptions.AlgebraNotExistsException.class,() -> source.performAlgebraTransfer("to-text"));
+        assertThrows(exceptions.AlgebraNotExistsException.class,() -> source.performCustomResultOperation("compare",3));
+        assertThrows(exceptions.AlgebraNotExistsException.class,() -> source.performFlatCustomResultOperation("compare-flat",3));
+        assertEquals(Collections.singletonList("5"),source.collect());
+        assertEquals(Collections.singletonList("5"),source.collect());
+        incomplete.addAlgebra(booleans);
+        assertEquals(Arrays.asList("true","true"),source.<Boolean>performFlatCustomResultOperation("compare-flat",3).collect());
+    }
 }
-

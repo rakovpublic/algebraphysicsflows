@@ -22,7 +22,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final RationalComplexField complexRationals=new RationalComplexField(rationals);
     public final RationalVectorSpace vectors;
     public final RationalMatrixAlgebra matrices;
-    public final RationalPolynomialRing polynomials=new RationalPolynomialRing(rationals);
+    public final RationalPolynomialRing polynomials=new RationalPolynomialRing(rationals,naturals);
     public final List<PrimeField> primeFields;
     public final MathTool mathTool=new MathTool("concrete-mathematics");
     private final List<ConcreteAlgebra<?>> algebras;
@@ -31,7 +31,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public ConcreteMathematics() { this(2,5); }
     public ConcreteMathematics(int dimension,int... primes) {
         vectors=new RationalVectorSpace(rationals,dimension);
-        matrices=new RationalMatrixAlgebra(rationals,vectors);
+        matrices=new RationalMatrixAlgebra(rationals,vectors,naturals);
         List<PrimeField> fields=new ArrayList<>();
         Set<Integer> seen=new HashSet<>();
         for(int prime : primes) {
