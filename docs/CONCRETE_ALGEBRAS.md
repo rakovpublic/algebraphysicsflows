@@ -1,6 +1,6 @@
 # Concrete algebras connected to MathTool
 
-`new ConcreteMathematics()` creates real `Algebra<T>` instances and registers their checked operations in the existing `MathTool`. It includes N, Z, Q, Q(i), Boolean, Q^2, Mat2(Q), Q[x], and F5 (named Z/5Z). Each construction owns its domain/algebra instances; separate tools do not share mutable registrations.
+`new ConcreteMathematics()` creates real `Algebra<T>` instances and registers their native operations in the existing `MathTool`. It includes N, Z, Q, Q(i), Boolean, Q^2, Mat2(Q), Q[x], and F5 (named Z/5Z). Each construction owns its algebra instances; separate tools do not share mutable registrations.
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
@@ -28,17 +28,17 @@ List<String> values = math.flow(math.naturals,
         .collect(); // ["1", "3/2"]
 ```
 
-`DomainInput<T>` is also available for constructing an AlgebraFlow with an existing MathTool initializer. It copies a finite input list, checks membership, and rejects a different domain instance.
+`ListAlgebraInput<T>` is also available for constructing an AlgebraFlow with an existing MathTool initializer. It copies a finite input list, checks membership, and rejects a different algebra instance.
 
 ## Registered operation names
 
-| Class / carrier | Same-carrier binary operations | Unary transfers | Mixed/custom-result/flat operations |
+| Class / carrier | Same-carrier binary operations | Unary operations/transfers | Mixed/custom-result/flat operations |
 | --- | --- | --- | --- |
-| NaturalSemiring / N | add, multiply | successor, to-integer | — |
+| NaturalSemiring / N | add, multiply | successor, to-integer | вЂ” |
 | IntegerRing / Z | add, subtract, multiply, gcd, lcm, quotient, remainder | negate, to-rational | greater/equal -> Boolean; divide-rational -> Q; flat quotient-remainder |
 | RationalField / Q | add, subtract, multiply, divide | negate, inverse | greater/equal -> Boolean; flat add-subtract |
 | PrimeField / Z/pZ | add, subtract, multiply, divide | negate, inverse | Fixed prime membership, exact residues |
-| BooleanAlgebra / Boolean | and, or, xor, implies, equal | not | — |
+| BooleanAlgebra / Boolean | and, or, xor, implies, equal | not | вЂ” |
 | RationalComplexField / Q(i) | add, subtract, multiply, divide | negate, conjugate, norm-squared -> Q | Q(i).embed-rational on Q -> Q(i) |
 | RationalVectorSpace / Q^n | add, subtract | negate | scale by Q -> Q^n; dot -> Q; flat scale-flat and scale-signs |
 | RationalMatrixAlgebra / Matn(Q) | add, subtract, multiply | negate, transpose, inverse, determinant -> Q, trace -> Q | scale by Q; apply to Q^n |
@@ -46,17 +46,21 @@ List<String> values = math.flow(math.naturals,
 
 Each algebra registers zero/one constants where applicable on Unit with qualified names such as `Q.zero`, `Z.one`, `Mat2(Q).one`. Vector spaces have zero. Constants are Unit -> carrier transfers.
 
-Ordinary binary names use `performOperation`. Equal-input/different-result operations such as dot use `performCustomResultOperation`. Mixed-operand operations use `performUnsafeOperation` on items or `performAlgebraUnsafe` on flows; the legacy name says unsafe, but the new adapters validate both mathematical operands and the result. Flat mixed operations use `performUnsafeFlatOperation` / `performFlatAlgebraUnsafe`. Same-carrier flat operations use `performFlatOperation`.
+Ordinary binary names use `performOperation(name, second)`. Same-algebra unary operations use `performOneOperandOperation(name)` or `performOperation(name)`, backed by IOneOperandOperation. Cross-algebra unary operations use ITransferOperation and `performAlgebraTransfer`.
+
+Same-input/different-result operations such as dot use ICustomResultOperation. Mixed-input operations returning the first type use ICustomMemberOperation and `performCustomMemberOperation`; their flat form uses `performFlatCustomMemberOperation` on flows. Mixed-input operations returning the second type use ILeftProjectionOperation and `performLeftProjectionOperation`; their flat form uses `performLeftProjectionFlatOperation`. Despite the historical interface name, its result is now `IAlgebraItem<B>` for A x B -> B. The flat interface returns `List<IAlgebraItem<B>>`. Fully independent result types use IUnsafeOperation, as in the existing architecture.
+
+Implementations live directly under `operations/simple` and `operations/flat`. Concrete algebra builders live under `algebra/concrete`. They build the original Algebra, add IValidationRule implementations, and register the native operations in MathTool. They do not execute through Domain, Signature, Outcome, or the separate checked-operation prototype. OperationRegistration is a read-only description for reports; it is not an executor. ConcreteMathematics implements IMathToolInitializer.
 
 ## A x B -> A and its flat version
 
-These are actual transformations, not projections or custom-member aliases:
+These transformations implement the existing ICustomMemberOperation and ICustomMemberFlatOperation interfaces:
 
 ```java
 RationalVector v = new RationalVector(Rational.ONE, Rational.of(2));
 List<String> scaled = math.flow(math.vectors, Collections.singletonList(v))
-        .<RationalVector, Rational>performAlgebraUnsafe("scale", Rational.of(2))
-        .<RationalVector, Rational>performFlatAlgebraUnsafe("scale-flat", Rational.of(3))
+        .performCustomMemberOperation("scale", Rational.of(2))
+        .performFlatCustomMemberOperation("scale-flat", Rational.of(3))
         .collect(); // ["[6, 12]"]
 ```
 
@@ -66,11 +70,11 @@ Polynomial integration demonstrates three independent carrier types: Q[x] x (Q x
 
 ## Laws, partiality and integration limits
 
-These are concrete mathematical structures with explicit law declarations. Tests exercise exact arithmetic, ring/field identities, Boolean identities, closure, shape/modulus rejection, noncommutative matrix multiplication and calculus identities. Structure declarations remain DEFINED; tests do not claim formal proof.
+These are concrete mathematical structures with explicit law descriptions (not machine-checked proofs). Tests exercise exact arithmetic, ring/field identities, Boolean identities, closure, shape/modulus rejection, noncommutative matrix multiplication and calculus identities. Law descriptions remain declarations; tests do not claim formal proof.
 
 Division by zero and singular inversion are undefined. Natural subtraction is intentionally absent because N is not closed under it. Integer quotient truncates toward zero; quotient-remainder returns that quotient followed by the corresponding signed remainder. Q(i) is a proper subfield of C. Polynomial integration is in the stated rational scope.
 
-Legacy `buildAlgebraItem` returns null for invalid membership; legacy operand validation throws NotMemberException. Checked Domain/Operation APIs instead report MathFailure. The bridge preserves those existing entry-point conventions.
+Existing `buildAlgebraItem` returns null for invalid membership; legacy operand validation throws NotMemberException. Native operation implementations validate their inputs and results through Algebra. Undefined exact arithmetic uses MathFailure; membership failures use NotMemberException.
 
 See [ConcreteAlgebrasTest](../groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java) for complete working imports and [the executable example](../groupimp/src/main/java/mathematics/examples/ConcreteAlgebrasExample.java). Existing flat-transfer signature and distributed-executor limitations remain documented in the architecture audit.
 

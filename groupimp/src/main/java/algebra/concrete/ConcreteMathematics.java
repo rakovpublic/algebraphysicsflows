@@ -1,16 +1,17 @@
-package mathematics.algebras;
+package algebra.concrete;
 
+import algebra.IMathToolInitializer;
+import algebra.imp.Algebra;
 import algebra.imp.MathTool;
 import algebraflow.imp.AlgebraFlow;
-import mathematics.adapters.DomainInput;
-import mathematics.core.*;
+import algebraflow.imp.ListAlgebraInput;
 import mathematics.foundations.Unit;
 import java.util.*;
-import static mathematics.core.MathStatus.Membership.MEMBER;
 
-/** Ready-to-use, isolated algebras connected to the existing MathTool and AlgebraFlow APIs. */
-public final class ConcreteMathematics {
-    public final Domain<Unit> unit=new Domain<>(Metadata.of("Unit","Singleton for algebra constants"),Unit.class,u -> MEMBER);
+/** Initializes actual Algebra instances with native operations; also usable as an IMathToolInitializer. */
+public final class ConcreteMathematics implements IMathToolInitializer {
+    private static final long serialVersionUID=1L;
+    public final Algebra<Unit> unit=AlgebraFactories.carrier("Unit",Unit.class,"Singleton for algebra constants",u -> true);
     public final BooleanAlgebra booleans=new BooleanAlgebra(unit);
     public final RationalField rationals=new RationalField(booleans);
     public final IntegerRing integers=new IntegerRing(rationals,booleans);
@@ -20,9 +21,9 @@ public final class ConcreteMathematics {
     public final RationalMatrixAlgebra matrices;
     public final RationalPolynomialRing polynomials=new RationalPolynomialRing(rationals);
     public final List<PrimeField> primeFields;
-    public final OperationCatalog catalog=new OperationCatalog();
     public final MathTool mathTool=new MathTool("concrete-mathematics");
     private final List<ConcreteAlgebra<?>> algebras;
+    private final Map<String,OperationRegistration> operations=new LinkedHashMap<>();
 
     public ConcreteMathematics() { this(2,5); }
     public ConcreteMathematics(int dimension,int... primes) {
@@ -37,16 +38,20 @@ public final class ConcreteMathematics {
         primeFields=Collections.unmodifiableList(fields);
         List<ConcreteAlgebra<?>> values=new ArrayList<>(Arrays.asList(booleans,naturals,integers,rationals,complexRationals,vectors,matrices,polynomials));
         values.addAll(fields); algebras=Collections.unmodifiableList(values);
-        for(ConcreteAlgebra<?> algebra : algebras) for(Domain<?> carrier : algebra.carriers().values()) catalog.addDomain(carrier);
         for(ConcreteAlgebra<?> algebra : algebras) {
-            for(DescribedOperation operation : algebra.operations().values()) catalog.addOperation(operation);
             algebra.register(mathTool);
+            for(OperationRegistration entry : algebra.operations().values()) {
+                if(operations.putIfAbsent(entry.id,entry)!=null) throw new IllegalArgumentException("Duplicate operation id: "+entry.id);
+            }
         }
     }
+    public MathTool initialize() { return mathTool; }
     public List<ConcreteAlgebra<?>> algebras() { return algebras; }
+    /** Descriptive registry only. Execution goes through Algebra and AlgebraFlow. */
+    public Map<String,OperationRegistration> operations() { return Collections.unmodifiableMap(operations); }
     public <T> AlgebraFlow<T> flow(ConcreteAlgebra<T> algebra,List<T> input) {
-        if(mathTool.getAlgebra(algebra.domain().metadata().id)!=algebra.algebra())
-            throw new IllegalArgumentException("The algebra belongs to a different MathTool");
-        return new AlgebraFlow<>(new DomainInput<>(algebra.domain(),input),() -> mathTool,algebra.domain().metadata().id);
+        String name=algebra.algebra().getAlgebraName();
+        if(mathTool.getAlgebra(name)!=algebra.algebra()) throw new IllegalArgumentException("The algebra belongs to a different MathTool");
+        return new AlgebraFlow<>(new ListAlgebraInput<>(algebra.algebra(),input),this,name);
     }
 }

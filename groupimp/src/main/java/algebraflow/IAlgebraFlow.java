@@ -20,11 +20,21 @@ public interface IAlgebraFlow<T> extends Serializable {
      */
     public IAlgebraFlow<T> performOperation(String operation, T element);
 
-    /** Retain each value after an operation with an independently typed operand. */
-    <V> IAlgebraFlow<T> performLeftProjectionOperation(String operationName, V second);
+    /** Apply a registered A -> A operation to every member without changing the algebra. */
+    default IAlgebraFlow<T> performOneOperandOperation(String operationName) {
+        throw new java.lang.UnsupportedOperationException("This flow implementation does not support unary operations");
+    }
 
-    /** Retain each value through a flat operation with an independently typed operand. */
-    <V> IAlgebraFlow<T> performLeftProjectionFlatOperation(String operationName, V second);
+    /** Unary overload of the existing operation entry point. */
+    default IAlgebraFlow<T> performOperation(String operationName) {
+        return performOneOperandOperation(operationName);
+    }
+
+    /** A x B -> B; subsequent operations run in the result algebra B. */
+    <V> IAlgebraFlow<V> performLeftProjectionOperation(String operationName, V second);
+
+    /** A x B -> List(B); subsequent operations run in the result algebra B. */
+    <V> IAlgebraFlow<V> performLeftProjectionFlatOperation(String operationName, V second);
 
     /**
      * perform custom result operation for each element in flow with two elements of type T and return result type K

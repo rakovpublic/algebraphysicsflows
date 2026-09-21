@@ -21,7 +21,7 @@ public abstract class AbstractAlgebra<T> implements IAlgebraItem<T> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public <V> IAlgebraItem<T> performLeftProjectionOperation(String operationName, V second) {
+    public <V> IAlgebraItem<V> performLeftProjectionOperation(String operationName, V second) {
         Algebra<T> algebra = getAlgebra();
         ILeftProjectionOperation<T, V> operation = algebra.getLeftProjectionOperation(
                 operationName, (Class<V>) second.getClass());
@@ -29,12 +29,12 @@ public abstract class AbstractAlgebra<T> implements IAlgebraItem<T> {
             throw new exceptions.UnsupportedOperationException("No left projection " + operationName
                     + " for second operand type " + second.getClass().getName());
         }
-        return algebra.buildAlgebraItem(operation.performOperation(perform().getResult(), second));
+        return operation.performOperation(perform().getResult(), second);
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public <V> List<IAlgebraItem<T>> performLeftProjectionFlatOperation(String operationName, V second) {
+    public <V> List<IAlgebraItem<V>> performLeftProjectionFlatOperation(String operationName, V second) {
         Algebra<T> algebra = getAlgebra();
         ILeftProjectionFlatOperation<T, V> operation = algebra.getLeftProjectionFlatOperation(
                 operationName, (Class<V>) second.getClass());

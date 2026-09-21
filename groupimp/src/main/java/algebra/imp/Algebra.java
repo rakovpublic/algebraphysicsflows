@@ -19,6 +19,7 @@ public final class Algebra<T> implements Serializable {
     private static final Logger logger = LogManager.getLogger(Algebra.class);
     private final List<IValidationRule<T>> validationRules;
     private final HashMap<String, IOperation<T>> algebraOperations;
+    private final HashMap<String, IOneOperandOperation<T>> oneOperandOperations;
     private final HashMap<String, ICustomResultOperation<T>> customOperations;
     private final HashMap<String, ITransferOperation<T>> transferOperations;
     private final HashMap<String, IFlatOperation<T>> algebraFlatOperations;
@@ -48,6 +49,7 @@ public final class Algebra<T> implements Serializable {
         this.paramClass = paramClass;
         this.validationRules = new LinkedList<IValidationRule<T>>();
         this.algebraOperations = new HashMap<>();
+        this.oneOperandOperations = new HashMap<>();
         this.customOperations = new HashMap<>();
         this.transferOperations = new HashMap<>();
         this.algebraName = algebraName;
@@ -190,6 +192,20 @@ public final class Algebra<T> implements Serializable {
     public boolean addOperation(String name, IOperation<T> operation) {
         algebraOperations.put(name,operation);
         return true;
+    }
+
+    /** Register an A -> A operation independently from binary and transfer operations. */
+    public boolean addOneOperandOperation(String name, IOneOperandOperation<T> operation) {
+        oneOperandOperations.put(Objects.requireNonNull(name),Objects.requireNonNull(operation));
+        return true;
+    }
+
+    public boolean hasOneOperandOperation(String name) {
+        return oneOperandOperations.containsKey(name);
+    }
+
+    public IOneOperandOperation<T> getOneOperandOperation(String name) {
+        return oneOperandOperations.get(name);
     }
 
     /**
@@ -509,7 +525,7 @@ public final class Algebra<T> implements Serializable {
      * @return
      * @see IValidationRule
      */
-    boolean validate(T value) {
+    public boolean validate(T value) {
         for (IValidationRule<T> rule : validationRules) {
             if (!rule.validate(value)) {
                 return false;

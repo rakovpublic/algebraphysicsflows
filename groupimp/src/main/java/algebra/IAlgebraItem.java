@@ -19,11 +19,27 @@ public interface IAlgebraItem<T> extends Serializable {
      */
     public IAlgebraItem<T> performOperation(String operationName, T sElement);
 
-    /** Retain this item's value after an operation with an independently typed operand. */
-    <V> IAlgebraItem<T> performLeftProjectionOperation(String operationName, V second);
+    /** Evaluate a registered A -> A operation after any pending binary operations. */
+    default IAlgebraItem<T> performOneOperandOperation(String operationName) {
+        Algebra<T> algebra=getAlgebra();
+        operations.simple.IOneOperandOperation<T> operation=algebra.getOneOperandOperation(operationName);
+        if(operation==null) throw new exceptions.UnsupportedOperationException("No one-operand operation " + operationName + " in " + algebra.getAlgebraName());
+        T value=operation.performOperation(perform().getResult());
+        IAlgebraItem<T> result=algebra.buildAlgebraItem(value);
+        if(result==null) throw new exceptions.NotMemberException("One-operand operation " + operationName + " returned a nonmember of " + algebra.getAlgebraName());
+        return result;
+    }
 
-    /** Retain this item's value as a single-item flat result. */
-    <V> List<IAlgebraItem<T>> performLeftProjectionFlatOperation(String operationName, V second);
+    /** Unary overload of the existing operation entry point. */
+    default IAlgebraItem<T> performOperation(String operationName) {
+        return performOneOperandOperation(operationName);
+    }
+
+    /** A x B -> B, with the result in the second operand's algebra. */
+    <V> IAlgebraItem<V> performLeftProjectionOperation(String operationName, V second);
+
+    /** A x B -> List(B), preserving ordered duplicates. */
+    <V> List<IAlgebraItem<V>> performLeftProjectionFlatOperation(String operationName, V second);
 
     /**
      * perform custom result operation with two elements of type T and return IAlgebraItem  K

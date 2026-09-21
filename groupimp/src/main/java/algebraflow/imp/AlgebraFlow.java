@@ -41,53 +41,57 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
     private List<IFlowInvoke<?>> currentInvokes;
 
     @Override
-    public <V> IAlgebraFlow<T> performLeftProjectionOperation(String operationName, V second) {
-        if (currentAlgebra.getLeftProjectionOperation(operationName, second.getClass()) == null) {
-            throw new UnsupportedOperationException("No left projection " + operationName
-                    + " for second operand type " + second.getClass().getName());
-        }
+    public IAlgebraFlow<T> performOneOperandOperation(String operationName) {
+        if(!currentAlgebra.hasOneOperandOperation(operationName))
+            throw new UnsupportedOperationException("No one-operand operation " + operationName + " in " + currentAlgebra.getAlgebraName());
         currentInvokes.add(new IFlowInvoke<T>() {
-            @Override
-            public String getAlgebraName() {
-                return currentAlgebra.getAlgebraName();
-            }
-
-            @Override
+            public String getAlgebraName() { return currentAlgebra.getAlgebraName(); }
             public List<IAlgebraItem<T>> perform() {
-                List<IAlgebraItem<T>> flow = new ArrayList<>();
-                for (IAlgebraItem<T> item : flowState.values) {
-                    flow.add(item.performLeftProjectionOperation(operationName, second));
-                }
-                flowState.values = flow;
-                return flow;
+                List<IAlgebraItem<T>> result=new ArrayList<>();
+                for(IAlgebraItem<T> item : flowState.values) result.add(item.performOneOperandOperation(operationName));
+                flowState.values=result;
+                return result;
             }
         });
         return this;
     }
 
     @Override
-    public <V> IAlgebraFlow<T> performLeftProjectionFlatOperation(String operationName, V second) {
-        if (currentAlgebra.getLeftProjectionFlatOperation(operationName, second.getClass()) == null) {
-            throw new UnsupportedOperationException("No flat left projection " + operationName
-                    + " for second operand type " + second.getClass().getName());
-        }
-        currentInvokes.add(new IFlowInvoke<T>() {
-            @Override
-            public String getAlgebraName() {
-                return currentAlgebra.getAlgebraName();
-            }
-
-            @Override
-            public List<IAlgebraItem<T>> perform() {
-                List<IAlgebraItem<T>> flow = new ArrayList<>();
-                for (IAlgebraItem<T> item : flowState.values) {
-                    flow.addAll(item.performLeftProjectionFlatOperation(operationName, second));
-                }
-                flowState.values = flow;
-                return flow;
+    @SuppressWarnings("unchecked")
+    public <V> IAlgebraFlow<V> performLeftProjectionOperation(String operationName,V second) {
+        operations.simple.ILeftProjectionOperation<T,V> operation=(operations.simple.ILeftProjectionOperation<T,V>)currentAlgebra.getLeftProjectionOperation(operationName,second.getClass());
+        if(operation==null) throw new UnsupportedOperationException("No A x B -> B operation " + operationName + " for " + second.getClass().getName());
+        Algebra<V> result=(Algebra<V>)mathTool.getAlgebra(operation.getAlgebraName());
+        if(result==null) throw new AlgebraNotExistsException("Missing result algebra " + operation.getAlgebraName());
+        currentInvokes.add(new IFlowInvoke<V>() {
+            public String getAlgebraName() { return result.getAlgebraName(); }
+            public List<IAlgebraItem<V>> perform() {
+                List<IAlgebraItem<V>> values=new ArrayList<>();
+                for(IAlgebraItem<T> item : flowState.values) values.add(item.performLeftProjectionOperation(operationName,second));
+                flowState.values=values;
+                return values;
             }
         });
-        return this;
+        return new AlgebraFlow<V>(mathTool,flowState,result,currentInvokes);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <V> IAlgebraFlow<V> performLeftProjectionFlatOperation(String operationName,V second) {
+        operations.flat.ILeftProjectionFlatOperation<T,V> operation=(operations.flat.ILeftProjectionFlatOperation<T,V>)currentAlgebra.getLeftProjectionFlatOperation(operationName,second.getClass());
+        if(operation==null) throw new UnsupportedOperationException("No flat A x B -> B operation " + operationName + " for " + second.getClass().getName());
+        Algebra<V> result=(Algebra<V>)mathTool.getAlgebra(operation.getAlgebraName());
+        if(result==null) throw new AlgebraNotExistsException("Missing result algebra " + operation.getAlgebraName());
+        currentInvokes.add(new IFlowInvoke<V>() {
+            public String getAlgebraName() { return result.getAlgebraName(); }
+            public List<IAlgebraItem<V>> perform() {
+                List<IAlgebraItem<V>> values=new ArrayList<>();
+                for(IAlgebraItem<T> item : flowState.values) values.addAll(item.performLeftProjectionFlatOperation(operationName,second));
+                flowState.values=values;
+                return values;
+            }
+        });
+        return new AlgebraFlow<V>(mathTool,flowState,result,currentInvokes);
     }
 
     private AlgebraFlow(MathTool mathTool, FlowState flowState, Algebra<T> currentAlgebra, List<IFlowInvoke<?>> currentInvokes) {

@@ -4,12 +4,15 @@ import algebra.IAlgebraItem;
 import algebra.imp.Algebra;
 import algebra.imp.MathTool;
 import algebraflow.IAlgebraFlow;
-import mathematics.algebras.*;
+import algebra.concrete.*;
 import mathematics.calculus.Polynomial;
-import mathematics.core.*;
+import mathematics.core.MathFailure;
+import operations.simple.*;
+import operations.flat.*;
 import mathematics.foundations.*;
 import mathematics.linear.*;
 import mathematics.numbers.*;
+import mathematics.examples.ConcreteAlgebrasExample;
 import org.junit.Test;
 import java.io.*;
 import java.math.BigInteger;
@@ -17,13 +20,89 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
+    @Test public void all90RegisteredOperationsReturnIndependentExpectedValues() {
+        ConcreteMathematics math=new ConcreteMathematics();
+        Map<String,String> expected=new HashMap<>();
+        expected.put("BooleanAlgebra","false|true|true|false|false|false|false|true");
+        expected.put("NaturalSemiring","8|12|7|6|0|1");
+        expected.put("IntegerRing","8|4|12|2|6|3|0|-6|6|3|true|false|[3, 0]|0|1");
+        expected.put("RationalField","8|4|12|3|-6|1/6|true|false|[8, 4]|0|1");
+        expected.put("RationalComplexField","(4)+(3)i|(-2)+(1)i|(1)+(7)i|(1/2)+(1/2)i|(-1)+(-2)i|(1)+(-2)i|5|(6)+(0)i|(0)+(0)i|(1)+(0)i");
+        expected.put("RationalVectorSpace","[4, 6]|[-2, -2]|[-1, -2]|[2, 4]|[18, 24]|[[18, 24]]|11|[[2, 4]]|[[2, 4], [-2, -4]]|[0, 0]");
+        expected.put("RationalMatrixAlgebra","[[3, 2], [3, 6]]|[[2, 4], [6, 8]]|[[-1, 2], [3, 2]]|[[-1, -2], [-3, -4]]|[[1, 3], [2, 4]]|[[-2, 1], [3/2, -1/2]]|-2|5|[[2, 4], [6, 8]]|[11, 25]|[[0, 0], [0, 0]]|[[1, 0], [0, 1]]");
+        expected.put("RationalPolynomialRing","Q[x][3, 3, 1]|Q[x][2, 5, 4, 1]|Q[x][-1, 1, 1]|Q[x][-1, -2, -1]|Q[x][2, 2]|9|Q[x][2, 1, 1, 1/3]|7/3|Q[x][0]|Q[x][1]");
+        expected.put("PrimeField","0 (mod 5)|1 (mod 5)|1 (mod 5)|4 (mod 5)|2 (mod 5)|2 (mod 5)|0 (mod 5)|1 (mod 5)");
+        int count=0;
+        for(ConcreteAlgebra<?> algebra : math.algebras()) {
+            String[] values=expected.get(algebra.getClass().getSimpleName()).split("\\|",-1);
+            assertEquals(algebra.operations().size(),values.length);
+            int i=0;
+            for(Map.Entry<String,OperationRegistration> entry : algebra.operations().entrySet())
+                assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
+            count+=i;
+        }
+        assertEquals(90,count);
+    }
+    @SuppressWarnings({"unchecked","rawtypes"})
+    private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
+        Algebra source=math.mathTool.getAlgebra(entry.first.getAlgebraName());
+        IAlgebraItem item=source.buildAlgebraItem(sample(source.getAlgebraName(),0));
+        String alias=entry.alias;
+        Object operation=entry.operation;
+        if(operation instanceof IOneOperandOperation) return item.performOneOperandOperation(alias).perform().getResult().toString();
+        if(operation instanceof ITransferOperation) return item.performAlgebraTransfer(alias).perform().getResult().toString();
+        Object second=sample(entry.second.getAlgebraName(),1);
+        if(entry.flat) {
+            List<IAlgebraItem> results;
+            if(operation instanceof IFlatOperation) results=item.performFlatOperation(alias,second);
+            else if(operation instanceof ICustomMemberFlatOperation) results=item.performCustomMemberFlatOperation(alias,second);
+            else if(operation instanceof ILeftProjectionFlatOperation) results=item.performLeftProjectionFlatOperation(alias,second);
+            else if(operation instanceof ICustomResultFlatOperation) results=item.performCustomResultFlatOperation(alias,second);
+            else results=item.performUnsafeFlatOperation(alias,second);
+            List<Object> values=new ArrayList<>();
+            for(IAlgebraItem result : results) values.add(result.perform().getResult());
+            return values.toString();
+        }
+        IAlgebraItem result;
+        if(operation instanceof IOperation) result=item.performOperation(alias,second);
+        else if(operation instanceof ICustomResultOperation) result=item.performCustomResultOperation(alias,second);
+        else if(operation instanceof ICustomMemberOperation) result=item.performCustomMemberOperation(alias,second);
+        else if(operation instanceof ILeftProjectionOperation) result=item.performLeftProjectionOperation(alias,second);
+        else result=item.performUnsafeOperation(alias,second);
+        return result.perform().getResult().toString();
+    }
+    private Object sample(String domain,int index) {
+        switch(domain) {
+            case "Unit": return Unit.INSTANCE;
+            case "Boolean": return index==0;
+            case "N": case "Z": return BigInteger.valueOf(index==0?6:2);
+            case "Q": return Rational.of(index==0?6:2);
+            case "Q(i)": return index==0?new RationalComplex(Rational.ONE,Rational.of(2)):new RationalComplex(Rational.of(3),Rational.ONE);
+            case "Q^2": return index==0?new RationalVector(Rational.ONE,Rational.of(2)):new RationalVector(Rational.of(3),Rational.of(4));
+            case "Mat2(Q)": return new RationalMatrix(index==0
+                    ?new Rational[][] {{Rational.ONE,Rational.of(2)},{Rational.of(3),Rational.of(4)}}
+                    :new Rational[][] {{Rational.of(2),Rational.ZERO},{Rational.ZERO,Rational.of(2)}});
+            case "Q[x]": return index==0?new Polynomial(Rational.ONE,Rational.of(2),Rational.ONE):new Polynomial(Rational.of(2),Rational.ONE);
+            case "QxQ.bounds": return new Pair<>(Rational.ZERO,Rational.ONE);
+            case "Z/5Z": return new ModularInteger(index==0?3:2,5);
+            default: throw new AssertionError("Missing test operand for "+domain);
+        }
+    }
+    @Test public void runtimeRegistrationsMatchTheCoverageManifest() throws Exception {
+        StringBuilder expected=new StringBuilder();
+        try(BufferedReader input=new BufferedReader(new InputStreamReader(
+                Objects.requireNonNull(getClass().getResourceAsStream("/mathematics/concrete-catalog.tsv")),"UTF-8"))) {
+            String line; while((line=input.readLine())!=null) expected.append(line).append('\n');
+        }
+        assertEquals(expected.toString(),ConcreteAlgebrasExample.catalogManifest(new ConcreteMathematics()));
+    }
     @Test public void registersConcreteLegacyAlgebrasAndKeepsInstancesIsolated() throws Exception {
         ConcreteMathematics first=new ConcreteMathematics(),second=new ConcreteMathematics();
         for(ConcreteAlgebra<?> algebra : first.algebras()) {
-            assertSame(algebra.algebra(),first.mathTool.getAlgebra(algebra.domain().metadata().id));
+            assertSame(algebra.algebra(),first.mathTool.getAlgebra(algebra.algebra().getAlgebraName()));
             assertFalse(algebra.operations().isEmpty());
-            assertFalse(algebra.structure().laws.isEmpty());
-            assertNotSame(algebra.algebra(),second.mathTool.getAlgebra(algebra.domain().metadata().id));
+            assertFalse(algebra.laws().isEmpty());
+            assertNotSame(algebra.algebra(),second.mathTool.getAlgebra(algebra.algebra().getAlgebraName()));
         }
         assertTrue(first.integers.algebra().hasOperation("add"));
         assertTrue(first.rationals.algebra().hasFlatOperation("add-subtract"));
@@ -44,12 +123,12 @@ public class ConcreteAlgebrasTest {
                 .<Rational>performAlgebraTransfer("to-rational")
                 .performOperation("divide",Rational.of(2))
                 .<Boolean>performCustomResultOperation("greater",Rational.of(-1))
-                .<Boolean>performAlgebraTransfer("not");
+                .performOneOperandOperation("not");
         assertEquals(Arrays.asList("true","false"),flow.collect());
         assertEquals(Arrays.asList("true","false"),flow.collect());
         assertNull(m.naturals.algebra().buildAlgebraItem(BigInteger.valueOf(-1)));
-        assertThrows(MathFailure.class,() -> m.flow(m.naturals,Collections.singletonList(BigInteger.valueOf(-1))));
-        assertEquals(Rational.of(3,2),m.integers.domain().item(BigInteger.valueOf(3))
+        assertThrows(exceptions.NotMemberException.class,() -> m.flow(m.naturals,Collections.singletonList(BigInteger.valueOf(-1))));
+        assertEquals(Rational.of(3,2),m.integers.algebra().buildAlgebraItem(BigInteger.valueOf(3))
                 .<Rational>performCustomResultOperation("divide-rational",BigInteger.valueOf(2)).perform().getResult());
         assertEquals(Arrays.asList("-2","-1"),m.flow(m.integers,Collections.singletonList(BigInteger.valueOf(-7)))
                 .performFlatOperation("quotient-remainder",BigInteger.valueOf(3)).collect());
@@ -78,15 +157,15 @@ public class ConcreteAlgebrasTest {
         ConcreteMathematics m=new ConcreteMathematics(2,5,7);
         for(PrimeField field : m.primeFields) {
             for(int a=0;a<field.prime;a++) for(int b=0;b<field.prime;b++) {
-                IAlgebraItem<ModularInteger> member=field.domain().item(field.member(a));
+                IAlgebraItem<ModularInteger> member=field.algebra().buildAlgebraItem(field.member(a));
                 assertEquals(field.member(a+b),member.performOperation("add",field.member(b)).perform().getResult());
                 assertEquals(field.member(a*b),member.performOperation("multiply",field.member(b)).perform().getResult());
                 if(b!=0) assertEquals(field.member(a),member.performOperation("divide",field.member(b)).performOperation("multiply",field.member(b)).perform().getResult());
             }
-            assertThrows(MathFailure.class,() -> field.domain().item(field.one()).performOperation("divide",field.zero()).perform());
+            assertThrows(MathFailure.class,() -> field.algebra().buildAlgebraItem(field.one()).performOperation("divide",field.zero()).perform());
         }
-        assertThrows(MathFailure.class,() -> m.primeFields.get(0).domain().item(new ModularInteger(1,7)));
-        assertThrows(exceptions.NotMemberException.class,() -> m.primeFields.get(0).domain().item(new ModularInteger(1,5)).performOperation("add",new ModularInteger(1,7)));
+        assertNull(m.primeFields.get(0).algebra().buildAlgebraItem(new ModularInteger(1,7)));
+        assertThrows(exceptions.NotMemberException.class,() -> m.primeFields.get(0).algebra().buildAlgebraItem(new ModularInteger(1,5)).performOperation("add",new ModularInteger(1,7)));
         assertThrows(MathFailure.class,() -> new PrimeField(m.unit,9));
         assertThrows(IllegalArgumentException.class,() -> new ConcreteMathematics(2,5,5));
     }
@@ -94,46 +173,45 @@ public class ConcreteAlgebrasTest {
         ConcreteMathematics m=new ConcreteMathematics();
         RationalVector v=new RationalVector(Rational.ONE,Rational.of(2));
         assertEquals(Arrays.asList("[6, 12]"),m.flow(m.vectors,Collections.singletonList(v))
-                .<RationalVector,Rational>performAlgebraUnsafe("scale",Rational.of(2))
-                .<RationalVector,Rational>performFlatAlgebraUnsafe("scale-flat",Rational.of(3)).collect());
+                .performCustomMemberOperation("scale",Rational.of(2))
+                .performFlatCustomMemberOperation("scale-flat",Rational.of(3)).collect());
         assertEquals(Arrays.asList("5","-5"),m.flow(m.vectors,Collections.singletonList(v))
-                .<RationalVector,Rational>performFlatAlgebraUnsafe("scale-signs",Rational.ONE)
+                .performFlatCustomMemberOperation("scale-signs",Rational.ONE)
                 .<Rational>performCustomResultOperation("dot",v)
                 .collect());
         // Test actual opposite-order scalar action through a Q -> Q^2 flow.
         assertEquals(Collections.singletonList("[3, 6]"),m.flow(m.rationals,Collections.singletonList(Rational.of(3)))
-                .<RationalVector,RationalVector>performAlgebraUnsafe("Q^2.scale-left",v).collect());
-        assertEquals(MathFailure.Kind.INVALID_MEMBER,assertThrows(MathFailure.class,
-                () -> m.vectors.domain().item(new RationalVector(Rational.ONE))).kind());
+                .performLeftProjectionOperation("Q^2.scale-left",v).collect());
+        assertNull(m.vectors.algebra().buildAlgebraItem(new RationalVector(Rational.ONE)));
     }
     @Test public void matrixAndPolynomialOperationsCrossDomainsWithExactResults() {
         ConcreteMathematics m=new ConcreteMathematics();
         RationalMatrix a=new RationalMatrix(new Rational[][] {{Rational.ONE,Rational.of(2)},{Rational.of(3),Rational.of(4)}});
         assertEquals(Collections.singletonList("-2"),m.flow(m.matrices,Collections.singletonList(a)).<Rational>performAlgebraTransfer("determinant").collect());
-        assertEquals(RationalMatrix.identity(2),m.matrices.domain().item(a).<RationalMatrix>performAlgebraTransfer("inverse").performOperation("multiply",a).perform().getResult());
+        assertEquals(RationalMatrix.identity(2),m.matrices.algebra().buildAlgebraItem(a).performOneOperandOperation("inverse").performOperation("multiply",a).perform().getResult());
         RationalVector v=new RationalVector(Rational.ONE,Rational.of(2));
-        assertEquals(Collections.singletonList("[5, 11]"),m.flow(m.matrices,Collections.singletonList(a)).<RationalVector,RationalVector>performAlgebraUnsafe("apply",v).collect());
+        assertEquals(Collections.singletonList("[5, 11]"),m.flow(m.matrices,Collections.singletonList(a)).performLeftProjectionOperation("apply",v).collect());
         RationalMatrix b=new RationalMatrix(new Rational[][] {{Rational.ZERO,Rational.ONE},{Rational.ONE,Rational.ZERO}});
-        assertNotEquals(m.matrices.domain().item(a).performOperation("multiply",b).perform().getResult(),m.matrices.domain().item(b).performOperation("multiply",a).perform().getResult());
+        assertNotEquals(m.matrices.algebra().buildAlgebraItem(a).performOperation("multiply",b).perform().getResult(),m.matrices.algebra().buildAlgebraItem(b).performOperation("multiply",a).perform().getResult());
         Polynomial square=new Polynomial(Rational.ZERO,Rational.ZERO,Rational.ONE);
         assertEquals(Collections.singletonList("6"),m.flow(m.polynomials,Collections.singletonList(square))
-                .<Polynomial>performAlgebraTransfer("derivative").<Rational,Rational>performAlgebraUnsafe("evaluate",Rational.of(3)).collect());
+                .performOneOperandOperation("derivative").performLeftProjectionOperation("evaluate",Rational.of(3)).collect());
         assertEquals(Collections.singletonList("1/3"),m.flow(m.polynomials,Collections.singletonList(square))
                 .<Rational,Pair<Rational,Rational>>performAlgebraUnsafe("integrate",new Pair<>(Rational.ZERO,Rational.ONE)).collect());
-        assertEquals(square,m.polynomials.domain().item(square).<Polynomial,Rational>performUnsafeOperation("primitive",Rational.of(7))
-                .<Polynomial>performAlgebraTransfer("derivative").perform().getResult());
+        assertEquals(square,m.polynomials.algebra().buildAlgebraItem(square).performCustomMemberOperation("primitive",Rational.of(7))
+                .performOneOperandOperation("derivative").perform().getResult());
     }
     @Test public void constantsBooleanLawsAndComplexArithmeticAreRegistered() {
         ConcreteMathematics m=new ConcreteMathematics();
-        assertEquals(Rational.ZERO,m.unit.item(Unit.INSTANCE).<Rational>performAlgebraTransfer("Q.zero").perform().getResult());
+        assertEquals(Rational.ZERO,m.unit.buildAlgebraItem(Unit.INSTANCE).<Rational>performAlgebraTransfer("Q.zero").perform().getResult());
         for(boolean a : new boolean[]{false,true}) for(boolean b : new boolean[]{false,true}) {
-            Boolean notAnd=m.booleans.domain().item(a).performOperation("and",b).<Boolean>performAlgebraTransfer("not").perform().getResult();
-            Boolean deMorgan=m.booleans.domain().item(!a).performOperation("or",!b).perform().getResult();
+            Boolean notAnd=m.booleans.algebra().buildAlgebraItem(a).performOperation("and",b).performOneOperandOperation("not").perform().getResult();
+            Boolean deMorgan=m.booleans.algebra().buildAlgebraItem(!a).performOperation("or",!b).perform().getResult();
             assertEquals(notAnd,deMorgan);
         }
         RationalComplex i=new RationalComplex(Rational.ZERO,Rational.ONE);
-        assertEquals(new RationalComplex(Rational.of(-1),Rational.ZERO),m.complexRationals.domain().item(i).performOperation("multiply",i).perform().getResult());
-        assertEquals(Rational.ONE,m.complexRationals.domain().item(i).<Rational>performAlgebraTransfer("norm-squared").perform().getResult());
+        assertEquals(new RationalComplex(Rational.of(-1),Rational.ZERO),m.complexRationals.algebra().buildAlgebraItem(i).performOperation("multiply",i).perform().getResult());
+        assertEquals(Rational.ONE,m.complexRationals.algebra().buildAlgebraItem(i).<Rational>performAlgebraTransfer("norm-squared").perform().getResult());
         assertEquals(Collections.singletonList("(2)+(0)i"),m.flow(m.rationals,Collections.singletonList(Rational.of(2)))
                 .<RationalComplex>performAlgebraTransfer("Q(i).embed-rational").collect());
     }
