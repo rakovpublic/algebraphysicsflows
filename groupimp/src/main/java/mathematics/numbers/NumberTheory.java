@@ -17,7 +17,7 @@ public final class NumberTheory {
     public static BigInteger factorial(int n) {
         if (n < 0) throw MathFailure.invalid("Factorial requires a nonnegative integer");
         BigInteger result=BigInteger.ONE;
-        for (int i=2;i<=n;i++) result=result.multiply(BigInteger.valueOf(i));
+        for (long i=2;i<=n;i++) result=result.multiply(BigInteger.valueOf(i));
         return result;
     }
 }
