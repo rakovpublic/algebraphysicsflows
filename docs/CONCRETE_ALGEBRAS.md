@@ -1,6 +1,6 @@
 # Concrete algebras connected to MathTool
 
-`new ConcreteMathematics()` creates real `Algebra<T>` instances and registers their native operations in the existing `MathTool`. It includes N, Z, Q, Q(i), Boolean, Q^2, Mat2(Q), Q[x], finite sets of integers, and F5 (named Z/5Z). Each construction owns its algebra instances; separate tools do not share mutable registrations.
+`new ConcreteMathematics()` creates real `Algebra<T>` instances and registers their native operations in the existing `MathTool`. It includes N, Z, Q, Q(i), Boolean, Q^2, Mat2(Q), Q[x], finite sets of integers, rational samples, finite integer probability measures, and F5 (named Z/5Z). Each construction owns its algebra instances; separate tools do not share mutable registrations.
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
@@ -34,12 +34,14 @@ List<String> values = math.flow(math.naturals,
 
 | Class / carrier | Same-carrier binary operations | Unary operations/transfers | Mixed/custom-result/flat operations |
 | --- | --- | --- | --- |
+| RationalSampleAlgebra / Sample(Q) | concatenate | size -> N, mean/variance -> Q, center | covariance -> Q; scale by Q; flat transfer elements -> Q |
+| FiniteProbabilityAlgebra / FiniteDistribution(Z) | — | support -> finite set, support-size -> N, expectation/variance -> Q | event/point probability -> Q; conditioning; flat transfer outcomes -> Z; point mass from Z |
 | FiniteSetAlgebra / FiniteSet(Z) | union, intersection, difference, symmetric-difference, complement-in | cardinality -> N | subset/equal -> Boolean; contains; insert/remove; unary flat subsets; flat transfer elements -> Z |
-| NaturalSemiring / N | add, multiply | successor, to-integer | РІР‚вЂќ |
+| NaturalSemiring / N | add, multiply | successor, to-integer | Р Р†Р вЂљРІР‚Сњ |
 | IntegerRing / Z | add, subtract, multiply, gcd, lcm, quotient, remainder | negate, to-rational | greater/equal -> Boolean; divide-rational -> Q; flat quotient-remainder |
 | RationalField / Q | add, subtract, multiply, divide | negate, inverse | greater/equal -> Boolean; flat add-subtract |
 | PrimeField / Z/pZ | add, subtract, multiply, divide | negate, inverse | Fixed prime membership, exact residues |
-| BooleanAlgebra / Boolean | and, or, xor, implies, equal | not | РІР‚вЂќ |
+| BooleanAlgebra / Boolean | and, or, xor, implies, equal | not | Р Р†Р вЂљРІР‚Сњ |
 | RationalComplexField / Q(i) | add, subtract, multiply, divide | negate, conjugate, norm-squared -> Q | Q(i).embed-rational on Q -> Q(i) |
 | RationalVectorSpace / Q^n | add, subtract | negate | scale by Q -> Q^n; dot -> Q; flat scale-flat and scale-signs |
 | RationalMatrixAlgebra / Matn(Q) | add, subtract, multiply | negate, transpose, inverse, determinant -> Q, trace -> Q | scale by Q; apply to Q^n |
@@ -82,3 +84,8 @@ See [ConcreteAlgebrasTest](../groupimp/src/test/java/mathematics/ConcreteAlgebra
 
 
 Same-algebra unary flat operations use `IOneOperandFlatOperation` and `performOneOperandFlatOperation(name)` (or `performFlatOperation(name)`). Finite-set `subsets` is an example. Cross-algebra unary flat operations use the existing `ITransferFlatOperation`, whose return type is corrected to `List<IAlgebraItem<V>>`; `elements` transfers a finite set to its member algebra. Empty results remain valid, and every emitted member keeps its target algebra.
+
+
+The default initializer currently installs 12 algebras and 125 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
+
+For overloaded custom-member and unsafe operations, the most specific compatible second-operand class is selected (exact matches take priority). Re-registering the same second class replaces that overload. Ambiguous supertypes are rejected. Mathematical domains sharing one Java class need distinct operation names; overload selection does not infer a domain from a value.

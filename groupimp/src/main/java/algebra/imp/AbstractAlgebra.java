@@ -197,7 +197,8 @@ public abstract class AbstractAlgebra<T> implements IAlgebraItem<T> {
     public <K, V> IAlgebraItem<K> performUnsafeOperation(String operationName, V element) {
         Algebra<T> algebra = this.getAlgebra();
         if (this.getAlgebra().hasUnsafeOperation(operationName)) {
-            IUnsafeOperation<T> op = algebra.getUnsafeOperation(operationName);
+            IUnsafeOperation<T> op = algebra.getUnsafeOperationWithParam(operationName,element==null?null:element.getClass());
+            if(op==null) throw new exceptions.UnsupportedOperationException("No matching operand type for " + operationName);
             return op.<K, V>performOperation(perform().getResult(), element);
         }
         UnsupportedOperationException ex = new UnsupportedOperationException("Operation" + operationName + " is not exists in this algebra.");
@@ -218,7 +219,8 @@ public abstract class AbstractAlgebra<T> implements IAlgebraItem<T> {
     public <K, V> List<IAlgebraItem<K>> performUnsafeFlatOperation(String operationName, V element) {
         Algebra<T> algebra = this.getAlgebra();
         if (this.getAlgebra().hasUnsafeFlatOperation(operationName)) {
-            IUnsafeFlatOperation<T> op = algebra.getUnsafeFlatOperation(operationName);
+            IUnsafeFlatOperation<T> op = algebra.getUnsafeFlatOperationWithParam(operationName,element==null?null:element.getClass());
+            if(op==null) throw new exceptions.UnsupportedOperationException("No matching operand type for " + operationName);
             return op.<K, V>performOperation(perform().getResult(), element);
         }
         UnsupportedOperationException ex = new UnsupportedOperationException("Operation" + operationName + " is not exists in this algebra.");
@@ -238,7 +240,8 @@ public abstract class AbstractAlgebra<T> implements IAlgebraItem<T> {
     public <K> IAlgebraItem<T> performCustomMemberOperation(String operationName, K element) {
         Algebra<T> algebra = this.getAlgebra();
         if (this.getAlgebra().hasCustomMemberOperation(operationName)) {
-            ICustomMemberOperation<T> op = algebra.getCustomMemberOperation(operationName);
+            ICustomMemberOperation<T> op = algebra.getCustomMemberOperationWithParam(operationName,element==null?null:element.getClass());
+            if(op==null) throw new exceptions.UnsupportedOperationException("No matching operand type for " + operationName);
 
             return op.performOperation(perform().getResult(), element);
 
@@ -260,7 +263,8 @@ public abstract class AbstractAlgebra<T> implements IAlgebraItem<T> {
     public <K> List<IAlgebraItem<T>> performCustomMemberFlatOperation(String operationName, K element) {
         Algebra<T> algebra = this.getAlgebra();
         if (this.getAlgebra().hasCustomMemberFlatOperation(operationName)) {
-            ICustomMemberFlatOperation<T> op = algebra.getCustomMemberFlatOperation(operationName);
+            ICustomMemberFlatOperation<T> op = algebra.getCustomMemberFlatOperationWithParam(operationName,element==null?null:element.getClass());
+            if(op==null) throw new exceptions.UnsupportedOperationException("No matching operand type for " + operationName);
             return op.performOperation(perform().getResult(), element);
 
         }

@@ -116,13 +116,7 @@ public final class Algebra<T> implements Serializable {
      * @see ICustomMemberOperation
      */
     public boolean addCustomMemberOperation(String name, ICustomMemberOperation<T> operation) {
-        if (customMemberOperations.containsKey(name)) {
-            customMemberOperations.get(name).add(operation);
-        }else {
-            List<ICustomMemberOperation<T>> operations=new LinkedList<>();
-            operations.add(operation);
-            customMemberOperations.put(name,operations);
-        }
+        registerOverload(customMemberOperations,name,operation);
         return true;
     }
 
@@ -135,13 +129,7 @@ public final class Algebra<T> implements Serializable {
      * @see ICustomMemberFlatOperation
      */
     public boolean addCustomMemberFlatOperation(String name, ICustomMemberFlatOperation<T> operation) {
-        if (customMemberFlatOperations.containsKey(name)) {
-            customMemberFlatOperations.get(name).add(operation);
-        }else {
-            List<ICustomMemberFlatOperation<T>> operations=new LinkedList<>();
-            operations.add(operation);
-            customMemberFlatOperations.put(name,operations);
-        }
+        registerOverload(customMemberFlatOperations,name,operation);
         return true;
     }
 
@@ -154,13 +142,7 @@ public final class Algebra<T> implements Serializable {
      * @see IUnsafeOperation
      */
     public boolean addUnsafeOperation(String name, IUnsafeOperation<T> operation) {
-        if (unsafeOperations.containsKey(name)) {
-            unsafeOperations.get(name).add(operation);
-        }else {
-            List<IUnsafeOperation<T>> operations=new LinkedList<>();
-            operations.add(operation);
-            unsafeOperations.put(name,operations);
-        }
+        registerOverload(unsafeOperations,name,operation);
         return true;
     }
 
@@ -173,13 +155,7 @@ public final class Algebra<T> implements Serializable {
      * @see IUnsafeFlatOperation
      */
     public boolean addUnsafeOperationFlat(String name, IUnsafeFlatOperation<T> operation) {
-        if (unsafeFlatOperations.containsKey(name)) {
-            unsafeFlatOperations.get(name).add(operation);
-        }else {
-            List<IUnsafeFlatOperation<T>> operations=new LinkedList<>();
-            operations.add(operation);
-            unsafeFlatOperations.put(name,operations);
-        }
+        registerOverload(unsafeFlatOperations,name,operation);
         return true;
     }
 
@@ -643,12 +619,7 @@ public final class Algebra<T> implements Serializable {
      * @see IUnsafeOperation
      */
     public IUnsafeOperation<T> getUnsafeOperationWithParam(String name,Class<?> clazz) {
-        for(IUnsafeOperation operation:this.unsafeOperations.get(name)){
-            if(operation.getSecondElementClass()==clazz){
-                return operation;
-            }
-        }
-        return null;
+        return selectOverload(unsafeOperations.get(name),clazz,name);
     }
 
     /**
@@ -659,12 +630,7 @@ public final class Algebra<T> implements Serializable {
      * @see IUnsafeFlatOperation
      */
     public IUnsafeFlatOperation<T> getUnsafeFlatOperationWithParam(String name,Class<?> clazz) {
-        for(IUnsafeFlatOperation operation:this.unsafeFlatOperations.get(name)){
-            if(operation.getSecondElementClass()==clazz){
-                return operation;
-            }
-        }
-        return null;
+        return selectOverload(unsafeFlatOperations.get(name),clazz,name);
     }
     /**
      * get custom member operation instance
@@ -674,12 +640,7 @@ public final class Algebra<T> implements Serializable {
      * @see ICustomMemberOperation
      */
     public ICustomMemberOperation<T> getCustomMemberOperationWithParam(String name,Class<?> clazz) {
-        for(ICustomMemberOperation operation:this.customMemberOperations.get(name)){
-            if(operation.getSecondElementClass()==clazz){
-                return operation;
-            }
-        }
-        return null;
+        return selectOverload(customMemberOperations.get(name),clazz,name);
     }
 
     /**
@@ -690,12 +651,27 @@ public final class Algebra<T> implements Serializable {
      * @see ICustomMemberFlatOperation
      */
     public ICustomMemberFlatOperation<T> getCustomMemberFlatOperationWithParam(String name,Class<?> clazz) {
-        for(ICustomMemberFlatOperation operation:this.customMemberFlatOperations.get(name)){
-            if(operation.getSecondElementClass()==clazz){
-                return operation;
-            }
-        }
-        return null;
+        return selectOverload(customMemberFlatOperations.get(name),clazz,name);
     }
 
+    private static <O extends IAbsOperation> void registerOverload(Map<String,List<O>> registry,String name,O operation) {
+        Objects.requireNonNull(operation); Objects.requireNonNull(operation.getSecondElementClass());
+        List<O> values=registry.computeIfAbsent(Objects.requireNonNull(name),ignored -> new ArrayList<>());
+        values.removeIf(existing -> existing.getSecondElementClass().equals(operation.getSecondElementClass()));
+        values.add(operation);
+    }
+    private static <O extends IAbsOperation> O selectOverload(List<O> values,Class<?> type,String name) {
+        if(values==null || type==null) return null;
+        for(O value : values) if(value.getSecondElementClass().equals(type)) return value;
+        List<O> candidates=new ArrayList<>();
+        for(O value : values) if(value.getSecondElementClass().isAssignableFrom(type)) candidates.add(value);
+        List<O> mostSpecific=new ArrayList<>();
+        for(O candidate : candidates) {
+            boolean dominated=false;
+            for(O other : candidates) if(candidate!=other && candidate.getSecondElementClass().isAssignableFrom(other.getSecondElementClass())) dominated=true;
+            if(!dominated) mostSpecific.add(candidate);
+        }
+        if(mostSpecific.size()>1) throw new exceptions.UnsupportedOperationException("Ambiguous operand overload for " + name + " and " + type.getName());
+        return mostSpecific.isEmpty()?null:mostSpecific.get(0);
+    }
 }

@@ -298,40 +298,22 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
      * @see operations.simple.IUnsafeOperation
      */
     @Override
-    public <K, V> IAlgebraFlow<K> performAlgebraUnsafe(String operationName, V element) {
-        IUnsafeOperation<K> customOperation = null;
-        if (currentAlgebra.hasUnsafeOperation(operationName)) {
-            customOperation = (IUnsafeOperation<K>) currentAlgebra.getUnsafeOperationWithParam(operationName,element.getClass());
-            IFlowInvoke<K> invoke = new IFlowInvoke<K>() {
-                @Override
-                public String getAlgebraName() {
-                    return currentAlgebra.getAlgebraName();
-                }
-
-                @Override
-                public List<IAlgebraItem<K>> perform() {
-                    List<IAlgebraItem<K>> flow = new ArrayList<IAlgebraItem<K>>();
-                    for (IAlgebraItem<T> item : flowState.values) {
-                        flow.add(item.performUnsafeOperation(operationName, element));
-                    }
-                    flowState.values = flow;
-                    return flow;
-                }
-            };
-            currentInvokes.add(invoke);
-        } else {
-            UnsupportedOperationException exception = new UnsupportedOperationException("Algebra " + currentAlgebra.getAlgebraName() + " has not operation" + operationName + "operation type unsafe");
-            logger.error("Algebra " + currentAlgebra.getAlgebraName() + " has not operation" + operationName + "operation type unsafe", exception);
-            throw exception;
-        }
-        if (mathTool.hasAlgebra(customOperation.getAlgebraName())) {
-            return new AlgebraFlow<K>(this.mathTool, this.flowState, (Algebra<K>) mathTool.getAlgebra(customOperation.getAlgebraName()), this.currentInvokes);
-
-        } else {
-            AlgebraNotExistsException exception = new AlgebraNotExistsException("Cannot find algebra" + customOperation.getAlgebraName() + " in math tool: " + mathTool.getName());
-            logger.error("Cannot find algebra" + customOperation.getAlgebraName() + " in math tool: " + mathTool.getName());
-            throw exception;
-        }
+    @SuppressWarnings("unchecked")
+    public <K,V> IAlgebraFlow<K> performAlgebraUnsafe(String operationName,V element) {
+        IUnsafeOperation<T> operation=(IUnsafeOperation<T>)currentAlgebra.getUnsafeOperationWithParam(operationName,element==null?null:element.getClass());
+        if(operation==null) throw new UnsupportedOperationException("No matching operand type for " + operationName);
+        Algebra<K> result=(Algebra<K>)mathTool.getAlgebra(operation.getAlgebraName());
+        if(result==null) throw new AlgebraNotExistsException("Missing result algebra " + operation.getAlgebraName());
+        currentInvokes.add(new IFlowInvoke<K>() {
+            public String getAlgebraName() { return result.getAlgebraName(); }
+            public List<IAlgebraItem<K>> perform() {
+                List<IAlgebraItem<K>> values=new ArrayList<>();
+                for(IAlgebraItem<T> item : flowState.values) values.add(item.performUnsafeOperation(operationName,element));
+                flowState.values=values;
+                return values;
+            }
+        });
+        return new AlgebraFlow<K>(mathTool,flowState,result,currentInvokes);
     }
 
     /**
@@ -462,40 +444,22 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
      * @see operations.flat.IUnsafeFlatOperation
      */
     @Override
-    public <K, V> IAlgebraFlow<K> performFlatAlgebraUnsafe(String operationName, V element) {
-        IUnsafeFlatOperation<K> customOperation = null;
-        if (currentAlgebra.hasUnsafeFlatOperation(operationName)) {
-            customOperation = (IUnsafeFlatOperation<K>) currentAlgebra.getUnsafeFlatOperationWithParam(operationName,element.getClass());
-            IFlowInvoke<K> invoke = new IFlowInvoke<K>() {
-                @Override
-                public String getAlgebraName() {
-                    return currentAlgebra.getAlgebraName();
-                }
-
-                @Override
-                public List<IAlgebraItem<K>> perform() {
-                    List<IAlgebraItem<K>> flow = new ArrayList<IAlgebraItem<K>>();
-                    for (IAlgebraItem<T> item : flowState.values) {
-                        flow.addAll(item.performUnsafeFlatOperation(operationName, element));
-                    }
-                    flowState.values = flow;
-                    return flow;
-                }
-            };
-            currentInvokes.add(invoke);
-        } else {
-            UnsupportedOperationException exception = new UnsupportedOperationException("Algebra " + currentAlgebra.getAlgebraName() + " has not operation" + operationName + "operation type unsafeflat");
-            logger.error("Algebra " + currentAlgebra.getAlgebraName() + " has not operation" + operationName + "operation type unsafeflat", exception);
-            throw exception;
-        }
-        if (mathTool.hasAlgebra(customOperation.getAlgebraName())) {
-            return new AlgebraFlow<K>(this.mathTool, this.flowState, (Algebra<K>) mathTool.getAlgebra(customOperation.getAlgebraName()), this.currentInvokes);
-
-        } else {
-            AlgebraNotExistsException exception = new AlgebraNotExistsException("Cannot find algebra" + customOperation.getAlgebraName() + " in math tool: " + mathTool.getName());
-            logger.error("Cannot find algebra" + customOperation.getAlgebraName() + " in math tool: " + mathTool.getName());
-            throw exception;
-        }
+    @SuppressWarnings("unchecked")
+    public <K,V> IAlgebraFlow<K> performFlatAlgebraUnsafe(String operationName,V element) {
+        IUnsafeFlatOperation<T> operation=(IUnsafeFlatOperation<T>)currentAlgebra.getUnsafeFlatOperationWithParam(operationName,element==null?null:element.getClass());
+        if(operation==null) throw new UnsupportedOperationException("No matching operand type for " + operationName);
+        Algebra<K> result=(Algebra<K>)mathTool.getAlgebra(operation.getAlgebraName());
+        if(result==null) throw new AlgebraNotExistsException("Missing result algebra " + operation.getAlgebraName());
+        currentInvokes.add(new IFlowInvoke<K>() {
+            public String getAlgebraName() { return result.getAlgebraName(); }
+            public List<IAlgebraItem<K>> perform() {
+                List<IAlgebraItem<K>> values=new ArrayList<>();
+                for(IAlgebraItem<T> item : flowState.values) values.addAll(item.performUnsafeFlatOperation(operationName,element));
+                flowState.values=values;
+                return values;
+            }
+        });
+        return new AlgebraFlow<K>(mathTool,flowState,result,currentInvokes);
     }
 
     /**
@@ -507,41 +471,22 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
      * @see operations.simple.ICustomMemberOperation
      */
     @Override
-    public <K> IAlgebraFlow<T> performCustomMemberOperation(String operationName, K sElement) {
-        ICustomMemberOperation<K> customOperation = null;
-        if (currentAlgebra.hasCustomMemberOperation(operationName)) {
-            customOperation = (ICustomMemberOperation<K>) currentAlgebra.getCustomMemberOperationWithParam(operationName,sElement.getClass());
-            IFlowInvoke<T> invoke = new IFlowInvoke<T>() {
-                @Override
-                public String getAlgebraName() {
-                    return currentAlgebra.getAlgebraName();
-                }
-
-                @Override
-                public List<IAlgebraItem<T>> perform() {
-                    List<IAlgebraItem<T>> flow = new ArrayList<IAlgebraItem<T>>();
-                    for (IAlgebraItem<T> item : flowState.values) {
-                        flow.add(item.performCustomMemberOperation(operationName, sElement));
-                    }
-                    flowState.values = flow;
-                    return flow;
-                }
-            };
-            currentInvokes.add(invoke);
-        } else {
-            UnsupportedOperationException exception = new UnsupportedOperationException("Algebra " + currentAlgebra.getAlgebraName() + " has not operation" + operationName + "operation type custommeber");
-            logger.error("Algebra " + currentAlgebra.getAlgebraName() + " has not operation" + operationName + "operation type custommeber", exception);
-            throw exception;
-        }
-
-        if (mathTool.hasAlgebra(customOperation.getAlgebraName())) {
-            return new AlgebraFlow<T>(this.mathTool, this.flowState, (Algebra<T>) mathTool.getAlgebra(customOperation.getAlgebraName()), this.currentInvokes);
-
-        } else {
-            AlgebraNotExistsException exception = new AlgebraNotExistsException("Cannot find algebra" + customOperation.getAlgebraName() + " in math tool: " + mathTool.getName());
-            logger.error("Cannot find algebra" + customOperation.getAlgebraName() + " in math tool: " + mathTool.getName());
-            throw exception;
-        }
+    @SuppressWarnings("unchecked")
+    public <V> IAlgebraFlow<T> performCustomMemberOperation(String operationName,V element) {
+        ICustomMemberOperation<T> operation=(ICustomMemberOperation<T>)currentAlgebra.getCustomMemberOperationWithParam(operationName,element==null?null:element.getClass());
+        if(operation==null) throw new UnsupportedOperationException("No matching operand type for " + operationName);
+        Algebra<T> result=(Algebra<T>)mathTool.getAlgebra(operation.getAlgebraName());
+        if(result==null) throw new AlgebraNotExistsException("Missing result algebra " + operation.getAlgebraName());
+        currentInvokes.add(new IFlowInvoke<T>() {
+            public String getAlgebraName() { return result.getAlgebraName(); }
+            public List<IAlgebraItem<T>> perform() {
+                List<IAlgebraItem<T>> values=new ArrayList<>();
+                for(IAlgebraItem<T> item : flowState.values) values.add(item.performCustomMemberOperation(operationName,element));
+                flowState.values=values;
+                return values;
+            }
+        });
+        return new AlgebraFlow<T>(mathTool,flowState,result,currentInvokes);
     }
 
     /**
@@ -553,41 +498,22 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
      * @see operations.flat.ICustomMemberFlatOperation
      */
     @Override
-    public <K> IAlgebraFlow<T> performFlatCustomMemberOperation(String operationName, K sElement) {
-        ICustomMemberFlatOperation<K> customOperation = null;
-        if (currentAlgebra.hasCustomMemberFlatOperation(operationName)) {
-            customOperation = (ICustomMemberFlatOperation<K>) currentAlgebra.getCustomMemberFlatOperationWithParam(operationName,sElement.getClass());
-            IFlowInvoke<T> invoke = new IFlowInvoke<T>() {
-                @Override
-                public String getAlgebraName() {
-                    return currentAlgebra.getAlgebraName();
-                }
-
-                @Override
-                public List<IAlgebraItem<T>> perform() {
-                    List<IAlgebraItem<T>> flow = new ArrayList<IAlgebraItem<T>>();
-                    for (IAlgebraItem<T> item : flowState.values) {
-                        flow.addAll(item.performCustomMemberFlatOperation(operationName, sElement));
-                    }
-                    flowState.values = flow;
-                    return flow;
-                }
-            };
-            currentInvokes.add(invoke);
-        } else {
-            UnsupportedOperationException exception = new UnsupportedOperationException("Algebra " + currentAlgebra.getAlgebraName() + " has not operation" + operationName + "operation type custommeberflat");
-            logger.error("Algebra " + currentAlgebra.getAlgebraName() + " has not operation" + operationName + "operation type custommeberflat", exception);
-            throw exception;
-        }
-
-        if (mathTool.hasAlgebra(customOperation.getAlgebraName())) {
-            return new AlgebraFlow<T>(this.mathTool, this.flowState, (Algebra<T>) mathTool.getAlgebra(customOperation.getAlgebraName()), this.currentInvokes);
-
-        } else {
-            AlgebraNotExistsException exception = new AlgebraNotExistsException("Cannot find algebra" + customOperation.getAlgebraName() + " in math tool: " + mathTool.getName());
-            logger.error("Cannot find algebra" + customOperation.getAlgebraName() + " in math tool: " + mathTool.getName());
-            throw exception;
-        }
+    @SuppressWarnings("unchecked")
+    public <V> IAlgebraFlow<T> performFlatCustomMemberOperation(String operationName,V element) {
+        ICustomMemberFlatOperation<T> operation=(ICustomMemberFlatOperation<T>)currentAlgebra.getCustomMemberFlatOperationWithParam(operationName,element==null?null:element.getClass());
+        if(operation==null) throw new UnsupportedOperationException("No matching operand type for " + operationName);
+        Algebra<T> result=(Algebra<T>)mathTool.getAlgebra(operation.getAlgebraName());
+        if(result==null) throw new AlgebraNotExistsException("Missing result algebra " + operation.getAlgebraName());
+        currentInvokes.add(new IFlowInvoke<T>() {
+            public String getAlgebraName() { return result.getAlgebraName(); }
+            public List<IAlgebraItem<T>> perform() {
+                List<IAlgebraItem<T>> values=new ArrayList<>();
+                for(IAlgebraItem<T> item : flowState.values) values.addAll(item.performCustomMemberFlatOperation(operationName,element));
+                flowState.values=values;
+                return values;
+            }
+        });
+        return new AlgebraFlow<T>(mathTool,flowState,result,currentInvokes);
     }
 
     /**

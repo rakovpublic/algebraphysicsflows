@@ -20,7 +20,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all104RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all125RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         expected.put("BooleanAlgebra","false|true|true|false|false|false|false|true");
@@ -33,6 +33,8 @@ public class ConcreteAlgebrasTest {
         expected.put("RationalPolynomialRing","Q[x][3, 3, 1]|Q[x][2, 5, 4, 1]|Q[x][-1, 1, 1]|Q[x][-1, -2, -1]|Q[x][2, 2]|9|Q[x][2, 1, 1, 1/3]|7/3|Q[x][0]|Q[x][1]");
         expected.put("PrimeField","0 (mod 5)|1 (mod 5)|1 (mod 5)|4 (mod 5)|2 (mod 5)|2 (mod 5)|0 (mod 5)|1 (mod 5)");
         expected.put("FiniteSetAlgebra","[1, 2, 3]|[1, 2]|[]|[3]|true|false|true|[1, 2]|[1]|2|[1, 2]|[[], [1], [2], [1, 2]]|[3]|[]");
+        expected.put("RationalSampleAlgebra","Sample[1, 2, 3, 2, 4, 6]|3|2|2/3|1|Sample[-1, 0, 1]|4/3|2|Sample[2, 4, 6]|[1, 2, 3]|Sample[]");
+        expected.put("FiniteProbabilityAlgebra","1|0|Distribution{1=1/4, 3=3/4}|[1, 3]|2|[1, 3]|false|Distribution{6=1}|5/2|3/4");
         int count=0;
         for(ConcreteAlgebra<?> algebra : math.algebras()) {
             String[] values=expected.get(algebra.getClass().getSimpleName()).split("\\|",-1);
@@ -42,17 +44,17 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(104,count);
+        assertEquals(125,count);
     }
     @SuppressWarnings({"unchecked","rawtypes"})
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
         Algebra source=math.mathTool.getAlgebra(entry.first.getAlgebraName());
-        IAlgebraItem item=source.buildAlgebraItem(sample(source.getAlgebraName(),0));
+        IAlgebraItem item=source.buildAlgebraItem(sample(math,source.getAlgebraName(),0));
         String alias=entry.alias;
         Object operation=entry.operation;
         if(operation instanceof IOneOperandOperation) return item.performOneOperandOperation(alias).perform().getResult().toString();
         if(operation instanceof ITransferOperation) return item.performAlgebraTransfer(alias).perform().getResult().toString();
-        Object second=entry.second==null?null:sample(entry.second.getAlgebraName(),1);
+        Object second=entry.second==null?null:sample(math,entry.second.getAlgebraName(),1);
         if(entry.flat) {
             List<IAlgebraItem> results;
             if(operation instanceof IOneOperandFlatOperation) results=item.performOneOperandFlatOperation(alias);
@@ -74,7 +76,7 @@ public class ConcreteAlgebrasTest {
         else result=item.performUnsafeOperation(alias,second);
         return result.perform().getResult().toString();
     }
-    private Object sample(String domain,int index) {
+    private Object sample(ConcreteMathematics math,String domain,int index) {
         switch(domain) {
             case "Unit": return Unit.INSTANCE;
             case "Boolean": return index==0;
@@ -87,6 +89,12 @@ public class ConcreteAlgebrasTest {
                     :new Rational[][] {{Rational.of(2),Rational.ZERO},{Rational.ZERO,Rational.of(2)}});
             case "Q[x]": return index==0?new Polynomial(Rational.ONE,Rational.of(2),Rational.ONE):new Polynomial(Rational.of(2),Rational.ONE);
             case "FiniteSet(Z)": return index==0?FiniteSet.of(BigInteger.ONE,BigInteger.valueOf(2)):FiniteSet.of(BigInteger.ONE,BigInteger.valueOf(2),BigInteger.valueOf(3));
+            case "Sample(Q)": return index==0?mathematics.statistics.RationalSample.of(Rational.ONE,Rational.of(2),Rational.of(3)):mathematics.statistics.RationalSample.of(Rational.of(2),Rational.of(4),Rational.of(6));
+            case "FiniteDistribution(Z)":
+                Map<BigInteger,Rational> masses=new LinkedHashMap<>();
+                if(index==0) { masses.put(BigInteger.ONE,Rational.of(1,4)); masses.put(BigInteger.valueOf(3),Rational.of(3,4)); }
+                else masses.put(BigInteger.ONE,Rational.ONE);
+                return new mathematics.probability.FiniteDistribution<>(math.integers.algebra(),masses);
             case "QxQ.bounds": return new Pair<>(Rational.ZERO,Rational.ONE);
             case "Z/5Z": return new ModularInteger(index==0?3:2,5);
             default: throw new AssertionError("Missing test operand for "+domain);

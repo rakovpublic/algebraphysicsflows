@@ -17,6 +17,8 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final IntegerRing integers=new IntegerRing(rationals,booleans);
     public final NaturalSemiring naturals=new NaturalSemiring(integers);
     public final FiniteSetAlgebra<java.math.BigInteger> integerSets=new FiniteSetAlgebra<>("FiniteSet(Z)",integers.algebra(),booleans,naturals);
+    public final RationalSampleAlgebra samples=new RationalSampleAlgebra(rationals,naturals);
+    public final FiniteProbabilityAlgebra<java.math.BigInteger> integerProbabilities=new FiniteProbabilityAlgebra<>("FiniteDistribution(Z)",integers.algebra(),integerSets,rationals,booleans,naturals,mathematics.numbers.Rational::of);
     public final RationalComplexField complexRationals=new RationalComplexField(rationals);
     public final RationalVectorSpace vectors;
     public final RationalMatrixAlgebra matrices;
@@ -37,7 +39,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
             fields.add(new PrimeField(unit,prime));
         }
         primeFields=Collections.unmodifiableList(fields);
-        List<ConcreteAlgebra<?>> values=new ArrayList<>(Arrays.asList(booleans,naturals,integers,rationals,complexRationals,vectors,matrices,polynomials,integerSets));
+        List<ConcreteAlgebra<?>> values=new ArrayList<>(Arrays.asList(booleans,naturals,integers,rationals,complexRationals,vectors,matrices,polynomials,integerSets,samples,integerProbabilities));
         values.addAll(fields); algebras=Collections.unmodifiableList(values);
         for(ConcreteAlgebra<?> algebra : algebras) {
             algebra.register(mathTool);
