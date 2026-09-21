@@ -3,6 +3,33 @@ Algebra - set rules which defines which elements could be the elements of this a
 
 Operations- incupsulate logic of operations (see package operations)
 
+The reusable left projection operation follows `A op B = A`. Its flat version
+returns a one-element list containing `A` as an `IAlgebraItem<T>` in the supplied
+algebra. Register either version under a name of your choice:
+
+```java
+import algebra.imp.Algebra;
+import operations.simple.LeftProjectionOperation;
+import operations.flat.LeftProjectionFlatOperation;
+
+Algebra<Integer> integers = new Algebra<>("integer", Integer.class, "Integers");
+integers.addOperation("left", new LeftProjectionOperation<>(integers));
+integers.addFlatOperation("left", new LeftProjectionFlatOperation<>(integers));
+
+// 5 op 10 = 5
+Integer value = integers.buildAlgebraItem(5)
+        .performOperation("left", 10).perform().getResult();
+// The flat result contains one item with value 5.
+Integer flatValue = integers.buildAlgebraItem(5)
+        .performFlatOperation("left", 10).get(0).getResult();
+```
+
+After registering the algebra with `MathTool`, use
+`flow.performOperation("left", second)` or
+`flow.performFlatOperation("left", second)` to retain each input value. Both
+versions use the existing algebra membership checks when invoked through an item
+or flow.
+
 MathTool - incupsulate all algebras which will be used in modelling(see mathtool class)
 
 AlgebraFlow -  provide operation invoke api (see IAlgebraFlow interafce and AlgebraFlow class)
