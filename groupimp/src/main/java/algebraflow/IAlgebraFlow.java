@@ -20,6 +20,12 @@ public interface IAlgebraFlow<T> extends Serializable {
      */
     public IAlgebraFlow<T> performOperation(String operation, T element);
 
+    /** Retain each value after an operation with an independently typed operand. */
+    <V> IAlgebraFlow<T> performLeftProjectionOperation(String operationName, V second);
+
+    /** Retain each value through a flat operation with an independently typed operand. */
+    <V> IAlgebraFlow<T> performLeftProjectionFlatOperation(String operationName, V second);
+
     /**
      * perform custom result operation for each element in flow with two elements of type T and return result type K
      *

@@ -28,6 +28,8 @@ public final class Algebra<T> implements Serializable {
     private final HashMap<String, List<IUnsafeFlatOperation<T>>> unsafeFlatOperations;
     private final HashMap<String, List<ICustomMemberOperation<T>>> customMemberOperations;
     private final HashMap<String, List<ICustomMemberFlatOperation<T>>> customMemberFlatOperations;
+    private final HashMap<String, ILeftProjectionOperation<T, ?>> leftProjectionOperations;
+    private final HashMap<String, ILeftProjectionFlatOperation<T, ?>> leftProjectionFlatOperations;
 
 
     public Class getParamClass() {
@@ -56,7 +58,49 @@ public final class Algebra<T> implements Serializable {
         unsafeFlatOperations = new HashMap<>();
         customMemberOperations = new HashMap<>();
         customMemberFlatOperations = new HashMap<>();
+        leftProjectionOperations = new HashMap<>();
+        leftProjectionFlatOperations = new HashMap<>();
 
+    }
+
+    /** Register a left projection with an independently typed second operand. */
+    public <V> boolean addLeftProjectionOperation(String name, ILeftProjectionOperation<T, V> operation) {
+        leftProjectionOperations.put(name, operation);
+        return true;
+    }
+
+    /** Register a flat left projection with an independently typed second operand. */
+    public <V> boolean addLeftProjectionFlatOperation(String name, ILeftProjectionFlatOperation<T, V> operation) {
+        leftProjectionFlatOperations.put(name, operation);
+        return true;
+    }
+
+    public boolean hasLeftProjectionOperation(String name) {
+        return leftProjectionOperations.containsKey(name);
+    }
+
+    public boolean hasLeftProjectionFlatOperation(String name) {
+        return leftProjectionFlatOperations.containsKey(name);
+    }
+
+    /** Return a matching operation, or null if its name or operand type does not match. */
+    @SuppressWarnings("unchecked")
+    public <V> ILeftProjectionOperation<T, V> getLeftProjectionOperation(String name, Class<V> secondElementClass) {
+        ILeftProjectionOperation<T, ?> operation = leftProjectionOperations.get(name);
+        if (operation != null && operation.getSecondElementClass().isAssignableFrom(secondElementClass)) {
+            return (ILeftProjectionOperation<T, V>) operation;
+        }
+        return null;
+    }
+
+    /** Return a matching flat operation, or null if its name or operand type does not match. */
+    @SuppressWarnings("unchecked")
+    public <V> ILeftProjectionFlatOperation<T, V> getLeftProjectionFlatOperation(String name, Class<V> secondElementClass) {
+        ILeftProjectionFlatOperation<T, ?> operation = leftProjectionFlatOperations.get(name);
+        if (operation != null && operation.getSecondElementClass().isAssignableFrom(secondElementClass)) {
+            return (ILeftProjectionFlatOperation<T, V>) operation;
+        }
+        return null;
     }
 
     /**

@@ -19,6 +19,12 @@ public interface IAlgebraItem<T> extends Serializable {
      */
     public IAlgebraItem<T> performOperation(String operationName, T sElement);
 
+    /** Retain this item's value after an operation with an independently typed operand. */
+    <V> IAlgebraItem<T> performLeftProjectionOperation(String operationName, V second);
+
+    /** Retain this item's value as a single-item flat result. */
+    <V> List<IAlgebraItem<T>> performLeftProjectionFlatOperation(String operationName, V second);
+
     /**
      * perform custom result operation with two elements of type T and return IAlgebraItem  K
      *

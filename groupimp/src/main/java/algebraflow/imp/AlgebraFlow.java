@@ -37,6 +37,56 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
     private final Algebra<?> currentAlgebra;
     private List<IFlowInvoke<?>> currentInvokes;
 
+    @Override
+    public <V> IAlgebraFlow<T> performLeftProjectionOperation(String operationName, V second) {
+        if (currentAlgebra.getLeftProjectionOperation(operationName, second.getClass()) == null) {
+            throw new UnsupportedOperationException("No left projection " + operationName
+                    + " for second operand type " + second.getClass().getName());
+        }
+        currentInvokes.add(new IFlowInvoke<T>() {
+            @Override
+            public String getAlgebraName() {
+                return currentAlgebra.getAlgebraName();
+            }
+
+            @Override
+            public List<IAlgebraItem<T>> perform() {
+                List<IAlgebraItem<T>> flow = new ArrayList<>();
+                for (IAlgebraItem<T> item : currentFlow) {
+                    flow.add(item.performLeftProjectionOperation(operationName, second));
+                }
+                currentFlow = flow;
+                return flow;
+            }
+        });
+        return this;
+    }
+
+    @Override
+    public <V> IAlgebraFlow<T> performLeftProjectionFlatOperation(String operationName, V second) {
+        if (currentAlgebra.getLeftProjectionFlatOperation(operationName, second.getClass()) == null) {
+            throw new UnsupportedOperationException("No flat left projection " + operationName
+                    + " for second operand type " + second.getClass().getName());
+        }
+        currentInvokes.add(new IFlowInvoke<T>() {
+            @Override
+            public String getAlgebraName() {
+                return currentAlgebra.getAlgebraName();
+            }
+
+            @Override
+            public List<IAlgebraItem<T>> perform() {
+                List<IAlgebraItem<T>> flow = new ArrayList<>();
+                for (IAlgebraItem<T> item : currentFlow) {
+                    flow.addAll(item.performLeftProjectionFlatOperation(operationName, second));
+                }
+                currentFlow = flow;
+                return flow;
+            }
+        });
+        return this;
+    }
+
     private AlgebraFlow(List<IAlgebraItem<T>> currentFlow, Algebra<T> currentAlgebra, MathTool mathTool) {
         this.mathTool = mathTool;
         this.currentFlow = currentFlow;

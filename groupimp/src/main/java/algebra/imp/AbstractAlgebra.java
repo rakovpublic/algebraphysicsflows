@@ -7,6 +7,7 @@ import operations.simple.ICustomMemberOperation;
 import operations.simple.ICustomResultOperation;
 import operations.simple.ITransferOperation;
 import operations.simple.IUnsafeOperation;
+import operations.simple.ILeftProjectionOperation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,6 +18,32 @@ import java.util.List;
  */
 public abstract class AbstractAlgebra<T> implements IAlgebraItem<T> {
     private static final Logger logger = LogManager.getLogger(AbstractAlgebra.class);
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <V> IAlgebraItem<T> performLeftProjectionOperation(String operationName, V second) {
+        Algebra<T> algebra = getAlgebra();
+        ILeftProjectionOperation<T, V> operation = algebra.getLeftProjectionOperation(
+                operationName, (Class<V>) second.getClass());
+        if (operation == null) {
+            throw new exceptions.UnsupportedOperationException("No left projection " + operationName
+                    + " for second operand type " + second.getClass().getName());
+        }
+        return algebra.buildAlgebraItem(operation.performOperation(perform().getResult(), second));
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <V> List<IAlgebraItem<T>> performLeftProjectionFlatOperation(String operationName, V second) {
+        Algebra<T> algebra = getAlgebra();
+        ILeftProjectionFlatOperation<T, V> operation = algebra.getLeftProjectionFlatOperation(
+                operationName, (Class<V>) second.getClass());
+        if (operation == null) {
+            throw new exceptions.UnsupportedOperationException("No flat left projection " + operationName
+                    + " for second operand type " + second.getClass().getName());
+        }
+        return operation.performOperation(perform().getResult(), second);
+    }
 
     /**
      * perform operation with two elements of type T and return result IAlgebraItem T

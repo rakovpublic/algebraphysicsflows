@@ -5,19 +5,21 @@ import algebra.imp.Algebra;
 import java.util.Objects;
 
 /**
- * Left projection: A op B = A.
+ * Left projection between potentially different operand types: A op B = A.
  */
-public final class LeftProjectionOperation<T> implements IOperation<T> {
+public final class LeftProjectionOperation<T, V> implements ILeftProjectionOperation<T, V> {
     private static final long serialVersionUID = 1L;
 
     private final Algebra<T> algebra;
+    private final Class<V> secondElementClass;
 
-    public LeftProjectionOperation(Algebra<T> algebra) {
+    public LeftProjectionOperation(Algebra<T> algebra, Class<V> secondElementClass) {
         this.algebra = Objects.requireNonNull(algebra, "algebra");
+        this.secondElementClass = Objects.requireNonNull(secondElementClass, "secondElementClass");
     }
 
     @Override
-    public T performOperation(T first, T second) {
+    public T performOperation(T first, V second) {
         return first;
     }
 
@@ -37,7 +39,7 @@ public final class LeftProjectionOperation<T> implements IOperation<T> {
     }
 
     @Override
-    public Class<?> getSecondElementClass() {
-        return algebra.getParamClass();
+    public Class<V> getSecondElementClass() {
+        return secondElementClass;
     }
 }
