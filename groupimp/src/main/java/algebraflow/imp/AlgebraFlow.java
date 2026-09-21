@@ -33,7 +33,10 @@ import java.util.List;
 public class AlgebraFlow<T> implements IAlgebraFlow<T> {
     private static final Logger logger = LogManager.getLogger(AlgebraFlow.class);
     private final MathTool mathTool;
-    private List<? extends IAlgebraItem> currentFlow;
+    private static final class FlowState {
+        private List<? extends IAlgebraItem> values;
+    }
+    private final FlowState flowState;
     private final Algebra<?> currentAlgebra;
     private List<IFlowInvoke<?>> currentInvokes;
 
@@ -52,10 +55,10 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
             @Override
             public List<IAlgebraItem<T>> perform() {
                 List<IAlgebraItem<T>> flow = new ArrayList<>();
-                for (IAlgebraItem<T> item : currentFlow) {
+                for (IAlgebraItem<T> item : flowState.values) {
                     flow.add(item.performLeftProjectionOperation(operationName, second));
                 }
-                currentFlow = flow;
+                flowState.values = flow;
                 return flow;
             }
         });
@@ -77,30 +80,25 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
             @Override
             public List<IAlgebraItem<T>> perform() {
                 List<IAlgebraItem<T>> flow = new ArrayList<>();
-                for (IAlgebraItem<T> item : currentFlow) {
+                for (IAlgebraItem<T> item : flowState.values) {
                     flow.addAll(item.performLeftProjectionFlatOperation(operationName, second));
                 }
-                currentFlow = flow;
+                flowState.values = flow;
                 return flow;
             }
         });
         return this;
     }
 
-    private AlgebraFlow(List<IAlgebraItem<T>> currentFlow, Algebra<T> currentAlgebra, MathTool mathTool) {
+    private AlgebraFlow(MathTool mathTool, FlowState flowState, Algebra<T> currentAlgebra, List<IFlowInvoke<?>> currentInvokes) {
         this.mathTool = mathTool;
-        this.currentFlow = currentFlow;
-        this.currentAlgebra = currentAlgebra;
-    }
-
-    private AlgebraFlow(MathTool mathTool, List<? extends IAlgebraItem> currentFlow, Algebra<T> currentAlgebra, List<IFlowInvoke<?>> currentInvokes) {
-        this.mathTool = mathTool;
-        this.currentFlow = currentFlow;
+        this.flowState = flowState;
         this.currentAlgebra = currentAlgebra;
         this.currentInvokes = currentInvokes;
     }
 
     public AlgebraFlow(InputFormat<T> inputFormat, IMathToolInitializer algebraInitializer, String startAlgebra) {
+        flowState = new FlowState();
         mathTool = algebraInitializer.initialize();
         currentAlgebra = mathTool.getAlgebra(startAlgebra);
         currentInvokes = new LinkedList<IFlowInvoke<?>>();
@@ -114,7 +112,7 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
                 @Override
                 public List<IAlgebraItem<T>> perform() {
                     List<IAlgebraItem<T>> flow = inputFormat.read((Algebra<T>) currentAlgebra);
-                    currentFlow = flow;
+                    flowState.values = flow;
                     return flow;
                 }
 
@@ -154,11 +152,11 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
                 @Override
                 public List<IAlgebraItem<T>> perform() {
                     List<IAlgebraItem<T>> flow = new ArrayList<IAlgebraItem<T>>();
-                    for (IAlgebraItem<T> item : currentFlow) {
+                    for (IAlgebraItem<T> item : flowState.values) {
                         flow.add(item.performOperation(operation, element));
 
                     }
-                    currentFlow = flow;
+                    flowState.values = flow;
                     return flow;
                 }
 
@@ -200,10 +198,10 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
                 @Override
                 public List<IAlgebraItem<K>> perform() {
                     List<IAlgebraItem<K>> flow = new ArrayList<IAlgebraItem<K>>();
-                    for (IAlgebraItem<T> item : currentFlow) {
+                    for (IAlgebraItem<T> item : flowState.values) {
                         flow.add(item.performCustomResultOperation(operationName, sElement));
                     }
-                    currentFlow = flow;
+                    flowState.values = flow;
                     return flow;
                 }
 
@@ -215,7 +213,7 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
             throw exception;
         }
         if (mathTool.hasAlgebra(customOperation.getAlgebraName())) {
-            return new AlgebraFlow<K>(this.mathTool, this.currentFlow, (Algebra<K>) mathTool.getAlgebra(customOperation.getAlgebraName()), this.currentInvokes);
+            return new AlgebraFlow<K>(this.mathTool, this.flowState, (Algebra<K>) mathTool.getAlgebra(customOperation.getAlgebraName()), this.currentInvokes);
 
         } else {
             AlgebraNotExistsException exception = new AlgebraNotExistsException("Cannot find algebra" + customOperation.getAlgebraName() + " in math tool: " + mathTool.getName());
@@ -247,10 +245,10 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
                 @Override
                 public List<IAlgebraItem<K>> perform() {
                     List<IAlgebraItem<K>> flow = new ArrayList<IAlgebraItem<K>>();
-                    for (IAlgebraItem<T> item : currentFlow) {
+                    for (IAlgebraItem<T> item : flowState.values) {
                         flow.add(item.performAlgebraTransfer(operationName));
                     }
-                    currentFlow = flow;
+                    flowState.values = flow;
                     return flow;
                 }
             };
@@ -261,7 +259,7 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
             throw exception;
         }
         if (mathTool.hasAlgebra(transferOperation.getAlgebraName())) {
-            return new AlgebraFlow<K>(this.mathTool, this.currentFlow, (Algebra<K>) mathTool.getAlgebra(transferOperation.getAlgebraName()), this.currentInvokes);
+            return new AlgebraFlow<K>(this.mathTool, this.flowState, (Algebra<K>) mathTool.getAlgebra(transferOperation.getAlgebraName()), this.currentInvokes);
 
         } else {
             AlgebraNotExistsException exception = new AlgebraNotExistsException("Cannot find algebra" + transferOperation.getAlgebraName() + " in math tool: " + mathTool.getName() + "operation type transfer");
@@ -283,7 +281,7 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
     public <K, V> IAlgebraFlow<K> performAlgebraUnsafe(String operationName, V element) {
         IUnsafeOperation<K> customOperation = null;
         if (currentAlgebra.hasUnsafeOperation(operationName)) {
-            customOperation = (IUnsafeOperation<K>) currentAlgebra.getCustomMemberOperationWithParam(operationName,element.getClass());
+            customOperation = (IUnsafeOperation<K>) currentAlgebra.getUnsafeOperationWithParam(operationName,element.getClass());
             IFlowInvoke<K> invoke = new IFlowInvoke<K>() {
                 @Override
                 public String getAlgebraName() {
@@ -293,10 +291,10 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
                 @Override
                 public List<IAlgebraItem<K>> perform() {
                     List<IAlgebraItem<K>> flow = new ArrayList<IAlgebraItem<K>>();
-                    for (IAlgebraItem<T> item : currentFlow) {
+                    for (IAlgebraItem<T> item : flowState.values) {
                         flow.add(item.performUnsafeOperation(operationName, element));
                     }
-                    currentFlow = flow;
+                    flowState.values = flow;
                     return flow;
                 }
             };
@@ -307,7 +305,7 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
             throw exception;
         }
         if (mathTool.hasAlgebra(customOperation.getAlgebraName())) {
-            return new AlgebraFlow<K>(this.mathTool, this.currentFlow, (Algebra<K>) mathTool.getAlgebra(customOperation.getAlgebraName()), this.currentInvokes);
+            return new AlgebraFlow<K>(this.mathTool, this.flowState, (Algebra<K>) mathTool.getAlgebra(customOperation.getAlgebraName()), this.currentInvokes);
 
         } else {
             AlgebraNotExistsException exception = new AlgebraNotExistsException("Cannot find algebra" + customOperation.getAlgebraName() + " in math tool: " + mathTool.getName());
@@ -341,11 +339,11 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
                 @Override
                 public List<IAlgebraItem<T>> perform() {
                     List<IAlgebraItem<T>> flow = new ArrayList<IAlgebraItem<T>>();
-                    for (IAlgebraItem<T> item : currentFlow) {
+                    for (IAlgebraItem<T> item : flowState.values) {
                         flow.addAll(item.performFlatOperation(operation, element));
 
                     }
-                    currentFlow = flow;
+                    flowState.values = flow;
                     return flow;
                 }
             };
@@ -385,10 +383,10 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
                 @Override
                 public List<IAlgebraItem<K>> perform() {
                     List<IAlgebraItem<K>> flow = new ArrayList<IAlgebraItem<K>>();
-                    for (IAlgebraItem<T> item : currentFlow) {
+                    for (IAlgebraItem<T> item : flowState.values) {
                         flow.addAll(item.performCustomResultFlatOperation(operationName, sElement));
                     }
-                    currentFlow = flow;
+                    flowState.values = flow;
                     return flow;
                 }
             };
@@ -399,7 +397,7 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
             throw exception;
         }
         if (mathTool.hasAlgebra(customOperation.getAlgebraName())) {
-            return new AlgebraFlow<K>(this.mathTool, this.currentFlow, (Algebra<K>) mathTool.getAlgebra(customOperation.getAlgebraName()), this.currentInvokes);
+            return new AlgebraFlow<K>(this.mathTool, this.flowState, (Algebra<K>) mathTool.getAlgebra(customOperation.getAlgebraName()), this.currentInvokes);
 
         } else {
             AlgebraNotExistsException exception = new AlgebraNotExistsException("Cannot find algebra" + customOperation.getAlgebraName() + " in math tool: " + mathTool.getName());
@@ -430,10 +428,10 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
                 @Override
                 public List<IAlgebraItem<K>> perform() {
                     List<IAlgebraItem<K>> flow = new ArrayList<IAlgebraItem<K>>();
-                    for (IAlgebraItem<T> item : currentFlow) {
+                    for (IAlgebraItem<T> item : flowState.values) {
                         flow.addAll(item.performAlgebraFlatTransfer(operationName));
                     }
-                    currentFlow = flow;
+                    flowState.values = flow;
                     return flow;
                 }
             };
@@ -444,7 +442,7 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
             throw exception;
         }
         if (mathTool.hasAlgebra(transferOperation.getAlgebraName())) {
-            return new AlgebraFlow<K>(this.mathTool, this.currentFlow, (Algebra<K>) mathTool.getAlgebra(transferOperation.getAlgebraName()), this.currentInvokes);
+            return new AlgebraFlow<K>(this.mathTool, this.flowState, (Algebra<K>) mathTool.getAlgebra(transferOperation.getAlgebraName()), this.currentInvokes);
 
         } else {
             AlgebraNotExistsException exception = new AlgebraNotExistsException("Cannot find algebra" + transferOperation.getAlgebraName() + " in math tool: " + mathTool.getName());
@@ -475,10 +473,10 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
                 @Override
                 public List<IAlgebraItem<K>> perform() {
                     List<IAlgebraItem<K>> flow = new ArrayList<IAlgebraItem<K>>();
-                    for (IAlgebraItem<T> item : currentFlow) {
+                    for (IAlgebraItem<T> item : flowState.values) {
                         flow.addAll(item.performUnsafeFlatOperation(operationName, element));
                     }
-                    currentFlow = flow;
+                    flowState.values = flow;
                     return flow;
                 }
             };
@@ -489,7 +487,7 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
             throw exception;
         }
         if (mathTool.hasAlgebra(customOperation.getAlgebraName())) {
-            return new AlgebraFlow<K>(this.mathTool, this.currentFlow, (Algebra<K>) mathTool.getAlgebra(customOperation.getAlgebraName()), this.currentInvokes);
+            return new AlgebraFlow<K>(this.mathTool, this.flowState, (Algebra<K>) mathTool.getAlgebra(customOperation.getAlgebraName()), this.currentInvokes);
 
         } else {
             AlgebraNotExistsException exception = new AlgebraNotExistsException("Cannot find algebra" + customOperation.getAlgebraName() + " in math tool: " + mathTool.getName());
@@ -520,10 +518,10 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
                 @Override
                 public List<IAlgebraItem<T>> perform() {
                     List<IAlgebraItem<T>> flow = new ArrayList<IAlgebraItem<T>>();
-                    for (IAlgebraItem<T> item : currentFlow) {
+                    for (IAlgebraItem<T> item : flowState.values) {
                         flow.add(item.performCustomMemberOperation(operationName, sElement));
                     }
-                    currentFlow = flow;
+                    flowState.values = flow;
                     return flow;
                 }
             };
@@ -535,7 +533,7 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
         }
 
         if (mathTool.hasAlgebra(customOperation.getAlgebraName())) {
-            return new AlgebraFlow<T>(this.mathTool, this.currentFlow, (Algebra<T>) mathTool.getAlgebra(customOperation.getAlgebraName()), this.currentInvokes);
+            return new AlgebraFlow<T>(this.mathTool, this.flowState, (Algebra<T>) mathTool.getAlgebra(customOperation.getAlgebraName()), this.currentInvokes);
 
         } else {
             AlgebraNotExistsException exception = new AlgebraNotExistsException("Cannot find algebra" + customOperation.getAlgebraName() + " in math tool: " + mathTool.getName());
@@ -566,10 +564,10 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
                 @Override
                 public List<IAlgebraItem<T>> perform() {
                     List<IAlgebraItem<T>> flow = new ArrayList<IAlgebraItem<T>>();
-                    for (IAlgebraItem<T> item : currentFlow) {
+                    for (IAlgebraItem<T> item : flowState.values) {
                         flow.addAll(item.performCustomMemberFlatOperation(operationName, sElement));
                     }
-                    currentFlow = flow;
+                    flowState.values = flow;
                     return flow;
                 }
             };
@@ -581,7 +579,7 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
         }
 
         if (mathTool.hasAlgebra(customOperation.getAlgebraName())) {
-            return new AlgebraFlow<T>(this.mathTool, this.currentFlow, (Algebra<T>) mathTool.getAlgebra(customOperation.getAlgebraName()), this.currentInvokes);
+            return new AlgebraFlow<T>(this.mathTool, this.flowState, (Algebra<T>) mathTool.getAlgebra(customOperation.getAlgebraName()), this.currentInvokes);
 
         } else {
             AlgebraNotExistsException exception = new AlgebraNotExistsException("Cannot find algebra" + customOperation.getAlgebraName() + " in math tool: " + mathTool.getName());
@@ -600,9 +598,9 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
     public List<String> collect() {
         List<String> result = new ArrayList<>();
         for (IFlowInvoke invoke : currentInvokes) {
-            currentFlow = invoke.perform();
+            flowState.values = invoke.perform();
         }
-        for (IAlgebraItem item : currentFlow) {
+        for (IAlgebraItem item : flowState.values) {
             result.add(item.perform().getResult().toString());
         }
         return result;
@@ -630,9 +628,9 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
     public <K> List<IAlgebraItem<K>> collectAlgebraItems() {
         List<IAlgebraItem<K>> result = new ArrayList<>();
         for (IFlowInvoke invoke : currentInvokes) {
-            currentFlow = invoke.perform();
+            flowState.values = invoke.perform();
         }
-        for (IAlgebraItem<K> item : currentFlow) {
+        for (IAlgebraItem<K> item : flowState.values) {
             result.add(item.perform());
         }
         return result;
@@ -676,7 +674,7 @@ public class AlgebraFlow<T> implements IAlgebraFlow<T> {
                 for (T item : part.getContent()) {
                     flow.add(algebra.buildAlgebraItem(item));
                 }
-                currentFlow = flow;
+                flowState.values = flow;
                 return flow;
             }
         };

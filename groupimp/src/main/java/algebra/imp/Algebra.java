@@ -112,7 +112,7 @@ public final class Algebra<T> implements Serializable {
      * @see ICustomMemberOperation
      */
     public boolean addCustomMemberOperation(String name, ICustomMemberOperation<T> operation) {
-        if (!customMemberOperations.containsKey(name)) {
+        if (customMemberOperations.containsKey(name)) {
             customMemberOperations.get(name).add(operation);
         }else {
             List<ICustomMemberOperation<T>> operations=new LinkedList<>();
@@ -131,7 +131,7 @@ public final class Algebra<T> implements Serializable {
      * @see ICustomMemberFlatOperation
      */
     public boolean addCustomMemberFlatOperation(String name, ICustomMemberFlatOperation<T> operation) {
-        if (!customMemberFlatOperations.containsKey(name)) {
+        if (customMemberFlatOperations.containsKey(name)) {
             customMemberFlatOperations.get(name).add(operation);
         }else {
             List<ICustomMemberFlatOperation<T>> operations=new LinkedList<>();
@@ -150,7 +150,7 @@ public final class Algebra<T> implements Serializable {
      * @see IUnsafeOperation
      */
     public boolean addUnsafeOperation(String name, IUnsafeOperation<T> operation) {
-        if (!unsafeOperations.containsKey(name)) {
+        if (unsafeOperations.containsKey(name)) {
             unsafeOperations.get(name).add(operation);
         }else {
             List<IUnsafeOperation<T>> operations=new LinkedList<>();
@@ -169,7 +169,7 @@ public final class Algebra<T> implements Serializable {
      * @see IUnsafeFlatOperation
      */
     public boolean addUnsafeOperationFlat(String name, IUnsafeFlatOperation<T> operation) {
-        if (!unsafeFlatOperations.containsKey(name)) {
+        if (unsafeFlatOperations.containsKey(name)) {
             unsafeFlatOperations.get(name).add(operation);
         }else {
             List<IUnsafeFlatOperation<T>> operations=new LinkedList<>();
