@@ -91,6 +91,8 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("each source hom set", " ".join(records["FiniteFunctor.is-faithful"]["required_invariants"]))
         self.assertIn("Every component", " ".join(records["FiniteNaturalTransformation.inverse"]["required_invariants"]))
         self.assertIn("Vertical composition", " ".join(records["FiniteNaturalTransformation.compose"]["required_invariants"]))
+        self.assertIn("Every validated equivalence", " ".join(records["FiniteEquivalence.inverse"]["required_invariants"]))
+        self.assertIn("full, faithful and essentially surjective", " ".join(records["FiniteEquivalence.from-functor"]["required_invariants"]))
 
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)

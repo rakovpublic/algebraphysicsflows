@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 723 |
-| DIRECTLY_SUPPORTED | 480 |
+| Scoped records | 737 |
+| DIRECTLY_SUPPORTED | 494 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 339 |
+| IMPLEMENTED | 353 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 407 |
+| MACHINE_TESTED | 421 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 316 | 316 | 0 | 0 | 0 | 316 | 0 | 0 |
+| Concrete MathTool algebras | 330 | 330 | 0 | 0 | 0 | 330 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -241,6 +241,20 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | FiniteDistribution(Z).support | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer distributions with exact nonnegative rational masses summing to one; native operation FiniteDistribution(Z).support |
 | FiniteDistribution(Z).support-size | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer distributions with exact nonnegative rational masses summing to one; native operation FiniteDistribution(Z).support-size |
 | FiniteDistribution(Z).variance | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer distributions with exact nonnegative rational masses summing to one; native operation FiniteDistribution(Z).variance |
+| FiniteEquivalence.backward | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite adjoint equivalences with explicit quasi-inverse, unit, counit and checked triangle identities; native operation FiniteEquivalence.backward |
+| FiniteEquivalence.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite adjoint equivalences with explicit quasi-inverse, unit, counit and checked triangle identities; native operation FiniteEquivalence.compose |
+| FiniteEquivalence.counit | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite adjoint equivalences with explicit quasi-inverse, unit, counit and checked triangle identities; native operation FiniteEquivalence.counit |
+| FiniteEquivalence.empty | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite adjoint equivalences with explicit quasi-inverse, unit, counit and checked triangle identities; native operation FiniteEquivalence.empty |
+| FiniteEquivalence.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite adjoint equivalences with explicit quasi-inverse, unit, counit and checked triangle identities; native operation FiniteEquivalence.equal |
+| FiniteEquivalence.forward | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite adjoint equivalences with explicit quasi-inverse, unit, counit and checked triangle identities; native operation FiniteEquivalence.forward |
+| FiniteEquivalence.from-functor | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite adjoint equivalences with explicit quasi-inverse, unit, counit and checked triangle identities; native operation FiniteEquivalence.from-functor |
+| FiniteEquivalence.identity-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite adjoint equivalences with explicit quasi-inverse, unit, counit and checked triangle identities; native operation FiniteEquivalence.identity-on |
+| FiniteEquivalence.inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite adjoint equivalences with explicit quasi-inverse, unit, counit and checked triangle identities; native operation FiniteEquivalence.inverse |
+| FiniteEquivalence.opposite | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite adjoint equivalences with explicit quasi-inverse, unit, counit and checked triangle identities; native operation FiniteEquivalence.opposite |
+| FiniteEquivalence.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite adjoint equivalences with explicit quasi-inverse, unit, counit and checked triangle identities; native operation FiniteEquivalence.source |
+| FiniteEquivalence.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite adjoint equivalences with explicit quasi-inverse, unit, counit and checked triangle identities; native operation FiniteEquivalence.target |
+| FiniteEquivalence.unit | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite adjoint equivalences with explicit quasi-inverse, unit, counit and checked triangle identities; native operation FiniteEquivalence.unit |
+| FiniteEquivalenceAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite adjoint equivalences with explicit quasi-inverse, unit, counit and checked triangle identities |
 | FiniteFunction(Z,Z).apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).apply |
 | FiniteFunction(Z,Z).codomain | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).codomain |
 | FiniteFunction(Z,Z).compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).compose |

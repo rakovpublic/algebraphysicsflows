@@ -30,6 +30,7 @@ OWNERS = {
     "FiniteCategoryAlgebra": ("FiniteCategory", "Finite categories with integer object/arrow labels and exhaustively checked composition tables"),
     "FiniteFunctorAlgebra": ("FiniteFunctor", "Covariant functors between validated finite category tables with total object and arrow maps"),
     "FiniteNaturalTransformationAlgebra": ("FiniteNaturalTransformation", "Natural transformations between parallel finite functors with every naturality square checked"),
+    "FiniteEquivalenceAlgebra": ("FiniteEquivalence", "Finite adjoint equivalences with explicit quasi-inverse, unit, counit and checked triangle identities"),
     "SymmetricGroup": ("S3", "Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree"),
 }
 INTERFACES = {
@@ -60,6 +61,7 @@ EXTRA_TESTS = {
     "FiniteCategoryAlgebra": "NativeCategoryTest",
     "FiniteFunctorAlgebra": "NativeFunctorTest",
     "FiniteNaturalTransformationAlgebra": "NativeNaturalTransformationTest",
+    "FiniteEquivalenceAlgebra": "NativeEquivalenceTest",
     "SymmetricGroup": "NativePermutationTest",
     "ResidueRing": "NativeResidueRingTest",
 }
@@ -99,6 +101,20 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "FiniteEquivalenceAlgebra": {
+        "compose": "Apply the right operand first; labelled middle categories must agree. Compose the supplied quasi-inverses and witnesses without choosing new representatives.",
+        "inverse": "Every validated equivalence can be reversed by swapping the functors and using the inverse counit and inverse unit as witnesses.",
+        "opposite": "Reverse both categories and invert the opposite unit and counit to retain their required directions.",
+        "source": "Return the source category of the forward functor.",
+        "target": "Return the target category of the forward functor.",
+        "forward": "Return the chosen forward functor.",
+        "backward": "Return the chosen quasi-inverse functor, which need not be a strict inverse.",
+        "unit": "Return the checked natural isomorphism Id_C -> G.F.",
+        "counit": "Return the checked natural isomorphism F.G -> Id_D.",
+        "equal": "Equality includes both functors and both chosen natural isomorphisms; equivalent categories alone do not determine equal witnesses.",
+        "identity-on": "Construct the identity functor with identity unit and counit on the supplied category.",
+        "from-functor": "The functor must be full, faithful and essentially surjective. Choose representatives deterministically, preferring exact image objects, then construct and validate both triangle identities.",
+    },
     "FiniteNaturalTransformationAlgebra": {
         "compose": "Vertical composition beta.compose(alpha) applies alpha then beta; their middle functors must be equal.",
         "inverse": "Every component must be an isomorphism in the codomain category; return the reversed natural transformation.",
@@ -289,7 +305,7 @@ def record(identifier, owner, concept, paths, operation=None):
         value["references"].append("https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html")
     if owner == "FiniteFunctorAlgebra":
         value["required_invariants"].append("Construction checks total maps, endpoint typing, identity preservation and every source composition.")
-        value["known_limitations"].append("Both categories use the existing 128-arrow/object table cap. Only finite covariant functors are represented; equivalence is a finite decision criterion without an explicit quasi-inverse witness.")
+        value["known_limitations"].append("Both categories use the existing 128-arrow/object table cap. Only finite covariant functors are represented; is-equivalence is a decision criterion. Explicit witnesses are constructed separately by FiniteEquivalenceAlgebra.")
         value["references"] += ["https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Functor/Basic.html",
                                 "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Equivalence.html"]
     if owner == "FiniteNaturalTransformationAlgebra":
@@ -297,6 +313,10 @@ def record(identifier, owner, concept, paths, operation=None):
         value["known_limitations"].append("Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented.")
         value["references"] += ["https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatTrans.html",
                                 "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatIso.html"]
+    if owner == "FiniteEquivalenceAlgebra":
+        value["required_invariants"].append("Oppositely directed functors have an invertible unit Id_C -> G.F and counit F.G -> Id_D; both triangle identities are checked at every object.")
+        value["known_limitations"].append("Finite category tables retain the 128-arrow/object cap. These are chosen adjoint-equivalence witnesses; composition with the reversed witness need not be strictly equal to identity witness data. General adjunctions and infinite categories are not implemented by this carrier.")
+        value["references"].append("https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Equivalence.html")
     if owner == "RationalFunctionField":
         value["known_limitations"].append("Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented.")
         value["references"].append("https://docs.sympy.org/latest/modules/polys/domainsref.html")
@@ -328,6 +348,8 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("FiniteEquivalence", "Validated finite adjoint equivalences", "mathematics.structures.FiniteEquivalence",
+         ["Oppositely directed finite functors", "Invertible typed unit and counit", "Both triangle identities checked at every object"], ["FiniteCategory", "FiniteFunctor", "FiniteNaturalTransformation"]),
         ("FiniteNaturalTransformation", "Validated finite natural transformations", "mathematics.structures.FiniteNaturalTransformation",
          ["Parallel finite functors", "Exactly one typed component for every source object", "Naturality checked for every source arrow"], ["FiniteFunctor", "FiniteCategory", "Z", "FiniteFunction(Z,Z)"]),
         ("FiniteFunctor", "Validated finite functors", "mathematics.structures.FiniteFunctor",

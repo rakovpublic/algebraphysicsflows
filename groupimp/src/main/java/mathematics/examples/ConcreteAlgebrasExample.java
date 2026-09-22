@@ -9,6 +9,7 @@ import mathematics.foundations.FiniteSet;
 import mathematics.structures.FiniteCategory;
 import mathematics.structures.FiniteFunctor;
 import mathematics.structures.FiniteNaturalTransformation;
+import mathematics.structures.FiniteEquivalence;
 import mathematics.linear.RationalVector;
 import mathematics.numbers.Rational;
 import java.math.BigInteger;
@@ -49,6 +50,12 @@ public final class ConcreteAlgebrasExample {
                 Collections.singletonList(FiniteCategory.discrete(FiniteSet.of(BigInteger.TEN))))
                 .<FiniteFunctor>performAlgebraTransfer("FiniteFunctor.identity-on")
                 .<FiniteNaturalTransformation>performAlgebraTransfer("FiniteNaturalTransformation.identity-on")
+                .performLeftProjectionOperation("component",BigInteger.TEN).collect());
+        System.out.println("Constructed equivalence unit component: "+math.flow(math.categories,
+                Collections.singletonList(FiniteCategory.discrete(FiniteSet.of(BigInteger.TEN))))
+                .<FiniteFunctor>performAlgebraTransfer("FiniteFunctor.identity-on")
+                .<FiniteEquivalence>performAlgebraTransfer("FiniteEquivalence.from-functor")
+                .<FiniteNaturalTransformation>performAlgebraTransfer("unit")
                 .performLeftProjectionOperation("component",BigInteger.TEN).collect());
     }
     /** Stable manifest used to keep the human/JSON coverage registry aligned with real registrations. */
