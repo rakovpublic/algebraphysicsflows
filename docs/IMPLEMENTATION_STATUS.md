@@ -4,7 +4,7 @@ Checkpoint: 2026-09-22. This is a scoped implementation and initial survey of th
 
 ## Native execution delivered
 
-ConcreteMathematics installs **234 operations from 18 algebra builders** in the original MathTool. Builders are in algebra/concrete; operation implementations are in operations/simple and operations/flat. Unit, rational integration bounds, polynomial iteration inputs and integer relation pairs are additional supporting carriers.
+ConcreteMathematics installs **257 operations from 19 algebra builders** in the original MathTool. Builders are in algebra/concrete; operation implementations are in operations/simple and operations/flat. Unit, rational integration bounds, polynomial iteration inputs, integer relation/category label pairs and finite-function boundary pairs are additional supporting carriers.
 
 Delivered families: Boolean, N, Z, Q, Q(i), prime fields, rational vectors/square matrices, Q[x], Q(x), S3, finite integer sets/relations/functions, rational samples and finite exact probability measures on integers. Operations include exact arithmetic, embeddings, scalar actions in both orders, dot products, determinant/rank/nonsingular solve, derivatives/integrals, finite-set operations, moments/covariances and conditioning.
 
@@ -25,18 +25,18 @@ Scalar and flat unary execution are connected to Algebra, IAlgebraItem and Algeb
 | 8 Probability/statistics | Native finite distributions, events/conditioning, moments/covariances | Continuous measures, estimators/inference, broader stochastic models |
 | 9 Geometry/topology | Native finite simplicial algebra, skeletons, Euler characteristic and F2 Betti numbers | Manifolds, forms, integral/persistent homology |
 | 10 Advanced algebra | Scoped catalog and extension analysis | Representation/Galois/homological algebra implementations |
-| 11 Structural mathematics | Category/dependent-domain analysis and RFCs | Executable categories and indexed/evidence structures |
+| 11 Structural mathematics | Native finite categories with checked tables, opposite/hom/inverse operations, initial/terminal objects; dependent-domain RFCs | Functors, natural transformations, general diagrams and indexed/evidence structures |
 | 12 Applied/physics | Native finite integer-set polynomial optimization and exact polynomial iteration/orbits | General optimization, control/numerical contracts, physics/units |
 
 Partial progress covers only the listed scope. Catalog entries do not imply algorithms. Utility/prototype tests are separate from native registrations.
 
 ## Verification
 
-The Java suite has **101 tests**, including independent expected results for every native registration, partial-operation boundaries, serialization and repeated local-flow collection. A differential test checks **104 cases** generated independently with Python Fraction arithmetic and a permutation-expansion determinant. The suite also checks all 64 four-vertex undirected graphs and all 512 three-vertex directed graphs against independent invariants/reachability. Rational law samples and exhaustive small-prime arithmetic are empirical evidence, not general formal proofs.
+The Java suite has **107 tests**, including independent expected results for every native registration, partial-operation boundaries, serialization and repeated local-flow collection. A differential test checks **104 cases** generated independently with Python Fraction arithmetic and a permutation-expansion determinant. The suite also checks all 64 four-vertex undirected graphs and all 512 three-vertex directed graphs against independent invariants/reachability, all three-point endomaps, and all unital three-arrow multiplication tables. Rational law samples and exhaustive finite arithmetic are empirical evidence, not general formal proofs.
 
 Python checks validate source/test paths, required fields, evidence claims, extension links, requested topic inventory and manifest agreement. Reports must be fresh. [Maintenance instructions](ADDING_MATHEMATICS.md) list commands.
 
-The initial registry has 659 scoped records, covering all 322 distinct requested bullet concepts in specification sections 10-30, 30 domain descriptors and nine extension proposals. These are survey counts, not a percentage of all mathematics. All records remain human-unreviewed and formally unverified.
+The initial registry has 683 scoped records, covering all 322 distinct requested bullet concepts in specification sections 10-30, 32 domain descriptors and nine extension proposals. These are survey counts, not a percentage of all mathematics. All records remain human-unreviewed and formally unverified.
 
 ## Compatibility and limits
 

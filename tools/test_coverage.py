@@ -85,6 +85,8 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("empty list", " ".join(records["Z/6Z.solve-multiply"]["required_invariants"]))
         self.assertIn("bijection", " ".join(records["FiniteFunction(Z,Z).inverse"]["required_invariants"]))
         self.assertIn("f(g(x))", " ".join(records["FiniteFunction(Z,Z).compose"]["required_invariants"]))
+        self.assertIn("path order", " ".join(records["FiniteCategory.compose"]["required_invariants"]))
+        self.assertIn("arrow label", " ".join(records["FiniteCategory.source"]["required_invariants"]))
 
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)

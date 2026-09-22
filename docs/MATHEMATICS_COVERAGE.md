@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 659 |
-| DIRECTLY_SUPPORTED | 416 |
+| Scoped records | 683 |
+| DIRECTLY_SUPPORTED | 440 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 275 |
+| IMPLEMENTED | 299 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 343 |
+| MACHINE_TESTED | 367 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 252 | 252 | 0 | 0 | 0 | 252 | 0 | 0 |
+| Concrete MathTool algebras | 276 | 276 | 0 | 0 | 0 | 276 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -195,6 +195,30 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Boolean.xor | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.xor |
 | Boolean.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.zero |
 | BooleanAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations |
+| FiniteCategory.arrow-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.arrow-count |
+| FiniteCategory.arrows | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.arrows |
+| FiniteCategory.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.compose |
+| FiniteCategory.discrete-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.discrete-on |
+| FiniteCategory.empty | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.empty |
+| FiniteCategory.endomorphisms | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.endomorphisms |
+| FiniteCategory.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.equal |
+| FiniteCategory.from-preorder | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.from-preorder |
+| FiniteCategory.hom | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.hom |
+| FiniteCategory.identity | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.identity |
+| FiniteCategory.initial-objects | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.initial-objects |
+| FiniteCategory.inverse-of | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.inverse-of |
+| FiniteCategory.is-groupoid | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.is-groupoid |
+| FiniteCategory.is-isomorphism | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.is-isomorphism |
+| FiniteCategory.is-thin | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.is-thin |
+| FiniteCategory.isomorphisms | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.isomorphisms |
+| FiniteCategory.object-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.object-count |
+| FiniteCategory.objects | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.objects |
+| FiniteCategory.opposite | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.opposite |
+| FiniteCategory.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.source |
+| FiniteCategory.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.target |
+| FiniteCategory.terminal-objects | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.terminal-objects |
+| FiniteCategory.underlying-relation | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.underlying-relation |
+| FiniteCategoryAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables |
 | FiniteComplex.betti-number | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.betti-number |
 | FiniteComplex.betti-numbers | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.betti-numbers |
 | FiniteComplex.dimension | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.dimension |

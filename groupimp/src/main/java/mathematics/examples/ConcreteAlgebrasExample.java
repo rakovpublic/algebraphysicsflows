@@ -5,6 +5,8 @@ import algebra.concrete.ConcreteAlgebra;
 import algebra.concrete.OperationRegistration;
 import mathematics.calculus.Polynomial;
 import mathematics.foundations.Pair;
+import mathematics.foundations.FiniteSet;
+import mathematics.structures.FiniteCategory;
 import mathematics.linear.RationalVector;
 import mathematics.numbers.Rational;
 import java.math.BigInteger;
@@ -33,6 +35,14 @@ public final class ConcreteAlgebrasExample {
                 .<Rational,Pair<Rational,Rational>>performAlgebraUnsafe("integrate",new Pair<>(Rational.ZERO,Rational.ONE)).collect());
         System.out.println("F5: 3 / 2 = "+math.primeFields.get(0).algebra().buildAlgebraItem(math.primeFields.get(0).member(3))
                 .performOperation("divide",math.primeFields.get(0).member(2)).perform().getResult());
+        System.out.println("Solutions of 2*x=4 modulo 6: "+math.flow(math.residues,Collections.singletonList(math.residues.member(2)))
+                .performFlatOperation("solve-multiply",math.residues.member(4)).<BigInteger>performAlgebraTransfer("lift").collect());
+        System.out.println("Finite identity evaluated at 2: "+math.flow(math.integerSets,Collections.singletonList(FiniteSet.of(BigInteger.ONE,BigInteger.valueOf(2))))
+                .<mathematics.foundations.FiniteFunction<BigInteger,BigInteger>>performAlgebraTransfer("FiniteFunction(Z,Z).identity-on")
+                .performLeftProjectionOperation("apply",BigInteger.valueOf(2)).collect());
+        System.out.println("Initial objects of a one-object discrete category: "+math.flow(math.integerSets,Collections.singletonList(FiniteSet.of(BigInteger.TEN)))
+                .<FiniteCategory>performAlgebraTransfer("FiniteCategory.discrete-on")
+                .<BigInteger>performFlatAlgebraTransfer("initial-objects").collect());
     }
     /** Stable manifest used to keep the human/JSON coverage registry aligned with real registrations. */
     public static String catalogManifest(ConcreteMathematics math) {

@@ -25095,6 +25095,69 @@
       "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
     },
     {
+      "id": "concrete-algebra.FiniteCategoryAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCategoryAlgebra",
+      "concept": "FiniteCategoryAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "FiniteCategory",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite categories with integer object/arrow labels and exhaustively checked composition tables",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Construction checks every composable pair and associativity triple, both identity laws and source/target typing."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCategoryTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. This implements labelled finite categories, not functors, arbitrary infinite categories or a proof-assistant kernel."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
       "id": "concrete-algebra.FiniteIntegerFunctionAlgebra",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "FiniteIntegerFunctionAlgebra",
@@ -41305,6 +41368,1614 @@
       "legacy_operation_interface": "ITransferOperation"
     },
     {
+      "id": "concrete-operation.FiniteCategory.opposite",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCategoryAlgebra",
+      "concept": "FiniteCategory.opposite",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCategory",
+      "domain_B": null,
+      "domain_C": "FiniteCategory",
+      "operation_signature": "FiniteCategory -> FiniteCategory",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.opposite",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Reverse every arrow and composition order, preserving labels and identities.",
+        "Construction checks every composable pair and associativity triple, both identity laws and source/target typing."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCategoryTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. This implements labelled finite categories, not functors, arbitrary infinite categories or a proof-assistant kernel."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCategory.opposite",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "opposite",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCategory.objects",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCategoryAlgebra",
+      "concept": "FiniteCategory.objects",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCategory",
+      "domain_B": null,
+      "domain_C": "FiniteSet(Z)",
+      "operation_signature": "FiniteCategory -> FiniteSet(Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.objects",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Construction checks every composable pair and associativity triple, both identity laws and source/target typing."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCategoryTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. This implements labelled finite categories, not functors, arbitrary infinite categories or a proof-assistant kernel."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCategory.objects",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "objects",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCategory.arrows",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCategoryAlgebra",
+      "concept": "FiniteCategory.arrows",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCategory",
+      "domain_B": null,
+      "domain_C": "FiniteSet(Z)",
+      "operation_signature": "FiniteCategory -> FiniteSet(Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.arrows",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Construction checks every composable pair and associativity triple, both identity laws and source/target typing."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCategoryTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. This implements labelled finite categories, not functors, arbitrary infinite categories or a proof-assistant kernel."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCategory.arrows",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "arrows",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCategory.object-count",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCategoryAlgebra",
+      "concept": "FiniteCategory.object-count",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCategory",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "FiniteCategory -> N",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.object-count",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Construction checks every composable pair and associativity triple, both identity laws and source/target typing."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCategoryTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. This implements labelled finite categories, not functors, arbitrary infinite categories or a proof-assistant kernel."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCategory.object-count",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "object-count",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCategory.arrow-count",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCategoryAlgebra",
+      "concept": "FiniteCategory.arrow-count",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCategory",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "FiniteCategory -> N",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.arrow-count",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Construction checks every composable pair and associativity triple, both identity laws and source/target typing."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCategoryTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. This implements labelled finite categories, not functors, arbitrary infinite categories or a proof-assistant kernel."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCategory.arrow-count",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "arrow-count",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCategory.is-groupoid",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCategoryAlgebra",
+      "concept": "FiniteCategory.is-groupoid",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCategory",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "FiniteCategory -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.is-groupoid",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Construction checks every composable pair and associativity triple, both identity laws and source/target typing."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCategoryTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. This implements labelled finite categories, not functors, arbitrary infinite categories or a proof-assistant kernel."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCategory.is-groupoid",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "is-groupoid",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCategory.is-thin",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCategoryAlgebra",
+      "concept": "FiniteCategory.is-thin",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCategory",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "FiniteCategory -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.is-thin",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Construction checks every composable pair and associativity triple, both identity laws and source/target typing."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCategoryTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. This implements labelled finite categories, not functors, arbitrary infinite categories or a proof-assistant kernel."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCategory.is-thin",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "is-thin",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCategory.source",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCategoryAlgebra",
+      "concept": "FiniteCategory.source",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCategory",
+      "domain_B": "Z",
+      "domain_C": "Z",
+      "operation_signature": "FiniteCategory x Z -> Z",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.source",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The argument is an existing arrow label; return its source object label.",
+        "Construction checks every composable pair and associativity triple, both identity laws and source/target typing."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCategoryTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. This implements labelled finite categories, not functors, arbitrary infinite categories or a proof-assistant kernel."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteCategory.source",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "source",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCategory.target",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCategoryAlgebra",
+      "concept": "FiniteCategory.target",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCategory",
+      "domain_B": "Z",
+      "domain_C": "Z",
+      "operation_signature": "FiniteCategory x Z -> Z",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.target",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The argument is an existing arrow label; return its target object label.",
+        "Construction checks every composable pair and associativity triple, both identity laws and source/target typing."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCategoryTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. This implements labelled finite categories, not functors, arbitrary infinite categories or a proof-assistant kernel."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteCategory.target",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "target",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCategory.identity",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCategoryAlgebra",
+      "concept": "FiniteCategory.identity",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCategory",
+      "domain_B": "Z",
+      "domain_C": "Z",
+      "operation_signature": "FiniteCategory x Z -> Z",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.identity",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The argument is an existing object label; return its designated identity arrow label.",
+        "Construction checks every composable pair and associativity triple, both identity laws and source/target typing."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCategoryTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. This implements labelled finite categories, not functors, arbitrary infinite categories or a proof-assistant kernel."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteCategory.identity",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "identity",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCategory.compose",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCategoryAlgebra",
+      "concept": "FiniteCategory.compose",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCategory",
+      "domain_B": "ZxZ.category",
+      "domain_C": "Z",
+      "operation_signature": "FiniteCategory x ZxZ.category -> Z",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.compose",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The pair (f,g) is in path order: first f, then g; both arrows exist and target(f)=source(g).",
+        "Construction checks every composable pair and associativity triple, both identity laws and source/target typing."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCategoryTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. This implements labelled finite categories, not functors, arbitrary infinite categories or a proof-assistant kernel."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteCategory.compose",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "compose",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCategory.hom",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCategoryAlgebra",
+      "concept": "FiniteCategory.hom",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCategory",
+      "domain_B": "ZxZ.category",
+      "domain_C": "Z",
+      "operation_signature": "FiniteCategory x ZxZ.category -> List(Z)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.hom",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Both object labels exist; emit all arrows between them in ascending label order, possibly none.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Construction checks every composable pair and associativity triple, both identity laws and source/target typing."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "groupimp/src/main/java/operations/flat/MixedFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCategoryTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. This implements labelled finite categories, not functors, arbitrary infinite categories or a proof-assistant kernel."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteCategory.hom",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "hom",
+      "legacy_operation_interface": "IUnsafeFlatOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCategory.inverse-of",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCategoryAlgebra",
+      "concept": "FiniteCategory.inverse-of",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCategory",
+      "domain_B": "Z",
+      "domain_C": "Z",
+      "operation_signature": "FiniteCategory x Z -> List(Z)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.inverse-of",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The arrow label exists; emit its unique two-sided inverse if it is an isomorphism, otherwise an empty list.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Construction checks every composable pair and associativity triple, both identity laws and source/target typing."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "groupimp/src/main/java/operations/flat/SecondResultFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCategoryTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. This implements labelled finite categories, not functors, arbitrary infinite categories or a proof-assistant kernel."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteCategory.inverse-of",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "inverse-of",
+      "legacy_operation_interface": "ILeftProjectionFlatOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCategory.is-isomorphism",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCategoryAlgebra",
+      "concept": "FiniteCategory.is-isomorphism",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCategory",
+      "domain_B": "Z",
+      "domain_C": "Boolean",
+      "operation_signature": "FiniteCategory x Z -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.is-isomorphism",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The arrow label exists; a two-sided inverse must satisfy both identity equations.",
+        "Construction checks every composable pair and associativity triple, both identity laws and source/target typing."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCategoryTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. This implements labelled finite categories, not functors, arbitrary infinite categories or a proof-assistant kernel."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteCategory.is-isomorphism",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "is-isomorphism",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCategory.endomorphisms",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCategoryAlgebra",
+      "concept": "FiniteCategory.endomorphisms",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCategory",
+      "domain_B": "Z",
+      "domain_C": "Z",
+      "operation_signature": "FiniteCategory x Z -> List(Z)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.endomorphisms",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The object label exists; emit all arrows from that object to itself.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Construction checks every composable pair and associativity triple, both identity laws and source/target typing."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "groupimp/src/main/java/operations/flat/SecondResultFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCategoryTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. This implements labelled finite categories, not functors, arbitrary infinite categories or a proof-assistant kernel."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteCategory.endomorphisms",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "endomorphisms",
+      "legacy_operation_interface": "ILeftProjectionFlatOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCategory.isomorphisms",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCategoryAlgebra",
+      "concept": "FiniteCategory.isomorphisms",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCategory",
+      "domain_B": null,
+      "domain_C": "Z",
+      "operation_signature": "FiniteCategory -> List(Z)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.isomorphisms",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Construction checks every composable pair and associativity triple, both identity laws and source/target typing."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCategoryTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. This implements labelled finite categories, not functors, arbitrary infinite categories or a proof-assistant kernel."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCategory.isomorphisms",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "isomorphisms",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCategory.equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCategoryAlgebra",
+      "concept": "FiniteCategory.equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCategory",
+      "domain_B": "FiniteCategory",
+      "domain_C": "Boolean",
+      "operation_signature": "FiniteCategory x FiniteCategory -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Compare labelled objects, arrows, identities and composition exactly; this does not decide categorical equivalence.",
+        "Construction checks every composable pair and associativity triple, both identity laws and source/target typing."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCategoryTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. This implements labelled finite categories, not functors, arbitrary infinite categories or a proof-assistant kernel."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCategory.equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCategory.discrete-on",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCategoryAlgebra",
+      "concept": "FiniteCategory.discrete-on",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteSet(Z)",
+      "domain_B": null,
+      "domain_C": "FiniteCategory",
+      "operation_signature": "FiniteSet(Z) -> FiniteCategory",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.discrete-on",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Each supplied object label is also its sole identity arrow label; there are no other arrows.",
+        "Construction checks every composable pair and associativity triple, both identity laws and source/target typing."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCategoryTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. This implements labelled finite categories, not functors, arbitrary infinite categories or a proof-assistant kernel."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCategory.discrete-on",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "FiniteCategory.discrete-on",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCategory.from-preorder",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCategoryAlgebra",
+      "concept": "FiniteCategory.from-preorder",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteRelation(Z,Z)",
+      "domain_B": null,
+      "domain_C": "FiniteCategory",
+      "operation_signature": "FiniteRelation(Z,Z) -> FiniteCategory",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.from-preorder",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The finite relation is reflexive on its support and transitive; arrows are lexicographically ordered pairs labelled from zero.",
+        "Construction checks every composable pair and associativity triple, both identity laws and source/target typing."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCategoryTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. This implements labelled finite categories, not functors, arbitrary infinite categories or a proof-assistant kernel."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteCategory.from-preorder",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "FiniteCategory.from-preorder",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCategory.underlying-relation",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCategoryAlgebra",
+      "concept": "FiniteCategory.underlying-relation",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCategory",
+      "domain_B": null,
+      "domain_C": "FiniteRelation(Z,Z)",
+      "operation_signature": "FiniteCategory -> FiniteRelation(Z,Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.underlying-relation",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "A pair of objects is related exactly when a morphism exists; parallel arrows collapse to one pair.",
+        "Construction checks every composable pair and associativity triple, both identity laws and source/target typing."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCategoryTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. This implements labelled finite categories, not functors, arbitrary infinite categories or a proof-assistant kernel."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCategory.underlying-relation",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "underlying-relation",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCategory.initial-objects",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCategoryAlgebra",
+      "concept": "FiniteCategory.initial-objects",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCategory",
+      "domain_B": null,
+      "domain_C": "Z",
+      "operation_signature": "FiniteCategory -> List(Z)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.initial-objects",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit each object with exactly one morphism to every object, including itself.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Construction checks every composable pair and associativity triple, both identity laws and source/target typing."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCategoryTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. This implements labelled finite categories, not functors, arbitrary infinite categories or a proof-assistant kernel."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCategory.initial-objects",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "initial-objects",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCategory.terminal-objects",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCategoryAlgebra",
+      "concept": "FiniteCategory.terminal-objects",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCategory",
+      "domain_B": null,
+      "domain_C": "Z",
+      "operation_signature": "FiniteCategory -> List(Z)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.terminal-objects",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit each object with exactly one morphism from every object, including itself.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Construction checks every composable pair and associativity triple, both identity laws and source/target typing."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCategoryTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. This implements labelled finite categories, not functors, arbitrary infinite categories or a proof-assistant kernel."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCategory.terminal-objects",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "terminal-objects",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCategory.empty",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCategoryAlgebra",
+      "concept": "FiniteCategory.empty",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "FiniteCategory",
+      "operation_signature": "Unit -> FiniteCategory",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.empty",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Construction checks every composable pair and associativity triple, both identity laws and source/target typing."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCategoryTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. This implements labelled finite categories, not functors, arbitrary infinite categories or a proof-assistant kernel."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCategoryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCategory.empty",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "FiniteCategory.empty",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
       "id": "concrete-operation.Z/5Z.add",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "PrimeField",
@@ -41904,6 +43575,8 @@
         "Z"
       ],
       "supported_operations": [
+        "FiniteCategory.arrow-count",
+        "FiniteCategory.object-count",
         "FiniteComplex.betti-number",
         "FiniteComplex.betti-numbers",
         "FiniteComplex.simplex-count",
@@ -41964,6 +43637,17 @@
         "Q"
       ],
       "supported_operations": [
+        "FiniteCategory.compose",
+        "FiniteCategory.endomorphisms",
+        "FiniteCategory.hom",
+        "FiniteCategory.identity",
+        "FiniteCategory.initial-objects",
+        "FiniteCategory.inverse-of",
+        "FiniteCategory.is-isomorphism",
+        "FiniteCategory.isomorphisms",
+        "FiniteCategory.source",
+        "FiniteCategory.target",
+        "FiniteCategory.terminal-objects",
         "FiniteComplex.dimension",
         "FiniteComplex.euler-characteristic",
         "FiniteDistribution(Z).outcomes",
@@ -42284,6 +43968,10 @@
         "Boolean.or",
         "Boolean.xor",
         "Boolean.zero",
+        "FiniteCategory.equal",
+        "FiniteCategory.is-groupoid",
+        "FiniteCategory.is-isomorphism",
+        "FiniteCategory.is-thin",
         "FiniteComplex.equal",
         "FiniteComplex.subcomplex",
         "FiniteDistribution(Z).equal",
@@ -42340,6 +44028,7 @@
       "supported_operations": [
         "Boolean.one",
         "Boolean.zero",
+        "FiniteCategory.empty",
         "FiniteComplex.empty",
         "FiniteFunction(Z,Z).empty",
         "FiniteRelation(Z,Z).empty",
@@ -42808,6 +44497,9 @@
         "Z"
       ],
       "supported_operations": [
+        "FiniteCategory.arrows",
+        "FiniteCategory.discrete-on",
+        "FiniteCategory.objects",
         "FiniteDistribution(Z).condition",
         "FiniteDistribution(Z).event-probability",
         "FiniteDistribution(Z).support",
@@ -43004,6 +44696,8 @@
         "FiniteSet(Z)"
       ],
       "supported_operations": [
+        "FiniteCategory.from-preorder",
+        "FiniteCategory.underlying-relation",
         "FiniteFunction(Z,Z).from-relation",
         "FiniteFunction(Z,Z).graph",
         "FiniteRelation(Z,Z).cardinality",
@@ -43301,6 +44995,103 @@
       "invariants": [
         "Both coordinates are finite integer sets",
         "First is domain and second is codomain"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-22"
+      }
+    },
+    {
+      "id": "FiniteCategory",
+      "name": "Validated finite category tables",
+      "description": "Validated finite category tables",
+      "member_representation": "mathematics.structures.FiniteCategory",
+      "membership_rules": [
+        "Integer object and arrow labels",
+        "Complete typed composition and designated identities",
+        "Both identity laws and associativity checked exhaustively within the resource cap"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "Z",
+        "FiniteSet(Z)",
+        "FiniteRelation(Z,Z)"
+      ],
+      "supported_operations": [
+        "FiniteCategory.arrow-count",
+        "FiniteCategory.arrows",
+        "FiniteCategory.compose",
+        "FiniteCategory.discrete-on",
+        "FiniteCategory.empty",
+        "FiniteCategory.endomorphisms",
+        "FiniteCategory.equal",
+        "FiniteCategory.from-preorder",
+        "FiniteCategory.hom",
+        "FiniteCategory.identity",
+        "FiniteCategory.initial-objects",
+        "FiniteCategory.inverse-of",
+        "FiniteCategory.is-groupoid",
+        "FiniteCategory.is-isomorphism",
+        "FiniteCategory.is-thin",
+        "FiniteCategory.isomorphisms",
+        "FiniteCategory.object-count",
+        "FiniteCategory.objects",
+        "FiniteCategory.opposite",
+        "FiniteCategory.source",
+        "FiniteCategory.target",
+        "FiniteCategory.terminal-objects",
+        "FiniteCategory.underlying-relation"
+      ],
+      "invariants": [
+        "Integer object and arrow labels",
+        "Complete typed composition and designated identities",
+        "Both identity laws and associativity checked exhaustively within the resource cap"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-22"
+      }
+    },
+    {
+      "id": "ZxZ.category",
+      "name": "Ordered category label pair",
+      "description": "Ordered category label pair",
+      "member_representation": "mathematics.foundations.Pair<BigInteger,BigInteger>",
+      "membership_rules": [
+        "Two integer labels",
+        "Each operation checks object or arrow membership in its category"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "Z"
+      ],
+      "supported_operations": [
+        "FiniteCategory.compose",
+        "FiniteCategory.hom"
+      ],
+      "invariants": [
+        "Two integer labels",
+        "Each operation checks object or arrow membership in its category"
       ],
       "references": [
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"

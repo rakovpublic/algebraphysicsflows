@@ -27,6 +27,7 @@ OWNERS = {
     "FiniteSimplicialAlgebra": ("FiniteComplex", "Finite abstract simplicial complexes with integer labels and unreduced homology over F2"),
     "FiniteIntegerRelationAlgebra": ("FiniteRelation(Z,Z)", "Finite-support relations on the actual registered integer Algebra"),
     "FiniteIntegerFunctionAlgebra": ("FiniteFunction(Z,Z)", "Total maps between explicit finite integer sets, preserving declared domain and codomain"),
+    "FiniteCategoryAlgebra": ("FiniteCategory", "Finite categories with integer object/arrow labels and exhaustively checked composition tables"),
     "SymmetricGroup": ("S3", "Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree"),
 }
 INTERFACES = {
@@ -54,6 +55,7 @@ EXTRA_TESTS = {
     "FiniteSimplicialAlgebra": "NativeTopologyTest",
     "FiniteIntegerRelationAlgebra": "NativeRelationTest",
     "FiniteIntegerFunctionAlgebra": "NativeFiniteFunctionTest",
+    "FiniteCategoryAlgebra": "NativeCategoryTest",
     "SymmetricGroup": "NativePermutationTest",
     "ResidueRing": "NativeResidueRingTest",
 }
@@ -93,6 +95,23 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "FiniteCategoryAlgebra": {
+        "compose": "The pair (f,g) is in path order: first f, then g; both arrows exist and target(f)=source(g).",
+        "source": "The argument is an existing arrow label; return its source object label.",
+        "target": "The argument is an existing arrow label; return its target object label.",
+        "identity": "The argument is an existing object label; return its designated identity arrow label.",
+        "hom": "Both object labels exist; emit all arrows between them in ascending label order, possibly none.",
+        "inverse-of": "The arrow label exists; emit its unique two-sided inverse if it is an isomorphism, otherwise an empty list.",
+        "is-isomorphism": "The arrow label exists; a two-sided inverse must satisfy both identity equations.",
+        "endomorphisms": "The object label exists; emit all arrows from that object to itself.",
+        "equal": "Compare labelled objects, arrows, identities and composition exactly; this does not decide categorical equivalence.",
+        "from-preorder": "The finite relation is reflexive on its support and transitive; arrows are lexicographically ordered pairs labelled from zero.",
+        "underlying-relation": "A pair of objects is related exactly when a morphism exists; parallel arrows collapse to one pair.",
+        "initial-objects": "Emit each object with exactly one morphism to every object, including itself.",
+        "terminal-objects": "Emit each object with exactly one morphism from every object, including itself.",
+        "discrete-on": "Each supplied object label is also its sole identity arrow label; there are no other arrows.",
+        "opposite": "Reverse every arrow and composition order, preserving labels and identities.",
+    },
     "FiniteIntegerFunctionAlgebra": {
         "compose": "Composition is f(g(x)); declared middle finite sets and actual Algebra instances must match exactly.",
         "inverse": "The function must be a bijection onto its entire declared finite codomain.",
@@ -222,6 +241,10 @@ def record(identifier, owner, concept, paths, operation=None):
     if owner == "FiniteIntegerFunctionAlgebra":
         value["known_limitations"].append("Finite stored maps only; this does not implement arbitrary callback or infinite-domain function spaces. Codomain equality is required for typed composition even if the actual range is smaller.")
         value["references"].append("https://doc.sagemath.org/html/en/reference/sets/sage/sets/finite_set_maps.html")
+    if owner == "FiniteCategoryAlgebra":
+        value["required_invariants"].append("Construction checks every composable pair and associativity triple, both identity laws and source/target typing.")
+        value["known_limitations"].append("Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. This implements labelled finite categories, not functors, arbitrary infinite categories or a proof-assistant kernel.")
+        value["references"].append("https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html")
     if owner == "RationalFunctionField":
         value["known_limitations"].append("Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented.")
         value["references"].append("https://docs.sympy.org/latest/modules/polys/domainsref.html")
@@ -253,6 +276,10 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("FiniteCategory", "Validated finite category tables", "mathematics.structures.FiniteCategory",
+         ["Integer object and arrow labels", "Complete typed composition and designated identities", "Both identity laws and associativity checked exhaustively within the resource cap"], ["Z", "FiniteSet(Z)", "FiniteRelation(Z,Z)"]),
+        ("ZxZ.category", "Ordered category label pair", "mathematics.foundations.Pair<BigInteger,BigInteger>",
+         ["Two integer labels", "Each operation checks object or arrow membership in its category"], ["Z"]),
         ("FiniteFunction(Z,Z)", "Functions between finite integer sets", "mathematics.foundations.FiniteFunction<BigInteger,BigInteger>",
          ["Explicit finite domain and codomain in the registered integer Algebra", "Exactly one value in the codomain for every domain member", "Equality retains the declared codomain"], ["Z", "FiniteSet(Z)", "FiniteRelation(Z,Z)"]),
         ("FiniteSet(Z)xFiniteSet(Z).function", "Declared finite function boundaries", "mathematics.foundations.Pair<FiniteSet<BigInteger>,FiniteSet<BigInteger>>",

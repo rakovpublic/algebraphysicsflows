@@ -20,7 +20,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all234RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all257RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         expected.put("BooleanAlgebra","false|true|true|false|false|false|false|true");
@@ -41,6 +41,7 @@ public class ConcreteAlgebrasTest {
         expected.put("SymmetricGroup","Perm[2, 1, 0]|Perm[2, 0, 1]|false|3|1|0|0|Perm[2, 0, 1]|[2, 0, 1]|[Perm[1, 2, 0]]|Perm[0, 1, 2]|[Perm[0, 1, 2], Perm[0, 2, 1], Perm[1, 0, 2], Perm[1, 2, 0], Perm[2, 0, 1], Perm[2, 1, 0]]");
         expected.put("ResidueRing","0 (mod 6)|4 (mod 6)|5 (mod 6)|5 (mod 6)|1 (mod 6)|5 (mod 6)|true|false|5|0 (mod 6)|[5 (mod 6)]|1 (mod 6)|false|0 (mod 6)|1 (mod 6)|[0 (mod 6), 1 (mod 6), 2 (mod 6), 3 (mod 6), 4 (mod 6), 5 (mod 6)]");
         expected.put("FiniteIntegerFunctionAlgebra","Function[1, 2, 3]->[1, 2, 3]{1=3, 2=2, 3=1}|Function[1, 2, 3]->[1, 2, 3]{1=3, 2=1, 3=2}|[1, 2, 3]|[1, 2, 3]|[2, 3, 1]|Relation[(1,2), (2,3), (3,1)]|3|true|true|true|3|[2, 3, 1]|[1, 2, 3]|Function[1, 2, 3]->[1, 2, 3]{1=2, 2=3, 3=1}|[2, 3, 1]|[1]|false|Function[1, 2]->[1, 2]{1=1, 2=2}|Function[1, 2]->[2, 3]{1=2, 2=3}|Function[]->[]{}");
+        expected.put("FiniteCategoryAlgebra","Category(objects=[1, 2], arrows={1=(1,1), 2=(2,2)}, identities={1=1, 2=2}, composition={(1,1)=1, (2,2)=2})|[1, 2]|[1, 2]|2|2|true|true|2|2|2|2|[2]|[2]|true|[2]|[1, 2]|false|Category(objects=[1, 2], arrows={1=(1,1), 2=(2,2)}, identities={1=1, 2=2}, composition={(1,1)=1, (2,2)=2})|Category(objects=[1, 2], arrows={0=(1,1), 1=(2,2)}, identities={1=0, 2=1}, composition={(0,0)=0, (1,1)=1})|Relation[(1,1), (2,2)]|[]|[]|Category(objects=[], arrows={}, identities={}, composition={})");
         int count=0;
         for(ConcreteAlgebra<?> algebra : math.algebras()) {
             String[] values=expected.get(algebra.getClass().getSimpleName()).split("\\|",-1);
@@ -50,12 +51,14 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(234,count);
+        assertEquals(257,count);
     }
     @SuppressWarnings({"unchecked","rawtypes"})
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
         Algebra source=math.mathTool.getAlgebra(entry.first.getAlgebraName());
         IAlgebraItem item=source.buildAlgebraItem(sample(math,source.getAlgebraName(),0));
+        if(entry.id.equals("FiniteCategory.from-preorder")) item=source.buildAlgebraItem(new FiniteRelation<>(math.integers.algebra(),math.integers.algebra(),
+                FiniteSet.of(new Pair<>(BigInteger.ONE,BigInteger.ONE),new Pair<>(BigInteger.valueOf(2),BigInteger.valueOf(2)))));
         String alias=entry.alias;
         Object operation=entry.operation;
         if(operation instanceof IOneOperandOperation) return item.performOneOperandOperation(alias).perform().getResult().toString();
@@ -112,6 +115,9 @@ public class ConcreteAlgebrasTest {
             case "QxQ.bounds": return new Pair<>(Rational.ZERO,Rational.ONE);
             case "QxN.iteration": return new Pair<>(Rational.ZERO,BigInteger.valueOf(2));
             case "ZxZ.relation": return new Pair<>(BigInteger.ONE,BigInteger.valueOf(2));
+            case "ZxZ.category": return new Pair<>(BigInteger.valueOf(2),BigInteger.valueOf(2));
+            case "FiniteCategory": return mathematics.structures.FiniteCategory.discrete(index==0?FiniteSet.of(BigInteger.ONE,BigInteger.valueOf(2))
+                    :FiniteSet.of(BigInteger.ONE,BigInteger.valueOf(2),BigInteger.valueOf(3)));
             case "FiniteSet(Z)xFiniteSet(Z).function": return new Pair<>(FiniteSet.of(BigInteger.ONE,BigInteger.valueOf(2)),FiniteSet.of(BigInteger.valueOf(2),BigInteger.valueOf(3)));
             case "FiniteFunction(Z,Z)":
                 FiniteSet<BigInteger> points=FiniteSet.of(BigInteger.ONE,BigInteger.valueOf(2),BigInteger.valueOf(3));
