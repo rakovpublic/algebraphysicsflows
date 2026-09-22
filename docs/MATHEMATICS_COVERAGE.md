@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 621 |
-| DIRECTLY_SUPPORTED | 378 |
+| Scoped records | 638 |
+| DIRECTLY_SUPPORTED | 395 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 237 |
+| IMPLEMENTED | 254 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 305 |
+| MACHINE_TESTED | 322 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 214 | 214 | 0 | 0 | 0 | 214 | 0 | 0 |
+| Concrete MathTool algebras | 231 | 231 | 0 | 0 | 0 | 231 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -353,6 +353,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | RationalPolynomialRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients |
 | RationalSampleAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations |
 | RationalVectorSpace | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed-dimensional rational vectors; default dimension two |
+| ResidueRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one |
 | S3.apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree; native operation S3.apply |
 | S3.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree; native operation S3.compose |
 | S3.cycles | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree; native operation S3.cycles |
@@ -400,6 +401,22 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Z/5Z.one | DIRECTLY_SUPPORTED | IMPLEMENTED | Residues in the default prime field F5; configurable exactly checked prime int modulus; native operation Z/5Z.one |
 | Z/5Z.subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Residues in the default prime field F5; configurable exactly checked prime int modulus; native operation Z/5Z.subtract |
 | Z/5Z.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Residues in the default prime field F5; configurable exactly checked prime int modulus; native operation Z/5Z.zero |
+| Z/6Z.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.add |
+| Z/6Z.divide | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.divide |
+| Z/6Z.elements | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.elements |
+| Z/6Z.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.equal |
+| Z/6Z.inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.inverse |
+| Z/6Z.is-unit | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.is-unit |
+| Z/6Z.is-zero-divisor | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.is-zero-divisor |
+| Z/6Z.lift | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.lift |
+| Z/6Z.multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.multiply |
+| Z/6Z.negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.negate |
+| Z/6Z.one | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.one |
+| Z/6Z.power | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.power |
+| Z/6Z.reduce | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.reduce |
+| Z/6Z.solve-multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.solve-multiply |
+| Z/6Z.subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.subtract |
+| Z/6Z.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.zero |
 
 ### Cross-domain operations
 

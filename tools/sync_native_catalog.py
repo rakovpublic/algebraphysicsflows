@@ -15,6 +15,7 @@ OWNERS = {
     "IntegerRing": ("Z", "Arbitrary precision integers with ring operations and truncated quotient"),
     "RationalField": ("Q", "Canonical exact rational field"),
     "PrimeField": ("Z/5Z", "Residues in the default prime field F5; configurable exactly checked prime int modulus"),
+    "ResidueRing": ("Z/6Z", "Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one"),
     "RationalComplexField": ("Q(i)", "Pairs of rational coordinates; a proper subfield of the complex numbers"),
     "RationalVectorSpace": ("Q^2", "Fixed-dimensional rational vectors; default dimension two"),
     "RationalMatrixAlgebra": ("Mat2(Q)", "Fixed positive-dimensional square rational matrices; default dimension two"),
@@ -52,6 +53,7 @@ EXTRA_TESTS = {
     "FiniteSimplicialAlgebra": "NativeTopologyTest",
     "FiniteIntegerRelationAlgebra": "NativeRelationTest",
     "SymmetricGroup": "NativePermutationTest",
+    "ResidueRing": "NativeResidueRingTest",
 }
 CONDITIONS = {
     "divide": "The divisor must be nonzero.",
@@ -89,6 +91,16 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "ResidueRing": {
+        "divide": "The divisor must be a unit: gcd(divisor,modulus)=1; nonzero alone is insufficient.",
+        "inverse": "The residue must be a unit: gcd(value,modulus)=1.",
+        "power": "Nonnegative integer powers are total, with 0^0=1; negative powers require a unit base.",
+        "solve-multiply": "Emit all x satisfying a*x=b in increasing canonical representative order; no solution gives an empty list.",
+        "is-zero-divisor": "A zero divisor is nonzero and not a unit in this finite residue ring; zero itself is excluded.",
+        "lift": "Return the unique integer representative between zero inclusive and the modulus exclusive.",
+        "reduce": "Reduce any integer modulo this ring's fixed modulus.",
+        "elements": "Emit all residue classes in increasing canonical representative order, within the resource cap.",
+    },
     "RationalPolynomialRing": {
         "quotient": "The divisor is nonzero; return the Euclidean polynomial quotient over Q.",
         "remainder": "The divisor is nonzero; the Euclidean remainder has smaller degree than the divisor.",
@@ -197,6 +209,9 @@ def record(identifier, owner, concept, paths, operation=None):
     if owner == "SymmetricGroup":
         value["known_limitations"].append("Labels are zero-based and the degree is fixed. Full enumeration is capped at degree 8; higher-degree groups and individual operations remain representable.")
         value["references"].append("https://doc.sagemath.org/html/en/reference/combinat/sage/combinat/permutation.html")
+    if owner == "ResidueRing":
+        value["known_limitations"].append("Only fixed moduli greater than one are supported. Enumeration and congruence solution lists are capped at 10000 outputs; exceeding the cap is IMPLEMENTATION_FAILURE, not mathematical nonexistence.")
+        value["references"].append("https://doc.sagemath.org/html/en/reference/finite_rings/sage/rings/finite_rings/integer_mod.html")
     return value
 
 
@@ -219,6 +234,8 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("Z/6Z", "Residue ring modulo six", "mathematics.numbers.ModularInteger",
+         ["Fixed modulus six", "Canonical representatives from zero through five", "Composite modulus permits nonzero nonunits"], ["Z"]),
         ("S3", "Symmetric group on three labels", "mathematics.structures.Permutation",
          ["Images bijectively cover 0,1,2", "Composition uses the same fixed degree"], ["N", "Z"]),
         ("Q(x)", "Rational function field", "mathematics.calculus.RationalFunction",
