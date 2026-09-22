@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 683 |
-| DIRECTLY_SUPPORTED | 440 |
+| Scoped records | 706 |
+| DIRECTLY_SUPPORTED | 463 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 299 |
+| IMPLEMENTED | 322 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 367 |
+| MACHINE_TESTED | 390 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 276 | 276 | 0 | 0 | 0 | 276 | 0 | 0 |
+| Concrete MathTool algebras | 299 | 299 | 0 | 0 | 0 | 299 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -261,6 +261,29 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | FiniteFunction(Z,Z).restrict | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).restrict |
 | FiniteFunction(Z,Z).size | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).size |
 | FiniteFunction(Z,Z).values | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).values |
+| FiniteFunctor.arrow-fiber | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.arrow-fiber |
+| FiniteFunctor.arrow-images | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.arrow-images |
+| FiniteFunctor.arrow-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.arrow-map |
+| FiniteFunctor.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.compose |
+| FiniteFunctor.empty | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.empty |
+| FiniteFunctor.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.equal |
+| FiniteFunctor.from-discrete-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.from-discrete-map |
+| FiniteFunctor.identity-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.identity-on |
+| FiniteFunctor.inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.inverse |
+| FiniteFunctor.is-equivalence | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.is-equivalence |
+| FiniteFunctor.is-essentially-surjective | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.is-essentially-surjective |
+| FiniteFunctor.is-faithful | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.is-faithful |
+| FiniteFunctor.is-full | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.is-full |
+| FiniteFunctor.is-isomorphism | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.is-isomorphism |
+| FiniteFunctor.map-arrow | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.map-arrow |
+| FiniteFunctor.map-object | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.map-object |
+| FiniteFunctor.object-fiber | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.object-fiber |
+| FiniteFunctor.object-images | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.object-images |
+| FiniteFunctor.object-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.object-map |
+| FiniteFunctor.opposite | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.opposite |
+| FiniteFunctor.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.source |
+| FiniteFunctor.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.target |
+| FiniteFunctorAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps |
 | FiniteIntegerFunctionAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain |
 | FiniteIntegerRelationAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite-support relations on the actual registered integer Algebra |
 | FiniteProbabilityAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer distributions with exact nonnegative rational masses summing to one |

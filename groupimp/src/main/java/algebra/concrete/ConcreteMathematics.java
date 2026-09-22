@@ -25,6 +25,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final FiniteIntegerRelationAlgebra integerRelations=new FiniteIntegerRelationAlgebra(integers,integerSets,booleans,naturals);
     public final FiniteIntegerFunctionAlgebra integerFunctions=new FiniteIntegerFunctionAlgebra(integers,integerSets,integerRelations,booleans,naturals);
     public final FiniteCategoryAlgebra categories=new FiniteCategoryAlgebra(integers,integerSets,integerRelations,booleans,naturals);
+    public final FiniteFunctorAlgebra functors=new FiniteFunctorAlgebra(categories,integerFunctions,integers,booleans);
     public final RationalSampleAlgebra samples=new RationalSampleAlgebra(rationals,naturals);
     public final FiniteProbabilityAlgebra<java.math.BigInteger> integerProbabilities=new FiniteProbabilityAlgebra<>("FiniteDistribution(Z)",integers.algebra(),integerSets,rationals,booleans,naturals,mathematics.numbers.Rational::of);
     public final RationalComplexField complexRationals=new RationalComplexField(rationals);
@@ -46,7 +47,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
             fields.add(new PrimeField(unit,prime));
         }
         primeFields=Collections.unmodifiableList(fields);
-        List<ConcreteAlgebra<?>> values=new ArrayList<>(Arrays.asList(booleans,naturals,integers,rationals,complexRationals,vectors,matrices,polynomials,rationalFunctions,integerSets,samples,integerProbabilities,complexes,integerRelations,permutations,residues,integerFunctions,categories));
+        List<ConcreteAlgebra<?>> values=new ArrayList<>(Arrays.asList(booleans,naturals,integers,rationals,complexRationals,vectors,matrices,polynomials,rationalFunctions,integerSets,samples,integerProbabilities,complexes,integerRelations,permutations,residues,integerFunctions,categories,functors));
         values.addAll(fields); algebras=Collections.unmodifiableList(values);
         for(ConcreteAlgebra<?> algebra : algebras) {
             algebra.register(mathTool);

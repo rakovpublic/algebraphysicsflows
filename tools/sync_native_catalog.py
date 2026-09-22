@@ -28,6 +28,7 @@ OWNERS = {
     "FiniteIntegerRelationAlgebra": ("FiniteRelation(Z,Z)", "Finite-support relations on the actual registered integer Algebra"),
     "FiniteIntegerFunctionAlgebra": ("FiniteFunction(Z,Z)", "Total maps between explicit finite integer sets, preserving declared domain and codomain"),
     "FiniteCategoryAlgebra": ("FiniteCategory", "Finite categories with integer object/arrow labels and exhaustively checked composition tables"),
+    "FiniteFunctorAlgebra": ("FiniteFunctor", "Covariant functors between validated finite category tables with total object and arrow maps"),
     "SymmetricGroup": ("S3", "Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree"),
 }
 INTERFACES = {
@@ -56,6 +57,7 @@ EXTRA_TESTS = {
     "FiniteIntegerRelationAlgebra": "NativeRelationTest",
     "FiniteIntegerFunctionAlgebra": "NativeFiniteFunctionTest",
     "FiniteCategoryAlgebra": "NativeCategoryTest",
+    "FiniteFunctorAlgebra": "NativeFunctorTest",
     "SymmetricGroup": "NativePermutationTest",
     "ResidueRing": "NativeResidueRingTest",
 }
@@ -95,6 +97,27 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "FiniteFunctorAlgebra": {
+        "compose": "F.compose(G) is F(G(-)); G.target and F.source must be equal labelled category tables.",
+        "inverse": "Strict inverse requires bijections on both objects and arrows; an equivalence alone is insufficient.",
+        "map-object": "The argument must be an object label in the source category.",
+        "map-arrow": "The argument must be an arrow label in the source category.",
+        "is-faithful": "Check injectivity separately on each source hom set, not on all arrow labels together.",
+        "is-full": "For each source object pair, the induced map onto the corresponding target hom set is surjective.",
+        "is-essentially-surjective": "Every target object is isomorphic to an image object; equality with an image is not required.",
+        "is-equivalence": "Check fullness, faithfulness and essential surjectivity; no quasi-inverse witness is constructed.",
+        "is-isomorphism": "Check bijectivity of the object and arrow maps for a strict category isomorphism.",
+        "object-map": "Transfer the stored object map into a finite function with the complete source and target object sets.",
+        "arrow-map": "Transfer the stored arrow map into a finite function with the complete source and target arrow sets.",
+        "object-images": "Emit mapped objects in ascending source-label order, preserving duplicates.",
+        "arrow-images": "Emit mapped arrows in ascending source-label order, preserving duplicates.",
+        "object-fiber": "The target object label exists; emit all its source preimages in ascending order, possibly none.",
+        "arrow-fiber": "The target arrow label exists; emit all its source preimages in ascending order, possibly none.",
+        "identity-on": "Construct the identity functor on the supplied finite category.",
+        "from-discrete-map": "Create discrete source and target categories from the finite function's domain and codomain.",
+        "opposite": "Reverse both categories while retaining the same object and arrow maps.",
+        "equal": "Compare complete labelled source/target categories and both maps; natural isomorphism is not equality.",
+    },
     "FiniteCategoryAlgebra": {
         "compose": "The pair (f,g) is in path order: first f, then g; both arrows exist and target(f)=source(g).",
         "source": "The argument is an existing arrow label; return its source object label.",
@@ -243,8 +266,13 @@ def record(identifier, owner, concept, paths, operation=None):
         value["references"].append("https://doc.sagemath.org/html/en/reference/sets/sage/sets/finite_set_maps.html")
     if owner == "FiniteCategoryAlgebra":
         value["required_invariants"].append("Construction checks every composable pair and associativity triple, both identity laws and source/target typing.")
-        value["known_limitations"].append("Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. This implements labelled finite categories, not functors, arbitrary infinite categories or a proof-assistant kernel.")
+        value["known_limitations"].append("Table validation is capped at 128 arrows and objects; larger presentations raise IMPLEMENTATION_FAILURE. Functors have separate native registrations; arbitrary infinite categories and a proof-assistant kernel are not implemented.")
         value["references"].append("https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html")
+    if owner == "FiniteFunctorAlgebra":
+        value["required_invariants"].append("Construction checks total maps, endpoint typing, identity preservation and every source composition.")
+        value["known_limitations"].append("Both categories use the existing 128-arrow/object table cap. Only finite covariant functors are represented; equivalence is a finite decision criterion without an explicit quasi-inverse witness.")
+        value["references"] += ["https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Functor/Basic.html",
+                                "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Equivalence.html"]
     if owner == "RationalFunctionField":
         value["known_limitations"].append("Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented.")
         value["references"].append("https://docs.sympy.org/latest/modules/polys/domainsref.html")
@@ -276,6 +304,8 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("FiniteFunctor", "Validated finite functors", "mathematics.structures.FiniteFunctor",
+         ["Finite labelled source and target categories", "Total object and arrow maps", "Preservation of endpoints, identities and every composition"], ["FiniteCategory", "Z", "FiniteFunction(Z,Z)"]),
         ("FiniteCategory", "Validated finite category tables", "mathematics.structures.FiniteCategory",
          ["Integer object and arrow labels", "Complete typed composition and designated identities", "Both identity laws and associativity checked exhaustively within the resource cap"], ["Z", "FiniteSet(Z)", "FiniteRelation(Z,Z)"]),
         ("ZxZ.category", "Ordered category label pair", "mathematics.foundations.Pair<BigInteger,BigInteger>",

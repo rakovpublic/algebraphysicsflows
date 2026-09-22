@@ -23,7 +23,7 @@ A future effect-aware operation description would need an explicit result constr
 | Concept | Required data/obligation | Present boundary |
 | --- | --- | --- |
 | Category | Objects, indexed hom domains, identity, composability, associativity | Finite labelled tables implemented; general hom families still need indexed domains and law evidence |
-| Functor | Object and morphism maps preserving source/target, identities and composition | Two unrelated callbacks do not establish preservation |
+| Functor | Object and morphism maps preserving source/target, identities and composition | FiniteFunctorAlgebra checks total maps and all preservation equations for finite tables |
 | Natural transformation | Component for every object with naturality squares | Indexed family plus quantified coherence |
 | Product/coproduct | Projections/injections and the relevant universal property | Pair is a concrete finite set product; no general universal-property engine |
 | Limit/colimit | Diagram, cone/cocone and unique factorization | Initial/terminal objects computed for finite tables; broader constructions depend on the ambient category |
@@ -36,6 +36,6 @@ A future effect-aware operation description would need an explicit result constr
 
 First use [dependent domain families](RFC_DEPENDENT_DOMAINS.md) to describe Hom(A,B). Use [law and equivalence witnesses](RFC_LAWS_AND_EQUIVALENCE.md) for identities, associativity, preservation and universal properties. Only then evaluate a generic diagram/coherence layer against at least two concrete examples. Higher categories require a selected mathematical model; a universal HigherCategory Java class would hide that choice.
 
-The implemented finite alternative checks tables with at most 128 arrows and objects. It supports discrete categories, conversion from finite preorders, opposite categories, hom sets, arrow inverses, initial/terminal objects and the underlying existence relation. Full labelled-table equality does not identify isomorphic presentations. General functors, natural transformations, diagrams and external proof-object checking remain unimplemented. The coverage registry keeps general category concepts distinct from these concrete native registrations.
+The implemented finite alternative checks tables with at most 128 arrows and objects. It supports discrete categories, conversion from finite preorders, opposite categories, hom sets, arrow inverses, initial/terminal objects and the underlying existence relation. Finite functors now preserve all table equations by construction and support composition, opposite, strict inverse, hom-wise full/faithful checks and an essential-surjectivity criterion. Full labelled-table equality does not identify isomorphic presentations. Natural transformations, general diagrams and external proof-object checking remain unimplemented. The coverage registry keeps general category concepts distinct from these concrete native registrations.
 
 The breadth of existing formal developments is a useful discovery source: [mathlib documentation](https://leanprover-community.github.io/mathlib4_docs/Mathlib.html). The present Java mappings are not extracted from or proved by mathlib.

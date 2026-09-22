@@ -12,6 +12,8 @@ import operations.flat.*;
 import mathematics.foundations.*;
 import mathematics.linear.*;
 import mathematics.numbers.*;
+import mathematics.structures.FiniteCategory;
+import mathematics.structures.FiniteFunctor;
 import mathematics.examples.ConcreteAlgebrasExample;
 import org.junit.Test;
 import java.io.*;
@@ -20,9 +22,19 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all257RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all279RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
+        String category12="Category(objects=[1, 2], arrows={1=(1,1), 2=(2,2)}, identities={1=1, 2=2}, composition={(1,1)=1, (2,2)=2})";
+        String category123="Category(objects=[1, 2, 3], arrows={1=(1,1), 2=(2,2), 3=(3,3)}, identities={1=1, 2=2, 3=3}, composition={(1,1)=1, (2,2)=2, (3,3)=3})";
+        String categoryEmpty="Category(objects=[], arrows={}, identities={}, composition={})";
+        String swapFunctor="Functor(source="+category12+", target="+category12+", objects={1=2, 2=1}, arrows={1=2, 2=1})";
+        String identityFunctor="Functor(source="+category12+", target="+category12+", objects={1=1, 2=2}, arrows={1=1, 2=2})";
+        String cycleFunctor="Functor(source="+category123+", target="+category123+", objects={1=2, 2=3, 3=1}, arrows={1=2, 2=3, 3=1})";
+        String emptyFunctor="Functor(source="+categoryEmpty+", target="+categoryEmpty+", objects={}, arrows={})";
+        expected.put("FiniteFunctorAlgebra",String.join("|",swapFunctor,swapFunctor,swapFunctor,category12,category12,"1","1",
+                "true","true","true","true","true","Function[1, 2]->[1, 2]{1=2, 2=1}","Function[1, 2]->[1, 2]{1=2, 2=1}",
+                "[2, 1]","[2, 1]","[1]","[1]","false",identityFunctor,cycleFunctor,emptyFunctor));
         expected.put("BooleanAlgebra","false|true|true|false|false|false|false|true");
         expected.put("NaturalSemiring","8|12|7|6|0|1");
         expected.put("IntegerRing","8|4|12|2|6|3|0|-6|6|3|true|false|[3, 0]|0|1");
@@ -51,7 +63,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(257,count);
+        assertEquals(279,count);
     }
     @SuppressWarnings({"unchecked","rawtypes"})
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
@@ -116,6 +128,12 @@ public class ConcreteAlgebrasTest {
             case "QxN.iteration": return new Pair<>(Rational.ZERO,BigInteger.valueOf(2));
             case "ZxZ.relation": return new Pair<>(BigInteger.ONE,BigInteger.valueOf(2));
             case "ZxZ.category": return new Pair<>(BigInteger.valueOf(2),BigInteger.valueOf(2));
+            case "FiniteFunctor":
+                FiniteCategory category=FiniteCategory.discrete(FiniteSet.of(BigInteger.ONE,BigInteger.valueOf(2)));
+                Map<BigInteger,BigInteger> functorMap=new LinkedHashMap<>();
+                functorMap.put(BigInteger.ONE,BigInteger.valueOf(index==0?2:1));
+                functorMap.put(BigInteger.valueOf(2),BigInteger.valueOf(index==0?1:2));
+                return new FiniteFunctor(category,category,functorMap,functorMap);
             case "FiniteCategory": return mathematics.structures.FiniteCategory.discrete(index==0?FiniteSet.of(BigInteger.ONE,BigInteger.valueOf(2))
                     :FiniteSet.of(BigInteger.ONE,BigInteger.valueOf(2),BigInteger.valueOf(3)));
             case "FiniteSet(Z)xFiniteSet(Z).function": return new Pair<>(FiniteSet.of(BigInteger.ONE,BigInteger.valueOf(2)),FiniteSet.of(BigInteger.valueOf(2),BigInteger.valueOf(3)));
