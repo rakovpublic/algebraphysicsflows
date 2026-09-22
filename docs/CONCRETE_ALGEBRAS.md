@@ -41,6 +41,7 @@ List<String> values = math.flow(math.naturals,
 | FiniteEquivalenceAlgebra / FiniteEquivalence | compose; equality -> Boolean | inverse; opposite; source/target categories; forward/backward functors; unit/counit transformations | identity-on; from-functor |
 | FiniteAdjunctionAlgebra / FiniteAdjunction | compose; equality -> Boolean | opposite; source/target categories; left/right functors; unit/counit transformations; is-equivalence; to-equivalence | identity-on; from-equivalence; from-left; from-right; transpose; untranspose; hom-map |
 | FiniteConeAlgebra / FiniteCone | equality -> Boolean; lift -> Z; flat mediators -> Z | diagram; vertex; leg-map; flat legs; natural-transformation; is-limit | leg; reindex/map by a functor; limit; flat cones-at; from-transformation |
+| FiniteCoconeAlgebra / FiniteCocone | equality -> Boolean; descend -> Z; flat mediators -> Z | diagram; vertex; leg-map; flat legs; natural-transformation; is-colimit; opposite -> Cone | leg; reindex/map by a functor; colimit; flat cocones-at; from-transformation; opposite-cone |
 | FiniteIntegerRelationAlgebra / FiniteRelation(Z,Z) | union, intersection, compose | inverse, transitive-closure; domain/range -> finite set; cardinality -> N | image/preimage -> second set carrier; contains/function checks -> Boolean; finite identity |
 | FiniteSimplicialAlgebra / FiniteComplex | union, intersection | dimension/Euler characteristic -> Z; vertex-count -> N | equality/subcomplex -> Boolean; skeleton; degree-indexed simplex count/Betti number; flat Betti numbers -> N |
 | RationalSampleAlgebra / Sample(Q) | concatenate | size -> N, mean/variance -> Q, center | covariance -> Q; scale by Q; flat transfer elements -> Q |
@@ -98,7 +99,7 @@ See [ConcreteAlgebrasTest](../groupimp/src/test/java/mathematics/ConcreteAlgebra
 Same-algebra unary flat operations use `IOneOperandFlatOperation` and `performOneOperandFlatOperation(name)` (or `performFlatOperation(name)`). Finite-set `subsets` is an example. Cross-algebra unary flat operations use the existing `ITransferFlatOperation`, whose return type is corrected to `List<IAlgebraItem<V>>`; `elements` transfers a finite set to its member algebra. Empty results remain valid, and every emitted member keeps its target algebra.
 
 
-The default initializer currently installs 24 algebras and 344 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
+The default initializer currently installs 25 algebras and 361 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
 
 For overloaded custom-member and unsafe operations, the most specific compatible second-operand class is selected (exact matches take priority). Re-registering the same second class replaces that overload. Ambiguous supertypes are rejected. Mathematical domains sharing one Java class need distinct operation names; overload selection does not infer a domain from a value.
 
@@ -342,3 +343,22 @@ List<String> vertices = math.flow(math.categories,
 ~~~
 
 Search retains the category cap of 128 arrows/objects and additionally allows at most 10000 enumerated cones and 1000000 search steps per invocation. Exceeding either bound raises IMPLEMENTATION_FAILURE; it never yields a false existence claim or a truncated flat list. The bounds apply to enumeration, limit construction, is-limit and lift. Tests cover finite-chain products, products and equalizers in the full category of sets of sizes zero through two, fixed-point diagrams, missing limits, nonunique mediators, empty diagrams, loss of limits under mapping/reindexing, both resource caps and serialized native flows.
+
+## Finite cocones and colimits
+
+FiniteCoconeAlgebra represents cocones F(j)->c, checking F(f);leg_k=leg_j for each shape arrow f:j->k. Its natural-transformation transfer runs from F to the constant diagram at c, dual to the [cone construction](https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html). The vertex remains part of the value even for an empty shape.
+
+FiniteCocone.colimit, registered on the functor algebra, searches for a cocone with exactly one outgoing commuting arrow to every other cocone. It uses the shared limit search on the opposite diagram and returns the least vertex and lexicographically least legs among valid choices. descend requires this entire colimit property and returns the unique arrow from the first cocone's vertex to the second. The flat mediators operation returns every such commuting arrow for any pair of cocones on the same exact diagram, including none or several. These operations return the existing integer wrappers.
+
+cocones-at enumerates all cocones at a specified vertex; legs retains duplicate arrow labels, while leg-map transfers to the existing finite-function algebra. map and reindex preserve the cocone equations but may lose the colimit property. from-transformation requires a transformation ending at the constant diagram on the supplied vertex. opposite transfers a cocone into the cone algebra over the opposite diagram; FiniteCocone.opposite-cone is the reverse transfer registered on cones.
+
+~~~java
+List<String> vertices = math.flow(math.categories,
+        Collections.singletonList(FiniteCategory.discrete(FiniteSet.of(BigInteger.TEN))))
+        .<FiniteFunctor>performAlgebraTransfer("FiniteFunctor.empty-diagram")
+        .<FiniteCocone>performAlgebraTransfer("FiniteCocone.colimit")
+        .<BigInteger>performAlgebraTransfer("vertex")
+        .collect(); // ["10"]
+~~~
+
+Empty-diagram colimits are initial objects. Tests independently check maxima in finite chains, disjoint-union sizes for coproducts in the category of sets of sizes zero through two, coequalizers and group-action orbits, outgoing arrow direction, nonunique mediators, loss of colimits under mapping/reindexing, dual conversions and serialized native flows. The shared 128-arrow/object, 10000-cone and 1000000-step bounds apply; exhaustion reports IMPLEMENTATION_FAILURE, and completed searches without a colimit report OPERATION_UNDEFINED. These finite algorithms do not construct infinite colimits or provide formal proof artifacts.

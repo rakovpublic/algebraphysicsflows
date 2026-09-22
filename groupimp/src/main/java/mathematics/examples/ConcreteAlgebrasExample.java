@@ -12,6 +12,7 @@ import mathematics.structures.FiniteNaturalTransformation;
 import mathematics.structures.FiniteEquivalence;
 import mathematics.structures.FiniteAdjunction;
 import mathematics.structures.FiniteCone;
+import mathematics.structures.FiniteCocone;
 import mathematics.linear.RationalVector;
 import mathematics.numbers.Rational;
 import java.math.BigInteger;
@@ -68,6 +69,11 @@ public final class ConcreteAlgebrasExample {
                 Collections.singletonList(FiniteCategory.discrete(FiniteSet.of(BigInteger.TEN))))
                 .<FiniteFunctor>performAlgebraTransfer("FiniteFunctor.empty-diagram")
                 .<FiniteCone>performAlgebraTransfer("FiniteCone.limit")
+                .<BigInteger>performAlgebraTransfer("vertex").collect());
+        System.out.println("Colimit vertex of an empty diagram: "+math.flow(math.categories,
+                Collections.singletonList(FiniteCategory.discrete(FiniteSet.of(BigInteger.TEN))))
+                .<FiniteFunctor>performAlgebraTransfer("FiniteFunctor.empty-diagram")
+                .<FiniteCocone>performAlgebraTransfer("FiniteCocone.colimit")
                 .<BigInteger>performAlgebraTransfer("vertex").collect());
     }
     /** Stable manifest used to keep the human/JSON coverage registry aligned with real registrations. */

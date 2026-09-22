@@ -99,6 +99,9 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("entire diagram", " ".join(records["FiniteCone.lift"]["required_invariants"]))
         self.assertIn("never false", " ".join(records["FiniteCone.is-limit"]["required_invariants"]))
         self.assertIn("1000000", " ".join(records["FiniteCone.limit"]["known_limitations"]))
+        self.assertIn("first vertex to the second", " ".join(records["FiniteCocone.descend"]["required_invariants"]))
+        self.assertIn("end at the constant", " ".join(records["FiniteCocone.from-transformation"]["required_invariants"]))
+        self.assertIn("never false", " ".join(records["FiniteCocone.is-colimit"]["required_invariants"]))
 
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)

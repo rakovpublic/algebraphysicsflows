@@ -25223,6 +25223,70 @@
       "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
     },
     {
+      "id": "concrete-algebra.FiniteCoconeAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCoconeAlgebra",
+      "concept": "FiniteCoconeAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "FiniteCocone",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Each leg is F(j)->vertex, and F(f);leg_k = leg_j for every shape arrow f:j->k. Colimits require unique outgoing factorization for every cocone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCoconeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "The shared opposite-cone search retains the 128-arrow/object category cap, 10000 enumerated cones and 1000000 search steps. Exhaustion raises IMPLEMENTATION_FAILURE. Only explicit finite diagrams and categories are supported."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
       "id": "concrete-algebra.FiniteConeAlgebra",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "FiniteConeAlgebra",
@@ -49482,6 +49546,1216 @@
       "legacy_operation_interface": "IUnsafeOperation"
     },
     {
+      "id": "concrete-operation.FiniteCocone.diagram",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCoconeAlgebra",
+      "concept": "FiniteCocone.diagram",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCocone",
+      "domain_B": null,
+      "domain_C": "FiniteFunctor",
+      "operation_signature": "FiniteCocone -> FiniteFunctor",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.diagram",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the retained finite diagram J->C.",
+        "Each leg is F(j)->vertex, and F(f);leg_k = leg_j for every shape arrow f:j->k. Colimits require unique outgoing factorization for every cocone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCoconeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "The shared opposite-cone search retains the 128-arrow/object category cap, 10000 enumerated cones and 1000000 search steps. Exhaustion raises IMPLEMENTATION_FAILURE. Only explicit finite diagrams and categories are supported."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCocone.diagram",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "diagram",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCocone.vertex",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCoconeAlgebra",
+      "concept": "FiniteCocone.vertex",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCocone",
+      "domain_B": null,
+      "domain_C": "Z",
+      "operation_signature": "FiniteCocone -> Z",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.vertex",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the target vertex of all cocone legs; retain it even for an empty shape.",
+        "Each leg is F(j)->vertex, and F(f);leg_k = leg_j for every shape arrow f:j->k. Colimits require unique outgoing factorization for every cocone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCoconeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "The shared opposite-cone search retains the 128-arrow/object category cap, 10000 enumerated cones and 1000000 search steps. Exhaustion raises IMPLEMENTATION_FAILURE. Only explicit finite diagrams and categories are supported."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCocone.vertex",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "vertex",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCocone.leg",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCoconeAlgebra",
+      "concept": "FiniteCocone.leg",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCocone",
+      "domain_B": "Z",
+      "domain_C": "Z",
+      "operation_signature": "FiniteCocone x Z -> Z",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.leg",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The argument is an existing shape object j; return the arrow F(j)->vertex in the integer algebra.",
+        "Each leg is F(j)->vertex, and F(f);leg_k = leg_j for every shape arrow f:j->k. Colimits require unique outgoing factorization for every cocone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCoconeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "The shared opposite-cone search retains the 128-arrow/object category cap, 10000 enumerated cones and 1000000 search steps. Exhaustion raises IMPLEMENTATION_FAILURE. Only explicit finite diagrams and categories are supported."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteCocone.leg",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "leg",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCocone.leg-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCoconeAlgebra",
+      "concept": "FiniteCocone.leg-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCocone",
+      "domain_B": null,
+      "domain_C": "FiniteFunction(Z,Z)",
+      "operation_signature": "FiniteCocone -> FiniteFunction(Z,Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.leg-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Transfer to a finite function from every shape object to the full target-category arrow set.",
+        "Each leg is F(j)->vertex, and F(f);leg_k = leg_j for every shape arrow f:j->k. Colimits require unique outgoing factorization for every cocone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCoconeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "The shared opposite-cone search retains the 128-arrow/object category cap, 10000 enumerated cones and 1000000 search steps. Exhaustion raises IMPLEMENTATION_FAILURE. Only explicit finite diagrams and categories are supported."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCocone.leg-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "leg-map",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCocone.legs",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCoconeAlgebra",
+      "concept": "FiniteCocone.legs",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCocone",
+      "domain_B": null,
+      "domain_C": "Z",
+      "operation_signature": "FiniteCocone -> List(Z)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.legs",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit leg labels in ascending shape-object order, retaining duplicates.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Each leg is F(j)->vertex, and F(f);leg_k = leg_j for every shape arrow f:j->k. Colimits require unique outgoing factorization for every cocone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCoconeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "The shared opposite-cone search retains the 128-arrow/object category cap, 10000 enumerated cones and 1000000 search steps. Exhaustion raises IMPLEMENTATION_FAILURE. Only explicit finite diagrams and categories are supported."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCocone.legs",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "legs",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCocone.natural-transformation",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCoconeAlgebra",
+      "concept": "FiniteCocone.natural-transformation",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCocone",
+      "domain_B": null,
+      "domain_C": "FiniteNaturalTransformation",
+      "operation_signature": "FiniteCocone -> FiniteNaturalTransformation",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.natural-transformation",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the checked transformation from the retained diagram to the constant diagram at its vertex.",
+        "Each leg is F(j)->vertex, and F(f);leg_k = leg_j for every shape arrow f:j->k. Colimits require unique outgoing factorization for every cocone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCoconeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "The shared opposite-cone search retains the 128-arrow/object category cap, 10000 enumerated cones and 1000000 search steps. Exhaustion raises IMPLEMENTATION_FAILURE. Only explicit finite diagrams and categories are supported."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCocone.natural-transformation",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "natural-transformation",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCocone.is-colimit",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCoconeAlgebra",
+      "concept": "FiniteCocone.is-colimit",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCocone",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "FiniteCocone -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.is-colimit",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Exactly one commuting arrow must leave this cocone for every cocone over the same diagram. Resource exhaustion raises IMPLEMENTATION_FAILURE, never false.",
+        "Each leg is F(j)->vertex, and F(f);leg_k = leg_j for every shape arrow f:j->k. Colimits require unique outgoing factorization for every cocone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCoconeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "The shared opposite-cone search retains the 128-arrow/object category cap, 10000 enumerated cones and 1000000 search steps. Exhaustion raises IMPLEMENTATION_FAILURE. Only explicit finite diagrams and categories are supported."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCocone.is-colimit",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "is-colimit",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCocone.equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCoconeAlgebra",
+      "concept": "FiniteCocone.equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCocone",
+      "domain_B": "FiniteCocone",
+      "domain_C": "Boolean",
+      "operation_signature": "FiniteCocone x FiniteCocone -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Equality includes the labelled diagram, all legs and the vertex even for an empty shape.",
+        "Each leg is F(j)->vertex, and F(f);leg_k = leg_j for every shape arrow f:j->k. Colimits require unique outgoing factorization for every cocone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCoconeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "The shared opposite-cone search retains the 128-arrow/object category cap, 10000 enumerated cones and 1000000 search steps. Exhaustion raises IMPLEMENTATION_FAILURE. Only explicit finite diagrams and categories are supported."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCocone.equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCocone.descend",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCoconeAlgebra",
+      "concept": "FiniteCocone.descend",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCocone",
+      "domain_B": "FiniteCocone",
+      "domain_C": "Z",
+      "operation_signature": "FiniteCocone x FiniteCocone -> Z",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.descend",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The first cocone must satisfy the entire colimit property; the second has exactly the same diagram. Return the unique arrow from the first vertex to the second.",
+        "Each leg is F(j)->vertex, and F(f);leg_k = leg_j for every shape arrow f:j->k. Colimits require unique outgoing factorization for every cocone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCoconeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "The shared opposite-cone search retains the 128-arrow/object category cap, 10000 enumerated cones and 1000000 search steps. Exhaustion raises IMPLEMENTATION_FAILURE. Only explicit finite diagrams and categories are supported."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteCocone.descend",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "descend",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCocone.mediators",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCoconeAlgebra",
+      "concept": "FiniteCocone.mediators",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCocone",
+      "domain_B": "FiniteCocone",
+      "domain_C": "Z",
+      "operation_signature": "FiniteCocone x FiniteCocone -> List(Z)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.mediators",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Both cocones have exactly the same diagram; emit all commuting arrows from the first vertex to the second in ascending label order, possibly none or several.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Each leg is F(j)->vertex, and F(f);leg_k = leg_j for every shape arrow f:j->k. Colimits require unique outgoing factorization for every cocone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "groupimp/src/main/java/operations/flat/CustomResultFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCoconeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "The shared opposite-cone search retains the 128-arrow/object category cap, 10000 enumerated cones and 1000000 search steps. Exhaustion raises IMPLEMENTATION_FAILURE. Only explicit finite diagrams and categories are supported."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteCocone.mediators",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "mediators",
+      "legacy_operation_interface": "ICustomResultFlatOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCocone.reindex",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCoconeAlgebra",
+      "concept": "FiniteCocone.reindex",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCocone",
+      "domain_B": "FiniteFunctor",
+      "domain_C": "FiniteCocone",
+      "operation_signature": "FiniteCocone x FiniteFunctor -> FiniteCocone",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.reindex",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The functor targets the diagram shape; pull back the legs along its object map. The colimit property need not be preserved.",
+        "Each leg is F(j)->vertex, and F(f);leg_k = leg_j for every shape arrow f:j->k. Colimits require unique outgoing factorization for every cocone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCoconeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "The shared opposite-cone search retains the 128-arrow/object category cap, 10000 enumerated cones and 1000000 search steps. Exhaustion raises IMPLEMENTATION_FAILURE. Only explicit finite diagrams and categories are supported."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteCocone.reindex",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "reindex",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCocone.map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCoconeAlgebra",
+      "concept": "FiniteCocone.map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCocone",
+      "domain_B": "FiniteFunctor",
+      "domain_C": "FiniteCocone",
+      "operation_signature": "FiniteCocone x FiniteFunctor -> FiniteCocone",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The functor starts at the diagram target category; map the vertex and legs. The colimit property need not be preserved.",
+        "Each leg is F(j)->vertex, and F(f);leg_k = leg_j for every shape arrow f:j->k. Colimits require unique outgoing factorization for every cocone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCoconeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "The shared opposite-cone search retains the 128-arrow/object category cap, 10000 enumerated cones and 1000000 search steps. Exhaustion raises IMPLEMENTATION_FAILURE. Only explicit finite diagrams and categories are supported."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteCocone.map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "map",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCocone.colimit",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCoconeAlgebra",
+      "concept": "FiniteCocone.colimit",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteFunctor",
+      "domain_B": null,
+      "domain_C": "FiniteCocone",
+      "operation_signature": "FiniteFunctor -> FiniteCocone",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.colimit",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Search the opposite diagram for a limit and return its dual cocone, choosing least vertex then lexicographically least leg labels. Exhaustion differs from mathematical nonexistence.",
+        "Each leg is F(j)->vertex, and F(f);leg_k = leg_j for every shape arrow f:j->k. Colimits require unique outgoing factorization for every cocone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCoconeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "The shared opposite-cone search retains the 128-arrow/object category cap, 10000 enumerated cones and 1000000 search steps. Exhaustion raises IMPLEMENTATION_FAILURE. Only explicit finite diagrams and categories are supported."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteCocone.colimit",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "FiniteCocone.colimit",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCocone.cocones-at",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCoconeAlgebra",
+      "concept": "FiniteCocone.cocones-at",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteFunctor",
+      "domain_B": "Z",
+      "domain_C": "FiniteCocone",
+      "operation_signature": "FiniteFunctor x Z -> List(FiniteCocone)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.cocones-at",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The integer is an existing target-category object; emit all cocones at it in lexicographic leg order. Exhaustion never returns a truncated list.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Each leg is F(j)->vertex, and F(f);leg_k = leg_j for every shape arrow f:j->k. Colimits require unique outgoing factorization for every cocone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "groupimp/src/main/java/operations/flat/MixedFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCoconeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "The shared opposite-cone search retains the 128-arrow/object category cap, 10000 enumerated cones and 1000000 search steps. Exhaustion raises IMPLEMENTATION_FAILURE. Only explicit finite diagrams and categories are supported."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteCocone.cocones-at",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "FiniteCocone.cocones-at",
+      "legacy_operation_interface": "IUnsafeFlatOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCocone.from-transformation",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCoconeAlgebra",
+      "concept": "FiniteCocone.from-transformation",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteNaturalTransformation",
+      "domain_B": "Z",
+      "domain_C": "FiniteCocone",
+      "operation_signature": "FiniteNaturalTransformation x Z -> FiniteCocone",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.from-transformation",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The transformation must end at the constant diagram on the explicit vertex; its source becomes the cocone diagram.",
+        "Each leg is F(j)->vertex, and F(f);leg_k = leg_j for every shape arrow f:j->k. Colimits require unique outgoing factorization for every cocone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCoconeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "The shared opposite-cone search retains the 128-arrow/object category cap, 10000 enumerated cones and 1000000 search steps. Exhaustion raises IMPLEMENTATION_FAILURE. Only explicit finite diagrams and categories are supported."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteCocone.from-transformation",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "FiniteCocone.from-transformation",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCocone.opposite",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCoconeAlgebra",
+      "concept": "FiniteCocone.opposite",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCocone",
+      "domain_B": null,
+      "domain_C": "FiniteCone",
+      "operation_signature": "FiniteCocone -> FiniteCone",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.opposite",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return a cone over the opposite diagram, reversing all category arrows while retaining labels.",
+        "Each leg is F(j)->vertex, and F(f);leg_k = leg_j for every shape arrow f:j->k. Colimits require unique outgoing factorization for every cocone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCoconeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "The shared opposite-cone search retains the 128-arrow/object category cap, 10000 enumerated cones and 1000000 search steps. Exhaustion raises IMPLEMENTATION_FAILURE. Only explicit finite diagrams and categories are supported."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCocone.opposite",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "opposite",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCocone.opposite-cone",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteCoconeAlgebra",
+      "concept": "FiniteCocone.opposite-cone",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCone",
+      "domain_B": null,
+      "domain_C": "FiniteCocone",
+      "operation_signature": "FiniteCone -> FiniteCocone",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.opposite-cone",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Convert a cone to a cocone over its opposite diagram; this conversion is registered on the cone carrier.",
+        "Each leg is F(j)->vertex, and F(f);leg_k = leg_j for every shape arrow f:j->k. Colimits require unique outgoing factorization for every cocone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeCoconeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "The shared opposite-cone search retains the 128-arrow/object category cap, 10000 enumerated cones and 1000000 search steps. Exhaustion raises IMPLEMENTATION_FAILURE. Only explicit finite diagrams and categories are supported."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteCoconeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCocone.opposite-cone",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "FiniteCocone.opposite-cone",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
       "id": "concrete-operation.Z/5Z.add",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "PrimeField",
@@ -50156,6 +51430,13 @@
         "FiniteCategory.source",
         "FiniteCategory.target",
         "FiniteCategory.terminal-objects",
+        "FiniteCocone.cocones-at",
+        "FiniteCocone.descend",
+        "FiniteCocone.from-transformation",
+        "FiniteCocone.leg",
+        "FiniteCocone.legs",
+        "FiniteCocone.mediators",
+        "FiniteCocone.vertex",
         "FiniteComplex.dimension",
         "FiniteComplex.euler-characteristic",
         "FiniteCone.cones-at",
@@ -50499,6 +51780,8 @@
         "FiniteCategory.is-groupoid",
         "FiniteCategory.is-isomorphism",
         "FiniteCategory.is-thin",
+        "FiniteCocone.equal",
+        "FiniteCocone.is-colimit",
         "FiniteComplex.equal",
         "FiniteComplex.subcomplex",
         "FiniteCone.equal",
@@ -51478,6 +52761,7 @@
       ],
       "supported_operations": [
         "FiniteAdjunction.hom-map",
+        "FiniteCocone.leg-map",
         "FiniteCone.leg-map",
         "FiniteFunction(Z,Z).apply",
         "FiniteFunction(Z,Z).codomain",
@@ -51690,6 +52974,11 @@
         "FiniteAdjunction.from-right",
         "FiniteAdjunction.left",
         "FiniteAdjunction.right",
+        "FiniteCocone.cocones-at",
+        "FiniteCocone.colimit",
+        "FiniteCocone.diagram",
+        "FiniteCocone.map",
+        "FiniteCocone.reindex",
         "FiniteCone.cones-at",
         "FiniteCone.diagram",
         "FiniteCone.limit",
@@ -51768,6 +53057,8 @@
       "supported_operations": [
         "FiniteAdjunction.counit",
         "FiniteAdjunction.unit",
+        "FiniteCocone.from-transformation",
+        "FiniteCocone.natural-transformation",
         "FiniteCone.from-transformation",
         "FiniteCone.natural-transformation",
         "FiniteEquivalence.counit",
@@ -51941,6 +53232,8 @@
         "Z"
       ],
       "supported_operations": [
+        "FiniteCocone.opposite",
+        "FiniteCocone.opposite-cone",
         "FiniteCone.cones-at",
         "FiniteCone.diagram",
         "FiniteCone.equal",
@@ -51961,6 +53254,64 @@
         "Finite diagram with retained target vertex",
         "Exactly one typed leg per shape object",
         "Every cone equation checked; an empty shape still retains its vertex"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-22"
+      }
+    },
+    {
+      "id": "FiniteCocone",
+      "name": "Validated cocones over finite diagrams",
+      "description": "Validated cocones over finite diagrams",
+      "member_representation": "mathematics.structures.FiniteCocone",
+      "membership_rules": [
+        "Finite diagram and retained target vertex",
+        "Typed legs from every diagram object to the vertex",
+        "Every cocone equation checked; empty shapes retain the vertex"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "FiniteCone",
+        "FiniteFunctor",
+        "FiniteCategory",
+        "FiniteNaturalTransformation",
+        "FiniteFunction(Z,Z)",
+        "Z"
+      ],
+      "supported_operations": [
+        "FiniteCocone.cocones-at",
+        "FiniteCocone.colimit",
+        "FiniteCocone.descend",
+        "FiniteCocone.diagram",
+        "FiniteCocone.equal",
+        "FiniteCocone.from-transformation",
+        "FiniteCocone.is-colimit",
+        "FiniteCocone.leg",
+        "FiniteCocone.leg-map",
+        "FiniteCocone.legs",
+        "FiniteCocone.map",
+        "FiniteCocone.mediators",
+        "FiniteCocone.natural-transformation",
+        "FiniteCocone.opposite",
+        "FiniteCocone.opposite-cone",
+        "FiniteCocone.reindex",
+        "FiniteCocone.vertex"
+      ],
+      "invariants": [
+        "Finite diagram and retained target vertex",
+        "Typed legs from every diagram object to the vertex",
+        "Every cocone equation checked; empty shapes retain the vertex"
       ],
       "references": [
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"

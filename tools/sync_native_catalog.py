@@ -33,6 +33,7 @@ OWNERS = {
     "FiniteEquivalenceAlgebra": ("FiniteEquivalence", "Finite adjoint equivalences with explicit quasi-inverse, unit, counit and checked triangle identities"),
     "FiniteAdjunctionAlgebra": ("FiniteAdjunction", "Adjunctions of finite category tables with checked unit/counit and constructive finite adjoint search"),
     "FiniteConeAlgebra": ("FiniteCone", "Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks"),
+    "FiniteCoconeAlgebra": ("FiniteCocone", "Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories"),
     "SymmetricGroup": ("S3", "Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree"),
 }
 INTERFACES = {
@@ -66,6 +67,7 @@ EXTRA_TESTS = {
     "FiniteEquivalenceAlgebra": "NativeEquivalenceTest",
     "FiniteAdjunctionAlgebra": "NativeAdjunctionTest",
     "FiniteConeAlgebra": "NativeConeTest",
+    "FiniteCoconeAlgebra": "NativeCoconeTest",
     "SymmetricGroup": "NativePermutationTest",
     "ResidueRing": "NativeResidueRingTest",
 }
@@ -105,6 +107,25 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "FiniteCoconeAlgebra": {
+        "diagram": "Return the retained finite diagram J->C.",
+        "vertex": "Return the target vertex of all cocone legs; retain it even for an empty shape.",
+        "leg": "The argument is an existing shape object j; return the arrow F(j)->vertex in the integer algebra.",
+        "leg-map": "Transfer to a finite function from every shape object to the full target-category arrow set.",
+        "legs": "Emit leg labels in ascending shape-object order, retaining duplicates.",
+        "natural-transformation": "Return the checked transformation from the retained diagram to the constant diagram at its vertex.",
+        "is-colimit": "Exactly one commuting arrow must leave this cocone for every cocone over the same diagram. Resource exhaustion raises IMPLEMENTATION_FAILURE, never false.",
+        "equal": "Equality includes the labelled diagram, all legs and the vertex even for an empty shape.",
+        "descend": "The first cocone must satisfy the entire colimit property; the second has exactly the same diagram. Return the unique arrow from the first vertex to the second.",
+        "mediators": "Both cocones have exactly the same diagram; emit all commuting arrows from the first vertex to the second in ascending label order, possibly none or several.",
+        "reindex": "The functor targets the diagram shape; pull back the legs along its object map. The colimit property need not be preserved.",
+        "map": "The functor starts at the diagram target category; map the vertex and legs. The colimit property need not be preserved.",
+        "colimit": "Search the opposite diagram for a limit and return its dual cocone, choosing least vertex then lexicographically least leg labels. Exhaustion differs from mathematical nonexistence.",
+        "cocones-at": "The integer is an existing target-category object; emit all cocones at it in lexicographic leg order. Exhaustion never returns a truncated list.",
+        "from-transformation": "The transformation must end at the constant diagram on the explicit vertex; its source becomes the cocone diagram.",
+        "opposite": "Return a cone over the opposite diagram, reversing all category arrows while retaining labels.",
+        "opposite-cone": "Convert a cone to a cocone over its opposite diagram; this conversion is registered on the cone carrier.",
+    },
     "FiniteConeAlgebra": {
         "diagram": "Return the retained finite functor J->C.",
         "vertex": "Return the cone vertex object label in C, retained even for an empty shape J.",
@@ -371,6 +392,11 @@ def record(identifier, owner, concept, paths, operation=None):
         value["known_limitations"].append("Categories retain the 128-arrow/object cap. Each search is bounded at 10000 enumerated cones and 1000000 search steps; exhaustion raises IMPLEMENTATION_FAILURE. This is finite table search, not an infinite limit algorithm or formal proof.")
         value["references"] += ["https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
                                 "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"]
+    if owner == "FiniteCoconeAlgebra":
+        value["required_invariants"].append("Each leg is F(j)->vertex, and F(f);leg_k = leg_j for every shape arrow f:j->k. Colimits require unique outgoing factorization for every cocone.")
+        value["known_limitations"].append("The shared opposite-cone search retains the 128-arrow/object category cap, 10000 enumerated cones and 1000000 search steps. Exhaustion raises IMPLEMENTATION_FAILURE. Only explicit finite diagrams and categories are supported.")
+        value["references"] += ["https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+                                "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"]
     if owner == "RationalFunctionField":
         value["known_limitations"].append("Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented.")
         value["references"].append("https://docs.sympy.org/latest/modules/polys/domainsref.html")
@@ -402,6 +428,8 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("FiniteCocone", "Validated cocones over finite diagrams", "mathematics.structures.FiniteCocone",
+         ["Finite diagram and retained target vertex", "Typed legs from every diagram object to the vertex", "Every cocone equation checked; empty shapes retain the vertex"], ["FiniteCone", "FiniteFunctor", "FiniteCategory", "FiniteNaturalTransformation", "FiniteFunction(Z,Z)", "Z"]),
         ("FiniteCone", "Validated cones over finite diagrams", "mathematics.structures.FiniteCone",
          ["Finite diagram with retained target vertex", "Exactly one typed leg per shape object", "Every cone equation checked; an empty shape still retains its vertex"], ["FiniteFunctor", "FiniteCategory", "FiniteNaturalTransformation", "FiniteFunction(Z,Z)", "Z"]),
         ("FiniteAdjunction", "Validated finite adjunctions", "mathematics.structures.FiniteAdjunction",

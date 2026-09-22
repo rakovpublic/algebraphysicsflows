@@ -25,8 +25,8 @@ A future effect-aware operation description would need an explicit result constr
 | Category | Objects, indexed hom domains, identity, composability, associativity | Finite labelled tables implemented; general hom families still need indexed domains and law evidence |
 | Functor | Object and morphism maps preserving source/target, identities and composition | FiniteFunctorAlgebra checks total maps and all preservation equations for finite tables |
 | Natural transformation | Component for every object with naturality squares | FiniteNaturalTransformationAlgebra checks every component and square, with vertical/horizontal composition and pre/postcomposition |
-| Product/coproduct | Projections/injections and the relevant universal property | Finite products can be constructed as limits of discrete finite diagrams; dedicated coproduct witnesses remain to be added |
-| Limit/colimit | Diagram, cone/cocone and unique factorization | FiniteConeAlgebra checks cones and searches finite table limits with unique mediators; dedicated cocones/colimits remain to be added |
+| Product/coproduct | Projections/injections and the relevant universal property | Products and coproducts are constructed as finite diagram limits and colimits, with projections/injections and unique factorizations checked |
+| Limit/colimit | Diagram, cone/cocone and unique factorization | FiniteConeAlgebra and FiniteCoconeAlgebra check diagrams and search finite table limits/colimits with unique mediators |
 | Adjunction | Hom correspondence or unit/counit with triangle identities | FiniteAdjunctionAlgebra constructs finite adjoints and hom bijections; checks naturality and both triangles even for noninvertible components |
 | Monoidal/enriched category | Tensor/enrichment and specified coherence | Ordinary carrier graph is insufficient |
 | Higher/infinity category | Higher cells or a chosen model and coherence data | No general encoding or checked coherence implemented |
@@ -43,5 +43,7 @@ FiniteEquivalenceAlgebra constructs a quasi-inverse for a full, faithful and ess
 FiniteAdjunctionAlgebra also allows noninvertible units and counits. Finite universal-arrow search constructs a right adjoint to a supplied left functor, or dually a left adjoint to a supplied right functor. Hom correspondences transfer to the existing finite-function algebra and preserve their declared hom sets. The search decides existence only for the supplied finite tables within the existing category cap; no infinite adjoint functor theorem or proof-assistant kernel is implemented.
 
 FiniteConeAlgebra implements finite diagram cones as checked natural transformations and verifies unique factorization for limits. It constructs products and equalizers when they exist in the supplied finite ambient category, and empty-diagram limits recover terminal objects. Search is explicitly bounded; exhaustion differs from a proof of nonexistence. Mapping and reindexing retain cone equations but may lose the universal property. Infinite limits and external proof checking remain outside this implementation.
+
+FiniteCoconeAlgebra supplies the dual finite constructions: cocones, colimits, outgoing mediators, coproducts, coequalizers and empty-diagram initial objects. Opposite-diagram conversion reuses the checked cone search and its resource bounds. The tests independently check disjoint unions and quotient examples inside a small full category of finite sets; these algorithms do not assume that every ambient category contains the requested construction.
 
 The breadth of existing formal developments is a useful discovery source: [mathlib documentation](https://leanprover-community.github.io/mathlib4_docs/Mathlib.html). The present Java mappings are not extracted from or proved by mathlib.

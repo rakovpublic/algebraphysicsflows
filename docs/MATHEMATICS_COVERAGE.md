@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 775 |
-| DIRECTLY_SUPPORTED | 532 |
+| Scoped records | 793 |
+| DIRECTLY_SUPPORTED | 550 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 391 |
+| IMPLEMENTED | 409 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 459 |
+| MACHINE_TESTED | 477 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 368 | 368 | 0 | 0 | 0 | 368 | 0 | 0 |
+| Concrete MathTool algebras | 386 | 386 | 0 | 0 | 0 | 386 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -239,6 +239,24 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | FiniteCategory.terminal-objects | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.terminal-objects |
 | FiniteCategory.underlying-relation | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.underlying-relation |
 | FiniteCategoryAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables |
+| FiniteCocone.cocones-at | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.cocones-at |
+| FiniteCocone.colimit | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.colimit |
+| FiniteCocone.descend | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.descend |
+| FiniteCocone.diagram | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.diagram |
+| FiniteCocone.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.equal |
+| FiniteCocone.from-transformation | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.from-transformation |
+| FiniteCocone.is-colimit | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.is-colimit |
+| FiniteCocone.leg | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.leg |
+| FiniteCocone.leg-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.leg-map |
+| FiniteCocone.legs | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.legs |
+| FiniteCocone.map | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.map |
+| FiniteCocone.mediators | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.mediators |
+| FiniteCocone.natural-transformation | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.natural-transformation |
+| FiniteCocone.opposite | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.opposite |
+| FiniteCocone.opposite-cone | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.opposite-cone |
+| FiniteCocone.reindex | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.reindex |
+| FiniteCocone.vertex | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.vertex |
+| FiniteCoconeAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories |
 | FiniteComplex.betti-number | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.betti-number |
 | FiniteComplex.betti-numbers | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.betti-numbers |
 | FiniteComplex.dimension | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.dimension |
