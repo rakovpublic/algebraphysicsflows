@@ -16,6 +16,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final RationalField rationals=new RationalField(booleans);
     public final IntegerRing integers=new IntegerRing(rationals,booleans);
     public final NaturalSemiring naturals=new NaturalSemiring(integers);
+    public final SymmetricGroup permutations=new SymmetricGroup(3,naturals,integers,booleans);
     public final FiniteSimplicialAlgebra complexes=new FiniteSimplicialAlgebra(booleans,naturals,integers);
     public final RationalPolynomialRing polynomials=new RationalPolynomialRing(rationals,naturals);
     public final RationalFunctionField rationalFunctions=new RationalFunctionField(polynomials,rationals,booleans);
@@ -42,7 +43,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
             fields.add(new PrimeField(unit,prime));
         }
         primeFields=Collections.unmodifiableList(fields);
-        List<ConcreteAlgebra<?>> values=new ArrayList<>(Arrays.asList(booleans,naturals,integers,rationals,complexRationals,vectors,matrices,polynomials,rationalFunctions,integerSets,samples,integerProbabilities,complexes,integerRelations));
+        List<ConcreteAlgebra<?>> values=new ArrayList<>(Arrays.asList(booleans,naturals,integers,rationals,complexRationals,vectors,matrices,polynomials,rationalFunctions,integerSets,samples,integerProbabilities,complexes,integerRelations,permutations));
         values.addAll(fields); algebras=Collections.unmodifiableList(values);
         for(ConcreteAlgebra<?> algebra : algebras) {
             algebra.register(mathTool);

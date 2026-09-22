@@ -25,6 +25,7 @@ OWNERS = {
     "FiniteProbabilityAlgebra": ("FiniteDistribution(Z)", "Finite integer distributions with exact nonnegative rational masses summing to one"),
     "FiniteSimplicialAlgebra": ("FiniteComplex", "Finite abstract simplicial complexes with integer labels and unreduced homology over F2"),
     "FiniteIntegerRelationAlgebra": ("FiniteRelation(Z,Z)", "Finite-support relations on the actual registered integer Algebra"),
+    "SymmetricGroup": ("S3", "Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree"),
 }
 INTERFACES = {
     "IOperation": "simple/ClosedOperation",
@@ -50,6 +51,7 @@ EXTRA_TESTS = {
     "FiniteProbabilityAlgebra": "NativeStatisticsProbabilityTest",
     "FiniteSimplicialAlgebra": "NativeTopologyTest",
     "FiniteIntegerRelationAlgebra": "NativeRelationTest",
+    "SymmetricGroup": "NativePermutationTest",
 }
 CONDITIONS = {
     "divide": "The divisor must be nonzero.",
@@ -100,6 +102,15 @@ OWNER_CONDITIONS = {
         "compose": "Formal f(g(x)); undefined if substitution makes the reduced denominator identically zero.",
         "evaluate": "The reduced denominator must be nonzero at the rational evaluation point.",
         "inverse": "The rational function must be nonzero.",
+    },
+    "SymmetricGroup": {
+        "compose": "Composition is p(q(i)); the right operand acts first, and degrees must match.",
+        "inverse": "Every permutation has an inverse in the same fixed-degree group.",
+        "apply": "The natural-number point must be less than the permutation degree.",
+        "orbit": "The point is less than the degree; emit its finite cycle beginning at that point, without repeating the endpoint.",
+        "power": "The exponent is any BigInteger, including negative values; cycle lengths determine the result.",
+        "cycles": "Emit nontrivial disjoint cycle permutations on the same full carrier; identity emits an empty list.",
+        "elements": "Enumerate the entire fixed-degree group in lexicographic image order, within the explicit resource cap.",
     },
 }
 
@@ -170,7 +181,7 @@ def record(identifier, owner, concept, paths, operation=None):
             value["required_invariants"].append("Finite ordered wrapped results; duplicates and empty lists are retained.")
         if operation_name == "subsets":
             value["known_limitations"].append("Materialization is capped at 20 input elements; exceeding it is IMPLEMENTATION_FAILURE, not mathematical nonexistence.")
-        if operation_name in ("iterate", "orbit"):
+        if owner == "RationalPolynomialRing" and operation_name in ("iterate", "orbit"):
             value["known_limitations"].append("Iteration is capped at 10000 steps; exceeding it is IMPLEMENTATION_FAILURE. Exact values can still grow rapidly within this limit.")
         if operation_name in ("argmin", "argmax", "minimum", "maximum", "minimizers", "maximizers"):
             value["known_limitations"].append("Optimality is relative only to the explicit finite feasible set, not all integers or reals.")
@@ -183,6 +194,9 @@ def record(identifier, owner, concept, paths, operation=None):
     if owner == "RationalFunctionField":
         value["known_limitations"].append("Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented.")
         value["references"].append("https://docs.sympy.org/latest/modules/polys/domainsref.html")
+    if owner == "SymmetricGroup":
+        value["known_limitations"].append("Labels are zero-based and the degree is fixed. Full enumeration is capped at degree 8; higher-degree groups and individual operations remain representable.")
+        value["references"].append("https://doc.sagemath.org/html/en/reference/combinat/sage/combinat/permutation.html")
     return value
 
 
@@ -205,6 +219,8 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("S3", "Symmetric group on three labels", "mathematics.structures.Permutation",
+         ["Images bijectively cover 0,1,2", "Composition uses the same fixed degree"], ["N", "Z"]),
         ("Q(x)", "Rational function field", "mathematics.calculus.RationalFunction",
          ["Coprime rational-coefficient numerator and denominator", "Denominator is nonzero and monic; zero is 0/1"], ["Q", "Q[x]"]),
         ("FiniteRelation(Z,Z)", "Finite integer relations", "mathematics.foundations.FiniteRelation<BigInteger,BigInteger>",

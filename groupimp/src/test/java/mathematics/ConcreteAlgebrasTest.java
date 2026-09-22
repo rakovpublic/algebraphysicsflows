@@ -20,7 +20,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all186RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all198RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         expected.put("BooleanAlgebra","false|true|true|false|false|false|false|true");
@@ -38,6 +38,7 @@ public class ConcreteAlgebrasTest {
         expected.put("FiniteSimplicialAlgebra","Complex[[0], [1], [2], [0, 1], [0, 2], [1, 2], [0, 1, 2]]|Complex[[0], [1], [2], [0, 1], [0, 2], [1, 2]]|false|true|1|0|3|0|0|Complex[[0], [1], [2], [0, 1], [0, 2], [1, 2]]|[1, 1]|Complex[]");
         expected.put("FiniteIntegerRelationAlgebra","Relation[(1,2), (2,3), (2,4), (3,5)]|Relation[]|Relation[(1,4), (2,5)]|Relation[(2,1), (3,2)]|Relation[(1,2), (2,3), (1,3)]|false|false|[1, 2]|[2, 3]|2|true|[2, 3]|[1, 2]|false|Relation[]|Relation[(1,1), (2,2)]");
         expected.put("RationalFunctionField","Q(x)(Q[x][1, 1, 1])/(Q[x][0, 1])|Q(x)(Q[x][1, -1, -1])/(Q[x][0, 1])|Q(x)(Q[x][1, 1])/(Q[x][0, 1])|Q(x)(Q[x][1])/(Q[x][0, 1, 1])|Q(x)(Q[x][1])/(Q[x][1, 1])|Q(x)(Q[x][-1])/(Q[x][0, 1])|Q(x)(Q[x][0, 1])/(Q[x][1])|Q(x)(Q[x][-1])/(Q[x][0, 0, 1])|1/2|Q[x][1]|Q[x][0, 1]|Q(x)(Q[x][1, 2, 1])/(Q[x][1])|false|Q(x)(Q[x][0])/(Q[x][1])|Q(x)(Q[x][1])/(Q[x][1])");
+        expected.put("SymmetricGroup","Perm[2, 1, 0]|Perm[2, 0, 1]|false|3|1|0|0|Perm[2, 0, 1]|[2, 0, 1]|[Perm[1, 2, 0]]|Perm[0, 1, 2]|[Perm[0, 1, 2], Perm[0, 2, 1], Perm[1, 0, 2], Perm[1, 2, 0], Perm[2, 0, 1], Perm[2, 1, 0]]");
         int count=0;
         for(ConcreteAlgebra<?> algebra : math.algebras()) {
             String[] values=expected.get(algebra.getClass().getSimpleName()).split("\\|",-1);
@@ -47,7 +48,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(186,count);
+        assertEquals(198,count);
     }
     @SuppressWarnings({"unchecked","rawtypes"})
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
@@ -105,6 +106,7 @@ public class ConcreteAlgebrasTest {
             case "Q(x)": return index==0
                     ?new mathematics.calculus.RationalFunction(Polynomial.ONE,new Polynomial(Rational.ZERO,Rational.ONE))
                     :mathematics.calculus.RationalFunction.of(new Polynomial(Rational.ONE,Rational.ONE));
+            case "S3": return index==0?new mathematics.structures.Permutation(1,2,0):new mathematics.structures.Permutation(1,0,2);
             case "QxQ.bounds": return new Pair<>(Rational.ZERO,Rational.ONE);
             case "QxN.iteration": return new Pair<>(Rational.ZERO,BigInteger.valueOf(2));
             case "ZxZ.relation": return new Pair<>(BigInteger.ONE,BigInteger.valueOf(2));

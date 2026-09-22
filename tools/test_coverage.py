@@ -77,6 +77,9 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("truncates", " ".join(records["Z.quotient"]["required_invariants"]))
         self.assertIn("f(g(x))", " ".join(records["Q(x).compose"]["required_invariants"]))
         self.assertIn("first relation", " ".join(records["FiniteRelation(Z,Z).compose"]["required_invariants"]))
+        self.assertIn("Every permutation", " ".join(records["S3.inverse"]["required_invariants"]))
+        self.assertNotIn("10000", " ".join(records["S3.orbit"]["known_limitations"]))
+        self.assertIn("10000", " ".join(records["Q[x].orbit"]["known_limitations"]))
 
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)

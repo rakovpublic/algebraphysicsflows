@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 608 |
-| DIRECTLY_SUPPORTED | 365 |
+| Scoped records | 621 |
+| DIRECTLY_SUPPORTED | 378 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 224 |
+| IMPLEMENTED | 237 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 292 |
+| MACHINE_TESTED | 305 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 201 | 201 | 0 | 0 | 0 | 201 | 0 | 0 |
+| Concrete MathTool algebras | 214 | 214 | 0 | 0 | 0 | 214 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -353,6 +353,18 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | RationalPolynomialRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients |
 | RationalSampleAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations |
 | RationalVectorSpace | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed-dimensional rational vectors; default dimension two |
+| S3.apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree; native operation S3.apply |
+| S3.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree; native operation S3.compose |
+| S3.cycles | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree; native operation S3.cycles |
+| S3.elements | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree; native operation S3.elements |
+| S3.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree; native operation S3.equal |
+| S3.fixed-point-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree; native operation S3.fixed-point-count |
+| S3.identity | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree; native operation S3.identity |
+| S3.inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree; native operation S3.inverse |
+| S3.orbit | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree; native operation S3.orbit |
+| S3.order | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree; native operation S3.order |
+| S3.power | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree; native operation S3.power |
+| S3.sign | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree; native operation S3.sign |
 | Sample(Q).center | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations; native operation Sample(Q).center |
 | Sample(Q).concatenate | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations; native operation Sample(Q).concatenate |
 | Sample(Q).elements | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations; native operation Sample(Q).elements |
@@ -364,6 +376,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Sample(Q).sample-variance | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations; native operation Sample(Q).sample-variance |
 | Sample(Q).scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations; native operation Sample(Q).scale |
 | Sample(Q).size | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations; native operation Sample(Q).size |
+| SymmetricGroup | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree |
 | Z.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient; native operation Z.add |
 | Z.divide-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient; native operation Z.divide-rational |
 | Z.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient; native operation Z.equal |
