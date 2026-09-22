@@ -26,6 +26,7 @@ OWNERS = {
     "FiniteProbabilityAlgebra": ("FiniteDistribution(Z)", "Finite integer distributions with exact nonnegative rational masses summing to one"),
     "FiniteSimplicialAlgebra": ("FiniteComplex", "Finite abstract simplicial complexes with integer labels and unreduced homology over F2"),
     "FiniteIntegerRelationAlgebra": ("FiniteRelation(Z,Z)", "Finite-support relations on the actual registered integer Algebra"),
+    "FiniteIntegerFunctionAlgebra": ("FiniteFunction(Z,Z)", "Total maps between explicit finite integer sets, preserving declared domain and codomain"),
     "SymmetricGroup": ("S3", "Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree"),
 }
 INTERFACES = {
@@ -52,6 +53,7 @@ EXTRA_TESTS = {
     "FiniteProbabilityAlgebra": "NativeStatisticsProbabilityTest",
     "FiniteSimplicialAlgebra": "NativeTopologyTest",
     "FiniteIntegerRelationAlgebra": "NativeRelationTest",
+    "FiniteIntegerFunctionAlgebra": "NativeFiniteFunctionTest",
     "SymmetricGroup": "NativePermutationTest",
     "ResidueRing": "NativeResidueRingTest",
 }
@@ -91,6 +93,20 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "FiniteIntegerFunctionAlgebra": {
+        "compose": "Composition is f(g(x)); declared middle finite sets and actual Algebra instances must match exactly.",
+        "inverse": "The function must be a bijection onto its entire declared finite codomain.",
+        "apply": "The point must belong to the function's declared finite domain.",
+        "image": "The input set must be a subset of the declared finite domain.",
+        "preimage": "The input set must be a subset of the declared finite codomain.",
+        "restrict": "The input is a subset of the domain; restriction retains the original declared codomain.",
+        "values": "Emit one image per domain member in domain iteration order, preserving repeated values.",
+        "preimage-of": "The point belongs to the declared codomain; emit its fiber in domain order, possibly empty.",
+        "equal": "Equality includes source/target Algebra identity, declared domain and codomain, and every mapped value.",
+        "identity-on": "Construct identity on the supplied finite integer set, with that set also as codomain.",
+        "from-relation": "The relation assigns exactly one value to each declared domain member and no others; every value belongs to the declared codomain.",
+        "graph": "Return the finite relation of mapped pairs; the graph does not retain unused codomain members.",
+    },
     "ResidueRing": {
         "divide": "The divisor must be a unit: gcd(divisor,modulus)=1; nonzero alone is insufficient.",
         "inverse": "The residue must be a unit: gcd(value,modulus)=1.",
@@ -203,6 +219,9 @@ def record(identifier, owner, concept, paths, operation=None):
         value["references"].append("https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html")
     if owner == "FiniteIntegerRelationAlgebra":
         value["known_limitations"].append("Finite support only; equality includes source/target Algebra identity and pair equality. Function totality is restricted to an explicit finite carrier.")
+    if owner == "FiniteIntegerFunctionAlgebra":
+        value["known_limitations"].append("Finite stored maps only; this does not implement arbitrary callback or infinite-domain function spaces. Codomain equality is required for typed composition even if the actual range is smaller.")
+        value["references"].append("https://doc.sagemath.org/html/en/reference/sets/sage/sets/finite_set_maps.html")
     if owner == "RationalFunctionField":
         value["known_limitations"].append("Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented.")
         value["references"].append("https://docs.sympy.org/latest/modules/polys/domainsref.html")
@@ -234,6 +253,10 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("FiniteFunction(Z,Z)", "Functions between finite integer sets", "mathematics.foundations.FiniteFunction<BigInteger,BigInteger>",
+         ["Explicit finite domain and codomain in the registered integer Algebra", "Exactly one value in the codomain for every domain member", "Equality retains the declared codomain"], ["Z", "FiniteSet(Z)", "FiniteRelation(Z,Z)"]),
+        ("FiniteSet(Z)xFiniteSet(Z).function", "Declared finite function boundaries", "mathematics.foundations.Pair<FiniteSet<BigInteger>,FiniteSet<BigInteger>>",
+         ["Both coordinates are finite integer sets", "First is domain and second is codomain"], ["FiniteSet(Z)"]),
         ("Z/6Z", "Residue ring modulo six", "mathematics.numbers.ModularInteger",
          ["Fixed modulus six", "Canonical representatives from zero through five", "Composite modulus permits nonzero nonunits"], ["Z"]),
         ("S3", "Symmetric group on three labels", "mathematics.structures.Permutation",

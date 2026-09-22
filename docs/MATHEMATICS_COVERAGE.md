@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 638 |
-| DIRECTLY_SUPPORTED | 395 |
+| Scoped records | 659 |
+| DIRECTLY_SUPPORTED | 416 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 254 |
+| IMPLEMENTED | 275 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 322 |
+| MACHINE_TESTED | 343 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 231 | 231 | 0 | 0 | 0 | 231 | 0 | 0 |
+| Concrete MathTool algebras | 252 | 252 | 0 | 0 | 0 | 252 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -217,6 +217,27 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | FiniteDistribution(Z).support | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer distributions with exact nonnegative rational masses summing to one; native operation FiniteDistribution(Z).support |
 | FiniteDistribution(Z).support-size | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer distributions with exact nonnegative rational masses summing to one; native operation FiniteDistribution(Z).support-size |
 | FiniteDistribution(Z).variance | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer distributions with exact nonnegative rational masses summing to one; native operation FiniteDistribution(Z).variance |
+| FiniteFunction(Z,Z).apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).apply |
+| FiniteFunction(Z,Z).codomain | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).codomain |
+| FiniteFunction(Z,Z).compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).compose |
+| FiniteFunction(Z,Z).domain | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).domain |
+| FiniteFunction(Z,Z).empty | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).empty |
+| FiniteFunction(Z,Z).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).equal |
+| FiniteFunction(Z,Z).from-relation | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).from-relation |
+| FiniteFunction(Z,Z).graph | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).graph |
+| FiniteFunction(Z,Z).identity-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).identity-on |
+| FiniteFunction(Z,Z).image | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).image |
+| FiniteFunction(Z,Z).inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).inverse |
+| FiniteFunction(Z,Z).is-bijective | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).is-bijective |
+| FiniteFunction(Z,Z).is-injective | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).is-injective |
+| FiniteFunction(Z,Z).is-surjective | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).is-surjective |
+| FiniteFunction(Z,Z).preimage | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).preimage |
+| FiniteFunction(Z,Z).preimage-of | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).preimage-of |
+| FiniteFunction(Z,Z).range | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).range |
+| FiniteFunction(Z,Z).restrict | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).restrict |
+| FiniteFunction(Z,Z).size | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).size |
+| FiniteFunction(Z,Z).values | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).values |
+| FiniteIntegerFunctionAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain |
 | FiniteIntegerRelationAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite-support relations on the actual registered integer Algebra |
 | FiniteProbabilityAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer distributions with exact nonnegative rational masses summing to one |
 | FiniteRelation(Z,Z).cardinality | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).cardinality |

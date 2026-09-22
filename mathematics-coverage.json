@@ -25095,6 +25095,68 @@
       "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
     },
     {
+      "id": "concrete-algebra.FiniteIntegerFunctionAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerFunctionAlgebra",
+      "concept": "FiniteIntegerFunctionAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "FiniteFunction(Z,Z)",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Total maps between explicit finite integer sets, preserving declared domain and codomain",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFiniteFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite stored maps only; this does not implement arbitrary callback or infinite-domain function spaces. Codomain equality is required for typed composition even if the actual range is smaller."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/sets/sage/sets/finite_set_maps.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
       "id": "concrete-algebra.FiniteIntegerRelationAlgebra",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "FiniteIntegerRelationAlgebra",
@@ -39869,6 +39931,1380 @@
       "legacy_operation_interface": "ITransferFlatOperation"
     },
     {
+      "id": "concrete-operation.FiniteFunction(Z,Z).compose",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerFunctionAlgebra",
+      "concept": "FiniteFunction(Z,Z).compose",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteFunction(Z,Z)",
+      "domain_B": "FiniteFunction(Z,Z)",
+      "domain_C": "FiniteFunction(Z,Z)",
+      "operation_signature": "FiniteFunction(Z,Z) x FiniteFunction(Z,Z) -> FiniteFunction(Z,Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).compose",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Composition is f(g(x)); declared middle finite sets and actual Algebra instances must match exactly."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFiniteFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite stored maps only; this does not implement arbitrary callback or infinite-domain function spaces. Codomain equality is required for typed composition even if the actual range is smaller."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/sets/sage/sets/finite_set_maps.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteFunction(Z,Z).compose",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "compose",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteFunction(Z,Z).inverse",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerFunctionAlgebra",
+      "concept": "FiniteFunction(Z,Z).inverse",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteFunction(Z,Z)",
+      "domain_B": null,
+      "domain_C": "FiniteFunction(Z,Z)",
+      "operation_signature": "FiniteFunction(Z,Z) -> FiniteFunction(Z,Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).inverse",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The function must be a bijection onto its entire declared finite codomain."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFiniteFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite stored maps only; this does not implement arbitrary callback or infinite-domain function spaces. Codomain equality is required for typed composition even if the actual range is smaller."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/sets/sage/sets/finite_set_maps.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteFunction(Z,Z).inverse",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "inverse",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteFunction(Z,Z).domain",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerFunctionAlgebra",
+      "concept": "FiniteFunction(Z,Z).domain",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteFunction(Z,Z)",
+      "domain_B": null,
+      "domain_C": "FiniteSet(Z)",
+      "operation_signature": "FiniteFunction(Z,Z) -> FiniteSet(Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).domain",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFiniteFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite stored maps only; this does not implement arbitrary callback or infinite-domain function spaces. Codomain equality is required for typed composition even if the actual range is smaller."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/sets/sage/sets/finite_set_maps.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteFunction(Z,Z).domain",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "domain",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteFunction(Z,Z).codomain",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerFunctionAlgebra",
+      "concept": "FiniteFunction(Z,Z).codomain",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteFunction(Z,Z)",
+      "domain_B": null,
+      "domain_C": "FiniteSet(Z)",
+      "operation_signature": "FiniteFunction(Z,Z) -> FiniteSet(Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).codomain",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFiniteFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite stored maps only; this does not implement arbitrary callback or infinite-domain function spaces. Codomain equality is required for typed composition even if the actual range is smaller."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/sets/sage/sets/finite_set_maps.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteFunction(Z,Z).codomain",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "codomain",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteFunction(Z,Z).range",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerFunctionAlgebra",
+      "concept": "FiniteFunction(Z,Z).range",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteFunction(Z,Z)",
+      "domain_B": null,
+      "domain_C": "FiniteSet(Z)",
+      "operation_signature": "FiniteFunction(Z,Z) -> FiniteSet(Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).range",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFiniteFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite stored maps only; this does not implement arbitrary callback or infinite-domain function spaces. Codomain equality is required for typed composition even if the actual range is smaller."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/sets/sage/sets/finite_set_maps.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteFunction(Z,Z).range",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "range",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteFunction(Z,Z).graph",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerFunctionAlgebra",
+      "concept": "FiniteFunction(Z,Z).graph",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteFunction(Z,Z)",
+      "domain_B": null,
+      "domain_C": "FiniteRelation(Z,Z)",
+      "operation_signature": "FiniteFunction(Z,Z) -> FiniteRelation(Z,Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).graph",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the finite relation of mapped pairs; the graph does not retain unused codomain members."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFiniteFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite stored maps only; this does not implement arbitrary callback or infinite-domain function spaces. Codomain equality is required for typed composition even if the actual range is smaller."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/sets/sage/sets/finite_set_maps.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteFunction(Z,Z).graph",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "graph",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteFunction(Z,Z).size",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerFunctionAlgebra",
+      "concept": "FiniteFunction(Z,Z).size",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteFunction(Z,Z)",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "FiniteFunction(Z,Z) -> N",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).size",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFiniteFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite stored maps only; this does not implement arbitrary callback or infinite-domain function spaces. Codomain equality is required for typed composition even if the actual range is smaller."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/sets/sage/sets/finite_set_maps.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteFunction(Z,Z).size",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "size",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteFunction(Z,Z).is-injective",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerFunctionAlgebra",
+      "concept": "FiniteFunction(Z,Z).is-injective",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteFunction(Z,Z)",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "FiniteFunction(Z,Z) -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).is-injective",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFiniteFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite stored maps only; this does not implement arbitrary callback or infinite-domain function spaces. Codomain equality is required for typed composition even if the actual range is smaller."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/sets/sage/sets/finite_set_maps.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteFunction(Z,Z).is-injective",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "is-injective",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteFunction(Z,Z).is-surjective",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerFunctionAlgebra",
+      "concept": "FiniteFunction(Z,Z).is-surjective",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteFunction(Z,Z)",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "FiniteFunction(Z,Z) -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).is-surjective",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFiniteFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite stored maps only; this does not implement arbitrary callback or infinite-domain function spaces. Codomain equality is required for typed composition even if the actual range is smaller."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/sets/sage/sets/finite_set_maps.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteFunction(Z,Z).is-surjective",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "is-surjective",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteFunction(Z,Z).is-bijective",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerFunctionAlgebra",
+      "concept": "FiniteFunction(Z,Z).is-bijective",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteFunction(Z,Z)",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "FiniteFunction(Z,Z) -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).is-bijective",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFiniteFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite stored maps only; this does not implement arbitrary callback or infinite-domain function spaces. Codomain equality is required for typed composition even if the actual range is smaller."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/sets/sage/sets/finite_set_maps.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteFunction(Z,Z).is-bijective",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "is-bijective",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteFunction(Z,Z).apply",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerFunctionAlgebra",
+      "concept": "FiniteFunction(Z,Z).apply",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteFunction(Z,Z)",
+      "domain_B": "Z",
+      "domain_C": "Z",
+      "operation_signature": "FiniteFunction(Z,Z) x Z -> Z",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).apply",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The point must belong to the function's declared finite domain."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFiniteFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite stored maps only; this does not implement arbitrary callback or infinite-domain function spaces. Codomain equality is required for typed composition even if the actual range is smaller."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/sets/sage/sets/finite_set_maps.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteFunction(Z,Z).apply",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "apply",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteFunction(Z,Z).image",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerFunctionAlgebra",
+      "concept": "FiniteFunction(Z,Z).image",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteFunction(Z,Z)",
+      "domain_B": "FiniteSet(Z)",
+      "domain_C": "FiniteSet(Z)",
+      "operation_signature": "FiniteFunction(Z,Z) x FiniteSet(Z) -> FiniteSet(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).image",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The input set must be a subset of the declared finite domain."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFiniteFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite stored maps only; this does not implement arbitrary callback or infinite-domain function spaces. Codomain equality is required for typed composition even if the actual range is smaller."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/sets/sage/sets/finite_set_maps.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteFunction(Z,Z).image",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "image",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteFunction(Z,Z).preimage",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerFunctionAlgebra",
+      "concept": "FiniteFunction(Z,Z).preimage",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteFunction(Z,Z)",
+      "domain_B": "FiniteSet(Z)",
+      "domain_C": "FiniteSet(Z)",
+      "operation_signature": "FiniteFunction(Z,Z) x FiniteSet(Z) -> FiniteSet(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).preimage",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The input set must be a subset of the declared finite codomain."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFiniteFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite stored maps only; this does not implement arbitrary callback or infinite-domain function spaces. Codomain equality is required for typed composition even if the actual range is smaller."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/sets/sage/sets/finite_set_maps.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteFunction(Z,Z).preimage",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "preimage",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteFunction(Z,Z).restrict",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerFunctionAlgebra",
+      "concept": "FiniteFunction(Z,Z).restrict",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteFunction(Z,Z)",
+      "domain_B": "FiniteSet(Z)",
+      "domain_C": "FiniteFunction(Z,Z)",
+      "operation_signature": "FiniteFunction(Z,Z) x FiniteSet(Z) -> FiniteFunction(Z,Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).restrict",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The input is a subset of the domain; restriction retains the original declared codomain."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFiniteFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite stored maps only; this does not implement arbitrary callback or infinite-domain function spaces. Codomain equality is required for typed composition even if the actual range is smaller."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/sets/sage/sets/finite_set_maps.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteFunction(Z,Z).restrict",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "restrict",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteFunction(Z,Z).values",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerFunctionAlgebra",
+      "concept": "FiniteFunction(Z,Z).values",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteFunction(Z,Z)",
+      "domain_B": null,
+      "domain_C": "Z",
+      "operation_signature": "FiniteFunction(Z,Z) -> List(Z)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).values",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit one image per domain member in domain iteration order, preserving repeated values.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFiniteFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite stored maps only; this does not implement arbitrary callback or infinite-domain function spaces. Codomain equality is required for typed composition even if the actual range is smaller."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/sets/sage/sets/finite_set_maps.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteFunction(Z,Z).values",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "values",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteFunction(Z,Z).preimage-of",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerFunctionAlgebra",
+      "concept": "FiniteFunction(Z,Z).preimage-of",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteFunction(Z,Z)",
+      "domain_B": "Z",
+      "domain_C": "Z",
+      "operation_signature": "FiniteFunction(Z,Z) x Z -> List(Z)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).preimage-of",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The point belongs to the declared codomain; emit its fiber in domain order, possibly empty.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "groupimp/src/main/java/operations/flat/SecondResultFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFiniteFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite stored maps only; this does not implement arbitrary callback or infinite-domain function spaces. Codomain equality is required for typed composition even if the actual range is smaller."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/sets/sage/sets/finite_set_maps.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteFunction(Z,Z).preimage-of",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "preimage-of",
+      "legacy_operation_interface": "ILeftProjectionFlatOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteFunction(Z,Z).equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerFunctionAlgebra",
+      "concept": "FiniteFunction(Z,Z).equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteFunction(Z,Z)",
+      "domain_B": "FiniteFunction(Z,Z)",
+      "domain_C": "Boolean",
+      "operation_signature": "FiniteFunction(Z,Z) x FiniteFunction(Z,Z) -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Equality includes source/target Algebra identity, declared domain and codomain, and every mapped value."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFiniteFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite stored maps only; this does not implement arbitrary callback or infinite-domain function spaces. Codomain equality is required for typed composition even if the actual range is smaller."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/sets/sage/sets/finite_set_maps.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteFunction(Z,Z).equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteFunction(Z,Z).identity-on",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerFunctionAlgebra",
+      "concept": "FiniteFunction(Z,Z).identity-on",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteSet(Z)",
+      "domain_B": null,
+      "domain_C": "FiniteFunction(Z,Z)",
+      "operation_signature": "FiniteSet(Z) -> FiniteFunction(Z,Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).identity-on",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Construct identity on the supplied finite integer set, with that set also as codomain."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFiniteFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite stored maps only; this does not implement arbitrary callback or infinite-domain function spaces. Codomain equality is required for typed composition even if the actual range is smaller."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/sets/sage/sets/finite_set_maps.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteFunction(Z,Z).identity-on",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "FiniteFunction(Z,Z).identity-on",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteFunction(Z,Z).from-relation",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerFunctionAlgebra",
+      "concept": "FiniteFunction(Z,Z).from-relation",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteRelation(Z,Z)",
+      "domain_B": "FiniteSet(Z)xFiniteSet(Z).function",
+      "domain_C": "FiniteFunction(Z,Z)",
+      "operation_signature": "FiniteRelation(Z,Z) x FiniteSet(Z)xFiniteSet(Z).function -> FiniteFunction(Z,Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).from-relation",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The relation assigns exactly one value to each declared domain member and no others; every value belongs to the declared codomain."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFiniteFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite stored maps only; this does not implement arbitrary callback or infinite-domain function spaces. Codomain equality is required for typed composition even if the actual range is smaller."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/sets/sage/sets/finite_set_maps.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteFunction(Z,Z).from-relation",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "FiniteFunction(Z,Z).from-relation",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteFunction(Z,Z).empty",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerFunctionAlgebra",
+      "concept": "FiniteFunction(Z,Z).empty",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "FiniteFunction(Z,Z)",
+      "operation_signature": "Unit -> FiniteFunction(Z,Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Total maps between explicit finite integer sets, preserving declared domain and codomain; native operation FiniteFunction(Z,Z).empty",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFiniteFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite stored maps only; this does not implement arbitrary callback or infinite-domain function spaces. Codomain equality is required for typed composition even if the actual range is smaller."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/sets/sage/sets/finite_set_maps.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerFunctionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteFunction(Z,Z).empty",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "FiniteFunction(Z,Z).empty",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
       "id": "concrete-operation.Z/5Z.add",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "PrimeField",
@@ -40474,6 +41910,7 @@
         "FiniteComplex.skeleton",
         "FiniteComplex.vertex-count",
         "FiniteDistribution(Z).support-size",
+        "FiniteFunction(Z,Z).size",
         "FiniteRelation(Z,Z).cardinality",
         "FiniteSet(Z).cardinality",
         "Mat2(Q).rank",
@@ -40532,6 +41969,9 @@
         "FiniteDistribution(Z).outcomes",
         "FiniteDistribution(Z).point-mass",
         "FiniteDistribution(Z).point-probability",
+        "FiniteFunction(Z,Z).apply",
+        "FiniteFunction(Z,Z).preimage-of",
+        "FiniteFunction(Z,Z).values",
         "FiniteSet(Z).contains",
         "FiniteSet(Z).elements",
         "FiniteSet(Z).insert",
@@ -40847,6 +42287,10 @@
         "FiniteComplex.equal",
         "FiniteComplex.subcomplex",
         "FiniteDistribution(Z).equal",
+        "FiniteFunction(Z,Z).equal",
+        "FiniteFunction(Z,Z).is-bijective",
+        "FiniteFunction(Z,Z).is-injective",
+        "FiniteFunction(Z,Z).is-surjective",
         "FiniteRelation(Z,Z).contains",
         "FiniteRelation(Z,Z).equal",
         "FiniteRelation(Z,Z).is-function-on",
@@ -40897,6 +42341,7 @@
         "Boolean.one",
         "Boolean.zero",
         "FiniteComplex.empty",
+        "FiniteFunction(Z,Z).empty",
         "FiniteRelation(Z,Z).empty",
         "FiniteSet(Z).empty",
         "Mat2(Q).one",
@@ -41366,6 +42811,13 @@
         "FiniteDistribution(Z).condition",
         "FiniteDistribution(Z).event-probability",
         "FiniteDistribution(Z).support",
+        "FiniteFunction(Z,Z).codomain",
+        "FiniteFunction(Z,Z).domain",
+        "FiniteFunction(Z,Z).identity-on",
+        "FiniteFunction(Z,Z).image",
+        "FiniteFunction(Z,Z).preimage",
+        "FiniteFunction(Z,Z).range",
+        "FiniteFunction(Z,Z).restrict",
         "FiniteRelation(Z,Z).domain",
         "FiniteRelation(Z,Z).identity-on",
         "FiniteRelation(Z,Z).image",
@@ -41552,6 +43004,8 @@
         "FiniteSet(Z)"
       ],
       "supported_operations": [
+        "FiniteFunction(Z,Z).from-relation",
+        "FiniteFunction(Z,Z).graph",
         "FiniteRelation(Z,Z).cardinality",
         "FiniteRelation(Z,Z).compose",
         "FiniteRelation(Z,Z).contains",
@@ -41754,6 +43208,99 @@
         "Fixed modulus six",
         "Canonical representatives from zero through five",
         "Composite modulus permits nonzero nonunits"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-22"
+      }
+    },
+    {
+      "id": "FiniteFunction(Z,Z)",
+      "name": "Functions between finite integer sets",
+      "description": "Functions between finite integer sets",
+      "member_representation": "mathematics.foundations.FiniteFunction<BigInteger,BigInteger>",
+      "membership_rules": [
+        "Explicit finite domain and codomain in the registered integer Algebra",
+        "Exactly one value in the codomain for every domain member",
+        "Equality retains the declared codomain"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "Z",
+        "FiniteSet(Z)",
+        "FiniteRelation(Z,Z)"
+      ],
+      "supported_operations": [
+        "FiniteFunction(Z,Z).apply",
+        "FiniteFunction(Z,Z).codomain",
+        "FiniteFunction(Z,Z).compose",
+        "FiniteFunction(Z,Z).domain",
+        "FiniteFunction(Z,Z).empty",
+        "FiniteFunction(Z,Z).equal",
+        "FiniteFunction(Z,Z).from-relation",
+        "FiniteFunction(Z,Z).graph",
+        "FiniteFunction(Z,Z).identity-on",
+        "FiniteFunction(Z,Z).image",
+        "FiniteFunction(Z,Z).inverse",
+        "FiniteFunction(Z,Z).is-bijective",
+        "FiniteFunction(Z,Z).is-injective",
+        "FiniteFunction(Z,Z).is-surjective",
+        "FiniteFunction(Z,Z).preimage",
+        "FiniteFunction(Z,Z).preimage-of",
+        "FiniteFunction(Z,Z).range",
+        "FiniteFunction(Z,Z).restrict",
+        "FiniteFunction(Z,Z).size",
+        "FiniteFunction(Z,Z).values"
+      ],
+      "invariants": [
+        "Explicit finite domain and codomain in the registered integer Algebra",
+        "Exactly one value in the codomain for every domain member",
+        "Equality retains the declared codomain"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-22"
+      }
+    },
+    {
+      "id": "FiniteSet(Z)xFiniteSet(Z).function",
+      "name": "Declared finite function boundaries",
+      "description": "Declared finite function boundaries",
+      "member_representation": "mathematics.foundations.Pair<FiniteSet<BigInteger>,FiniteSet<BigInteger>>",
+      "membership_rules": [
+        "Both coordinates are finite integer sets",
+        "First is domain and second is codomain"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "FiniteSet(Z)"
+      ],
+      "supported_operations": [
+        "FiniteFunction(Z,Z).from-relation"
+      ],
+      "invariants": [
+        "Both coordinates are finite integer sets",
+        "First is domain and second is codomain"
       ],
       "references": [
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
