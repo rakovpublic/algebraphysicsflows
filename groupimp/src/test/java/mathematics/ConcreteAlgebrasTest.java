@@ -20,7 +20,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all148RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all164RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         expected.put("BooleanAlgebra","false|true|true|false|false|false|false|true");
@@ -36,6 +36,7 @@ public class ConcreteAlgebrasTest {
         expected.put("RationalSampleAlgebra","Sample[1, 2, 3, 2, 4, 6]|3|2|2/3|1|Sample[-1, 0, 1]|4/3|2|Sample[2, 4, 6]|[1, 2, 3]|Sample[]");
         expected.put("FiniteProbabilityAlgebra","1|0|Distribution{1=1/4, 3=3/4}|[1, 3]|2|[1, 3]|false|Distribution{6=1}|5/2|3/4");
         expected.put("FiniteSimplicialAlgebra","Complex[[0], [1], [2], [0, 1], [0, 2], [1, 2], [0, 1, 2]]|Complex[[0], [1], [2], [0, 1], [0, 2], [1, 2]]|false|true|1|0|3|0|0|Complex[[0], [1], [2], [0, 1], [0, 2], [1, 2]]|[1, 1]|Complex[]");
+        expected.put("FiniteIntegerRelationAlgebra","Relation[(1,2), (2,3), (2,4), (3,5)]|Relation[]|Relation[(1,4), (2,5)]|Relation[(2,1), (3,2)]|Relation[(1,2), (2,3), (1,3)]|false|false|[1, 2]|[2, 3]|2|true|[2, 3]|[1, 2]|false|Relation[]|Relation[(1,1), (2,2)]");
         int count=0;
         for(ConcreteAlgebra<?> algebra : math.algebras()) {
             String[] values=expected.get(algebra.getClass().getSimpleName()).split("\\|",-1);
@@ -45,7 +46,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(148,count);
+        assertEquals(164,count);
     }
     @SuppressWarnings({"unchecked","rawtypes"})
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
@@ -101,6 +102,10 @@ public class ConcreteAlgebrasTest {
                 return new mathematics.probability.FiniteDistribution<>(math.integers.algebra(),masses);
             case "QxQ.bounds": return new Pair<>(Rational.ZERO,Rational.ONE);
             case "QxN.iteration": return new Pair<>(Rational.ZERO,BigInteger.valueOf(2));
+            case "ZxZ.relation": return new Pair<>(BigInteger.ONE,BigInteger.valueOf(2));
+            case "FiniteRelation(Z,Z)": return new FiniteRelation<>(math.integers.algebra(),math.integers.algebra(),index==0
+                    ?FiniteSet.of(new Pair<>(BigInteger.ONE,BigInteger.valueOf(2)),new Pair<>(BigInteger.valueOf(2),BigInteger.valueOf(3)))
+                    :FiniteSet.of(new Pair<>(BigInteger.valueOf(2),BigInteger.valueOf(4)),new Pair<>(BigInteger.valueOf(3),BigInteger.valueOf(5))));
             case "Z/5Z": return new ModularInteger(index==0?3:2,5);
             default: throw new AssertionError("Missing test operand for "+domain);
         }

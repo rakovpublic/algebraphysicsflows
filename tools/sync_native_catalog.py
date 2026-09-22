@@ -23,6 +23,7 @@ OWNERS = {
     "RationalSampleAlgebra": ("Sample(Q)", "Finite ordered rational samples retaining repeated observations"),
     "FiniteProbabilityAlgebra": ("FiniteDistribution(Z)", "Finite integer distributions with exact nonnegative rational masses summing to one"),
     "FiniteSimplicialAlgebra": ("FiniteComplex", "Finite abstract simplicial complexes with integer labels and unreduced homology over F2"),
+    "FiniteIntegerRelationAlgebra": ("FiniteRelation(Z,Z)", "Finite-support relations on the actual registered integer Algebra"),
 }
 INTERFACES = {
     "IOperation": "simple/ClosedOperation",
@@ -46,6 +47,7 @@ EXTRA_TESTS = {
     "RationalSampleAlgebra": "NativeStatisticsProbabilityTest",
     "FiniteProbabilityAlgebra": "NativeStatisticsProbabilityTest",
     "FiniteSimplicialAlgebra": "NativeTopologyTest",
+    "FiniteIntegerRelationAlgebra": "NativeRelationTest",
 }
 CONDITIONS = {
     "divide": "The divisor must be nonzero.",
@@ -75,6 +77,10 @@ CONDITIONS = {
     "maximizers": "The finite feasible set must be nonempty; emit every tied maximizer in set iteration order.",
     "iterate": "The initial value is rational and the iteration count nonnegative; zero steps return the initial value.",
     "orbit": "Return the initial rational value followed by each iterate, preserving order and repeated states.",
+    "compose": "Apply the first relation, then the second; middle Algebra instances must be identical.",
+    "transitive-closure": "Include positive-length paths; do not add reflexive pairs except when a cycle implies them.",
+    "is-function-on": "Exactly one result for each member of the supplied finite carrier and no relation pairs outside it.",
+    "identity-on": "Identity pairs are created only on the explicit finite set, not on all integers.",
 }
 
 
@@ -149,6 +155,8 @@ def record(identifier, owner, concept, paths, operation=None):
         value["known_limitations"] += ["Construction materializes faces and caps each input facet at 20 vertices.",
             "Homology computes unreduced F2 dimensions only; no integral torsion, persistence or homeomorphism decision."]
         value["references"].append("https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html")
+    if owner == "FiniteIntegerRelationAlgebra":
+        value["known_limitations"].append("Finite support only; equality includes source/target Algebra identity and pair equality. Function totality is restricted to an explicit finite carrier.")
     return value
 
 
@@ -171,6 +179,10 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("FiniteRelation(Z,Z)", "Finite integer relations", "mathematics.foundations.FiniteRelation<BigInteger,BigInteger>",
+         ["Finite set of integer pairs", "Source and target are the actual registered integer Algebra"], ["Z", "FiniteSet(Z)"]),
+        ("ZxZ.relation", "Integer relation pair", "mathematics.foundations.Pair<BigInteger,BigInteger>",
+         ["Both coordinates belong to the registered integer Algebra"], ["Z"]),
         ("QxN.iteration", "Rational polynomial iteration inputs", "mathematics.foundations.Pair<Rational,BigInteger>",
          ["Rational initial value", "Nonnegative integer step count; execution separately enforces its resource limit"], ["Q", "N"]),
         ("FiniteSet(Z)", "Finite integer sets", "mathematics.foundations.FiniteSet<BigInteger>",

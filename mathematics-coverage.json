@@ -25095,6 +25095,67 @@
       "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
     },
     {
+      "id": "concrete-algebra.FiniteIntegerRelationAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerRelationAlgebra",
+      "concept": "FiniteIntegerRelationAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "FiniteRelation(Z,Z)",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support relations on the actual registered integer Algebra",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite support only; equality includes source/target Algebra identity and pair equality. Function totality is restricted to an explicit finite carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
       "id": "concrete-algebra.FiniteProbabilityAlgebra",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "FiniteProbabilityAlgebra",
@@ -35106,6 +35167,1083 @@
       "legacy_operation_interface": "ITransferOperation"
     },
     {
+      "id": "concrete-operation.FiniteRelation(Z,Z).union",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerRelationAlgebra",
+      "concept": "FiniteRelation(Z,Z).union",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteRelation(Z,Z)",
+      "domain_B": "FiniteRelation(Z,Z)",
+      "domain_C": "FiniteRelation(Z,Z)",
+      "operation_signature": "FiniteRelation(Z,Z) x FiniteRelation(Z,Z) -> FiniteRelation(Z,Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).union",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite support only; equality includes source/target Algebra identity and pair equality. Function totality is restricted to an explicit finite carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteRelation(Z,Z).union",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "union",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteRelation(Z,Z).intersection",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerRelationAlgebra",
+      "concept": "FiniteRelation(Z,Z).intersection",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteRelation(Z,Z)",
+      "domain_B": "FiniteRelation(Z,Z)",
+      "domain_C": "FiniteRelation(Z,Z)",
+      "operation_signature": "FiniteRelation(Z,Z) x FiniteRelation(Z,Z) -> FiniteRelation(Z,Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).intersection",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite support only; equality includes source/target Algebra identity and pair equality. Function totality is restricted to an explicit finite carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteRelation(Z,Z).intersection",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "intersection",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteRelation(Z,Z).compose",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerRelationAlgebra",
+      "concept": "FiniteRelation(Z,Z).compose",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteRelation(Z,Z)",
+      "domain_B": "FiniteRelation(Z,Z)",
+      "domain_C": "FiniteRelation(Z,Z)",
+      "operation_signature": "FiniteRelation(Z,Z) x FiniteRelation(Z,Z) -> FiniteRelation(Z,Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).compose",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Apply the first relation, then the second; middle Algebra instances must be identical."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite support only; equality includes source/target Algebra identity and pair equality. Function totality is restricted to an explicit finite carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteRelation(Z,Z).compose",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "compose",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteRelation(Z,Z).inverse",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerRelationAlgebra",
+      "concept": "FiniteRelation(Z,Z).inverse",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteRelation(Z,Z)",
+      "domain_B": null,
+      "domain_C": "FiniteRelation(Z,Z)",
+      "operation_signature": "FiniteRelation(Z,Z) -> FiniteRelation(Z,Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).inverse",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The value must be nonzero, or the square matrix must be nonsingular."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite support only; equality includes source/target Algebra identity and pair equality. Function totality is restricted to an explicit finite carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteRelation(Z,Z).inverse",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "inverse",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteRelation(Z,Z).transitive-closure",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerRelationAlgebra",
+      "concept": "FiniteRelation(Z,Z).transitive-closure",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteRelation(Z,Z)",
+      "domain_B": null,
+      "domain_C": "FiniteRelation(Z,Z)",
+      "operation_signature": "FiniteRelation(Z,Z) -> FiniteRelation(Z,Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).transitive-closure",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Include positive-length paths; do not add reflexive pairs except when a cycle implies them."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite support only; equality includes source/target Algebra identity and pair equality. Function totality is restricted to an explicit finite carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteRelation(Z,Z).transitive-closure",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "transitive-closure",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteRelation(Z,Z).equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerRelationAlgebra",
+      "concept": "FiniteRelation(Z,Z).equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteRelation(Z,Z)",
+      "domain_B": "FiniteRelation(Z,Z)",
+      "domain_C": "Boolean",
+      "operation_signature": "FiniteRelation(Z,Z) x FiniteRelation(Z,Z) -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite support only; equality includes source/target Algebra identity and pair equality. Function totality is restricted to an explicit finite carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteRelation(Z,Z).equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteRelation(Z,Z).subrelation",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerRelationAlgebra",
+      "concept": "FiniteRelation(Z,Z).subrelation",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteRelation(Z,Z)",
+      "domain_B": "FiniteRelation(Z,Z)",
+      "domain_C": "Boolean",
+      "operation_signature": "FiniteRelation(Z,Z) x FiniteRelation(Z,Z) -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).subrelation",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite support only; equality includes source/target Algebra identity and pair equality. Function totality is restricted to an explicit finite carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteRelation(Z,Z).subrelation",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "subrelation",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteRelation(Z,Z).domain",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerRelationAlgebra",
+      "concept": "FiniteRelation(Z,Z).domain",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteRelation(Z,Z)",
+      "domain_B": null,
+      "domain_C": "FiniteSet(Z)",
+      "operation_signature": "FiniteRelation(Z,Z) -> FiniteSet(Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).domain",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite support only; equality includes source/target Algebra identity and pair equality. Function totality is restricted to an explicit finite carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteRelation(Z,Z).domain",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "domain",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteRelation(Z,Z).range",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerRelationAlgebra",
+      "concept": "FiniteRelation(Z,Z).range",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteRelation(Z,Z)",
+      "domain_B": null,
+      "domain_C": "FiniteSet(Z)",
+      "operation_signature": "FiniteRelation(Z,Z) -> FiniteSet(Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).range",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite support only; equality includes source/target Algebra identity and pair equality. Function totality is restricted to an explicit finite carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteRelation(Z,Z).range",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "range",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteRelation(Z,Z).cardinality",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerRelationAlgebra",
+      "concept": "FiniteRelation(Z,Z).cardinality",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteRelation(Z,Z)",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "FiniteRelation(Z,Z) -> N",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).cardinality",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite support only; equality includes source/target Algebra identity and pair equality. Function totality is restricted to an explicit finite carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteRelation(Z,Z).cardinality",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "cardinality",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteRelation(Z,Z).contains",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerRelationAlgebra",
+      "concept": "FiniteRelation(Z,Z).contains",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteRelation(Z,Z)",
+      "domain_B": "ZxZ.relation",
+      "domain_C": "Boolean",
+      "operation_signature": "FiniteRelation(Z,Z) x ZxZ.relation -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).contains",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite support only; equality includes source/target Algebra identity and pair equality. Function totality is restricted to an explicit finite carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteRelation(Z,Z).contains",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "contains",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteRelation(Z,Z).image",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerRelationAlgebra",
+      "concept": "FiniteRelation(Z,Z).image",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteRelation(Z,Z)",
+      "domain_B": "FiniteSet(Z)",
+      "domain_C": "FiniteSet(Z)",
+      "operation_signature": "FiniteRelation(Z,Z) x FiniteSet(Z) -> FiniteSet(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).image",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite support only; equality includes source/target Algebra identity and pair equality. Function totality is restricted to an explicit finite carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteRelation(Z,Z).image",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "image",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteRelation(Z,Z).preimage",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerRelationAlgebra",
+      "concept": "FiniteRelation(Z,Z).preimage",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteRelation(Z,Z)",
+      "domain_B": "FiniteSet(Z)",
+      "domain_C": "FiniteSet(Z)",
+      "operation_signature": "FiniteRelation(Z,Z) x FiniteSet(Z) -> FiniteSet(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).preimage",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite support only; equality includes source/target Algebra identity and pair equality. Function totality is restricted to an explicit finite carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteRelation(Z,Z).preimage",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "preimage",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteRelation(Z,Z).is-function-on",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerRelationAlgebra",
+      "concept": "FiniteRelation(Z,Z).is-function-on",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteRelation(Z,Z)",
+      "domain_B": "FiniteSet(Z)",
+      "domain_C": "Boolean",
+      "operation_signature": "FiniteRelation(Z,Z) x FiniteSet(Z) -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).is-function-on",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Exactly one result for each member of the supplied finite carrier and no relation pairs outside it."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite support only; equality includes source/target Algebra identity and pair equality. Function totality is restricted to an explicit finite carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteRelation(Z,Z).is-function-on",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "is-function-on",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteRelation(Z,Z).empty",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerRelationAlgebra",
+      "concept": "FiniteRelation(Z,Z).empty",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "FiniteRelation(Z,Z)",
+      "operation_signature": "Unit -> FiniteRelation(Z,Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).empty",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite support only; equality includes source/target Algebra identity and pair equality. Function totality is restricted to an explicit finite carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteRelation(Z,Z).empty",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "FiniteRelation(Z,Z).empty",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteRelation(Z,Z).identity-on",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteIntegerRelationAlgebra",
+      "concept": "FiniteRelation(Z,Z).identity-on",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteSet(Z)",
+      "domain_B": null,
+      "domain_C": "FiniteRelation(Z,Z)",
+      "operation_signature": "FiniteSet(Z) -> FiniteRelation(Z,Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).identity-on",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Identity pairs are created only on the explicit finite set, not on all integers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite support only; equality includes source/target Algebra identity and pair equality. Function totality is restricted to an explicit finite carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteIntegerRelationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteRelation(Z,Z).identity-on",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "FiniteRelation(Z,Z).identity-on",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
       "id": "concrete-operation.Z/5Z.add",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "PrimeField",
@@ -35711,6 +36849,7 @@
         "FiniteComplex.skeleton",
         "FiniteComplex.vertex-count",
         "FiniteDistribution(Z).support-size",
+        "FiniteRelation(Z,Z).cardinality",
         "FiniteSet(Z).cardinality",
         "Mat2(Q).rank",
         "N-to-Z",
@@ -36073,6 +37212,10 @@
         "FiniteComplex.equal",
         "FiniteComplex.subcomplex",
         "FiniteDistribution(Z).equal",
+        "FiniteRelation(Z,Z).contains",
+        "FiniteRelation(Z,Z).equal",
+        "FiniteRelation(Z,Z).is-function-on",
+        "FiniteRelation(Z,Z).subrelation",
         "FiniteSet(Z).contains",
         "FiniteSet(Z).equal",
         "FiniteSet(Z).subset",
@@ -36114,6 +37257,7 @@
         "Boolean.one",
         "Boolean.zero",
         "FiniteComplex.empty",
+        "FiniteRelation(Z,Z).empty",
         "FiniteSet(Z).empty",
         "Mat2(Q).one",
         "Mat2(Q).zero",
@@ -36565,6 +37709,12 @@
         "FiniteDistribution(Z).condition",
         "FiniteDistribution(Z).event-probability",
         "FiniteDistribution(Z).support",
+        "FiniteRelation(Z,Z).domain",
+        "FiniteRelation(Z,Z).identity-on",
+        "FiniteRelation(Z,Z).image",
+        "FiniteRelation(Z,Z).is-function-on",
+        "FiniteRelation(Z,Z).preimage",
+        "FiniteRelation(Z,Z).range",
         "FiniteSet(Z).argmax",
         "FiniteSet(Z).argmin",
         "FiniteSet(Z).cardinality",
@@ -36714,6 +37864,90 @@
       "invariants": [
         "Rational initial value",
         "Nonnegative integer step count; execution separately enforces its resource limit"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-22"
+      }
+    },
+    {
+      "id": "FiniteRelation(Z,Z)",
+      "name": "Finite integer relations",
+      "description": "Finite integer relations",
+      "member_representation": "mathematics.foundations.FiniteRelation<BigInteger,BigInteger>",
+      "membership_rules": [
+        "Finite set of integer pairs",
+        "Source and target are the actual registered integer Algebra"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "Z",
+        "FiniteSet(Z)"
+      ],
+      "supported_operations": [
+        "FiniteRelation(Z,Z).cardinality",
+        "FiniteRelation(Z,Z).compose",
+        "FiniteRelation(Z,Z).contains",
+        "FiniteRelation(Z,Z).domain",
+        "FiniteRelation(Z,Z).empty",
+        "FiniteRelation(Z,Z).equal",
+        "FiniteRelation(Z,Z).identity-on",
+        "FiniteRelation(Z,Z).image",
+        "FiniteRelation(Z,Z).intersection",
+        "FiniteRelation(Z,Z).inverse",
+        "FiniteRelation(Z,Z).is-function-on",
+        "FiniteRelation(Z,Z).preimage",
+        "FiniteRelation(Z,Z).range",
+        "FiniteRelation(Z,Z).subrelation",
+        "FiniteRelation(Z,Z).transitive-closure",
+        "FiniteRelation(Z,Z).union"
+      ],
+      "invariants": [
+        "Finite set of integer pairs",
+        "Source and target are the actual registered integer Algebra"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-22"
+      }
+    },
+    {
+      "id": "ZxZ.relation",
+      "name": "Integer relation pair",
+      "description": "Integer relation pair",
+      "member_representation": "mathematics.foundations.Pair<BigInteger,BigInteger>",
+      "membership_rules": [
+        "Both coordinates belong to the registered integer Algebra"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "Z"
+      ],
+      "supported_operations": [
+        "FiniteRelation(Z,Z).contains"
+      ],
+      "invariants": [
+        "Both coordinates belong to the registered integer Algebra"
       ],
       "references": [
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"

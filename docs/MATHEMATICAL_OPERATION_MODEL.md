@@ -72,11 +72,11 @@ Sets, distributions and solution families can be single scalar members. They are
 
 ## Concrete scopes and optional prototype
 
-The default initializer has 13 algebra builders and 148 native registrations. [Concrete examples](CONCRETE_ALGEBRAS.md) cover arithmetic, finite sets, statistics, probability, vectors, matrices and polynomials. Q(i) is a proper subfield of C. Finite symbolic expressions are not all R. Polynomial differentiation does not decide differentiability of arbitrary callbacks.
+The default initializer has 14 algebra builders and 164 native registrations. [Concrete examples](CONCRETE_ALGEBRAS.md) cover arithmetic, finite sets, statistics, probability, vectors, matrices and polynomials. Q(i) is a proper subfield of C. Finite symbolic expressions are not all R. Polynomial differentiation does not decide differentiability of arbitrary callbacks.
 
 The earlier mathematics.core Domain/Signature/UnaryOperation/BinaryOperation/FlatOperation/Outcome prototype remains separately available and tested, with StandardMathematics and LegacyAdapters. **ConcreteMathematics does not use that prototype to execute operations.** Its Domain compatibility is identity-based; membership can be MEMBER, NOT_MEMBER or UNKNOWN. Its evaluate method captures categorized failures and composition tracks accuracy labels. These are prototype properties, not native Algebra guarantees. Prototype Outcome.trace lists planned pipeline ids, not executed events.
 
-Function, relation, symbolic-real, finite topology and finite optimization utilities also have explicit restricted scopes. Finite integer-set polynomial optimization and polynomial orbits are additionally registered natively. The coverage registry distinguishes their source/test evidence from native registrations. See [implementation status](IMPLEMENTATION_STATUS.md) for advanced structures requiring further work.
+Function, symbolic-real and sequence utilities also have explicit restricted scopes. Finite relations, finite topology, integer-set polynomial optimization and polynomial orbits are registered natively. The coverage registry distinguishes their source/test evidence from native registrations. See [implementation status](IMPLEMENTATION_STATUS.md) for advanced structures requiring further work.
 
 ## Native example
 

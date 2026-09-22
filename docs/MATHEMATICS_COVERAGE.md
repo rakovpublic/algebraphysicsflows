@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 568 |
-| DIRECTLY_SUPPORTED | 325 |
+| Scoped records | 585 |
+| DIRECTLY_SUPPORTED | 342 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 184 |
+| IMPLEMENTED | 201 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 252 |
+| MACHINE_TESTED | 269 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 161 | 161 | 0 | 0 | 0 | 161 | 0 | 0 |
+| Concrete MathTool algebras | 178 | 178 | 0 | 0 | 0 | 178 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -217,7 +217,24 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | FiniteDistribution(Z).support | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer distributions with exact nonnegative rational masses summing to one; native operation FiniteDistribution(Z).support |
 | FiniteDistribution(Z).support-size | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer distributions with exact nonnegative rational masses summing to one; native operation FiniteDistribution(Z).support-size |
 | FiniteDistribution(Z).variance | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer distributions with exact nonnegative rational masses summing to one; native operation FiniteDistribution(Z).variance |
+| FiniteIntegerRelationAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite-support relations on the actual registered integer Algebra |
 | FiniteProbabilityAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer distributions with exact nonnegative rational masses summing to one |
+| FiniteRelation(Z,Z).cardinality | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).cardinality |
+| FiniteRelation(Z,Z).compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).compose |
+| FiniteRelation(Z,Z).contains | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).contains |
+| FiniteRelation(Z,Z).domain | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).domain |
+| FiniteRelation(Z,Z).empty | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).empty |
+| FiniteRelation(Z,Z).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).equal |
+| FiniteRelation(Z,Z).identity-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).identity-on |
+| FiniteRelation(Z,Z).image | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).image |
+| FiniteRelation(Z,Z).intersection | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).intersection |
+| FiniteRelation(Z,Z).inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).inverse |
+| FiniteRelation(Z,Z).is-function-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).is-function-on |
+| FiniteRelation(Z,Z).preimage | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).preimage |
+| FiniteRelation(Z,Z).range | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).range |
+| FiniteRelation(Z,Z).subrelation | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).subrelation |
+| FiniteRelation(Z,Z).transitive-closure | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).transitive-closure |
+| FiniteRelation(Z,Z).union | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).union |
 | FiniteSet(Z).argmax | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).argmax |
 | FiniteSet(Z).argmin | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).argmin |
 | FiniteSet(Z).cardinality | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).cardinality |
