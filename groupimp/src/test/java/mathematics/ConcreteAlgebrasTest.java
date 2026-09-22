@@ -20,7 +20,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all128RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all140RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         expected.put("BooleanAlgebra","false|true|true|false|false|false|false|true");
@@ -35,6 +35,7 @@ public class ConcreteAlgebrasTest {
         expected.put("FiniteSetAlgebra","[1, 2, 3]|[1, 2]|[]|[3]|true|false|true|[1, 2]|[1]|2|[1, 2]|[[], [1], [2], [1, 2]]|[3]|[]");
         expected.put("RationalSampleAlgebra","Sample[1, 2, 3, 2, 4, 6]|3|2|2/3|1|Sample[-1, 0, 1]|4/3|2|Sample[2, 4, 6]|[1, 2, 3]|Sample[]");
         expected.put("FiniteProbabilityAlgebra","1|0|Distribution{1=1/4, 3=3/4}|[1, 3]|2|[1, 3]|false|Distribution{6=1}|5/2|3/4");
+        expected.put("FiniteSimplicialAlgebra","Complex[[0], [1], [2], [0, 1], [0, 2], [1, 2], [0, 1, 2]]|Complex[[0], [1], [2], [0, 1], [0, 2], [1, 2]]|false|true|1|0|3|0|0|Complex[[0], [1], [2], [0, 1], [0, 2], [1, 2]]|[1, 1]|Complex[]");
         int count=0;
         for(ConcreteAlgebra<?> algebra : math.algebras()) {
             String[] values=expected.get(algebra.getClass().getSimpleName()).split("\\|",-1);
@@ -44,7 +45,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(128,count);
+        assertEquals(140,count);
     }
     @SuppressWarnings({"unchecked","rawtypes"})
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
@@ -79,6 +80,9 @@ public class ConcreteAlgebrasTest {
     private Object sample(ConcreteMathematics math,String domain,int index) {
         switch(domain) {
             case "Unit": return Unit.INSTANCE;
+            case "FiniteComplex": return new mathematics.topology.FiniteSimplicialComplex(index==0
+                    ?Arrays.asList(FiniteSet.of(0,1),FiniteSet.of(1,2),FiniteSet.of(0,2))
+                    :Collections.singletonList(FiniteSet.of(0,1,2)));
             case "Boolean": return index==0;
             case "N": case "Z": return BigInteger.valueOf(index==0?6:2);
             case "Q": return Rational.of(index==0?6:2);

@@ -107,3 +107,7 @@ An additive `mathematics` layer can attach these to existing Algebra carriers an
 adapt operations to the legacy interfaces without deleting or changing those APIs.
 Dependent domains, quotient witnesses and infinitary evaluation need explicit RFCs;
 they are not solved by labeling an arbitrary Java object with a mathematical name.
+
+## Changes since the audit
+
+This baseline is retained for comparison. Current code fixes registration/overload dispatch, shared flow state and flat transfers; adds native scalar/flat unary support; and changes ILeftProjectionOperation to A x B -> IAlgebraItem<B> as requested. Concrete builders in algebra/concrete register implementations from operations directly in MathTool. The optional mathematics.core prototype is not their executor. See [the current operation model](MATHEMATICAL_OPERATION_MODEL.md) and [implementation status](IMPLEMENTATION_STATUS.md) for current contracts and limits.

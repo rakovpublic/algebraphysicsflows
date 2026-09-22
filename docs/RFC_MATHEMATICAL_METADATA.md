@@ -1,40 +1,23 @@
 # RFC: mathematical metadata and checked transformations
 
-Status: implemented incrementally; human mathematical review pending.
+Status: native architecture decision implemented; optional metadata prototype retained. General evidence support remains proposed.
 
-## Recurring problem
+## Problem and current decision
 
-Modular arithmetic and matrix dimensions, differentiable functions and measures,
-conditional distributions and partial inverses all need constraints beyond Class<T>.
-Group laws, category laws and probability normalization need explicit evidence.
-CAS, numerical and symbolic outputs need accuracy/provenance labels.
+Dimensions, moduli, differentiability and normalization need more than Class<T>. Laws, assumptions, computation accuracy and evidence need explicit descriptions.
 
-## Alternatives
+Concrete execution remains Algebra, its operation registries, IAlgebraItem, AlgebraFlow and MathTool. Implementations are in operations and builders in algebra/concrete. TypedMembershipRule checks concrete membership. OperationRegistration describes native registrations; it is not a parallel executor. ConcreteAlgebra.laws() returns declarations without claiming proof.
 
-Changing every legacy generic signature breaks callers. Per-field carrier classes
-alone duplicate validation and cannot express unknown membership. Treating
-everything as Object loses compatibility guarantees. A separate CAS would replace
-the project rather than extend its domain/operation model.
+The initial Domain/Structure/Outcome experiment remains a separately tested prototype. It supports tri-state membership, metadata and checked composition but is not required by ConcreteMathematics. This supersedes the initial proposal to route concrete algebras through that layer.
 
-## Smallest reusable extension
+## Available metadata
 
-Add immutable descriptive metadata and a checked domain wrapper backed by
-Algebra<T>. Keep domain compatibility conservative: shared domain objects or an
-explicit checked embedding, never equal Java classes or names alone.
-Introduce typed unary/binary transformations, finite flat transformations,
-structured outcomes, and inspectable unary composition. These are typed adapters
-over the existing operation forms, not a native n-ary execution engine.
-Keep collection semantics in explicit mathematical member types.
-Store laws as statements/evidence; do not infer proofs from tests.
+The JSON registry records carriers, operation shapes, invariants, representation scope, implementation/test paths, partiality, review/formal status and provenance. Native facts are synchronized from the registered operations' checked manifest. Survey classifications are separately authored and provisional.
 
-Membership can be true, false or unknown. Unknown is not false. Definitions of
-infinite domains do not require enumeration. Computations accept only membership
-that can be established by the supplied rule and validate output closure.
+Tests do not promote HUMAN_REVIEWED, PROVED or FORMALLY_VERIFIED. Human review needs a reviewer, date and scoped notes; formal claims need evidence artifacts. No specialist review or formal proof is recorded for this implementation.
 
-## Deferred decisions
+## Deferred extensions
 
-Dependent codomains, quotient equality witnesses, certified analytic membership
-and arbitrary infinitary evaluation remain RFCs. No automatic proof status
-promotion. No claim that all real numbers have finite executable representations.
-The new layer is local and synchronous; legacy cluster scaffolding remains
-host-dependent and is not certified by the local test suite.
+General unknown membership, dependent codomains, quotient witnesses, certified analytic contracts, accuracy propagation and formal law evidence are not native Algebra features. Use the dedicated RFCs and demonstrate repeated concrete needs before extending those contracts. Do not silently accept UNKNOWN as Boolean true.
+
+An infinite domain definition does not require enumeration. There is no claim that all real numbers have finite executable representations. Local tests do not certify the host-dependent distributed runner.
