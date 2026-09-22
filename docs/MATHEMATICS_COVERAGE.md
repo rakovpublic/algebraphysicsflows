@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 737 |
-| DIRECTLY_SUPPORTED | 494 |
+| Scoped records | 757 |
+| DIRECTLY_SUPPORTED | 514 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 353 |
+| IMPLEMENTED | 373 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 421 |
+| MACHINE_TESTED | 441 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 330 | 330 | 0 | 0 | 0 | 330 | 0 | 0 |
+| Concrete MathTool algebras | 350 | 350 | 0 | 0 | 0 | 350 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -195,6 +195,26 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Boolean.xor | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.xor |
 | Boolean.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.zero |
 | BooleanAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations |
+| FiniteAdjunction.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Adjunctions of finite category tables with checked unit/counit and constructive finite adjoint search; native operation FiniteAdjunction.compose |
+| FiniteAdjunction.counit | DIRECTLY_SUPPORTED | IMPLEMENTED | Adjunctions of finite category tables with checked unit/counit and constructive finite adjoint search; native operation FiniteAdjunction.counit |
+| FiniteAdjunction.empty | DIRECTLY_SUPPORTED | IMPLEMENTED | Adjunctions of finite category tables with checked unit/counit and constructive finite adjoint search; native operation FiniteAdjunction.empty |
+| FiniteAdjunction.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Adjunctions of finite category tables with checked unit/counit and constructive finite adjoint search; native operation FiniteAdjunction.equal |
+| FiniteAdjunction.from-equivalence | DIRECTLY_SUPPORTED | IMPLEMENTED | Adjunctions of finite category tables with checked unit/counit and constructive finite adjoint search; native operation FiniteAdjunction.from-equivalence |
+| FiniteAdjunction.from-left | DIRECTLY_SUPPORTED | IMPLEMENTED | Adjunctions of finite category tables with checked unit/counit and constructive finite adjoint search; native operation FiniteAdjunction.from-left |
+| FiniteAdjunction.from-right | DIRECTLY_SUPPORTED | IMPLEMENTED | Adjunctions of finite category tables with checked unit/counit and constructive finite adjoint search; native operation FiniteAdjunction.from-right |
+| FiniteAdjunction.hom-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Adjunctions of finite category tables with checked unit/counit and constructive finite adjoint search; native operation FiniteAdjunction.hom-map |
+| FiniteAdjunction.identity-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Adjunctions of finite category tables with checked unit/counit and constructive finite adjoint search; native operation FiniteAdjunction.identity-on |
+| FiniteAdjunction.is-equivalence | DIRECTLY_SUPPORTED | IMPLEMENTED | Adjunctions of finite category tables with checked unit/counit and constructive finite adjoint search; native operation FiniteAdjunction.is-equivalence |
+| FiniteAdjunction.left | DIRECTLY_SUPPORTED | IMPLEMENTED | Adjunctions of finite category tables with checked unit/counit and constructive finite adjoint search; native operation FiniteAdjunction.left |
+| FiniteAdjunction.opposite | DIRECTLY_SUPPORTED | IMPLEMENTED | Adjunctions of finite category tables with checked unit/counit and constructive finite adjoint search; native operation FiniteAdjunction.opposite |
+| FiniteAdjunction.right | DIRECTLY_SUPPORTED | IMPLEMENTED | Adjunctions of finite category tables with checked unit/counit and constructive finite adjoint search; native operation FiniteAdjunction.right |
+| FiniteAdjunction.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Adjunctions of finite category tables with checked unit/counit and constructive finite adjoint search; native operation FiniteAdjunction.source |
+| FiniteAdjunction.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Adjunctions of finite category tables with checked unit/counit and constructive finite adjoint search; native operation FiniteAdjunction.target |
+| FiniteAdjunction.to-equivalence | DIRECTLY_SUPPORTED | IMPLEMENTED | Adjunctions of finite category tables with checked unit/counit and constructive finite adjoint search; native operation FiniteAdjunction.to-equivalence |
+| FiniteAdjunction.transpose | DIRECTLY_SUPPORTED | IMPLEMENTED | Adjunctions of finite category tables with checked unit/counit and constructive finite adjoint search; native operation FiniteAdjunction.transpose |
+| FiniteAdjunction.unit | DIRECTLY_SUPPORTED | IMPLEMENTED | Adjunctions of finite category tables with checked unit/counit and constructive finite adjoint search; native operation FiniteAdjunction.unit |
+| FiniteAdjunction.untranspose | DIRECTLY_SUPPORTED | IMPLEMENTED | Adjunctions of finite category tables with checked unit/counit and constructive finite adjoint search; native operation FiniteAdjunction.untranspose |
+| FiniteAdjunctionAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Adjunctions of finite category tables with checked unit/counit and constructive finite adjoint search |
 | FiniteCategory.arrow-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.arrow-count |
 | FiniteCategory.arrows | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.arrows |
 | FiniteCategory.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite categories with integer object/arrow labels and exhaustively checked composition tables; native operation FiniteCategory.compose |

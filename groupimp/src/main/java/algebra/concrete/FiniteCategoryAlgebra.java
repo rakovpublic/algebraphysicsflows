@@ -7,10 +7,12 @@ import java.math.BigInteger;
 
 /** Explicit finite categories with checked identity, typing and associativity tables. */
 public final class FiniteCategoryAlgebra extends ConcreteAlgebra<FiniteCategory> {
+    public final Algebra<Pair<BigInteger,BigInteger>> labelPairs;
     public FiniteCategoryAlgebra(IntegerRing integers,IntegerSetAlgebra sets,
             FiniteIntegerRelationAlgebra relations,BooleanAlgebra truth,NaturalSemiring naturals) {
         super(carrier("FiniteCategory",FiniteCategory.class,"Finite labelled categories with validated tables",c -> true),integers.unit());
-        Algebra<BigInteger> z=integers.algebra(); Algebra<Pair<BigInteger,BigInteger>> pairs=pairCarrier(z);
+        Algebra<BigInteger> z=integers.algebra(); labelPairs=pairCarrier(z);
+        Algebra<Pair<BigInteger,BigInteger>> pairs=labelPairs;
         unary("opposite",algebra(),algebra(),false,FiniteCategory::opposite);
         unary("objects",algebra(),sets.algebra(),false,FiniteCategory::objects);
         unary("arrows",algebra(),sets.algebra(),false,FiniteCategory::arrowLabels);

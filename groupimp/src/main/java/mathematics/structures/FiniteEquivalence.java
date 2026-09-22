@@ -15,20 +15,8 @@ public final class FiniteEquivalence implements Serializable {
                              FiniteNaturalTransformation unit,FiniteNaturalTransformation counit) {
         this.forward=Objects.requireNonNull(forward); this.backward=Objects.requireNonNull(backward);
         this.unit=Objects.requireNonNull(unit); this.counit=Objects.requireNonNull(counit);
-        if(!forward.source.equals(backward.target) || !forward.target.equals(backward.source))
-            throw MathFailure.invalid("Equivalence functors must have opposite category boundaries");
-        if(!unit.source.equals(FiniteFunctor.identity(forward.source)) || !unit.target.equals(backward.compose(forward))
-                || !counit.source.equals(forward.compose(backward)) || !counit.target.equals(FiniteFunctor.identity(forward.target)))
-            throw MathFailure.invalid("Equivalence unit or counit has incorrect functor boundaries");
+        FiniteAdjunction.validate(forward,backward,unit,counit);
         if(!unit.isIsomorphism() || !counit.isIsomorphism()) throw MathFailure.invalid("Equivalence unit and counit must be natural isomorphisms");
-        for(BigInteger object : forward.source.objects().members())
-            if(!forward.target.compose(forward.mapArrow(unit.component(object)),counit.component(forward.mapObject(object)))
-                    .equals(forward.target.identity(forward.mapObject(object))))
-                throw MathFailure.invalid("Equivalence violates the forward triangle identity");
-        for(BigInteger object : forward.target.objects().members())
-            if(!forward.source.compose(unit.component(backward.mapObject(object)),backward.mapArrow(counit.component(object)))
-                    .equals(forward.source.identity(backward.mapObject(object))))
-                throw MathFailure.invalid("Equivalence violates the backward triangle identity");
     }
     public static FiniteEquivalence identity(FiniteCategory category) {
         FiniteFunctor f=FiniteFunctor.identity(category); FiniteNaturalTransformation id=FiniteNaturalTransformation.identity(f);

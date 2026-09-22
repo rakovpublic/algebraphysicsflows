@@ -31,6 +31,7 @@ OWNERS = {
     "FiniteFunctorAlgebra": ("FiniteFunctor", "Covariant functors between validated finite category tables with total object and arrow maps"),
     "FiniteNaturalTransformationAlgebra": ("FiniteNaturalTransformation", "Natural transformations between parallel finite functors with every naturality square checked"),
     "FiniteEquivalenceAlgebra": ("FiniteEquivalence", "Finite adjoint equivalences with explicit quasi-inverse, unit, counit and checked triangle identities"),
+    "FiniteAdjunctionAlgebra": ("FiniteAdjunction", "Adjunctions of finite category tables with checked unit/counit and constructive finite adjoint search"),
     "SymmetricGroup": ("S3", "Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree"),
 }
 INTERFACES = {
@@ -62,6 +63,7 @@ EXTRA_TESTS = {
     "FiniteFunctorAlgebra": "NativeFunctorTest",
     "FiniteNaturalTransformationAlgebra": "NativeNaturalTransformationTest",
     "FiniteEquivalenceAlgebra": "NativeEquivalenceTest",
+    "FiniteAdjunctionAlgebra": "NativeAdjunctionTest",
     "SymmetricGroup": "NativePermutationTest",
     "ResidueRing": "NativeResidueRingTest",
 }
@@ -101,6 +103,26 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "FiniteAdjunctionAlgebra": {
+        "compose": "Compose the left functors with the right operand first and the right functors in reverse order; labelled middle categories must agree. Retain and combine the supplied witnesses.",
+        "opposite": "Swap adjoint roles and reverse categories: L adjoint to R becomes R.op adjoint to L.op. The opposite counit is the new unit.",
+        "source": "Return the source category of the left adjoint.",
+        "target": "Return the target category of the left adjoint.",
+        "left": "Return the retained left adjoint L:C->D.",
+        "right": "Return the retained right adjoint R:D->C.",
+        "unit": "Return the checked natural transformation Id_C -> R.L; it need not be invertible.",
+        "counit": "Return the checked natural transformation L.R -> Id_D; it need not be invertible.",
+        "is-equivalence": "Both retained unit and counit must be natural isomorphisms.",
+        "to-equivalence": "Both retained unit and counit must be invertible; preserve all chosen functor and witness data.",
+        "equal": "Equality includes both labelled functors and the chosen unit and counit.",
+        "identity-on": "Construct identity functors and identity witnesses on the supplied finite category.",
+        "from-equivalence": "Retain the equivalence's forward/backward functors and its unit and counit as an adjunction.",
+        "from-left": "A right adjoint must exist: at every target object d choose the least pair (c,epsilon:L(c)->d) inducing bijections on all relevant hom sets; construct and validate the adjoint and both witnesses.",
+        "from-right": "A left adjoint must exist; construct it by the dual universal-arrow search on opposite categories.",
+        "transpose": "Input pair (c,h) supplies c in C and h:L(c)->d in D; return eta_c followed by R(h). The explicit c removes ambiguity when L identifies objects.",
+        "untranspose": "Input pair (d,k) supplies d in D and k:c->R(d) in C; return L(k) followed by epsilon_d. The explicit d removes ambiguity when R identifies objects.",
+        "hom-map": "Input pair (c,d) contains existing objects. Return the finite bijection Hom_D(L(c),d) -> Hom_C(c,R(d)), including an empty bijection when both hom sets are empty.",
+    },
     "FiniteEquivalenceAlgebra": {
         "compose": "Apply the right operand first; labelled middle categories must agree. Compose the supplied quasi-inverses and witnesses without choosing new representatives.",
         "inverse": "Every validated equivalence can be reversed by swapping the functors and using the inverse counit and inverse unit as witnesses.",
@@ -317,6 +339,12 @@ def record(identifier, owner, concept, paths, operation=None):
         value["required_invariants"].append("Oppositely directed functors have an invertible unit Id_C -> G.F and counit F.G -> Id_D; both triangle identities are checked at every object.")
         value["known_limitations"].append("Finite category tables retain the 128-arrow/object cap. These are chosen adjoint-equivalence witnesses; composition with the reversed witness need not be strictly equal to identity witness data. General adjunctions and infinite categories are not implemented by this carrier.")
         value["references"].append("https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Equivalence.html")
+    if owner == "FiniteAdjunctionAlgebra":
+        value["required_invariants"].append("Oppositely directed functors, typed natural unit/counit and both triangle identities are checked; invertibility is not required.")
+        value["known_limitations"].append("Finite categories retain the 128-arrow/object cap. Search is exhaustive only for these explicit finite tables, chooses one adjoint deterministically and does not enumerate all possible witnesses or handle infinite categories.")
+        value["references"] += ["https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Adjunction/Basic.html",
+                                "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Adjunction/Comma.html",
+                                "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Adjunction/Opposites.html"]
     if owner == "RationalFunctionField":
         value["known_limitations"].append("Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented.")
         value["references"].append("https://docs.sympy.org/latest/modules/polys/domainsref.html")
@@ -348,6 +376,8 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("FiniteAdjunction", "Validated finite adjunctions", "mathematics.structures.FiniteAdjunction",
+         ["Oppositely directed finite functors", "Typed natural unit and counit", "Both triangle identities checked at every object; components need not be invertible"], ["FiniteCategory", "FiniteFunctor", "FiniteNaturalTransformation", "FiniteEquivalence", "ZxZ.category", "FiniteFunction(Z,Z)"]),
         ("FiniteEquivalence", "Validated finite adjoint equivalences", "mathematics.structures.FiniteEquivalence",
          ["Oppositely directed finite functors", "Invertible typed unit and counit", "Both triangle identities checked at every object"], ["FiniteCategory", "FiniteFunctor", "FiniteNaturalTransformation"]),
         ("FiniteNaturalTransformation", "Validated finite natural transformations", "mathematics.structures.FiniteNaturalTransformation",

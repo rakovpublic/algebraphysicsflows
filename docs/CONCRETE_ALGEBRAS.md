@@ -39,6 +39,7 @@ List<String> values = math.flow(math.naturals,
 | FiniteFunctorAlgebra / FiniteFunctor | compose, equality -> Boolean | strict inverse; opposite; source/target categories; full/faithful/equivalence checks; object/arrow maps; flat images | map-object/map-arrow; flat object/arrow fibers; identity-on; from-discrete-map |
 | FiniteNaturalTransformationAlgebra / FiniteNaturalTransformation | vertical compose, horizontal, equality -> Boolean | inverse; opposite; source/target functors; component-map; flat components | component; flat component-fiber; precompose/postcompose by a functor; identity-on |
 | FiniteEquivalenceAlgebra / FiniteEquivalence | compose; equality -> Boolean | inverse; opposite; source/target categories; forward/backward functors; unit/counit transformations | identity-on; from-functor |
+| FiniteAdjunctionAlgebra / FiniteAdjunction | compose; equality -> Boolean | opposite; source/target categories; left/right functors; unit/counit transformations; is-equivalence; to-equivalence | identity-on; from-equivalence; from-left; from-right; transpose; untranspose; hom-map |
 | FiniteIntegerRelationAlgebra / FiniteRelation(Z,Z) | union, intersection, compose | inverse, transitive-closure; domain/range -> finite set; cardinality -> N | image/preimage -> second set carrier; contains/function checks -> Boolean; finite identity |
 | FiniteSimplicialAlgebra / FiniteComplex | union, intersection | dimension/Euler characteristic -> Z; vertex-count -> N | equality/subcomplex -> Boolean; skeleton; degree-indexed simplex count/Betti number; flat Betti numbers -> N |
 | RationalSampleAlgebra / Sample(Q) | concatenate | size -> N, mean/variance -> Q, center | covariance -> Q; scale by Q; flat transfer elements -> Q |
@@ -96,7 +97,7 @@ See [ConcreteAlgebrasTest](../groupimp/src/test/java/mathematics/ConcreteAlgebra
 Same-algebra unary flat operations use `IOneOperandFlatOperation` and `performOneOperandFlatOperation(name)` (or `performFlatOperation(name)`). Finite-set `subsets` is an example. Cross-algebra unary flat operations use the existing `ITransferFlatOperation`, whose return type is corrected to `List<IAlgebraItem<V>>`; `elements` transfers a finite set to its member algebra. Empty results remain valid, and every emitted member keeps its target algebra.
 
 
-The default initializer currently installs 22 algebras and 308 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
+The default initializer currently installs 23 algebras and 327 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
 
 For overloaded custom-member and unsafe operations, the most specific compatible second-operand class is selected (exact matches take priority). Re-registering the same second class replaces that overload. Ambiguous supertypes are rejected. Mathematical domains sharing one Java class need distinct operation names; overload selection does not infer a domain from a value.
 
@@ -282,7 +283,7 @@ The underlying category cap remains 128 arrows/objects. Tests include independen
 
 FiniteEquivalenceAlgebra registers explicit [adjoint equivalences](https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Equivalence.html). A value retains F:C->D, its chosen quasi-inverse G:D->C, the natural isomorphisms unit:Id_C->G.F and counit:F.G->Id_D, and checks both triangle identities at every object. These data can be supplied directly or constructed with FiniteEquivalence.from-functor for a full, faithful and essentially surjective functor.
 
-Construction makes deterministic finite choices: prefer the least source object mapping exactly to each target object, otherwise choose the least source object and least isomorphism to it in the target. Fullness and faithfulness give unique lifts for the backward arrow map and unit. This works for equivalent categories with different numbers of objects. Unknown or non-equivalence functors are not converted into witnesses.
+Construction makes deterministic finite choices: prefer the least source object mapping exactly to each target object d, otherwise choose the least source object c and least isomorphism F(c)->d. Fullness and faithfulness give unique lifts for the backward arrow map and unit. This works for equivalent categories with different numbers of objects. Non-equivalence functors are not converted into witnesses.
 
 compose applies the right operand first and combines the supplied units and counits. inverse reverses the equivalence using the inverse counit and inverse unit. opposite reverses the categories with the appropriately directed witnesses. Equality includes all chosen data: reversing an equivalence and composing it back need not give the identity witness by strict equality. The underlying functors are related by the retained natural isomorphisms.
 
@@ -296,4 +297,26 @@ List<String> unitComponents = math.flow(math.categories,
         .collect(); // ["10"]
 ~~~
 
-Tests check all functors between indiscrete categories with one through three objects against independent representative formulas, nontrivial cyclic-group unit/counit choices, composition and associativity, invalid triangles and serialized native flows. The finite category cap stays at 128 arrows/objects; arbitrary adjunctions with noninvertible witnesses and infinite categories are outside this carrier.
+Tests check all functors between indiscrete categories with one through three objects against independent representative formulas, nontrivial cyclic-group unit/counit choices, composition and associativity, invalid triangles and serialized native flows. The finite category cap stays at 128 arrows/objects. FiniteAdjunctionAlgebra below separately handles noninvertible units and counits.
+
+## Finite adjunctions and hom correspondences
+
+FiniteAdjunctionAlgebra represents L:C->D left adjoint to R:D->C with unit:Id_C->R.L and counit:L.R->Id_D. Construction checks the typed natural transformations and both triangle identities, following the [unit/counit definition of an adjunction](https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Adjunction/Basic.html). Components may be noninvertible: for example, inclusion of the initial object of a finite chain is left adjoint to the unique functor from that chain to the one-object category.
+
+FiniteAdjunction.from-left takes a functor L and searches for a right adjoint. For every object d it chooses the least pair (c,epsilon:L(c)->d) for which a |-> L(a);epsilon is a bijection Hom_C(x,c)->Hom_D(L(x),d) for every x. This is a [finite universal-arrow construction](https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Adjunction/Comma.html); it checks injectivity and surjectivity, including parallel arrows. It then constructs R's arrow map and the unit by unique lifts. from-right uses the dual construction to find a left adjoint to the supplied R. If an adjoint does not exist for the finite tables, construction reports OPERATION_UNDEFINED.
+
+transpose takes (c,h) with h:L(c)->d and returns eta_c;R(h). untranspose takes (d,k) with k:c->R(d) and returns L(k);epsilon_d. Explicit object labels matter because a functor can identify objects. These operations accept the existing ZxZ.category pair carrier and return wrapped integers through IUnsafeOperation. hom-map takes (c,d) and returns the corresponding bijection in FiniteFunction(Z,Z), including empty hom sets. It retains both hom sets as the function's declared domain and codomain.
+
+~~~java
+List<String> arrows = math.flow(math.categories,
+        Collections.singletonList(FiniteCategory.discrete(FiniteSet.of(BigInteger.TEN))))
+        .<FiniteFunctor>performAlgebraTransfer("FiniteFunctor.identity-on")
+        .<FiniteAdjunction>performAlgebraTransfer("FiniteAdjunction.from-left")
+        .<BigInteger,Pair<BigInteger,BigInteger>>performAlgebraUnsafe(
+                "transpose", new Pair<>(BigInteger.TEN, BigInteger.TEN))
+        .collect(); // ["10"]
+~~~
+
+compose applies the right operand's left functor first and composes right adjoints in reverse order. It combines the retained witnesses. opposite swaps the adjoint roles, giving R.op left adjoint to L.op. from-equivalence retains an equivalence's existing witnesses; to-equivalence succeeds exactly when both the unit and counit are invertible. Equality includes all chosen data.
+
+Tests compare both adjoint constructors against independent min/max formulas for every monotone map between chains of size zero through four, check hom bijections with parallel noncommuting arrows, reject each triangle failure separately, and exercise composition, empty hom sets, preserved witness choices and serialized flows. The 128-arrow/object category cap remains in force. Search constructs one deterministic finite adjoint; arbitrary infinite adjoint functor theorems and enumeration of every witness remain outside this implementation.

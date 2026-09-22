@@ -10,6 +10,7 @@ import mathematics.structures.FiniteCategory;
 import mathematics.structures.FiniteFunctor;
 import mathematics.structures.FiniteNaturalTransformation;
 import mathematics.structures.FiniteEquivalence;
+import mathematics.structures.FiniteAdjunction;
 import mathematics.linear.RationalVector;
 import mathematics.numbers.Rational;
 import java.math.BigInteger;
@@ -57,6 +58,11 @@ public final class ConcreteAlgebrasExample {
                 .<FiniteEquivalence>performAlgebraTransfer("FiniteEquivalence.from-functor")
                 .<FiniteNaturalTransformation>performAlgebraTransfer("unit")
                 .performLeftProjectionOperation("component",BigInteger.TEN).collect());
+        System.out.println("Constructed right adjoint hom correspondence: "+math.flow(math.categories,
+                Collections.singletonList(FiniteCategory.discrete(FiniteSet.of(BigInteger.TEN))))
+                .<FiniteFunctor>performAlgebraTransfer("FiniteFunctor.identity-on")
+                .<FiniteAdjunction>performAlgebraTransfer("FiniteAdjunction.from-left")
+                .<BigInteger,Pair<BigInteger,BigInteger>>performAlgebraUnsafe("transpose",new Pair<>(BigInteger.TEN,BigInteger.TEN)).collect());
     }
     /** Stable manifest used to keep the human/JSON coverage registry aligned with real registrations. */
     public static String catalogManifest(ConcreteMathematics math) {

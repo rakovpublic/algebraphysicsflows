@@ -93,6 +93,9 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("Vertical composition", " ".join(records["FiniteNaturalTransformation.compose"]["required_invariants"]))
         self.assertIn("Every validated equivalence", " ".join(records["FiniteEquivalence.inverse"]["required_invariants"]))
         self.assertIn("full, faithful and essentially surjective", " ".join(records["FiniteEquivalence.from-functor"]["required_invariants"]))
+        self.assertIn("right adjoint must exist", " ".join(records["FiniteAdjunction.from-left"]["required_invariants"]))
+        self.assertIn("Swap adjoint roles", " ".join(records["FiniteAdjunction.opposite"]["required_invariants"]))
+        self.assertIn("must be invertible", " ".join(records["FiniteAdjunction.to-equivalence"]["required_invariants"]))
 
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)
