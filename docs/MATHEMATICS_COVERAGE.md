@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 706 |
-| DIRECTLY_SUPPORTED | 463 |
+| Scoped records | 723 |
+| DIRECTLY_SUPPORTED | 480 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 322 |
+| IMPLEMENTED | 339 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 390 |
+| MACHINE_TESTED | 407 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 299 | 299 | 0 | 0 | 0 | 299 | 0 | 0 |
+| Concrete MathTool algebras | 316 | 316 | 0 | 0 | 0 | 316 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -286,6 +286,23 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | FiniteFunctorAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps |
 | FiniteIntegerFunctionAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain |
 | FiniteIntegerRelationAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite-support relations on the actual registered integer Algebra |
+| FiniteNaturalTransformation.component | DIRECTLY_SUPPORTED | IMPLEMENTED | Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.component |
+| FiniteNaturalTransformation.component-fiber | DIRECTLY_SUPPORTED | IMPLEMENTED | Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.component-fiber |
+| FiniteNaturalTransformation.component-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.component-map |
+| FiniteNaturalTransformation.components | DIRECTLY_SUPPORTED | IMPLEMENTED | Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.components |
+| FiniteNaturalTransformation.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.compose |
+| FiniteNaturalTransformation.empty | DIRECTLY_SUPPORTED | IMPLEMENTED | Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.empty |
+| FiniteNaturalTransformation.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.equal |
+| FiniteNaturalTransformation.horizontal | DIRECTLY_SUPPORTED | IMPLEMENTED | Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.horizontal |
+| FiniteNaturalTransformation.identity-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.identity-on |
+| FiniteNaturalTransformation.inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.inverse |
+| FiniteNaturalTransformation.is-isomorphism | DIRECTLY_SUPPORTED | IMPLEMENTED | Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.is-isomorphism |
+| FiniteNaturalTransformation.opposite | DIRECTLY_SUPPORTED | IMPLEMENTED | Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.opposite |
+| FiniteNaturalTransformation.postcompose | DIRECTLY_SUPPORTED | IMPLEMENTED | Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.postcompose |
+| FiniteNaturalTransformation.precompose | DIRECTLY_SUPPORTED | IMPLEMENTED | Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.precompose |
+| FiniteNaturalTransformation.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.source |
+| FiniteNaturalTransformation.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.target |
+| FiniteNaturalTransformationAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Natural transformations between parallel finite functors with every naturality square checked |
 | FiniteProbabilityAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer distributions with exact nonnegative rational masses summing to one |
 | FiniteRelation(Z,Z).cardinality | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).cardinality |
 | FiniteRelation(Z,Z).compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite-support relations on the actual registered integer Algebra; native operation FiniteRelation(Z,Z).compose |

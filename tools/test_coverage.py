@@ -89,6 +89,8 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("arrow label", " ".join(records["FiniteCategory.source"]["required_invariants"]))
         self.assertIn("Strict inverse", " ".join(records["FiniteFunctor.inverse"]["required_invariants"]))
         self.assertIn("each source hom set", " ".join(records["FiniteFunctor.is-faithful"]["required_invariants"]))
+        self.assertIn("Every component", " ".join(records["FiniteNaturalTransformation.inverse"]["required_invariants"]))
+        self.assertIn("Vertical composition", " ".join(records["FiniteNaturalTransformation.compose"]["required_invariants"]))
 
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)

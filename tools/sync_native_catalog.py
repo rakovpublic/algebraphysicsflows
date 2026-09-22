@@ -29,6 +29,7 @@ OWNERS = {
     "FiniteIntegerFunctionAlgebra": ("FiniteFunction(Z,Z)", "Total maps between explicit finite integer sets, preserving declared domain and codomain"),
     "FiniteCategoryAlgebra": ("FiniteCategory", "Finite categories with integer object/arrow labels and exhaustively checked composition tables"),
     "FiniteFunctorAlgebra": ("FiniteFunctor", "Covariant functors between validated finite category tables with total object and arrow maps"),
+    "FiniteNaturalTransformationAlgebra": ("FiniteNaturalTransformation", "Natural transformations between parallel finite functors with every naturality square checked"),
     "SymmetricGroup": ("S3", "Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree"),
 }
 INTERFACES = {
@@ -58,6 +59,7 @@ EXTRA_TESTS = {
     "FiniteIntegerFunctionAlgebra": "NativeFiniteFunctionTest",
     "FiniteCategoryAlgebra": "NativeCategoryTest",
     "FiniteFunctorAlgebra": "NativeFunctorTest",
+    "FiniteNaturalTransformationAlgebra": "NativeNaturalTransformationTest",
     "SymmetricGroup": "NativePermutationTest",
     "ResidueRing": "NativeResidueRingTest",
 }
@@ -97,6 +99,23 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "FiniteNaturalTransformationAlgebra": {
+        "compose": "Vertical composition beta.compose(alpha) applies alpha then beta; their middle functors must be equal.",
+        "inverse": "Every component must be an isomorphism in the codomain category; return the reversed natural transformation.",
+        "opposite": "Reverse both categories and the transformation direction: alpha:F=>G becomes alpha.op:G.op=>F.op.",
+        "source": "Return the source functor, including both of its labelled categories and maps.",
+        "target": "Return the target functor, including both of its labelled categories and maps.",
+        "component": "The argument is an object of the common source category; return the component's codomain arrow label.",
+        "is-isomorphism": "Check whether every component arrow is invertible; the empty transformation satisfies this vacuously.",
+        "component-map": "Transfer to a finite integer function from source objects to the entire codomain arrow set.",
+        "components": "Emit component arrow labels in ascending source-object order, preserving duplicates.",
+        "component-fiber": "The codomain arrow label exists; emit source objects having that component in ascending order, possibly none.",
+        "equal": "Equality includes both parallel functors and every component.",
+        "identity-on": "Each component is the identity at the supplied functor's image object.",
+        "precompose": "The additional functor targets the common source category; pull components back along its object map.",
+        "postcompose": "The additional functor starts at the common codomain category; map components through its arrow map.",
+        "horizontal": "For alpha:F=>G and beta:H=>K on adjacent categories, return H.F=>K.G with component H(alpha_x) followed by beta_(Gx).",
+    },
     "FiniteFunctorAlgebra": {
         "compose": "F.compose(G) is F(G(-)); G.target and F.source must be equal labelled category tables.",
         "inverse": "Strict inverse requires bijections on both objects and arrows; an equivalence alone is insufficient.",
@@ -273,6 +292,11 @@ def record(identifier, owner, concept, paths, operation=None):
         value["known_limitations"].append("Both categories use the existing 128-arrow/object table cap. Only finite covariant functors are represented; equivalence is a finite decision criterion without an explicit quasi-inverse witness.")
         value["references"] += ["https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Functor/Basic.html",
                                 "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Equivalence.html"]
+    if owner == "FiniteNaturalTransformationAlgebra":
+        value["required_invariants"].append("Functors are parallel, every component has the required endpoints, and all finite naturality squares commute.")
+        value["known_limitations"].append("Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented.")
+        value["references"] += ["https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatTrans.html",
+                                "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatIso.html"]
     if owner == "RationalFunctionField":
         value["known_limitations"].append("Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented.")
         value["references"].append("https://docs.sympy.org/latest/modules/polys/domainsref.html")
@@ -304,6 +328,8 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("FiniteNaturalTransformation", "Validated finite natural transformations", "mathematics.structures.FiniteNaturalTransformation",
+         ["Parallel finite functors", "Exactly one typed component for every source object", "Naturality checked for every source arrow"], ["FiniteFunctor", "FiniteCategory", "Z", "FiniteFunction(Z,Z)"]),
         ("FiniteFunctor", "Validated finite functors", "mathematics.structures.FiniteFunctor",
          ["Finite labelled source and target categories", "Total object and arrow maps", "Preservation of endpoints, identities and every composition"], ["FiniteCategory", "Z", "FiniteFunction(Z,Z)"]),
         ("FiniteCategory", "Validated finite category tables", "mathematics.structures.FiniteCategory",

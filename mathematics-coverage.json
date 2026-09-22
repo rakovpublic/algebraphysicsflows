@@ -25345,6 +25345,70 @@
       "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
     },
     {
+      "id": "concrete-algebra.FiniteNaturalTransformationAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteNaturalTransformationAlgebra",
+      "concept": "FiniteNaturalTransformationAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "FiniteNaturalTransformation",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Natural transformations between parallel finite functors with every naturality square checked",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Functors are parallel, every component has the required endpoints, and all finite naturality squares commute."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeNaturalTransformationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatTrans.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatIso.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
       "id": "concrete-algebra.FiniteProbabilityAlgebra",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "FiniteProbabilityAlgebra",
@@ -44603,6 +44667,1143 @@
       "legacy_operation_interface": "ITransferOperation"
     },
     {
+      "id": "concrete-operation.FiniteNaturalTransformation.compose",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteNaturalTransformationAlgebra",
+      "concept": "FiniteNaturalTransformation.compose",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteNaturalTransformation",
+      "domain_B": "FiniteNaturalTransformation",
+      "domain_C": "FiniteNaturalTransformation",
+      "operation_signature": "FiniteNaturalTransformation x FiniteNaturalTransformation -> FiniteNaturalTransformation",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.compose",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Vertical composition beta.compose(alpha) applies alpha then beta; their middle functors must be equal.",
+        "Functors are parallel, every component has the required endpoints, and all finite naturality squares commute."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeNaturalTransformationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatTrans.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatIso.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteNaturalTransformation.compose",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "compose",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteNaturalTransformation.inverse",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteNaturalTransformationAlgebra",
+      "concept": "FiniteNaturalTransformation.inverse",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteNaturalTransformation",
+      "domain_B": null,
+      "domain_C": "FiniteNaturalTransformation",
+      "operation_signature": "FiniteNaturalTransformation -> FiniteNaturalTransformation",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.inverse",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Every component must be an isomorphism in the codomain category; return the reversed natural transformation.",
+        "Functors are parallel, every component has the required endpoints, and all finite naturality squares commute."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeNaturalTransformationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatTrans.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatIso.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteNaturalTransformation.inverse",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "inverse",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteNaturalTransformation.opposite",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteNaturalTransformationAlgebra",
+      "concept": "FiniteNaturalTransformation.opposite",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteNaturalTransformation",
+      "domain_B": null,
+      "domain_C": "FiniteNaturalTransformation",
+      "operation_signature": "FiniteNaturalTransformation -> FiniteNaturalTransformation",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.opposite",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Reverse both categories and the transformation direction: alpha:F=>G becomes alpha.op:G.op=>F.op.",
+        "Functors are parallel, every component has the required endpoints, and all finite naturality squares commute."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeNaturalTransformationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatTrans.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatIso.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteNaturalTransformation.opposite",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "opposite",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteNaturalTransformation.source",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteNaturalTransformationAlgebra",
+      "concept": "FiniteNaturalTransformation.source",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteNaturalTransformation",
+      "domain_B": null,
+      "domain_C": "FiniteFunctor",
+      "operation_signature": "FiniteNaturalTransformation -> FiniteFunctor",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.source",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the source functor, including both of its labelled categories and maps.",
+        "Functors are parallel, every component has the required endpoints, and all finite naturality squares commute."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeNaturalTransformationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatTrans.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatIso.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteNaturalTransformation.source",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "source",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteNaturalTransformation.target",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteNaturalTransformationAlgebra",
+      "concept": "FiniteNaturalTransformation.target",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteNaturalTransformation",
+      "domain_B": null,
+      "domain_C": "FiniteFunctor",
+      "operation_signature": "FiniteNaturalTransformation -> FiniteFunctor",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.target",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the target functor, including both of its labelled categories and maps.",
+        "Functors are parallel, every component has the required endpoints, and all finite naturality squares commute."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeNaturalTransformationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatTrans.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatIso.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteNaturalTransformation.target",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "target",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteNaturalTransformation.component",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteNaturalTransformationAlgebra",
+      "concept": "FiniteNaturalTransformation.component",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteNaturalTransformation",
+      "domain_B": "Z",
+      "domain_C": "Z",
+      "operation_signature": "FiniteNaturalTransformation x Z -> Z",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.component",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The argument is an object of the common source category; return the component's codomain arrow label.",
+        "Functors are parallel, every component has the required endpoints, and all finite naturality squares commute."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeNaturalTransformationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatTrans.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatIso.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteNaturalTransformation.component",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "component",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteNaturalTransformation.is-isomorphism",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteNaturalTransformationAlgebra",
+      "concept": "FiniteNaturalTransformation.is-isomorphism",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteNaturalTransformation",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "FiniteNaturalTransformation -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.is-isomorphism",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Check whether every component arrow is invertible; the empty transformation satisfies this vacuously.",
+        "Functors are parallel, every component has the required endpoints, and all finite naturality squares commute."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeNaturalTransformationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatTrans.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatIso.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteNaturalTransformation.is-isomorphism",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "is-isomorphism",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteNaturalTransformation.component-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteNaturalTransformationAlgebra",
+      "concept": "FiniteNaturalTransformation.component-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteNaturalTransformation",
+      "domain_B": null,
+      "domain_C": "FiniteFunction(Z,Z)",
+      "operation_signature": "FiniteNaturalTransformation -> FiniteFunction(Z,Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.component-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Transfer to a finite integer function from source objects to the entire codomain arrow set.",
+        "Functors are parallel, every component has the required endpoints, and all finite naturality squares commute."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeNaturalTransformationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatTrans.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatIso.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteNaturalTransformation.component-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "component-map",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteNaturalTransformation.components",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteNaturalTransformationAlgebra",
+      "concept": "FiniteNaturalTransformation.components",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteNaturalTransformation",
+      "domain_B": null,
+      "domain_C": "Z",
+      "operation_signature": "FiniteNaturalTransformation -> List(Z)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.components",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit component arrow labels in ascending source-object order, preserving duplicates.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Functors are parallel, every component has the required endpoints, and all finite naturality squares commute."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeNaturalTransformationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatTrans.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatIso.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteNaturalTransformation.components",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "components",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteNaturalTransformation.component-fiber",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteNaturalTransformationAlgebra",
+      "concept": "FiniteNaturalTransformation.component-fiber",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteNaturalTransformation",
+      "domain_B": "Z",
+      "domain_C": "Z",
+      "operation_signature": "FiniteNaturalTransformation x Z -> List(Z)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.component-fiber",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The codomain arrow label exists; emit source objects having that component in ascending order, possibly none.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Functors are parallel, every component has the required endpoints, and all finite naturality squares commute."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "groupimp/src/main/java/operations/flat/SecondResultFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeNaturalTransformationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatTrans.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatIso.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteNaturalTransformation.component-fiber",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "component-fiber",
+      "legacy_operation_interface": "ILeftProjectionFlatOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteNaturalTransformation.equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteNaturalTransformationAlgebra",
+      "concept": "FiniteNaturalTransformation.equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteNaturalTransformation",
+      "domain_B": "FiniteNaturalTransformation",
+      "domain_C": "Boolean",
+      "operation_signature": "FiniteNaturalTransformation x FiniteNaturalTransformation -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Equality includes both parallel functors and every component.",
+        "Functors are parallel, every component has the required endpoints, and all finite naturality squares commute."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeNaturalTransformationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatTrans.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatIso.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteNaturalTransformation.equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteNaturalTransformation.identity-on",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteNaturalTransformationAlgebra",
+      "concept": "FiniteNaturalTransformation.identity-on",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteFunctor",
+      "domain_B": null,
+      "domain_C": "FiniteNaturalTransformation",
+      "operation_signature": "FiniteFunctor -> FiniteNaturalTransformation",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.identity-on",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Each component is the identity at the supplied functor's image object.",
+        "Functors are parallel, every component has the required endpoints, and all finite naturality squares commute."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeNaturalTransformationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatTrans.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatIso.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteNaturalTransformation.identity-on",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "FiniteNaturalTransformation.identity-on",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteNaturalTransformation.precompose",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteNaturalTransformationAlgebra",
+      "concept": "FiniteNaturalTransformation.precompose",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteNaturalTransformation",
+      "domain_B": "FiniteFunctor",
+      "domain_C": "FiniteNaturalTransformation",
+      "operation_signature": "FiniteNaturalTransformation x FiniteFunctor -> FiniteNaturalTransformation",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.precompose",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The additional functor targets the common source category; pull components back along its object map.",
+        "Functors are parallel, every component has the required endpoints, and all finite naturality squares commute."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeNaturalTransformationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatTrans.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatIso.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteNaturalTransformation.precompose",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "precompose",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteNaturalTransformation.postcompose",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteNaturalTransformationAlgebra",
+      "concept": "FiniteNaturalTransformation.postcompose",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteNaturalTransformation",
+      "domain_B": "FiniteFunctor",
+      "domain_C": "FiniteNaturalTransformation",
+      "operation_signature": "FiniteNaturalTransformation x FiniteFunctor -> FiniteNaturalTransformation",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.postcompose",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The additional functor starts at the common codomain category; map components through its arrow map.",
+        "Functors are parallel, every component has the required endpoints, and all finite naturality squares commute."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeNaturalTransformationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatTrans.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatIso.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteNaturalTransformation.postcompose",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "postcompose",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteNaturalTransformation.horizontal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteNaturalTransformationAlgebra",
+      "concept": "FiniteNaturalTransformation.horizontal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteNaturalTransformation",
+      "domain_B": "FiniteNaturalTransformation",
+      "domain_C": "FiniteNaturalTransformation",
+      "operation_signature": "FiniteNaturalTransformation x FiniteNaturalTransformation -> FiniteNaturalTransformation",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.horizontal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "For alpha:F=>G and beta:H=>K on adjacent categories, return H.F=>K.G with component H(alpha_x) followed by beta_(Gx).",
+        "Functors are parallel, every component has the required endpoints, and all finite naturality squares commute."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeNaturalTransformationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatTrans.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatIso.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteNaturalTransformation.horizontal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "horizontal",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteNaturalTransformation.empty",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteNaturalTransformationAlgebra",
+      "concept": "FiniteNaturalTransformation.empty",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "FiniteNaturalTransformation",
+      "operation_signature": "Unit -> FiniteNaturalTransformation",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.empty",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Functors are parallel, every component has the required endpoints, and all finite naturality squares commute."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeNaturalTransformationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatTrans.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatIso.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteNaturalTransformationAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteNaturalTransformation.empty",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "FiniteNaturalTransformation.empty",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
       "id": "concrete-operation.Z/5Z.add",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "PrimeField",
@@ -45289,6 +46490,9 @@
         "FiniteFunctor.map-object",
         "FiniteFunctor.object-fiber",
         "FiniteFunctor.object-images",
+        "FiniteNaturalTransformation.component",
+        "FiniteNaturalTransformation.component-fiber",
+        "FiniteNaturalTransformation.components",
         "FiniteSet(Z).contains",
         "FiniteSet(Z).elements",
         "FiniteSet(Z).insert",
@@ -45618,6 +46822,8 @@
         "FiniteFunctor.is-faithful",
         "FiniteFunctor.is-full",
         "FiniteFunctor.is-isomorphism",
+        "FiniteNaturalTransformation.equal",
+        "FiniteNaturalTransformation.is-isomorphism",
         "FiniteRelation(Z,Z).contains",
         "FiniteRelation(Z,Z).equal",
         "FiniteRelation(Z,Z).is-function-on",
@@ -45671,6 +46877,7 @@
         "FiniteComplex.empty",
         "FiniteFunction(Z,Z).empty",
         "FiniteFunctor.empty",
+        "FiniteNaturalTransformation.empty",
         "FiniteRelation(Z,Z).empty",
         "FiniteSet(Z).empty",
         "Mat2(Q).one",
@@ -46597,7 +47804,8 @@
         "FiniteFunction(Z,Z).values",
         "FiniteFunctor.arrow-map",
         "FiniteFunctor.from-discrete-map",
-        "FiniteFunctor.object-map"
+        "FiniteFunctor.object-map",
+        "FiniteNaturalTransformation.component-map"
       ],
       "invariants": [
         "Explicit finite domain and codomain in the registered integer Algebra",
@@ -46792,12 +48000,72 @@
         "FiniteFunctor.object-map",
         "FiniteFunctor.opposite",
         "FiniteFunctor.source",
-        "FiniteFunctor.target"
+        "FiniteFunctor.target",
+        "FiniteNaturalTransformation.identity-on",
+        "FiniteNaturalTransformation.postcompose",
+        "FiniteNaturalTransformation.precompose",
+        "FiniteNaturalTransformation.source",
+        "FiniteNaturalTransformation.target"
       ],
       "invariants": [
         "Finite labelled source and target categories",
         "Total object and arrow maps",
         "Preservation of endpoints, identities and every composition"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-22"
+      }
+    },
+    {
+      "id": "FiniteNaturalTransformation",
+      "name": "Validated finite natural transformations",
+      "description": "Validated finite natural transformations",
+      "member_representation": "mathematics.structures.FiniteNaturalTransformation",
+      "membership_rules": [
+        "Parallel finite functors",
+        "Exactly one typed component for every source object",
+        "Naturality checked for every source arrow"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "FiniteFunctor",
+        "FiniteCategory",
+        "Z",
+        "FiniteFunction(Z,Z)"
+      ],
+      "supported_operations": [
+        "FiniteNaturalTransformation.component",
+        "FiniteNaturalTransformation.component-fiber",
+        "FiniteNaturalTransformation.component-map",
+        "FiniteNaturalTransformation.components",
+        "FiniteNaturalTransformation.compose",
+        "FiniteNaturalTransformation.empty",
+        "FiniteNaturalTransformation.equal",
+        "FiniteNaturalTransformation.horizontal",
+        "FiniteNaturalTransformation.identity-on",
+        "FiniteNaturalTransformation.inverse",
+        "FiniteNaturalTransformation.is-isomorphism",
+        "FiniteNaturalTransformation.opposite",
+        "FiniteNaturalTransformation.postcompose",
+        "FiniteNaturalTransformation.precompose",
+        "FiniteNaturalTransformation.source",
+        "FiniteNaturalTransformation.target"
+      ],
+      "invariants": [
+        "Parallel finite functors",
+        "Exactly one typed component for every source object",
+        "Naturality checked for every source arrow"
       ],
       "references": [
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"

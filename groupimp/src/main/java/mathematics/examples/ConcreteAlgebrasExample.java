@@ -7,6 +7,8 @@ import mathematics.calculus.Polynomial;
 import mathematics.foundations.Pair;
 import mathematics.foundations.FiniteSet;
 import mathematics.structures.FiniteCategory;
+import mathematics.structures.FiniteFunctor;
+import mathematics.structures.FiniteNaturalTransformation;
 import mathematics.linear.RationalVector;
 import mathematics.numbers.Rational;
 import java.math.BigInteger;
@@ -43,6 +45,11 @@ public final class ConcreteAlgebrasExample {
         System.out.println("Initial objects of a one-object discrete category: "+math.flow(math.integerSets,Collections.singletonList(FiniteSet.of(BigInteger.TEN)))
                 .<FiniteCategory>performAlgebraTransfer("FiniteCategory.discrete-on")
                 .<BigInteger>performFlatAlgebraTransfer("initial-objects").collect());
+        System.out.println("Identity natural transformation component: "+math.flow(math.categories,
+                Collections.singletonList(FiniteCategory.discrete(FiniteSet.of(BigInteger.TEN))))
+                .<FiniteFunctor>performAlgebraTransfer("FiniteFunctor.identity-on")
+                .<FiniteNaturalTransformation>performAlgebraTransfer("FiniteNaturalTransformation.identity-on")
+                .performLeftProjectionOperation("component",BigInteger.TEN).collect());
     }
     /** Stable manifest used to keep the human/JSON coverage registry aligned with real registrations. */
     public static String catalogManifest(ConcreteMathematics math) {
