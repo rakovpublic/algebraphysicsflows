@@ -66,6 +66,17 @@ public final class FiniteFunctor implements Serializable {
         for(BigInteger label : category.arrows().keySet()) arrows.put(label,label);
         return new FiniteFunctor(category,category,objects,arrows);
     }
+    /** Constant diagram at an existing target object, sending every arrow to its identity. */
+    public static FiniteFunctor constant(FiniteCategory shape,FiniteCategory target,BigInteger object) {
+        BigInteger identity=target.identity(object);
+        Map<BigInteger,BigInteger> objects=new TreeMap<>(),arrows=new TreeMap<>();
+        for(BigInteger label : shape.objects().members()) objects.put(label,object);
+        for(BigInteger label : shape.arrows().keySet()) arrows.put(label,identity);
+        return new FiniteFunctor(shape,target,objects,arrows);
+    }
+    public static FiniteFunctor emptyDiagram(FiniteCategory target) {
+        return new FiniteFunctor(FiniteCategory.discrete(FiniteSet.of()),target,Collections.emptyMap(),Collections.emptyMap());
+    }
     public static FiniteFunctor fromDiscreteMap(FiniteFunction<BigInteger,BigInteger> function) {
         return new FiniteFunctor(FiniteCategory.discrete(function.domain),FiniteCategory.discrete(function.codomain),
                 function.mapping(),function.mapping());

@@ -11,6 +11,7 @@ import mathematics.structures.FiniteFunctor;
 import mathematics.structures.FiniteNaturalTransformation;
 import mathematics.structures.FiniteEquivalence;
 import mathematics.structures.FiniteAdjunction;
+import mathematics.structures.FiniteCone;
 import mathematics.linear.RationalVector;
 import mathematics.numbers.Rational;
 import java.math.BigInteger;
@@ -63,6 +64,11 @@ public final class ConcreteAlgebrasExample {
                 .<FiniteFunctor>performAlgebraTransfer("FiniteFunctor.identity-on")
                 .<FiniteAdjunction>performAlgebraTransfer("FiniteAdjunction.from-left")
                 .<BigInteger,Pair<BigInteger,BigInteger>>performAlgebraUnsafe("transpose",new Pair<>(BigInteger.TEN,BigInteger.TEN)).collect());
+        System.out.println("Limit vertex of an empty diagram: "+math.flow(math.categories,
+                Collections.singletonList(FiniteCategory.discrete(FiniteSet.of(BigInteger.TEN))))
+                .<FiniteFunctor>performAlgebraTransfer("FiniteFunctor.empty-diagram")
+                .<FiniteCone>performAlgebraTransfer("FiniteCone.limit")
+                .<BigInteger>performAlgebraTransfer("vertex").collect());
     }
     /** Stable manifest used to keep the human/JSON coverage registry aligned with real registrations. */
     public static String catalogManifest(ConcreteMathematics math) {

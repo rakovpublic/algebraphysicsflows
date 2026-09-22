@@ -25223,6 +25223,70 @@
       "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
     },
     {
+      "id": "concrete-algebra.FiniteConeAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteConeAlgebra",
+      "concept": "FiniteConeAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "FiniteCone",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "A retained target-category vertex has one typed leg to each diagram object, and all cone equations commute; limits additionally require unique factorization from every cone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeConeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Categories retain the 128-arrow/object cap. Each search is bounded at 10000 enumerated cones and 1000000 search steps; exhaustion raises IMPLEMENTATION_FAILURE. This is finite table search, not an infinite limit algorithm or formal proof."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
       "id": "concrete-algebra.FiniteEquivalenceAlgebra",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "FiniteEquivalenceAlgebra",
@@ -25511,7 +25575,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations are unimplemented. Finite diagram limits have separate bounded registrations in FiniteConeAlgebra."
       ],
       "required_extension": null,
       "references": [
@@ -44795,6 +44859,148 @@
       "legacy_operation_interface": "ITransferOperation"
     },
     {
+      "id": "concrete-operation.FiniteFunctor.constant-at",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteFunctorAlgebra",
+      "concept": "FiniteFunctor.constant-at",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteFunctor",
+      "domain_B": "Z",
+      "domain_C": "FiniteFunctor",
+      "operation_signature": "FiniteFunctor x Z -> FiniteFunctor",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.constant-at",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The integer is an existing target object, even for an empty shape. Send every shape object to it and every arrow to its identity.",
+        "Construction checks total maps, endpoint typing, identity preservation and every source composition."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteFunctorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFunctorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Both categories use the existing 128-arrow/object table cap. Only finite covariant functors are represented; is-equivalence is a decision criterion. Explicit witnesses are constructed separately by FiniteEquivalenceAlgebra."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Functor/Basic.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Equivalence.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteFunctorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteFunctor.constant-at",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "constant-at",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteFunctor.empty-diagram",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteFunctorAlgebra",
+      "concept": "FiniteFunctor.empty-diagram",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCategory",
+      "domain_B": null,
+      "domain_C": "FiniteFunctor",
+      "operation_signature": "FiniteCategory -> FiniteFunctor",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.empty-diagram",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Construct the unique functor from the empty category into the supplied category; retain that target category.",
+        "Construction checks total maps, endpoint typing, identity preservation and every source composition."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteFunctorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFunctorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Both categories use the existing 128-arrow/object table cap. Only finite covariant functors are represented; is-equivalence is a decision criterion. Explicit witnesses are constructed separately by FiniteEquivalenceAlgebra."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Functor/Basic.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Equivalence.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteFunctorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteFunctor.empty-diagram",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "FiniteFunctor.empty-diagram",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
       "id": "concrete-operation.FiniteNaturalTransformation.compose",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "FiniteNaturalTransformationAlgebra",
@@ -44835,7 +45041,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations are unimplemented. Finite diagram limits have separate bounded registrations in FiniteConeAlgebra."
       ],
       "required_extension": null,
       "references": [
@@ -44906,7 +45112,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations are unimplemented. Finite diagram limits have separate bounded registrations in FiniteConeAlgebra."
       ],
       "required_extension": null,
       "references": [
@@ -44977,7 +45183,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations are unimplemented. Finite diagram limits have separate bounded registrations in FiniteConeAlgebra."
       ],
       "required_extension": null,
       "references": [
@@ -45048,7 +45254,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations are unimplemented. Finite diagram limits have separate bounded registrations in FiniteConeAlgebra."
       ],
       "required_extension": null,
       "references": [
@@ -45119,7 +45325,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations are unimplemented. Finite diagram limits have separate bounded registrations in FiniteConeAlgebra."
       ],
       "required_extension": null,
       "references": [
@@ -45190,7 +45396,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations are unimplemented. Finite diagram limits have separate bounded registrations in FiniteConeAlgebra."
       ],
       "required_extension": null,
       "references": [
@@ -45261,7 +45467,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations are unimplemented. Finite diagram limits have separate bounded registrations in FiniteConeAlgebra."
       ],
       "required_extension": null,
       "references": [
@@ -45332,7 +45538,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations are unimplemented. Finite diagram limits have separate bounded registrations in FiniteConeAlgebra."
       ],
       "required_extension": null,
       "references": [
@@ -45404,7 +45610,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations are unimplemented. Finite diagram limits have separate bounded registrations in FiniteConeAlgebra."
       ],
       "required_extension": null,
       "references": [
@@ -45476,7 +45682,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations are unimplemented. Finite diagram limits have separate bounded registrations in FiniteConeAlgebra."
       ],
       "required_extension": null,
       "references": [
@@ -45547,7 +45753,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations are unimplemented. Finite diagram limits have separate bounded registrations in FiniteConeAlgebra."
       ],
       "required_extension": null,
       "references": [
@@ -45618,7 +45824,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations are unimplemented. Finite diagram limits have separate bounded registrations in FiniteConeAlgebra."
       ],
       "required_extension": null,
       "references": [
@@ -45689,7 +45895,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations are unimplemented. Finite diagram limits have separate bounded registrations in FiniteConeAlgebra."
       ],
       "required_extension": null,
       "references": [
@@ -45760,7 +45966,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations are unimplemented. Finite diagram limits have separate bounded registrations in FiniteConeAlgebra."
       ],
       "required_extension": null,
       "references": [
@@ -45831,7 +46037,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations are unimplemented. Finite diagram limits have separate bounded registrations in FiniteConeAlgebra."
       ],
       "required_extension": null,
       "references": [
@@ -45901,7 +46107,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented."
+        "Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations are unimplemented. Finite diagram limits have separate bounded registrations in FiniteConeAlgebra."
       ],
       "required_extension": null,
       "references": [
@@ -48208,6 +48414,1074 @@
       "legacy_operation_interface": "ITransferOperation"
     },
     {
+      "id": "concrete-operation.FiniteCone.diagram",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteConeAlgebra",
+      "concept": "FiniteCone.diagram",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCone",
+      "domain_B": null,
+      "domain_C": "FiniteFunctor",
+      "operation_signature": "FiniteCone -> FiniteFunctor",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.diagram",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the retained finite functor J->C.",
+        "A retained target-category vertex has one typed leg to each diagram object, and all cone equations commute; limits additionally require unique factorization from every cone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeConeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Categories retain the 128-arrow/object cap. Each search is bounded at 10000 enumerated cones and 1000000 search steps; exhaustion raises IMPLEMENTATION_FAILURE. This is finite table search, not an infinite limit algorithm or formal proof."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCone.diagram",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "diagram",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCone.vertex",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteConeAlgebra",
+      "concept": "FiniteCone.vertex",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCone",
+      "domain_B": null,
+      "domain_C": "Z",
+      "operation_signature": "FiniteCone -> Z",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.vertex",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the cone vertex object label in C, retained even for an empty shape J.",
+        "A retained target-category vertex has one typed leg to each diagram object, and all cone equations commute; limits additionally require unique factorization from every cone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeConeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Categories retain the 128-arrow/object cap. Each search is bounded at 10000 enumerated cones and 1000000 search steps; exhaustion raises IMPLEMENTATION_FAILURE. This is finite table search, not an infinite limit algorithm or formal proof."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCone.vertex",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "vertex",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCone.leg",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteConeAlgebra",
+      "concept": "FiniteCone.leg",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCone",
+      "domain_B": "Z",
+      "domain_C": "Z",
+      "operation_signature": "FiniteCone x Z -> Z",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.leg",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The argument must be an object of J; return its leg arrow label wrapped in the integer algebra.",
+        "A retained target-category vertex has one typed leg to each diagram object, and all cone equations commute; limits additionally require unique factorization from every cone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeConeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Categories retain the 128-arrow/object cap. Each search is bounded at 10000 enumerated cones and 1000000 search steps; exhaustion raises IMPLEMENTATION_FAILURE. This is finite table search, not an infinite limit algorithm or formal proof."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteCone.leg",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "leg",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCone.leg-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteConeAlgebra",
+      "concept": "FiniteCone.leg-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCone",
+      "domain_B": null,
+      "domain_C": "FiniteFunction(Z,Z)",
+      "operation_signature": "FiniteCone -> FiniteFunction(Z,Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.leg-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Transfer to a finite function from all shape objects to the entire target-category arrow set.",
+        "A retained target-category vertex has one typed leg to each diagram object, and all cone equations commute; limits additionally require unique factorization from every cone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeConeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Categories retain the 128-arrow/object cap. Each search is bounded at 10000 enumerated cones and 1000000 search steps; exhaustion raises IMPLEMENTATION_FAILURE. This is finite table search, not an infinite limit algorithm or formal proof."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCone.leg-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "leg-map",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCone.legs",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteConeAlgebra",
+      "concept": "FiniteCone.legs",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCone",
+      "domain_B": null,
+      "domain_C": "Z",
+      "operation_signature": "FiniteCone -> List(Z)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.legs",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit leg arrow labels in ascending shape-object order, retaining duplicate labels.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "A retained target-category vertex has one typed leg to each diagram object, and all cone equations commute; limits additionally require unique factorization from every cone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeConeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Categories retain the 128-arrow/object cap. Each search is bounded at 10000 enumerated cones and 1000000 search steps; exhaustion raises IMPLEMENTATION_FAILURE. This is finite table search, not an infinite limit algorithm or formal proof."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCone.legs",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "legs",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCone.natural-transformation",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteConeAlgebra",
+      "concept": "FiniteCone.natural-transformation",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCone",
+      "domain_B": null,
+      "domain_C": "FiniteNaturalTransformation",
+      "operation_signature": "FiniteCone -> FiniteNaturalTransformation",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.natural-transformation",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the checked natural transformation from the constant diagram at the vertex to the retained diagram.",
+        "A retained target-category vertex has one typed leg to each diagram object, and all cone equations commute; limits additionally require unique factorization from every cone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeConeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Categories retain the 128-arrow/object cap. Each search is bounded at 10000 enumerated cones and 1000000 search steps; exhaustion raises IMPLEMENTATION_FAILURE. This is finite table search, not an infinite limit algorithm or formal proof."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCone.natural-transformation",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "natural-transformation",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCone.is-limit",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteConeAlgebra",
+      "concept": "FiniteCone.is-limit",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCone",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "FiniteCone -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.is-limit",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Every cone over this exact diagram must have exactly one commuting mediator into this cone. Search exhaustion raises IMPLEMENTATION_FAILURE, never false.",
+        "A retained target-category vertex has one typed leg to each diagram object, and all cone equations commute; limits additionally require unique factorization from every cone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeConeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Categories retain the 128-arrow/object cap. Each search is bounded at 10000 enumerated cones and 1000000 search steps; exhaustion raises IMPLEMENTATION_FAILURE. This is finite table search, not an infinite limit algorithm or formal proof."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCone.is-limit",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "is-limit",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCone.equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteConeAlgebra",
+      "concept": "FiniteCone.equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCone",
+      "domain_B": "FiniteCone",
+      "domain_C": "Boolean",
+      "operation_signature": "FiniteCone x FiniteCone -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Equality includes the labelled diagram, vertex and every leg, including the vertex for empty shapes.",
+        "A retained target-category vertex has one typed leg to each diagram object, and all cone equations commute; limits additionally require unique factorization from every cone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeConeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Categories retain the 128-arrow/object cap. Each search is bounded at 10000 enumerated cones and 1000000 search steps; exhaustion raises IMPLEMENTATION_FAILURE. This is finite table search, not an infinite limit algorithm or formal proof."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteCone.equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCone.lift",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteConeAlgebra",
+      "concept": "FiniteCone.lift",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCone",
+      "domain_B": "FiniteCone",
+      "domain_C": "Z",
+      "operation_signature": "FiniteCone x FiniteCone -> Z",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.lift",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The first operand must be a limit cone for the entire diagram; the second has the same exact diagram. Return its unique commuting arrow into the first vertex.",
+        "A retained target-category vertex has one typed leg to each diagram object, and all cone equations commute; limits additionally require unique factorization from every cone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeConeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Categories retain the 128-arrow/object cap. Each search is bounded at 10000 enumerated cones and 1000000 search steps; exhaustion raises IMPLEMENTATION_FAILURE. This is finite table search, not an infinite limit algorithm or formal proof."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteCone.lift",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "lift",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCone.mediators",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteConeAlgebra",
+      "concept": "FiniteCone.mediators",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCone",
+      "domain_B": "FiniteCone",
+      "domain_C": "Z",
+      "operation_signature": "FiniteCone x FiniteCone -> List(Z)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.mediators",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Both cones have the same exact diagram; emit all commuting arrows from the second vertex to the first in ascending arrow-label order, possibly none or several.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "A retained target-category vertex has one typed leg to each diagram object, and all cone equations commute; limits additionally require unique factorization from every cone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "groupimp/src/main/java/operations/flat/CustomResultFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeConeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Categories retain the 128-arrow/object cap. Each search is bounded at 10000 enumerated cones and 1000000 search steps; exhaustion raises IMPLEMENTATION_FAILURE. This is finite table search, not an infinite limit algorithm or formal proof."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteCone.mediators",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "mediators",
+      "legacy_operation_interface": "ICustomResultFlatOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCone.reindex",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteConeAlgebra",
+      "concept": "FiniteCone.reindex",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCone",
+      "domain_B": "FiniteFunctor",
+      "domain_C": "FiniteCone",
+      "operation_signature": "FiniteCone x FiniteFunctor -> FiniteCone",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.reindex",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The additional functor targets the diagram shape. Pull the legs back along its object map; the limit property need not be preserved.",
+        "A retained target-category vertex has one typed leg to each diagram object, and all cone equations commute; limits additionally require unique factorization from every cone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeConeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Categories retain the 128-arrow/object cap. Each search is bounded at 10000 enumerated cones and 1000000 search steps; exhaustion raises IMPLEMENTATION_FAILURE. This is finite table search, not an infinite limit algorithm or formal proof."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteCone.reindex",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "reindex",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCone.map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteConeAlgebra",
+      "concept": "FiniteCone.map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteCone",
+      "domain_B": "FiniteFunctor",
+      "domain_C": "FiniteCone",
+      "operation_signature": "FiniteCone x FiniteFunctor -> FiniteCone",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The additional functor starts at the target category. Map the vertex and legs; the limit property need not be preserved.",
+        "A retained target-category vertex has one typed leg to each diagram object, and all cone equations commute; limits additionally require unique factorization from every cone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeConeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Categories retain the 128-arrow/object cap. Each search is bounded at 10000 enumerated cones and 1000000 search steps; exhaustion raises IMPLEMENTATION_FAILURE. This is finite table search, not an infinite limit algorithm or formal proof."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteCone.map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "map",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCone.limit",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteConeAlgebra",
+      "concept": "FiniteCone.limit",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteFunctor",
+      "domain_B": null,
+      "domain_C": "FiniteCone",
+      "operation_signature": "FiniteFunctor -> FiniteCone",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.limit",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Find a cone with exactly one mediator from every cone. Select least vertex then lexicographically least legs; nonexistence is OPERATION_UNDEFINED only after complete bounded search.",
+        "A retained target-category vertex has one typed leg to each diagram object, and all cone equations commute; limits additionally require unique factorization from every cone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeConeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Categories retain the 128-arrow/object cap. Each search is bounded at 10000 enumerated cones and 1000000 search steps; exhaustion raises IMPLEMENTATION_FAILURE. This is finite table search, not an infinite limit algorithm or formal proof."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteCone.limit",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "FiniteCone.limit",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCone.cones-at",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteConeAlgebra",
+      "concept": "FiniteCone.cones-at",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteFunctor",
+      "domain_B": "Z",
+      "domain_C": "FiniteCone",
+      "operation_signature": "FiniteFunctor x Z -> List(FiniteCone)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.cones-at",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The argument is an existing target-category object; enumerate every commuting cone there in lexicographic leg order. A valid empty list differs from exhausted search.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "A retained target-category vertex has one typed leg to each diagram object, and all cone equations commute; limits additionally require unique factorization from every cone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "groupimp/src/main/java/operations/flat/MixedFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeConeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Categories retain the 128-arrow/object cap. Each search is bounded at 10000 enumerated cones and 1000000 search steps; exhaustion raises IMPLEMENTATION_FAILURE. This is finite table search, not an infinite limit algorithm or formal proof."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteCone.cones-at",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "FiniteCone.cones-at",
+      "legacy_operation_interface": "IUnsafeFlatOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteCone.from-transformation",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteConeAlgebra",
+      "concept": "FiniteCone.from-transformation",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteNaturalTransformation",
+      "domain_B": "Z",
+      "domain_C": "FiniteCone",
+      "operation_signature": "FiniteNaturalTransformation x Z -> FiniteCone",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.from-transformation",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The source functor must be constant at the explicit vertex; the target functor becomes the cone diagram.",
+        "A retained target-category vertex has one typed leg to each diagram object, and all cone equations commute; limits additionally require unique factorization from every cone."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeConeTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Categories retain the 128-arrow/object cap. Each search is bounded at 10000 enumerated cones and 1000000 search steps; exhaustion raises IMPLEMENTATION_FAILURE. This is finite table search, not an infinite limit algorithm or formal proof."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteConeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteCone.from-transformation",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "FiniteCone.from-transformation",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
       "id": "concrete-operation.Z/5Z.add",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "PrimeField",
@@ -48884,6 +50158,13 @@
         "FiniteCategory.terminal-objects",
         "FiniteComplex.dimension",
         "FiniteComplex.euler-characteristic",
+        "FiniteCone.cones-at",
+        "FiniteCone.from-transformation",
+        "FiniteCone.leg",
+        "FiniteCone.legs",
+        "FiniteCone.lift",
+        "FiniteCone.mediators",
+        "FiniteCone.vertex",
         "FiniteDistribution(Z).outcomes",
         "FiniteDistribution(Z).point-mass",
         "FiniteDistribution(Z).point-probability",
@@ -48892,6 +50173,7 @@
         "FiniteFunction(Z,Z).values",
         "FiniteFunctor.arrow-fiber",
         "FiniteFunctor.arrow-images",
+        "FiniteFunctor.constant-at",
         "FiniteFunctor.map-arrow",
         "FiniteFunctor.map-object",
         "FiniteFunctor.object-fiber",
@@ -49219,6 +50501,8 @@
         "FiniteCategory.is-thin",
         "FiniteComplex.equal",
         "FiniteComplex.subcomplex",
+        "FiniteCone.equal",
+        "FiniteCone.is-limit",
         "FiniteDistribution(Z).equal",
         "FiniteEquivalence.equal",
         "FiniteFunction(Z,Z).equal",
@@ -50194,6 +51478,7 @@
       ],
       "supported_operations": [
         "FiniteAdjunction.hom-map",
+        "FiniteCone.leg-map",
         "FiniteFunction(Z,Z).apply",
         "FiniteFunction(Z,Z).codomain",
         "FiniteFunction(Z,Z).compose",
@@ -50320,6 +51605,7 @@
         "FiniteEquivalence.identity-on",
         "FiniteEquivalence.source",
         "FiniteEquivalence.target",
+        "FiniteFunctor.empty-diagram",
         "FiniteFunctor.identity-on",
         "FiniteFunctor.source",
         "FiniteFunctor.target"
@@ -50404,6 +51690,11 @@
         "FiniteAdjunction.from-right",
         "FiniteAdjunction.left",
         "FiniteAdjunction.right",
+        "FiniteCone.cones-at",
+        "FiniteCone.diagram",
+        "FiniteCone.limit",
+        "FiniteCone.map",
+        "FiniteCone.reindex",
         "FiniteEquivalence.backward",
         "FiniteEquivalence.forward",
         "FiniteEquivalence.from-functor",
@@ -50411,7 +51702,9 @@
         "FiniteFunctor.arrow-images",
         "FiniteFunctor.arrow-map",
         "FiniteFunctor.compose",
+        "FiniteFunctor.constant-at",
         "FiniteFunctor.empty",
+        "FiniteFunctor.empty-diagram",
         "FiniteFunctor.equal",
         "FiniteFunctor.from-discrete-map",
         "FiniteFunctor.identity-on",
@@ -50475,6 +51768,8 @@
       "supported_operations": [
         "FiniteAdjunction.counit",
         "FiniteAdjunction.unit",
+        "FiniteCone.from-transformation",
+        "FiniteCone.natural-transformation",
         "FiniteEquivalence.counit",
         "FiniteEquivalence.unit",
         "FiniteNaturalTransformation.component",
@@ -50611,6 +51906,61 @@
         "Oppositely directed finite functors",
         "Typed natural unit and counit",
         "Both triangle identities checked at every object; components need not be invertible"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-22"
+      }
+    },
+    {
+      "id": "FiniteCone",
+      "name": "Validated cones over finite diagrams",
+      "description": "Validated cones over finite diagrams",
+      "member_representation": "mathematics.structures.FiniteCone",
+      "membership_rules": [
+        "Finite diagram with retained target vertex",
+        "Exactly one typed leg per shape object",
+        "Every cone equation checked; an empty shape still retains its vertex"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "FiniteFunctor",
+        "FiniteCategory",
+        "FiniteNaturalTransformation",
+        "FiniteFunction(Z,Z)",
+        "Z"
+      ],
+      "supported_operations": [
+        "FiniteCone.cones-at",
+        "FiniteCone.diagram",
+        "FiniteCone.equal",
+        "FiniteCone.from-transformation",
+        "FiniteCone.is-limit",
+        "FiniteCone.leg",
+        "FiniteCone.leg-map",
+        "FiniteCone.legs",
+        "FiniteCone.lift",
+        "FiniteCone.limit",
+        "FiniteCone.map",
+        "FiniteCone.mediators",
+        "FiniteCone.natural-transformation",
+        "FiniteCone.reindex",
+        "FiniteCone.vertex"
+      ],
+      "invariants": [
+        "Finite diagram with retained target vertex",
+        "Exactly one typed leg per shape object",
+        "Every cone equation checked; an empty shape still retains its vertex"
       ],
       "references": [
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"

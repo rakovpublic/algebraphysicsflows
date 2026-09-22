@@ -32,6 +32,7 @@ OWNERS = {
     "FiniteNaturalTransformationAlgebra": ("FiniteNaturalTransformation", "Natural transformations between parallel finite functors with every naturality square checked"),
     "FiniteEquivalenceAlgebra": ("FiniteEquivalence", "Finite adjoint equivalences with explicit quasi-inverse, unit, counit and checked triangle identities"),
     "FiniteAdjunctionAlgebra": ("FiniteAdjunction", "Adjunctions of finite category tables with checked unit/counit and constructive finite adjoint search"),
+    "FiniteConeAlgebra": ("FiniteCone", "Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks"),
     "SymmetricGroup": ("S3", "Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree"),
 }
 INTERFACES = {
@@ -64,6 +65,7 @@ EXTRA_TESTS = {
     "FiniteNaturalTransformationAlgebra": "NativeNaturalTransformationTest",
     "FiniteEquivalenceAlgebra": "NativeEquivalenceTest",
     "FiniteAdjunctionAlgebra": "NativeAdjunctionTest",
+    "FiniteConeAlgebra": "NativeConeTest",
     "SymmetricGroup": "NativePermutationTest",
     "ResidueRing": "NativeResidueRingTest",
 }
@@ -103,6 +105,23 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "FiniteConeAlgebra": {
+        "diagram": "Return the retained finite functor J->C.",
+        "vertex": "Return the cone vertex object label in C, retained even for an empty shape J.",
+        "leg": "The argument must be an object of J; return its leg arrow label wrapped in the integer algebra.",
+        "leg-map": "Transfer to a finite function from all shape objects to the entire target-category arrow set.",
+        "legs": "Emit leg arrow labels in ascending shape-object order, retaining duplicate labels.",
+        "natural-transformation": "Return the checked natural transformation from the constant diagram at the vertex to the retained diagram.",
+        "is-limit": "Every cone over this exact diagram must have exactly one commuting mediator into this cone. Search exhaustion raises IMPLEMENTATION_FAILURE, never false.",
+        "equal": "Equality includes the labelled diagram, vertex and every leg, including the vertex for empty shapes.",
+        "lift": "The first operand must be a limit cone for the entire diagram; the second has the same exact diagram. Return its unique commuting arrow into the first vertex.",
+        "mediators": "Both cones have the same exact diagram; emit all commuting arrows from the second vertex to the first in ascending arrow-label order, possibly none or several.",
+        "reindex": "The additional functor targets the diagram shape. Pull the legs back along its object map; the limit property need not be preserved.",
+        "map": "The additional functor starts at the target category. Map the vertex and legs; the limit property need not be preserved.",
+        "limit": "Find a cone with exactly one mediator from every cone. Select least vertex then lexicographically least legs; nonexistence is OPERATION_UNDEFINED only after complete bounded search.",
+        "cones-at": "The argument is an existing target-category object; enumerate every commuting cone there in lexicographic leg order. A valid empty list differs from exhausted search.",
+        "from-transformation": "The source functor must be constant at the explicit vertex; the target functor becomes the cone diagram.",
+    },
     "FiniteAdjunctionAlgebra": {
         "compose": "Compose the left functors with the right operand first and the right functors in reverse order; labelled middle categories must agree. Retain and combine the supplied witnesses.",
         "opposite": "Swap adjoint roles and reverse categories: L adjoint to R becomes R.op adjoint to L.op. The opposite counit is the new unit.",
@@ -155,6 +174,8 @@ OWNER_CONDITIONS = {
         "horizontal": "For alpha:F=>G and beta:H=>K on adjacent categories, return H.F=>K.G with component H(alpha_x) followed by beta_(Gx).",
     },
     "FiniteFunctorAlgebra": {
+        "constant-at": "The integer is an existing target object, even for an empty shape. Send every shape object to it and every arrow to its identity.",
+        "empty-diagram": "Construct the unique functor from the empty category into the supplied category; retain that target category.",
         "compose": "F.compose(G) is F(G(-)); G.target and F.source must be equal labelled category tables.",
         "inverse": "Strict inverse requires bijections on both objects and arrows; an equivalence alone is insufficient.",
         "map-object": "The argument must be an object label in the source category.",
@@ -332,7 +353,7 @@ def record(identifier, owner, concept, paths, operation=None):
                                 "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Equivalence.html"]
     if owner == "FiniteNaturalTransformationAlgebra":
         value["required_invariants"].append("Functors are parallel, every component has the required endpoints, and all finite naturality squares commute.")
-        value["known_limitations"].append("Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations and general diagram limits remain unimplemented.")
+        value["known_limitations"].append("Underlying category tables retain the 128-arrow/object cap. Components are explicit finite maps; arbitrary infinite natural transformations are unimplemented. Finite diagram limits have separate bounded registrations in FiniteConeAlgebra.")
         value["references"] += ["https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatTrans.html",
                                 "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatIso.html"]
     if owner == "FiniteEquivalenceAlgebra":
@@ -345,6 +366,11 @@ def record(identifier, owner, concept, paths, operation=None):
         value["references"] += ["https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Adjunction/Basic.html",
                                 "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Adjunction/Comma.html",
                                 "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Adjunction/Opposites.html"]
+    if owner == "FiniteConeAlgebra":
+        value["required_invariants"].append("A retained target-category vertex has one typed leg to each diagram object, and all cone equations commute; limits additionally require unique factorization from every cone.")
+        value["known_limitations"].append("Categories retain the 128-arrow/object cap. Each search is bounded at 10000 enumerated cones and 1000000 search steps; exhaustion raises IMPLEMENTATION_FAILURE. This is finite table search, not an infinite limit algorithm or formal proof.")
+        value["references"] += ["https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
+                                "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"]
     if owner == "RationalFunctionField":
         value["known_limitations"].append("Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented.")
         value["references"].append("https://docs.sympy.org/latest/modules/polys/domainsref.html")
@@ -376,6 +402,8 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("FiniteCone", "Validated cones over finite diagrams", "mathematics.structures.FiniteCone",
+         ["Finite diagram with retained target vertex", "Exactly one typed leg per shape object", "Every cone equation checked; an empty shape still retains its vertex"], ["FiniteFunctor", "FiniteCategory", "FiniteNaturalTransformation", "FiniteFunction(Z,Z)", "Z"]),
         ("FiniteAdjunction", "Validated finite adjunctions", "mathematics.structures.FiniteAdjunction",
          ["Oppositely directed finite functors", "Typed natural unit and counit", "Both triangle identities checked at every object; components need not be invertible"], ["FiniteCategory", "FiniteFunctor", "FiniteNaturalTransformation", "FiniteEquivalence", "ZxZ.category", "FiniteFunction(Z,Z)"]),
         ("FiniteEquivalence", "Validated finite adjoint equivalences", "mathematics.structures.FiniteEquivalence",

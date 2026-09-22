@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 757 |
-| DIRECTLY_SUPPORTED | 514 |
+| Scoped records | 775 |
+| DIRECTLY_SUPPORTED | 532 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 373 |
+| IMPLEMENTED | 391 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 441 |
+| MACHINE_TESTED | 459 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 350 | 350 | 0 | 0 | 0 | 350 | 0 | 0 |
+| Concrete MathTool algebras | 368 | 368 | 0 | 0 | 0 | 368 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -251,6 +251,22 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | FiniteComplex.subcomplex | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.subcomplex |
 | FiniteComplex.union | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.union |
 | FiniteComplex.vertex-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.vertex-count |
+| FiniteCone.cones-at | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.cones-at |
+| FiniteCone.diagram | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.diagram |
+| FiniteCone.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.equal |
+| FiniteCone.from-transformation | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.from-transformation |
+| FiniteCone.is-limit | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.is-limit |
+| FiniteCone.leg | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.leg |
+| FiniteCone.leg-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.leg-map |
+| FiniteCone.legs | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.legs |
+| FiniteCone.lift | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.lift |
+| FiniteCone.limit | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.limit |
+| FiniteCone.map | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.map |
+| FiniteCone.mediators | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.mediators |
+| FiniteCone.natural-transformation | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.natural-transformation |
+| FiniteCone.reindex | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.reindex |
+| FiniteCone.vertex | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.vertex |
+| FiniteConeAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks |
 | FiniteDistribution(Z).condition | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer distributions with exact nonnegative rational masses summing to one; native operation FiniteDistribution(Z).condition |
 | FiniteDistribution(Z).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer distributions with exact nonnegative rational masses summing to one; native operation FiniteDistribution(Z).equal |
 | FiniteDistribution(Z).event-probability | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer distributions with exact nonnegative rational masses summing to one; native operation FiniteDistribution(Z).event-probability |
@@ -299,7 +315,9 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | FiniteFunctor.arrow-images | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.arrow-images |
 | FiniteFunctor.arrow-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.arrow-map |
 | FiniteFunctor.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.compose |
+| FiniteFunctor.constant-at | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.constant-at |
 | FiniteFunctor.empty | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.empty |
+| FiniteFunctor.empty-diagram | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.empty-diagram |
 | FiniteFunctor.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.equal |
 | FiniteFunctor.from-discrete-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.from-discrete-map |
 | FiniteFunctor.identity-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps; native operation FiniteFunctor.identity-on |

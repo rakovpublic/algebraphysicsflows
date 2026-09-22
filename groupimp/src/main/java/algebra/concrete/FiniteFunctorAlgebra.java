@@ -30,6 +30,8 @@ public final class FiniteFunctorAlgebra extends ConcreteAlgebra<FiniteFunctor> {
         unary("identity-on",categories.algebra(),algebra(),false,FiniteFunctor::identity);
         unary("from-discrete-map",functions.algebra(),algebra(),false,FiniteFunctor::fromDiscreteMap);
         constant("empty",FiniteFunctor.identity(FiniteCategory.discrete(FiniteSet.of())));
+        binary("constant-at",algebra(),integers.algebra(),algebra(),true,(f,c) -> FiniteFunctor.constant(f.source,f.target,c));
+        unary("empty-diagram",categories.algebra(),algebra(),false,FiniteFunctor::emptyDiagram);
         law("Object and arrow maps preserve endpoints, identities and every composition in the finite source table.");
         law("compose is F(G(-)); the labelled middle categories must match exactly.");
         law("Faithfulness and fullness are checked separately on every hom set; equivalence also requires essential surjectivity.");

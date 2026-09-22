@@ -17,6 +17,7 @@ import mathematics.structures.FiniteFunctor;
 import mathematics.structures.FiniteNaturalTransformation;
 import mathematics.structures.FiniteEquivalence;
 import mathematics.structures.FiniteAdjunction;
+import mathematics.structures.FiniteCone;
 import mathematics.examples.ConcreteAlgebrasExample;
 import org.junit.Test;
 import java.io.*;
@@ -25,7 +26,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all327RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all344RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String category12="Category(objects=[1, 2], arrows={1=(1,1), 2=(2,2)}, identities={1=1, 2=2}, composition={(1,1)=1, (2,2)=2})";
@@ -44,6 +45,12 @@ public class ConcreteAlgebrasTest {
         String swapAdjunction="Adjunction(left="+swapFunctor+", right="+swapFunctor+", unit={1=1, 2=2}, counit={1=1, 2=2})";
         String identityAdjunction="Adjunction(left="+identityFunctor+", right="+identityFunctor+", unit={1=1, 2=2}, counit={1=1, 2=2})";
         String emptyAdjunction="Adjunction(left="+emptyFunctor+", right="+emptyFunctor+", unit={}, counit={})";
+        String constantTwo="Functor(source="+category12+", target="+category12+", objects={1=2, 2=2}, arrows={1=2, 2=2})";
+        String emptyDiagram="Functor(source="+categoryEmpty+", target="+category12+", objects={}, arrows={})";
+        String cone="Cone(diagram="+constantTwo+", vertex=2, legs={1=2, 2=2})";
+        String coneTransformation="NaturalTransformation(source="+constantTwo+", target="+constantTwo+", components={1=2, 2=2})";
+        expected.put("FiniteConeAlgebra",String.join("|",constantTwo,"2","2","Function[1, 2]->[1, 2]{1=2, 2=2}","[2, 2]",
+                coneTransformation,"true","true","2","[2]",cone,cone,cone,"["+cone+"]",cone));
         expected.put("FiniteAdjunctionAlgebra",String.join("|",swapAdjunction,swapAdjunction,category12,category12,
                 swapFunctor,swapFunctor,identityTransformation,identityTransformation,"true",swapEquivalence,"false",identityAdjunction,
                 swapAdjunction,swapAdjunction,swapAdjunction,"1","1","Function[2]->[1]{2=1}",emptyAdjunction));
@@ -54,7 +61,7 @@ public class ConcreteAlgebrasTest {
                 swapIdentityTransformation,identityTransformation,identityTransformation,identityTransformation,emptyTransformation));
         expected.put("FiniteFunctorAlgebra",String.join("|",swapFunctor,swapFunctor,swapFunctor,category12,category12,"1","1",
                 "true","true","true","true","true","Function[1, 2]->[1, 2]{1=2, 2=1}","Function[1, 2]->[1, 2]{1=2, 2=1}",
-                "[2, 1]","[2, 1]","[1]","[1]","false",identityFunctor,cycleFunctor,emptyFunctor));
+                "[2, 1]","[2, 1]","[1]","[1]","false",identityFunctor,cycleFunctor,emptyFunctor,constantTwo,emptyDiagram));
         expected.put("BooleanAlgebra","false|true|true|false|false|false|false|true");
         expected.put("NaturalSemiring","8|12|7|6|0|1");
         expected.put("IntegerRing","8|4|12|2|6|3|0|-6|6|3|true|false|[3, 0]|0|1");
@@ -83,12 +90,17 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(327,count);
+        assertEquals(344,count);
     }
     @SuppressWarnings({"unchecked","rawtypes"})
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
         Algebra source=math.mathTool.getAlgebra(entry.first.getAlgebraName());
         IAlgebraItem item=source.buildAlgebraItem(sample(math,source.getAlgebraName(),0));
+        if(entry.id.startsWith("FiniteCone.")) {
+            FiniteCone cone=(FiniteCone)sample(math,"FiniteCone",0);
+            if(source==math.functors.algebra()) item=source.buildAlgebraItem(cone.diagram);
+            if(source==math.naturalTransformations.algebra()) item=source.buildAlgebraItem(cone.asTransformation());
+        }
         if(entry.id.equals("FiniteCategory.from-preorder")) item=source.buildAlgebraItem(new FiniteRelation<>(math.integers.algebra(),math.integers.algebra(),
                 FiniteSet.of(new Pair<>(BigInteger.ONE,BigInteger.ONE),new Pair<>(BigInteger.valueOf(2),BigInteger.valueOf(2)))));
         String alias=entry.alias;
@@ -151,6 +163,11 @@ public class ConcreteAlgebrasTest {
             case "ZxZ.category": return new Pair<>(BigInteger.valueOf(2),BigInteger.valueOf(2));
             case "FiniteEquivalence": return FiniteEquivalence.fromFunctor((FiniteFunctor)sample(math,"FiniteFunctor",index));
             case "FiniteAdjunction": return FiniteAdjunction.fromEquivalence((FiniteEquivalence)sample(math,"FiniteEquivalence",index));
+            case "FiniteCone":
+                FiniteCategory coneCategory=FiniteCategory.discrete(FiniteSet.of(BigInteger.ONE,BigInteger.valueOf(2)));
+                Map<BigInteger,BigInteger> coneLegs=new LinkedHashMap<>();
+                coneLegs.put(BigInteger.ONE,BigInteger.valueOf(2)); coneLegs.put(BigInteger.valueOf(2),BigInteger.valueOf(2));
+                return new FiniteCone(FiniteFunctor.constant(coneCategory,coneCategory,BigInteger.valueOf(2)),BigInteger.valueOf(2),coneLegs);
             case "FiniteNaturalTransformation": return FiniteNaturalTransformation.identity(FiniteFunctor.identity(
                     FiniteCategory.discrete(FiniteSet.of(BigInteger.ONE,BigInteger.valueOf(2)))));
             case "FiniteFunctor":
