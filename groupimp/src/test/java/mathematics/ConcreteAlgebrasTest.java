@@ -20,7 +20,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all140RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all148RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         expected.put("BooleanAlgebra","false|true|true|false|false|false|false|true");
@@ -30,9 +30,9 @@ public class ConcreteAlgebrasTest {
         expected.put("RationalComplexField","(4)+(3)i|(-2)+(1)i|(1)+(7)i|(1/2)+(1/2)i|(-1)+(-2)i|(1)+(-2)i|5|(6)+(0)i|(0)+(0)i|(1)+(0)i");
         expected.put("RationalVectorSpace","[4, 6]|[-2, -2]|[-1, -2]|[2, 4]|[18, 24]|[[18, 24]]|11|[[2, 4]]|[[2, 4], [-2, -4]]|[0, 0]");
         expected.put("RationalMatrixAlgebra","[[3, 2], [3, 6]]|[[2, 4], [6, 8]]|[[-1, 2], [3, 2]]|[[-1, -2], [-3, -4]]|[[1, 3], [2, 4]]|[[-2, 1], [3/2, -1/2]]|-2|5|[[2, 4], [6, 8]]|[11, 25]|[-2, 5/2]|[[0, 0], [0, 0]]|[[1, 0], [0, 1]]|2");
-        expected.put("RationalPolynomialRing","Q[x][3, 3, 1]|Q[x][2, 5, 4, 1]|Q[x][-1, 1, 1]|Q[x][-1, -2, -1]|Q[x][2, 2]|9|Q[x][2, 1, 1, 1/3]|7/3|Q[x][0]|Q[x][1]|Q[x][2]");
+        expected.put("RationalPolynomialRing","Q[x][3, 3, 1]|Q[x][2, 5, 4, 1]|Q[x][-1, 1, 1]|Q[x][-1, -2, -1]|Q[x][2, 2]|9|Q[x][2, 1, 1, 1/3]|7/3|Q[x][0]|Q[x][1]|Q[x][2]|4|[0, 1, 4]");
         expected.put("PrimeField","0 (mod 5)|1 (mod 5)|1 (mod 5)|4 (mod 5)|2 (mod 5)|2 (mod 5)|0 (mod 5)|1 (mod 5)");
-        expected.put("FiniteSetAlgebra","[1, 2, 3]|[1, 2]|[]|[3]|true|false|true|[1, 2]|[1]|2|[1, 2]|[[], [1], [2], [1, 2]]|[3]|[]");
+        expected.put("IntegerSetAlgebra","[1, 2, 3]|[1, 2]|[]|[3]|true|false|true|[1, 2]|[1]|2|[1, 2]|[[], [1], [2], [1, 2]]|[3]|[]|[1]|[2]|3|4|[1]|[2]");
         expected.put("RationalSampleAlgebra","Sample[1, 2, 3, 2, 4, 6]|3|2|2/3|1|Sample[-1, 0, 1]|4/3|2|Sample[2, 4, 6]|[1, 2, 3]|Sample[]");
         expected.put("FiniteProbabilityAlgebra","1|0|Distribution{1=1/4, 3=3/4}|[1, 3]|2|[1, 3]|false|Distribution{6=1}|5/2|3/4");
         expected.put("FiniteSimplicialAlgebra","Complex[[0], [1], [2], [0, 1], [0, 2], [1, 2], [0, 1, 2]]|Complex[[0], [1], [2], [0, 1], [0, 2], [1, 2]]|false|true|1|0|3|0|0|Complex[[0], [1], [2], [0, 1], [0, 2], [1, 2]]|[1, 1]|Complex[]");
@@ -45,7 +45,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(140,count);
+        assertEquals(148,count);
     }
     @SuppressWarnings({"unchecked","rawtypes"})
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
@@ -100,6 +100,7 @@ public class ConcreteAlgebrasTest {
                 else masses.put(BigInteger.ONE,Rational.ONE);
                 return new mathematics.probability.FiniteDistribution<>(math.integers.algebra(),masses);
             case "QxQ.bounds": return new Pair<>(Rational.ZERO,Rational.ONE);
+            case "QxN.iteration": return new Pair<>(Rational.ZERO,BigInteger.valueOf(2));
             case "Z/5Z": return new ModularInteger(index==0?3:2,5);
             default: throw new AssertionError("Missing test operand for "+domain);
         }

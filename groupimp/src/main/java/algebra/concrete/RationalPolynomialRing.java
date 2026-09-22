@@ -6,6 +6,7 @@ import mathematics.calculus.Polynomial;
 import mathematics.foundations.*;
 import mathematics.numbers.Rational;
 import java.math.BigInteger;
+import java.util.*;
 
 
 public final class RationalPolynomialRing extends ConcreteAlgebra<Polynomial> {
@@ -29,6 +30,31 @@ public final class RationalPolynomialRing extends ConcreteAlgebra<Polynomial> {
         binary("derivative-order",algebra(),naturals.algebra(),algebra(),false,(polynomial,order) ->
                 order.compareTo(BigInteger.valueOf(polynomial.degree()))>0
                         ?new Polynomial(Rational.ZERO):polynomial.derivative(order.intValueExact()));
+        Algebra<Pair<Rational,BigInteger>> iterationInputs=iterationCarrier(rationals,naturals);
+        binary("iterate",algebra(),iterationInputs,rationals.algebra(),false,(polynomial,input) -> {
+            int steps=iterationCount(input.second); Rational value=input.first;
+            for(int i=0;i<steps;i++) value=polynomial.evaluate(value);
+            return value;
+        });
+        flat("orbit",algebra(),iterationInputs,rationals.algebra(),false,(polynomial,input) -> {
+            int steps=iterationCount(input.second); List<Rational> values=new ArrayList<>();
+            Rational value=input.first; values.add(value);
+            for(int i=0;i<steps;i++) { value=polynomial.evaluate(value); values.add(value); }
+            return values;
+        });
+        law("Iteration applies the polynomial repeatedly; an orbit contains the initial value followed by each iterate.");
+    }
+    private static int iterationCount(BigInteger steps) {
+        if(steps.compareTo(BigInteger.valueOf(10000))>0)
+            throw new MathFailure(MathFailure.Kind.IMPLEMENTATION_FAILURE,"Polynomial iteration is limited to 10000 steps");
+        return steps.intValueExact();
+    }
+    @SuppressWarnings("unchecked")
+    private static Algebra<Pair<Rational,BigInteger>> iterationCarrier(RationalField rationals,NaturalSemiring naturals) {
+        Class<Pair<Rational,BigInteger>> type=(Class<Pair<Rational,BigInteger>>)(Class<?>)Pair.class;
+        return carrier("QxN.iteration",type,"Rational initial value and nonnegative iteration count",pair ->
+                rationals.algebra().getParamClass().isInstance(pair.first) && naturals.algebra().getParamClass().isInstance(pair.second)
+                && rationals.algebra().validate(pair.first) && naturals.algebra().validate(pair.second));
     }
     @SuppressWarnings("unchecked")
     private static Algebra<Pair<Rational,Rational>> boundsCarrier(RationalField rationals) {

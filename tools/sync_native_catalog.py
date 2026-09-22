@@ -19,7 +19,7 @@ OWNERS = {
     "RationalVectorSpace": ("Q^2", "Fixed-dimensional rational vectors; default dimension two"),
     "RationalMatrixAlgebra": ("Mat2(Q)", "Fixed positive-dimensional square rational matrices; default dimension two"),
     "RationalPolynomialRing": ("Q[x]", "Finite univariate polynomials with canonical rational coefficients"),
-    "FiniteSetAlgebra": ("FiniteSet(Z)", "Finite sets of arbitrary precision integers under canonical equality"),
+    "IntegerSetAlgebra": ("FiniteSet(Z)", "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets"),
     "RationalSampleAlgebra": ("Sample(Q)", "Finite ordered rational samples retaining repeated observations"),
     "FiniteProbabilityAlgebra": ("FiniteDistribution(Z)", "Finite integer distributions with exact nonnegative rational masses summing to one"),
     "FiniteSimplicialAlgebra": ("FiniteComplex", "Finite abstract simplicial complexes with integer labels and unreduced homology over F2"),
@@ -41,7 +41,8 @@ INTERFACES = {
     "IUnsafeFlatOperation": "flat/MixedFlatOperation",
 }
 EXTRA_TESTS = {
-    "FiniteSetAlgebra": "NativeFlatAndSetTest",
+    "IntegerSetAlgebra": "NativeFlatAndSetTest",
+    "RationalPolynomialRing": "NativeDynamicsTest",
     "RationalSampleAlgebra": "NativeStatisticsProbabilityTest",
     "FiniteProbabilityAlgebra": "NativeStatisticsProbabilityTest",
     "FiniteSimplicialAlgebra": "NativeTopologyTest",
@@ -66,6 +67,14 @@ CONDITIONS = {
     "betti-number": "The degree is a nonnegative BigInteger; degrees above the complex dimension yield zero. Coefficients are F2.",
     "skeleton": "The degree is nonnegative; higher degrees return the same complex.",
     "simplex-count": "The degree is nonnegative; higher degrees yield zero.",
+    "argmin": "The finite feasible set must be nonempty; every tied minimizer is retained.",
+    "argmax": "The finite feasible set must be nonempty; every tied maximizer is retained.",
+    "minimum": "The finite feasible set must be nonempty; the result is its exact minimum objective value.",
+    "maximum": "The finite feasible set must be nonempty; the result is its exact maximum objective value.",
+    "minimizers": "The finite feasible set must be nonempty; emit every tied minimizer in set iteration order.",
+    "maximizers": "The finite feasible set must be nonempty; emit every tied maximizer in set iteration order.",
+    "iterate": "The initial value is rational and the iteration count nonnegative; zero steps return the initial value.",
+    "orbit": "Return the initial rational value followed by each iterate, preserving order and repeated states.",
 }
 
 
@@ -74,6 +83,9 @@ def record(identifier, owner, concept, paths, operation=None):
     tests = ["groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java"]
     if owner in EXTRA_TESTS:
         tests.append("groupimp/src/test/java/operations/" + EXTRA_TESTS[owner] + ".java")
+    if owner == "IntegerSetAlgebra":
+        tests.append("groupimp/src/test/java/operations/NativeOptimizationTest.java")
+        paths = paths + ["groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java"]
     value = {
         "id": identifier, "mathematical_area": "Concrete MathTool algebras",
         "subfield": owner, "concept": concept, "specification_section": 0,
@@ -129,6 +141,10 @@ def record(identifier, owner, concept, paths, operation=None):
             value["required_invariants"].append("Finite ordered wrapped results; duplicates and empty lists are retained.")
         if operation_name == "subsets":
             value["known_limitations"].append("Materialization is capped at 20 input elements; exceeding it is IMPLEMENTATION_FAILURE, not mathematical nonexistence.")
+        if operation_name in ("iterate", "orbit"):
+            value["known_limitations"].append("Iteration is capped at 10000 steps; exceeding it is IMPLEMENTATION_FAILURE. Exact values can still grow rapidly within this limit.")
+        if operation_name in ("argmin", "argmax", "minimum", "maximum", "minimizers", "maximizers"):
+            value["known_limitations"].append("Optimality is relative only to the explicit finite feasible set, not all integers or reals.")
     if owner == "FiniteSimplicialAlgebra":
         value["known_limitations"] += ["Construction materializes faces and caps each input facet at 20 vertices.",
             "Homology computes unreduced F2 dimensions only; no integral torsion, persistence or homeomorphism decision."]
@@ -155,6 +171,8 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("QxN.iteration", "Rational polynomial iteration inputs", "mathematics.foundations.Pair<Rational,BigInteger>",
+         ["Rational initial value", "Nonnegative integer step count; execution separately enforces its resource limit"], ["Q", "N"]),
         ("FiniteSet(Z)", "Finite integer sets", "mathematics.foundations.FiniteSet<BigInteger>",
          ["Finite membership; every member belongs to the registered integer Algebra"], ["Z"]),
         ("Sample(Q)", "Finite rational samples", "mathematics.statistics.RationalSample",

@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 560 |
-| DIRECTLY_SUPPORTED | 317 |
+| Scoped records | 568 |
+| DIRECTLY_SUPPORTED | 325 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 176 |
+| IMPLEMENTED | 184 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 244 |
+| MACHINE_TESTED | 252 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 153 | 153 | 0 | 0 | 0 | 153 | 0 | 0 |
+| Concrete MathTool algebras | 161 | 161 | 0 | 0 | 0 | 161 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -218,23 +218,29 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | FiniteDistribution(Z).support-size | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer distributions with exact nonnegative rational masses summing to one; native operation FiniteDistribution(Z).support-size |
 | FiniteDistribution(Z).variance | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer distributions with exact nonnegative rational masses summing to one; native operation FiniteDistribution(Z).variance |
 | FiniteProbabilityAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer distributions with exact nonnegative rational masses summing to one |
-| FiniteSet(Z).cardinality | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).cardinality |
-| FiniteSet(Z).complement-in | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).complement-in |
-| FiniteSet(Z).contains | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).contains |
-| FiniteSet(Z).difference | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).difference |
-| FiniteSet(Z).elements | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).elements |
-| FiniteSet(Z).empty | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).empty |
-| FiniteSet(Z).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).equal |
-| FiniteSet(Z).insert | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).insert |
-| FiniteSet(Z).intersection | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).intersection |
-| FiniteSet(Z).remove | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).remove |
-| FiniteSet(Z).subset | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).subset |
-| FiniteSet(Z).subsets | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).subsets |
-| FiniteSet(Z).symmetric-difference | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).symmetric-difference |
-| FiniteSet(Z).union | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).union |
-| FiniteSetAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite sets of arbitrary precision integers under canonical equality |
+| FiniteSet(Z).argmax | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).argmax |
+| FiniteSet(Z).argmin | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).argmin |
+| FiniteSet(Z).cardinality | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).cardinality |
+| FiniteSet(Z).complement-in | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).complement-in |
+| FiniteSet(Z).contains | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).contains |
+| FiniteSet(Z).difference | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).difference |
+| FiniteSet(Z).elements | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).elements |
+| FiniteSet(Z).empty | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).empty |
+| FiniteSet(Z).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).equal |
+| FiniteSet(Z).insert | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).insert |
+| FiniteSet(Z).intersection | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).intersection |
+| FiniteSet(Z).maximizers | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).maximizers |
+| FiniteSet(Z).maximum | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).maximum |
+| FiniteSet(Z).minimizers | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).minimizers |
+| FiniteSet(Z).minimum | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).minimum |
+| FiniteSet(Z).remove | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).remove |
+| FiniteSet(Z).subset | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).subset |
+| FiniteSet(Z).subsets | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).subsets |
+| FiniteSet(Z).symmetric-difference | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).symmetric-difference |
+| FiniteSet(Z).union | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).union |
 | FiniteSimplicialAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels and unreduced homology over F2 |
 | IntegerRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient |
+| IntegerSetAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets |
 | Mat2(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).add |
 | Mat2(Q).apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).apply |
 | Mat2(Q).determinant | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).determinant |
@@ -283,9 +289,11 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Q[x].derivative-order | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].derivative-order |
 | Q[x].evaluate | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].evaluate |
 | Q[x].integrate | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].integrate |
+| Q[x].iterate | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].iterate |
 | Q[x].multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].multiply |
 | Q[x].negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].negate |
 | Q[x].one | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].one |
+| Q[x].orbit | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].orbit |
 | Q[x].primitive | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].primitive |
 | Q[x].subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].subtract |
 | Q[x].zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].zero |

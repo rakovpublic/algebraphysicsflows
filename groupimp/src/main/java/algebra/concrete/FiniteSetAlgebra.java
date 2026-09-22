@@ -6,7 +6,7 @@ import java.math.BigInteger;
 import java.util.*;
 
 /** Algebra of finite sets with canonical member equality; no infinite-set enumeration. */
-public final class FiniteSetAlgebra<T> extends ConcreteAlgebra<FiniteSet<T>> {
+public class FiniteSetAlgebra<T> extends ConcreteAlgebra<FiniteSet<T>> {
     public final Algebra<T> elements;
     public FiniteSetAlgebra(String name,Algebra<T> elements,BooleanAlgebra truth,NaturalSemiring naturals) {
         super(setCarrier(name,elements),truth.unit());

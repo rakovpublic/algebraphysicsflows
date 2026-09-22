@@ -25155,66 +25155,6 @@
       "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
     },
     {
-      "id": "concrete-algebra.FiniteSetAlgebra",
-      "mathematical_area": "Concrete MathTool algebras",
-      "subfield": "FiniteSetAlgebra",
-      "concept": "FiniteSetAlgebra",
-      "specification_section": 0,
-      "record_kind": "DOMAIN_OR_STRUCTURE",
-      "domain_A": null,
-      "domain_B": null,
-      "domain_C": "FiniteSet(Z)",
-      "operation_signature": null,
-      "arity": null,
-      "scalar_or_flat": "SCALAR",
-      "representation_scope": "Finite sets of arbitrary precision integers under canonical equality",
-      "required_invariants": [
-        "Operands and results satisfy membership in the actual Algebra instances.",
-        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
-        "Law descriptions and passing tests are not proofs."
-      ],
-      "representation_status": "DIRECTLY_SUPPORTED",
-      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
-      "implementation_status": "IMPLEMENTED",
-      "implementation_paths": [
-        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java"
-      ],
-      "tests": [
-        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java"
-      ],
-      "machine_tested": true,
-      "human_review_status": "UNREVIEWED",
-      "reviewer": null,
-      "review_date": null,
-      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
-      "formal_verification_status": "UNVERIFIED",
-      "known_limitations": [
-        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
-        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
-      ],
-      "required_extension": null,
-      "references": [
-        "https://msc2020.org/",
-        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
-      ],
-      "epistemic_status": "DEFINED",
-      "provenance": {
-        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
-        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
-        "implemented_by": "Codex",
-        "generated_by_model": "not recorded",
-        "reviewed_by": null,
-        "version": "2",
-        "date": "2026-09-22",
-        "assumptions": [
-          "Classification is scoped; passing tests do not prove laws."
-        ],
-        "related_concepts": []
-      },
-      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
-    },
-    {
       "id": "concrete-algebra.FiniteSimplicialAlgebra",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "FiniteSimplicialAlgebra",
@@ -25324,6 +25264,68 @@
       "provenance": {
         "definition_source": "docs/CONCRETE_ALGEBRAS.md",
         "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerRing.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
+      "id": "concrete-algebra.IntegerSetAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerSetAlgebra",
+      "concept": "IntegerSetAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "FiniteSet(Z)",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java",
+        "groupimp/src/test/java/operations/NativeOptimizationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
         "implemented_by": "Codex",
         "generated_by_model": "not recorded",
         "reviewed_by": null,
@@ -25657,7 +25659,8 @@
         "groupimp/src/main/java/algebra/concrete/RationalPolynomialRing.java"
       ],
       "tests": [
-        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java"
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -30660,7 +30663,8 @@
         "groupimp/src/main/java/operations/simple/ClosedOperation.java"
       ],
       "tests": [
-        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java"
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -30725,7 +30729,8 @@
         "groupimp/src/main/java/operations/simple/ClosedOperation.java"
       ],
       "tests": [
-        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java"
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -30790,7 +30795,8 @@
         "groupimp/src/main/java/operations/simple/ClosedOperation.java"
       ],
       "tests": [
-        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java"
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -30855,7 +30861,8 @@
         "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
       ],
       "tests": [
-        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java"
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -30920,7 +30927,8 @@
         "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
       ],
       "tests": [
-        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java"
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -30985,7 +30993,8 @@
         "groupimp/src/main/java/operations/simple/SecondResultOperation.java"
       ],
       "tests": [
-        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java"
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -31050,7 +31059,8 @@
         "groupimp/src/main/java/operations/simple/CustomMemberOperation.java"
       ],
       "tests": [
-        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java"
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -31115,7 +31125,8 @@
         "groupimp/src/main/java/operations/simple/MixedOperation.java"
       ],
       "tests": [
-        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java"
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -31180,7 +31191,8 @@
         "groupimp/src/main/java/operations/simple/TransferOperation.java"
       ],
       "tests": [
-        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java"
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -31245,7 +31257,8 @@
         "groupimp/src/main/java/operations/simple/TransferOperation.java"
       ],
       "tests": [
-        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java"
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -31311,7 +31324,8 @@
         "groupimp/src/main/java/operations/simple/CustomMemberOperation.java"
       ],
       "tests": [
-        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java"
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -31350,9 +31364,146 @@
       "legacy_operation_interface": "ICustomMemberOperation"
     },
     {
+      "id": "concrete-operation.Q[x].iterate",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalPolynomialRing",
+      "concept": "Q[x].iterate",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q[x]",
+      "domain_B": "QxN.iteration",
+      "domain_C": "Q",
+      "operation_signature": "Q[x] x QxN.iteration -> Q",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite univariate polynomials with canonical rational coefficients; native operation Q[x].iterate",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The initial value is rational and the iteration count nonnegative; zero steps return the initial value."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalPolynomialRing.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Iteration is capped at 10000 steps; exceeding it is IMPLEMENTATION_FAILURE. Exact values can still grow rapidly within this limit."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalPolynomialRing.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Q[x].iterate",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "iterate",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.Q[x].orbit",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalPolynomialRing",
+      "concept": "Q[x].orbit",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q[x]",
+      "domain_B": "QxN.iteration",
+      "domain_C": "Q",
+      "operation_signature": "Q[x] x QxN.iteration -> List(Q)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Finite univariate polynomials with canonical rational coefficients; native operation Q[x].orbit",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the initial rational value followed by each iterate, preserving order and repeated states.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalPolynomialRing.java",
+        "groupimp/src/main/java/operations/flat/MixedFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Iteration is capped at 10000 steps; exceeding it is IMPLEMENTATION_FAILURE. Exact values can still grow rapidly within this limit."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalPolynomialRing.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Q[x].orbit",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "orbit",
+      "legacy_operation_interface": "IUnsafeFlatOperation"
+    },
+    {
       "id": "concrete-operation.FiniteSet(Z).union",
       "mathematical_area": "Concrete MathTool algebras",
-      "subfield": "FiniteSetAlgebra",
+      "subfield": "IntegerSetAlgebra",
       "concept": "FiniteSet(Z).union",
       "specification_section": 0,
       "record_kind": "OPERATION",
@@ -31362,7 +31513,7 @@
       "operation_signature": "FiniteSet(Z) x FiniteSet(Z) -> FiniteSet(Z)",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).union",
+      "representation_scope": "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).union",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -31372,12 +31523,14 @@
       "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
-        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
-        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+        "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java"
+        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java",
+        "groupimp/src/test/java/operations/NativeOptimizationTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -31397,7 +31550,7 @@
       "epistemic_status": "DEFINED",
       "provenance": {
         "definition_source": "docs/CONCRETE_ALGEBRAS.md",
-        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
         "implemented_by": "Codex",
         "generated_by_model": "not recorded",
         "reviewed_by": null,
@@ -31418,7 +31571,7 @@
     {
       "id": "concrete-operation.FiniteSet(Z).intersection",
       "mathematical_area": "Concrete MathTool algebras",
-      "subfield": "FiniteSetAlgebra",
+      "subfield": "IntegerSetAlgebra",
       "concept": "FiniteSet(Z).intersection",
       "specification_section": 0,
       "record_kind": "OPERATION",
@@ -31428,7 +31581,7 @@
       "operation_signature": "FiniteSet(Z) x FiniteSet(Z) -> FiniteSet(Z)",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).intersection",
+      "representation_scope": "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).intersection",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -31438,12 +31591,14 @@
       "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
-        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
-        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+        "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java"
+        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java",
+        "groupimp/src/test/java/operations/NativeOptimizationTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -31463,7 +31618,7 @@
       "epistemic_status": "DEFINED",
       "provenance": {
         "definition_source": "docs/CONCRETE_ALGEBRAS.md",
-        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
         "implemented_by": "Codex",
         "generated_by_model": "not recorded",
         "reviewed_by": null,
@@ -31484,7 +31639,7 @@
     {
       "id": "concrete-operation.FiniteSet(Z).difference",
       "mathematical_area": "Concrete MathTool algebras",
-      "subfield": "FiniteSetAlgebra",
+      "subfield": "IntegerSetAlgebra",
       "concept": "FiniteSet(Z).difference",
       "specification_section": 0,
       "record_kind": "OPERATION",
@@ -31494,7 +31649,7 @@
       "operation_signature": "FiniteSet(Z) x FiniteSet(Z) -> FiniteSet(Z)",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).difference",
+      "representation_scope": "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).difference",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -31504,12 +31659,14 @@
       "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
-        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
-        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+        "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java"
+        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java",
+        "groupimp/src/test/java/operations/NativeOptimizationTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -31529,7 +31686,7 @@
       "epistemic_status": "DEFINED",
       "provenance": {
         "definition_source": "docs/CONCRETE_ALGEBRAS.md",
-        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
         "implemented_by": "Codex",
         "generated_by_model": "not recorded",
         "reviewed_by": null,
@@ -31550,7 +31707,7 @@
     {
       "id": "concrete-operation.FiniteSet(Z).symmetric-difference",
       "mathematical_area": "Concrete MathTool algebras",
-      "subfield": "FiniteSetAlgebra",
+      "subfield": "IntegerSetAlgebra",
       "concept": "FiniteSet(Z).symmetric-difference",
       "specification_section": 0,
       "record_kind": "OPERATION",
@@ -31560,7 +31717,7 @@
       "operation_signature": "FiniteSet(Z) x FiniteSet(Z) -> FiniteSet(Z)",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).symmetric-difference",
+      "representation_scope": "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).symmetric-difference",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -31570,12 +31727,14 @@
       "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
-        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
-        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+        "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java"
+        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java",
+        "groupimp/src/test/java/operations/NativeOptimizationTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -31595,7 +31754,7 @@
       "epistemic_status": "DEFINED",
       "provenance": {
         "definition_source": "docs/CONCRETE_ALGEBRAS.md",
-        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
         "implemented_by": "Codex",
         "generated_by_model": "not recorded",
         "reviewed_by": null,
@@ -31616,7 +31775,7 @@
     {
       "id": "concrete-operation.FiniteSet(Z).subset",
       "mathematical_area": "Concrete MathTool algebras",
-      "subfield": "FiniteSetAlgebra",
+      "subfield": "IntegerSetAlgebra",
       "concept": "FiniteSet(Z).subset",
       "specification_section": 0,
       "record_kind": "OPERATION",
@@ -31626,7 +31785,7 @@
       "operation_signature": "FiniteSet(Z) x FiniteSet(Z) -> Boolean",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).subset",
+      "representation_scope": "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).subset",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -31636,12 +31795,14 @@
       "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
-        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
-        "groupimp/src/main/java/operations/simple/CustomResultOperation.java"
+        "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java"
+        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java",
+        "groupimp/src/test/java/operations/NativeOptimizationTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -31661,7 +31822,7 @@
       "epistemic_status": "DEFINED",
       "provenance": {
         "definition_source": "docs/CONCRETE_ALGEBRAS.md",
-        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
         "implemented_by": "Codex",
         "generated_by_model": "not recorded",
         "reviewed_by": null,
@@ -31682,7 +31843,7 @@
     {
       "id": "concrete-operation.FiniteSet(Z).equal",
       "mathematical_area": "Concrete MathTool algebras",
-      "subfield": "FiniteSetAlgebra",
+      "subfield": "IntegerSetAlgebra",
       "concept": "FiniteSet(Z).equal",
       "specification_section": 0,
       "record_kind": "OPERATION",
@@ -31692,7 +31853,7 @@
       "operation_signature": "FiniteSet(Z) x FiniteSet(Z) -> Boolean",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).equal",
+      "representation_scope": "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).equal",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -31702,12 +31863,14 @@
       "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
-        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
-        "groupimp/src/main/java/operations/simple/CustomResultOperation.java"
+        "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java"
+        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java",
+        "groupimp/src/test/java/operations/NativeOptimizationTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -31727,7 +31890,7 @@
       "epistemic_status": "DEFINED",
       "provenance": {
         "definition_source": "docs/CONCRETE_ALGEBRAS.md",
-        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
         "implemented_by": "Codex",
         "generated_by_model": "not recorded",
         "reviewed_by": null,
@@ -31748,7 +31911,7 @@
     {
       "id": "concrete-operation.FiniteSet(Z).contains",
       "mathematical_area": "Concrete MathTool algebras",
-      "subfield": "FiniteSetAlgebra",
+      "subfield": "IntegerSetAlgebra",
       "concept": "FiniteSet(Z).contains",
       "specification_section": 0,
       "record_kind": "OPERATION",
@@ -31758,7 +31921,7 @@
       "operation_signature": "FiniteSet(Z) x Z -> Boolean",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).contains",
+      "representation_scope": "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).contains",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -31768,12 +31931,14 @@
       "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
-        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
-        "groupimp/src/main/java/operations/simple/MixedOperation.java"
+        "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java"
+        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java",
+        "groupimp/src/test/java/operations/NativeOptimizationTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -31793,7 +31958,7 @@
       "epistemic_status": "DEFINED",
       "provenance": {
         "definition_source": "docs/CONCRETE_ALGEBRAS.md",
-        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
         "implemented_by": "Codex",
         "generated_by_model": "not recorded",
         "reviewed_by": null,
@@ -31814,7 +31979,7 @@
     {
       "id": "concrete-operation.FiniteSet(Z).insert",
       "mathematical_area": "Concrete MathTool algebras",
-      "subfield": "FiniteSetAlgebra",
+      "subfield": "IntegerSetAlgebra",
       "concept": "FiniteSet(Z).insert",
       "specification_section": 0,
       "record_kind": "OPERATION",
@@ -31824,7 +31989,7 @@
       "operation_signature": "FiniteSet(Z) x Z -> FiniteSet(Z)",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).insert",
+      "representation_scope": "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).insert",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -31834,12 +31999,14 @@
       "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
-        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
-        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java"
+        "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java",
+        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java"
+        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java",
+        "groupimp/src/test/java/operations/NativeOptimizationTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -31859,7 +32026,7 @@
       "epistemic_status": "DEFINED",
       "provenance": {
         "definition_source": "docs/CONCRETE_ALGEBRAS.md",
-        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
         "implemented_by": "Codex",
         "generated_by_model": "not recorded",
         "reviewed_by": null,
@@ -31880,7 +32047,7 @@
     {
       "id": "concrete-operation.FiniteSet(Z).remove",
       "mathematical_area": "Concrete MathTool algebras",
-      "subfield": "FiniteSetAlgebra",
+      "subfield": "IntegerSetAlgebra",
       "concept": "FiniteSet(Z).remove",
       "specification_section": 0,
       "record_kind": "OPERATION",
@@ -31890,7 +32057,7 @@
       "operation_signature": "FiniteSet(Z) x Z -> FiniteSet(Z)",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).remove",
+      "representation_scope": "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).remove",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -31900,12 +32067,14 @@
       "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
-        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
-        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java"
+        "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java",
+        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java"
+        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java",
+        "groupimp/src/test/java/operations/NativeOptimizationTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -31925,7 +32094,7 @@
       "epistemic_status": "DEFINED",
       "provenance": {
         "definition_source": "docs/CONCRETE_ALGEBRAS.md",
-        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
         "implemented_by": "Codex",
         "generated_by_model": "not recorded",
         "reviewed_by": null,
@@ -31946,7 +32115,7 @@
     {
       "id": "concrete-operation.FiniteSet(Z).cardinality",
       "mathematical_area": "Concrete MathTool algebras",
-      "subfield": "FiniteSetAlgebra",
+      "subfield": "IntegerSetAlgebra",
       "concept": "FiniteSet(Z).cardinality",
       "specification_section": 0,
       "record_kind": "OPERATION",
@@ -31956,7 +32125,7 @@
       "operation_signature": "FiniteSet(Z) -> N",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).cardinality",
+      "representation_scope": "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).cardinality",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -31966,12 +32135,14 @@
       "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
-        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
-        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+        "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java"
+        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java",
+        "groupimp/src/test/java/operations/NativeOptimizationTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -31991,7 +32162,7 @@
       "epistemic_status": "DEFINED",
       "provenance": {
         "definition_source": "docs/CONCRETE_ALGEBRAS.md",
-        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
         "implemented_by": "Codex",
         "generated_by_model": "not recorded",
         "reviewed_by": null,
@@ -32012,7 +32183,7 @@
     {
       "id": "concrete-operation.FiniteSet(Z).elements",
       "mathematical_area": "Concrete MathTool algebras",
-      "subfield": "FiniteSetAlgebra",
+      "subfield": "IntegerSetAlgebra",
       "concept": "FiniteSet(Z).elements",
       "specification_section": 0,
       "record_kind": "OPERATION",
@@ -32022,7 +32193,7 @@
       "operation_signature": "FiniteSet(Z) -> List(Z)",
       "arity": 1,
       "scalar_or_flat": "LIST",
-      "representation_scope": "Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).elements",
+      "representation_scope": "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).elements",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -32033,12 +32204,14 @@
       "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
-        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
-        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java"
+        "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java"
+        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java",
+        "groupimp/src/test/java/operations/NativeOptimizationTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -32058,7 +32231,7 @@
       "epistemic_status": "DEFINED",
       "provenance": {
         "definition_source": "docs/CONCRETE_ALGEBRAS.md",
-        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
         "implemented_by": "Codex",
         "generated_by_model": "not recorded",
         "reviewed_by": null,
@@ -32079,7 +32252,7 @@
     {
       "id": "concrete-operation.FiniteSet(Z).subsets",
       "mathematical_area": "Concrete MathTool algebras",
-      "subfield": "FiniteSetAlgebra",
+      "subfield": "IntegerSetAlgebra",
       "concept": "FiniteSet(Z).subsets",
       "specification_section": 0,
       "record_kind": "OPERATION",
@@ -32089,7 +32262,7 @@
       "operation_signature": "FiniteSet(Z) -> List(FiniteSet(Z))",
       "arity": 1,
       "scalar_or_flat": "LIST",
-      "representation_scope": "Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).subsets",
+      "representation_scope": "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).subsets",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -32100,12 +32273,14 @@
       "framework_mapping": "IOneOperandFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
-        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
-        "groupimp/src/main/java/operations/flat/OneOperandFlatOperation.java"
+        "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "groupimp/src/main/java/operations/flat/OneOperandFlatOperation.java",
+        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java"
+        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java",
+        "groupimp/src/test/java/operations/NativeOptimizationTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -32126,7 +32301,7 @@
       "epistemic_status": "DEFINED",
       "provenance": {
         "definition_source": "docs/CONCRETE_ALGEBRAS.md",
-        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
         "implemented_by": "Codex",
         "generated_by_model": "not recorded",
         "reviewed_by": null,
@@ -32147,7 +32322,7 @@
     {
       "id": "concrete-operation.FiniteSet(Z).complement-in",
       "mathematical_area": "Concrete MathTool algebras",
-      "subfield": "FiniteSetAlgebra",
+      "subfield": "IntegerSetAlgebra",
       "concept": "FiniteSet(Z).complement-in",
       "specification_section": 0,
       "record_kind": "OPERATION",
@@ -32157,7 +32332,7 @@
       "operation_signature": "FiniteSet(Z) x FiniteSet(Z) -> FiniteSet(Z)",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).complement-in",
+      "representation_scope": "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).complement-in",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -32168,12 +32343,14 @@
       "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
-        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
-        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+        "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java"
+        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java",
+        "groupimp/src/test/java/operations/NativeOptimizationTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -32193,7 +32370,7 @@
       "epistemic_status": "DEFINED",
       "provenance": {
         "definition_source": "docs/CONCRETE_ALGEBRAS.md",
-        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
         "implemented_by": "Codex",
         "generated_by_model": "not recorded",
         "reviewed_by": null,
@@ -32214,7 +32391,7 @@
     {
       "id": "concrete-operation.FiniteSet(Z).empty",
       "mathematical_area": "Concrete MathTool algebras",
-      "subfield": "FiniteSetAlgebra",
+      "subfield": "IntegerSetAlgebra",
       "concept": "FiniteSet(Z).empty",
       "specification_section": 0,
       "record_kind": "OPERATION",
@@ -32224,7 +32401,7 @@
       "operation_signature": "Unit -> FiniteSet(Z)",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Finite sets of arbitrary precision integers under canonical equality; native operation FiniteSet(Z).empty",
+      "representation_scope": "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).empty",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -32234,12 +32411,14 @@
       "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
-        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
-        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+        "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java"
+        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java",
+        "groupimp/src/test/java/operations/NativeOptimizationTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -32259,7 +32438,7 @@
       "epistemic_status": "DEFINED",
       "provenance": {
         "definition_source": "docs/CONCRETE_ALGEBRAS.md",
-        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
         "implemented_by": "Codex",
         "generated_by_model": "not recorded",
         "reviewed_by": null,
@@ -32276,6 +32455,428 @@
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "FiniteSet(Z).empty",
       "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteSet(Z).argmin",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerSetAlgebra",
+      "concept": "FiniteSet(Z).argmin",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteSet(Z)",
+      "domain_B": "Q[x]",
+      "domain_C": "FiniteSet(Z)",
+      "operation_signature": "FiniteSet(Z) x Q[x] -> FiniteSet(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).argmin",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The finite feasible set must be nonempty; every tied minimizer is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java",
+        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java",
+        "groupimp/src/test/java/operations/NativeOptimizationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Optimality is relative only to the explicit finite feasible set, not all integers or reals."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteSet(Z).argmin",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "argmin",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteSet(Z).argmax",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerSetAlgebra",
+      "concept": "FiniteSet(Z).argmax",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteSet(Z)",
+      "domain_B": "Q[x]",
+      "domain_C": "FiniteSet(Z)",
+      "operation_signature": "FiniteSet(Z) x Q[x] -> FiniteSet(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).argmax",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The finite feasible set must be nonempty; every tied maximizer is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java",
+        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java",
+        "groupimp/src/test/java/operations/NativeOptimizationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Optimality is relative only to the explicit finite feasible set, not all integers or reals."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteSet(Z).argmax",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "argmax",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteSet(Z).minimum",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerSetAlgebra",
+      "concept": "FiniteSet(Z).minimum",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteSet(Z)",
+      "domain_B": "Q[x]",
+      "domain_C": "Q",
+      "operation_signature": "FiniteSet(Z) x Q[x] -> Q",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).minimum",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The finite feasible set must be nonempty; the result is its exact minimum objective value."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java",
+        "groupimp/src/test/java/operations/NativeOptimizationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Optimality is relative only to the explicit finite feasible set, not all integers or reals."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteSet(Z).minimum",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "minimum",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteSet(Z).maximum",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerSetAlgebra",
+      "concept": "FiniteSet(Z).maximum",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteSet(Z)",
+      "domain_B": "Q[x]",
+      "domain_C": "Q",
+      "operation_signature": "FiniteSet(Z) x Q[x] -> Q",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).maximum",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The finite feasible set must be nonempty; the result is its exact maximum objective value."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java",
+        "groupimp/src/test/java/operations/NativeOptimizationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Optimality is relative only to the explicit finite feasible set, not all integers or reals."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteSet(Z).maximum",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "maximum",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteSet(Z).minimizers",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerSetAlgebra",
+      "concept": "FiniteSet(Z).minimizers",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteSet(Z)",
+      "domain_B": "Q[x]",
+      "domain_C": "Z",
+      "operation_signature": "FiniteSet(Z) x Q[x] -> List(Z)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).minimizers",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The finite feasible set must be nonempty; emit every tied minimizer in set iteration order.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "groupimp/src/main/java/operations/flat/MixedFlatOperation.java",
+        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java",
+        "groupimp/src/test/java/operations/NativeOptimizationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Optimality is relative only to the explicit finite feasible set, not all integers or reals."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteSet(Z).minimizers",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "minimizers",
+      "legacy_operation_interface": "IUnsafeFlatOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteSet(Z).maximizers",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerSetAlgebra",
+      "concept": "FiniteSet(Z).maximizers",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteSet(Z)",
+      "domain_B": "Q[x]",
+      "domain_C": "Z",
+      "operation_signature": "FiniteSet(Z) x Q[x] -> List(Z)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).maximizers",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The finite feasible set must be nonempty; emit every tied maximizer in set iteration order.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "groupimp/src/main/java/operations/flat/MixedFlatOperation.java",
+        "groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeFlatAndSetTest.java",
+        "groupimp/src/test/java/operations/NativeOptimizationTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Optimality is relative only to the explicit finite feasible set, not all integers or reals."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "FiniteSet(Z).maximizers",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "maximizers",
+      "legacy_operation_interface": "IUnsafeFlatOperation"
     },
     {
       "id": "concrete-operation.Sample(Q).concatenate",
@@ -35166,6 +35767,8 @@
         "FiniteSet(Z).contains",
         "FiniteSet(Z).elements",
         "FiniteSet(Z).insert",
+        "FiniteSet(Z).maximizers",
+        "FiniteSet(Z).minimizers",
         "FiniteSet(Z).remove",
         "N-to-Z",
         "N.to-integer",
@@ -35229,6 +35832,8 @@
         "FiniteDistribution(Z).expectation",
         "FiniteDistribution(Z).point-probability",
         "FiniteDistribution(Z).variance",
+        "FiniteSet(Z).maximum",
+        "FiniteSet(Z).minimum",
         "Mat2(Q).determinant",
         "Mat2(Q).scale",
         "Mat2(Q).trace",
@@ -35249,6 +35854,8 @@
         "Q.zero",
         "Q[x].evaluate",
         "Q[x].integrate",
+        "Q[x].iterate",
+        "Q[x].orbit",
         "Q[x].primitive",
         "Q^2.dot",
         "Q^2.scale",
@@ -35657,14 +36264,22 @@
         "C^infinity(R,R)"
       ],
       "supported_operations": [
+        "FiniteSet(Z).argmax",
+        "FiniteSet(Z).argmin",
+        "FiniteSet(Z).maximizers",
+        "FiniteSet(Z).maximum",
+        "FiniteSet(Z).minimizers",
+        "FiniteSet(Z).minimum",
         "Q[x].add",
         "Q[x].derivative",
         "Q[x].derivative-order",
         "Q[x].evaluate",
         "Q[x].integrate",
+        "Q[x].iterate",
         "Q[x].multiply",
         "Q[x].negate",
         "Q[x].one",
+        "Q[x].orbit",
         "Q[x].primitive",
         "Q[x].subtract",
         "Q[x].zero",
@@ -35950,6 +36565,8 @@
         "FiniteDistribution(Z).condition",
         "FiniteDistribution(Z).event-probability",
         "FiniteDistribution(Z).support",
+        "FiniteSet(Z).argmax",
+        "FiniteSet(Z).argmin",
         "FiniteSet(Z).cardinality",
         "FiniteSet(Z).complement-in",
         "FiniteSet(Z).contains",
@@ -35959,6 +36576,10 @@
         "FiniteSet(Z).equal",
         "FiniteSet(Z).insert",
         "FiniteSet(Z).intersection",
+        "FiniteSet(Z).maximizers",
+        "FiniteSet(Z).maximum",
+        "FiniteSet(Z).minimizers",
+        "FiniteSet(Z).minimum",
         "FiniteSet(Z).remove",
         "FiniteSet(Z).subset",
         "FiniteSet(Z).subsets",
@@ -36056,6 +36677,43 @@
       "invariants": [
         "Same outcome Algebra identity",
         "Finite support with nonnegative rational masses summing exactly to one"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-22"
+      }
+    },
+    {
+      "id": "QxN.iteration",
+      "name": "Rational polynomial iteration inputs",
+      "description": "Rational polynomial iteration inputs",
+      "member_representation": "mathematics.foundations.Pair<Rational,BigInteger>",
+      "membership_rules": [
+        "Rational initial value",
+        "Nonnegative integer step count; execution separately enforces its resource limit"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "Q",
+        "N"
+      ],
+      "supported_operations": [
+        "Q[x].iterate",
+        "Q[x].orbit"
+      ],
+      "invariants": [
+        "Rational initial value",
+        "Nonnegative integer step count; execution separately enforces its resource limit"
       ],
       "references": [
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"

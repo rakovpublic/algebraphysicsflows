@@ -4,7 +4,7 @@ Checkpoint: 2026-09-22. This is a scoped implementation and initial survey of th
 
 ## Native execution delivered
 
-ConcreteMathematics installs **140 operations from 13 algebra builders** in the original MathTool. Builders are in algebra/concrete; operation implementations are in operations/simple and operations/flat. Unit and rational integration bounds are additional supporting carriers.
+ConcreteMathematics installs **148 operations from 13 algebra builders** in the original MathTool. Builders are in algebra/concrete; operation implementations are in operations/simple and operations/flat. Unit, rational integration bounds and rational-state/nonnegative-step iteration inputs are additional supporting carriers.
 
 Delivered families: Boolean, N, Z, Q, Q(i), prime fields, rational vectors/square matrices, Q[x], finite integer sets, rational samples and finite exact probability measures on integers. Operations include exact arithmetic, embeddings, scalar actions in both orders, dot products, determinant/rank/nonsingular solve, derivatives/integrals, finite-set operations, moments/covariances and conditioning.
 
@@ -26,17 +26,17 @@ Scalar and flat unary execution are connected to Algebra, IAlgebraItem and Algeb
 | 9 Geometry/topology | Native finite simplicial algebra, skeletons, Euler characteristic and F2 Betti numbers | Manifolds, forms, integral/persistent homology |
 | 10 Advanced algebra | Scoped catalog and extension analysis | Representation/Galois/homological algebra implementations |
 | 11 Structural mathematics | Category/dependent-domain analysis and RFCs | Executable categories and indexed/evidence structures |
-| 12 Applied/physics | Tested finite optimization/dynamics utilities | Native registration, control/numerical contracts, physics/units |
+| 12 Applied/physics | Native finite integer-set polynomial optimization and exact polynomial iteration/orbits | General optimization, control/numerical contracts, physics/units |
 
 Partial progress covers only the listed scope. Catalog entries do not imply algorithms. Utility/prototype tests are separate from native registrations.
 
 ## Verification
 
-The Java suite has **66 tests**, including independent expected results for every native registration, partial-operation boundaries, serialization and repeated local-flow collection. A differential test checks **104 cases** generated independently with Python Fraction arithmetic and a permutation-expansion determinant. Rational law samples and exhaustive small-prime arithmetic are empirical evidence, not general formal proofs.
+The Java suite has **73 tests**, including independent expected results for every native registration, partial-operation boundaries, serialization and repeated local-flow collection. A differential test checks **104 cases** generated independently with Python Fraction arithmetic and a permutation-expansion determinant. Rational law samples and exhaustive small-prime arithmetic are empirical evidence, not general formal proofs.
 
 Python checks validate source/test paths, required fields, evidence claims, extension links, requested topic inventory and manifest agreement. Reports must be fresh. [Maintenance instructions](ADDING_MATHEMATICS.md) list commands.
 
-The initial registry has 560 scoped records, covering all 322 distinct requested bullet concepts in specification sections 10-30, 22 domain descriptors and nine extension proposals. These are survey counts, not a percentage of all mathematics. All records remain human-unreviewed and formally unverified.
+The initial registry has 568 scoped records, covering all 322 distinct requested bullet concepts in specification sections 10-30, 23 domain descriptors and nine extension proposals. These are survey counts, not a percentage of all mathematics. All records remain human-unreviewed and formally unverified.
 
 ## Compatibility and limits
 

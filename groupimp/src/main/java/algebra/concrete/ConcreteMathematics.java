@@ -17,13 +17,13 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final IntegerRing integers=new IntegerRing(rationals,booleans);
     public final NaturalSemiring naturals=new NaturalSemiring(integers);
     public final FiniteSimplicialAlgebra complexes=new FiniteSimplicialAlgebra(booleans,naturals,integers);
-    public final FiniteSetAlgebra<java.math.BigInteger> integerSets=new FiniteSetAlgebra<>("FiniteSet(Z)",integers.algebra(),booleans,naturals);
+    public final RationalPolynomialRing polynomials=new RationalPolynomialRing(rationals,naturals);
+    public final IntegerSetAlgebra integerSets=new IntegerSetAlgebra(integers,booleans,naturals,rationals,polynomials);
     public final RationalSampleAlgebra samples=new RationalSampleAlgebra(rationals,naturals);
     public final FiniteProbabilityAlgebra<java.math.BigInteger> integerProbabilities=new FiniteProbabilityAlgebra<>("FiniteDistribution(Z)",integers.algebra(),integerSets,rationals,booleans,naturals,mathematics.numbers.Rational::of);
     public final RationalComplexField complexRationals=new RationalComplexField(rationals);
     public final RationalVectorSpace vectors;
     public final RationalMatrixAlgebra matrices;
-    public final RationalPolynomialRing polynomials=new RationalPolynomialRing(rationals,naturals);
     public final List<PrimeField> primeFields;
     public final MathTool mathTool=new MathTool("concrete-mathematics");
     private final List<ConcreteAlgebra<?>> algebras;
