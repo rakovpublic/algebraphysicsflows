@@ -4,9 +4,9 @@ Checkpoint: 2026-09-22. This is a scoped implementation and initial survey of th
 
 ## Native execution delivered
 
-ConcreteMathematics installs **164 operations from 14 algebra builders** in the original MathTool. Builders are in algebra/concrete; operation implementations are in operations/simple and operations/flat. Unit, rational integration bounds, polynomial iteration inputs and integer relation pairs are additional supporting carriers.
+ConcreteMathematics installs **186 operations from 15 algebra builders** in the original MathTool. Builders are in algebra/concrete; operation implementations are in operations/simple and operations/flat. Unit, rational integration bounds, polynomial iteration inputs and integer relation pairs are additional supporting carriers.
 
-Delivered families: Boolean, N, Z, Q, Q(i), prime fields, rational vectors/square matrices, Q[x], finite integer sets/relations, rational samples and finite exact probability measures on integers. Operations include exact arithmetic, embeddings, scalar actions in both orders, dot products, determinant/rank/nonsingular solve, derivatives/integrals, finite-set operations, moments/covariances and conditioning.
+Delivered families: Boolean, N, Z, Q, Q(i), prime fields, rational vectors/square matrices, Q[x], Q(x), finite integer sets/relations, rational samples and finite exact probability measures on integers. Operations include exact arithmetic, embeddings, scalar actions in both orders, dot products, determinant/rank/nonsingular solve, derivatives/integrals, finite-set operations, moments/covariances and conditioning.
 
 Scalar and flat unary execution are connected to Algebra, IAlgebraItem and AlgebraFlow. A x B -> A uses ICustomMemberOperation; A x B -> B uses ILeftProjectionOperation and returns the second carrier's IAlgebraItem wrapper. Flat transfer returns a list. Overloads select by the second operand class; result-algebra checks precede flow mutation.
 
@@ -20,7 +20,7 @@ Scalar and flat unary execution are connected to Algebra, IAlgebraItem and Algeb
 | 3 Numbers/logic | Native N/Z/Q, Boolean, Q(i), prime residues, embeddings; symbolic-real utility | Certified computable reals and larger complex representations |
 | 4 Abstract algebra | Concrete semiring/rings/fields/vector space/matrix algebra with declared laws | Generic structures, homomorphisms, law/equivalence witnesses |
 | 5 Linear algebra | Native fixed-dimensional rational vectors/matrices, rank/inverse/solve | Rectangular/mixed-shape registrations, tensors, decompositions |
-| 6 Calculus | Native polynomial derivative/higher derivative/integral; primitive-family utility | Certified function spaces and multivariate operators |
+| 6 Calculus | Native polynomial Euclidean arithmetic and calculus, rational-function field/differentiation/composition; primitive-family utility | Certified function spaces and multivariate operators |
 | 7 Analysis | Catalog, scoped sequence/symbolic examples, analytic RFC | Measures, transforms, convergence/error evidence |
 | 8 Probability/statistics | Native finite distributions, events/conditioning, moments/covariances | Continuous measures, estimators/inference, broader stochastic models |
 | 9 Geometry/topology | Native finite simplicial algebra, skeletons, Euler characteristic and F2 Betti numbers | Manifolds, forms, integral/persistent homology |
@@ -32,11 +32,11 @@ Partial progress covers only the listed scope. Catalog entries do not imply algo
 
 ## Verification
 
-The Java suite has **77 tests**, including independent expected results for every native registration, partial-operation boundaries, serialization and repeated local-flow collection. A differential test checks **104 cases** generated independently with Python Fraction arithmetic and a permutation-expansion determinant. The suite also checks all 64 four-vertex undirected graphs and all 512 three-vertex directed graphs against independent invariants/reachability. Rational law samples and exhaustive small-prime arithmetic are empirical evidence, not general formal proofs.
+The Java suite has **84 tests**, including independent expected results for every native registration, partial-operation boundaries, serialization and repeated local-flow collection. A differential test checks **104 cases** generated independently with Python Fraction arithmetic and a permutation-expansion determinant. The suite also checks all 64 four-vertex undirected graphs and all 512 three-vertex directed graphs against independent invariants/reachability. Rational law samples and exhaustive small-prime arithmetic are empirical evidence, not general formal proofs.
 
 Python checks validate source/test paths, required fields, evidence claims, extension links, requested topic inventory and manifest agreement. Reports must be fresh. [Maintenance instructions](ADDING_MATHEMATICS.md) list commands.
 
-The initial registry has 585 scoped records, covering all 322 distinct requested bullet concepts in specification sections 10-30, 25 domain descriptors and nine extension proposals. These are survey counts, not a percentage of all mathematics. All records remain human-unreviewed and formally unverified.
+The initial registry has 608 scoped records, covering all 322 distinct requested bullet concepts in specification sections 10-30, 26 domain descriptors and nine extension proposals. These are survey counts, not a percentage of all mathematics. All records remain human-unreviewed and formally unverified.
 
 ## Compatibility and limits
 

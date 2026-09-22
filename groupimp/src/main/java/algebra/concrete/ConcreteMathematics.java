@@ -18,6 +18,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final NaturalSemiring naturals=new NaturalSemiring(integers);
     public final FiniteSimplicialAlgebra complexes=new FiniteSimplicialAlgebra(booleans,naturals,integers);
     public final RationalPolynomialRing polynomials=new RationalPolynomialRing(rationals,naturals);
+    public final RationalFunctionField rationalFunctions=new RationalFunctionField(polynomials,rationals,booleans);
     public final IntegerSetAlgebra integerSets=new IntegerSetAlgebra(integers,booleans,naturals,rationals,polynomials);
     public final FiniteIntegerRelationAlgebra integerRelations=new FiniteIntegerRelationAlgebra(integers,integerSets,booleans,naturals);
     public final RationalSampleAlgebra samples=new RationalSampleAlgebra(rationals,naturals);
@@ -41,7 +42,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
             fields.add(new PrimeField(unit,prime));
         }
         primeFields=Collections.unmodifiableList(fields);
-        List<ConcreteAlgebra<?>> values=new ArrayList<>(Arrays.asList(booleans,naturals,integers,rationals,complexRationals,vectors,matrices,polynomials,integerSets,samples,integerProbabilities,complexes,integerRelations));
+        List<ConcreteAlgebra<?>> values=new ArrayList<>(Arrays.asList(booleans,naturals,integers,rationals,complexRationals,vectors,matrices,polynomials,rationalFunctions,integerSets,samples,integerProbabilities,complexes,integerRelations));
         values.addAll(fields); algebras=Collections.unmodifiableList(values);
         for(ConcreteAlgebra<?> algebra : algebras) {
             algebra.register(mathTool);

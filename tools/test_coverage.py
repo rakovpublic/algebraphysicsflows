@@ -69,6 +69,15 @@ class CoverageTest(unittest.TestCase):
                               legacy_operation_interface="ICustomMemberOperation")
         self.assertTrue(any("concrete runtime signature drift" in x for x in errors))
 
+    def test_operation_conditions_are_scoped_to_the_algebra(self):
+        records = {r.get("runtime_operation_id"): r for r in self.data["concepts"] if r.get("runtime_operation_id")}
+        polynomial = " ".join(records["Q[x].quotient"]["required_invariants"])
+        self.assertIn("Euclidean", polynomial)
+        self.assertNotIn("truncates", polynomial)
+        self.assertIn("truncates", " ".join(records["Z.quotient"]["required_invariants"]))
+        self.assertIn("f(g(x))", " ".join(records["Q(x).compose"]["required_invariants"]))
+        self.assertIn("first relation", " ".join(records["FiniteRelation(Z,Z).compose"]["required_invariants"]))
+
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)
         next(d for d in data["domains"] if d["id"] == "QxQ.bounds")["supported_operations"].append("Q.add")

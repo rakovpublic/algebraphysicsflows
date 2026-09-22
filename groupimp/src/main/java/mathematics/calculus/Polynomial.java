@@ -1,12 +1,16 @@
 package mathematics.calculus;
 
 import mathematics.numbers.Rational;
+import mathematics.core.MathFailure;
+import mathematics.foundations.Pair;
 import java.io.Serializable;
 import java.util.*;
 
 /** Univariate Q[x]. Polynomial smoothness is structural; arbitrary callbacks are not accepted. */
 public final class Polynomial implements Serializable {
     private static final long serialVersionUID=1L;
+    public static final Polynomial ZERO=new Polynomial(Rational.ZERO);
+    public static final Polynomial ONE=new Polynomial(Rational.ONE);
     private final List<Rational> coefficients;
     public Polynomial(Rational... input) {
         List<Rational> values=new ArrayList<>(Arrays.asList(input));
@@ -30,10 +34,59 @@ public final class Polynomial implements Serializable {
         for(int i=0;i<values.length;i++) values[i]=coefficient(i).add(b.coefficient(i));
         return new Polynomial(values);
     }
+    public Polynomial scale(Rational factor) {
+        Rational[] values=new Rational[coefficients.size()];
+        for(int i=0;i<values.length;i++) values[i]=coefficients.get(i).multiply(factor);
+        return new Polynomial(values);
+    }
+    public Polynomial negate() { return scale(Rational.of(-1)); }
+    public Polynomial subtract(Polynomial b) { return add(b.negate()); }
     public Polynomial multiply(Polynomial b) {
+        if(degree()<0 || b.degree()<0) return ZERO;
         Rational[] values=new Rational[coefficients.size()+b.coefficients.size()-1]; Arrays.fill(values,Rational.ZERO);
         for(int i=0;i<coefficients.size();i++) for(int j=0;j<b.coefficients.size();j++) values[i+j]=values[i+j].add(coefficient(i).multiply(b.coefficient(j)));
         return new Polynomial(values);
+    }
+    /** Euclidean division: this = divisor * quotient + remainder, deg(remainder) < deg(divisor). */
+    public Pair<Polynomial,Polynomial> divideAndRemainder(Polynomial divisor) {
+        int divisorDegree=divisor.degree();
+        if(divisorDegree<0) throw MathFailure.undefined("Polynomial division by zero");
+        Rational[] remainder=coefficients.toArray(new Rational[0]);
+        Rational[] quotient=new Rational[Math.max(1,degree()-divisorDegree+1)];
+        Arrays.fill(quotient,Rational.ZERO);
+        int remainderDegree=degree();
+        while(remainderDegree>=divisorDegree) {
+            int shift=remainderDegree-divisorDegree;
+            Rational factor=remainder[remainderDegree].divide(divisor.coefficient(divisorDegree));
+            quotient[shift]=quotient[shift].add(factor);
+            for(int i=0;i<=divisorDegree;i++)
+                remainder[i+shift]=remainder[i+shift].subtract(factor.multiply(divisor.coefficient(i)));
+            while(remainderDegree>=0 && remainder[remainderDegree].signum()==0) remainderDegree--;
+        }
+        return new Pair<>(new Polynomial(quotient),new Polynomial(remainder));
+    }
+    public Polynomial quotient(Polynomial divisor) { return divideAndRemainder(divisor).first; }
+    public Polynomial remainder(Polynomial divisor) { return divideAndRemainder(divisor).second; }
+    public Polynomial divideExact(Polynomial divisor) {
+        Pair<Polynomial,Polynomial> division=divideAndRemainder(divisor);
+        if(division.second.degree()>=0) throw MathFailure.undefined("Polynomial division has nonzero remainder");
+        return division.first;
+    }
+    public Polynomial monic() {
+        if(degree()<0) throw MathFailure.undefined("Zero polynomial has no monic normalization");
+        return scale(Rational.ONE.divide(coefficient(degree())));
+    }
+    /** The monic gcd, with gcd(0,0)=0. */
+    public Polynomial gcd(Polynomial other) {
+        Polynomial a=this,b=other;
+        while(b.degree()>=0) { Polynomial remainder=a.remainder(b); a=b; b=remainder; }
+        return a.degree()<0?ZERO:a.monic();
+    }
+    /** Substitution this(inner(x)). */
+    public Polynomial compose(Polynomial inner) {
+        Polynomial result=ZERO;
+        for(int i=coefficients.size()-1;i>=0;i--) result=result.multiply(inner).add(new Polynomial(coefficients.get(i)));
+        return result;
     }
     public Polynomial derivative() {
         Rational[] values=new Rational[Math.max(1,coefficients.size()-1)]; Arrays.fill(values,Rational.ZERO);

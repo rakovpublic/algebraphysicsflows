@@ -22,8 +22,19 @@ public final class RationalPolynomialRing extends ConcreteAlgebra<Polynomial> {
         binary("primitive",algebra(),rationals.algebra(),algebra(),false,Polynomial::primitive);
         binary("integrate",algebra(),integrationBounds,rationals.algebra(),false,(p,bounds) -> p.integrate(bounds.first,bounds.second));
         constant("zero",new Polynomial(Rational.ZERO)); constant("one",new Polynomial(Rational.ONE));
+        closed("quotient",true,Polynomial::quotient);
+        closed("remainder",true,Polynomial::remainder);
+        closed("divide-exact",true,Polynomial::divideExact);
+        closed("gcd",false,Polynomial::gcd);
+        closed("compose",false,Polynomial::compose);
+        unary("monic",algebra(),algebra(),true,Polynomial::monic);
+        flat("quotient-remainder",algebra(),algebra(),algebra(),true,(a,b) -> {
+            Pair<Polynomial,Polynomial> result=a.divideAndRemainder(b);
+            return Arrays.asList(result.first,result.second);
+        });
         law("Q[x] is a commutative unital ring; polynomial multiplication distributes over addition.");
         law("The derivative is Q-linear and satisfies the product rule; primitive uses an explicit rational constant.");
+        law("Euclidean division has a remainder of smaller degree; gcd is monic unless both operands are zero.");
     }
     public RationalPolynomialRing(RationalField rationals,NaturalSemiring naturals) {
         this(rationals);

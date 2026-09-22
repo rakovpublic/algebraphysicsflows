@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 585 |
-| DIRECTLY_SUPPORTED | 342 |
+| Scoped records | 608 |
+| DIRECTLY_SUPPORTED | 365 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 201 |
+| IMPLEMENTED | 224 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 269 |
+| MACHINE_TESTED | 292 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 178 | 178 | 0 | 0 | 0 | 178 | 0 | 0 |
+| Concrete MathTool algebras | 201 | 201 | 0 | 0 | 0 | 201 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -290,6 +290,21 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Q(i).one | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers; native operation Q(i).one |
 | Q(i).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers; native operation Q(i).subtract |
 | Q(i).zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers; native operation Q(i).zero |
+| Q(x).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).add |
+| Q(x).compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).compose |
+| Q(x).denominator | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).denominator |
+| Q(x).derivative | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).derivative |
+| Q(x).divide | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).divide |
+| Q(x).embed-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).embed-polynomial |
+| Q(x).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).equal |
+| Q(x).evaluate | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).evaluate |
+| Q(x).inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).inverse |
+| Q(x).multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).multiply |
+| Q(x).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).negate |
+| Q(x).numerator | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).numerator |
+| Q(x).one | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).one |
+| Q(x).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).subtract |
+| Q(x).zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).zero |
 | Q.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field; native operation Q.add |
 | Q.add-subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field; native operation Q.add-subtract |
 | Q.divide | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field; native operation Q.divide |
@@ -302,16 +317,23 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Q.subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field; native operation Q.subtract |
 | Q.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field; native operation Q.zero |
 | Q[x].add | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].add |
+| Q[x].compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].compose |
 | Q[x].derivative | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].derivative |
 | Q[x].derivative-order | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].derivative-order |
+| Q[x].divide-exact | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].divide-exact |
 | Q[x].evaluate | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].evaluate |
+| Q[x].gcd | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].gcd |
 | Q[x].integrate | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].integrate |
 | Q[x].iterate | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].iterate |
+| Q[x].monic | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].monic |
 | Q[x].multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].multiply |
 | Q[x].negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].negate |
 | Q[x].one | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].one |
 | Q[x].orbit | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].orbit |
 | Q[x].primitive | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].primitive |
+| Q[x].quotient | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].quotient |
+| Q[x].quotient-remainder | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].quotient-remainder |
+| Q[x].remainder | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].remainder |
 | Q[x].subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].subtract |
 | Q[x].zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].zero |
 | Q^2.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed-dimensional rational vectors; default dimension two; native operation Q^2.add |
@@ -326,6 +348,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Q^2.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed-dimensional rational vectors; default dimension two; native operation Q^2.zero |
 | RationalComplexField | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers |
 | RationalField | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field |
+| RationalFunctionField | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator |
 | RationalMatrixAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two |
 | RationalPolynomialRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients |
 | RationalSampleAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations |

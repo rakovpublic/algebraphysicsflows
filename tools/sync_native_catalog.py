@@ -19,6 +19,7 @@ OWNERS = {
     "RationalVectorSpace": ("Q^2", "Fixed-dimensional rational vectors; default dimension two"),
     "RationalMatrixAlgebra": ("Mat2(Q)", "Fixed positive-dimensional square rational matrices; default dimension two"),
     "RationalPolynomialRing": ("Q[x]", "Finite univariate polynomials with canonical rational coefficients"),
+    "RationalFunctionField": ("Q(x)", "Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator"),
     "IntegerSetAlgebra": ("FiniteSet(Z)", "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets"),
     "RationalSampleAlgebra": ("Sample(Q)", "Finite ordered rational samples retaining repeated observations"),
     "FiniteProbabilityAlgebra": ("FiniteDistribution(Z)", "Finite integer distributions with exact nonnegative rational masses summing to one"),
@@ -44,6 +45,7 @@ INTERFACES = {
 EXTRA_TESTS = {
     "IntegerSetAlgebra": "NativeFlatAndSetTest",
     "RationalPolynomialRing": "NativeDynamicsTest",
+    "RationalFunctionField": "NativeRationalFunctionTest",
     "RationalSampleAlgebra": "NativeStatisticsProbabilityTest",
     "FiniteProbabilityAlgebra": "NativeStatisticsProbabilityTest",
     "FiniteSimplicialAlgebra": "NativeTopologyTest",
@@ -84,6 +86,24 @@ CONDITIONS = {
 }
 
 
+OWNER_CONDITIONS = {
+    "RationalPolynomialRing": {
+        "quotient": "The divisor is nonzero; return the Euclidean polynomial quotient over Q.",
+        "remainder": "The divisor is nonzero; the Euclidean remainder has smaller degree than the divisor.",
+        "quotient-remainder": "The divisor is nonzero; emit quotient then remainder with a = b*q + r and deg(r) < deg(b).",
+        "divide-exact": "The divisor is nonzero and the polynomial remainder must be zero.",
+        "gcd": "The gcd is monic; gcd(0,0) is defined as zero.",
+        "monic": "The polynomial must be nonzero.",
+        "compose": "Substitute the second polynomial into the first: f(g(x)).",
+    },
+    "RationalFunctionField": {
+        "compose": "Formal f(g(x)); undefined if substitution makes the reduced denominator identically zero.",
+        "evaluate": "The reduced denominator must be nonzero at the rational evaluation point.",
+        "inverse": "The rational function must be nonzero.",
+    },
+}
+
+
 def record(identifier, owner, concept, paths, operation=None):
     carrier, scope = OWNERS[owner]
     tests = ["groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java"]
@@ -92,6 +112,8 @@ def record(identifier, owner, concept, paths, operation=None):
     if owner == "IntegerSetAlgebra":
         tests.append("groupimp/src/test/java/operations/NativeOptimizationTest.java")
         paths = paths + ["groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java"]
+    if owner == "RationalPolynomialRing":
+        tests.append("groupimp/src/test/java/operations/NativeRationalFunctionTest.java")
     value = {
         "id": identifier, "mathematical_area": "Concrete MathTool algebras",
         "subfield": owner, "concept": concept, "specification_section": 0,
@@ -141,8 +163,9 @@ def record(identifier, owner, concept, paths, operation=None):
             framework_mapping=operation["interface"] + " installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow."
         )
         operation_name = operation["id"].rsplit(".", 1)[-1]
-        if operation_name in CONDITIONS:
-            value["required_invariants"].append(CONDITIONS[operation_name])
+        condition = OWNER_CONDITIONS.get(owner, {}).get(operation_name, CONDITIONS.get(operation_name))
+        if condition:
+            value["required_invariants"].append(condition)
         if operation["semantics"] == "LIST":
             value["required_invariants"].append("Finite ordered wrapped results; duplicates and empty lists are retained.")
         if operation_name == "subsets":
@@ -157,6 +180,9 @@ def record(identifier, owner, concept, paths, operation=None):
         value["references"].append("https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html")
     if owner == "FiniteIntegerRelationAlgebra":
         value["known_limitations"].append("Finite support only; equality includes source/target Algebra identity and pair equality. Function totality is restricted to an explicit finite carrier.")
+    if owner == "RationalFunctionField":
+        value["known_limitations"].append("Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented.")
+        value["references"].append("https://docs.sympy.org/latest/modules/polys/domainsref.html")
     return value
 
 
@@ -179,6 +205,8 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("Q(x)", "Rational function field", "mathematics.calculus.RationalFunction",
+         ["Coprime rational-coefficient numerator and denominator", "Denominator is nonzero and monic; zero is 0/1"], ["Q", "Q[x]"]),
         ("FiniteRelation(Z,Z)", "Finite integer relations", "mathematics.foundations.FiniteRelation<BigInteger,BigInteger>",
          ["Finite set of integer pairs", "Source and target are the actual registered integer Algebra"], ["Z", "FiniteSet(Z)"]),
         ("ZxZ.relation", "Integer relation pair", "mathematics.foundations.Pair<BigInteger,BigInteger>",

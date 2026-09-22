@@ -25636,6 +25636,68 @@
       "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
     },
     {
+      "id": "concrete-algebra.RationalFunctionField",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalFunctionField",
+      "concept": "RationalFunctionField",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "Q(x)",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/polys/domainsref.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
       "id": "concrete-algebra.RationalMatrixAlgebra",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "RationalMatrixAlgebra",
@@ -25721,7 +25783,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -30725,7 +30788,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -30791,7 +30855,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -30857,7 +30922,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -30923,7 +30989,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -30989,7 +31056,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -31055,7 +31123,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -31121,7 +31190,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -31187,7 +31257,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -31253,7 +31324,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -31319,7 +31391,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -31358,6 +31431,483 @@
       "legacy_operation_interface": "ITransferOperation"
     },
     {
+      "id": "concrete-operation.Q[x].quotient",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalPolynomialRing",
+      "concept": "Q[x].quotient",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q[x]",
+      "domain_B": "Q[x]",
+      "domain_C": "Q[x]",
+      "operation_signature": "Q[x] x Q[x] -> Q[x]",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite univariate polynomials with canonical rational coefficients; native operation Q[x].quotient",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The divisor is nonzero; return the Euclidean polynomial quotient over Q."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalPolynomialRing.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalPolynomialRing.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Q[x].quotient",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "quotient",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.Q[x].remainder",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalPolynomialRing",
+      "concept": "Q[x].remainder",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q[x]",
+      "domain_B": "Q[x]",
+      "domain_C": "Q[x]",
+      "operation_signature": "Q[x] x Q[x] -> Q[x]",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite univariate polynomials with canonical rational coefficients; native operation Q[x].remainder",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The divisor is nonzero; the Euclidean remainder has smaller degree than the divisor."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalPolynomialRing.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalPolynomialRing.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Q[x].remainder",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "remainder",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.Q[x].divide-exact",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalPolynomialRing",
+      "concept": "Q[x].divide-exact",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q[x]",
+      "domain_B": "Q[x]",
+      "domain_C": "Q[x]",
+      "operation_signature": "Q[x] x Q[x] -> Q[x]",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite univariate polynomials with canonical rational coefficients; native operation Q[x].divide-exact",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The divisor is nonzero and the polynomial remainder must be zero."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalPolynomialRing.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalPolynomialRing.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Q[x].divide-exact",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "divide-exact",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.Q[x].gcd",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalPolynomialRing",
+      "concept": "Q[x].gcd",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q[x]",
+      "domain_B": "Q[x]",
+      "domain_C": "Q[x]",
+      "operation_signature": "Q[x] x Q[x] -> Q[x]",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite univariate polynomials with canonical rational coefficients; native operation Q[x].gcd",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The gcd is monic; gcd(0,0) is defined as zero."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalPolynomialRing.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalPolynomialRing.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Q[x].gcd",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "gcd",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.Q[x].compose",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalPolynomialRing",
+      "concept": "Q[x].compose",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q[x]",
+      "domain_B": "Q[x]",
+      "domain_C": "Q[x]",
+      "operation_signature": "Q[x] x Q[x] -> Q[x]",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite univariate polynomials with canonical rational coefficients; native operation Q[x].compose",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Substitute the second polynomial into the first: f(g(x))."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalPolynomialRing.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalPolynomialRing.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Q[x].compose",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "compose",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.Q[x].monic",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalPolynomialRing",
+      "concept": "Q[x].monic",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q[x]",
+      "domain_B": null,
+      "domain_C": "Q[x]",
+      "operation_signature": "Q[x] -> Q[x]",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite univariate polynomials with canonical rational coefficients; native operation Q[x].monic",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The polynomial must be nonzero."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalPolynomialRing.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalPolynomialRing.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Q[x].monic",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "monic",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.Q[x].quotient-remainder",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalPolynomialRing",
+      "concept": "Q[x].quotient-remainder",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q[x]",
+      "domain_B": "Q[x]",
+      "domain_C": "Q[x]",
+      "operation_signature": "Q[x] x Q[x] -> List(Q[x])",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Finite univariate polynomials with canonical rational coefficients; native operation Q[x].quotient-remainder",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The divisor is nonzero; emit quotient then remainder with a = b*q + r and deg(r) < deg(b).",
+        "Finite ordered wrapped results; duplicates and empty lists are retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalPolynomialRing.java",
+        "groupimp/src/main/java/operations/flat/ClosedFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalPolynomialRing.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Q[x].quotient-remainder",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "quotient-remainder",
+      "legacy_operation_interface": "IFlatOperation"
+    },
+    {
       "id": "concrete-operation.Q[x].derivative-order",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "RationalPolynomialRing",
@@ -31386,7 +31936,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -31453,7 +32004,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -31522,7 +32074,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeDynamicsTest.java"
+        "groupimp/src/test/java/operations/NativeDynamicsTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -31560,6 +32113,1030 @@
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "orbit",
       "legacy_operation_interface": "IUnsafeFlatOperation"
+    },
+    {
+      "id": "concrete-operation.Q(x).add",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalFunctionField",
+      "concept": "Q(x).add",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(x)",
+      "domain_B": "Q(x)",
+      "domain_C": "Q(x)",
+      "operation_signature": "Q(x) x Q(x) -> Q(x)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).add",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/polys/domainsref.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Q(x).add",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "add",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.Q(x).subtract",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalFunctionField",
+      "concept": "Q(x).subtract",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(x)",
+      "domain_B": "Q(x)",
+      "domain_C": "Q(x)",
+      "operation_signature": "Q(x) x Q(x) -> Q(x)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).subtract",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/polys/domainsref.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Q(x).subtract",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "subtract",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.Q(x).multiply",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalFunctionField",
+      "concept": "Q(x).multiply",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(x)",
+      "domain_B": "Q(x)",
+      "domain_C": "Q(x)",
+      "operation_signature": "Q(x) x Q(x) -> Q(x)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).multiply",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/polys/domainsref.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Q(x).multiply",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "multiply",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.Q(x).divide",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalFunctionField",
+      "concept": "Q(x).divide",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(x)",
+      "domain_B": "Q(x)",
+      "domain_C": "Q(x)",
+      "operation_signature": "Q(x) x Q(x) -> Q(x)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).divide",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The divisor must be nonzero."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/polys/domainsref.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Q(x).divide",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "divide",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.Q(x).compose",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalFunctionField",
+      "concept": "Q(x).compose",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(x)",
+      "domain_B": "Q(x)",
+      "domain_C": "Q(x)",
+      "operation_signature": "Q(x) x Q(x) -> Q(x)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).compose",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Formal f(g(x)); undefined if substitution makes the reduced denominator identically zero."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/polys/domainsref.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Q(x).compose",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "compose",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.Q(x).negate",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalFunctionField",
+      "concept": "Q(x).negate",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(x)",
+      "domain_B": null,
+      "domain_C": "Q(x)",
+      "operation_signature": "Q(x) -> Q(x)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).negate",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/polys/domainsref.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Q(x).negate",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "negate",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.Q(x).inverse",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalFunctionField",
+      "concept": "Q(x).inverse",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(x)",
+      "domain_B": null,
+      "domain_C": "Q(x)",
+      "operation_signature": "Q(x) -> Q(x)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).inverse",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The rational function must be nonzero."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/polys/domainsref.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Q(x).inverse",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "inverse",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.Q(x).derivative",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalFunctionField",
+      "concept": "Q(x).derivative",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(x)",
+      "domain_B": null,
+      "domain_C": "Q(x)",
+      "operation_signature": "Q(x) -> Q(x)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).derivative",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/polys/domainsref.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Q(x).derivative",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "derivative",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.Q(x).evaluate",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalFunctionField",
+      "concept": "Q(x).evaluate",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(x)",
+      "domain_B": "Q",
+      "domain_C": "Q",
+      "operation_signature": "Q(x) x Q -> Q",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).evaluate",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The reduced denominator must be nonzero at the rational evaluation point."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/polys/domainsref.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Q(x).evaluate",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "evaluate",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.Q(x).numerator",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalFunctionField",
+      "concept": "Q(x).numerator",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(x)",
+      "domain_B": null,
+      "domain_C": "Q[x]",
+      "operation_signature": "Q(x) -> Q[x]",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).numerator",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/polys/domainsref.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Q(x).numerator",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "numerator",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Q(x).denominator",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalFunctionField",
+      "concept": "Q(x).denominator",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(x)",
+      "domain_B": null,
+      "domain_C": "Q[x]",
+      "operation_signature": "Q(x) -> Q[x]",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).denominator",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/polys/domainsref.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Q(x).denominator",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "denominator",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Q(x).embed-polynomial",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalFunctionField",
+      "concept": "Q(x).embed-polynomial",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q[x]",
+      "domain_B": null,
+      "domain_C": "Q(x)",
+      "operation_signature": "Q[x] -> Q(x)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).embed-polynomial",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/polys/domainsref.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Q(x).embed-polynomial",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "Q(x).embed-polynomial",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Q(x).equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalFunctionField",
+      "concept": "Q(x).equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(x)",
+      "domain_B": "Q(x)",
+      "domain_C": "Boolean",
+      "operation_signature": "Q(x) x Q(x) -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/polys/domainsref.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Q(x).equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.Q(x).zero",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalFunctionField",
+      "concept": "Q(x).zero",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "Q(x)",
+      "operation_signature": "Unit -> Q(x)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).zero",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/polys/domainsref.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Q(x).zero",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "Q(x).zero",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Q(x).one",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalFunctionField",
+      "concept": "Q(x).one",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "Q(x)",
+      "operation_signature": "Unit -> Q(x)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).one",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRationalFunctionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/polys/domainsref.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalFunctionField.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Q(x).one",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "Q(x).one",
+      "legacy_operation_interface": "ITransferOperation"
     },
     {
       "id": "concrete-operation.FiniteSet(Z).union",
@@ -36978,6 +38555,7 @@
         "Mat2(Q).trace",
         "Q(i).embed-rational",
         "Q(i).norm-squared",
+        "Q(x).evaluate",
         "Q-to-Qi",
         "Q-to-RealExpression",
         "Q.add",
@@ -37219,6 +38797,7 @@
         "FiniteSet(Z).contains",
         "FiniteSet(Z).equal",
         "FiniteSet(Z).subset",
+        "Q(x).equal",
         "Q.equal",
         "Q.greater",
         "Z.equal",
@@ -37265,6 +38844,8 @@
         "N.zero",
         "Q(i).one",
         "Q(i).zero",
+        "Q(x).one",
+        "Q(x).zero",
         "Q.one",
         "Q.zero",
         "Q[x].one",
@@ -37414,17 +38995,27 @@
         "FiniteSet(Z).maximum",
         "FiniteSet(Z).minimizers",
         "FiniteSet(Z).minimum",
+        "Q(x).denominator",
+        "Q(x).embed-polynomial",
+        "Q(x).numerator",
         "Q[x].add",
+        "Q[x].compose",
         "Q[x].derivative",
         "Q[x].derivative-order",
+        "Q[x].divide-exact",
         "Q[x].evaluate",
+        "Q[x].gcd",
         "Q[x].integrate",
         "Q[x].iterate",
+        "Q[x].monic",
         "Q[x].multiply",
         "Q[x].negate",
         "Q[x].one",
         "Q[x].orbit",
         "Q[x].primitive",
+        "Q[x].quotient",
+        "Q[x].quotient-remainder",
+        "Q[x].remainder",
         "Q[x].subtract",
         "Q[x].zero",
         "evaluate-polynomial",
@@ -37948,6 +39539,56 @@
       ],
       "invariants": [
         "Both coordinates belong to the registered integer Algebra"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-22"
+      }
+    },
+    {
+      "id": "Q(x)",
+      "name": "Rational function field",
+      "description": "Rational function field",
+      "member_representation": "mathematics.calculus.RationalFunction",
+      "membership_rules": [
+        "Coprime rational-coefficient numerator and denominator",
+        "Denominator is nonzero and monic; zero is 0/1"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "Q",
+        "Q[x]"
+      ],
+      "supported_operations": [
+        "Q(x).add",
+        "Q(x).compose",
+        "Q(x).denominator",
+        "Q(x).derivative",
+        "Q(x).divide",
+        "Q(x).embed-polynomial",
+        "Q(x).equal",
+        "Q(x).evaluate",
+        "Q(x).inverse",
+        "Q(x).multiply",
+        "Q(x).negate",
+        "Q(x).numerator",
+        "Q(x).one",
+        "Q(x).subtract",
+        "Q(x).zero"
+      ],
+      "invariants": [
+        "Coprime rational-coefficient numerator and denominator",
+        "Denominator is nonzero and monic; zero is 0/1"
       ],
       "references": [
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
