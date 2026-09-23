@@ -27,7 +27,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all417RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all440RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String category12="Category(objects=[1, 2], arrows={1=(1,1), 2=(2,2)}, identities={1=1, 2=2}, composition={(1,1)=1, (2,2)=2})";
@@ -76,6 +76,7 @@ public class ConcreteAlgebrasTest {
         expected.put("RationalVectorFamily","[4, 4, 4]|[-2, 0, 2]|[-1, -2, -3]|[2, 4, 6]|10|3|[1, 2, 3]|[0, 0, 0]|[1, 2]|[1, 2]|[]");
         expected.put("RationalMatrixFamily","[[4, 4, 4], [2, 5, 6]]|[[-2, 0, 2], [2, 3, 6]]|[[4, 5], [8, 10]]|[[-1, -2, -3], [-2, -4, -6]]|[[1, 2], [2, 4], [3, 6]]|[[2, 4, 6], [4, 8, 12]]|[10, 20]|[[1, 2, 3], [0, 0, 0]]|1|2|[0]|[[-2, 1, 0], [-3, 0, 1]]|[[1, 2, 3]]|[[1, 2]]|[[1, 2, 3], [2, 4, 6]]|[[1, 2], [2, 4], [3, 6]]|2|3|false|[[1, 2], [3, 4]]|[[1, 2], [3, 4]]|[[0, 0, 0], [0, 0, 0]]|[[-2, 1], [3/2, -1/2]]|-2|5|[[1/70, 1/35], [1/35, 2/35], [3/70, 3/35]]|[[1/5, 2/5], [2/5, 4/5]]|[[1/14, 1/7, 3/14], [1/7, 2/7, 3/7], [3/14, 3/7, 9/14]]|[7/5, 14/5]|[1/10, 1/5, 3/10]|[-2/5, 1/5]|1/5");
         expected.put("RationalAffineSpaceAlgebra","Affine(particular=[1, 0, 0], directions=[[-2, 1, 0], [-3, 0, 1]])|[1, 0, 0]|[[-2, 1, 0], [-3, 0, 1]]|2|3|false|false|false|[-3, -1, 2]|false|Affine(particular=[7/5, 0, 0], directions=[[-2, 1, 0], [-3, 0, 1]])|[33/14, 5/7, -13/14]|[1/14, 1/7, 3/14]");
+        expected.put("RationalTensorAlgebra","Tensor(shape=[2, 2], entries=[6, 8, 10, 12])|Tensor(shape=[2, 2], entries=[-4, -4, -4, -4])|Tensor(shape=[2, 2], entries=[5, 12, 21, 32])|Tensor(shape=[2, 2, 2, 2], entries=[5, 6, 7, 8, 10, 12, 14, 16, 15, 18, 21, 24, 20, 24, 28, 32])|Tensor(shape=[2, 2], entries=[-1, -2, -3, -4])|Tensor(shape=[2, 2], entries=[2, 4, 6, 8])|2|4|[2, 2]|[1, 2, 3, 4]|30|70|false|Tensor(shape=[2, 2], entries=[1, 3, 2, 4])|Tensor(shape=[], entries=[5])|Tensor(shape=[], entries=[6])|6|Tensor(shape=[3], entries=[1, 2, 3])|[1, 2, 3]|Tensor(shape=[2, 3], entries=[1, 2, 3, 2, 4, 6])|[[1, 2], [3, 4]]|Tensor(shape=[2, 2], entries=[0, 0, 0, 0])|Tensor(shape=[], entries=[1])");
         expected.put("RationalPolynomialRing","Q[x][3, 3, 1]|Q[x][2, 5, 4, 1]|Q[x][-1, 1, 1]|Q[x][-1, -2, -1]|Q[x][2, 2]|9|Q[x][2, 1, 1, 1/3]|7/3|Q[x][0]|Q[x][1]|Q[x][0, 1]|Q[x][1]|Q[x][1, 1]|Q[x][1]|Q[x][9, 6, 1]|Q[x][1, 2, 1]|[Q[x][0, 1], Q[x][1]]|Q[x][2]|4|[0, 1, 4]");
         expected.put("PrimeField","0 (mod 5)|1 (mod 5)|1 (mod 5)|4 (mod 5)|2 (mod 5)|2 (mod 5)|0 (mod 5)|1 (mod 5)");
         expected.put("IntegerSetAlgebra","[1, 2, 3]|[1, 2]|[]|[3]|true|false|true|[1, 2]|[1]|2|[1, 2]|[[], [1], [2], [1, 2]]|[3]|[]|[1]|[2]|3|4|[1]|[2]");
@@ -97,13 +98,15 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(417,count);
+        assertEquals(440,count);
     }
     @SuppressWarnings({"unchecked","rawtypes"})
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
         Algebra source=math.mathTool.getAlgebra(entry.first.getAlgebraName());
         IAlgebraItem item=source.buildAlgebraItem(sample(math,source.getAlgebraName(),0));
         if(entry.id.equals("Vec(Q).to-fixed")) item=source.buildAlgebraItem(new RationalVector(Rational.ONE,Rational.of(2)));
+        if(entry.id.equals("Tensor(Q).to-scalar")) item=source.buildAlgebraItem(RationalTensor.scalar(Rational.of(6)));
+        if(entry.id.equals("Tensor(Q).to-vector")) item=source.buildAlgebraItem(RationalTensor.fromVector(new RationalVector(Rational.ONE,Rational.of(2),Rational.of(3))));
         if(Arrays.asList("Mat(Q).to-fixed","Mat(Q).inverse","Mat(Q).determinant","Mat(Q).trace").contains(entry.id))
             item=source.buildAlgebraItem(sample(math,"Mat2(Q)",0));
         if(entry.id.startsWith("FiniteCone.")) {
@@ -163,6 +166,8 @@ public class ConcreteAlgebrasTest {
             case "Q(i)": return index==0?new RationalComplex(Rational.ONE,Rational.of(2)):new RationalComplex(Rational.of(3),Rational.ONE);
             case "Q^2": return index==0?new RationalVector(Rational.ONE,Rational.of(2)):new RationalVector(Rational.of(3),Rational.of(4));
             case "Vec(Q)": return index==0?new RationalVector(Rational.ONE,Rational.of(2),Rational.of(3)):new RationalVector(Rational.of(3),Rational.of(2),Rational.ONE);
+            case "Tensor(Q)": return new RationalTensor(new int[]{2,2},Rational.of(1+4*index),Rational.of(2+4*index),Rational.of(3+4*index),Rational.of(4+4*index));
+            case "NxN.tensor-axes": return new Pair<>(BigInteger.ZERO,BigInteger.ONE);
             case "Mat(Q)": return new RationalMatrix(index==0
                     ?new Rational[][]{{Rational.ONE,Rational.of(2),Rational.of(3)},{Rational.of(2),Rational.of(4),Rational.of(6)}}
                     :new Rational[][]{{Rational.of(3),Rational.of(2),Rational.ONE},{Rational.ZERO,Rational.ONE,Rational.ZERO}});

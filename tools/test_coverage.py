@@ -109,6 +109,9 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("including zero matrices", " ".join(records["Mat(Q).pseudoinverse"]["required_invariants"]))
         self.assertIn("nonempty affine", " ".join(records["Affine(Q).least-squares"]["required_invariants"]))
         self.assertIn("need not equal", " ".join(records["Affine(Q).minimum-norm"]["required_invariants"]))
+        self.assertIn("distinct, present and equal-sized", " ".join(records["Tensor(Q).contract"]["required_invariants"]))
+        self.assertIn("not tensor decomposition rank", " ".join(records["Tensor(Q).order"]["required_invariants"]))
+        self.assertIn("both dimensions positive", " ".join(records["Tensor(Q).to-matrix"]["required_invariants"]))
 
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)

@@ -22,6 +22,7 @@ OWNERS = {
     "RationalVectorFamily": ("Vec(Q)", "Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations"),
     "RationalMatrixFamily": ("Mat(Q)", "Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases"),
     "RationalAffineSpaceAlgebra": ("Affine(Q)", "Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension"),
+    "RationalTensorAlgebra": ("Tensor(Q)", "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction"),
     "RationalPolynomialRing": ("Q[x]", "Finite univariate polynomials with canonical rational coefficients"),
     "RationalFunctionField": ("Q(x)", "Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator"),
     "IntegerSetAlgebra": ("FiniteSet(Z)", "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets"),
@@ -59,6 +60,7 @@ EXTRA_TESTS = {
     "RationalVectorFamily": "NativeRectangularLinearTest",
     "RationalMatrixFamily": "NativeRectangularLinearTest",
     "RationalAffineSpaceAlgebra": "NativeRectangularLinearTest",
+    "RationalTensorAlgebra": "NativeTensorTest",
     "IntegerSetAlgebra": "NativeFlatAndSetTest",
     "RationalPolynomialRing": "NativeDynamicsTest",
     "RationalFunctionField": "NativeRationalFunctionTest",
@@ -113,6 +115,30 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "RationalTensorAlgebra": {
+        "add": "Both tensors have exactly the same ordered shape; add coordinatewise.",
+        "subtract": "Both tensors have exactly the same ordered shape; subtract coordinatewise.",
+        "hadamard": "Both tensors have exactly the same ordered shape; multiply coordinatewise, retaining shape.",
+        "tensor-product": "Concatenate the first shape and second shape, multiplying entries in row-major order. Order-zero scalar tensors are allowed; the result remains subject to materialization caps.",
+        "scale": "Multiply every rational entry by the scalar, retaining the full shape including zero axes.",
+        "order": "Return the number of axes, not tensor decomposition rank or matrix rank; scalar tensors have order zero.",
+        "size": "Return the product of axis dimensions; any zero axis makes size zero, while scalar tensors have one entry.",
+        "shape": "Emit axis dimensions in their stored order, retaining repetitions and zeros; scalar tensors emit an empty list.",
+        "entries": "Emit exact coordinates in row-major order with the final axis varying fastest; zero-sized tensors emit no entries.",
+        "norm-squared": "Return the sum of squared rational coordinates in the standard coordinate inner product, not a square root.",
+        "dot": "Both tensors have exactly the same ordered shape; sum coordinatewise products in the standard coordinate inner product.",
+        "equal": "Equality includes ordered shape and every coordinate; a scalar and a singleton-axis tensor are distinct.",
+        "swap-axes": "Both zero-based axis indices must exist. Exchange their dimensions and coordinates; equal indices leave the tensor unchanged.",
+        "contract": "The zero-based axis indices must be distinct, present and equal-sized. Sum over equal coordinates of these axes and retain other axes in order; contracting two zero-sized axes yields zeros in the remaining shape.",
+        "from-scalar": "Embed the rational as an order-zero tensor with exactly one entry.",
+        "to-scalar": "The tensor must have order zero; a singleton-axis tensor is not a scalar tensor.",
+        "from-vector": "Embed a finite rational vector as an order-one tensor, including an empty vector as shape [0].",
+        "to-vector": "The tensor must have order one; retain the axis length, including zero.",
+        "from-matrix": "Embed the positive rectangular matrix as an order-two tensor with row-major coordinates.",
+        "to-matrix": "The tensor must have order two and both dimensions positive, matching the existing matrix representation.",
+        "zero-like": "Replace every coordinate with zero, retaining the exact ordered shape.",
+        "one": "The order-zero scalar tensor one is the identity for tensor product, not a matrix identity of every shape.",
+    },
     "RationalVectorFamily": {
         "add": "Both vectors have the same dimension, including dimension zero.",
         "subtract": "Both vectors have the same dimension.",
@@ -464,6 +490,11 @@ def record(identifier, owner, concept, paths, operation=None):
                                 "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"]
     if owner in ("RationalVectorFamily", "RationalMatrixFamily", "RationalAffineSpaceAlgebra"):
         value["references"].append("https://docs.sympy.org/latest/modules/matrices/matrices.html")
+    if owner == "RationalTensorAlgebra":
+        value["references"].append("https://docs.sympy.org/latest/modules/tensor/array.html")
+        value["known_limitations"].append("Dense materialization is capped at order 32 and 1000000 entries per tensor; exceeding a cap raises IMPLEMENTATION_FAILURE, not mathematical nonexistence. Removing zero axes by contraction can exceed the result materialization cap.")
+        value["known_limitations"].append("Standard coordinate spaces and coordinate contraction only; no covariant/contravariant axis labels, arbitrary metrics, basis-change witnesses, sparse storage or tensor bundles.")
+        value["required_invariants"].append("Every axis dimension is nonnegative, scalar order is zero, coordinates are immutable and row-major, and entry count equals the shape product with the empty product equal to one.")
     if owner == "RationalVectorFamily":
         value["known_limitations"].append("This is a family of different vector spaces, not one vector space across all dimensions. Dimension checks run at operation execution; entries are materialized exactly.")
     if owner == "RationalMatrixFamily":
@@ -505,6 +536,10 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("Tensor(Q)", "Finite rational coordinate tensors", "mathematics.linear.RationalTensor",
+         ["Ordered nonnegative axis dimensions", "Row-major rational coordinates with checked shape product", "Order-zero scalars have one entry; zero-sized axes have no entries"], ["Q", "Vec(Q)", "Mat(Q)", "N", "NxN.tensor-axes"]),
+        ("NxN.tensor-axes", "Ordered tensor axis pair", "mathematics.foundations.Pair<BigInteger,BigInteger>",
+         ["Two nonnegative integer indices", "Each operation checks existence and compatibility in the actual tensor shape"], ["N"]),
         ("Vec(Q)", "Family of finite rational vectors", "mathematics.linear.RationalVector",
          ["Finite nonnegative dimension", "Exact rational entries", "Dimension-sensitive operations check compatible input lengths"], ["Q", "Q^2", "N"]),
         ("Mat(Q)", "Family of positive rectangular rational matrices", "mathematics.linear.RationalMatrix",

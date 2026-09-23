@@ -1,6 +1,6 @@
 # Concrete algebras connected to MathTool
 
-`new ConcreteMathematics()` creates real `Algebra<T>` instances and registers their native operations in the existing `MathTool`. It includes N, Z, Q, Q(i), Boolean, Q^2, Mat2(Q), Vec(Q), Mat(Q), Affine(Q), Q[x], Q(x), S3, Z/6Z, finite sets of integers, rational samples, finite integer probability measures, finite simplicial complexes, finite integer relations/functions, finite categories/functors/natural transformations, and F5 (named Z/5Z). Each construction owns its algebra instances; separate tools do not share mutable registrations.
+`new ConcreteMathematics()` creates real `Algebra<T>` instances and registers their native operations in the existing `MathTool`. It includes N, Z, Q, Q(i), Boolean, Q^2, Mat2(Q), Vec(Q), Mat(Q), Affine(Q), Tensor(Q), Q[x], Q(x), S3, Z/6Z, finite sets of integers, rational samples, finite integer probability measures, finite simplicial complexes, finite integer relations/functions, finite categories/functors/natural transformations, and F5 (named Z/5Z). Each construction owns its algebra instances; separate tools do not share mutable registrations.
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
@@ -61,6 +61,7 @@ List<String> values = math.flow(math.naturals,
 | RationalVectorFamily / Vec(Q) | partial add, subtract, dot -> Q | negate; dimension -> N; flat entries -> Q; zero-like | scale by Q; fixed-carrier conversions; empty vector constant |
 | RationalMatrixFamily / Mat(Q) | partial add, subtract, multiply; equal -> Boolean | transpose, RREF, pseudoinverse, row/column projectors; rank/nullity -> N; flat pivot columns -> N; flat nullspace/row-space/column-space bases -> Vec(Q); rows, columns, shape counts | scale by Q; apply/project-column/least-squares-minimum-norm/least-squares-residual -> Vec(Q); least-squares-error -> Q; fixed-carrier conversions; zero-like; partial inverse/determinant/trace |
 | RationalAffineSpaceAlgebra / Affine(Q) | equal -> Boolean | particular/minimum-norm -> Vec(Q); flat directions -> Vec(Q); dimension/ambient-dimension -> N; is-empty/is-unique | solve/least-squares Mat(Q) x Vec(Q) -> Affine(Q); contains -> Boolean; at/closest-point -> Vec(Q) |
+| RationalTensorAlgebra / Tensor(Q) | add, subtract, Hadamard and tensor products; dot -> Q; equal -> Boolean | negate; order/size -> N; flat shape -> N; flat entries -> Q; norm-squared -> Q; zero-like | scale by Q; axis-pair swap/contraction; scalar/vector/matrix conversions; tensor-product unit |
 | RationalPolynomialRing / Q[x] | add, subtract, multiply | negate, derivative | derivative-order with N; evaluate at Q -> Q; primitive/integrate; iterate and flat orbit with Pair(Q,N) |
 
 Each algebra registers zero/one constants where applicable on Unit with qualified names such as `Q.zero`, `Z.one`, `Mat2(Q).one`. Vector spaces have zero. Constants are Unit -> carrier transfers.
@@ -102,7 +103,7 @@ See [ConcreteAlgebrasTest](../groupimp/src/test/java/mathematics/ConcreteAlgebra
 Same-algebra unary flat operations use `IOneOperandFlatOperation` and `performOneOperandFlatOperation(name)` (or `performFlatOperation(name)`). Finite-set `subsets` is an example. Cross-algebra unary flat operations use the existing `ITransferFlatOperation`, whose return type is corrected to `List<IAlgebraItem<V>>`; `elements` transfers a finite set to its member algebra. Empty results remain valid, and every emitted member keeps its target algebra.
 
 
-The default initializer currently installs 28 algebras and 417 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
+The default initializer currently installs 29 algebras and 440 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
 
 For overloaded custom-member and unsafe operations, the most specific compatible second-operand class is selected (exact matches take priority). Re-registering the same second class replaces that overload. Ambiguous supertypes are rejected. Mathematical domains sharing one Java class need distinct operation names; overload selection does not infer a domain from a value.
 
@@ -154,6 +155,30 @@ List<String> minimum = math.flow(math.rectangularMatrices, Collections.singleton
 For any nonempty Affine(Q) member, `closest-point` projects a Vec(Q) point of the same ambient dimension onto the affine set. `minimum-norm` projects zero onto it; this point can differ from the canonical free-zero `particular`. Both operations are undefined on an empty set. A singleton projects every compatible point to its sole member; projection onto the full ambient space returns the input.
 
 NativeLeastSquaresTest checks the four Moore-Penrose equations, projector symmetry/idempotence, transpose compatibility, residual orthogonality and minimum-norm identities for all 729 ternary matrices of shape 2 by 3 and their transposes. It also checks known rank-three and square cases, zero matrices, closest-point distance identities, large exact coefficients, wrapper identity, incompatible dimensions and serialized native flows.
+
+## Rational coordinate tensors
+
+`math.tensors` registers Tensor(Q) using immutable `RationalTensor` members with ordered shapes and row-major entries (last axis varying fastest). A scalar has shape `[]` and one entry; a vector has one axis; a matrix has two. `order` reports the number of axes, not tensor decomposition rank. Zero-sized axes are supported and retained, with zero stored entries. Shape-sensitive addition, subtraction, Hadamard multiplication and dot product require identical ordered shapes.
+
+`tensor-product` concatenates operand shapes and multiplies coordinates. The scalar tensor one is its identity. `swap-axes` exchanges two zero-based axes, including their dimensions. `contract` sums entries with equal coordinates on two distinct, equal-sized axes and removes those axes, keeping the others in order. This uses the standard coordinate pairing; no covariant/contravariant axis labels or arbitrary metric are inferred. These coordinate conventions agree with [SymPy's array operations](https://docs.sympy.org/latest/modules/tensor/array.html). Contracting a square matrix tensor yields its trace, while tensor product followed by contraction reproduces matrix multiplication.
+
+Axis operations use the native ICustomMemberOperation interface with a `Pair<BigInteger,BigInteger>` in the supporting NxN.tensor-axes carrier. For example, using the matrix from the rectangular example:
+
+~~~java
+List<String> trace = math.flow(math.rectangularMatrices, Collections.singletonList(matrix))
+        .<RationalTensor>performAlgebraTransfer("Tensor(Q).from-matrix")
+        .performOperation("tensor-product", RationalTensor.fromMatrix(matrix.transpose()))
+        .performCustomMemberOperation("contract", new Pair<>(BigInteger.ONE, BigInteger.valueOf(2)))
+        .<RationalMatrix>performAlgebraTransfer("to-matrix")
+        .<Rational>performAlgebraTransfer("trace")
+        .collect(); // ["70"]
+~~~
+
+`from-scalar`, `from-vector` and `from-matrix` transfers are qualified on their source carriers. Reverse transfers check tensor order; conversion to Mat(Q) also requires positive dimensions. An empty vector converts to and from shape `[0]`. Scalar tensor shape `[]` remains distinct from shape `[1]`. Flat `shape` and `entries` transfers preserve axis or coordinate order; `norm-squared` returns an exact rational squared coordinate norm.
+
+Dense construction and results are capped at order 32 and 1,000,000 entries. Exceeding either cap raises IMPLEMENTATION_FAILURE, distinct from OPERATION_UNDEFINED for incompatible shapes or axes. Contracting two zero-sized axes yields an empty sum of zero for every remaining coordinate, and the resulting shape is subject to the same cap. Sparse tensors, basis-independent variance contracts and tensor bundles remain outside this implementation.
+
+NativeTensorTest compares product/contraction against independent coordinate sums for all 6,561 pairs of ternary 2 by 2 matrices. It also checks nonadjacent axis operations, associativity/bilinearity, shape-preserving empty tensors, order-zero scalars, immutability, resource limits, actual carrier wrappers and serialized flows from matrices through tensors back to vectors and scalars.
 
 ## Finite topology through the existing flow API
 

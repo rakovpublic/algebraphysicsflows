@@ -26517,6 +26517,70 @@
       "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
     },
     {
+      "id": "concrete-algebra.RationalTensorAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTensorAlgebra",
+      "concept": "RationalTensorAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "Tensor(Q)",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Every axis dimension is nonnegative, scalar order is zero, coordinates are immutable and row-major, and entry count equals the shape product with the empty product equal to one."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTensorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense materialization is capped at order 32 and 1000000 entries per tensor; exceeding a cap raises IMPLEMENTATION_FAILURE, not mathematical nonexistence. Removing zero axes by contraction can exceed the result materialization cap.",
+        "Standard coordinate spaces and coordinate contraction only; no covariant/contravariant axis labels, arbitrary metrics, basis-change witnesses, sparse storage or tensor bundles."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/tensor/array.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
       "id": "concrete-algebra.RationalVectorFamily",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "RationalVectorFamily",
@@ -35585,6 +35649,1640 @@
       "runtime_operation_id": "Affine(Q).minimum-norm",
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "minimum-norm",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Tensor(Q).add",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTensorAlgebra",
+      "concept": "Tensor(Q).add",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Tensor(Q)",
+      "domain_B": "Tensor(Q)",
+      "domain_C": "Tensor(Q)",
+      "operation_signature": "Tensor(Q) x Tensor(Q) -> Tensor(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).add",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Both tensors have exactly the same ordered shape; add coordinatewise.",
+        "Every axis dimension is nonnegative, scalar order is zero, coordinates are immutable and row-major, and entry count equals the shape product with the empty product equal to one."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTensorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense materialization is capped at order 32 and 1000000 entries per tensor; exceeding a cap raises IMPLEMENTATION_FAILURE, not mathematical nonexistence. Removing zero axes by contraction can exceed the result materialization cap.",
+        "Standard coordinate spaces and coordinate contraction only; no covariant/contravariant axis labels, arbitrary metrics, basis-change witnesses, sparse storage or tensor bundles."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/tensor/array.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Tensor(Q).add",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "add",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.Tensor(Q).subtract",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTensorAlgebra",
+      "concept": "Tensor(Q).subtract",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Tensor(Q)",
+      "domain_B": "Tensor(Q)",
+      "domain_C": "Tensor(Q)",
+      "operation_signature": "Tensor(Q) x Tensor(Q) -> Tensor(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).subtract",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Both tensors have exactly the same ordered shape; subtract coordinatewise.",
+        "Every axis dimension is nonnegative, scalar order is zero, coordinates are immutable and row-major, and entry count equals the shape product with the empty product equal to one."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTensorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense materialization is capped at order 32 and 1000000 entries per tensor; exceeding a cap raises IMPLEMENTATION_FAILURE, not mathematical nonexistence. Removing zero axes by contraction can exceed the result materialization cap.",
+        "Standard coordinate spaces and coordinate contraction only; no covariant/contravariant axis labels, arbitrary metrics, basis-change witnesses, sparse storage or tensor bundles."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/tensor/array.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Tensor(Q).subtract",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "subtract",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.Tensor(Q).hadamard",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTensorAlgebra",
+      "concept": "Tensor(Q).hadamard",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Tensor(Q)",
+      "domain_B": "Tensor(Q)",
+      "domain_C": "Tensor(Q)",
+      "operation_signature": "Tensor(Q) x Tensor(Q) -> Tensor(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).hadamard",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Both tensors have exactly the same ordered shape; multiply coordinatewise, retaining shape.",
+        "Every axis dimension is nonnegative, scalar order is zero, coordinates are immutable and row-major, and entry count equals the shape product with the empty product equal to one."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTensorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense materialization is capped at order 32 and 1000000 entries per tensor; exceeding a cap raises IMPLEMENTATION_FAILURE, not mathematical nonexistence. Removing zero axes by contraction can exceed the result materialization cap.",
+        "Standard coordinate spaces and coordinate contraction only; no covariant/contravariant axis labels, arbitrary metrics, basis-change witnesses, sparse storage or tensor bundles."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/tensor/array.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Tensor(Q).hadamard",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "hadamard",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.Tensor(Q).tensor-product",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTensorAlgebra",
+      "concept": "Tensor(Q).tensor-product",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Tensor(Q)",
+      "domain_B": "Tensor(Q)",
+      "domain_C": "Tensor(Q)",
+      "operation_signature": "Tensor(Q) x Tensor(Q) -> Tensor(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).tensor-product",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Concatenate the first shape and second shape, multiplying entries in row-major order. Order-zero scalar tensors are allowed; the result remains subject to materialization caps.",
+        "Every axis dimension is nonnegative, scalar order is zero, coordinates are immutable and row-major, and entry count equals the shape product with the empty product equal to one."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTensorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense materialization is capped at order 32 and 1000000 entries per tensor; exceeding a cap raises IMPLEMENTATION_FAILURE, not mathematical nonexistence. Removing zero axes by contraction can exceed the result materialization cap.",
+        "Standard coordinate spaces and coordinate contraction only; no covariant/contravariant axis labels, arbitrary metrics, basis-change witnesses, sparse storage or tensor bundles."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/tensor/array.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Tensor(Q).tensor-product",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "tensor-product",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.Tensor(Q).negate",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTensorAlgebra",
+      "concept": "Tensor(Q).negate",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Tensor(Q)",
+      "domain_B": null,
+      "domain_C": "Tensor(Q)",
+      "operation_signature": "Tensor(Q) -> Tensor(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).negate",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Every axis dimension is nonnegative, scalar order is zero, coordinates are immutable and row-major, and entry count equals the shape product with the empty product equal to one."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTensorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense materialization is capped at order 32 and 1000000 entries per tensor; exceeding a cap raises IMPLEMENTATION_FAILURE, not mathematical nonexistence. Removing zero axes by contraction can exceed the result materialization cap.",
+        "Standard coordinate spaces and coordinate contraction only; no covariant/contravariant axis labels, arbitrary metrics, basis-change witnesses, sparse storage or tensor bundles."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/tensor/array.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Tensor(Q).negate",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "negate",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.Tensor(Q).scale",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTensorAlgebra",
+      "concept": "Tensor(Q).scale",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Tensor(Q)",
+      "domain_B": "Q",
+      "domain_C": "Tensor(Q)",
+      "operation_signature": "Tensor(Q) x Q -> Tensor(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).scale",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Multiply every rational entry by the scalar, retaining the full shape including zero axes.",
+        "Every axis dimension is nonnegative, scalar order is zero, coordinates are immutable and row-major, and entry count equals the shape product with the empty product equal to one."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTensorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense materialization is capped at order 32 and 1000000 entries per tensor; exceeding a cap raises IMPLEMENTATION_FAILURE, not mathematical nonexistence. Removing zero axes by contraction can exceed the result materialization cap.",
+        "Standard coordinate spaces and coordinate contraction only; no covariant/contravariant axis labels, arbitrary metrics, basis-change witnesses, sparse storage or tensor bundles."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/tensor/array.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Tensor(Q).scale",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "scale",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.Tensor(Q).order",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTensorAlgebra",
+      "concept": "Tensor(Q).order",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Tensor(Q)",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "Tensor(Q) -> N",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).order",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the number of axes, not tensor decomposition rank or matrix rank; scalar tensors have order zero.",
+        "Every axis dimension is nonnegative, scalar order is zero, coordinates are immutable and row-major, and entry count equals the shape product with the empty product equal to one."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTensorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense materialization is capped at order 32 and 1000000 entries per tensor; exceeding a cap raises IMPLEMENTATION_FAILURE, not mathematical nonexistence. Removing zero axes by contraction can exceed the result materialization cap.",
+        "Standard coordinate spaces and coordinate contraction only; no covariant/contravariant axis labels, arbitrary metrics, basis-change witnesses, sparse storage or tensor bundles."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/tensor/array.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Tensor(Q).order",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "order",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Tensor(Q).size",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTensorAlgebra",
+      "concept": "Tensor(Q).size",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Tensor(Q)",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "Tensor(Q) -> N",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).size",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the product of axis dimensions; any zero axis makes size zero, while scalar tensors have one entry.",
+        "Every axis dimension is nonnegative, scalar order is zero, coordinates are immutable and row-major, and entry count equals the shape product with the empty product equal to one."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTensorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense materialization is capped at order 32 and 1000000 entries per tensor; exceeding a cap raises IMPLEMENTATION_FAILURE, not mathematical nonexistence. Removing zero axes by contraction can exceed the result materialization cap.",
+        "Standard coordinate spaces and coordinate contraction only; no covariant/contravariant axis labels, arbitrary metrics, basis-change witnesses, sparse storage or tensor bundles."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/tensor/array.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Tensor(Q).size",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "size",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Tensor(Q).shape",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTensorAlgebra",
+      "concept": "Tensor(Q).shape",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Tensor(Q)",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "Tensor(Q) -> List(N)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).shape",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit axis dimensions in their stored order, retaining repetitions and zeros; scalar tensors emit an empty list.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Every axis dimension is nonnegative, scalar order is zero, coordinates are immutable and row-major, and entry count equals the shape product with the empty product equal to one."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTensorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense materialization is capped at order 32 and 1000000 entries per tensor; exceeding a cap raises IMPLEMENTATION_FAILURE, not mathematical nonexistence. Removing zero axes by contraction can exceed the result materialization cap.",
+        "Standard coordinate spaces and coordinate contraction only; no covariant/contravariant axis labels, arbitrary metrics, basis-change witnesses, sparse storage or tensor bundles."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/tensor/array.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Tensor(Q).shape",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "shape",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.Tensor(Q).entries",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTensorAlgebra",
+      "concept": "Tensor(Q).entries",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Tensor(Q)",
+      "domain_B": null,
+      "domain_C": "Q",
+      "operation_signature": "Tensor(Q) -> List(Q)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).entries",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit exact coordinates in row-major order with the final axis varying fastest; zero-sized tensors emit no entries.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Every axis dimension is nonnegative, scalar order is zero, coordinates are immutable and row-major, and entry count equals the shape product with the empty product equal to one."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTensorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense materialization is capped at order 32 and 1000000 entries per tensor; exceeding a cap raises IMPLEMENTATION_FAILURE, not mathematical nonexistence. Removing zero axes by contraction can exceed the result materialization cap.",
+        "Standard coordinate spaces and coordinate contraction only; no covariant/contravariant axis labels, arbitrary metrics, basis-change witnesses, sparse storage or tensor bundles."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/tensor/array.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Tensor(Q).entries",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "entries",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.Tensor(Q).norm-squared",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTensorAlgebra",
+      "concept": "Tensor(Q).norm-squared",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Tensor(Q)",
+      "domain_B": null,
+      "domain_C": "Q",
+      "operation_signature": "Tensor(Q) -> Q",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).norm-squared",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the sum of squared rational coordinates in the standard coordinate inner product, not a square root.",
+        "Every axis dimension is nonnegative, scalar order is zero, coordinates are immutable and row-major, and entry count equals the shape product with the empty product equal to one."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTensorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense materialization is capped at order 32 and 1000000 entries per tensor; exceeding a cap raises IMPLEMENTATION_FAILURE, not mathematical nonexistence. Removing zero axes by contraction can exceed the result materialization cap.",
+        "Standard coordinate spaces and coordinate contraction only; no covariant/contravariant axis labels, arbitrary metrics, basis-change witnesses, sparse storage or tensor bundles."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/tensor/array.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Tensor(Q).norm-squared",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "norm-squared",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Tensor(Q).dot",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTensorAlgebra",
+      "concept": "Tensor(Q).dot",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Tensor(Q)",
+      "domain_B": "Tensor(Q)",
+      "domain_C": "Q",
+      "operation_signature": "Tensor(Q) x Tensor(Q) -> Q",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).dot",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Both tensors have exactly the same ordered shape; sum coordinatewise products in the standard coordinate inner product.",
+        "Every axis dimension is nonnegative, scalar order is zero, coordinates are immutable and row-major, and entry count equals the shape product with the empty product equal to one."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTensorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense materialization is capped at order 32 and 1000000 entries per tensor; exceeding a cap raises IMPLEMENTATION_FAILURE, not mathematical nonexistence. Removing zero axes by contraction can exceed the result materialization cap.",
+        "Standard coordinate spaces and coordinate contraction only; no covariant/contravariant axis labels, arbitrary metrics, basis-change witnesses, sparse storage or tensor bundles."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/tensor/array.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Tensor(Q).dot",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "dot",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.Tensor(Q).equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTensorAlgebra",
+      "concept": "Tensor(Q).equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Tensor(Q)",
+      "domain_B": "Tensor(Q)",
+      "domain_C": "Boolean",
+      "operation_signature": "Tensor(Q) x Tensor(Q) -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Equality includes ordered shape and every coordinate; a scalar and a singleton-axis tensor are distinct.",
+        "Every axis dimension is nonnegative, scalar order is zero, coordinates are immutable and row-major, and entry count equals the shape product with the empty product equal to one."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTensorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense materialization is capped at order 32 and 1000000 entries per tensor; exceeding a cap raises IMPLEMENTATION_FAILURE, not mathematical nonexistence. Removing zero axes by contraction can exceed the result materialization cap.",
+        "Standard coordinate spaces and coordinate contraction only; no covariant/contravariant axis labels, arbitrary metrics, basis-change witnesses, sparse storage or tensor bundles."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/tensor/array.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Tensor(Q).equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.Tensor(Q).swap-axes",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTensorAlgebra",
+      "concept": "Tensor(Q).swap-axes",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Tensor(Q)",
+      "domain_B": "NxN.tensor-axes",
+      "domain_C": "Tensor(Q)",
+      "operation_signature": "Tensor(Q) x NxN.tensor-axes -> Tensor(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).swap-axes",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Both zero-based axis indices must exist. Exchange their dimensions and coordinates; equal indices leave the tensor unchanged.",
+        "Every axis dimension is nonnegative, scalar order is zero, coordinates are immutable and row-major, and entry count equals the shape product with the empty product equal to one."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTensorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense materialization is capped at order 32 and 1000000 entries per tensor; exceeding a cap raises IMPLEMENTATION_FAILURE, not mathematical nonexistence. Removing zero axes by contraction can exceed the result materialization cap.",
+        "Standard coordinate spaces and coordinate contraction only; no covariant/contravariant axis labels, arbitrary metrics, basis-change witnesses, sparse storage or tensor bundles."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/tensor/array.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Tensor(Q).swap-axes",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "swap-axes",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.Tensor(Q).contract",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTensorAlgebra",
+      "concept": "Tensor(Q).contract",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Tensor(Q)",
+      "domain_B": "NxN.tensor-axes",
+      "domain_C": "Tensor(Q)",
+      "operation_signature": "Tensor(Q) x NxN.tensor-axes -> Tensor(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).contract",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The zero-based axis indices must be distinct, present and equal-sized. Sum over equal coordinates of these axes and retain other axes in order; contracting two zero-sized axes yields zeros in the remaining shape.",
+        "Every axis dimension is nonnegative, scalar order is zero, coordinates are immutable and row-major, and entry count equals the shape product with the empty product equal to one."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTensorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense materialization is capped at order 32 and 1000000 entries per tensor; exceeding a cap raises IMPLEMENTATION_FAILURE, not mathematical nonexistence. Removing zero axes by contraction can exceed the result materialization cap.",
+        "Standard coordinate spaces and coordinate contraction only; no covariant/contravariant axis labels, arbitrary metrics, basis-change witnesses, sparse storage or tensor bundles."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/tensor/array.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Tensor(Q).contract",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "contract",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.Tensor(Q).from-scalar",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTensorAlgebra",
+      "concept": "Tensor(Q).from-scalar",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q",
+      "domain_B": null,
+      "domain_C": "Tensor(Q)",
+      "operation_signature": "Q -> Tensor(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).from-scalar",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed the rational as an order-zero tensor with exactly one entry.",
+        "Every axis dimension is nonnegative, scalar order is zero, coordinates are immutable and row-major, and entry count equals the shape product with the empty product equal to one."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTensorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense materialization is capped at order 32 and 1000000 entries per tensor; exceeding a cap raises IMPLEMENTATION_FAILURE, not mathematical nonexistence. Removing zero axes by contraction can exceed the result materialization cap.",
+        "Standard coordinate spaces and coordinate contraction only; no covariant/contravariant axis labels, arbitrary metrics, basis-change witnesses, sparse storage or tensor bundles."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/tensor/array.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Tensor(Q).from-scalar",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "Tensor(Q).from-scalar",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Tensor(Q).to-scalar",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTensorAlgebra",
+      "concept": "Tensor(Q).to-scalar",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Tensor(Q)",
+      "domain_B": null,
+      "domain_C": "Q",
+      "operation_signature": "Tensor(Q) -> Q",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).to-scalar",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The tensor must have order zero; a singleton-axis tensor is not a scalar tensor.",
+        "Every axis dimension is nonnegative, scalar order is zero, coordinates are immutable and row-major, and entry count equals the shape product with the empty product equal to one."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTensorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense materialization is capped at order 32 and 1000000 entries per tensor; exceeding a cap raises IMPLEMENTATION_FAILURE, not mathematical nonexistence. Removing zero axes by contraction can exceed the result materialization cap.",
+        "Standard coordinate spaces and coordinate contraction only; no covariant/contravariant axis labels, arbitrary metrics, basis-change witnesses, sparse storage or tensor bundles."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/tensor/array.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Tensor(Q).to-scalar",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-scalar",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Tensor(Q).from-vector",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTensorAlgebra",
+      "concept": "Tensor(Q).from-vector",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Vec(Q)",
+      "domain_B": null,
+      "domain_C": "Tensor(Q)",
+      "operation_signature": "Vec(Q) -> Tensor(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).from-vector",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed a finite rational vector as an order-one tensor, including an empty vector as shape [0].",
+        "Every axis dimension is nonnegative, scalar order is zero, coordinates are immutable and row-major, and entry count equals the shape product with the empty product equal to one."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTensorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense materialization is capped at order 32 and 1000000 entries per tensor; exceeding a cap raises IMPLEMENTATION_FAILURE, not mathematical nonexistence. Removing zero axes by contraction can exceed the result materialization cap.",
+        "Standard coordinate spaces and coordinate contraction only; no covariant/contravariant axis labels, arbitrary metrics, basis-change witnesses, sparse storage or tensor bundles."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/tensor/array.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Tensor(Q).from-vector",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "Tensor(Q).from-vector",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Tensor(Q).to-vector",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTensorAlgebra",
+      "concept": "Tensor(Q).to-vector",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Tensor(Q)",
+      "domain_B": null,
+      "domain_C": "Vec(Q)",
+      "operation_signature": "Tensor(Q) -> Vec(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).to-vector",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The tensor must have order one; retain the axis length, including zero.",
+        "Every axis dimension is nonnegative, scalar order is zero, coordinates are immutable and row-major, and entry count equals the shape product with the empty product equal to one."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTensorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense materialization is capped at order 32 and 1000000 entries per tensor; exceeding a cap raises IMPLEMENTATION_FAILURE, not mathematical nonexistence. Removing zero axes by contraction can exceed the result materialization cap.",
+        "Standard coordinate spaces and coordinate contraction only; no covariant/contravariant axis labels, arbitrary metrics, basis-change witnesses, sparse storage or tensor bundles."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/tensor/array.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Tensor(Q).to-vector",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-vector",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Tensor(Q).from-matrix",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTensorAlgebra",
+      "concept": "Tensor(Q).from-matrix",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Q)",
+      "domain_B": null,
+      "domain_C": "Tensor(Q)",
+      "operation_signature": "Mat(Q) -> Tensor(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).from-matrix",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed the positive rectangular matrix as an order-two tensor with row-major coordinates.",
+        "Every axis dimension is nonnegative, scalar order is zero, coordinates are immutable and row-major, and entry count equals the shape product with the empty product equal to one."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTensorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense materialization is capped at order 32 and 1000000 entries per tensor; exceeding a cap raises IMPLEMENTATION_FAILURE, not mathematical nonexistence. Removing zero axes by contraction can exceed the result materialization cap.",
+        "Standard coordinate spaces and coordinate contraction only; no covariant/contravariant axis labels, arbitrary metrics, basis-change witnesses, sparse storage or tensor bundles."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/tensor/array.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Tensor(Q).from-matrix",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "Tensor(Q).from-matrix",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Tensor(Q).to-matrix",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTensorAlgebra",
+      "concept": "Tensor(Q).to-matrix",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Tensor(Q)",
+      "domain_B": null,
+      "domain_C": "Mat(Q)",
+      "operation_signature": "Tensor(Q) -> Mat(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).to-matrix",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The tensor must have order two and both dimensions positive, matching the existing matrix representation.",
+        "Every axis dimension is nonnegative, scalar order is zero, coordinates are immutable and row-major, and entry count equals the shape product with the empty product equal to one."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTensorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense materialization is capped at order 32 and 1000000 entries per tensor; exceeding a cap raises IMPLEMENTATION_FAILURE, not mathematical nonexistence. Removing zero axes by contraction can exceed the result materialization cap.",
+        "Standard coordinate spaces and coordinate contraction only; no covariant/contravariant axis labels, arbitrary metrics, basis-change witnesses, sparse storage or tensor bundles."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/tensor/array.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Tensor(Q).to-matrix",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-matrix",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Tensor(Q).zero-like",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTensorAlgebra",
+      "concept": "Tensor(Q).zero-like",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Tensor(Q)",
+      "domain_B": null,
+      "domain_C": "Tensor(Q)",
+      "operation_signature": "Tensor(Q) -> Tensor(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).zero-like",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Replace every coordinate with zero, retaining the exact ordered shape.",
+        "Every axis dimension is nonnegative, scalar order is zero, coordinates are immutable and row-major, and entry count equals the shape product with the empty product equal to one."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTensorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense materialization is capped at order 32 and 1000000 entries per tensor; exceeding a cap raises IMPLEMENTATION_FAILURE, not mathematical nonexistence. Removing zero axes by contraction can exceed the result materialization cap.",
+        "Standard coordinate spaces and coordinate contraction only; no covariant/contravariant axis labels, arbitrary metrics, basis-change witnesses, sparse storage or tensor bundles."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/tensor/array.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Tensor(Q).zero-like",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "zero-like",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.Tensor(Q).one",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTensorAlgebra",
+      "concept": "Tensor(Q).one",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "Tensor(Q)",
+      "operation_signature": "Unit -> Tensor(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).one",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The order-zero scalar tensor one is the identity for tensor product, not a matrix identity of every shape.",
+        "Every axis dimension is nonnegative, scalar order is zero, coordinates are immutable and row-major, and entry count equals the shape product with the empty product equal to one."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTensorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense materialization is capped at order 32 and 1000000 entries per tensor; exceeding a cap raises IMPLEMENTATION_FAILURE, not mathematical nonexistence. Removing zero axes by contraction can exceed the result materialization cap.",
+        "Standard coordinate spaces and coordinate contraction only; no covariant/contravariant axis labels, arbitrary metrics, basis-change witnesses, sparse storage or tensor bundles."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/tensor/array.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTensorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Tensor(Q).one",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "Tensor(Q).one",
       "legacy_operation_interface": "ITransferOperation"
     },
     {
@@ -55581,6 +57279,9 @@
         "S3.orbit",
         "S3.order",
         "Sample(Q).size",
+        "Tensor(Q).order",
+        "Tensor(Q).shape",
+        "Tensor(Q).size",
         "Vec(Q).dimension",
         "betti-F2"
       ],
@@ -55780,6 +57481,12 @@
         "Sample(Q).sample-covariance",
         "Sample(Q).sample-variance",
         "Sample(Q).scale",
+        "Tensor(Q).dot",
+        "Tensor(Q).entries",
+        "Tensor(Q).from-scalar",
+        "Tensor(Q).norm-squared",
+        "Tensor(Q).scale",
+        "Tensor(Q).to-scalar",
         "Vec(Q).dot",
         "Vec(Q).entries",
         "Vec(Q).scale",
@@ -56025,6 +57732,7 @@
         "Q.equal",
         "Q.greater",
         "S3.equal",
+        "Tensor(Q).equal",
         "Z.equal",
         "Z.greater",
         "Z/6Z.equal",
@@ -56088,6 +57796,7 @@
         "S3.elements",
         "S3.identity",
         "Sample(Q).empty",
+        "Tensor(Q).one",
         "Vec(Q).empty",
         "Z.one",
         "Z.zero",
@@ -57582,6 +59291,8 @@
         "Mat(Q).project-column",
         "Mat(Q).row-space-basis",
         "Mat(Q).rows",
+        "Tensor(Q).from-vector",
+        "Tensor(Q).to-vector",
         "Vec(Q).add",
         "Vec(Q).dimension",
         "Vec(Q).dot",
@@ -57665,7 +59376,9 @@
         "Mat(Q).to-fixed",
         "Mat(Q).trace",
         "Mat(Q).transpose",
-        "Mat(Q).zero-like"
+        "Mat(Q).zero-like",
+        "Tensor(Q).from-matrix",
+        "Tensor(Q).to-matrix"
       ],
       "invariants": [
         "Positive row and column counts",
@@ -57723,6 +59436,105 @@
         "Retained positive ambient dimension",
         "Empty set or canonical particular point and ordered independent kernel basis",
         "Every parameter tuple determines exactly one solution"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-23"
+      }
+    },
+    {
+      "id": "Tensor(Q)",
+      "name": "Finite rational coordinate tensors",
+      "description": "Finite rational coordinate tensors",
+      "member_representation": "mathematics.linear.RationalTensor",
+      "membership_rules": [
+        "Ordered nonnegative axis dimensions",
+        "Row-major rational coordinates with checked shape product",
+        "Order-zero scalars have one entry; zero-sized axes have no entries"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "Q",
+        "Vec(Q)",
+        "Mat(Q)",
+        "N",
+        "NxN.tensor-axes"
+      ],
+      "supported_operations": [
+        "Tensor(Q).add",
+        "Tensor(Q).contract",
+        "Tensor(Q).dot",
+        "Tensor(Q).entries",
+        "Tensor(Q).equal",
+        "Tensor(Q).from-matrix",
+        "Tensor(Q).from-scalar",
+        "Tensor(Q).from-vector",
+        "Tensor(Q).hadamard",
+        "Tensor(Q).negate",
+        "Tensor(Q).norm-squared",
+        "Tensor(Q).one",
+        "Tensor(Q).order",
+        "Tensor(Q).scale",
+        "Tensor(Q).shape",
+        "Tensor(Q).size",
+        "Tensor(Q).subtract",
+        "Tensor(Q).swap-axes",
+        "Tensor(Q).tensor-product",
+        "Tensor(Q).to-matrix",
+        "Tensor(Q).to-scalar",
+        "Tensor(Q).to-vector",
+        "Tensor(Q).zero-like"
+      ],
+      "invariants": [
+        "Ordered nonnegative axis dimensions",
+        "Row-major rational coordinates with checked shape product",
+        "Order-zero scalars have one entry; zero-sized axes have no entries"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-23"
+      }
+    },
+    {
+      "id": "NxN.tensor-axes",
+      "name": "Ordered tensor axis pair",
+      "description": "Ordered tensor axis pair",
+      "member_representation": "mathematics.foundations.Pair<BigInteger,BigInteger>",
+      "membership_rules": [
+        "Two nonnegative integer indices",
+        "Each operation checks existence and compatibility in the actual tensor shape"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "N"
+      ],
+      "supported_operations": [
+        "Tensor(Q).contract",
+        "Tensor(Q).swap-axes"
+      ],
+      "invariants": [
+        "Two nonnegative integer indices",
+        "Each operation checks existence and compatibility in the actual tensor shape"
       ],
       "references": [
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
