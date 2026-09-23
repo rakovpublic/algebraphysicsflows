@@ -57,6 +57,12 @@ public final class RationalMatrixFamily extends ConcreteAlgebra<RationalMatrix> 
         law("The rational pseudoinverse satisfies all four Moore-Penrose equations in the standard Euclidean inner products, including rank-zero matrices.");
         law("Least-squares residual means b minus A*x; it is perpendicular to every column, and the minimum-norm minimizer is perpendicular to the kernel.");
     }
+    public RationalMatrixFamily(RationalField rationals,RationalVectorFamily vectors,NaturalSemiring naturals,
+                                BooleanAlgebra truth,RationalMatrixAlgebra fixed,RationalPolynomialRing polynomials) {
+        this(rationals,vectors,naturals,truth,fixed);
+        MatrixSpectralOperations.install(this,vectors.algebra(),rationals,polynomials,naturals,truth,true);
+        unary("companion",polynomials.algebra(),algebra(),true,RationalMatrix::companion);
+    }
     private static RationalMatrix same(RationalMatrix a,RationalMatrix b) {
         if(a.rows()!=b.rows() || a.columns()!=b.columns()) throw MathFailure.undefined("Matrix shapes must agree"); return a;
     }

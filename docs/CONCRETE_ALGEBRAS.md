@@ -63,13 +63,13 @@ List<String> values = math.flow(math.naturals,
 | RationalComplexField / Q(i) | add, subtract, multiply, divide | negate, conjugate, norm-squared -> Q | Q(i).embed-rational on Q -> Q(i) |
 | RationalQuaternionAlgebra / H(Q) | add, subtract, Hamilton multiply, left/right division; equal/same-rotation -> Boolean | negate, conjugate, inverse; norm-squared/real-part -> Q; imaginary-part -> Vec(Q); flat components -> Q | rational/complex embeddings; pure vector conversions; rotations -> Vec(Q); exact rotation matrix conversions; zero/one/i/j/k |
 | RationalVectorSpace / Q^n | add, subtract | negate | scale by Q -> Q^n; dot -> Q; flat scale-flat and scale-signs |
-| RationalMatrixAlgebra / Matn(Q) | add, subtract, multiply | negate, transpose, inverse, determinant -> Q, trace -> Q, rank -> N | scale by Q; apply to Q^n; solve with nonsingular matrix |
+| RationalMatrixAlgebra / Matn(Q) | add, subtract, multiply | negate, transpose, inverse, determinant -> Q, trace -> Q, rank -> N; characteristic/minimal polynomials; flat rational eigenvalues and diagonalization | scale by Q; apply to Q^n; solve with nonsingular matrix; polynomial evaluation; natural powers; ordinary/generalized eigenspace bases and eigenvalue multiplicity |
 | RationalVectorFamily / Vec(Q) | partial add, subtract, dot -> Q | negate; dimension -> N; flat entries -> Q; zero-like | scale by Q; fixed-carrier conversions; empty vector constant |
-| RationalMatrixFamily / Mat(Q) | partial add, subtract, multiply; equal -> Boolean | transpose, RREF, pseudoinverse, row/column projectors; rank/nullity -> N; flat pivot columns -> N; flat nullspace/row-space/column-space bases -> Vec(Q); rows, columns, shape counts | scale by Q; apply/project-column/least-squares-minimum-norm/least-squares-residual -> Vec(Q); least-squares-error -> Q; fixed-carrier conversions; zero-like; partial inverse/determinant/trace |
+| RationalMatrixFamily / Mat(Q) | partial add, subtract, multiply; equal -> Boolean | transpose, RREF, pseudoinverse, row/column projectors; rank/nullity -> N; flat pivot columns and linear-space bases; rows, columns, shape counts; characteristic/minimal polynomials; rational spectra and diagonalization | scale; apply/project-column/least-squares-minimum-norm/least-squares-residual -> Vec(Q); least-squares-error -> Q; fixed-carrier conversions; zero-like; square inverse/determinant/trace; matrix polynomial evaluation, powers, companion matrices, eigenspace bases and multiplicity |
 | RationalAffineSpaceAlgebra / Affine(Q) | equal -> Boolean | particular/minimum-norm -> Vec(Q); flat directions -> Vec(Q); dimension/ambient-dimension -> N; is-empty/is-unique | solve/least-squares Mat(Q) x Vec(Q) -> Affine(Q); contains -> Boolean; at/closest-point -> Vec(Q) |
 | RationalTensorAlgebra / Tensor(Q) | add, subtract, Hadamard and tensor products; dot -> Q; equal -> Boolean | negate; order/size -> N; flat shape -> N; flat entries -> Q; norm-squared -> Q; zero-like | scale by Q; axis-pair swap/contraction; scalar/vector/matrix conversions; tensor-product unit |
 | RationalExteriorAlgebra / Exterior(Q) | add, subtract, wedge; dot -> Q; equal -> Boolean | negate, grade involution, reverse, Hodge star; dimension/term count -> N; flat degrees/masks -> N, coefficients -> Q, terms -> Exterior(Q); scalar/vector transfers | scale; grade selection; vector insertion; induced matrix action; dimension-indexed zero/unit/volume |
-| RationalPolynomialRing / Q[x] | add, subtract, multiply | negate, derivative | derivative-order with N; evaluate at Q -> Q; primitive/integrate; iterate and flat orbit with Pair(Q,N) |
+| RationalPolynomialRing / Q[x] | add, subtract, multiply | negate, derivative; flat rational roots | derivative-order with N; evaluate at Q -> Q; primitive/integrate; iterate and flat orbit with Pair(Q,N); rational-root multiplicity -> N |
 
 Each algebra registers zero/one constants where applicable on Unit with qualified names such as `Q.zero`, `Z.one`, `Mat2(Q).one`. Vector spaces have zero. Constants are Unit -> carrier transfers.
 
@@ -110,7 +110,7 @@ See [ConcreteAlgebrasTest](../groupimp/src/test/java/mathematics/ConcreteAlgebra
 Same-algebra unary flat operations use `IOneOperandFlatOperation` and `performOneOperandFlatOperation(name)` (or `performFlatOperation(name)`). Finite-set `subsets` is an example. Cross-algebra unary flat operations use the existing `ITransferFlatOperation`, whose return type is corrected to `List<IAlgebraItem<V>>`; `elements` transfers a finite set to its member algebra. Empty results remain valid, and every emitted member keeps its target algebra.
 
 
-The default initializer currently installs 36 algebras and 619 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
+The default initializer currently installs 36 algebras and 644 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
 
 For overloaded custom-member and unsafe operations, the most specific compatible second-operand class is selected (exact matches take priority). Re-registering the same second class replaces that overload. Ambiguous supertypes are rejected. Mathematical domains sharing one Java class need distinct operation names; overload selection does not infer a domain from a value.
 
@@ -141,6 +141,38 @@ List<String> point = math.flow(math.rectangularMatrices, Collections.singletonLi
 The original fixed carriers remain available through `math.vectors` and `math.matrices`. Their `Vec(Q).from-fixed` and `Mat(Q).from-fixed` transfers embed values into the families; family `to-fixed` transfers require the configured fixed dimensions. These conversions use the actual registered Algebra instances.
 
 The reduction and solution conventions follow standard exact linear algebra, as documented by [SymPy's matrix API](https://docs.sympy.org/latest/modules/matrices/matrices.html); execution here is Java rational arithmetic. NativeRectangularLinearTest checks all 729 matrices of shape 2 by 3 with entries in {-1,0,1}, each with nine right-hand sides, using an independent minor-based rank oracle and substitution. It also checks empty, unique and infinite solutions, basis independence, large exact coefficients, canonical equality, shape failures and serialized native flows. Zero-sized matrices and sparse representations are not implemented.
+
+## Exact matrix polynomials and rational spectra
+
+Both `math.matrices` (fixed Matn(Q)) and `math.rectangularMatrices` (Mat(Q)) expose `characteristic-polynomial`, `minimal-polynomial`, `evaluate-polynomial`, natural `pow`, flat `rational-eigenvalues`, flat `eigenspace-basis` and `generalized-eigenspace-basis`, `eigenvalue-multiplicity`, `is-diagonalizable-over-q`, and unary flat `diagonalize-over-q`. The family operations require a square input. Characteristic and minimal polynomials transfer to the actual Q[x] algebra. Constants in matrix polynomial evaluation mean scalar identity matrices, and exponent zero returns identity even for a zero matrix.
+
+The characteristic polynomial uses the monic convention det(x*I-A). Exact Faddeev-LeVerrier recurrence computes it over Q. The minimal polynomial comes from the first linear dependence among I,A,...,A^n, with coefficient transformations retained during elimination. Both annihilate the matrix, and the minimal polynomial divides the characteristic polynomial. The Q[x] transfer `Mat(Q).companion` builds the column companion of a positive-degree polynomial, normalizing its leading coefficient; its characteristic and minimal polynomials are that monic normalization.
+
+`Q[x].rational-roots` emits distinct rational roots in ascending order. `root-multiplicity` returns the multiplicity of a supplied rational value, including zero for a nonroot. Both operations are undefined for the zero polynomial. Rational root search clears denominators and content, then uses exact integer trial division and the rational-root theorem. Irrational and nonreal roots remain represented in the polynomial and are excluded from the rational output list. No floating-point approximation or external CAS is used.
+
+`eigenspace-basis` computes ker(A-lambda*I); `generalized-eigenspace-basis` computes ker((A-lambda*I)^n). A rational non-eigenvalue produces empty bases and multiplicity zero. Bases follow ascending free-column order, with a unit free coordinate; they do not enumerate the entire eigenspace. The generalized basis is not a Jordan-chain decomposition. `diagonalize-over-q` requires a full rational eigenbasis and emits exactly two matrix wrappers, [P,D], with A*P=P*D. Columns of P are the canonical basis vectors grouped by increasing eigenvalue; D repeats each eigenvalue on the corresponding diagonal positions. A defective matrix or one with nonrational eigenvalues has no such rational diagonalization. These conventions follow [SymPy's matrix API](https://docs.sympy.org/latest/modules/matrices/matrices.html) and [Sage's matrix documentation](https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix2.html).
+
+~~~java
+RationalMatrix a = new RationalMatrix(new Rational[][] {
+        {Rational.of(2), Rational.ONE}, {Rational.ZERO, Rational.of(3)}});
+List<String> roots = math.flow(math.rectangularMatrices, Collections.singletonList(a))
+        .<Polynomial>performAlgebraTransfer("characteristic-polynomial")
+        .<Rational>performFlatAlgebraTransfer("rational-roots")
+        .collect(); // ["2", "3"]
+List<String> decomposition = math.flow(math.rectangularMatrices, Collections.singletonList(a))
+        .performOneOperandFlatOperation("diagonalize-over-q")
+        .collect(); // ["[[1, 1], [0, 1]]", "[[2, 0], [0, 3]]"]
+IAlgebraItem<RationalMatrix> evaluated = math.polynomials.algebra()
+        .buildAlgebraItem(new Polynomial(Rational.ONE, Rational.of(2), Rational.ONE))
+        .performLeftProjectionOperation("Mat(Q).evaluate-at-matrix", a);
+// (A+I)^2 = [[9, 7], [0, 16]], wrapped in math.rectangularMatrices.algebra().
+~~~
+
+`evaluate-polynomial` uses the original custom-member contract Mat x Q[x] -> Mat. The reverse `Mat(Q).evaluate-at-matrix` and `Matn(Q).evaluate-at-matrix`, registered on Q[x], use ILeftProjectionOperation and return the second matrix carrier's IAlgebraItem. Eigenspace bases use native mixed flat operations and return Vec(Q) or the configured Q^n wrappers. Existing constructor signatures remain available; ConcreteMathematics uses the constructors that install the spectral registrations.
+
+These new matrix operations accept square dimensions through 32. Polynomial evaluation and powers accept degree/exponent through 10000, with a shared 5000000-unit arithmetic budget for each matrix calculation. Rational root search and multiplicity accept polynomial degree through 64. Search allows 100000 trial divisions, 50000 divisors per coefficient, 100000 signed candidate pairs before deduplication, and 1000000 coefficient visits. Large coefficients can exhaust the search even for a quadratic; coefficient bit lengths are unbounded. Exhaustion raises IMPLEMENTATION_FAILURE, never a partial root list or false diagonalizability claim. These limits apply to the new operations, leaving the scope of prior matrix and polynomial operations unchanged.
+
+NativeSpectralLinearTest compares all 512 binary 3 by 3 characteristic polynomials with an independent permutation determinant, verifies minimality through independent matrix-power ranks, checks all 81 ternary 2 by 2 spectra against the quadratic formula, and checks 624 nonzero small polynomials with independent root and derivative evaluations. Further tests cover defective Jordan blocks, repeated eigenspaces, nonrational spectra, companion matrices, exact similarities, large coefficients, resource failures, wrapper identity and serialized scalar/flat flows.
 
 ## Exact least-squares and orthogonal projection
 

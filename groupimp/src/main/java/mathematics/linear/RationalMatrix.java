@@ -2,6 +2,8 @@ package mathematics.linear;
 
 import mathematics.core.MathFailure;
 import mathematics.numbers.Rational;
+import mathematics.calculus.Polynomial;
+import java.math.BigInteger;
 import java.io.Serializable;
 import java.util.*;
 
@@ -20,6 +22,21 @@ public final class RationalMatrix implements Serializable {
     }
     public int rows() { return rows; }
     public int columns() { return columns; }
+    /** Monic det(x*I-A), for a square matrix. */
+    public Polynomial characteristicPolynomial() { return RationalMatrixSpectral.characteristic(this); }
+    public Polynomial minimalPolynomial() { return RationalMatrixSpectral.minimal(this); }
+    public RationalMatrix evaluatePolynomial(Polynomial polynomial) { return RationalMatrixSpectral.evaluate(this,polynomial); }
+    public RationalMatrix pow(BigInteger exponent) { return RationalMatrixSpectral.power(this,exponent); }
+    public static RationalMatrix companion(Polynomial polynomial) { return RationalMatrixSpectral.companion(polynomial); }
+    /** Distinct rational eigenvalues, sorted; the list need not contain the entire complex spectrum. */
+    public List<Rational> rationalEigenvalues() { return RationalMatrixSpectral.eigenvalues(this); }
+    public int eigenvalueMultiplicity(Rational eigenvalue) { return RationalMatrixSpectral.multiplicity(this,eigenvalue); }
+    public List<RationalVector> eigenspace(Rational eigenvalue) { return RationalMatrixSpectral.eigenspace(this,eigenvalue,false); }
+    /** Kernel of (A-lambda*I)^n, including the zero subspace for a non-eigenvalue. */
+    public List<RationalVector> generalizedEigenspace(Rational eigenvalue) { return RationalMatrixSpectral.eigenspace(this,eigenvalue,true); }
+    public boolean isDiagonalizableOverRationals() { return RationalMatrixSpectral.diagonalizable(this); }
+    /** Emit [P,D], with eigenvectors in P's columns and A*P=P*D; requires a rational eigenbasis. */
+    public List<RationalMatrix> diagonalizeOverRationals() { return RationalMatrixSpectral.diagonalize(this); }
     public Rational get(int r,int c) { return entries[r][c]; }
     public RationalVector row(int index) { return new RationalVector(entries[index]); }
     public RationalVector column(int index) {

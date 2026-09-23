@@ -54,6 +54,10 @@ public final class RationalPolynomialRing extends ConcreteAlgebra<Polynomial> {
             return values;
         });
         law("Iteration applies the polynomial repeatedly; an orbit contains the initial value followed by each iterate.");
+        unaryFlat("rational-roots",algebra(),rationals.algebra(),true,Polynomial::rationalRoots);
+        binary("root-multiplicity",algebra(),rationals.algebra(),naturals.algebra(),true,
+                (p,q) -> BigInteger.valueOf(p.rootMultiplicity(q)));
+        law("Rational roots are emitted once in increasing order; multiplicity is separate. The zero polynomial has no finite root list or finite root multiplicity.");
     }
     private static int iterationCount(BigInteger steps) {
         if(steps.compareTo(BigInteger.valueOf(10000))>0)

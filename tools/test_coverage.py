@@ -134,6 +134,15 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("even for a zero chain", " ".join(records["PolynomialChain(Q).integrate"]["required_invariants"]))
         self.assertIn("degree -1", " ".join(records["PolynomialChain(Q).boundary"]["required_invariants"]))
         self.assertIn("shared work budget", " ".join(records["PolynomialChain(Q).pushforward"]["required_invariants"]))
+        self.assertIn("det(x*I-A)", " ".join(records["Mat(Q).characteristic-polynomial"]["required_invariants"]))
+        self.assertIn("least degree", " ".join(records["Mat2(Q).minimal-polynomial"]["required_invariants"]))
+        self.assertIn("second matrix carrier", " ".join(records["Mat(Q).evaluate-at-matrix"]["required_invariants"]))
+        self.assertIn("never false", " ".join(records["Mat(Q).is-diagonalizable-over-q"]["required_invariants"]))
+        self.assertIn("A*P=P*D", " ".join(records["Mat2(Q).diagonalize-over-q"]["required_invariants"]))
+        self.assertIn("not a Jordan chain", " ".join(records["Mat(Q).generalized-eigenspace-basis"]["required_invariants"]))
+        self.assertIn("5000000", " ".join(records["Mat(Q).minimal-polynomial"]["known_limitations"]))
+        self.assertIn("never a partial list", " ".join(records["Q[x].rational-roots"]["required_invariants"]))
+        self.assertIn("zero polynomial", " ".join(records["Q[x].root-multiplicity"]["required_invariants"]))
 
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)

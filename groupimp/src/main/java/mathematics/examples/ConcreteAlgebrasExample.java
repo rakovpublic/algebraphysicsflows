@@ -38,6 +38,11 @@ public final class ConcreteAlgebrasExample {
             return;
         }
         System.out.println("MathTool: "+math.mathTool.getName()+", concrete algebras: "+math.algebras().size()+", operations: "+math.operations().size());
+        RationalMatrix spectralMatrix=new RationalMatrix(new Rational[][]{{Rational.of(2),Rational.ONE},{Rational.ZERO,Rational.of(3)}});
+        System.out.println("Rational roots of the characteristic polynomial of [[2,1],[0,3]]: "+math.flow(math.rectangularMatrices,Collections.singletonList(spectralMatrix))
+                .<Polynomial>performAlgebraTransfer("characteristic-polynomial").<Rational>performFlatAlgebraTransfer("rational-roots").collect());
+        System.out.println("Rational diagonalization [P,D], A*P=P*D: "+math.flow(math.rectangularMatrices,Collections.singletonList(spectralMatrix))
+                .performOneOperandFlatOperation("diagonalize-over-q").collect());
         System.out.println("1/2 + 1/3 = "+math.rationals.algebra().buildAlgebraItem(Rational.of(1,2))
                 .performOperation("add",Rational.of(1,3)).perform().getResult());
         System.out.println("N -> Z -> Q: "+math.flow(math.naturals,Arrays.asList(BigInteger.ONE,BigInteger.valueOf(2)))

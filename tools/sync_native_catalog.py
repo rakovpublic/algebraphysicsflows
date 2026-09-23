@@ -551,6 +551,8 @@ OWNER_CONDITIONS = {
         "elements": "Emit all residue classes in increasing canonical representative order, within the resource cap.",
     },
     "RationalPolynomialRing": {
+        "rational-roots": "The polynomial is nonzero. Emit all distinct rational roots in increasing order; irrational and nonreal roots are excluded. Constants emit an empty list; search exhaustion raises IMPLEMENTATION_FAILURE, never a partial list.",
+        "root-multiplicity": "The polynomial is nonzero. Return the order of its zero at the rational argument, or zero for a nonroot. The zero polynomial has no finite root multiplicity.",
         "quotient": "The divisor is nonzero; return the Euclidean polynomial quotient over Q.",
         "remainder": "The divisor is nonzero; the Euclidean remainder has smaller degree than the divisor.",
         "quotient-remainder": "The divisor is nonzero; emit quotient then remainder with a = b*q + r and deg(r) < deg(b).",
@@ -575,6 +577,23 @@ OWNER_CONDITIONS = {
     },
 }
 
+SPECTRAL_CONDITIONS = {
+    "characteristic-polynomial": "The matrix is square. Return the monic polynomial det(x*I-A) over Q, including repeated factors; it annihilates A by Cayley-Hamilton.",
+    "minimal-polynomial": "The matrix is square. Return the monic annihilating polynomial of least degree. It divides the characteristic polynomial; repeated Jordan factors are retained.",
+    "evaluate-polynomial": "The matrix is square. Substitute A in the rational polynomial with constants interpreted as scalar identity matrices; return the first matrix carrier's wrapper.",
+    "evaluate-at-matrix": "The second operand is square. Substitute that matrix in the first polynomial, using scalar identity matrices for constants; return the second matrix carrier's IAlgebraItem wrapper.",
+    "rational-eigenvalues": "The matrix is square. Emit all distinct rational eigenvalues in increasing order, without multiplicities. This can be empty even when nonrational eigenvalues exist; resource exhaustion never emits an incomplete list.",
+    "eigenspace-basis": "The matrix is square. Emit a rational basis of ker(A-lambda*I) in ascending free-column order. A non-eigenvalue emits an empty list; this is a basis, not enumeration of all eigenvectors.",
+    "generalized-eigenspace-basis": "The matrix is square of dimension n. Emit a basis of ker((A-lambda*I)^n) in ascending free-column order. This is the full generalized eigenspace, not a Jordan chain; a non-eigenvalue emits an empty list.",
+    "eigenvalue-multiplicity": "The matrix is square. Return the algebraic multiplicity of the rational argument in det(x*I-A), including zero for a non-eigenvalue; this need not equal the ordinary eigenspace dimension.",
+    "is-diagonalizable-over-q": "The matrix is square. Return whether it has a full eigenbasis over Q. Irrational-only or defective spectra return false; resource exhaustion is IMPLEMENTATION_FAILURE, never false.",
+    "diagonalize-over-q": "The matrix is square and has a full rational eigenbasis. Emit exactly [P,D], with P invertible, D diagonal in ascending eigenvalue order and A*P=P*D. P's columns are canonical free-coordinate eigenvectors, without Euclidean normalization.",
+    "pow": "The matrix is square and the exponent is nonnegative. Compute the exact matrix power, including A^0=I for singular and zero matrices; exponent and arithmetic limits are implementation failures.",
+}
+for _matrix_owner in ("RationalMatrixAlgebra", "RationalMatrixFamily"):
+    OWNER_CONDITIONS.setdefault(_matrix_owner, {}).update(SPECTRAL_CONDITIONS)
+OWNER_CONDITIONS["RationalMatrixFamily"]["companion"] = "The polynomial has positive degree n. Return the n by n column companion matrix with subdiagonal ones and last column minus the lower coefficients divided by the leading coefficient; both characteristic and minimal polynomials equal its monic normalization."
+
 
 def record(identifier, owner, concept, paths, operation=None):
     carrier, scope = OWNERS[owner]
@@ -588,6 +607,12 @@ def record(identifier, owner, concept, paths, operation=None):
         tests.append("groupimp/src/test/java/operations/NativeRationalFunctionTest.java")
     if owner in ("RationalMatrixFamily", "RationalAffineSpaceAlgebra"):
         tests.append("groupimp/src/test/java/operations/NativeLeastSquaresTest.java")
+    if owner in ("RationalMatrixAlgebra", "RationalMatrixFamily", "RationalPolynomialRing"):
+        tests.append("groupimp/src/test/java/operations/NativeSpectralLinearTest.java")
+        paths = paths + ["groupimp/src/main/java/mathematics/calculus/RationalPolynomialRoots.java"]
+    if owner in ("RationalMatrixAlgebra", "RationalMatrixFamily"):
+        paths = paths + ["groupimp/src/main/java/algebra/concrete/MatrixSpectralOperations.java",
+                         "groupimp/src/main/java/mathematics/linear/RationalMatrixSpectral.java"]
     if owner in ("RationalMultivariatePolynomialAlgebra", "PolynomialDifferentialFormAlgebra"):
         tests.append("groupimp/src/test/java/operations/NativePolynomialChainsTest.java")
     value = {
@@ -730,9 +755,16 @@ def record(identifier, owner, concept, paths, operation=None):
     if owner == "RationalVectorFamily":
         value["known_limitations"].append("This is a family of different vector spaces, not one vector space across all dimensions. Dimension checks run at operation execution; entries are materialized exactly.")
     if owner == "RationalMatrixFamily":
-        value["known_limitations"].append("Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.")
+        value["known_limitations"].append("Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, general algebraic/complex eigenvalue representations and numerical error contracts are not supplied by this carrier.")
         value["required_invariants"].append("Shapes are stored explicitly. RREF uses exact rational row operations; bases preserve rank-nullity and declared coordinate dimensions.")
         value["known_limitations"].append("Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided.")
+    if owner in ("RationalMatrixAlgebra", "RationalMatrixFamily"):
+        value["known_limitations"].append("Spectral and matrix polynomial operations require square dimension at most 32. Matrix polynomial evaluation and natural powers allow degree/exponent at most 10000. Each calculation shares 5000000 arithmetic work units across matrix products, diagonal shifts, power elimination and eigenspace reductions. Exceeding a cap raises IMPLEMENTATION_FAILURE, not a mathematical nonexistence result. Other matrix operations keep their existing scope.")
+        value["required_invariants"].append("Spectral arithmetic is exact over Q. Characteristic/minimal polynomials retain nonrational factors; eigenvalue enumeration and diagonalization remain over Q. Diagonalization emits P then D with A*P=P*D.")
+        value["references"].append("https://docs.sympy.org/latest/modules/matrices/matrices.html")
+        value["references"].append("https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix2.html")
+    if owner in ("RationalMatrixAlgebra", "RationalMatrixFamily", "RationalPolynomialRing"):
+        value["known_limitations"].append("Rational root search and root multiplicity accept degree at most 64. Search uses exact trial division of primitive integer coefficients with at most 100000 trial divisions, 100000 signed candidate pairs, 50000 divisors per coefficient, and 1000000 coefficient visits; it may fail for large coefficients even at degree two. Exhaustion raises IMPLEMENTATION_FAILURE and never yields a partial root list. Coefficient bit lengths are unbounded. These caps do not restrict existing polynomial arithmetic.")
     if owner == "RationalAffineSpaceAlgebra":
         value["known_limitations"].append("Finite linear systems over Q with a positive number of equations and unknowns. Infinite solution sets are parametrized by a finite basis, never enumerated. Empty sets retain ambient dimension and have no particular point, direction basis or affine dimension operation result.")
         value["required_invariants"].append("The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization.")

@@ -55,9 +55,9 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public ConcreteMathematics() { this(2,5); }
     public ConcreteMathematics(int dimension,int... primes) {
         vectors=new RationalVectorSpace(rationals,dimension);
-        matrices=new RationalMatrixAlgebra(rationals,vectors,naturals);
+        matrices=new RationalMatrixAlgebra(rationals,vectors,naturals,polynomials,booleans);
         finiteVectors=new RationalVectorFamily(rationals,naturals,vectors);
-        rectangularMatrices=new RationalMatrixFamily(rationals,finiteVectors,naturals,booleans,matrices);
+        rectangularMatrices=new RationalMatrixFamily(rationals,finiteVectors,naturals,booleans,matrices,polynomials);
         affineSpaces=new RationalAffineSpaceAlgebra(rectangularMatrices,finiteVectors,naturals,booleans);
         tensors=new RationalTensorAlgebra(rationals,finiteVectors,rectangularMatrices,naturals,booleans);
         exterior=new RationalExteriorAlgebra(rationals,finiteVectors,rectangularMatrices,naturals,booleans);

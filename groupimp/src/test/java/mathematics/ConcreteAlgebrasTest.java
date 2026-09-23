@@ -32,7 +32,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all619RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all644RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String px="Poly(Q^3){[1, 0, 0]=1}",py="Poly(Q^3){[0, 1, 0]=1}",pz="Poly(Q^3){[0, 0, 1]=1}";
@@ -139,6 +139,10 @@ public class ConcreteAlgebrasTest {
         expected.put("ResidueRing","0 (mod 6)|4 (mod 6)|5 (mod 6)|5 (mod 6)|1 (mod 6)|5 (mod 6)|true|false|5|0 (mod 6)|[5 (mod 6)]|1 (mod 6)|false|0 (mod 6)|1 (mod 6)|[0 (mod 6), 1 (mod 6), 2 (mod 6), 3 (mod 6), 4 (mod 6), 5 (mod 6)]");
         expected.put("FiniteIntegerFunctionAlgebra","Function[1, 2, 3]->[1, 2, 3]{1=3, 2=2, 3=1}|Function[1, 2, 3]->[1, 2, 3]{1=3, 2=1, 3=2}|[1, 2, 3]|[1, 2, 3]|[2, 3, 1]|Relation[(1,2), (2,3), (3,1)]|3|true|true|true|3|[2, 3, 1]|[1, 2, 3]|Function[1, 2, 3]->[1, 2, 3]{1=2, 2=3, 3=1}|[2, 3, 1]|[1]|false|Function[1, 2]->[1, 2]{1=1, 2=2}|Function[1, 2]->[2, 3]{1=2, 2=3}|Function[]->[]{}");
         expected.put("FiniteCategoryAlgebra","Category(objects=[1, 2], arrows={1=(1,1), 2=(2,2)}, identities={1=1, 2=2}, composition={(1,1)=1, (2,2)=2})|[1, 2]|[1, 2]|2|2|true|true|2|2|2|2|[2]|[2]|true|[2]|[1, 2]|false|Category(objects=[1, 2], arrows={1=(1,1), 2=(2,2)}, identities={1=1, 2=2}, composition={(1,1)=1, (2,2)=2})|Category(objects=[1, 2], arrows={0=(1,1), 1=(2,2)}, identities={1=0, 2=1}, composition={(0,0)=0, (1,1)=1})|Relation[(1,1), (2,2)]|[]|[]|Category(objects=[], arrows={}, identities={}, composition={})");
+        String spectral="Q[x][6, -5, 1]|Q[x][6, -5, 1]|[[4, 1], [0, 5]]|[[9, 7], [0, 16]]|[2, 3]|[[1, 0]]|[[1, 0]]|1|true|[[[1, 1], [0, 1]], [[2, 0], [0, 3]]]|[[4, 5], [0, 9]]";
+        expected.put("RationalMatrixAlgebra",expected.get("RationalMatrixAlgebra")+"|"+spectral);
+        expected.put("RationalMatrixFamily",expected.get("RationalMatrixFamily")+"|"+spectral+"|[[0, -1], [1, -2]]");
+        expected.put("RationalPolynomialRing",expected.get("RationalPolynomialRing")+"|[-1]|0");
         int count=0;
         for(ConcreteAlgebra<?> algebra : math.algebras()) {
             String[] values=expected.get(algebra.getClass().getSimpleName()).split("\\|",-1);
@@ -148,12 +152,17 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(619,count);
+        assertEquals(644,count);
     }
     @SuppressWarnings({"unchecked","rawtypes"})
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
         Algebra source=math.mathTool.getAlgebra(entry.first.getAlgebraName());
         IAlgebraItem item=source.buildAlgebraItem(sample(math,source.getAlgebraName(),0));
+        List<String> spectralNames=Arrays.asList("characteristic-polynomial","minimal-polynomial","evaluate-polynomial",
+                "rational-eigenvalues","eigenspace-basis","generalized-eigenspace-basis","eigenvalue-multiplicity",
+                "is-diagonalizable-over-q","diagonalize-over-q","pow");
+        if((owner instanceof RationalMatrixAlgebra || owner instanceof RationalMatrixFamily) && spectralNames.contains(name))
+            item=source.buildAlgebraItem(new RationalMatrix(new Rational[][]{{Rational.of(2),Rational.ONE},{Rational.ZERO,Rational.of(3)}}));
         if(Arrays.asList("PolynomialCell(Q).to-map","PolynomialCell(Q).lower-face","PolynomialCell(Q).upper-face").contains(entry.id))
             item=source.buildAlgebraItem(PolynomialCell.parameterized(new PolynomialMap(MultivariatePolynomial.variable(1,0),
                     MultivariatePolynomial.constant(1,Rational.ZERO),MultivariatePolynomial.constant(1,Rational.ZERO))));
@@ -192,6 +201,8 @@ public class ConcreteAlgebrasTest {
         if(operation instanceof IOneOperandOperation) return item.performOneOperandOperation(alias).perform().getResult().toString();
         if(operation instanceof ITransferOperation) return item.performAlgebraTransfer(alias).perform().getResult().toString();
         Object second=entry.second==null?null:sample(math,entry.second.getAlgebraName(),1);
+        if(entry.id.equals("Mat(Q).evaluate-at-matrix") || entry.id.equals("Mat2(Q).evaluate-at-matrix"))
+            second=new RationalMatrix(new Rational[][]{{Rational.of(2),Rational.ONE},{Rational.ZERO,Rational.of(3)}});
         if(entry.id.equals("PolynomialCell(Q).evaluate")) second=new RationalVector();
         if(entry.id.equals("PolynomialCell(Q).lower-face") || entry.id.equals("PolynomialCell(Q).upper-face")) second=BigInteger.ZERO;
         if(entry.id.equals("PolynomialCell(Q).integrate") || entry.id.equals("PolynomialChain(Q).integrate"))

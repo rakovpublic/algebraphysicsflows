@@ -31,6 +31,11 @@ public final class RationalMatrixAlgebra extends ConcreteAlgebra<RationalMatrix>
         this(rationals,vectors);
         unary("rank",algebra(),naturals.algebra(),false,m -> java.math.BigInteger.valueOf(m.rank()));
     }
+    public RationalMatrixAlgebra(RationalField rationals,RationalVectorSpace vectors,NaturalSemiring naturals,
+                                 RationalPolynomialRing polynomials,BooleanAlgebra truth) {
+        this(rationals,vectors,naturals);
+        MatrixSpectralOperations.install(this,vectors.algebra(),rationals,polynomials,naturals,truth,false);
+    }
     private static Algebra<RationalMatrix> carrier(int n) {
         if(n<=0) throw MathFailure.invalid("Matrix dimension must be positive");
         return carrier("Mat"+n+"(Q)",RationalMatrix.class,"Square rational matrix algebra of dimension "+n,m -> m.rows()==n && m.columns()==n);

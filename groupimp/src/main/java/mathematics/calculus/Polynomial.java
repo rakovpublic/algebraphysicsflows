@@ -29,6 +29,10 @@ public final class Polynomial implements Serializable {
         for(int i=coefficients.size()-1;i>=0;i--) result=result.multiply(x).add(coefficients.get(i));
         return result;
     }
+    /** Distinct rational roots in increasing order. Irrational and nonreal roots are not emitted. */
+    public List<Rational> rationalRoots() { return RationalPolynomialRoots.roots(this); }
+    /** Zero for a nonroot; undefined for the zero polynomial. */
+    public int rootMultiplicity(Rational root) { return RationalPolynomialRoots.multiplicity(this,root); }
     public Polynomial add(Polynomial b) {
         Rational[] values=new Rational[Math.max(coefficients.size(),b.coefficients.size())];
         for(int i=0;i<values.length;i++) values[i]=coefficient(i).add(b.coefficient(i));

@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1062 |
-| DIRECTLY_SUPPORTED | 819 |
+| Scoped records | 1087 |
+| DIRECTLY_SUPPORTED | 844 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 678 |
+| IMPLEMENTED | 703 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 746 |
+| MACHINE_TESTED | 771 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 655 | 655 | 0 | 0 | 0 | 655 | 0 | 0 |
+| Concrete MathTool algebras | 680 | 680 | 0 | 0 | 0 | 680 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -485,25 +485,37 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | IntegerSetAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets |
 | Mat(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).add |
 | Mat(Q).apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).apply |
+| Mat(Q).characteristic-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).characteristic-polynomial |
 | Mat(Q).column-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).column-count |
 | Mat(Q).column-projector | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).column-projector |
 | Mat(Q).column-space-basis | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).column-space-basis |
 | Mat(Q).columns | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).columns |
+| Mat(Q).companion | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).companion |
 | Mat(Q).determinant | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).determinant |
+| Mat(Q).diagonalize-over-q | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).diagonalize-over-q |
+| Mat(Q).eigenspace-basis | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).eigenspace-basis |
+| Mat(Q).eigenvalue-multiplicity | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).eigenvalue-multiplicity |
 | Mat(Q).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).equal |
+| Mat(Q).evaluate-at-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).evaluate-at-matrix |
+| Mat(Q).evaluate-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).evaluate-polynomial |
 | Mat(Q).from-fixed | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).from-fixed |
+| Mat(Q).generalized-eigenspace-basis | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).generalized-eigenspace-basis |
 | Mat(Q).inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).inverse |
+| Mat(Q).is-diagonalizable-over-q | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).is-diagonalizable-over-q |
 | Mat(Q).least-squares-error | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).least-squares-error |
 | Mat(Q).least-squares-minimum-norm | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).least-squares-minimum-norm |
 | Mat(Q).least-squares-residual | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).least-squares-residual |
+| Mat(Q).minimal-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).minimal-polynomial |
 | Mat(Q).multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).multiply |
 | Mat(Q).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).negate |
 | Mat(Q).nullity | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).nullity |
 | Mat(Q).nullspace-basis | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).nullspace-basis |
 | Mat(Q).pivot-columns | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).pivot-columns |
+| Mat(Q).pow | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).pow |
 | Mat(Q).project-column | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).project-column |
 | Mat(Q).pseudoinverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).pseudoinverse |
 | Mat(Q).rank | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).rank |
+| Mat(Q).rational-eigenvalues | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).rational-eigenvalues |
 | Mat(Q).row-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).row-count |
 | Mat(Q).row-projector | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).row-projector |
 | Mat(Q).row-space-basis | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).row-space-basis |
@@ -517,12 +529,23 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Mat(Q).zero-like | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).zero-like |
 | Mat2(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).add |
 | Mat2(Q).apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).apply |
+| Mat2(Q).characteristic-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).characteristic-polynomial |
 | Mat2(Q).determinant | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).determinant |
+| Mat2(Q).diagonalize-over-q | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).diagonalize-over-q |
+| Mat2(Q).eigenspace-basis | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).eigenspace-basis |
+| Mat2(Q).eigenvalue-multiplicity | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).eigenvalue-multiplicity |
+| Mat2(Q).evaluate-at-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).evaluate-at-matrix |
+| Mat2(Q).evaluate-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).evaluate-polynomial |
+| Mat2(Q).generalized-eigenspace-basis | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).generalized-eigenspace-basis |
 | Mat2(Q).inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).inverse |
+| Mat2(Q).is-diagonalizable-over-q | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).is-diagonalizable-over-q |
+| Mat2(Q).minimal-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).minimal-polynomial |
 | Mat2(Q).multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).multiply |
 | Mat2(Q).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).negate |
 | Mat2(Q).one | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).one |
+| Mat2(Q).pow | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).pow |
 | Mat2(Q).rank | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).rank |
+| Mat2(Q).rational-eigenvalues | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).rational-eigenvalues |
 | Mat2(Q).scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).scale |
 | Mat2(Q).solve | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).solve |
 | Mat2(Q).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).subtract |
@@ -715,7 +738,9 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Q[x].primitive | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].primitive |
 | Q[x].quotient | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].quotient |
 | Q[x].quotient-remainder | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].quotient-remainder |
+| Q[x].rational-roots | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].rational-roots |
 | Q[x].remainder | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].remainder |
+| Q[x].root-multiplicity | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].root-multiplicity |
 | Q[x].subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].subtract |
 | Q[x].zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].zero |
 | Q^2.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed-dimensional rational vectors; default dimension two; native operation Q^2.add |
