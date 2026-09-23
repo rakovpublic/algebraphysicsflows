@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 876 |
-| DIRECTLY_SUPPORTED | 633 |
+| Scoped records | 905 |
+| DIRECTLY_SUPPORTED | 662 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 492 |
+| IMPLEMENTED | 521 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 560 |
+| MACHINE_TESTED | 589 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 469 | 469 | 0 | 0 | 0 | 469 | 0 | 0 |
+| Concrete MathTool algebras | 498 | 498 | 0 | 0 | 0 | 498 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -208,6 +208,34 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Boolean.xor | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.xor |
 | Boolean.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.zero |
 | BooleanAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations |
+| Exterior(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).add |
+| Exterior(Q).ambient-dimension | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).ambient-dimension |
+| Exterior(Q).apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).apply |
+| Exterior(Q).basis-masks | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).basis-masks |
+| Exterior(Q).coefficients | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).coefficients |
+| Exterior(Q).degrees | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).degrees |
+| Exterior(Q).dot | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).dot |
+| Exterior(Q).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).equal |
+| Exterior(Q).from-vector | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).from-vector |
+| Exterior(Q).grade | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).grade |
+| Exterior(Q).grade-involution | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).grade-involution |
+| Exterior(Q).hodge-star | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).hodge-star |
+| Exterior(Q).interior | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).interior |
+| Exterior(Q).is-zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).is-zero |
+| Exterior(Q).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).negate |
+| Exterior(Q).norm-squared | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).norm-squared |
+| Exterior(Q).one-in | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).one-in |
+| Exterior(Q).reverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).reverse |
+| Exterior(Q).scalar-part | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).scalar-part |
+| Exterior(Q).scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).scale |
+| Exterior(Q).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).subtract |
+| Exterior(Q).term-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).term-count |
+| Exterior(Q).terms | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).terms |
+| Exterior(Q).to-scalar | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).to-scalar |
+| Exterior(Q).to-vector | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).to-vector |
+| Exterior(Q).volume-in | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).volume-in |
+| Exterior(Q).wedge | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).wedge |
+| Exterior(Q).zero-in | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).zero-in |
 | FiniteAdjunction.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Adjunctions of finite category tables with checked unit/counit and constructive finite adjoint search; native operation FiniteAdjunction.compose |
 | FiniteAdjunction.counit | DIRECTLY_SUPPORTED | IMPLEMENTED | Adjunctions of finite category tables with checked unit/counit and constructive finite adjoint search; native operation FiniteAdjunction.counit |
 | FiniteAdjunction.empty | DIRECTLY_SUPPORTED | IMPLEMENTED | Adjunctions of finite category tables with checked unit/counit and constructive finite adjoint search; native operation FiniteAdjunction.empty |
@@ -548,6 +576,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Q^2.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed-dimensional rational vectors; default dimension two; native operation Q^2.zero |
 | RationalAffineSpaceAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension |
 | RationalComplexField | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers |
+| RationalExteriorAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension |
 | RationalField | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field |
 | RationalFunctionField | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator |
 | RationalMatrixAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two |

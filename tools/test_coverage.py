@@ -112,6 +112,9 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("distinct, present and equal-sized", " ".join(records["Tensor(Q).contract"]["required_invariants"]))
         self.assertIn("not tensor decomposition rank", " ".join(records["Tensor(Q).order"]["required_invariants"]))
         self.assertIn("both dimensions positive", " ".join(records["Tensor(Q).to-matrix"]["required_invariants"]))
+        self.assertIn("Repeated basis factors vanish", " ".join(records["Exterior(Q).wedge"]["required_invariants"]))
+        self.assertIn("oriented orthonormal", " ".join(records["Exterior(Q).hodge-star"]["required_invariants"]))
+        self.assertIn("covariant induced map", " ".join(records["Exterior(Q).apply"]["required_invariants"]))
 
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)

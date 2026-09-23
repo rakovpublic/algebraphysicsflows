@@ -26151,6 +26151,70 @@
       "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
     },
     {
+      "id": "concrete-algebra.RationalExteriorAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "RationalExteriorAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "Exterior(Q)",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
       "id": "concrete-algebra.RationalField",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "RationalField",
@@ -37283,6 +37347,1997 @@
       "runtime_operation_id": "Tensor(Q).one",
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "Tensor(Q).one",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).add",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).add",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Exterior(Q)",
+      "domain_B": "Exterior(Q)",
+      "domain_C": "Exterior(Q)",
+      "operation_signature": "Exterior(Q) x Exterior(Q) -> Exterior(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).add",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Both elements have the same ambient dimension; add coefficients and remove zero terms.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Exterior(Q).add",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "add",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).subtract",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).subtract",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Exterior(Q)",
+      "domain_B": "Exterior(Q)",
+      "domain_C": "Exterior(Q)",
+      "operation_signature": "Exterior(Q) x Exterior(Q) -> Exterior(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).subtract",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Both elements have the same ambient dimension; subtract coefficients and remove zero terms.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Exterior(Q).subtract",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "subtract",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).wedge",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).wedge",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Exterior(Q)",
+      "domain_B": "Exterior(Q)",
+      "domain_C": "Exterior(Q)",
+      "operation_signature": "Exterior(Q) x Exterior(Q) -> Exterior(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).wedge",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Both elements have the same ambient dimension. Repeated basis factors vanish; distinct factors are sorted with the permutation sign. The operation supports mixed grades and is subject to a sparse product work cap.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Exterior(Q).wedge",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "wedge",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).negate",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).negate",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Exterior(Q)",
+      "domain_B": null,
+      "domain_C": "Exterior(Q)",
+      "operation_signature": "Exterior(Q) -> Exterior(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).negate",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Exterior(Q).negate",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "negate",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).scale",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).scale",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Exterior(Q)",
+      "domain_B": "Q",
+      "domain_C": "Exterior(Q)",
+      "operation_signature": "Exterior(Q) x Q -> Exterior(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).scale",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Multiply every coefficient by the rational scalar, retaining ambient dimension even for zero.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Exterior(Q).scale",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "scale",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).grade-involution",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).grade-involution",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Exterior(Q)",
+      "domain_B": null,
+      "domain_C": "Exterior(Q)",
+      "operation_signature": "Exterior(Q) -> Exterior(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).grade-involution",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Multiply each homogeneous grade k by (-1)^k.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Exterior(Q).grade-involution",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "grade-involution",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).reverse",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).reverse",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Exterior(Q)",
+      "domain_B": null,
+      "domain_C": "Exterior(Q)",
+      "operation_signature": "Exterior(Q) -> Exterior(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).reverse",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Reverse wedge factor order, multiplying grade k by (-1)^(k*(k-1)/2); this is an algebra antiautomorphism.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Exterior(Q).reverse",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "reverse",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).hodge-star",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).hodge-star",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Exterior(Q)",
+      "domain_B": null,
+      "domain_C": "Exterior(Q)",
+      "operation_signature": "Exterior(Q) -> Exterior(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).hodge-star",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Use the standard positive oriented orthonormal coordinate basis: e_I wedge star(e_I) is the volume element, and star squared on grade k is (-1)^(k*(n-k)).",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Exterior(Q).hodge-star",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "hodge-star",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).ambient-dimension",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).ambient-dimension",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Exterior(Q)",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "Exterior(Q) -> N",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).ambient-dimension",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the retained coordinate space dimension, including for zero and scalar elements.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Exterior(Q).ambient-dimension",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ambient-dimension",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).term-count",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).term-count",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Exterior(Q)",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "Exterior(Q) -> N",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).term-count",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the number of nonzero canonical basis coefficients.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Exterior(Q).term-count",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "term-count",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).degrees",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).degrees",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Exterior(Q)",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "Exterior(Q) -> List(N)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).degrees",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit distinct occupied homogeneous degrees in ascending order; the zero element emits an empty list.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Exterior(Q).degrees",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "degrees",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).terms",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).terms",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Exterior(Q)",
+      "domain_B": null,
+      "domain_C": "Exterior(Q)",
+      "operation_signature": "Exterior(Q) -> List(Exterior(Q))",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).terms",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit one wrapped nonzero monomial per basis mask in ascending mask order, with retained coefficient and ambient dimension.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/flat/OneOperandFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Exterior(Q).terms",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "terms",
+      "legacy_operation_interface": "IOneOperandFlatOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).coefficients",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).coefficients",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Exterior(Q)",
+      "domain_B": null,
+      "domain_C": "Q",
+      "operation_signature": "Exterior(Q) -> List(Q)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).coefficients",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit nonzero rational coefficients in ascending basis-mask order, retaining repeated coefficients.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Exterior(Q).coefficients",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "coefficients",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).basis-masks",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).basis-masks",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Exterior(Q)",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "Exterior(Q) -> List(N)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).basis-masks",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit occupied nonnegative basis masks in ascending order; bit i denotes e_i and mask zero denotes the scalar unit.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Exterior(Q).basis-masks",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "basis-masks",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).grade",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).grade",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Exterior(Q)",
+      "domain_B": "N",
+      "domain_C": "Exterior(Q)",
+      "operation_signature": "Exterior(Q) x N -> Exterior(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).grade",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The supplied degree is nonnegative. Retain only that degree; every degree above ambient dimension returns zero in the same ambient space.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Exterior(Q).grade",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "grade",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).interior",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).interior",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Exterior(Q)",
+      "domain_B": "Vec(Q)",
+      "domain_C": "Exterior(Q)",
+      "operation_signature": "Exterior(Q) x Vec(Q) -> Exterior(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).interior",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The vector dimension equals the exterior ambient dimension. Apply left insertion i_v, a degree-minus-one antiderivation, using the standard coordinate identification with the dual.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Exterior(Q).interior",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "interior",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).dot",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).dot",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Exterior(Q)",
+      "domain_B": "Exterior(Q)",
+      "domain_C": "Q",
+      "operation_signature": "Exterior(Q) x Exterior(Q) -> Q",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).dot",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The ambient dimensions agree. Pair identical increasing basis monomials as an orthonormal basis and distinct monomials as orthogonal.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Exterior(Q).dot",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "dot",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).norm-squared",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).norm-squared",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Exterior(Q)",
+      "domain_B": null,
+      "domain_C": "Q",
+      "operation_signature": "Exterior(Q) -> Q",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).norm-squared",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the exact nonnegative sum of squared canonical coefficients, not a square root.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Exterior(Q).norm-squared",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "norm-squared",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Exterior(Q)",
+      "domain_B": "Exterior(Q)",
+      "domain_C": "Boolean",
+      "operation_signature": "Exterior(Q) x Exterior(Q) -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Equality includes ambient dimension and all canonical nonzero coefficients; zeros in different dimensions are distinct.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Exterior(Q).equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).is-zero",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).is-zero",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Exterior(Q)",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "Exterior(Q) -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).is-zero",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "True exactly when the canonical coefficient map is empty.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Exterior(Q).is-zero",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "is-zero",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).scalar-part",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).scalar-part",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Exterior(Q)",
+      "domain_B": null,
+      "domain_C": "Q",
+      "operation_signature": "Exterior(Q) -> Q",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).scalar-part",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the coefficient of the empty basis mask, or zero if it is absent.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Exterior(Q).scalar-part",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "scalar-part",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).to-scalar",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).to-scalar",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Exterior(Q)",
+      "domain_B": null,
+      "domain_C": "Q",
+      "operation_signature": "Exterior(Q) -> Q",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).to-scalar",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "All nonzero terms have degree zero; zero is accepted and maps to rational zero.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Exterior(Q).to-scalar",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-scalar",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).to-vector",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).to-vector",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Exterior(Q)",
+      "domain_B": null,
+      "domain_C": "Vec(Q)",
+      "operation_signature": "Exterior(Q) -> Vec(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).to-vector",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "All nonzero terms have degree one; zero maps to the zero vector of its retained ambient dimension.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Exterior(Q).to-vector",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-vector",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).from-vector",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).from-vector",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Vec(Q)",
+      "domain_B": null,
+      "domain_C": "Exterior(Q)",
+      "operation_signature": "Vec(Q) -> Exterior(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).from-vector",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed a rational coordinate vector in grade one with the vector's ambient dimension; the empty vector gives the exterior zero in dimension zero.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Exterior(Q).from-vector",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "Exterior(Q).from-vector",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).apply",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).apply",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Q)",
+      "domain_B": "Exterior(Q)",
+      "domain_C": "Exterior(Q)",
+      "operation_signature": "Mat(Q) x Exterior(Q) -> Exterior(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).apply",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Matrix columns equal the exterior source dimension. The covariant induced map sends each basis generator to its matrix column and respects wedge products and scalars; the second-type wrapper has the matrix row count as its new ambient dimension.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Exterior(Q).apply",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "Exterior(Q).apply",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).zero-in",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).zero-in",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "N",
+      "domain_B": null,
+      "domain_C": "Exterior(Q)",
+      "operation_signature": "N -> Exterior(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).zero-in",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The natural-number input is the ambient dimension; construct its zero exterior element, subject to the representation dimension cap.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Exterior(Q).zero-in",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "Exterior(Q).zero-in",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).one-in",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).one-in",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "N",
+      "domain_B": null,
+      "domain_C": "Exterior(Q)",
+      "operation_signature": "N -> Exterior(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).one-in",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The natural-number input is the ambient dimension; construct the scalar wedge unit in that dimension, subject to the representation cap.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Exterior(Q).one-in",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "Exterior(Q).one-in",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Exterior(Q).volume-in",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalExteriorAlgebra",
+      "concept": "Exterior(Q).volume-in",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "N",
+      "domain_B": null,
+      "domain_C": "Exterior(Q)",
+      "operation_signature": "N -> Exterior(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).volume-in",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The natural-number input is the ambient dimension; construct e_0 wedge ... wedge e_(n-1), with the empty wedge equal to one in dimension zero.",
+        "Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeExteriorTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.",
+        "Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalExteriorAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Exterior(Q).volume-in",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "Exterior(Q).volume-in",
       "legacy_operation_interface": "ITransferOperation"
     },
     {
@@ -57249,6 +59304,14 @@
       "supported_operations": [
         "Affine(Q).ambient-dimension",
         "Affine(Q).dimension",
+        "Exterior(Q).ambient-dimension",
+        "Exterior(Q).basis-masks",
+        "Exterior(Q).degrees",
+        "Exterior(Q).grade",
+        "Exterior(Q).one-in",
+        "Exterior(Q).term-count",
+        "Exterior(Q).volume-in",
+        "Exterior(Q).zero-in",
         "FiniteCategory.arrow-count",
         "FiniteCategory.object-count",
         "FiniteComplex.betti-number",
@@ -57434,6 +59497,12 @@
         "Q(i)"
       ],
       "supported_operations": [
+        "Exterior(Q).coefficients",
+        "Exterior(Q).dot",
+        "Exterior(Q).norm-squared",
+        "Exterior(Q).scalar-part",
+        "Exterior(Q).scale",
+        "Exterior(Q).to-scalar",
         "FiniteDistribution(Z).event-probability",
         "FiniteDistribution(Z).expectation",
         "FiniteDistribution(Z).point-probability",
@@ -57694,6 +59763,8 @@
         "Boolean.or",
         "Boolean.xor",
         "Boolean.zero",
+        "Exterior(Q).equal",
+        "Exterior(Q).is-zero",
         "FiniteAdjunction.equal",
         "FiniteAdjunction.is-equivalence",
         "FiniteCategory.equal",
@@ -59281,6 +61352,9 @@
         "Affine(Q).minimum-norm",
         "Affine(Q).particular",
         "Affine(Q).solve",
+        "Exterior(Q).from-vector",
+        "Exterior(Q).interior",
+        "Exterior(Q).to-vector",
         "Mat(Q).apply",
         "Mat(Q).column-space-basis",
         "Mat(Q).columns",
@@ -59345,6 +61419,7 @@
       "supported_operations": [
         "Affine(Q).least-squares",
         "Affine(Q).solve",
+        "Exterior(Q).apply",
         "Mat(Q).add",
         "Mat(Q).apply",
         "Mat(Q).column-count",
@@ -59535,6 +61610,73 @@
       "invariants": [
         "Two nonnegative integer indices",
         "Each operation checks existence and compatibility in the actual tensor shape"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-23"
+      }
+    },
+    {
+      "id": "Exterior(Q)",
+      "name": "Rational coordinate exterior algebras",
+      "description": "Rational coordinate exterior algebras",
+      "member_representation": "mathematics.linear.RationalExterior",
+      "membership_rules": [
+        "Retained nonnegative ambient dimension",
+        "Nonzero rational coefficients on increasing coordinate basis masks",
+        "Standard Euclidean orientation and pairing; mixed homogeneous grades allowed"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "Q",
+        "Vec(Q)",
+        "Mat(Q)",
+        "N"
+      ],
+      "supported_operations": [
+        "Exterior(Q).add",
+        "Exterior(Q).ambient-dimension",
+        "Exterior(Q).apply",
+        "Exterior(Q).basis-masks",
+        "Exterior(Q).coefficients",
+        "Exterior(Q).degrees",
+        "Exterior(Q).dot",
+        "Exterior(Q).equal",
+        "Exterior(Q).from-vector",
+        "Exterior(Q).grade",
+        "Exterior(Q).grade-involution",
+        "Exterior(Q).hodge-star",
+        "Exterior(Q).interior",
+        "Exterior(Q).is-zero",
+        "Exterior(Q).negate",
+        "Exterior(Q).norm-squared",
+        "Exterior(Q).one-in",
+        "Exterior(Q).reverse",
+        "Exterior(Q).scalar-part",
+        "Exterior(Q).scale",
+        "Exterior(Q).subtract",
+        "Exterior(Q).term-count",
+        "Exterior(Q).terms",
+        "Exterior(Q).to-scalar",
+        "Exterior(Q).to-vector",
+        "Exterior(Q).volume-in",
+        "Exterior(Q).wedge",
+        "Exterior(Q).zero-in"
+      ],
+      "invariants": [
+        "Retained nonnegative ambient dimension",
+        "Nonzero rational coefficients on increasing coordinate basis masks",
+        "Standard Euclidean orientation and pairing; mixed homogeneous grades allowed"
       ],
       "references": [
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"

@@ -17,6 +17,7 @@ import mathematics.linear.RationalVector;
 import mathematics.linear.RationalMatrix;
 import mathematics.linear.RationalAffineSpace;
 import mathematics.linear.RationalTensor;
+import mathematics.linear.RationalExterior;
 import mathematics.numbers.Rational;
 import java.math.BigInteger;
 import java.util.*;
@@ -54,6 +55,11 @@ public final class ConcreteAlgebrasExample {
                 .performOperation("tensor-product",RationalTensor.fromMatrix(rectangular.transpose()))
                 .performCustomMemberOperation("contract",new Pair<>(BigInteger.ONE,BigInteger.valueOf(2)))
                 .<RationalMatrix>performAlgebraTransfer("to-matrix").<Rational>performAlgebraTransfer("trace").collect());
+        System.out.println("Exterior wedge and Hodge star recover the cross product: "+math.flow(math.finiteVectors,
+                Collections.singletonList(new RationalVector(Rational.ONE,Rational.of(2),Rational.of(3))))
+                .<RationalExterior>performAlgebraTransfer("Exterior(Q).from-vector")
+                .performOperation("wedge",RationalExterior.fromVector(new RationalVector(Rational.of(4),Rational.of(5),Rational.of(6))))
+                .performOneOperandOperation("hodge-star").<RationalVector>performAlgebraTransfer("to-vector").collect());
         System.out.println("Integral of x^2 from 0 to 1: "+math.flow(math.polynomials,Collections.singletonList(new Polynomial(Rational.ZERO,Rational.ZERO,Rational.ONE)))
                 .<Rational,Pair<Rational,Rational>>performAlgebraUnsafe("integrate",new Pair<>(Rational.ZERO,Rational.ONE)).collect());
         System.out.println("F5: 3 / 2 = "+math.primeFields.get(0).algebra().buildAlgebraItem(math.primeFields.get(0).member(3))

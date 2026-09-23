@@ -23,6 +23,7 @@ OWNERS = {
     "RationalMatrixFamily": ("Mat(Q)", "Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases"),
     "RationalAffineSpaceAlgebra": ("Affine(Q)", "Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension"),
     "RationalTensorAlgebra": ("Tensor(Q)", "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction"),
+    "RationalExteriorAlgebra": ("Exterior(Q)", "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension"),
     "RationalPolynomialRing": ("Q[x]", "Finite univariate polynomials with canonical rational coefficients"),
     "RationalFunctionField": ("Q(x)", "Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator"),
     "IntegerSetAlgebra": ("FiniteSet(Z)", "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets"),
@@ -61,6 +62,7 @@ EXTRA_TESTS = {
     "RationalMatrixFamily": "NativeRectangularLinearTest",
     "RationalAffineSpaceAlgebra": "NativeRectangularLinearTest",
     "RationalTensorAlgebra": "NativeTensorTest",
+    "RationalExteriorAlgebra": "NativeExteriorTest",
     "IntegerSetAlgebra": "NativeFlatAndSetTest",
     "RationalPolynomialRing": "NativeDynamicsTest",
     "RationalFunctionField": "NativeRationalFunctionTest",
@@ -115,6 +117,35 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "RationalExteriorAlgebra": {
+        "add": "Both elements have the same ambient dimension; add coefficients and remove zero terms.",
+        "subtract": "Both elements have the same ambient dimension; subtract coefficients and remove zero terms.",
+        "wedge": "Both elements have the same ambient dimension. Repeated basis factors vanish; distinct factors are sorted with the permutation sign. The operation supports mixed grades and is subject to a sparse product work cap.",
+        "scale": "Multiply every coefficient by the rational scalar, retaining ambient dimension even for zero.",
+        "grade-involution": "Multiply each homogeneous grade k by (-1)^k.",
+        "reverse": "Reverse wedge factor order, multiplying grade k by (-1)^(k*(k-1)/2); this is an algebra antiautomorphism.",
+        "hodge-star": "Use the standard positive oriented orthonormal coordinate basis: e_I wedge star(e_I) is the volume element, and star squared on grade k is (-1)^(k*(n-k)).",
+        "ambient-dimension": "Return the retained coordinate space dimension, including for zero and scalar elements.",
+        "term-count": "Return the number of nonzero canonical basis coefficients.",
+        "degrees": "Emit distinct occupied homogeneous degrees in ascending order; the zero element emits an empty list.",
+        "terms": "Emit one wrapped nonzero monomial per basis mask in ascending mask order, with retained coefficient and ambient dimension.",
+        "coefficients": "Emit nonzero rational coefficients in ascending basis-mask order, retaining repeated coefficients.",
+        "basis-masks": "Emit occupied nonnegative basis masks in ascending order; bit i denotes e_i and mask zero denotes the scalar unit.",
+        "grade": "The supplied degree is nonnegative. Retain only that degree; every degree above ambient dimension returns zero in the same ambient space.",
+        "interior": "The vector dimension equals the exterior ambient dimension. Apply left insertion i_v, a degree-minus-one antiderivation, using the standard coordinate identification with the dual.",
+        "dot": "The ambient dimensions agree. Pair identical increasing basis monomials as an orthonormal basis and distinct monomials as orthogonal.",
+        "norm-squared": "Return the exact nonnegative sum of squared canonical coefficients, not a square root.",
+        "equal": "Equality includes ambient dimension and all canonical nonzero coefficients; zeros in different dimensions are distinct.",
+        "is-zero": "True exactly when the canonical coefficient map is empty.",
+        "scalar-part": "Return the coefficient of the empty basis mask, or zero if it is absent.",
+        "to-scalar": "All nonzero terms have degree zero; zero is accepted and maps to rational zero.",
+        "to-vector": "All nonzero terms have degree one; zero maps to the zero vector of its retained ambient dimension.",
+        "from-vector": "Embed a rational coordinate vector in grade one with the vector's ambient dimension; the empty vector gives the exterior zero in dimension zero.",
+        "apply": "Matrix columns equal the exterior source dimension. The covariant induced map sends each basis generator to its matrix column and respects wedge products and scalars; the second-type wrapper has the matrix row count as its new ambient dimension.",
+        "zero-in": "The natural-number input is the ambient dimension; construct its zero exterior element, subject to the representation dimension cap.",
+        "one-in": "The natural-number input is the ambient dimension; construct the scalar wedge unit in that dimension, subject to the representation cap.",
+        "volume-in": "The natural-number input is the ambient dimension; construct e_0 wedge ... wedge e_(n-1), with the empty wedge equal to one in dimension zero.",
+    },
     "RationalTensorAlgebra": {
         "add": "Both tensors have exactly the same ordered shape; add coordinatewise.",
         "subtract": "Both tensors have exactly the same ordered shape; subtract coordinatewise.",
@@ -495,6 +526,11 @@ def record(identifier, owner, concept, paths, operation=None):
         value["known_limitations"].append("Dense materialization is capped at order 32 and 1000000 entries per tensor; exceeding a cap raises IMPLEMENTATION_FAILURE, not mathematical nonexistence. Removing zero axes by contraction can exceed the result materialization cap.")
         value["known_limitations"].append("Standard coordinate spaces and coordinate contraction only; no covariant/contravariant axis labels, arbitrary metrics, basis-change witnesses, sparse storage or tensor bundles.")
         value["required_invariants"].append("Every axis dimension is nonnegative, scalar order is zero, coordinates are immutable and row-major, and entry count equals the shape product with the empty product equal to one.")
+    if owner == "RationalExteriorAlgebra":
+        value["references"].append("https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html")
+        value["required_invariants"].append("Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension.")
+        value["known_limitations"].append("Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.")
+        value["known_limitations"].append("Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier.")
     if owner == "RationalVectorFamily":
         value["known_limitations"].append("This is a family of different vector spaces, not one vector space across all dimensions. Dimension checks run at operation execution; entries are materialized exactly.")
     if owner == "RationalMatrixFamily":
@@ -536,6 +572,8 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("Exterior(Q)", "Rational coordinate exterior algebras", "mathematics.linear.RationalExterior",
+         ["Retained nonnegative ambient dimension", "Nonzero rational coefficients on increasing coordinate basis masks", "Standard Euclidean orientation and pairing; mixed homogeneous grades allowed"], ["Q", "Vec(Q)", "Mat(Q)", "N"]),
         ("Tensor(Q)", "Finite rational coordinate tensors", "mathematics.linear.RationalTensor",
          ["Ordered nonnegative axis dimensions", "Row-major rational coordinates with checked shape product", "Order-zero scalars have one entry; zero-sized axes have no entries"], ["Q", "Vec(Q)", "Mat(Q)", "N", "NxN.tensor-axes"]),
         ("NxN.tensor-axes", "Ordered tensor axis pair", "mathematics.foundations.Pair<BigInteger,BigInteger>",

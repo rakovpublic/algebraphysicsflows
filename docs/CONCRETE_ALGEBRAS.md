@@ -1,6 +1,6 @@
 # Concrete algebras connected to MathTool
 
-`new ConcreteMathematics()` creates real `Algebra<T>` instances and registers their native operations in the existing `MathTool`. It includes N, Z, Q, Q(i), Boolean, Q^2, Mat2(Q), Vec(Q), Mat(Q), Affine(Q), Tensor(Q), Q[x], Q(x), S3, Z/6Z, finite sets of integers, rational samples, finite integer probability measures, finite simplicial complexes, finite integer relations/functions, finite categories/functors/natural transformations, and F5 (named Z/5Z). Each construction owns its algebra instances; separate tools do not share mutable registrations.
+`new ConcreteMathematics()` creates real `Algebra<T>` instances and registers their native operations in the existing `MathTool`. It includes N, Z, Q, Q(i), Boolean, Q^2, Mat2(Q), Vec(Q), Mat(Q), Affine(Q), Tensor(Q), Exterior(Q), Q[x], Q(x), S3, Z/6Z, finite sets of integers, rational samples, finite integer probability measures, finite simplicial complexes, finite integer relations/functions, finite categories/functors/natural transformations, and F5 (named Z/5Z). Each construction owns its algebra instances; separate tools do not share mutable registrations.
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
@@ -62,6 +62,7 @@ List<String> values = math.flow(math.naturals,
 | RationalMatrixFamily / Mat(Q) | partial add, subtract, multiply; equal -> Boolean | transpose, RREF, pseudoinverse, row/column projectors; rank/nullity -> N; flat pivot columns -> N; flat nullspace/row-space/column-space bases -> Vec(Q); rows, columns, shape counts | scale by Q; apply/project-column/least-squares-minimum-norm/least-squares-residual -> Vec(Q); least-squares-error -> Q; fixed-carrier conversions; zero-like; partial inverse/determinant/trace |
 | RationalAffineSpaceAlgebra / Affine(Q) | equal -> Boolean | particular/minimum-norm -> Vec(Q); flat directions -> Vec(Q); dimension/ambient-dimension -> N; is-empty/is-unique | solve/least-squares Mat(Q) x Vec(Q) -> Affine(Q); contains -> Boolean; at/closest-point -> Vec(Q) |
 | RationalTensorAlgebra / Tensor(Q) | add, subtract, Hadamard and tensor products; dot -> Q; equal -> Boolean | negate; order/size -> N; flat shape -> N; flat entries -> Q; norm-squared -> Q; zero-like | scale by Q; axis-pair swap/contraction; scalar/vector/matrix conversions; tensor-product unit |
+| RationalExteriorAlgebra / Exterior(Q) | add, subtract, wedge; dot -> Q; equal -> Boolean | negate, grade involution, reverse, Hodge star; dimension/term count -> N; flat degrees/masks -> N, coefficients -> Q, terms -> Exterior(Q); scalar/vector transfers | scale; grade selection; vector insertion; induced matrix action; dimension-indexed zero/unit/volume |
 | RationalPolynomialRing / Q[x] | add, subtract, multiply | negate, derivative | derivative-order with N; evaluate at Q -> Q; primitive/integrate; iterate and flat orbit with Pair(Q,N) |
 
 Each algebra registers zero/one constants where applicable on Unit with qualified names such as `Q.zero`, `Z.one`, `Mat2(Q).one`. Vector spaces have zero. Constants are Unit -> carrier transfers.
@@ -103,7 +104,7 @@ See [ConcreteAlgebrasTest](../groupimp/src/test/java/mathematics/ConcreteAlgebra
 Same-algebra unary flat operations use `IOneOperandFlatOperation` and `performOneOperandFlatOperation(name)` (or `performFlatOperation(name)`). Finite-set `subsets` is an example. Cross-algebra unary flat operations use the existing `ITransferFlatOperation`, whose return type is corrected to `List<IAlgebraItem<V>>`; `elements` transfers a finite set to its member algebra. Empty results remain valid, and every emitted member keeps its target algebra.
 
 
-The default initializer currently installs 29 algebras and 440 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
+The default initializer currently installs 30 algebras and 468 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
 
 For overloaded custom-member and unsafe operations, the most specific compatible second-operand class is selected (exact matches take priority). Re-registering the same second class replaces that overload. Ambiguous supertypes are rejected. Mathematical domains sharing one Java class need distinct operation names; overload selection does not infer a domain from a value.
 
@@ -179,6 +180,31 @@ List<String> trace = math.flow(math.rectangularMatrices, Collections.singletonLi
 Dense construction and results are capped at order 32 and 1,000,000 entries. Exceeding either cap raises IMPLEMENTATION_FAILURE, distinct from OPERATION_UNDEFINED for incompatible shapes or axes. Contracting two zero-sized axes yields an empty sum of zero for every remaining coordinate, and the resulting shape is subject to the same cap. Sparse tensors, basis-independent variance contracts and tensor bundles remain outside this implementation.
 
 NativeTensorTest compares product/contraction against independent coordinate sums for all 6,561 pairs of ternary 2 by 2 matrices. It also checks nonadjacent axis operations, associativity/bilinearity, shape-preserving empty tensors, order-zero scalars, immutability, resource limits, actual carrier wrappers and serialized flows from matrices through tensors back to vectors and scalars.
+
+## Exterior algebra and Hodge duality
+
+`math.exterior` registers Exterior(Q), a family of exterior algebras over rational coordinate spaces. `RationalExterior` stores a retained ambient dimension and a canonical sparse map from basis masks to nonzero rational coefficients. Bit i denotes the generator e_i; mask 3 denotes e_0 wedge e_1, and mask zero denotes the scalar unit. Factors in each basis monomial are ordered by increasing index. Mixed homogeneous degrees are allowed. Zero has empty support and retains its ambient dimension.
+
+`wedge` requires equal ambient dimensions. A repeated basis factor makes that product zero; otherwise sorting concatenated factors supplies the permutation sign. `grade` selects a nonnegative homogeneous degree, with degrees above dimension returning zero. `grade-involution` multiplies degree k by (-1)^k; `reverse` multiplies it by (-1)^(k*(k-1)/2). Flat `terms`, `coefficients` and `basis-masks` use ascending mask order; `degrees` emits occupied degrees in ascending order. Empty support emits no terms or degrees.
+
+`hodge-star` uses the standard positively oriented orthonormal coordinate basis. For every basis monomial e_I, e_I wedge star(e_I) is the positive volume. On degree k in dimension n, applying star twice multiplies by (-1)^(k*(n-k)). `interior` inserts a compatible vector on the left, identifying it with a covector through the standard dot product. It obeys the graded antiderivation rule. The coordinate pairing convention is explicit, as in [Sage's exterior algebra documentation](https://doc.sagemath.org/html/en/reference/algebras/sage/algebras/clifford_algebra_element.html).
+
+~~~java
+List<String> cross = math.flow(math.finiteVectors,
+        Collections.singletonList(new RationalVector(Rational.ONE, Rational.of(2), Rational.of(3))))
+        .<RationalExterior>performAlgebraTransfer("Exterior(Q).from-vector")
+        .performOperation("wedge", RationalExterior.fromVector(
+                new RationalVector(Rational.of(4), Rational.of(5), Rational.of(6))))
+        .performOneOperandOperation("hodge-star")
+        .<RationalVector>performAlgebraTransfer("to-vector")
+        .collect(); // ["[-3, 6, -3]"]
+~~~
+
+`Exterior(Q).apply` is registered on Mat(Q) as ILeftProjectionOperation. It sends each generator to the corresponding matrix column and extends by wedge and linearity, returning the exterior wrapper with the matrix row count as its ambient dimension. Thus it is the covariant induced map on multivectors. Matrix columns must match the source dimension. This operation preserves scalars and wedge products, composes in matrix order, and acts on top exterior degree by the determinant for square matrices. It does not implement pullback of differential forms.
+
+`from-vector` embeds in degree one. `to-vector` rejects nonzero terms outside degree one; zero maps to the zero vector of its retained dimension. `to-scalar` accepts only scalar support, while `scalar-part` is always defined. `zero-in`, `one-in` and `volume-in` are qualified transfers from N, taking ambient dimension as input. Dimension zero has volume equal to the scalar unit.
+
+The representation caps ambient dimension at 20 and sparse support at 100,000 terms, including intermediate results. Wedge and each complete induced matrix action cap candidate coefficient products at 1,000,000. Exhaustion raises IMPLEMENTATION_FAILURE. Arbitrary metrics, manifold differential forms and exterior derivatives remain outside this carrier. NativeExteriorTest covers basis sign oracles, associativity, Hodge and insertion identities, all 729 ternary cross-product pairs, all 729 ternary 2 by 3 minor maps, all 512 binary 3 by 3 determinants, exact large coefficients, resource limits and serialized native flows.
 
 ## Finite topology through the existing flow API
 
