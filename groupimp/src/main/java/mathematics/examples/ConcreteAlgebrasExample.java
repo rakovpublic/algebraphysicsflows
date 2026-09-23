@@ -14,6 +14,8 @@ import mathematics.structures.FiniteAdjunction;
 import mathematics.structures.FiniteCone;
 import mathematics.structures.FiniteCocone;
 import mathematics.linear.RationalVector;
+import mathematics.linear.RationalMatrix;
+import mathematics.linear.RationalAffineSpace;
 import mathematics.numbers.Rational;
 import java.math.BigInteger;
 import java.util.*;
@@ -37,6 +39,12 @@ public final class ConcreteAlgebrasExample {
                 .performOperation("divide",Rational.of(2)).collect());
         System.out.println("Vector x scalar -> vector (flat): "+math.flow(math.vectors,Collections.singletonList(new RationalVector(Rational.ONE,Rational.of(2))))
                 .performFlatCustomMemberOperation("scale-flat",Rational.of(3)).collect());
+        RationalMatrix rectangular=new RationalMatrix(new Rational[][] {
+                {Rational.ONE,Rational.of(2),Rational.of(3)},
+                {Rational.of(2),Rational.of(4),Rational.of(6)}});
+        System.out.println("Rectangular system solution at parameters [-1, 2]: "+math.flow(math.rectangularMatrices,Collections.singletonList(rectangular))
+                .<RationalAffineSpace,RationalVector>performAlgebraUnsafe("Affine(Q).solve",new RationalVector(Rational.ONE,Rational.of(2)))
+                .performLeftProjectionOperation("at",new RationalVector(Rational.of(-1),Rational.of(2))).collect());
         System.out.println("Integral of x^2 from 0 to 1: "+math.flow(math.polynomials,Collections.singletonList(new Polynomial(Rational.ZERO,Rational.ZERO,Rational.ONE)))
                 .<Rational,Pair<Rational,Rational>>performAlgebraUnsafe("integrate",new Pair<>(Rational.ZERO,Rational.ONE)).collect());
         System.out.println("F5: 3 / 2 = "+math.primeFields.get(0).algebra().buildAlgebraItem(math.primeFields.get(0).member(3))

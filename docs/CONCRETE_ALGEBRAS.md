@@ -1,6 +1,6 @@
 # Concrete algebras connected to MathTool
 
-`new ConcreteMathematics()` creates real `Algebra<T>` instances and registers their native operations in the existing `MathTool`. It includes N, Z, Q, Q(i), Boolean, Q^2, Mat2(Q), Q[x], Q(x), S3, Z/6Z, finite sets of integers, rational samples, finite integer probability measures, finite simplicial complexes, finite integer relations/functions, finite categories/functors/natural transformations, and F5 (named Z/5Z). Each construction owns its algebra instances; separate tools do not share mutable registrations.
+`new ConcreteMathematics()` creates real `Algebra<T>` instances and registers their native operations in the existing `MathTool`. It includes N, Z, Q, Q(i), Boolean, Q^2, Mat2(Q), Vec(Q), Mat(Q), Affine(Q), Q[x], Q(x), S3, Z/6Z, finite sets of integers, rational samples, finite integer probability measures, finite simplicial complexes, finite integer relations/functions, finite categories/functors/natural transformations, and F5 (named Z/5Z). Each construction owns its algebra instances; separate tools do not share mutable registrations.
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
@@ -58,6 +58,9 @@ List<String> values = math.flow(math.naturals,
 | RationalComplexField / Q(i) | add, subtract, multiply, divide | negate, conjugate, norm-squared -> Q | Q(i).embed-rational on Q -> Q(i) |
 | RationalVectorSpace / Q^n | add, subtract | negate | scale by Q -> Q^n; dot -> Q; flat scale-flat and scale-signs |
 | RationalMatrixAlgebra / Matn(Q) | add, subtract, multiply | negate, transpose, inverse, determinant -> Q, trace -> Q, rank -> N | scale by Q; apply to Q^n; solve with nonsingular matrix |
+| RationalVectorFamily / Vec(Q) | partial add, subtract, dot -> Q | negate; dimension -> N; flat entries -> Q; zero-like | scale by Q; fixed-carrier conversions; empty vector constant |
+| RationalMatrixFamily / Mat(Q) | partial add, subtract, multiply; equal -> Boolean | transpose, RREF; rank/nullity -> N; flat pivot columns -> N; flat nullspace/row-space/column-space bases -> Vec(Q); rows, columns, shape counts | scale by Q; apply -> Vec(Q); fixed-carrier conversions; zero-like; partial inverse/determinant/trace |
+| RationalAffineSpaceAlgebra / Affine(Q) | equal -> Boolean | particular -> Vec(Q); flat directions -> Vec(Q); dimension/ambient-dimension -> N; is-empty/is-unique | solve Mat(Q) x Vec(Q) -> Affine(Q); contains -> Boolean; at -> Vec(Q) |
 | RationalPolynomialRing / Q[x] | add, subtract, multiply | negate, derivative | derivative-order with N; evaluate at Q -> Q; primitive/integrate; iterate and flat orbit with Pair(Q,N) |
 
 Each algebra registers zero/one constants where applicable on Unit with qualified names such as `Q.zero`, `Z.one`, `Mat2(Q).one`. Vector spaces have zero. Constants are Unit -> carrier transfers.
@@ -99,11 +102,35 @@ See [ConcreteAlgebrasTest](../groupimp/src/test/java/mathematics/ConcreteAlgebra
 Same-algebra unary flat operations use `IOneOperandFlatOperation` and `performOneOperandFlatOperation(name)` (or `performFlatOperation(name)`). Finite-set `subsets` is an example. Cross-algebra unary flat operations use the existing `ITransferFlatOperation`, whose return type is corrected to `List<IAlgebraItem<V>>`; `elements` transfers a finite set to its member algebra. Empty results remain valid, and every emitted member keeps its target algebra.
 
 
-The default initializer currently installs 25 algebras and 361 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
+The default initializer currently installs 28 algebras and 407 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
 
 For overloaded custom-member and unsafe operations, the most specific compatible second-operand class is selected (exact matches take priority). Re-registering the same second class replaces that overload. Ambiguous supertypes are rejected. Mathematical domains sharing one Java class need distinct operation names; overload selection does not infer a domain from a value.
 
-`solve` returns the exact vector solving M x = b for nonsingular square M. Singular matrices are outside this operation, including consistent systems with multiple solutions. `rank` returns a member of N. `derivative-order` accepts arbitrary nonnegative BigInteger orders and returns zero when the order exceeds the finite polynomial degree.
+Fixed `Matn(Q).solve` returns the exact vector solving M x = b for nonsingular square M. Singular matrices are outside that operation; the affine solution operation below handles them. `rank` returns a member of N. `derivative-order` accepts arbitrary nonnegative BigInteger orders and returns zero when the order exceeds the finite polynomial degree.
+
+## Rectangular matrices and affine solution sets
+
+`math.finiteVectors`, `math.rectangularMatrices` and `math.affineSpaces` register `Vec(Q)`, `Mat(Q)` and `Affine(Q)` in the same MathTool. Vec(Q) holds finite rational vectors, including the zero-dimensional vector. Mat(Q) holds dense rational matrices with positive row and column counts. Addition and dot products require matching dimensions; matrix multiplication requires matching inner dimensions. These carriers are families of spaces with partial operations across shapes. `apply` uses ILeftProjectionOperation and returns a Vec(Q) wrapper whose dimension is the number of matrix rows.
+
+RREF uses exact Gauss-Jordan elimination. `pivot-columns` emits zero-based pivot indices in ascending order. `nullspace-basis` emits one direction for each free variable in ascending column order. `row-space-basis` emits nonzero RREF rows; `column-space-basis` emits original pivot columns. These are finite bases, while `rows` and `columns` retain all vectors, including zero vectors and duplicates. Rank plus nullity equals the column count. Determinant and trace require square matrices; inverse also requires nonsingularity.
+
+`Affine(Q).solve`, registered on Mat(Q), accepts a right-hand side with one entry per row. It returns the complete solution set as one member: empty for an inconsistent system, a single point for a unique solution, or a canonical particular point and nullspace directions for an infinite family. The particular solution sets free variables to zero. `at` accepts one rational parameter per direction and returns a Vec(Q) wrapper. `directions` flattens the basis, not the infinitely many solutions. On an empty set, particular, directions, dimension and at are undefined; is-empty, is-unique, ambient-dimension, contains and equality remain defined. Contains returns false for a point in a different ambient dimension. Equality compares canonical solution sets, including ambient dimension, independently of the equation presentation.
+
+~~~java
+RationalMatrix matrix = new RationalMatrix(new Rational[][] {
+        {Rational.ONE, Rational.of(2), Rational.of(3)},
+        {Rational.of(2), Rational.of(4), Rational.of(6)}});
+List<String> point = math.flow(math.rectangularMatrices, Collections.singletonList(matrix))
+        .<RationalAffineSpace, RationalVector>performAlgebraUnsafe("Affine(Q).solve",
+                new RationalVector(Rational.ONE, Rational.of(2)))
+        .performLeftProjectionOperation("at", new RationalVector(Rational.of(-1), Rational.of(2)))
+        .collect(); // ["[-3, -1, 2]"]
+// General solution: [1, 0, 0] + s*[-2, 1, 0] + t*[-3, 0, 1].
+~~~
+
+The original fixed carriers remain available through `math.vectors` and `math.matrices`. Their `Vec(Q).from-fixed` and `Mat(Q).from-fixed` transfers embed values into the families; family `to-fixed` transfers require the configured fixed dimensions. These conversions use the actual registered Algebra instances.
+
+The reduction and solution conventions follow standard exact linear algebra, as documented by [SymPy's matrix API](https://docs.sympy.org/latest/modules/matrices/matrices.html); execution here is Java rational arithmetic. NativeRectangularLinearTest checks all 729 matrices of shape 2 by 3 with entries in {-1,0,1}, each with nine right-hand sides, using an independent minor-based rank oracle and substitution. It also checks empty, unique and infinite solutions, basis independence, large exact coefficients, canonical equality, shape failures and serialized native flows. Zero-sized matrices and sparse representations are not implemented.
 
 ## Finite topology through the existing flow API
 

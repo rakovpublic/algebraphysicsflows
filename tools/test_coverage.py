@@ -102,6 +102,10 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("first vertex to the second", " ".join(records["FiniteCocone.descend"]["required_invariants"]))
         self.assertIn("end at the constant", " ".join(records["FiniteCocone.from-transformation"]["required_invariants"]))
         self.assertIn("never false", " ".join(records["FiniteCocone.is-colimit"]["required_invariants"]))
+        self.assertIn("same dimension", " ".join(records["Vec(Q).dot"]["required_invariants"]))
+        self.assertIn("square and nonsingular", " ".join(records["Mat(Q).inverse"]["required_invariants"]))
+        self.assertIn("Inconsistent systems return an empty", " ".join(records["Affine(Q).solve"]["required_invariants"]))
+        self.assertNotIn("must be nonsingular", " ".join(records["Affine(Q).solve"]["required_invariants"]))
 
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)

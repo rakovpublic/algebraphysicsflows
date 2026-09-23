@@ -36,6 +36,9 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final RationalComplexField complexRationals=new RationalComplexField(rationals);
     public final RationalVectorSpace vectors;
     public final RationalMatrixAlgebra matrices;
+    public final RationalVectorFamily finiteVectors;
+    public final RationalMatrixFamily rectangularMatrices;
+    public final RationalAffineSpaceAlgebra affineSpaces;
     public final List<PrimeField> primeFields;
     public final MathTool mathTool=new MathTool("concrete-mathematics");
     private final List<ConcreteAlgebra<?>> algebras;
@@ -45,6 +48,9 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public ConcreteMathematics(int dimension,int... primes) {
         vectors=new RationalVectorSpace(rationals,dimension);
         matrices=new RationalMatrixAlgebra(rationals,vectors,naturals);
+        finiteVectors=new RationalVectorFamily(rationals,naturals,vectors);
+        rectangularMatrices=new RationalMatrixFamily(rationals,finiteVectors,naturals,booleans,matrices);
+        affineSpaces=new RationalAffineSpaceAlgebra(rectangularMatrices,finiteVectors,naturals,booleans);
         List<PrimeField> fields=new ArrayList<>();
         Set<Integer> seen=new HashSet<>();
         for(int prime : primes) {
@@ -52,7 +58,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
             fields.add(new PrimeField(unit,prime));
         }
         primeFields=Collections.unmodifiableList(fields);
-        List<ConcreteAlgebra<?>> values=new ArrayList<>(Arrays.asList(booleans,naturals,integers,rationals,complexRationals,vectors,matrices,polynomials,rationalFunctions,integerSets,samples,integerProbabilities,complexes,integerRelations,permutations,residues,integerFunctions,categories,functors,naturalTransformations,equivalences,adjunctions,cones,cocones));
+        List<ConcreteAlgebra<?>> values=new ArrayList<>(Arrays.asList(booleans,naturals,integers,rationals,complexRationals,vectors,matrices,finiteVectors,rectangularMatrices,affineSpaces,polynomials,rationalFunctions,integerSets,samples,integerProbabilities,complexes,integerRelations,permutations,residues,integerFunctions,categories,functors,naturalTransformations,equivalences,adjunctions,cones,cocones));
         values.addAll(fields); algebras=Collections.unmodifiableList(values);
         for(ConcreteAlgebra<?> algebra : algebras) {
             algebra.register(mathTool);

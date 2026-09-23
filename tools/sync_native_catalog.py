@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DATABASE = ROOT / "mathematics-coverage.json"
 MANIFEST = ROOT / "groupimp/src/test/resources/mathematics/concrete-catalog.tsv"
-DATE = "2026-09-22"
+DATE = "2026-09-23"
 OWNERS = {
     "BooleanAlgebra": ("Boolean", "Boolean truth values with Boolean operations"),
     "NaturalSemiring": ("N", "Nonnegative arbitrary precision integers with addition and multiplication"),
@@ -19,6 +19,9 @@ OWNERS = {
     "RationalComplexField": ("Q(i)", "Pairs of rational coordinates; a proper subfield of the complex numbers"),
     "RationalVectorSpace": ("Q^2", "Fixed-dimensional rational vectors; default dimension two"),
     "RationalMatrixAlgebra": ("Mat2(Q)", "Fixed positive-dimensional square rational matrices; default dimension two"),
+    "RationalVectorFamily": ("Vec(Q)", "Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations"),
+    "RationalMatrixFamily": ("Mat(Q)", "Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases"),
+    "RationalAffineSpaceAlgebra": ("Affine(Q)", "Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension"),
     "RationalPolynomialRing": ("Q[x]", "Finite univariate polynomials with canonical rational coefficients"),
     "RationalFunctionField": ("Q(x)", "Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator"),
     "IntegerSetAlgebra": ("FiniteSet(Z)", "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets"),
@@ -53,6 +56,9 @@ INTERFACES = {
     "IUnsafeFlatOperation": "flat/MixedFlatOperation",
 }
 EXTRA_TESTS = {
+    "RationalVectorFamily": "NativeRectangularLinearTest",
+    "RationalMatrixFamily": "NativeRectangularLinearTest",
+    "RationalAffineSpaceAlgebra": "NativeRectangularLinearTest",
     "IntegerSetAlgebra": "NativeFlatAndSetTest",
     "RationalPolynomialRing": "NativeDynamicsTest",
     "RationalFunctionField": "NativeRationalFunctionTest",
@@ -107,6 +113,53 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "RationalVectorFamily": {
+        "add": "Both vectors have the same dimension, including dimension zero.",
+        "subtract": "Both vectors have the same dimension.",
+        "dot": "Both vectors have the same dimension; the empty dot product is zero.",
+        "scale": "Multiply every entry by the rational scalar, retaining dimension.",
+        "dimension": "Return the stored nonnegative vector dimension.",
+        "entries": "Emit entries in coordinate order, retaining repeated values; an empty vector emits no entries.",
+        "zero-like": "Return the zero vector in the input's dimension.",
+        "from-fixed": "Embed the existing fixed-dimensional vector carrier into the family without changing coordinates.",
+        "to-fixed": "The vector dimension must match the configured fixed-dimensional target carrier.",
+        "empty": "The unique zero-dimensional vector, not a zero vector of every dimension.",
+    },
+    "RationalMatrixFamily": {
+        "add": "Both matrices have identical row and column counts.",
+        "subtract": "Both matrices have identical row and column counts.",
+        "multiply": "The first matrix's column count equals the second matrix's row count; the result retains the outer dimensions.",
+        "transpose": "Swap the positive row and column dimensions.",
+        "apply": "Vector dimension equals matrix column count; the wrapped result vector has the matrix's row count.",
+        "rref": "Exact Gauss-Jordan elimination returns reduced row-echelon form with the original positive shape.",
+        "rank": "Return the exact rational matrix rank.",
+        "nullity": "Return column count minus rank.",
+        "pivot-columns": "Emit zero-based pivot columns in ascending order.",
+        "nullspace-basis": "Emit one canonical kernel vector per free column, setting that free coordinate to one and the other free coordinates to zero; full column rank emits no vectors.",
+        "row-space-basis": "Emit the nonzero rows of the reduced row-echelon form, in pivot order.",
+        "column-space-basis": "Emit the original matrix's pivot columns, not the reduced matrix's columns.",
+        "rows": "Emit all row vectors in order, retaining zero and repeated rows.",
+        "columns": "Emit all column vectors in order, retaining zero and repeated columns.",
+        "from-fixed": "Embed the configured square matrix carrier into the family.",
+        "to-fixed": "Both dimensions must match the configured fixed square matrix carrier.",
+        "zero-like": "Return the zero matrix of exactly the input shape.",
+        "inverse": "The matrix must be square and nonsingular.",
+        "determinant": "The matrix must be square; singular matrices have determinant zero.",
+        "trace": "The matrix must be square.",
+        "equal": "Equality includes both dimensions and every exact rational entry.",
+    },
+    "RationalAffineSpaceAlgebra": {
+        "solve": "Right-hand side dimension equals the positive matrix row count. Inconsistent systems return an empty affine set; consistent singular and rectangular systems return a particular solution plus canonical kernel directions.",
+        "particular": "The affine set is nonempty; return its canonical solution with every free coordinate zero.",
+        "directions": "The affine set is nonempty; emit a finite nullspace basis in ascending free-column order. A unique solution emits no directions.",
+        "dimension": "The affine set is nonempty; return the number of independent free rational parameters.",
+        "ambient-dimension": "Return the original positive number of unknowns, including for empty solution sets.",
+        "is-empty": "Check whether the original rational linear system is inconsistent.",
+        "is-unique": "True exactly for a nonempty zero-dimensional affine set.",
+        "contains": "Compare the point against the canonical parametrization; empty sets or vectors of the wrong ambient dimension return false.",
+        "at": "The affine set is nonempty and the parameter vector has one entry per free variable. Return particular plus the corresponding linear combination of directions, wrapped in Vec(Q).",
+        "equal": "Compare canonical solution sets within the same ambient dimension, independently of the input equation presentation.",
+    },
     "FiniteCoconeAlgebra": {
         "diagram": "Return the retained finite diagram J->C.",
         "vertex": "Return the target vertex of all cocone legs; retain it even for an empty shape.",
@@ -397,6 +450,16 @@ def record(identifier, owner, concept, paths, operation=None):
         value["known_limitations"].append("The shared opposite-cone search retains the 128-arrow/object category cap, 10000 enumerated cones and 1000000 search steps. Exhaustion raises IMPLEMENTATION_FAILURE. Only explicit finite diagrams and categories are supported.")
         value["references"] += ["https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/Cones.html",
                                 "https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Limits/IsLimit.html"]
+    if owner in ("RationalVectorFamily", "RationalMatrixFamily", "RationalAffineSpaceAlgebra"):
+        value["references"].append("https://docs.sympy.org/latest/modules/matrices/matrices.html")
+    if owner == "RationalVectorFamily":
+        value["known_limitations"].append("This is a family of different vector spaces, not one vector space across all dimensions. Dimension checks run at operation execution; entries are materialized exactly.")
+    if owner == "RationalMatrixFamily":
+        value["known_limitations"].append("Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.")
+        value["required_invariants"].append("Shapes are stored explicitly. RREF uses exact rational row operations; bases preserve rank-nullity and declared coordinate dimensions.")
+    if owner == "RationalAffineSpaceAlgebra":
+        value["known_limitations"].append("Finite linear systems over Q with a positive number of equations and unknowns. Infinite solution sets are parametrized by a finite basis, never enumerated. Empty sets retain ambient dimension and have no particular point, direction basis or affine dimension operation result.")
+        value["required_invariants"].append("The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization.")
     if owner == "RationalFunctionField":
         value["known_limitations"].append("Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented.")
         value["references"].append("https://docs.sympy.org/latest/modules/polys/domainsref.html")
@@ -428,6 +491,12 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("Vec(Q)", "Family of finite rational vectors", "mathematics.linear.RationalVector",
+         ["Finite nonnegative dimension", "Exact rational entries", "Dimension-sensitive operations check compatible input lengths"], ["Q", "Q^2", "N"]),
+        ("Mat(Q)", "Family of positive rectangular rational matrices", "mathematics.linear.RationalMatrix",
+         ["Positive row and column counts", "Rectangular immutable exact entries", "Shape-sensitive operations check dimensions"], ["Q", "Vec(Q)", "Mat2(Q)", "N"]),
+        ("Affine(Q)", "Exact rational affine solution sets", "mathematics.linear.RationalAffineSpace",
+         ["Retained positive ambient dimension", "Empty set or canonical particular point and ordered independent kernel basis", "Every parameter tuple determines exactly one solution"], ["Mat(Q)", "Vec(Q)", "Q", "N"]),
         ("FiniteCocone", "Validated cocones over finite diagrams", "mathematics.structures.FiniteCocone",
          ["Finite diagram and retained target vertex", "Typed legs from every diagram object to the vertex", "Every cocone equation checked; empty shapes retain the vertex"], ["FiniteCone", "FiniteFunctor", "FiniteCategory", "FiniteNaturalTransformation", "FiniteFunction(Z,Z)", "Z"]),
         ("FiniteCone", "Validated cones over finite diagrams", "mathematics.structures.FiniteCone",

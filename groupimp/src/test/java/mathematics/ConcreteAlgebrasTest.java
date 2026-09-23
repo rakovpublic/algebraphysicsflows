@@ -27,7 +27,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all361RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all407RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String category12="Category(objects=[1, 2], arrows={1=(1,1), 2=(2,2)}, identities={1=1, 2=2}, composition={(1,1)=1, (2,2)=2})";
@@ -73,6 +73,9 @@ public class ConcreteAlgebrasTest {
         expected.put("RationalComplexField","(4)+(3)i|(-2)+(1)i|(1)+(7)i|(1/2)+(1/2)i|(-1)+(-2)i|(1)+(-2)i|5|(6)+(0)i|(0)+(0)i|(1)+(0)i");
         expected.put("RationalVectorSpace","[4, 6]|[-2, -2]|[-1, -2]|[2, 4]|[18, 24]|[[18, 24]]|11|[[2, 4]]|[[2, 4], [-2, -4]]|[0, 0]");
         expected.put("RationalMatrixAlgebra","[[3, 2], [3, 6]]|[[2, 4], [6, 8]]|[[-1, 2], [3, 2]]|[[-1, -2], [-3, -4]]|[[1, 3], [2, 4]]|[[-2, 1], [3/2, -1/2]]|-2|5|[[2, 4], [6, 8]]|[11, 25]|[-2, 5/2]|[[0, 0], [0, 0]]|[[1, 0], [0, 1]]|2");
+        expected.put("RationalVectorFamily","[4, 4, 4]|[-2, 0, 2]|[-1, -2, -3]|[2, 4, 6]|10|3|[1, 2, 3]|[0, 0, 0]|[1, 2]|[1, 2]|[]");
+        expected.put("RationalMatrixFamily","[[4, 4, 4], [2, 5, 6]]|[[-2, 0, 2], [2, 3, 6]]|[[4, 5], [8, 10]]|[[-1, -2, -3], [-2, -4, -6]]|[[1, 2], [2, 4], [3, 6]]|[[2, 4, 6], [4, 8, 12]]|[10, 20]|[[1, 2, 3], [0, 0, 0]]|1|2|[0]|[[-2, 1, 0], [-3, 0, 1]]|[[1, 2, 3]]|[[1, 2]]|[[1, 2, 3], [2, 4, 6]]|[[1, 2], [2, 4], [3, 6]]|2|3|false|[[1, 2], [3, 4]]|[[1, 2], [3, 4]]|[[0, 0, 0], [0, 0, 0]]|[[-2, 1], [3/2, -1/2]]|-2|5");
+        expected.put("RationalAffineSpaceAlgebra","Affine(particular=[1, 0, 0], directions=[[-2, 1, 0], [-3, 0, 1]])|[1, 0, 0]|[[-2, 1, 0], [-3, 0, 1]]|2|3|false|false|false|[-3, -1, 2]|false");
         expected.put("RationalPolynomialRing","Q[x][3, 3, 1]|Q[x][2, 5, 4, 1]|Q[x][-1, 1, 1]|Q[x][-1, -2, -1]|Q[x][2, 2]|9|Q[x][2, 1, 1, 1/3]|7/3|Q[x][0]|Q[x][1]|Q[x][0, 1]|Q[x][1]|Q[x][1, 1]|Q[x][1]|Q[x][9, 6, 1]|Q[x][1, 2, 1]|[Q[x][0, 1], Q[x][1]]|Q[x][2]|4|[0, 1, 4]");
         expected.put("PrimeField","0 (mod 5)|1 (mod 5)|1 (mod 5)|4 (mod 5)|2 (mod 5)|2 (mod 5)|0 (mod 5)|1 (mod 5)");
         expected.put("IntegerSetAlgebra","[1, 2, 3]|[1, 2]|[]|[3]|true|false|true|[1, 2]|[1]|2|[1, 2]|[[], [1], [2], [1, 2]]|[3]|[]|[1]|[2]|3|4|[1]|[2]");
@@ -94,12 +97,15 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(361,count);
+        assertEquals(407,count);
     }
     @SuppressWarnings({"unchecked","rawtypes"})
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
         Algebra source=math.mathTool.getAlgebra(entry.first.getAlgebraName());
         IAlgebraItem item=source.buildAlgebraItem(sample(math,source.getAlgebraName(),0));
+        if(entry.id.equals("Vec(Q).to-fixed")) item=source.buildAlgebraItem(new RationalVector(Rational.ONE,Rational.of(2)));
+        if(Arrays.asList("Mat(Q).to-fixed","Mat(Q).inverse","Mat(Q).determinant","Mat(Q).trace").contains(entry.id))
+            item=source.buildAlgebraItem(sample(math,"Mat2(Q)",0));
         if(entry.id.startsWith("FiniteCone.")) {
             FiniteCone cone=(FiniteCone)sample(math,"FiniteCone",0);
             if(source==math.functors.algebra()) item=source.buildAlgebraItem(cone.diagram);
@@ -117,6 +123,9 @@ public class ConcreteAlgebrasTest {
         if(operation instanceof IOneOperandOperation) return item.performOneOperandOperation(alias).perform().getResult().toString();
         if(operation instanceof ITransferOperation) return item.performAlgebraTransfer(alias).perform().getResult().toString();
         Object second=entry.second==null?null:sample(math,entry.second.getAlgebraName(),1);
+        if(entry.id.equals("Mat(Q).multiply")) second=new RationalMatrix(new Rational[][]{{Rational.ONE,Rational.ZERO},{Rational.ZERO,Rational.ONE},{Rational.ONE,Rational.ONE}});
+        if(entry.id.equals("Affine(Q).solve")) second=new RationalVector(Rational.ONE,Rational.of(2));
+        if(entry.id.equals("Affine(Q).at")) second=new RationalVector(Rational.of(-1),Rational.of(2));
         if(entry.first==math.adjunctions.algebra() && entry.second==math.categories.labelPairs) second=new Pair<>(BigInteger.ONE,BigInteger.valueOf(2));
         if(entry.id.equals("Q[x].divide-exact")) second=new Polynomial(Rational.ONE,Rational.ONE);
         if(entry.flat) {
@@ -151,6 +160,11 @@ public class ConcreteAlgebrasTest {
             case "Q": return Rational.of(index==0?6:2);
             case "Q(i)": return index==0?new RationalComplex(Rational.ONE,Rational.of(2)):new RationalComplex(Rational.of(3),Rational.ONE);
             case "Q^2": return index==0?new RationalVector(Rational.ONE,Rational.of(2)):new RationalVector(Rational.of(3),Rational.of(4));
+            case "Vec(Q)": return index==0?new RationalVector(Rational.ONE,Rational.of(2),Rational.of(3)):new RationalVector(Rational.of(3),Rational.of(2),Rational.ONE);
+            case "Mat(Q)": return new RationalMatrix(index==0
+                    ?new Rational[][]{{Rational.ONE,Rational.of(2),Rational.of(3)},{Rational.of(2),Rational.of(4),Rational.of(6)}}
+                    :new Rational[][]{{Rational.of(3),Rational.of(2),Rational.ONE},{Rational.ZERO,Rational.ONE,Rational.ZERO}});
+            case "Affine(Q)": return ((RationalMatrix)sample(math,"Mat(Q)",0)).solve(new RationalVector(Rational.of(index==0?1:2),Rational.of(index==0?2:4)));
             case "Mat2(Q)": return new RationalMatrix(index==0
                     ?new Rational[][] {{Rational.ONE,Rational.of(2)},{Rational.of(3),Rational.of(4)}}
                     :new Rational[][] {{Rational.of(2),Rational.ZERO},{Rational.ZERO,Rational.of(2)}});

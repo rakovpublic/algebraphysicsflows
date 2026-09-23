@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 793 |
-| DIRECTLY_SUPPORTED | 550 |
+| Scoped records | 842 |
+| DIRECTLY_SUPPORTED | 599 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 409 |
+| IMPLEMENTED | 458 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 477 |
+| MACHINE_TESTED | 526 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 386 | 386 | 0 | 0 | 0 | 386 | 0 | 0 |
+| Concrete MathTool algebras | 435 | 435 | 0 | 0 | 0 | 435 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -186,6 +186,16 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 
 | Concept | Representation | Implementation | Scope |
 | --- | --- | --- | --- |
+| Affine(Q).ambient-dimension | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).ambient-dimension |
+| Affine(Q).at | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).at |
+| Affine(Q).contains | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).contains |
+| Affine(Q).dimension | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).dimension |
+| Affine(Q).directions | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).directions |
+| Affine(Q).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).equal |
+| Affine(Q).is-empty | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).is-empty |
+| Affine(Q).is-unique | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).is-unique |
+| Affine(Q).particular | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).particular |
+| Affine(Q).solve | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).solve |
 | Boolean.and | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.and |
 | Boolean.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.equal |
 | Boolean.implies | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.implies |
@@ -413,6 +423,31 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | FiniteSimplicialAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels and unreduced homology over F2 |
 | IntegerRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient |
 | IntegerSetAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets |
+| Mat(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).add |
+| Mat(Q).apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).apply |
+| Mat(Q).column-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).column-count |
+| Mat(Q).column-space-basis | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).column-space-basis |
+| Mat(Q).columns | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).columns |
+| Mat(Q).determinant | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).determinant |
+| Mat(Q).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).equal |
+| Mat(Q).from-fixed | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).from-fixed |
+| Mat(Q).inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).inverse |
+| Mat(Q).multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).multiply |
+| Mat(Q).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).negate |
+| Mat(Q).nullity | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).nullity |
+| Mat(Q).nullspace-basis | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).nullspace-basis |
+| Mat(Q).pivot-columns | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).pivot-columns |
+| Mat(Q).rank | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).rank |
+| Mat(Q).row-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).row-count |
+| Mat(Q).row-space-basis | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).row-space-basis |
+| Mat(Q).rows | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).rows |
+| Mat(Q).rref | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).rref |
+| Mat(Q).scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).scale |
+| Mat(Q).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).subtract |
+| Mat(Q).to-fixed | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).to-fixed |
+| Mat(Q).trace | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).trace |
+| Mat(Q).transpose | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).transpose |
+| Mat(Q).zero-like | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).zero-like |
 | Mat2(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).add |
 | Mat2(Q).apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).apply |
 | Mat2(Q).determinant | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).determinant |
@@ -501,12 +536,15 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Q^2.scale-signs | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed-dimensional rational vectors; default dimension two; native operation Q^2.scale-signs |
 | Q^2.subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed-dimensional rational vectors; default dimension two; native operation Q^2.subtract |
 | Q^2.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed-dimensional rational vectors; default dimension two; native operation Q^2.zero |
+| RationalAffineSpaceAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension |
 | RationalComplexField | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers |
 | RationalField | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field |
 | RationalFunctionField | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator |
 | RationalMatrixAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two |
+| RationalMatrixFamily | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases |
 | RationalPolynomialRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients |
 | RationalSampleAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations |
+| RationalVectorFamily | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations |
 | RationalVectorSpace | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed-dimensional rational vectors; default dimension two |
 | ResidueRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one |
 | S3.apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree; native operation S3.apply |
@@ -533,6 +571,17 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Sample(Q).scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations; native operation Sample(Q).scale |
 | Sample(Q).size | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations; native operation Sample(Q).size |
 | SymmetricGroup | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree |
+| Vec(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations; native operation Vec(Q).add |
+| Vec(Q).dimension | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations; native operation Vec(Q).dimension |
+| Vec(Q).dot | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations; native operation Vec(Q).dot |
+| Vec(Q).empty | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations; native operation Vec(Q).empty |
+| Vec(Q).entries | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations; native operation Vec(Q).entries |
+| Vec(Q).from-fixed | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations; native operation Vec(Q).from-fixed |
+| Vec(Q).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations; native operation Vec(Q).negate |
+| Vec(Q).scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations; native operation Vec(Q).scale |
+| Vec(Q).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations; native operation Vec(Q).subtract |
+| Vec(Q).to-fixed | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations; native operation Vec(Q).to-fixed |
+| Vec(Q).zero-like | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations; native operation Vec(Q).zero-like |
 | Z.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient; native operation Z.add |
 | Z.divide-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient; native operation Z.divide-rational |
 | Z.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient; native operation Z.equal |

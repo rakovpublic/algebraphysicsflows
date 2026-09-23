@@ -53,7 +53,7 @@ The executor is finite and eager at collection. Shared flow facades are a mutabl
 | Missing result algebra in a flow | AlgebraNotExistsException before plan mutation |
 | Explicit materialization limit | MathFailure with IMPLEMENTATION_FAILURE |
 
-Examples of undefined operations include division by zero, singular matrix solve/inverse, sample variance with fewer than two observations, and conditioning on a zero-probability event. A singular consistent system remains outside the implemented unique nonsingular solve contract. Native execution does not automatically convert arbitrary callback exceptions to structured outcomes.
+Examples of undefined operations include division by zero, singular matrix inversion or fixed Matn(Q).solve, sample variance with fewer than two observations, and conditioning on a zero-probability event. Affine(Q).solve accepts singular and rectangular systems with matching right-hand sides; inconsistency yields an empty affine solution set. Operations on variable-dimensional vectors and matrices check dimensions at execution. Native execution does not automatically convert arbitrary callback exceptions to structured outcomes.
 
 Partiality is a declaration, not a proof of totality or termination. Algebra predicates and bodies are trusted application code. Law descriptions do not confer proof status. Exact arithmetic introduces no floating-point approximation; it does not promise resource-unbounded computation or formal verification.
 
@@ -67,12 +67,13 @@ Partiality is a declaration, not a proof of totality or termination. Algebra pre
 | LazySequence | Natural-indexed generator; only requested terms/prefixes computed |
 | FiniteDistribution | Finite support with nonnegative rational masses summing to one |
 | PrimitiveFamily | Rational constant parameter -> polynomial primitive |
+| RationalAffineSpace | Empty solution set or canonical particular point plus a finite basis of rational directions |
 
 Sets, distributions and solution families can be single scalar members. They are flattened only by an explicit operation. Materializing all subsets is capped at 20 input elements; exceeding it is an implementation restriction, not mathematical nonexistence.
 
 ## Concrete scopes and optional prototype
 
-The default initializer has 25 algebra builders and 361 native registrations. [Concrete examples](CONCRETE_ALGEBRAS.md) cover arithmetic, finite sets/functions/categories, statistics, probability, vectors, matrices and polynomials. Q(i) is a proper subfield of C. Finite symbolic expressions are not all R. Polynomial differentiation does not decide differentiability of arbitrary callbacks.
+The default initializer has 28 algebra builders and 407 native registrations. [Concrete examples](CONCRETE_ALGEBRAS.md) cover arithmetic, finite sets/functions/categories, statistics, probability, vectors, rectangular matrices, affine solution sets and polynomials. Vec(Q) and Mat(Q) are families with partial dimension-sensitive operations; they are not one vector space or ring across all dimensions. Q(i) is a proper subfield of C. Finite symbolic expressions are not all R. Polynomial differentiation does not decide differentiability of arbitrary callbacks.
 
 The earlier mathematics.core Domain/Signature/UnaryOperation/BinaryOperation/FlatOperation/Outcome prototype remains separately available and tested, with StandardMathematics and LegacyAdapters. **ConcreteMathematics does not use that prototype to execute operations.** Its Domain compatibility is identity-based; membership can be MEMBER, NOT_MEMBER or UNKNOWN. Its evaluate method captures categorized failures and composition tracks accuracy labels. These are prototype properties, not native Algebra guarantees. Prototype Outcome.trace lists planned pipeline ids, not executed events.
 

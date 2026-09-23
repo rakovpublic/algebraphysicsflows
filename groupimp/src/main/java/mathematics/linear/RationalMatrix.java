@@ -21,6 +21,37 @@ public final class RationalMatrix implements Serializable {
     public int rows() { return rows; }
     public int columns() { return columns; }
     public Rational get(int r,int c) { return entries[r][c]; }
+    public RationalVector row(int index) { return new RationalVector(entries[index]); }
+    public RationalVector column(int index) {
+        Rational[] values=new Rational[rows]; for(int r=0;r<rows;r++) values[r]=get(r,index);
+        return new RationalVector(values);
+    }
+    public List<RationalVector> rowVectors() {
+        List<RationalVector> result=new ArrayList<>(); for(int r=0;r<rows;r++) result.add(row(r));
+        return Collections.unmodifiableList(result);
+    }
+    public List<RationalVector> columnVectors() {
+        List<RationalVector> result=new ArrayList<>(); for(int c=0;c<columns;c++) result.add(column(c));
+        return Collections.unmodifiableList(result);
+    }
+    public RationalMatrix scale(Rational scalar) {
+        Rational[][] values=copy();
+        for(int r=0;r<rows;r++) for(int c=0;c<columns;c++) values[r][c]=values[r][c].multiply(scalar);
+        return new RationalMatrix(values);
+    }
+    public RationalMatrix rref() { return new RationalRowReduction(this,null).matrix; }
+    public List<Integer> pivotColumns() { return new RationalRowReduction(this,null).pivots; }
+    public List<RationalVector> nullspace() { return new RationalRowReduction(this,null).nullspace(); }
+    public List<RationalVector> rowSpace() {
+        RationalRowReduction reduction=new RationalRowReduction(this,null); List<RationalVector> result=new ArrayList<>();
+        for(int r=0;r<reduction.pivots.size();r++) result.add(reduction.matrix.row(r));
+        return Collections.unmodifiableList(result);
+    }
+    public List<RationalVector> columnSpace() {
+        List<RationalVector> result=new ArrayList<>(); for(int c : pivotColumns()) result.add(column(c));
+        return Collections.unmodifiableList(result);
+    }
+    public RationalAffineSpace solve(RationalVector rhs) { return RationalAffineSpace.solve(this,rhs); }
     private Rational[][] copy() { Rational[][] copy=new Rational[rows][]; for(int r=0;r<rows;r++) copy[r]=entries[r].clone(); return copy; }
     private void square() { if (rows!=columns) throw MathFailure.invalid("A square matrix is required"); }
     public static RationalMatrix identity(int n) {
