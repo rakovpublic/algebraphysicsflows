@@ -28,6 +28,7 @@ OWNERS = {
     "RationalPolynomialRing": ("Q[x]", "Finite univariate polynomials with canonical rational coefficients"),
     "RationalMultivariatePolynomialAlgebra": ("Poly(Q)", "Sparse exact rational polynomials with an explicit ordered positive input dimension"),
     "RationalPolynomialMapAlgebra": ("PolynomialMap(Q)", "Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions"),
+    "PolynomialDifferentialFormAlgebra": ("PolynomialForm(Q)", "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces"),
     "RationalFunctionField": ("Q(x)", "Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator"),
     "IntegerSetAlgebra": ("FiniteSet(Z)", "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets"),
     "RationalSampleAlgebra": ("Sample(Q)", "Finite ordered rational samples retaining repeated observations"),
@@ -71,6 +72,7 @@ EXTRA_TESTS = {
     "RationalPolynomialRing": "NativeDynamicsTest",
     "RationalMultivariatePolynomialAlgebra": "NativeMultivariateCalculusTest",
     "RationalPolynomialMapAlgebra": "NativeMultivariateCalculusTest",
+    "PolynomialDifferentialFormAlgebra": "NativePolynomialFormsTest",
     "RationalFunctionField": "NativeRationalFunctionTest",
     "RationalSampleAlgebra": "NativeStatisticsProbabilityTest",
     "FiniteProbabilityAlgebra": "NativeStatisticsProbabilityTest",
@@ -123,6 +125,42 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "PolynomialDifferentialFormAlgebra": {
+        "add": "Coordinate dimensions agree; add coefficients at matching differential basis masks and remove zeros.",
+        "subtract": "Coordinate dimensions agree; subtract coefficients at matching differential basis masks and remove zeros.",
+        "wedge": "Coordinate dimensions agree. Repeated differentials vanish; increasing coordinate order fixes signs. Polynomial products and basis-pair visits share one work budget.",
+        "negate": "Negate each polynomial coefficient, retaining the coordinate dimension.",
+        "scale": "Multiply each polynomial coefficient by the rational scalar.",
+        "multiply-polynomial": "The scalar polynomial has the form coordinate dimension; multiply every coefficient with a shared work budget.",
+        "exterior-derivative": "For each coefficient f of dx_I, sum partial_j(f)*dx_j wedge dx_I. The degree increases by one and d squared is zero, including mixed-degree forms.",
+        "pullback": "For F:Q^m -> Q^n and a form on Q^n, substitute f(F) in coefficients and replace dx_i by dF_i, yielding a form on Q^m. Pullback is contravariant, preserves wedge and commutes with d; all substitutions and wedges share one work budget.",
+        "interior": "The polynomial vector field maps the form coordinate space to itself. Use left insertion with the natural covector-vector pairing and one shared coefficient-product budget.",
+        "lie-derivative": "The polynomial vector field maps the form coordinate space to itself. Use Cartan's formula L_X=i_X*d+d*i_X; both insertions share a work budget.",
+        "hodge-star": "Use the standard oriented Euclidean coframe, preserving polynomial coefficients and taking signed complementary differential basis masks.",
+        "grade-involution": "Multiply degree-k components by (-1)^k; this supplies the graded product rule even for mixed-degree forms.",
+        "ambient-dimension": "Return the retained positive coordinate dimension, including for zero and scalar forms.",
+        "basis-count": "Count occupied differential basis masks, not scalar polynomial monomials.",
+        "coefficient-term-count": "Sum the nonzero monomial counts of all polynomial coefficients; the representation cap applies to this total.",
+        "degrees": "Emit occupied differential degrees in increasing order; zero has no occupied degrees.",
+        "terms": "Emit one wrapped form per occupied differential basis mask in increasing order, retaining its whole polynomial coefficient.",
+        "coefficients": "Emit the nonzero polynomial coefficients in increasing differential-mask order, retaining duplicates.",
+        "basis-masks": "Emit occupied masks in ascending order; bit i means dx_i and mask zero means the scalar basis.",
+        "grade": "Keep the requested nonnegative differential degree; every degree above the coordinate dimension returns zero.",
+        "evaluate": "The point dimension agrees; evaluate polynomial coefficients and identify the standard coordinate coframe with the registered Exterior(Q) basis, without claiming a general tangent/cotangent identification.",
+        "equal": "Compare coordinate dimensions and all canonical polynomial coefficients, including for constants and zero.",
+        "is-zero": "Zero is exactly empty canonical differential support.",
+        "scalar-part": "Return the degree-zero polynomial coefficient, or zero in the same coordinate dimension.",
+        "to-polynomial": "All positive-degree components vanish; return the scalar polynomial in the same coordinate dimension.",
+        "from-polynomial": "Embed the scalar polynomial as a differential zero-form, retaining its input dimension.",
+        "from-exterior": "The exterior dimension is positive; use the standard coordinate basis identification to create constant polynomial form coefficients.",
+        "to-exterior": "Every coefficient is a constant polynomial; use the standard coordinate coframe identification with the registered exterior basis.",
+        "from-vector-field": "Input and output dimensions agree; lower the polynomial vector field to a one-form with the standard Euclidean metric.",
+        "to-vector-field": "Only degree-one components are present; raise coefficients to a square polynomial vector field with the standard Euclidean metric. Zero maps to the zero field.",
+        "zero-like": "Return the zero form in the same coordinate dimension.",
+        "one-like": "Return the constant scalar unit form in the same coordinate dimension.",
+        "volume-like": "Return dx_0 wedge ... wedge dx_(n-1) with constant unit coefficient and positive coordinate orientation.",
+        "basis": "Emit dx_0 through dx_(n-1) as wrapped one-forms in coordinate order.",
+    },
     "RationalMultivariatePolynomialAlgebra": {
         "add": "Both polynomials retain the same input dimension; add coefficients and discard zeros.",
         "subtract": "Both polynomials retain the same input dimension; subtract coefficients and discard zeros.",
@@ -630,6 +668,12 @@ def record(identifier, owner, concept, paths, operation=None):
         value["required_invariants"].append("Each scalar polynomial retains its positive variable count, with immutable nonnegative exponent tuples and canonical nonzero rational coefficients. Map components share an input space and retain output order.")
         value["known_limitations"].append("At most 32 input variables and 32 map components, total monomial degree 10000, and 100000 nonzero terms per scalar intermediate/output. A multiply, power or complete substitution/composition allows 1000000 candidate coefficient products; exponents for pow are capped at 10000. Cap exhaustion raises IMPLEMENTATION_FAILURE, not mathematical undefinedness.")
         value["known_limitations"].append("Exact rational polynomial coordinate calculus only, with positive dimensions and standard Euclidean coordinates. No arbitrary differentiable callbacks, general smooth functions, manifolds, Groebner bases or multivariate rational functions; no formal proof of the stated identities.")
+    if owner == "PolynomialDifferentialFormAlgebra":
+        value["references"] += ["https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+                                "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"]
+        value["required_invariants"].append("Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action.")
+        value["known_limitations"].append("Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.")
+        value["known_limitations"].append("Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example.")
     if owner == "RationalVectorFamily":
         value["known_limitations"].append("This is a family of different vector spaces, not one vector space across all dimensions. Dimension checks run at operation execution; entries are materialized exactly.")
     if owner == "RationalMatrixFamily":
@@ -671,6 +715,8 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("PolynomialForm(Q)", "Polynomial coordinate differential forms", "mathematics.calculus.PolynomialDifferentialForm",
+         ["Retained positive ordered coordinate dimension", "Increasing differential basis masks with canonical polynomial coefficients", "All coefficient variable counts equal the coordinate dimension; mixed differential degrees allowed"], ["Poly(Q)", "PolynomialMap(Q)", "Exterior(Q)", "Vec(Q)", "Q", "N"]),
         ("Poly(Q)", "Exact rational multivariate polynomial family", "mathematics.calculus.MultivariatePolynomial",
          ["Retained positive ordered variable count", "Nonnegative exponent tuples and exact nonzero rational coefficients", "Canonical immutable sparse support; dimension-sensitive arithmetic is partial"], ["Q", "Q[x]", "N", "Z", "Vec(Q)", "Mat(Q)", "PolynomialMap(Q)"]),
         ("PolynomialMap(Q)", "Exact rational polynomial maps", "mathematics.calculus.PolynomialMap",

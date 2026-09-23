@@ -1,6 +1,6 @@
 # Concrete algebras connected to MathTool
 
-`new ConcreteMathematics()` creates real `Algebra<T>` instances and registers their native operations in the existing `MathTool`. It includes N, Z, Q, Q(i), H(Q), Boolean, Q^2, Mat2(Q), Vec(Q), Mat(Q), Affine(Q), Tensor(Q), Exterior(Q), Q[x], Q(x), Poly(Q), PolynomialMap(Q), S3, Z/6Z, finite sets of integers, rational samples, finite integer probability measures, finite simplicial complexes, finite integer relations/functions, finite categories/functors/natural transformations, and F5 (named Z/5Z). Each construction owns its algebra instances; separate tools do not share mutable registrations.
+`new ConcreteMathematics()` creates real `Algebra<T>` instances and registers their native operations in the existing `MathTool`. It includes N, Z, Q, Q(i), H(Q), Boolean, Q^2, Mat2(Q), Vec(Q), Mat(Q), Affine(Q), Tensor(Q), Exterior(Q), Q[x], Q(x), Poly(Q), PolynomialMap(Q), PolynomialForm(Q), S3, Z/6Z, finite sets of integers, rational samples, finite integer probability measures, finite simplicial complexes, finite integer relations/functions, finite categories/functors/natural transformations, and F5 (named Z/5Z). Each construction owns its algebra instances; separate tools do not share mutable registrations.
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
@@ -55,6 +55,7 @@ List<String> values = math.flow(math.naturals,
 | RationalFunctionField / Q(x) | add, subtract, multiply, divide, compose | negate, inverse, derivative, numerator/denominator | evaluate at Q; equality; polynomial embedding |
 | RationalMultivariatePolynomialAlgebra / Poly(Q) | dimension-checked add, subtract, multiply; equality -> Boolean | negate; degree -> Z; variable/term counts -> N; Laplacian; constant-part -> Q; flat partials, variables, terms and coefficients | partial, primitive by variable index; rational scale; natural powers; evaluate at Vec(Q) -> Q; directional derivative; gradient-at -> second vector carrier; hessian-at -> Mat(Q); Q[x] conversions |
 | RationalPolynomialMapAlgebra / PolynomialMap(Q) | shape-checked add, subtract, compose; equality -> Boolean | negate; input/output dimensions; flat components; divergence -> Poly(Q); curl; constant-part -> Vec(Q); linear-part -> Mat(Q) | evaluate -> second vector carrier; jacobian-at -> Mat(Q); partial/component by index; rational scale; scalar gradient and embedding; matrix embedding; simultaneous substitution into a scalar polynomial |
+| PolynomialDifferentialFormAlgebra / PolynomialForm(Q) | dimension-checked add, subtract, wedge; equality -> Boolean | exterior-derivative; Hodge star; grade involution; scalar-part -> Poly(Q); flat terms, coefficients, masks, degrees and coordinate differentials | rational/polynomial scaling; pullback, insertion and Lie derivative by PolynomialMap(Q); evaluation -> Exterior(Q); grade selection; polynomial, exterior and vector-field conversions |
 | SymmetricGroup / Sn | compose | inverse, order, sign, fixed-point-count, flat cycles | apply and flat orbit at N; integer powers; equality; enumeration |
 | BooleanAlgebra / Boolean | and, or, xor, implies, equal | not | None |
 | RationalComplexField / Q(i) | add, subtract, multiply, divide | negate, conjugate, norm-squared -> Q | Q(i).embed-rational on Q -> Q(i) |
@@ -107,7 +108,7 @@ See [ConcreteAlgebrasTest](../groupimp/src/test/java/mathematics/ConcreteAlgebra
 Same-algebra unary flat operations use `IOneOperandFlatOperation` and `performOneOperandFlatOperation(name)` (or `performFlatOperation(name)`). Finite-set `subsets` is an example. Cross-algebra unary flat operations use the existing `ITransferFlatOperation`, whose return type is corrected to `List<IAlgebraItem<V>>`; `elements` transfers a finite set to its member algebra. Empty results remain valid, and every emitted member keeps its target algebra.
 
 
-The default initializer currently installs 33 algebras and 548 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
+The default initializer currently installs 34 algebras and 582 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
 
 For overloaded custom-member and unsafe operations, the most specific compatible second-operand class is selected (exact matches take priority). Re-registering the same second class replaces that overload. Ambiguous supertypes are rejected. Mathematical domains sharing one Java class need distinct operation names; overload selection does not infer a domain from a value.
 
@@ -263,6 +264,35 @@ List<String> hessian = math.flow(math.multivariatePolynomials, Collections.singl
 Representation limits are 32 variables, 32 map components, total monomial degree 10,000, and 100,000 nonzero terms per scalar intermediate or output. Each multiply, power, or complete substitution/composition has a budget of 1,000,000 candidate coefficient products; map composition shares the budget across all components. Natural powers are capped at exponent 10,000. Exceeding a limit raises IMPLEMENTATION_FAILURE. Wrong dimensions, missing variable/component indices, and unsupported scalar conversions raise OPERATION_UNDEFINED. Coefficient bit lengths remain arbitrary precision and can still grow quickly. The implementation covers polynomial coordinate calculus with positive dimensions; it does not provide arbitrary smooth-function spaces, zero-dimensional maps, multivariate rational functions, Groebner bases, or manifold calculus.
 
 NativeMultivariateCalculusTest checks all 729 bivariate quadratics with coefficients in {-1,0,1} against independently evaluated exact centered differences. It also checks explicit higher-degree derivatives, mixed partials, product and chain rules, exact Taylor restrictions, rectangular Jacobians, right-handed curl, divergence-of-curl and curl-of-gradient identities, primitive conventions, large rational coefficients, immutable representations, shared expansion limits, actual result wrappers and serialized MathTool flows. These checks provide empirical evidence; no formal verification is claimed.
+
+## Polynomial coordinate differential forms
+
+`math.polynomialForms` installs PolynomialForm(Q) in MathTool. A `PolynomialDifferentialForm` is a canonical finite sum of polynomial coefficients times increasing coordinate differentials. Bit i in a basis mask denotes dx_i; mask zero denotes a scalar. Every coefficient has the form's declared variable count, and mixed differential degrees are allowed. Zero coefficients disappear without erasing dimension. `basis-count` counts occupied differential masks; `coefficient-term-count` counts all nonzero scalar monomials across their coefficients. Flat `terms` emits one whole polynomial coefficient times its differential basis element. Flat `basis` emits the coordinate one-forms in order.
+
+`exterior-derivative` computes d(f dx_I) as the sum of partial_j(f) dx_j wedge dx_I. It raises differential degree, squares to zero, and obeys the graded product rule. `grade-involution` supplies the sign for mixed forms. `interior` inserts a polynomial vector field using the natural covector-vector pairing. `lie-derivative` uses Cartan's formula, i_X d + d i_X. Insertion and Lie derivative require a square vector field on the same coordinate space. The [Sage differential-form reference](https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html) documents these coordinate exterior operations and identities.
+
+For F:Q^m -> Q^n, `pullback` takes a form on Q^n to one on Q^m. It substitutes F into every coefficient and replaces each dx_i by dF_i. Composition is contravariant: (F composed with G)* applies F* first, then G*. Pullbacks preserve wedge and commute with exterior differentiation. At a point u, this agrees with evaluating the form at F(u), then applying the transpose of J_F(u) to the coordinate coframe. The pre-existing `Exterior(Q).apply` remains the covariant induced matrix action on multivectors. See [Sage's differentiable-map pullback documentation](https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html).
+
+Polynomial zero-forms transfer from Poly(Q) with `PolynomialForm(Q).from-polynomial`; extraction requires all positive-degree components to vanish. `evaluate` returns the actual registered Exterior(Q) wrapper by identifying the standard coordinate coframe with its basis. `from-exterior` creates constant coefficients and requires positive dimension; `to-exterior` requires every coefficient to be constant. Hodge star and conversions to/from square polynomial vector fields use the standard oriented Euclidean metric. They do not infer a metric on arbitrary manifolds.
+
+```java
+PolynomialMap rotation = new PolynomialMap(
+        MultivariatePolynomial.variable(3, 1).negate(),
+        MultivariatePolynomial.variable(3, 0),
+        MultivariatePolynomial.constant(3, Rational.ZERO));
+List<String> curl = math.flow(math.polynomialMaps, Collections.singletonList(rotation))
+        .<PolynomialDifferentialForm>performAlgebraTransfer("PolynomialForm(Q).from-vector-field")
+        .performOneOperandOperation("exterior-derivative")
+        .performOneOperandOperation("hodge-star")
+        .<PolynomialMap>performAlgebraTransfer("to-vector-field")
+        .performLeftProjectionOperation("evaluate",
+                new RationalVector(Rational.of(2), Rational.of(3), Rational.of(4)))
+        .collect(); // [[0, 0, 2]]
+```
+
+Forms support dimensions 1 through 20, coefficient total degree at most 10,000, and at most 100,000 scalar monomials across all coefficients of each intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1,000,000 basis-work visits plus candidate polynomial products. Exceeding a bound raises IMPLEMENTATION_FAILURE. A whole-form cap prevents many small coefficients from bypassing the limit, and compound pullbacks share the expansion budget across coefficients and differential factors. Exact coefficient bit lengths remain unbounded.
+
+NativePolynomialFormsTest checks independent wedge signs, d squared, graded product and insertion rules, Euler-field Lie derivatives, gradient/curl/divergence correspondences, nonlinear pullback composition and 729 ternary rectangular matrix pullbacks against independent minors. An oriented rectangle regression pulls a polynomial one-form back to each edge and integrates through Q[x], obtaining the same exact value as the area integral of its exterior derivative. This is a specific Stokes example, not a general form-integration algorithm or proof. Serialized native flows, wrapper identities, shape failures and aggregate resource limits are also tested. General manifold charts, arbitrary smooth coefficients and metrics, global de Rham cohomology and general form integration remain outside this implementation.
 
 ## Finite topology through the existing flow API
 

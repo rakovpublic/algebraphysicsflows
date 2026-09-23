@@ -8,6 +8,7 @@ import algebra.concrete.*;
 import mathematics.calculus.Polynomial;
 import mathematics.calculus.MultivariatePolynomial;
 import mathematics.calculus.PolynomialMap;
+import mathematics.calculus.PolynomialDifferentialForm;
 import mathematics.core.MathFailure;
 import operations.simple.*;
 import operations.flat.*;
@@ -29,12 +30,23 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all548RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all582RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String px="Poly(Q^3){[1, 0, 0]=1}",py="Poly(Q^3){[0, 1, 0]=1}",pz="Poly(Q^3){[0, 0, 1]=1}";
         String pzero="Poly(Q^3){}",pone="Poly(Q^3){[0, 0, 0]=1}",pfirst="Poly(Q^3){[0, 0, 0]=1, [1, 0, 0]=1}";
         String identityMap="PolynomialMap["+px+", "+py+", "+pz+"]",cycleMap="PolynomialMap["+py+", "+pz+", "+px+"]";
+        String form="Form(Q^3){1="+py+"}",formZero="Form(Q^3){}";
+        expected.put("PolynomialDifferentialFormAlgebra",String.join("|",
+                "Form(Q^3){1="+py+", 2="+px+"}","Form(Q^3){1="+py+", 2=Poly(Q^3){[1, 0, 0]=-1}}",
+                "Form(Q^3){3=Poly(Q^3){[1, 1, 0]=1}}","Form(Q^3){1=Poly(Q^3){[0, 1, 0]=-1}}",
+                "Form(Q^3){1=Poly(Q^3){[0, 1, 0]=2}}","Form(Q^3){1=Poly(Q^3){[0, 2, 0]=1}}",
+                "Form(Q^3){3=Poly(Q^3){[0, 0, 0]=-1}}","Form(Q^3){2="+pz+"}","Form(Q^3){0=Poly(Q^3){[0, 2, 0]=1}}",
+                "Form(Q^3){1="+pz+", 2="+py+"}","Form(Q^3){6="+py+"}","Form(Q^3){1=Poly(Q^3){[0, 1, 0]=-1}}",
+                "3","1","1","[1]","["+form+"]","["+py+"]","[1]",formZero,"Exterior(Q^3){1=2}","false","false",pzero,pfirst,
+                "Form(Q^3){0="+pfirst+"}","Form(Q^3){0=Poly(Q^3){[0, 0, 0]=2}, 1="+pone+", 3=Poly(Q^3){[0, 0, 0]=3}}",
+                "Exterior(Q^3){1=2}","Form(Q^3){1="+px+", 2="+py+", 4="+pz+"}","PolynomialMap["+py+", "+pzero+", "+pzero+"]",
+                formZero,"Form(Q^3){0="+pone+"}","Form(Q^3){7="+pone+"}","[Form(Q^3){1="+pone+"}, Form(Q^3){2="+pone+"}, Form(Q^3){4="+pone+"}]"));
         expected.put("RationalMultivariatePolynomialAlgebra",String.join("|",
                 "Poly(Q^3){[0, 0, 0]=1, [0, 1, 0]=1, [1, 0, 0]=1}",
                 "Poly(Q^3){[0, 0, 0]=1, [0, 1, 0]=-1, [1, 0, 0]=1}",
@@ -124,12 +136,14 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(548,count);
+        assertEquals(582,count);
     }
     @SuppressWarnings({"unchecked","rawtypes"})
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
         Algebra source=math.mathTool.getAlgebra(entry.first.getAlgebraName());
         IAlgebraItem item=source.buildAlgebraItem(sample(math,source.getAlgebraName(),0));
+        if(entry.id.equals("PolynomialForm(Q).to-polynomial")) item=source.buildAlgebraItem(PolynomialDifferentialForm.scalar((MultivariatePolynomial)sample(math,"Poly(Q)",0)));
+        if(entry.id.equals("PolynomialForm(Q).to-exterior")) item=source.buildAlgebraItem(PolynomialDifferentialForm.fromExterior(new RationalExterior(3,Collections.singletonMap(1,Rational.of(2)))));
         if(entry.id.equals("Poly(Q).to-univariate")) item=source.buildAlgebraItem(MultivariatePolynomial.fromUnivariate(new Polynomial(Rational.ONE,Rational.of(2),Rational.ONE)));
         if(entry.id.equals("Poly(Q).to-rational")) item=source.buildAlgebraItem(MultivariatePolynomial.constant(3,Rational.of(6)));
         if(entry.id.equals("PolynomialMap(Q).to-polynomial")) item=source.buildAlgebraItem(new PolynomialMap(MultivariatePolynomial.variable(3,0)));
@@ -221,6 +235,7 @@ public class ConcreteAlgebrasTest {
                     :new Rational[][] {{Rational.of(2),Rational.ZERO},{Rational.ZERO,Rational.of(2)}});
             case "Q[x]": return index==0?new Polynomial(Rational.ONE,Rational.of(2),Rational.ONE):new Polynomial(Rational.of(2),Rational.ONE);
             case "Poly(Q)": return index==0?MultivariatePolynomial.constant(3,Rational.ONE).add(MultivariatePolynomial.variable(3,0)):MultivariatePolynomial.variable(3,1);
+            case "PolynomialForm(Q)": return new PolynomialDifferentialForm(3,Collections.singletonMap(index==0?1:2,MultivariatePolynomial.variable(3,index==0?1:0)));
             case "PolynomialMap(Q)": return index==0?PolynomialMap.identity(3):new PolynomialMap(
                     MultivariatePolynomial.variable(3,1),MultivariatePolynomial.variable(3,2),MultivariatePolynomial.variable(3,0));
             case "FiniteSet(Z)": return index==0?FiniteSet.of(BigInteger.ONE,BigInteger.valueOf(2)):FiniteSet.of(BigInteger.ONE,BigInteger.valueOf(2),BigInteger.valueOf(3));

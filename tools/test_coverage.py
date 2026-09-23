@@ -125,6 +125,10 @@ class CoverageTest(unittest.TestCase):
         self.assertNotIn("first relation", " ".join(records["PolynomialMap(Q).compose"]["required_invariants"]))
         self.assertIn("rows index output", " ".join(records["PolynomialMap(Q).jacobian-at"]["required_invariants"]))
         self.assertIn("right-handed", " ".join(records["PolynomialMap(Q).curl"]["required_invariants"]))
+        self.assertIn("contravariant", " ".join(records["PolynomialForm(Q).pullback"]["required_invariants"]))
+        self.assertIn("d squared is zero", " ".join(records["PolynomialForm(Q).exterior-derivative"]["required_invariants"]))
+        self.assertIn("Cartan", " ".join(records["PolynomialForm(Q).lie-derivative"]["required_invariants"]))
+        self.assertIn("Every coefficient is a constant", " ".join(records["PolynomialForm(Q).to-exterior"]["required_invariants"]))
 
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)

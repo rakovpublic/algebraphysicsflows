@@ -25968,6 +25968,71 @@
       "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
     },
     {
+      "id": "concrete-algebra.PolynomialDifferentialFormAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialDifferentialFormAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "PolynomialForm(Q)",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
       "id": "concrete-algebra.PrimeField",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "PrimeField",
@@ -64601,6 +64666,2459 @@
       "legacy_operation_interface": "ICustomMemberOperation"
     },
     {
+      "id": "concrete-operation.PolynomialForm(Q).add",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).add",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": "PolynomialForm(Q)",
+      "domain_C": "PolynomialForm(Q)",
+      "operation_signature": "PolynomialForm(Q) x PolynomialForm(Q) -> PolynomialForm(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).add",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Coordinate dimensions agree; add coefficients at matching differential basis masks and remove zeros.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "PolynomialForm(Q).add",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "add",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).subtract",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).subtract",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": "PolynomialForm(Q)",
+      "domain_C": "PolynomialForm(Q)",
+      "operation_signature": "PolynomialForm(Q) x PolynomialForm(Q) -> PolynomialForm(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).subtract",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Coordinate dimensions agree; subtract coefficients at matching differential basis masks and remove zeros.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "PolynomialForm(Q).subtract",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "subtract",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).wedge",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).wedge",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": "PolynomialForm(Q)",
+      "domain_C": "PolynomialForm(Q)",
+      "operation_signature": "PolynomialForm(Q) x PolynomialForm(Q) -> PolynomialForm(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).wedge",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Coordinate dimensions agree. Repeated differentials vanish; increasing coordinate order fixes signs. Polynomial products and basis-pair visits share one work budget.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "PolynomialForm(Q).wedge",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "wedge",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).negate",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).negate",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": null,
+      "domain_C": "PolynomialForm(Q)",
+      "operation_signature": "PolynomialForm(Q) -> PolynomialForm(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).negate",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Negate each polynomial coefficient, retaining the coordinate dimension.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PolynomialForm(Q).negate",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "negate",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).scale",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).scale",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": "Q",
+      "domain_C": "PolynomialForm(Q)",
+      "operation_signature": "PolynomialForm(Q) x Q -> PolynomialForm(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).scale",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Multiply each polynomial coefficient by the rational scalar.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PolynomialForm(Q).scale",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "scale",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).multiply-polynomial",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).multiply-polynomial",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": "Poly(Q)",
+      "domain_C": "PolynomialForm(Q)",
+      "operation_signature": "PolynomialForm(Q) x Poly(Q) -> PolynomialForm(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).multiply-polynomial",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The scalar polynomial has the form coordinate dimension; multiply every coefficient with a shared work budget.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "PolynomialForm(Q).multiply-polynomial",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "multiply-polynomial",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).exterior-derivative",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).exterior-derivative",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": null,
+      "domain_C": "PolynomialForm(Q)",
+      "operation_signature": "PolynomialForm(Q) -> PolynomialForm(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).exterior-derivative",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "For each coefficient f of dx_I, sum partial_j(f)*dx_j wedge dx_I. The degree increases by one and d squared is zero, including mixed-degree forms.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PolynomialForm(Q).exterior-derivative",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "exterior-derivative",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).pullback",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).pullback",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": "PolynomialMap(Q)",
+      "domain_C": "PolynomialForm(Q)",
+      "operation_signature": "PolynomialForm(Q) x PolynomialMap(Q) -> PolynomialForm(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).pullback",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "For F:Q^m -> Q^n and a form on Q^n, substitute f(F) in coefficients and replace dx_i by dF_i, yielding a form on Q^m. Pullback is contravariant, preserves wedge and commutes with d; all substitutions and wedges share one work budget.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "PolynomialForm(Q).pullback",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "pullback",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).interior",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).interior",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": "PolynomialMap(Q)",
+      "domain_C": "PolynomialForm(Q)",
+      "operation_signature": "PolynomialForm(Q) x PolynomialMap(Q) -> PolynomialForm(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).interior",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The polynomial vector field maps the form coordinate space to itself. Use left insertion with the natural covector-vector pairing and one shared coefficient-product budget.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "PolynomialForm(Q).interior",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "interior",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).lie-derivative",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).lie-derivative",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": "PolynomialMap(Q)",
+      "domain_C": "PolynomialForm(Q)",
+      "operation_signature": "PolynomialForm(Q) x PolynomialMap(Q) -> PolynomialForm(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).lie-derivative",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The polynomial vector field maps the form coordinate space to itself. Use Cartan's formula L_X=i_X*d+d*i_X; both insertions share a work budget.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "PolynomialForm(Q).lie-derivative",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "lie-derivative",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).hodge-star",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).hodge-star",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": null,
+      "domain_C": "PolynomialForm(Q)",
+      "operation_signature": "PolynomialForm(Q) -> PolynomialForm(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).hodge-star",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Use the standard oriented Euclidean coframe, preserving polynomial coefficients and taking signed complementary differential basis masks.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PolynomialForm(Q).hodge-star",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "hodge-star",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).grade-involution",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).grade-involution",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": null,
+      "domain_C": "PolynomialForm(Q)",
+      "operation_signature": "PolynomialForm(Q) -> PolynomialForm(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).grade-involution",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Multiply degree-k components by (-1)^k; this supplies the graded product rule even for mixed-degree forms.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PolynomialForm(Q).grade-involution",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "grade-involution",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).ambient-dimension",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).ambient-dimension",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "PolynomialForm(Q) -> N",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).ambient-dimension",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the retained positive coordinate dimension, including for zero and scalar forms.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PolynomialForm(Q).ambient-dimension",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ambient-dimension",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).basis-count",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).basis-count",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "PolynomialForm(Q) -> N",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).basis-count",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Count occupied differential basis masks, not scalar polynomial monomials.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PolynomialForm(Q).basis-count",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "basis-count",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).coefficient-term-count",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).coefficient-term-count",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "PolynomialForm(Q) -> N",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).coefficient-term-count",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Sum the nonzero monomial counts of all polynomial coefficients; the representation cap applies to this total.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PolynomialForm(Q).coefficient-term-count",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "coefficient-term-count",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).degrees",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).degrees",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "PolynomialForm(Q) -> List(N)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).degrees",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit occupied differential degrees in increasing order; zero has no occupied degrees.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PolynomialForm(Q).degrees",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "degrees",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).terms",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).terms",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": null,
+      "domain_C": "PolynomialForm(Q)",
+      "operation_signature": "PolynomialForm(Q) -> List(PolynomialForm(Q))",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).terms",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit one wrapped form per occupied differential basis mask in increasing order, retaining its whole polynomial coefficient.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/flat/OneOperandFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PolynomialForm(Q).terms",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "terms",
+      "legacy_operation_interface": "IOneOperandFlatOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).coefficients",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).coefficients",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": null,
+      "domain_C": "Poly(Q)",
+      "operation_signature": "PolynomialForm(Q) -> List(Poly(Q))",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).coefficients",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit the nonzero polynomial coefficients in increasing differential-mask order, retaining duplicates.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PolynomialForm(Q).coefficients",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "coefficients",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).basis-masks",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).basis-masks",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "PolynomialForm(Q) -> List(N)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).basis-masks",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit occupied masks in ascending order; bit i means dx_i and mask zero means the scalar basis.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PolynomialForm(Q).basis-masks",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "basis-masks",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).grade",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).grade",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": "N",
+      "domain_C": "PolynomialForm(Q)",
+      "operation_signature": "PolynomialForm(Q) x N -> PolynomialForm(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).grade",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Keep the requested nonnegative differential degree; every degree above the coordinate dimension returns zero.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PolynomialForm(Q).grade",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "grade",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).evaluate",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).evaluate",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": "Vec(Q)",
+      "domain_C": "Exterior(Q)",
+      "operation_signature": "PolynomialForm(Q) x Vec(Q) -> Exterior(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).evaluate",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The point dimension agrees; evaluate polynomial coefficients and identify the standard coordinate coframe with the registered Exterior(Q) basis, without claiming a general tangent/cotangent identification.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "PolynomialForm(Q).evaluate",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "evaluate",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": "PolynomialForm(Q)",
+      "domain_C": "Boolean",
+      "operation_signature": "PolynomialForm(Q) x PolynomialForm(Q) -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Compare coordinate dimensions and all canonical polynomial coefficients, including for constants and zero.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PolynomialForm(Q).equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).is-zero",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).is-zero",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "PolynomialForm(Q) -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).is-zero",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Zero is exactly empty canonical differential support.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PolynomialForm(Q).is-zero",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "is-zero",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).scalar-part",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).scalar-part",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": null,
+      "domain_C": "Poly(Q)",
+      "operation_signature": "PolynomialForm(Q) -> Poly(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).scalar-part",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the degree-zero polynomial coefficient, or zero in the same coordinate dimension.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PolynomialForm(Q).scalar-part",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "scalar-part",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).to-polynomial",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).to-polynomial",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": null,
+      "domain_C": "Poly(Q)",
+      "operation_signature": "PolynomialForm(Q) -> Poly(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).to-polynomial",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "All positive-degree components vanish; return the scalar polynomial in the same coordinate dimension.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "PolynomialForm(Q).to-polynomial",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-polynomial",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).from-polynomial",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).from-polynomial",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Poly(Q)",
+      "domain_B": null,
+      "domain_C": "PolynomialForm(Q)",
+      "operation_signature": "Poly(Q) -> PolynomialForm(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).from-polynomial",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed the scalar polynomial as a differential zero-form, retaining its input dimension.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PolynomialForm(Q).from-polynomial",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "PolynomialForm(Q).from-polynomial",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).from-exterior",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).from-exterior",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Exterior(Q)",
+      "domain_B": null,
+      "domain_C": "PolynomialForm(Q)",
+      "operation_signature": "Exterior(Q) -> PolynomialForm(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).from-exterior",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The exterior dimension is positive; use the standard coordinate basis identification to create constant polynomial form coefficients.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "PolynomialForm(Q).from-exterior",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "PolynomialForm(Q).from-exterior",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).to-exterior",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).to-exterior",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": null,
+      "domain_C": "Exterior(Q)",
+      "operation_signature": "PolynomialForm(Q) -> Exterior(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).to-exterior",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Every coefficient is a constant polynomial; use the standard coordinate coframe identification with the registered exterior basis.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "PolynomialForm(Q).to-exterior",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-exterior",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).from-vector-field",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).from-vector-field",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialMap(Q)",
+      "domain_B": null,
+      "domain_C": "PolynomialForm(Q)",
+      "operation_signature": "PolynomialMap(Q) -> PolynomialForm(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).from-vector-field",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Input and output dimensions agree; lower the polynomial vector field to a one-form with the standard Euclidean metric.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "PolynomialForm(Q).from-vector-field",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "PolynomialForm(Q).from-vector-field",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).to-vector-field",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).to-vector-field",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": null,
+      "domain_C": "PolynomialMap(Q)",
+      "operation_signature": "PolynomialForm(Q) -> PolynomialMap(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).to-vector-field",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Only degree-one components are present; raise coefficients to a square polynomial vector field with the standard Euclidean metric. Zero maps to the zero field.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "PolynomialForm(Q).to-vector-field",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-vector-field",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).zero-like",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).zero-like",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": null,
+      "domain_C": "PolynomialForm(Q)",
+      "operation_signature": "PolynomialForm(Q) -> PolynomialForm(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).zero-like",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the zero form in the same coordinate dimension.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PolynomialForm(Q).zero-like",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "zero-like",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).one-like",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).one-like",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": null,
+      "domain_C": "PolynomialForm(Q)",
+      "operation_signature": "PolynomialForm(Q) -> PolynomialForm(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).one-like",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the constant scalar unit form in the same coordinate dimension.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PolynomialForm(Q).one-like",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "one-like",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).volume-like",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).volume-like",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": null,
+      "domain_C": "PolynomialForm(Q)",
+      "operation_signature": "PolynomialForm(Q) -> PolynomialForm(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).volume-like",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return dx_0 wedge ... wedge dx_(n-1) with constant unit coefficient and positive coordinate orientation.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PolynomialForm(Q).volume-like",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "volume-like",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.PolynomialForm(Q).basis",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PolynomialDifferentialFormAlgebra",
+      "concept": "PolynomialForm(Q).basis",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PolynomialForm(Q)",
+      "domain_B": null,
+      "domain_C": "PolynomialForm(Q)",
+      "operation_signature": "PolynomialForm(Q) -> List(PolynomialForm(Q))",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).basis",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit dx_0 through dx_(n-1) as wrapped one-forms in coordinate order.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "groupimp/src/main/java/operations/flat/OneOperandFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePolynomialFormsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.",
+        "Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_form.html",
+        "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PolynomialForm(Q).basis",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "basis",
+      "legacy_operation_interface": "IOneOperandFlatOperation"
+    },
+    {
       "id": "concrete-operation.Z/5Z.add",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "PrimeField",
@@ -65239,6 +67757,12 @@
         "Poly(Q).primitive",
         "Poly(Q).term-count",
         "Poly(Q).variable-count",
+        "PolynomialForm(Q).ambient-dimension",
+        "PolynomialForm(Q).basis-count",
+        "PolynomialForm(Q).basis-masks",
+        "PolynomialForm(Q).coefficient-term-count",
+        "PolynomialForm(Q).degrees",
+        "PolynomialForm(Q).grade",
         "PolynomialMap(Q).component",
         "PolynomialMap(Q).input-dimension",
         "PolynomialMap(Q).output-dimension",
@@ -65435,6 +67959,7 @@
         "Poly(Q).evaluate",
         "Poly(Q).scale",
         "Poly(Q).to-rational",
+        "PolynomialForm(Q).scale",
         "PolynomialMap(Q).scale",
         "Q(i).embed-rational",
         "Q(i).norm-squared",
@@ -65725,6 +68250,8 @@
         "Mat(Q).equal",
         "Poly(Q).equal",
         "Poly(Q).is-zero",
+        "PolynomialForm(Q).equal",
+        "PolynomialForm(Q).is-zero",
         "PolynomialMap(Q).equal",
         "Q(x).equal",
         "Q.equal",
@@ -67307,6 +69834,7 @@
         "Poly(Q).evaluate",
         "Poly(Q).gradient-at",
         "Poly(Q).hessian-at",
+        "PolynomialForm(Q).evaluate",
         "PolynomialMap(Q).constant-part",
         "PolynomialMap(Q).evaluate",
         "PolynomialMap(Q).jacobian-at",
@@ -67622,7 +70150,10 @@
         "Exterior(Q).to-vector",
         "Exterior(Q).volume-in",
         "Exterior(Q).wedge",
-        "Exterior(Q).zero-in"
+        "Exterior(Q).zero-in",
+        "PolynomialForm(Q).evaluate",
+        "PolynomialForm(Q).from-exterior",
+        "PolynomialForm(Q).to-exterior"
       ],
       "invariants": [
         "Retained nonnegative ambient dimension",
@@ -67761,6 +70292,11 @@
         "Poly(Q).variable-count",
         "Poly(Q).variables",
         "Poly(Q).zero-like",
+        "PolynomialForm(Q).coefficients",
+        "PolynomialForm(Q).from-polynomial",
+        "PolynomialForm(Q).multiply-polynomial",
+        "PolynomialForm(Q).scalar-part",
+        "PolynomialForm(Q).to-polynomial",
         "PolynomialMap(Q).component",
         "PolynomialMap(Q).components",
         "PolynomialMap(Q).divergence",
@@ -67808,6 +70344,11 @@
         "N"
       ],
       "supported_operations": [
+        "PolynomialForm(Q).from-vector-field",
+        "PolynomialForm(Q).interior",
+        "PolynomialForm(Q).lie-derivative",
+        "PolynomialForm(Q).pullback",
+        "PolynomialForm(Q).to-vector-field",
         "PolynomialMap(Q).add",
         "PolynomialMap(Q).component",
         "PolynomialMap(Q).components",
@@ -67836,6 +70377,81 @@
         "Positive explicit input and output dimensions",
         "Ordered scalar polynomial components share an input dimension",
         "Composition checks the common middle dimension; Jacobian rows are output components"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-23"
+      }
+    },
+    {
+      "id": "PolynomialForm(Q)",
+      "name": "Polynomial coordinate differential forms",
+      "description": "Polynomial coordinate differential forms",
+      "member_representation": "mathematics.calculus.PolynomialDifferentialForm",
+      "membership_rules": [
+        "Retained positive ordered coordinate dimension",
+        "Increasing differential basis masks with canonical polynomial coefficients",
+        "All coefficient variable counts equal the coordinate dimension; mixed differential degrees allowed"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "Poly(Q)",
+        "PolynomialMap(Q)",
+        "Exterior(Q)",
+        "Vec(Q)",
+        "Q",
+        "N"
+      ],
+      "supported_operations": [
+        "PolynomialForm(Q).add",
+        "PolynomialForm(Q).ambient-dimension",
+        "PolynomialForm(Q).basis",
+        "PolynomialForm(Q).basis-count",
+        "PolynomialForm(Q).basis-masks",
+        "PolynomialForm(Q).coefficient-term-count",
+        "PolynomialForm(Q).coefficients",
+        "PolynomialForm(Q).degrees",
+        "PolynomialForm(Q).equal",
+        "PolynomialForm(Q).evaluate",
+        "PolynomialForm(Q).exterior-derivative",
+        "PolynomialForm(Q).from-exterior",
+        "PolynomialForm(Q).from-polynomial",
+        "PolynomialForm(Q).from-vector-field",
+        "PolynomialForm(Q).grade",
+        "PolynomialForm(Q).grade-involution",
+        "PolynomialForm(Q).hodge-star",
+        "PolynomialForm(Q).interior",
+        "PolynomialForm(Q).is-zero",
+        "PolynomialForm(Q).lie-derivative",
+        "PolynomialForm(Q).multiply-polynomial",
+        "PolynomialForm(Q).negate",
+        "PolynomialForm(Q).one-like",
+        "PolynomialForm(Q).pullback",
+        "PolynomialForm(Q).scalar-part",
+        "PolynomialForm(Q).scale",
+        "PolynomialForm(Q).subtract",
+        "PolynomialForm(Q).terms",
+        "PolynomialForm(Q).to-exterior",
+        "PolynomialForm(Q).to-polynomial",
+        "PolynomialForm(Q).to-vector-field",
+        "PolynomialForm(Q).volume-like",
+        "PolynomialForm(Q).wedge",
+        "PolynomialForm(Q).zero-like"
+      ],
+      "invariants": [
+        "Retained positive ordered coordinate dimension",
+        "Increasing differential basis masks with canonical polynomial coefficients",
+        "All coefficient variable counts equal the coordinate dimension; mixed differential degrees allowed"
       ],
       "references": [
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"

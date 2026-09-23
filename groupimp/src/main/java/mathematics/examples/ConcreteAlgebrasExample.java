@@ -6,6 +6,7 @@ import algebra.concrete.OperationRegistration;
 import mathematics.calculus.Polynomial;
 import mathematics.calculus.MultivariatePolynomial;
 import mathematics.calculus.PolynomialMap;
+import mathematics.calculus.PolynomialDifferentialForm;
 import mathematics.foundations.Pair;
 import mathematics.foundations.FiniteSet;
 import mathematics.structures.FiniteCategory;
@@ -76,6 +77,13 @@ public final class ConcreteAlgebrasExample {
         System.out.println("Jacobian of that gradient is the Hessian: "+math.flow(math.multivariatePolynomials,Collections.singletonList(multivariate))
                 .<PolynomialMap>performAlgebraTransfer("PolynomialMap(Q).gradient")
                 .<RationalMatrix,RationalVector>performAlgebraUnsafe("jacobian-at",new RationalVector(Rational.of(2),Rational.of(3),Rational.of(-1))).collect());
+        PolynomialMap rotationField=new PolynomialMap(MultivariatePolynomial.variable(3,1).negate(),
+                MultivariatePolynomial.variable(3,0),MultivariatePolynomial.constant(3,Rational.ZERO));
+        System.out.println("Curl via differential forms, d and Hodge star: "+math.flow(math.polynomialMaps,Collections.singletonList(rotationField))
+                .<PolynomialDifferentialForm>performAlgebraTransfer("PolynomialForm(Q).from-vector-field")
+                .performOneOperandOperation("exterior-derivative").performOneOperandOperation("hodge-star")
+                .<PolynomialMap>performAlgebraTransfer("to-vector-field")
+                .performLeftProjectionOperation("evaluate",new RationalVector(Rational.of(2),Rational.of(3),Rational.of(4))).collect());
         System.out.println("Integral of x^2 from 0 to 1: "+math.flow(math.polynomials,Collections.singletonList(new Polynomial(Rational.ZERO,Rational.ZERO,Rational.ONE)))
                 .<Rational,Pair<Rational,Rational>>performAlgebraUnsafe("integrate",new Pair<>(Rational.ZERO,Rational.ONE)).collect());
         System.out.println("F5: 3 / 2 = "+math.primeFields.get(0).algebra().buildAlgebraItem(math.primeFields.get(0).member(3))

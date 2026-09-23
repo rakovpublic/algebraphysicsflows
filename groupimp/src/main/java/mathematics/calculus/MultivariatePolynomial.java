@@ -116,7 +116,7 @@ public final class MultivariatePolynomial implements Serializable {
     public MultivariatePolynomial negate() { return scale(Rational.of(-1)); }
     public MultivariatePolynomial subtract(MultivariatePolynomial other) { return add(other.negate()); }
     public MultivariatePolynomial multiply(MultivariatePolynomial other) { return multiply(other,new Work()); }
-    private MultivariatePolynomial multiply(MultivariatePolynomial other,Work work) {
+    MultivariatePolynomial multiply(MultivariatePolynomial other,Work work) {
         sameSpace(other); work.consume((long)coefficients.size()*other.coefficients.size());
         Map<List<Integer>,Rational> result=new HashMap<>();
         for(Map.Entry<List<Integer>,Rational> first : coefficients.entrySet())

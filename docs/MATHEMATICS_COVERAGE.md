@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 988 |
-| DIRECTLY_SUPPORTED | 745 |
+| Scoped records | 1023 |
+| DIRECTLY_SUPPORTED | 780 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 604 |
+| IMPLEMENTED | 639 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 672 |
+| MACHINE_TESTED | 707 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 581 | 581 | 0 | 0 | 0 | 581 | 0 | 0 |
+| Concrete MathTool algebras | 616 | 616 | 0 | 0 | 0 | 616 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -564,6 +564,41 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Poly(Q).variable-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).variable-count |
 | Poly(Q).variables | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).variables |
 | Poly(Q).zero-like | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).zero-like |
+| PolynomialDifferentialFormAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces |
+| PolynomialForm(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).add |
+| PolynomialForm(Q).ambient-dimension | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).ambient-dimension |
+| PolynomialForm(Q).basis | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).basis |
+| PolynomialForm(Q).basis-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).basis-count |
+| PolynomialForm(Q).basis-masks | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).basis-masks |
+| PolynomialForm(Q).coefficient-term-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).coefficient-term-count |
+| PolynomialForm(Q).coefficients | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).coefficients |
+| PolynomialForm(Q).degrees | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).degrees |
+| PolynomialForm(Q).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).equal |
+| PolynomialForm(Q).evaluate | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).evaluate |
+| PolynomialForm(Q).exterior-derivative | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).exterior-derivative |
+| PolynomialForm(Q).from-exterior | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).from-exterior |
+| PolynomialForm(Q).from-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).from-polynomial |
+| PolynomialForm(Q).from-vector-field | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).from-vector-field |
+| PolynomialForm(Q).grade | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).grade |
+| PolynomialForm(Q).grade-involution | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).grade-involution |
+| PolynomialForm(Q).hodge-star | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).hodge-star |
+| PolynomialForm(Q).interior | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).interior |
+| PolynomialForm(Q).is-zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).is-zero |
+| PolynomialForm(Q).lie-derivative | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).lie-derivative |
+| PolynomialForm(Q).multiply-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).multiply-polynomial |
+| PolynomialForm(Q).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).negate |
+| PolynomialForm(Q).one-like | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).one-like |
+| PolynomialForm(Q).pullback | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).pullback |
+| PolynomialForm(Q).scalar-part | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).scalar-part |
+| PolynomialForm(Q).scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).scale |
+| PolynomialForm(Q).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).subtract |
+| PolynomialForm(Q).terms | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).terms |
+| PolynomialForm(Q).to-exterior | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).to-exterior |
+| PolynomialForm(Q).to-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).to-polynomial |
+| PolynomialForm(Q).to-vector-field | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).to-vector-field |
+| PolynomialForm(Q).volume-like | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).volume-like |
+| PolynomialForm(Q).wedge | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).wedge |
+| PolynomialForm(Q).zero-like | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).zero-like |
 | PolynomialMap(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).add |
 | PolynomialMap(Q).component | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).component |
 | PolynomialMap(Q).components | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).components |

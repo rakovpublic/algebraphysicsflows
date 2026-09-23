@@ -44,6 +44,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final RationalQuaternionAlgebra quaternions;
     public final RationalMultivariatePolynomialAlgebra multivariatePolynomials;
     public final RationalPolynomialMapAlgebra polynomialMaps;
+    public final PolynomialDifferentialFormAlgebra polynomialForms;
     public final List<PrimeField> primeFields;
     public final MathTool mathTool=new MathTool("concrete-mathematics");
     private final List<ConcreteAlgebra<?>> algebras;
@@ -61,6 +62,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         quaternions=new RationalQuaternionAlgebra(rationals,complexRationals,finiteVectors,rectangularMatrices,booleans);
         multivariatePolynomials=new RationalMultivariatePolynomialAlgebra(rationals,naturals,integers,booleans,finiteVectors,rectangularMatrices,polynomials);
         polynomialMaps=new RationalPolynomialMapAlgebra(multivariatePolynomials,rationals,naturals,booleans,finiteVectors,rectangularMatrices);
+        polynomialForms=new PolynomialDifferentialFormAlgebra(multivariatePolynomials,polynomialMaps,exterior,rationals,finiteVectors,naturals,booleans);
         List<PrimeField> fields=new ArrayList<>();
         Set<Integer> seen=new HashSet<>();
         for(int prime : primes) {
@@ -70,6 +72,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         primeFields=Collections.unmodifiableList(fields);
         List<ConcreteAlgebra<?>> values=new ArrayList<>(Arrays.asList(booleans,naturals,integers,rationals,complexRationals,vectors,matrices,finiteVectors,rectangularMatrices,affineSpaces,tensors,exterior,quaternions,polynomials,rationalFunctions,integerSets,samples,integerProbabilities,complexes,integerRelations,permutations,residues,integerFunctions,categories,functors,naturalTransformations,equivalences,adjunctions,cones,cocones));
         values.add(multivariatePolynomials); values.add(polynomialMaps);
+        values.add(polynomialForms);
         values.addAll(fields); algebras=Collections.unmodifiableList(values);
         for(ConcreteAlgebra<?> algebra : algebras) {
             algebra.register(mathTool);
