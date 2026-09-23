@@ -43,6 +43,20 @@ public final class RationalAffineSpace implements Serializable {
         for(int i=0;i<parameters.length;i++) parameters[i]=point.get(freeColumns.get(i));
         return at(new RationalVector(parameters)).equals(point);
     }
+    /** Orthogonal projection onto this affine set in the standard Euclidean inner product. */
+    public RationalVector closestPoint(RationalVector point) {
+        nonempty();
+        if(point.dimension()!=ambientDimension) throw MathFailure.undefined("Point dimension must equal the affine ambient dimension");
+        if(directions.isEmpty()) return particular;
+        Rational[][] basis=new Rational[ambientDimension][directions.size()];
+        for(int r=0;r<ambientDimension;r++) for(int c=0;c<directions.size();c++) basis[r][c]=directions.get(c).get(r);
+        RationalVector displacement=point.add(particular.scale(Rational.of(-1)));
+        return particular.add(new RationalMatrix(basis).projectColumn(displacement));
+    }
+    public RationalVector minimumNorm() {
+        nonempty(); Rational[] zero=new Rational[ambientDimension]; Arrays.fill(zero,Rational.ZERO);
+        return closestPoint(new RationalVector(zero));
+    }
     @Override public boolean equals(Object other) {
         if(!(other instanceof RationalAffineSpace)) return false;
         RationalAffineSpace a=(RationalAffineSpace)other;

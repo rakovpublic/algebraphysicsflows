@@ -147,6 +147,13 @@ OWNER_CONDITIONS = {
         "determinant": "The matrix must be square; singular matrices have determinant zero.",
         "trace": "The matrix must be square.",
         "equal": "Equality includes both dimensions and every exact rational entry.",
+        "pseudoinverse": "Return the unique rational Moore-Penrose inverse with transposed shape, satisfying A*A+*A=A, A+*A*A+=A+ and symmetry of A*A+ and A+*A. Defined for every positive shape and rank, including zero matrices.",
+        "column-projector": "Return A*A+, the symmetric idempotent orthogonal projector onto the column space, of shape row-count by row-count.",
+        "row-projector": "Return A+*A, the symmetric idempotent orthogonal projector onto the row space, of shape column-count by column-count.",
+        "project-column": "Point dimension equals row count. Return its closest point in the column space under the standard Euclidean inner product, retaining the row dimension.",
+        "least-squares-minimum-norm": "Right-hand side dimension equals row count. Return A+*b, the unique least-squares minimizer of smallest Euclidean norm; singular and inconsistent systems are accepted.",
+        "least-squares-residual": "Right-hand side dimension equals row count. Return b minus its fitted value A*A+*b, perpendicular to every matrix column.",
+        "least-squares-error": "Right-hand side dimension equals row count. Return the exact nonnegative sum of squared residual coordinates, not its square root.",
     },
     "RationalAffineSpaceAlgebra": {
         "solve": "Right-hand side dimension equals the positive matrix row count. Inconsistent systems return an empty affine set; consistent singular and rectangular systems return a particular solution plus canonical kernel directions.",
@@ -159,6 +166,9 @@ OWNER_CONDITIONS = {
         "contains": "Compare the point against the canonical parametrization; empty sets or vectors of the wrong ambient dimension return false.",
         "at": "The affine set is nonempty and the parameter vector has one entry per free variable. Return particular plus the corresponding linear combination of directions, wrapped in Vec(Q).",
         "equal": "Compare canonical solution sets within the same ambient dimension, independently of the input equation presentation.",
+        "least-squares": "Right-hand side dimension equals matrix row count. Return all minimizers of the squared Euclidean residual as the nonempty affine solution set of A^T*A*x=A^T*b, including rank-deficient and inconsistent original systems.",
+        "closest-point": "The affine set is nonempty and the point has its ambient dimension. Return the unique closest point in the standard Euclidean inner product; points already in the set are unchanged.",
+        "minimum-norm": "The affine set is nonempty. Return its unique point of smallest Euclidean norm, which need not equal the free-zero particular point.",
     },
     "FiniteCoconeAlgebra": {
         "diagram": "Return the retained finite diagram J->C.",
@@ -347,6 +357,8 @@ def record(identifier, owner, concept, paths, operation=None):
         paths = paths + ["groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java"]
     if owner == "RationalPolynomialRing":
         tests.append("groupimp/src/test/java/operations/NativeRationalFunctionTest.java")
+    if owner in ("RationalMatrixFamily", "RationalAffineSpaceAlgebra"):
+        tests.append("groupimp/src/test/java/operations/NativeLeastSquaresTest.java")
     value = {
         "id": identifier, "mathematical_area": "Concrete MathTool algebras",
         "subfield": owner, "concept": concept, "specification_section": 0,
@@ -457,9 +469,11 @@ def record(identifier, owner, concept, paths, operation=None):
     if owner == "RationalMatrixFamily":
         value["known_limitations"].append("Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.")
         value["required_invariants"].append("Shapes are stored explicitly. RREF uses exact rational row operations; bases preserve rank-nullity and declared coordinate dimensions.")
+        value["known_limitations"].append("Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided.")
     if owner == "RationalAffineSpaceAlgebra":
         value["known_limitations"].append("Finite linear systems over Q with a positive number of equations and unknowns. Infinite solution sets are parametrized by a finite basis, never enumerated. Empty sets retain ambient dimension and have no particular point, direction basis or affine dimension operation result.")
         value["required_invariants"].append("The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization.")
+        value["required_invariants"].append("Least-squares and closest-point operations use the standard Euclidean inner product and preserve exact rational results.")
     if owner == "RationalFunctionField":
         value["known_limitations"].append("Formal fraction-field equality; cancelled factors do not retain excluded points from an original expression. Only rational-coefficient univariate functions are implemented.")
         value["references"].append("https://docs.sympy.org/latest/modules/polys/domainsref.html")

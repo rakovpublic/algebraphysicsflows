@@ -44,9 +44,18 @@ public final class RationalMatrixFamily extends ConcreteAlgebra<RationalMatrix> 
         unary("inverse",algebra(),algebra(),true,m -> square(m).inverse());
         unary("determinant",algebra(),rationals.algebra(),true,m -> square(m).determinant());
         unary("trace",algebra(),rationals.algebra(),true,m -> square(m).trace());
+        unary("pseudoinverse",algebra(),algebra(),false,RationalMatrix::pseudoinverse);
+        unary("column-projector",algebra(),algebra(),false,RationalMatrix::columnProjector);
+        unary("row-projector",algebra(),algebra(),false,RationalMatrix::rowProjector);
+        binary("project-column",algebra(),vectors.algebra(),vectors.algebra(),true,RationalMatrix::projectColumn);
+        binary("least-squares-minimum-norm",algebra(),vectors.algebra(),vectors.algebra(),true,RationalMatrix::minimumNormLeastSquares);
+        binary("least-squares-residual",algebra(),vectors.algebra(),vectors.algebra(),true,RationalMatrix::leastSquaresResidual);
+        binary("least-squares-error",algebra(),vectors.algebra(),rationals.algebra(),true,RationalMatrix::leastSquaresError);
         law("This is a family of matrix spaces, with shape-checked addition and composition; it is not one ring across all shapes.");
         law("RREF and bases use exact rational arithmetic, with pivot and free columns in ascending zero-based order.");
         law("Rank plus nullity equals the number of columns; column-space bases retain original pivot columns.");
+        law("The rational pseudoinverse satisfies all four Moore-Penrose equations in the standard Euclidean inner products, including rank-zero matrices.");
+        law("Least-squares residual means b minus A*x; it is perpendicular to every column, and the minimum-norm minimizer is perpendicular to the kernel.");
     }
     private static RationalMatrix same(RationalMatrix a,RationalMatrix b) {
         if(a.rows()!=b.rows() || a.columns()!=b.columns()) throw MathFailure.undefined("Matrix shapes must agree"); return a;

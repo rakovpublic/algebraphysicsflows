@@ -109,6 +109,13 @@ Mat(Q).zero-like	RationalMatrixFamily	zero-like	Mat(Q)	-	Mat(Q)	SCALAR	TOTAL	IOn
 Mat(Q).inverse	RationalMatrixFamily	inverse	Mat(Q)	-	Mat(Q)	SCALAR	PARTIAL	IOneOperandOperation
 Mat(Q).determinant	RationalMatrixFamily	determinant	Mat(Q)	-	Q	SCALAR	PARTIAL	ITransferOperation
 Mat(Q).trace	RationalMatrixFamily	trace	Mat(Q)	-	Q	SCALAR	PARTIAL	ITransferOperation
+Mat(Q).pseudoinverse	RationalMatrixFamily	pseudoinverse	Mat(Q)	-	Mat(Q)	SCALAR	TOTAL	IOneOperandOperation
+Mat(Q).column-projector	RationalMatrixFamily	column-projector	Mat(Q)	-	Mat(Q)	SCALAR	TOTAL	IOneOperandOperation
+Mat(Q).row-projector	RationalMatrixFamily	row-projector	Mat(Q)	-	Mat(Q)	SCALAR	TOTAL	IOneOperandOperation
+Mat(Q).project-column	RationalMatrixFamily	project-column	Mat(Q)	Vec(Q)	Vec(Q)	SCALAR	PARTIAL	ILeftProjectionOperation
+Mat(Q).least-squares-minimum-norm	RationalMatrixFamily	least-squares-minimum-norm	Mat(Q)	Vec(Q)	Vec(Q)	SCALAR	PARTIAL	ILeftProjectionOperation
+Mat(Q).least-squares-residual	RationalMatrixFamily	least-squares-residual	Mat(Q)	Vec(Q)	Vec(Q)	SCALAR	PARTIAL	ILeftProjectionOperation
+Mat(Q).least-squares-error	RationalMatrixFamily	least-squares-error	Mat(Q)	Vec(Q)	Q	SCALAR	PARTIAL	IUnsafeOperation
 Affine(Q).solve	RationalAffineSpaceAlgebra	Affine(Q).solve	Mat(Q)	Vec(Q)	Affine(Q)	SCALAR	PARTIAL	IUnsafeOperation
 Affine(Q).particular	RationalAffineSpaceAlgebra	particular	Affine(Q)	-	Vec(Q)	SCALAR	PARTIAL	ITransferOperation
 Affine(Q).directions	RationalAffineSpaceAlgebra	directions	Affine(Q)	-	Vec(Q)	LIST	PARTIAL	ITransferFlatOperation
@@ -119,6 +126,9 @@ Affine(Q).is-unique	RationalAffineSpaceAlgebra	is-unique	Affine(Q)	-	Boolean	SCA
 Affine(Q).contains	RationalAffineSpaceAlgebra	contains	Affine(Q)	Vec(Q)	Boolean	SCALAR	TOTAL	IUnsafeOperation
 Affine(Q).at	RationalAffineSpaceAlgebra	at	Affine(Q)	Vec(Q)	Vec(Q)	SCALAR	PARTIAL	ILeftProjectionOperation
 Affine(Q).equal	RationalAffineSpaceAlgebra	equal	Affine(Q)	Affine(Q)	Boolean	SCALAR	TOTAL	ICustomResultOperation
+Affine(Q).least-squares	RationalAffineSpaceAlgebra	Affine(Q).least-squares	Mat(Q)	Vec(Q)	Affine(Q)	SCALAR	PARTIAL	IUnsafeOperation
+Affine(Q).closest-point	RationalAffineSpaceAlgebra	closest-point	Affine(Q)	Vec(Q)	Vec(Q)	SCALAR	PARTIAL	ILeftProjectionOperation
+Affine(Q).minimum-norm	RationalAffineSpaceAlgebra	minimum-norm	Affine(Q)	-	Vec(Q)	SCALAR	PARTIAL	ITransferOperation
 Q[x].add	RationalPolynomialRing	add	Q[x]	Q[x]	Q[x]	SCALAR	TOTAL	IOperation
 Q[x].multiply	RationalPolynomialRing	multiply	Q[x]	Q[x]	Q[x]	SCALAR	TOTAL	IOperation
 Q[x].subtract	RationalPolynomialRing	subtract	Q[x]	Q[x]	Q[x]	SCALAR	TOTAL	IOperation

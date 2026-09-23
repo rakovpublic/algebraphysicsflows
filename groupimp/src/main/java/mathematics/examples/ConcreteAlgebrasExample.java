@@ -45,6 +45,9 @@ public final class ConcreteAlgebrasExample {
         System.out.println("Rectangular system solution at parameters [-1, 2]: "+math.flow(math.rectangularMatrices,Collections.singletonList(rectangular))
                 .<RationalAffineSpace,RationalVector>performAlgebraUnsafe("Affine(Q).solve",new RationalVector(Rational.ONE,Rational.of(2)))
                 .performLeftProjectionOperation("at",new RationalVector(Rational.of(-1),Rational.of(2))).collect());
+        System.out.println("Minimum-norm least-squares fit for inconsistent right-hand side [1, 3]: "+math.flow(math.rectangularMatrices,Collections.singletonList(rectangular))
+                .<RationalAffineSpace,RationalVector>performAlgebraUnsafe("Affine(Q).least-squares",new RationalVector(Rational.ONE,Rational.of(3)))
+                .<RationalVector>performAlgebraTransfer("minimum-norm").collect());
         System.out.println("Integral of x^2 from 0 to 1: "+math.flow(math.polynomials,Collections.singletonList(new Polynomial(Rational.ZERO,Rational.ZERO,Rational.ONE)))
                 .<Rational,Pair<Rational,Rational>>performAlgebraUnsafe("integrate",new Pair<>(Rational.ZERO,Rational.ONE)).collect());
         System.out.println("F5: 3 / 2 = "+math.primeFields.get(0).algebra().buildAlgebraItem(math.primeFields.get(0).member(3))

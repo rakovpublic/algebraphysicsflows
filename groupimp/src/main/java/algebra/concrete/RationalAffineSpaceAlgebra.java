@@ -17,9 +17,14 @@ public final class RationalAffineSpaceAlgebra extends ConcreteAlgebra<RationalAf
         binary("contains",algebra(),vectors.algebra(),truth.algebra(),false,RationalAffineSpace::contains);
         binary("at",algebra(),vectors.algebra(),vectors.algebra(),true,RationalAffineSpace::at);
         binary("equal",algebra(),algebra(),truth.algebra(),false,RationalAffineSpace::equals);
+        binary("least-squares",matrices.algebra(),vectors.algebra(),algebra(),true,RationalMatrix::leastSquares);
+        binary("closest-point",algebra(),vectors.algebra(),vectors.algebra(),true,RationalAffineSpace::closestPoint);
+        unary("minimum-norm",algebra(),vectors.algebra(),true,RationalAffineSpace::minimumNorm);
         law("A consistent system is represented by the free-zero particular solution and one canonical nullspace direction per free variable.");
         law("An inconsistent system yields an empty solution set with a retained ambient dimension, not a fabricated vector.");
         law("Every rational parameter tuple determines a solution; directions are a finite basis, not an enumeration of infinitely many points.");
         law("Equality compares canonical solution sets in the same ambient dimension, not the input equation presentation.");
+        law("Least-squares returns all minimizers of the squared Euclidean residual and is nonempty for every dimension-compatible right-hand side.");
+        law("Closest-point and minimum-norm are unique orthogonal projections onto nonempty affine sets in the standard Euclidean inner product.");
     }
 }

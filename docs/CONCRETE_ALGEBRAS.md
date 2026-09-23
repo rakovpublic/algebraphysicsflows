@@ -59,8 +59,8 @@ List<String> values = math.flow(math.naturals,
 | RationalVectorSpace / Q^n | add, subtract | negate | scale by Q -> Q^n; dot -> Q; flat scale-flat and scale-signs |
 | RationalMatrixAlgebra / Matn(Q) | add, subtract, multiply | negate, transpose, inverse, determinant -> Q, trace -> Q, rank -> N | scale by Q; apply to Q^n; solve with nonsingular matrix |
 | RationalVectorFamily / Vec(Q) | partial add, subtract, dot -> Q | negate; dimension -> N; flat entries -> Q; zero-like | scale by Q; fixed-carrier conversions; empty vector constant |
-| RationalMatrixFamily / Mat(Q) | partial add, subtract, multiply; equal -> Boolean | transpose, RREF; rank/nullity -> N; flat pivot columns -> N; flat nullspace/row-space/column-space bases -> Vec(Q); rows, columns, shape counts | scale by Q; apply -> Vec(Q); fixed-carrier conversions; zero-like; partial inverse/determinant/trace |
-| RationalAffineSpaceAlgebra / Affine(Q) | equal -> Boolean | particular -> Vec(Q); flat directions -> Vec(Q); dimension/ambient-dimension -> N; is-empty/is-unique | solve Mat(Q) x Vec(Q) -> Affine(Q); contains -> Boolean; at -> Vec(Q) |
+| RationalMatrixFamily / Mat(Q) | partial add, subtract, multiply; equal -> Boolean | transpose, RREF, pseudoinverse, row/column projectors; rank/nullity -> N; flat pivot columns -> N; flat nullspace/row-space/column-space bases -> Vec(Q); rows, columns, shape counts | scale by Q; apply/project-column/least-squares-minimum-norm/least-squares-residual -> Vec(Q); least-squares-error -> Q; fixed-carrier conversions; zero-like; partial inverse/determinant/trace |
+| RationalAffineSpaceAlgebra / Affine(Q) | equal -> Boolean | particular/minimum-norm -> Vec(Q); flat directions -> Vec(Q); dimension/ambient-dimension -> N; is-empty/is-unique | solve/least-squares Mat(Q) x Vec(Q) -> Affine(Q); contains -> Boolean; at/closest-point -> Vec(Q) |
 | RationalPolynomialRing / Q[x] | add, subtract, multiply | negate, derivative | derivative-order with N; evaluate at Q -> Q; primitive/integrate; iterate and flat orbit with Pair(Q,N) |
 
 Each algebra registers zero/one constants where applicable on Unit with qualified names such as `Q.zero`, `Z.one`, `Mat2(Q).one`. Vector spaces have zero. Constants are Unit -> carrier transfers.
@@ -102,7 +102,7 @@ See [ConcreteAlgebrasTest](../groupimp/src/test/java/mathematics/ConcreteAlgebra
 Same-algebra unary flat operations use `IOneOperandFlatOperation` and `performOneOperandFlatOperation(name)` (or `performFlatOperation(name)`). Finite-set `subsets` is an example. Cross-algebra unary flat operations use the existing `ITransferFlatOperation`, whose return type is corrected to `List<IAlgebraItem<V>>`; `elements` transfers a finite set to its member algebra. Empty results remain valid, and every emitted member keeps its target algebra.
 
 
-The default initializer currently installs 28 algebras and 407 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
+The default initializer currently installs 28 algebras and 417 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
 
 For overloaded custom-member and unsafe operations, the most specific compatible second-operand class is selected (exact matches take priority). Re-registering the same second class replaces that overload. Ambiguous supertypes are rejected. Mathematical domains sharing one Java class need distinct operation names; overload selection does not infer a domain from a value.
 
@@ -131,6 +131,29 @@ List<String> point = math.flow(math.rectangularMatrices, Collections.singletonLi
 The original fixed carriers remain available through `math.vectors` and `math.matrices`. Their `Vec(Q).from-fixed` and `Mat(Q).from-fixed` transfers embed values into the families; family `to-fixed` transfers require the configured fixed dimensions. These conversions use the actual registered Algebra instances.
 
 The reduction and solution conventions follow standard exact linear algebra, as documented by [SymPy's matrix API](https://docs.sympy.org/latest/modules/matrices/matrices.html); execution here is Java rational arithmetic. NativeRectangularLinearTest checks all 729 matrices of shape 2 by 3 with entries in {-1,0,1}, each with nine right-hand sides, using an independent minor-based rank oracle and substitution. It also checks empty, unique and infinite solutions, basis independence, large exact coefficients, canonical equality, shape failures and serialized native flows. Zero-sized matrices and sparse representations are not implemented.
+
+## Exact least-squares and orthogonal projection
+
+`Mat(Q).pseudoinverse` returns the Moore-Penrose inverse A+ of any positive-shape rational matrix, including rectangular and rank-deficient matrices. The result has the transposed shape. The implementation uses a rank factorization A=C*R, with original independent columns C and their RREF coordinates R, and computes R^T*(R*R^T)^-1*(C^T*C)^-1*C^T. A zero matrix returns the transposed zero matrix. All arithmetic remains rational; there is no floating-point rank tolerance or square-root approximation. The four defining identities and least-squares interpretation are described in [SciPy's pseudoinverse documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.pinv.html); this implementation has no SciPy dependency.
+
+`column-projector` returns A*A+ and `row-projector` returns A+*A. Both are symmetric and idempotent in the standard Euclidean inner product. `project-column` maps a point to its closest point in the column space. Its input and output vectors have the matrix's row dimension.
+
+`Affine(Q).least-squares`, registered on Mat(Q), returns all minimizers of the squared residual through the exact normal equations A^T*A*x=A^T*b. It is defined for every right-hand side with the matrix's row dimension, and its result is always nonempty. `least-squares-minimum-norm` returns the unique smallest-norm minimizer A+*b as a Vec(Q) wrapper. `least-squares-residual` returns b-A*A+*b and `least-squares-error` returns the sum of squared residual entries. Error is a rational squared norm, not a square root. These operations use the standard unweighted Euclidean inner products.
+
+~~~java
+// Using the rectangular matrix from the preceding example:
+List<String> minimum = math.flow(math.rectangularMatrices, Collections.singletonList(matrix))
+        .<RationalAffineSpace, RationalVector>performAlgebraUnsafe("Affine(Q).least-squares",
+                new RationalVector(Rational.ONE, Rational.of(3)))
+        .<RationalVector>performAlgebraTransfer("minimum-norm")
+        .collect(); // ["[1/10, 1/5, 3/10]"]
+// No exact solution to these original equations exists.
+// Fitted values: [7/5, 14/5]; residual: [-2/5, 1/5]; squared error: 1/5.
+~~~
+
+For any nonempty Affine(Q) member, `closest-point` projects a Vec(Q) point of the same ambient dimension onto the affine set. `minimum-norm` projects zero onto it; this point can differ from the canonical free-zero `particular`. Both operations are undefined on an empty set. A singleton projects every compatible point to its sole member; projection onto the full ambient space returns the input.
+
+NativeLeastSquaresTest checks the four Moore-Penrose equations, projector symmetry/idempotence, transpose compatibility, residual orthogonality and minimum-norm identities for all 729 ternary matrices of shape 2 by 3 and their transposes. It also checks known rank-three and square cases, zero matrices, closest-point distance identities, large exact coefficients, wrapper identity, incompatible dimensions and serialized native flows.
 
 ## Finite topology through the existing flow API
 

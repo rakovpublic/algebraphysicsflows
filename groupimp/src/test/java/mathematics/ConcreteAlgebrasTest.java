@@ -27,7 +27,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all407RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all417RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String category12="Category(objects=[1, 2], arrows={1=(1,1), 2=(2,2)}, identities={1=1, 2=2}, composition={(1,1)=1, (2,2)=2})";
@@ -74,8 +74,8 @@ public class ConcreteAlgebrasTest {
         expected.put("RationalVectorSpace","[4, 6]|[-2, -2]|[-1, -2]|[2, 4]|[18, 24]|[[18, 24]]|11|[[2, 4]]|[[2, 4], [-2, -4]]|[0, 0]");
         expected.put("RationalMatrixAlgebra","[[3, 2], [3, 6]]|[[2, 4], [6, 8]]|[[-1, 2], [3, 2]]|[[-1, -2], [-3, -4]]|[[1, 3], [2, 4]]|[[-2, 1], [3/2, -1/2]]|-2|5|[[2, 4], [6, 8]]|[11, 25]|[-2, 5/2]|[[0, 0], [0, 0]]|[[1, 0], [0, 1]]|2");
         expected.put("RationalVectorFamily","[4, 4, 4]|[-2, 0, 2]|[-1, -2, -3]|[2, 4, 6]|10|3|[1, 2, 3]|[0, 0, 0]|[1, 2]|[1, 2]|[]");
-        expected.put("RationalMatrixFamily","[[4, 4, 4], [2, 5, 6]]|[[-2, 0, 2], [2, 3, 6]]|[[4, 5], [8, 10]]|[[-1, -2, -3], [-2, -4, -6]]|[[1, 2], [2, 4], [3, 6]]|[[2, 4, 6], [4, 8, 12]]|[10, 20]|[[1, 2, 3], [0, 0, 0]]|1|2|[0]|[[-2, 1, 0], [-3, 0, 1]]|[[1, 2, 3]]|[[1, 2]]|[[1, 2, 3], [2, 4, 6]]|[[1, 2], [2, 4], [3, 6]]|2|3|false|[[1, 2], [3, 4]]|[[1, 2], [3, 4]]|[[0, 0, 0], [0, 0, 0]]|[[-2, 1], [3/2, -1/2]]|-2|5");
-        expected.put("RationalAffineSpaceAlgebra","Affine(particular=[1, 0, 0], directions=[[-2, 1, 0], [-3, 0, 1]])|[1, 0, 0]|[[-2, 1, 0], [-3, 0, 1]]|2|3|false|false|false|[-3, -1, 2]|false");
+        expected.put("RationalMatrixFamily","[[4, 4, 4], [2, 5, 6]]|[[-2, 0, 2], [2, 3, 6]]|[[4, 5], [8, 10]]|[[-1, -2, -3], [-2, -4, -6]]|[[1, 2], [2, 4], [3, 6]]|[[2, 4, 6], [4, 8, 12]]|[10, 20]|[[1, 2, 3], [0, 0, 0]]|1|2|[0]|[[-2, 1, 0], [-3, 0, 1]]|[[1, 2, 3]]|[[1, 2]]|[[1, 2, 3], [2, 4, 6]]|[[1, 2], [2, 4], [3, 6]]|2|3|false|[[1, 2], [3, 4]]|[[1, 2], [3, 4]]|[[0, 0, 0], [0, 0, 0]]|[[-2, 1], [3/2, -1/2]]|-2|5|[[1/70, 1/35], [1/35, 2/35], [3/70, 3/35]]|[[1/5, 2/5], [2/5, 4/5]]|[[1/14, 1/7, 3/14], [1/7, 2/7, 3/7], [3/14, 3/7, 9/14]]|[7/5, 14/5]|[1/10, 1/5, 3/10]|[-2/5, 1/5]|1/5");
+        expected.put("RationalAffineSpaceAlgebra","Affine(particular=[1, 0, 0], directions=[[-2, 1, 0], [-3, 0, 1]])|[1, 0, 0]|[[-2, 1, 0], [-3, 0, 1]]|2|3|false|false|false|[-3, -1, 2]|false|Affine(particular=[7/5, 0, 0], directions=[[-2, 1, 0], [-3, 0, 1]])|[33/14, 5/7, -13/14]|[1/14, 1/7, 3/14]");
         expected.put("RationalPolynomialRing","Q[x][3, 3, 1]|Q[x][2, 5, 4, 1]|Q[x][-1, 1, 1]|Q[x][-1, -2, -1]|Q[x][2, 2]|9|Q[x][2, 1, 1, 1/3]|7/3|Q[x][0]|Q[x][1]|Q[x][0, 1]|Q[x][1]|Q[x][1, 1]|Q[x][1]|Q[x][9, 6, 1]|Q[x][1, 2, 1]|[Q[x][0, 1], Q[x][1]]|Q[x][2]|4|[0, 1, 4]");
         expected.put("PrimeField","0 (mod 5)|1 (mod 5)|1 (mod 5)|4 (mod 5)|2 (mod 5)|2 (mod 5)|0 (mod 5)|1 (mod 5)");
         expected.put("IntegerSetAlgebra","[1, 2, 3]|[1, 2]|[]|[3]|true|false|true|[1, 2]|[1]|2|[1, 2]|[[], [1], [2], [1, 2]]|[3]|[]|[1]|[2]|3|4|[1]|[2]");
@@ -97,7 +97,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(407,count);
+        assertEquals(417,count);
     }
     @SuppressWarnings({"unchecked","rawtypes"})
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
@@ -126,6 +126,8 @@ public class ConcreteAlgebrasTest {
         if(entry.id.equals("Mat(Q).multiply")) second=new RationalMatrix(new Rational[][]{{Rational.ONE,Rational.ZERO},{Rational.ZERO,Rational.ONE},{Rational.ONE,Rational.ONE}});
         if(entry.id.equals("Affine(Q).solve")) second=new RationalVector(Rational.ONE,Rational.of(2));
         if(entry.id.equals("Affine(Q).at")) second=new RationalVector(Rational.of(-1),Rational.of(2));
+        if(Arrays.asList("Mat(Q).project-column","Mat(Q).least-squares-minimum-norm","Mat(Q).least-squares-residual",
+                "Mat(Q).least-squares-error","Affine(Q).least-squares").contains(entry.id)) second=new RationalVector(Rational.ONE,Rational.of(3));
         if(entry.first==math.adjunctions.algebra() && entry.second==math.categories.labelPairs) second=new Pair<>(BigInteger.ONE,BigInteger.valueOf(2));
         if(entry.id.equals("Q[x].divide-exact")) second=new Polynomial(Rational.ONE,Rational.ONE);
         if(entry.flat) {

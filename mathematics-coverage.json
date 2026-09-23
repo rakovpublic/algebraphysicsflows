@@ -26044,7 +26044,8 @@
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
         "Law descriptions and passing tests are not proofs.",
-        "The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization."
+        "The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization.",
+        "Least-squares and closest-point operations use the standard Euclidean inner product and preserve exact rational results."
       ],
       "representation_status": "DIRECTLY_SUPPORTED",
       "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
@@ -26054,7 +26055,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -26356,7 +26358,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -26367,7 +26370,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier."
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
       ],
       "required_extension": null,
       "references": [
@@ -32370,7 +32374,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -32381,7 +32386,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier."
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
       ],
       "required_extension": null,
       "references": [
@@ -32440,7 +32446,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -32451,7 +32458,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier."
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
       ],
       "required_extension": null,
       "references": [
@@ -32510,7 +32518,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -32521,7 +32530,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier."
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
       ],
       "required_extension": null,
       "references": [
@@ -32579,7 +32589,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -32590,7 +32601,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier."
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
       ],
       "required_extension": null,
       "references": [
@@ -32649,7 +32661,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -32660,7 +32673,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier."
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
       ],
       "required_extension": null,
       "references": [
@@ -32718,7 +32732,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -32729,7 +32744,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier."
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
       ],
       "required_extension": null,
       "references": [
@@ -32788,7 +32804,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -32799,7 +32816,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier."
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
       ],
       "required_extension": null,
       "references": [
@@ -32858,7 +32876,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -32869,7 +32888,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier."
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
       ],
       "required_extension": null,
       "references": [
@@ -32928,7 +32948,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -32939,7 +32960,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier."
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
       ],
       "required_extension": null,
       "references": [
@@ -32998,7 +33020,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -33009,7 +33032,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier."
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
       ],
       "required_extension": null,
       "references": [
@@ -33069,7 +33093,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -33080,7 +33105,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier."
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
       ],
       "required_extension": null,
       "references": [
@@ -33140,7 +33166,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -33151,7 +33178,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier."
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
       ],
       "required_extension": null,
       "references": [
@@ -33211,7 +33239,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -33222,7 +33251,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier."
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
       ],
       "required_extension": null,
       "references": [
@@ -33282,7 +33312,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -33293,7 +33324,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier."
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
       ],
       "required_extension": null,
       "references": [
@@ -33353,7 +33385,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -33364,7 +33397,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier."
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
       ],
       "required_extension": null,
       "references": [
@@ -33424,7 +33458,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -33435,7 +33470,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier."
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
       ],
       "required_extension": null,
       "references": [
@@ -33493,7 +33529,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -33504,7 +33541,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier."
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
       ],
       "required_extension": null,
       "references": [
@@ -33562,7 +33600,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -33573,7 +33612,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier."
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
       ],
       "required_extension": null,
       "references": [
@@ -33632,7 +33672,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -33643,7 +33684,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier."
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
       ],
       "required_extension": null,
       "references": [
@@ -33702,7 +33744,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -33713,7 +33756,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier."
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
       ],
       "required_extension": null,
       "references": [
@@ -33772,7 +33816,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -33783,7 +33828,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier."
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
       ],
       "required_extension": null,
       "references": [
@@ -33842,7 +33888,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -33853,7 +33900,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier."
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
       ],
       "required_extension": null,
       "references": [
@@ -33912,7 +33960,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -33923,7 +33972,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier."
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
       ],
       "required_extension": null,
       "references": [
@@ -33982,7 +34032,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -33993,7 +34044,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier."
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
       ],
       "required_extension": null,
       "references": [
@@ -34052,7 +34104,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -34063,7 +34116,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier."
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
       ],
       "required_extension": null,
       "references": [
@@ -34093,6 +34147,510 @@
       "legacy_operation_interface": "ITransferOperation"
     },
     {
+      "id": "concrete-operation.Mat(Q).pseudoinverse",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalMatrixFamily",
+      "concept": "Mat(Q).pseudoinverse",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Q)",
+      "domain_B": null,
+      "domain_C": "Mat(Q)",
+      "operation_signature": "Mat(Q) -> Mat(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).pseudoinverse",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the unique rational Moore-Penrose inverse with transposed shape, satisfying A*A+*A=A, A+*A*A+=A+ and symmetry of A*A+ and A+*A. Defined for every positive shape and rank, including zero matrices.",
+        "Shapes are stored explicitly. RREF uses exact rational row operations; bases preserve rank-nullity and declared coordinate dimensions."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/matrices/matrices.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Mat(Q).pseudoinverse",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "pseudoinverse",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Q).column-projector",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalMatrixFamily",
+      "concept": "Mat(Q).column-projector",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Q)",
+      "domain_B": null,
+      "domain_C": "Mat(Q)",
+      "operation_signature": "Mat(Q) -> Mat(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).column-projector",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return A*A+, the symmetric idempotent orthogonal projector onto the column space, of shape row-count by row-count.",
+        "Shapes are stored explicitly. RREF uses exact rational row operations; bases preserve rank-nullity and declared coordinate dimensions."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/matrices/matrices.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Mat(Q).column-projector",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "column-projector",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Q).row-projector",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalMatrixFamily",
+      "concept": "Mat(Q).row-projector",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Q)",
+      "domain_B": null,
+      "domain_C": "Mat(Q)",
+      "operation_signature": "Mat(Q) -> Mat(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).row-projector",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return A+*A, the symmetric idempotent orthogonal projector onto the row space, of shape column-count by column-count.",
+        "Shapes are stored explicitly. RREF uses exact rational row operations; bases preserve rank-nullity and declared coordinate dimensions."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/matrices/matrices.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Mat(Q).row-projector",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "row-projector",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Q).project-column",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalMatrixFamily",
+      "concept": "Mat(Q).project-column",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Q)",
+      "domain_B": "Vec(Q)",
+      "domain_C": "Vec(Q)",
+      "operation_signature": "Mat(Q) x Vec(Q) -> Vec(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).project-column",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Point dimension equals row count. Return its closest point in the column space under the standard Euclidean inner product, retaining the row dimension.",
+        "Shapes are stored explicitly. RREF uses exact rational row operations; bases preserve rank-nullity and declared coordinate dimensions."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/matrices/matrices.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Mat(Q).project-column",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "project-column",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Q).least-squares-minimum-norm",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalMatrixFamily",
+      "concept": "Mat(Q).least-squares-minimum-norm",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Q)",
+      "domain_B": "Vec(Q)",
+      "domain_C": "Vec(Q)",
+      "operation_signature": "Mat(Q) x Vec(Q) -> Vec(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).least-squares-minimum-norm",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Right-hand side dimension equals row count. Return A+*b, the unique least-squares minimizer of smallest Euclidean norm; singular and inconsistent systems are accepted.",
+        "Shapes are stored explicitly. RREF uses exact rational row operations; bases preserve rank-nullity and declared coordinate dimensions."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/matrices/matrices.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Mat(Q).least-squares-minimum-norm",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "least-squares-minimum-norm",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Q).least-squares-residual",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalMatrixFamily",
+      "concept": "Mat(Q).least-squares-residual",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Q)",
+      "domain_B": "Vec(Q)",
+      "domain_C": "Vec(Q)",
+      "operation_signature": "Mat(Q) x Vec(Q) -> Vec(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).least-squares-residual",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Right-hand side dimension equals row count. Return b minus its fitted value A*A+*b, perpendicular to every matrix column.",
+        "Shapes are stored explicitly. RREF uses exact rational row operations; bases preserve rank-nullity and declared coordinate dimensions."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/matrices/matrices.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Mat(Q).least-squares-residual",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "least-squares-residual",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Q).least-squares-error",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalMatrixFamily",
+      "concept": "Mat(Q).least-squares-error",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Q)",
+      "domain_B": "Vec(Q)",
+      "domain_C": "Q",
+      "operation_signature": "Mat(Q) x Vec(Q) -> Q",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).least-squares-error",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Right-hand side dimension equals row count. Return the exact nonnegative sum of squared residual coordinates, not its square root.",
+        "Shapes are stored explicitly. RREF uses exact rational row operations; bases preserve rank-nullity and declared coordinate dimensions."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Dense exact matrices with positive row and column counts only; zero-sized matrices, sparse algorithms, eigenvalue decompositions and numerical error contracts are not supplied by this carrier.",
+        "Pseudoinverse and least-squares use exact rational arithmetic in the standard Euclidean inner products; no floating-point rank tolerance, weighted metric or approximation error estimate is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/matrices/matrices.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Mat(Q).least-squares-error",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "least-squares-error",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
       "id": "concrete-operation.Affine(Q).solve",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "RationalAffineSpaceAlgebra",
@@ -34111,7 +34669,8 @@
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
         "Law descriptions and passing tests are not proofs.",
         "Right-hand side dimension equals the positive matrix row count. Inconsistent systems return an empty affine set; consistent singular and rectangular systems return a particular solution plus canonical kernel directions.",
-        "The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization."
+        "The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization.",
+        "Least-squares and closest-point operations use the standard Euclidean inner product and preserve exact rational results."
       ],
       "representation_status": "DIRECTLY_SUPPORTED",
       "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
@@ -34122,7 +34681,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -34181,7 +34741,8 @@
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
         "Law descriptions and passing tests are not proofs.",
         "The affine set is nonempty; return its canonical solution with every free coordinate zero.",
-        "The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization."
+        "The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization.",
+        "Least-squares and closest-point operations use the standard Euclidean inner product and preserve exact rational results."
       ],
       "representation_status": "DIRECTLY_SUPPORTED",
       "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
@@ -34192,7 +34753,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -34252,7 +34814,8 @@
         "Law descriptions and passing tests are not proofs.",
         "The affine set is nonempty; emit a finite nullspace basis in ascending free-column order. A unique solution emits no directions.",
         "Finite ordered wrapped results; duplicates and empty lists are retained.",
-        "The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization."
+        "The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization.",
+        "Least-squares and closest-point operations use the standard Euclidean inner product and preserve exact rational results."
       ],
       "representation_status": "DIRECTLY_SUPPORTED",
       "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
@@ -34263,7 +34826,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -34322,7 +34886,8 @@
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
         "Law descriptions and passing tests are not proofs.",
         "The affine set is nonempty; return the number of independent free rational parameters.",
-        "The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization."
+        "The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization.",
+        "Least-squares and closest-point operations use the standard Euclidean inner product and preserve exact rational results."
       ],
       "representation_status": "DIRECTLY_SUPPORTED",
       "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
@@ -34333,7 +34898,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -34392,7 +34958,8 @@
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
         "Law descriptions and passing tests are not proofs.",
         "Return the original positive number of unknowns, including for empty solution sets.",
-        "The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization."
+        "The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization.",
+        "Least-squares and closest-point operations use the standard Euclidean inner product and preserve exact rational results."
       ],
       "representation_status": "DIRECTLY_SUPPORTED",
       "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
@@ -34403,7 +34970,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -34462,7 +35030,8 @@
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
         "Law descriptions and passing tests are not proofs.",
         "Check whether the original rational linear system is inconsistent.",
-        "The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization."
+        "The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization.",
+        "Least-squares and closest-point operations use the standard Euclidean inner product and preserve exact rational results."
       ],
       "representation_status": "DIRECTLY_SUPPORTED",
       "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
@@ -34473,7 +35042,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -34532,7 +35102,8 @@
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
         "Law descriptions and passing tests are not proofs.",
         "True exactly for a nonempty zero-dimensional affine set.",
-        "The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization."
+        "The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization.",
+        "Least-squares and closest-point operations use the standard Euclidean inner product and preserve exact rational results."
       ],
       "representation_status": "DIRECTLY_SUPPORTED",
       "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
@@ -34543,7 +35114,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -34602,7 +35174,8 @@
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
         "Law descriptions and passing tests are not proofs.",
         "Compare the point against the canonical parametrization; empty sets or vectors of the wrong ambient dimension return false.",
-        "The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization."
+        "The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization.",
+        "Least-squares and closest-point operations use the standard Euclidean inner product and preserve exact rational results."
       ],
       "representation_status": "DIRECTLY_SUPPORTED",
       "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
@@ -34613,7 +35186,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -34672,7 +35246,8 @@
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
         "Law descriptions and passing tests are not proofs.",
         "The affine set is nonempty and the parameter vector has one entry per free variable. Return particular plus the corresponding linear combination of directions, wrapped in Vec(Q).",
-        "The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization."
+        "The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization.",
+        "Least-squares and closest-point operations use the standard Euclidean inner product and preserve exact rational results."
       ],
       "representation_status": "DIRECTLY_SUPPORTED",
       "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
@@ -34683,7 +35258,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -34742,7 +35318,8 @@
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
         "Law descriptions and passing tests are not proofs.",
         "Compare canonical solution sets within the same ambient dimension, independently of the input equation presentation.",
-        "The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization."
+        "The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization.",
+        "Least-squares and closest-point operations use the standard Euclidean inner product and preserve exact rational results."
       ],
       "representation_status": "DIRECTLY_SUPPORTED",
       "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
@@ -34753,7 +35330,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java"
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -34792,6 +35370,222 @@
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "equal",
       "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.Affine(Q).least-squares",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalAffineSpaceAlgebra",
+      "concept": "Affine(Q).least-squares",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Q)",
+      "domain_B": "Vec(Q)",
+      "domain_C": "Affine(Q)",
+      "operation_signature": "Mat(Q) x Vec(Q) -> Affine(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).least-squares",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Right-hand side dimension equals matrix row count. Return all minimizers of the squared Euclidean residual as the nonempty affine solution set of A^T*A*x=A^T*b, including rank-deficient and inconsistent original systems.",
+        "The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization.",
+        "Least-squares and closest-point operations use the standard Euclidean inner product and preserve exact rational results."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalAffineSpaceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite linear systems over Q with a positive number of equations and unknowns. Infinite solution sets are parametrized by a finite basis, never enumerated. Empty sets retain ambient dimension and have no particular point, direction basis or affine dimension operation result."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/matrices/matrices.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalAffineSpaceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Affine(Q).least-squares",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "Affine(Q).least-squares",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.Affine(Q).closest-point",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalAffineSpaceAlgebra",
+      "concept": "Affine(Q).closest-point",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Affine(Q)",
+      "domain_B": "Vec(Q)",
+      "domain_C": "Vec(Q)",
+      "operation_signature": "Affine(Q) x Vec(Q) -> Vec(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).closest-point",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The affine set is nonempty and the point has its ambient dimension. Return the unique closest point in the standard Euclidean inner product; points already in the set are unchanged.",
+        "The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization.",
+        "Least-squares and closest-point operations use the standard Euclidean inner product and preserve exact rational results."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalAffineSpaceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite linear systems over Q with a positive number of equations and unknowns. Infinite solution sets are parametrized by a finite basis, never enumerated. Empty sets retain ambient dimension and have no particular point, direction basis or affine dimension operation result."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/matrices/matrices.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalAffineSpaceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Affine(Q).closest-point",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "closest-point",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.Affine(Q).minimum-norm",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalAffineSpaceAlgebra",
+      "concept": "Affine(Q).minimum-norm",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Affine(Q)",
+      "domain_B": null,
+      "domain_C": "Vec(Q)",
+      "operation_signature": "Affine(Q) -> Vec(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).minimum-norm",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The affine set is nonempty. Return its unique point of smallest Euclidean norm, which need not equal the free-zero particular point.",
+        "The private representation is constructed by exact row reduction. Free-zero particular points and ordered unit-free-coordinate basis vectors give a canonical affine parametrization.",
+        "Least-squares and closest-point operations use the standard Euclidean inner product and preserve exact rational results."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalAffineSpaceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRectangularLinearTest.java",
+        "groupimp/src/test/java/operations/NativeLeastSquaresTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Finite linear systems over Q with a positive number of equations and unknowns. Infinite solution sets are parametrized by a finite basis, never enumerated. Empty sets retain ambient dimension and have no particular point, direction basis or affine dimension operation result."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/matrices/matrices.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalAffineSpaceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Affine(Q).minimum-norm",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "minimum-norm",
+      "legacy_operation_interface": "ITransferOperation"
     },
     {
       "id": "concrete-operation.Q[x].add",
@@ -54946,6 +55740,7 @@
         "FiniteSet(Z).maximum",
         "FiniteSet(Z).minimum",
         "Mat(Q).determinant",
+        "Mat(Q).least-squares-error",
         "Mat(Q).scale",
         "Mat(Q).trace",
         "Mat2(Q).determinant",
@@ -56770,14 +57565,21 @@
       ],
       "supported_operations": [
         "Affine(Q).at",
+        "Affine(Q).closest-point",
         "Affine(Q).contains",
         "Affine(Q).directions",
+        "Affine(Q).least-squares",
+        "Affine(Q).minimum-norm",
         "Affine(Q).particular",
         "Affine(Q).solve",
         "Mat(Q).apply",
         "Mat(Q).column-space-basis",
         "Mat(Q).columns",
+        "Mat(Q).least-squares-error",
+        "Mat(Q).least-squares-minimum-norm",
+        "Mat(Q).least-squares-residual",
         "Mat(Q).nullspace-basis",
+        "Mat(Q).project-column",
         "Mat(Q).row-space-basis",
         "Mat(Q).rows",
         "Vec(Q).add",
@@ -56830,23 +57632,31 @@
         "N"
       ],
       "supported_operations": [
+        "Affine(Q).least-squares",
         "Affine(Q).solve",
         "Mat(Q).add",
         "Mat(Q).apply",
         "Mat(Q).column-count",
+        "Mat(Q).column-projector",
         "Mat(Q).column-space-basis",
         "Mat(Q).columns",
         "Mat(Q).determinant",
         "Mat(Q).equal",
         "Mat(Q).from-fixed",
         "Mat(Q).inverse",
+        "Mat(Q).least-squares-error",
+        "Mat(Q).least-squares-minimum-norm",
+        "Mat(Q).least-squares-residual",
         "Mat(Q).multiply",
         "Mat(Q).negate",
         "Mat(Q).nullity",
         "Mat(Q).nullspace-basis",
         "Mat(Q).pivot-columns",
+        "Mat(Q).project-column",
+        "Mat(Q).pseudoinverse",
         "Mat(Q).rank",
         "Mat(Q).row-count",
+        "Mat(Q).row-projector",
         "Mat(Q).row-space-basis",
         "Mat(Q).rows",
         "Mat(Q).rref",
@@ -56897,12 +57707,15 @@
       "supported_operations": [
         "Affine(Q).ambient-dimension",
         "Affine(Q).at",
+        "Affine(Q).closest-point",
         "Affine(Q).contains",
         "Affine(Q).dimension",
         "Affine(Q).directions",
         "Affine(Q).equal",
         "Affine(Q).is-empty",
         "Affine(Q).is-unique",
+        "Affine(Q).least-squares",
+        "Affine(Q).minimum-norm",
         "Affine(Q).particular",
         "Affine(Q).solve"
       ],

@@ -106,6 +106,9 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("square and nonsingular", " ".join(records["Mat(Q).inverse"]["required_invariants"]))
         self.assertIn("Inconsistent systems return an empty", " ".join(records["Affine(Q).solve"]["required_invariants"]))
         self.assertNotIn("must be nonsingular", " ".join(records["Affine(Q).solve"]["required_invariants"]))
+        self.assertIn("including zero matrices", " ".join(records["Mat(Q).pseudoinverse"]["required_invariants"]))
+        self.assertIn("nonempty affine", " ".join(records["Affine(Q).least-squares"]["required_invariants"]))
+        self.assertIn("need not equal", " ".join(records["Affine(Q).minimum-norm"]["required_invariants"]))
 
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)

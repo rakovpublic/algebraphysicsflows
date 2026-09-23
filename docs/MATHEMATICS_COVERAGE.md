@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 842 |
-| DIRECTLY_SUPPORTED | 599 |
+| Scoped records | 852 |
+| DIRECTLY_SUPPORTED | 609 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 458 |
+| IMPLEMENTED | 468 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 526 |
+| MACHINE_TESTED | 536 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 435 | 435 | 0 | 0 | 0 | 435 | 0 | 0 |
+| Concrete MathTool algebras | 445 | 445 | 0 | 0 | 0 | 445 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -188,12 +188,15 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | --- | --- | --- | --- |
 | Affine(Q).ambient-dimension | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).ambient-dimension |
 | Affine(Q).at | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).at |
+| Affine(Q).closest-point | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).closest-point |
 | Affine(Q).contains | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).contains |
 | Affine(Q).dimension | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).dimension |
 | Affine(Q).directions | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).directions |
 | Affine(Q).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).equal |
 | Affine(Q).is-empty | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).is-empty |
 | Affine(Q).is-unique | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).is-unique |
+| Affine(Q).least-squares | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).least-squares |
+| Affine(Q).minimum-norm | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).minimum-norm |
 | Affine(Q).particular | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).particular |
 | Affine(Q).solve | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).solve |
 | Boolean.and | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.and |
@@ -426,19 +429,26 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Mat(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).add |
 | Mat(Q).apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).apply |
 | Mat(Q).column-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).column-count |
+| Mat(Q).column-projector | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).column-projector |
 | Mat(Q).column-space-basis | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).column-space-basis |
 | Mat(Q).columns | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).columns |
 | Mat(Q).determinant | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).determinant |
 | Mat(Q).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).equal |
 | Mat(Q).from-fixed | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).from-fixed |
 | Mat(Q).inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).inverse |
+| Mat(Q).least-squares-error | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).least-squares-error |
+| Mat(Q).least-squares-minimum-norm | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).least-squares-minimum-norm |
+| Mat(Q).least-squares-residual | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).least-squares-residual |
 | Mat(Q).multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).multiply |
 | Mat(Q).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).negate |
 | Mat(Q).nullity | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).nullity |
 | Mat(Q).nullspace-basis | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).nullspace-basis |
 | Mat(Q).pivot-columns | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).pivot-columns |
+| Mat(Q).project-column | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).project-column |
+| Mat(Q).pseudoinverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).pseudoinverse |
 | Mat(Q).rank | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).rank |
 | Mat(Q).row-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).row-count |
+| Mat(Q).row-projector | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).row-projector |
 | Mat(Q).row-space-basis | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).row-space-basis |
 | Mat(Q).rows | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).rows |
 | Mat(Q).rref | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).rref |

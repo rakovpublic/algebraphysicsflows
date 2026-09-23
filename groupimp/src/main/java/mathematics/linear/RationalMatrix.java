@@ -52,6 +52,40 @@ public final class RationalMatrix implements Serializable {
         return Collections.unmodifiableList(result);
     }
     public RationalAffineSpace solve(RationalVector rhs) { return RationalAffineSpace.solve(this,rhs); }
+    /** Moore-Penrose inverse in the standard rational Euclidean inner products. */
+    public RationalMatrix pseudoinverse() {
+        RationalRowReduction reduction=new RationalRowReduction(this,null); int rank=reduction.pivots.size();
+        if(rank==0) return transpose(); // The zero matrix's pseudoinverse is the transposed zero matrix.
+        Rational[][] columns=new Rational[rows][rank],rowCoordinates=new Rational[rank][this.columns];
+        for(int i=0;i<rank;i++) {
+            for(int r=0;r<rows;r++) columns[r][i]=get(r,reduction.pivots.get(i));
+            for(int c=0;c<this.columns;c++) rowCoordinates[i][c]=reduction.matrix.get(i,c);
+        }
+        // A=C*R with C of full column rank and R of full row rank; A+=R+*C+.
+        RationalMatrix c=new RationalMatrix(columns),r=new RationalMatrix(rowCoordinates);
+        RationalMatrix ct=c.transpose(),rt=r.transpose();
+        return rt.multiply(r.multiply(rt).inverse()).multiply(ct.multiply(c).inverse()).multiply(ct);
+    }
+    public RationalMatrix columnProjector() { return multiply(pseudoinverse()); }
+    public RationalMatrix rowProjector() { return pseudoinverse().multiply(this); }
+    private void rightHandSide(RationalVector rhs) {
+        if(rhs.dimension()!=rows) throw MathFailure.undefined("Right-hand side dimension must equal the number of matrix rows");
+    }
+    /** All minimizers of ||A*x-b||^2, represented as an affine solution set of the normal equations. */
+    public RationalAffineSpace leastSquares(RationalVector rhs) {
+        rightHandSide(rhs); RationalMatrix transpose=transpose();
+        return transpose.multiply(this).solve(transpose.multiply(rhs));
+    }
+    /** The unique least-squares minimizer with smallest squared Euclidean norm. */
+    public RationalVector minimumNormLeastSquares(RationalVector rhs) {
+        rightHandSide(rhs); return pseudoinverse().multiply(rhs);
+    }
+    public RationalVector projectColumn(RationalVector point) { return multiply(minimumNormLeastSquares(point)); }
+    /** Residual convention: b minus its fitted value A*x. */
+    public RationalVector leastSquaresResidual(RationalVector rhs) { return rhs.add(projectColumn(rhs).scale(Rational.of(-1))); }
+    public Rational leastSquaresError(RationalVector rhs) {
+        RationalVector residual=leastSquaresResidual(rhs); return residual.dot(residual);
+    }
     private Rational[][] copy() { Rational[][] copy=new Rational[rows][]; for(int r=0;r<rows;r++) copy[r]=entries[r].clone(); return copy; }
     private void square() { if (rows!=columns) throw MathFailure.invalid("A square matrix is required"); }
     public static RationalMatrix identity(int n) {
