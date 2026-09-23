@@ -51,8 +51,10 @@ public final class PolynomialMap implements Serializable {
     public PolynomialMap subtract(PolynomialMap other) { return add(other.negate()); }
     /** Composition outer.compose(inner) acts with inner first. */
     public PolynomialMap compose(PolynomialMap inner) {
+        return compose(inner,new MultivariatePolynomial.Work());
+    }
+    PolynomialMap compose(PolynomialMap inner,MultivariatePolynomial.Work work) {
         if(inputDimension()!=inner.outputDimension()) throw MathFailure.undefined("Inner outputs must match outer inputs");
-        MultivariatePolynomial.Work work=new MultivariatePolynomial.Work();
         MultivariatePolynomial[] result=new MultivariatePolynomial[outputDimension()];
         for(int i=0;i<result.length;i++) result[i]=component(i).substitute(inner,work);
         return new PolynomialMap(result);

@@ -169,9 +169,11 @@ public final class PolynomialDifferentialForm implements Serializable {
     }
     /** For F:Q^m -> Q^n, pull back a form on Q^n by f -> f(F) and dx_i -> dF_i. */
     public PolynomialDifferentialForm pullback(PolynomialMap map) {
+        return pullback(map,new MultivariatePolynomial.Work());
+    }
+    PolynomialDifferentialForm pullback(PolynomialMap map,MultivariatePolynomial.Work work) {
         if(map.outputDimension()!=dimension) throw MathFailure.undefined("Pullback map output dimension must equal the form coordinate dimension");
         int input=map.inputDimension(); checkDimension(input);
-        MultivariatePolynomial.Work work=new MultivariatePolynomial.Work();
         PolynomialDifferentialForm[] differentials=new PolynomialDifferentialForm[dimension]; Accumulator result=new Accumulator();
         for(Map.Entry<Integer,MultivariatePolynomial> term : coefficients.entrySet()) {
             PolynomialDifferentialForm image=scalar(term.getValue().substitute(map,work));
@@ -184,6 +186,16 @@ public final class PolynomialDifferentialForm implements Serializable {
             for(Map.Entry<Integer,MultivariatePolynomial> part : image.coefficients.entrySet()) result.add(part.getKey(),part.getValue());
         }
         return new PolynomialDifferentialForm(input,result.values);
+    }
+    void requireDegree(java.math.BigInteger degree) {
+        for(int mask : coefficients.keySet()) if(!degree.equals(java.math.BigInteger.valueOf(Integer.bitCount(mask))))
+            throw MathFailure.undefined("Integration requires a homogeneous form of the chain or cell degree");
+    }
+    /** Integrate a top-degree form over the standard positively oriented unit cube. */
+    public Rational integrateUnitCube() {
+        requireDegree(java.math.BigInteger.valueOf(dimension));
+        MultivariatePolynomial top=coefficients.get((1<<dimension)-1);
+        return top==null?Rational.ZERO:top.integrateUnitCube();
     }
     /** Evaluate coefficients and identify the standard coordinate coframe with the existing exterior basis. */
     public RationalExterior evaluate(RationalVector point) {

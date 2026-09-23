@@ -9,6 +9,8 @@ import mathematics.calculus.Polynomial;
 import mathematics.calculus.MultivariatePolynomial;
 import mathematics.calculus.PolynomialMap;
 import mathematics.calculus.PolynomialDifferentialForm;
+import mathematics.calculus.PolynomialCell;
+import mathematics.calculus.PolynomialChain;
 import mathematics.core.MathFailure;
 import operations.simple.*;
 import operations.flat.*;
@@ -30,12 +32,22 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all582RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all619RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String px="Poly(Q^3){[1, 0, 0]=1}",py="Poly(Q^3){[0, 1, 0]=1}",pz="Poly(Q^3){[0, 0, 1]=1}";
         String pzero="Poly(Q^3){}",pone="Poly(Q^3){[0, 0, 0]=1}",pfirst="Poly(Q^3){[0, 0, 0]=1, [1, 0, 0]=1}";
         String identityMap="PolynomialMap["+px+", "+py+", "+pz+"]",cycleMap="PolynomialMap["+py+", "+pz+", "+px+"]";
+        String cellA="Cell(point=[1, 2, 3])",cellB="Cell(point=[3, 2, 1])",chainA="Chain(Q^3, degree=0){"+cellA+"=1}";
+        String cellProduct="Cell(point=[1, 2, 3, 3, 2, 1])",negativeChain="Chain(Q^3, degree=-1){}";
+        expected.put("PolynomialCellAlgebra",String.join("|",cellProduct,"0","3","Cell(map="+identityMap+")",
+                "PolynomialMap[Poly(Q^1){[1]=1}, Poly(Q^1){}, Poly(Q^1){}]",cellA,"[1, 2, 3]",
+                "Cell(map=PolynomialMap[Poly(Q^1){[0]=1, [1]=2}, Poly(Q^1){[0]=2}, Poly(Q^1){[0]=3, [1]=-2}])",
+                "Cell(point=[0, 0, 0])","Cell(point=[1, 0, 0])","[]","[[1, 2, 3]]","[1, 2, 3]","Cell(point=[2, 3, 1])","2","false"));
+        expected.put("PolynomialChainAlgebra",String.join("|","Chain(Q^3, degree=0){"+cellA+"=1, "+cellB+"=1}",
+                "Chain(Q^3, degree=0){"+cellA+"=1, "+cellB+"=-1}","Chain(Q^3, degree=0){"+cellA+"=-1}","Chain(Q^3, degree=0){"+cellA+"=2}",
+                "Chain(Q^6, degree=0){"+cellProduct+"=1}",negativeChain,"Chain(Q^3, degree=0){Cell(point=[2, 3, 1])=1}","2","3","0","false","1",
+                "["+cellA+"]","[1]","0","false",chainA,negativeChain,"Chain(Q^3, degree=0){}"));
         String form="Form(Q^3){1="+py+"}",formZero="Form(Q^3){}";
         expected.put("PolynomialDifferentialFormAlgebra",String.join("|",
                 "Form(Q^3){1="+py+", 2="+px+"}","Form(Q^3){1="+py+", 2=Poly(Q^3){[1, 0, 0]=-1}}",
@@ -46,7 +58,7 @@ public class ConcreteAlgebrasTest {
                 "3","1","1","[1]","["+form+"]","["+py+"]","[1]",formZero,"Exterior(Q^3){1=2}","false","false",pzero,pfirst,
                 "Form(Q^3){0="+pfirst+"}","Form(Q^3){0=Poly(Q^3){[0, 0, 0]=2}, 1="+pone+", 3=Poly(Q^3){[0, 0, 0]=3}}",
                 "Exterior(Q^3){1=2}","Form(Q^3){1="+px+", 2="+py+", 4="+pz+"}","PolynomialMap["+py+", "+pzero+", "+pzero+"]",
-                formZero,"Form(Q^3){0="+pone+"}","Form(Q^3){7="+pone+"}","[Form(Q^3){1="+pone+"}, Form(Q^3){2="+pone+"}, Form(Q^3){4="+pone+"}]"));
+                formZero,"Form(Q^3){0="+pone+"}","Form(Q^3){7="+pone+"}","[Form(Q^3){1="+pone+"}, Form(Q^3){2="+pone+"}, Form(Q^3){4="+pone+"}]","2"));
         expected.put("RationalMultivariatePolynomialAlgebra",String.join("|",
                 "Poly(Q^3){[0, 0, 0]=1, [0, 1, 0]=1, [1, 0, 0]=1}",
                 "Poly(Q^3){[0, 0, 0]=1, [0, 1, 0]=-1, [1, 0, 0]=1}",
@@ -55,7 +67,7 @@ public class ConcreteAlgebrasTest {
                 "["+pone+", "+pzero+", "+pzero+"]","Poly(Q^3){[0, 0, 0]=3}","[1, 0, 0]",
                 "[[0, 0, 0], [0, 0, 0], [0, 0, 0]]",pzero,"Poly(Q^3){[0, 0, 1]=1, [1, 0, 1]=1}",
                 "Poly(Q^3){[0, 0, 0]=1, [1, 0, 0]=2, [2, 0, 0]=1}","["+pone+", "+px+"]","[1, 1]",pzero,pone,
-                "Poly(Q^1){[0]=1, [1]=2, [2]=1}","Q[x][1, 2, 1]","1","6","["+px+", "+py+", "+pz+"]"));
+                "Poly(Q^1){[0]=1, [1]=2, [2]=1}","Q[x][1, 2, 1]","1","6","["+px+", "+py+", "+pz+"]","3/2"));
         expected.put("RationalPolynomialMapAlgebra",String.join("|",
                 "PolynomialMap[Poly(Q^3){[0, 1, 0]=1, [1, 0, 0]=1}, Poly(Q^3){[0, 0, 1]=1, [0, 1, 0]=1}, Poly(Q^3){[0, 0, 1]=1, [1, 0, 0]=1}]",
                 "PolynomialMap[Poly(Q^3){[0, 1, 0]=-1, [1, 0, 0]=1}, Poly(Q^3){[0, 0, 1]=-1, [0, 1, 0]=1}, Poly(Q^3){[0, 0, 1]=1, [1, 0, 0]=-1}]",
@@ -136,12 +148,16 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(582,count);
+        assertEquals(619,count);
     }
     @SuppressWarnings({"unchecked","rawtypes"})
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
         Algebra source=math.mathTool.getAlgebra(entry.first.getAlgebraName());
         IAlgebraItem item=source.buildAlgebraItem(sample(math,source.getAlgebraName(),0));
+        if(Arrays.asList("PolynomialCell(Q).to-map","PolynomialCell(Q).lower-face","PolynomialCell(Q).upper-face").contains(entry.id))
+            item=source.buildAlgebraItem(PolynomialCell.parameterized(new PolynomialMap(MultivariatePolynomial.variable(1,0),
+                    MultivariatePolynomial.constant(1,Rational.ZERO),MultivariatePolynomial.constant(1,Rational.ZERO))));
+        if(entry.id.equals("PolynomialForm(Q).integrate-unit-cube")) item=source.buildAlgebraItem(PolynomialDifferentialForm.volume(3).scale(Rational.of(2)));
         if(entry.id.equals("PolynomialForm(Q).to-polynomial")) item=source.buildAlgebraItem(PolynomialDifferentialForm.scalar((MultivariatePolynomial)sample(math,"Poly(Q)",0)));
         if(entry.id.equals("PolynomialForm(Q).to-exterior")) item=source.buildAlgebraItem(PolynomialDifferentialForm.fromExterior(new RationalExterior(3,Collections.singletonMap(1,Rational.of(2)))));
         if(entry.id.equals("Poly(Q).to-univariate")) item=source.buildAlgebraItem(MultivariatePolynomial.fromUnivariate(new Polynomial(Rational.ONE,Rational.of(2),Rational.ONE)));
@@ -176,6 +192,10 @@ public class ConcreteAlgebrasTest {
         if(operation instanceof IOneOperandOperation) return item.performOneOperandOperation(alias).perform().getResult().toString();
         if(operation instanceof ITransferOperation) return item.performAlgebraTransfer(alias).perform().getResult().toString();
         Object second=entry.second==null?null:sample(math,entry.second.getAlgebraName(),1);
+        if(entry.id.equals("PolynomialCell(Q).evaluate")) second=new RationalVector();
+        if(entry.id.equals("PolynomialCell(Q).lower-face") || entry.id.equals("PolynomialCell(Q).upper-face")) second=BigInteger.ZERO;
+        if(entry.id.equals("PolynomialCell(Q).integrate") || entry.id.equals("PolynomialChain(Q).integrate"))
+            second=PolynomialDifferentialForm.scalar((MultivariatePolynomial)sample(math,"Poly(Q)",0));
         if(entry.id.equals("Mat(Q).multiply")) second=new RationalMatrix(new Rational[][]{{Rational.ONE,Rational.ZERO},{Rational.ZERO,Rational.ONE},{Rational.ONE,Rational.ONE}});
         if(entry.id.equals("Affine(Q).solve")) second=new RationalVector(Rational.ONE,Rational.of(2));
         if(entry.id.equals("Affine(Q).at")) second=new RationalVector(Rational.of(-1),Rational.of(2));
@@ -218,6 +238,8 @@ public class ConcreteAlgebrasTest {
                     :new RationalQuaternion(Rational.of(2),Rational.of(-1),Rational.ONE,Rational.of(3));
             case "Q^2": return index==0?new RationalVector(Rational.ONE,Rational.of(2)):new RationalVector(Rational.of(3),Rational.of(4));
             case "Vec(Q)": return index==0?new RationalVector(Rational.ONE,Rational.of(2),Rational.of(3)):new RationalVector(Rational.of(3),Rational.of(2),Rational.ONE);
+            case "PolynomialCell(Q)": return PolynomialCell.point((RationalVector)sample(math,"Vec(Q)",index));
+            case "PolynomialChain(Q)": return PolynomialChain.of((PolynomialCell)sample(math,"PolynomialCell(Q)",index));
             case "Tensor(Q)": return new RationalTensor(new int[]{2,2},Rational.of(1+4*index),Rational.of(2+4*index),Rational.of(3+4*index),Rational.of(4+4*index));
             case "NxN.tensor-axes": return new Pair<>(BigInteger.ZERO,BigInteger.ONE);
             case "Exterior(Q)": {

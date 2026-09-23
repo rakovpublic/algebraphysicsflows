@@ -38,6 +38,7 @@ public final class RationalMultivariatePolynomialAlgebra extends ConcreteAlgebra
         unary("constant-part",algebra(),rationals.algebra(),false,MultivariatePolynomial::constantPart);
         unary("to-rational",algebra(),rationals.algebra(),true,MultivariatePolynomial::toRational);
         unaryFlat("variables",algebra(),algebra(),false,MultivariatePolynomial::variables);
+        unary("integrate-unit-cube",algebra(),rationals.algebra(),false,MultivariatePolynomial::integrateUnitCube);
         law("For each fixed input dimension these polynomials form a commutative Q-algebra; arithmetic requires equal dimensions.");
         law("Partial derivatives commute and satisfy the product rule; directional differentiation is linear in the unnormalized direction.");
         law("Gradient coordinates follow variable order; Hessian rows and columns follow that same order; its trace equals the Laplacian.");

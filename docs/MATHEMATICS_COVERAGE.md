@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1023 |
-| DIRECTLY_SUPPORTED | 780 |
+| Scoped records | 1062 |
+| DIRECTLY_SUPPORTED | 819 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 639 |
+| IMPLEMENTED | 678 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 707 |
+| MACHINE_TESTED | 746 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 616 | 616 | 0 | 0 | 0 | 616 | 0 | 0 |
+| Concrete MathTool algebras | 655 | 655 | 0 | 0 | 0 | 655 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -546,6 +546,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Poly(Q).from-univariate | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).from-univariate |
 | Poly(Q).gradient-at | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).gradient-at |
 | Poly(Q).hessian-at | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).hessian-at |
+| Poly(Q).integrate-unit-cube | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).integrate-unit-cube |
 | Poly(Q).is-zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).is-zero |
 | Poly(Q).laplacian | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).laplacian |
 | Poly(Q).multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).multiply |
@@ -564,6 +565,43 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Poly(Q).variable-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).variable-count |
 | Poly(Q).variables | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).variables |
 | Poly(Q).zero-like | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).zero-like |
+| PolynomialCell(Q).ambient-dimension | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational polynomial parametrizations of positively oriented real unit cubes, including explicit point cells; native operation PolynomialCell(Q).ambient-dimension |
+| PolynomialCell(Q).dimension | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational polynomial parametrizations of positively oriented real unit cubes, including explicit point cells; native operation PolynomialCell(Q).dimension |
+| PolynomialCell(Q).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational polynomial parametrizations of positively oriented real unit cubes, including explicit point cells; native operation PolynomialCell(Q).equal |
+| PolynomialCell(Q).evaluate | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational polynomial parametrizations of positively oriented real unit cubes, including explicit point cells; native operation PolynomialCell(Q).evaluate |
+| PolynomialCell(Q).faces | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational polynomial parametrizations of positively oriented real unit cubes, including explicit point cells; native operation PolynomialCell(Q).faces |
+| PolynomialCell(Q).from-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational polynomial parametrizations of positively oriented real unit cubes, including explicit point cells; native operation PolynomialCell(Q).from-map |
+| PolynomialCell(Q).from-point | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational polynomial parametrizations of positively oriented real unit cubes, including explicit point cells; native operation PolynomialCell(Q).from-point |
+| PolynomialCell(Q).integrate | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational polynomial parametrizations of positively oriented real unit cubes, including explicit point cells; native operation PolynomialCell(Q).integrate |
+| PolynomialCell(Q).lower-face | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational polynomial parametrizations of positively oriented real unit cubes, including explicit point cells; native operation PolynomialCell(Q).lower-face |
+| PolynomialCell(Q).product | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational polynomial parametrizations of positively oriented real unit cubes, including explicit point cells; native operation PolynomialCell(Q).product |
+| PolynomialCell(Q).pushforward | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational polynomial parametrizations of positively oriented real unit cubes, including explicit point cells; native operation PolynomialCell(Q).pushforward |
+| PolynomialCell(Q).segment | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational polynomial parametrizations of positively oriented real unit cubes, including explicit point cells; native operation PolynomialCell(Q).segment |
+| PolynomialCell(Q).to-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational polynomial parametrizations of positively oriented real unit cubes, including explicit point cells; native operation PolynomialCell(Q).to-map |
+| PolynomialCell(Q).to-point | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational polynomial parametrizations of positively oriented real unit cubes, including explicit point cells; native operation PolynomialCell(Q).to-point |
+| PolynomialCell(Q).upper-face | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational polynomial parametrizations of positively oriented real unit cubes, including explicit point cells; native operation PolynomialCell(Q).upper-face |
+| PolynomialCell(Q).vertices | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational polynomial parametrizations of positively oriented real unit cubes, including explicit point cells; native operation PolynomialCell(Q).vertices |
+| PolynomialCellAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational polynomial parametrizations of positively oriented real unit cubes, including explicit point cells |
+| PolynomialChain(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational formal sums of polynomial cells with a retained ambient dimension and integer degree; native operation PolynomialChain(Q).add |
+| PolynomialChain(Q).ambient-dimension | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational formal sums of polynomial cells with a retained ambient dimension and integer degree; native operation PolynomialChain(Q).ambient-dimension |
+| PolynomialChain(Q).boundary | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational formal sums of polynomial cells with a retained ambient dimension and integer degree; native operation PolynomialChain(Q).boundary |
+| PolynomialChain(Q).boundary-of-cell | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational formal sums of polynomial cells with a retained ambient dimension and integer degree; native operation PolynomialChain(Q).boundary-of-cell |
+| PolynomialChain(Q).cell-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational formal sums of polynomial cells with a retained ambient dimension and integer degree; native operation PolynomialChain(Q).cell-count |
+| PolynomialChain(Q).cells | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational formal sums of polynomial cells with a retained ambient dimension and integer degree; native operation PolynomialChain(Q).cells |
+| PolynomialChain(Q).coefficient | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational formal sums of polynomial cells with a retained ambient dimension and integer degree; native operation PolynomialChain(Q).coefficient |
+| PolynomialChain(Q).coefficients | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational formal sums of polynomial cells with a retained ambient dimension and integer degree; native operation PolynomialChain(Q).coefficients |
+| PolynomialChain(Q).degree | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational formal sums of polynomial cells with a retained ambient dimension and integer degree; native operation PolynomialChain(Q).degree |
+| PolynomialChain(Q).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational formal sums of polynomial cells with a retained ambient dimension and integer degree; native operation PolynomialChain(Q).equal |
+| PolynomialChain(Q).from-cell | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational formal sums of polynomial cells with a retained ambient dimension and integer degree; native operation PolynomialChain(Q).from-cell |
+| PolynomialChain(Q).integrate | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational formal sums of polynomial cells with a retained ambient dimension and integer degree; native operation PolynomialChain(Q).integrate |
+| PolynomialChain(Q).is-zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational formal sums of polynomial cells with a retained ambient dimension and integer degree; native operation PolynomialChain(Q).is-zero |
+| PolynomialChain(Q).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational formal sums of polynomial cells with a retained ambient dimension and integer degree; native operation PolynomialChain(Q).negate |
+| PolynomialChain(Q).product | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational formal sums of polynomial cells with a retained ambient dimension and integer degree; native operation PolynomialChain(Q).product |
+| PolynomialChain(Q).pushforward | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational formal sums of polynomial cells with a retained ambient dimension and integer degree; native operation PolynomialChain(Q).pushforward |
+| PolynomialChain(Q).scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational formal sums of polynomial cells with a retained ambient dimension and integer degree; native operation PolynomialChain(Q).scale |
+| PolynomialChain(Q).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational formal sums of polynomial cells with a retained ambient dimension and integer degree; native operation PolynomialChain(Q).subtract |
+| PolynomialChain(Q).zero-like | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational formal sums of polynomial cells with a retained ambient dimension and integer degree; native operation PolynomialChain(Q).zero-like |
+| PolynomialChainAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational formal sums of polynomial cells with a retained ambient dimension and integer degree |
 | PolynomialDifferentialFormAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces |
 | PolynomialForm(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).add |
 | PolynomialForm(Q).ambient-dimension | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).ambient-dimension |
@@ -582,6 +620,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | PolynomialForm(Q).grade | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).grade |
 | PolynomialForm(Q).grade-involution | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).grade-involution |
 | PolynomialForm(Q).hodge-star | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).hodge-star |
+| PolynomialForm(Q).integrate-unit-cube | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).integrate-unit-cube |
 | PolynomialForm(Q).interior | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).interior |
 | PolynomialForm(Q).is-zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).is-zero |
 | PolynomialForm(Q).lie-derivative | DIRECTLY_SUPPORTED | IMPLEMENTED | Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces; native operation PolynomialForm(Q).lie-derivative |

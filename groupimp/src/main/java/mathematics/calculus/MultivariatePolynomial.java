@@ -27,7 +27,7 @@ public final class MultivariatePolynomial implements Serializable {
     static final class Work {
         private int products;
         void consume(long count) {
-            if(count>MAX_PRODUCTS-products) throw limit("Polynomial expansion exceeds the term-product budget");
+            if(count>MAX_PRODUCTS-products) throw limit("Exact polynomial computation exceeds the work budget");
             products+=(int)count;
         }
     }
@@ -212,6 +212,27 @@ public final class MultivariatePolynomial implements Serializable {
         return Collections.unmodifiableList(result);
     }
     public Rational constantPart() { return coefficients.getOrDefault(Collections.nCopies(variables,0),Rational.ZERO); }
+    /** Exact integral on [0,1]^n in the declared variable order. */
+    public Rational integrateUnitCube() {
+        Rational result=Rational.ZERO;
+        for(Map.Entry<List<Integer>,Rational> term : coefficients.entrySet()) {
+            BigInteger denominator=BigInteger.ONE;
+            for(int exponent : term.getKey()) denominator=denominator.multiply(BigInteger.valueOf(exponent+1));
+            result=result.add(term.getValue().divide(Rational.of(denominator)));
+        }
+        return result;
+    }
+    /** Fix and remove one coordinate; zero-variable faces are represented separately as cell points. */
+    MultivariatePolynomial restrictCoordinate(int axis,Rational value) {
+        checkAxis(axis,variables);
+        if(variables==1) throw MathFailure.undefined("Removing the last variable requires scalar evaluation");
+        Map<List<Integer>,Rational> result=new HashMap<>();
+        for(Map.Entry<List<Integer>,Rational> term : coefficients.entrySet()) {
+            List<Integer> powers=new ArrayList<>(term.getKey()); int exponent=powers.remove(axis);
+            merge(result,powers,term.getValue().multiply(value.pow(exponent)));
+        }
+        return new MultivariatePolynomial(variables-1,result);
+    }
     public Rational toRational() {
         if(degree()>0) throw MathFailure.undefined("Polynomial is not constant");
         return constantPart();

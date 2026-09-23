@@ -47,6 +47,7 @@ public final class PolynomialDifferentialFormAlgebra extends ConcreteAlgebra<Pol
         unary("one-like",algebra(),algebra(),false,f -> PolynomialDifferentialForm.one(f.dimension()));
         unary("volume-like",algebra(),algebra(),false,f -> PolynomialDifferentialForm.volume(f.dimension()));
         unaryFlat("basis",algebra(),algebra(),false,PolynomialDifferentialForm::basis);
+        unary("integrate-unit-cube",algebra(),rationals.algebra(),true,PolynomialDifferentialForm::integrateUnitCube);
         law("Wedge is graded commutative, exterior differentiation squares to zero, and d(a wedge b)=da wedge b+gradeInvolution(a) wedge db, including mixed degrees.");
         law("For a polynomial map F, pullback substitutes coefficients and sends dx_i to dF_i; it preserves wedge and commutes with exterior differentiation.");
         law("Left insertion uses the natural covector-vector pairing; the Lie derivative satisfies Cartan's formula L_X=i_X*d+d*i_X.");

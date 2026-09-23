@@ -7,6 +7,8 @@ import mathematics.calculus.Polynomial;
 import mathematics.calculus.MultivariatePolynomial;
 import mathematics.calculus.PolynomialMap;
 import mathematics.calculus.PolynomialDifferentialForm;
+import mathematics.calculus.PolynomialCell;
+import mathematics.calculus.PolynomialChain;
 import mathematics.foundations.Pair;
 import mathematics.foundations.FiniteSet;
 import mathematics.structures.FiniteCategory;
@@ -84,6 +86,17 @@ public final class ConcreteAlgebrasExample {
                 .performOneOperandOperation("exterior-derivative").performOneOperandOperation("hodge-star")
                 .<PolynomialMap>performAlgebraTransfer("to-vector-field")
                 .performLeftProjectionOperation("evaluate",new RationalVector(Rational.of(2),Rational.of(3),Rational.of(4))).collect());
+        PolynomialCell rectangle=PolynomialCell.parameterized(new PolynomialMap(MultivariatePolynomial.variable(2,0).scale(Rational.of(2)),
+                MultivariatePolynomial.variable(2,1).scale(Rational.of(3))));
+        Map<Integer,MultivariatePolynomial> formCoefficients=new TreeMap<>();
+        formCoefficients.put(1,MultivariatePolynomial.monomial(Rational.ONE,2,1));
+        formCoefficients.put(2,MultivariatePolynomial.monomial(Rational.ONE,1,2));
+        PolynomialDifferentialForm omega=new PolynomialDifferentialForm(2,formCoefficients);
+        System.out.println("Oriented boundary integral on a 2 by 3 rectangle: "+math.flow(math.polynomialCells,Collections.singletonList(rectangle))
+                .<PolynomialChain>performAlgebraTransfer("PolynomialChain(Q).from-cell").performOneOperandOperation("boundary")
+                .<Rational,PolynomialDifferentialForm>performAlgebraUnsafe("integrate",omega).collect());
+        System.out.println("Integral of its exterior derivative over the rectangle: "+math.flow(math.polynomialCells,Collections.singletonList(rectangle))
+                .<Rational,PolynomialDifferentialForm>performAlgebraUnsafe("integrate",omega.exteriorDerivative()).collect());
         System.out.println("Integral of x^2 from 0 to 1: "+math.flow(math.polynomials,Collections.singletonList(new Polynomial(Rational.ZERO,Rational.ZERO,Rational.ONE)))
                 .<Rational,Pair<Rational,Rational>>performAlgebraUnsafe("integrate",new Pair<>(Rational.ZERO,Rational.ONE)).collect());
         System.out.println("F5: 3 / 2 = "+math.primeFields.get(0).algebra().buildAlgebraItem(math.primeFields.get(0).member(3))

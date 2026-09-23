@@ -29,6 +29,8 @@ OWNERS = {
     "RationalMultivariatePolynomialAlgebra": ("Poly(Q)", "Sparse exact rational polynomials with an explicit ordered positive input dimension"),
     "RationalPolynomialMapAlgebra": ("PolynomialMap(Q)", "Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions"),
     "PolynomialDifferentialFormAlgebra": ("PolynomialForm(Q)", "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces"),
+    "PolynomialCellAlgebra": ("PolynomialCell(Q)", "Rational polynomial parametrizations of positively oriented real unit cubes, including explicit point cells"),
+    "PolynomialChainAlgebra": ("PolynomialChain(Q)", "Finite rational formal sums of polynomial cells with a retained ambient dimension and integer degree"),
     "RationalFunctionField": ("Q(x)", "Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator"),
     "IntegerSetAlgebra": ("FiniteSet(Z)", "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets"),
     "RationalSampleAlgebra": ("Sample(Q)", "Finite ordered rational samples retaining repeated observations"),
@@ -73,6 +75,8 @@ EXTRA_TESTS = {
     "RationalMultivariatePolynomialAlgebra": "NativeMultivariateCalculusTest",
     "RationalPolynomialMapAlgebra": "NativeMultivariateCalculusTest",
     "PolynomialDifferentialFormAlgebra": "NativePolynomialFormsTest",
+    "PolynomialCellAlgebra": "NativePolynomialChainsTest",
+    "PolynomialChainAlgebra": "NativePolynomialChainsTest",
     "RationalFunctionField": "NativeRationalFunctionTest",
     "RationalSampleAlgebra": "NativeStatisticsProbabilityTest",
     "FiniteProbabilityAlgebra": "NativeStatisticsProbabilityTest",
@@ -125,7 +129,47 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "PolynomialCellAlgebra": {
+        "product": "Concatenate ambient coordinates and parameter coordinates, putting first-cell parameters first; this fixes product orientation and includes point factors.",
+        "dimension": "Return parameter dimension, including zero for a point; this is not the rank or geometric image dimension.",
+        "ambient-dimension": "Return the positive target coordinate dimension.",
+        "from-map": "Restrict the exact polynomial map to the positively oriented real unit cube in its input coordinates; no injectivity or full-rank condition is required.",
+        "to-map": "The cell has positive parameter dimension; return its polynomial parametrization, whose algebraic domain extends beyond the restricted unit cube.",
+        "from-point": "The rational vector has positive dimension; construct a zero-dimensional cell at that point.",
+        "to-point": "The cell has parameter dimension zero; positive-dimensional constant parametrizations do not qualify.",
+        "segment": "Endpoint dimensions are positive and equal; t maps to start+t*(end-start) on [0,1], retaining parameter dimension one for coincident endpoints.",
+        "lower-face": "The zero-based axis is in the parameter space; set it to zero and remove it, retaining the other parameter order. A one-cell face is a point.",
+        "upper-face": "The zero-based axis is in the parameter space; set it to one and remove it, retaining the other parameter order. A one-cell face is a point.",
+        "faces": "Emit lower then upper faces for each increasing parameter axis, without boundary signs; duplicate faces are retained and a point emits an empty list.",
+        "vertices": "Emit endpoint evaluations in increasing binary-mask order, with bit i choosing parameter i. Repeated points are retained; a point emits itself once.",
+        "evaluate": "Supply exactly one rational parameter per cell dimension, all in [0,1]; a point accepts the empty vector. Return a wrapper of the actual second operand Vec(Q) carrier with ambient output dimension.",
+        "pushforward": "The polynomial map input dimension equals cell ambient dimension; compose it after the cell parametrization, or evaluate it at a point cell.",
+        "integrate": "The form ambient dimension agrees and every nonzero form component has the cell degree. Integrate its pullback exactly over the oriented unit cube; no absolute Jacobian is taken. A point evaluates a zero-form.",
+        "equal": "Compare canonical parametrizations or point coordinates, including parameter and ambient dimensions; geometric images, reversed parametrizations and homology classes are not identified.",
+    },
+    "PolynomialChainAlgebra": {
+        "add": "Ambient dimensions and degrees agree; combine rational coefficients of identical polynomial cells and discard zero coefficients.",
+        "subtract": "Ambient dimensions and degrees agree; subtract coefficients of identical cells.",
+        "negate": "Negate all chain coefficients and retain ambient dimension and degree.",
+        "scale": "Scale rational chain coefficients, retaining ambient dimension and degree even when the result is zero.",
+        "product": "Distribute the oriented cell product bilinearly; ambient dimensions and chain degrees add, including zero chains in negative degrees.",
+        "boundary": "Lower degree by one and sum (-1)^i*(upper_i-lower_i) with each cell coefficient. Point boundaries are zero in degree -1; zero chains retain all negative integer degrees.",
+        "pushforward": "Map input dimension equals chain ambient dimension. Compose every cell with the map using a shared work budget and combine identical resulting cells; degree is retained.",
+        "integrate": "Form ambient dimension and homogeneous degree match the chain, even for a zero chain. Sum coefficient-weighted oriented cell integrals with one shared work budget; only the zero form can pair with a negative-degree zero chain.",
+        "ambient-dimension": "Return the retained positive ambient coordinate dimension.",
+        "degree": "Return the retained integer chain degree in Z; every negative degree contains only the zero chain.",
+        "is-zero": "The canonical cell support is empty.",
+        "cell-count": "Count nonzero canonical cell coefficients, without counting repeated vertices or monomials inside parametrizations.",
+        "cells": "Emit occupied cells in canonical structural order, matching the coefficient list order.",
+        "coefficients": "Emit nonzero rational coefficients in canonical cell order, retaining repeated coefficients.",
+        "coefficient": "The cell has the declared ambient dimension and degree; return its stored coefficient, or zero if absent.",
+        "equal": "Compare ambient dimension, integer degree and canonical rational cell coefficients, including for zero chains.",
+        "from-cell": "Give the cell rational coefficient one in its ambient dimension and parameter degree.",
+        "boundary-of-cell": "Transfer the oriented cubical boundary to the actual PolynomialChain(Q) carrier, combining coincident faces with signed coefficients.",
+        "zero-like": "Return the zero chain in the same ambient dimension and integer degree.",
+    },
     "PolynomialDifferentialFormAlgebra": {
+        "integrate-unit-cube": "Only top-degree components in the form coordinate dimension may be nonzero. Integrate the top coefficient over the positively oriented real unit cube exactly; the zero form integrates to zero.",
         "add": "Coordinate dimensions agree; add coefficients at matching differential basis masks and remove zeros.",
         "subtract": "Coordinate dimensions agree; subtract coefficients at matching differential basis masks and remove zeros.",
         "wedge": "Coordinate dimensions agree. Repeated differentials vanish; increasing coordinate order fixes signs. Polynomial products and basis-pair visits share one work budget.",
@@ -162,6 +206,7 @@ OWNER_CONDITIONS = {
         "basis": "Emit dx_0 through dx_(n-1) as wrapped one-forms in coordinate order.",
     },
     "RationalMultivariatePolynomialAlgebra": {
+        "integrate-unit-cube": "Integrate over the real unit cube in all declared variables by summing coefficient/prod_i(exponent_i+1); return an exact rational.",
         "add": "Both polynomials retain the same input dimension; add coefficients and discard zeros.",
         "subtract": "Both polynomials retain the same input dimension; subtract coefficients and discard zeros.",
         "multiply": "Input dimensions agree. Multiply sparse monomials and combine equal exponent tuples within the expansion budget.",
@@ -543,6 +588,8 @@ def record(identifier, owner, concept, paths, operation=None):
         tests.append("groupimp/src/test/java/operations/NativeRationalFunctionTest.java")
     if owner in ("RationalMatrixFamily", "RationalAffineSpaceAlgebra"):
         tests.append("groupimp/src/test/java/operations/NativeLeastSquaresTest.java")
+    if owner in ("RationalMultivariatePolynomialAlgebra", "PolynomialDifferentialFormAlgebra"):
+        tests.append("groupimp/src/test/java/operations/NativePolynomialChainsTest.java")
     value = {
         "id": identifier, "mathematical_area": "Concrete MathTool algebras",
         "subfield": owner, "concept": concept, "specification_section": 0,
@@ -673,7 +720,13 @@ def record(identifier, owner, concept, paths, operation=None):
                                 "https://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/diff_map.html"]
         value["required_invariants"].append("Immutable sparse differential masks carry nonzero canonical rational polynomials with the same retained coordinate dimension; mixed degrees are allowed. Pullback uses dF_i, while the older exterior matrix action remains a covariant multivector action.")
         value["known_limitations"].append("Dimensions are positive and at most 20; coefficient polynomial total degree is at most 10000. There are at most 100000 nonzero scalar monomials across all coefficients of an intermediate/output form. Wedge, polynomial multiplication, insertion, Lie derivative and complete pullback each share a budget of 1000000 basis-work visits plus candidate polynomial products. Exhaustion is IMPLEMENTATION_FAILURE.")
-        value["known_limitations"].append("Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. No manifold charts, arbitrary metric fields, general smooth forms, global topology or general form-integration algorithm is implemented; the exact Stokes rectangle is a regression example.")
+        value["known_limitations"].append("Polynomial forms in fixed standard coordinate spaces only. Hodge star and vector-field/exterior identifications use the standard Euclidean metric and orientation. Integration covers top-degree unit cubes and compatible polynomial cells/chains; arbitrary manifold charts, metric fields, smooth coefficients, global topology and general integration domains remain unsupported.")
+    if owner in ("PolynomialCellAlgebra", "PolynomialChainAlgebra"):
+        value["references"] += ["https://doc.sagemath.org/html/en/reference/topology/sage/topology/cubical_complex.html",
+                                "https://doc.sagemath.org/html/en/reference/homology/sage/homology/chains.html"]
+        value["required_invariants"].append("Rational coefficient data define polynomial parametrizations of real unit cubes with the standard parameter orientation. Chains are immutable canonical finite formal sums with retained ambient dimension and integer degree; all negative degrees are zero-only.")
+        value["known_limitations"].append("Ambient dimension is 1 through 20 and positive cell/chain degree at most 10. A chain has at most 10000 occupied cells, including intermediate support; boundary and product allow at most 100000 candidate face/cell visits. Each whole evaluation, face list, vertex list, boundary, product, pushforward or integral additionally shares 1000000 polynomial work units across cells, coefficient-coordinate scans and candidate coefficient products. Exhaustion raises IMPLEMENTATION_FAILURE.")
+        value["known_limitations"].append("Polynomial degrees, coefficient support and pullback forms retain their existing representation caps. Exact coefficient bit lengths are unbounded. Parametrizations need not be injective; integrals retain orientation and multiplicity. Degenerate cells and reparametrizations are not quotiented out, and no geometric image equality, standard cubical homology groups, arbitrary manifolds or general numerical quadrature are provided.")
     if owner == "RationalVectorFamily":
         value["known_limitations"].append("This is a family of different vector spaces, not one vector space across all dimensions. Dimension checks run at operation execution; entries are materialized exactly.")
     if owner == "RationalMatrixFamily":
@@ -715,6 +768,10 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("PolynomialCell(Q)", "Polynomially parametrized cubical cells", "mathematics.calculus.PolynomialCell",
+         ["Positive ambient coordinate dimension and nonnegative parameter dimension", "Explicit rational point or ordered polynomial parametrization on the real unit cube", "Parameter orientation retained; equality is parametrization equality"], ["PolynomialMap(Q)", "PolynomialForm(Q)", "Vec(Q)", "Q", "N", "PolynomialChain(Q)"]),
+        ("PolynomialChain(Q)", "Finite rational polynomial cubical chains", "mathematics.calculus.PolynomialChain",
+         ["Retained positive ambient dimension and integer degree", "Canonical nonzero rational coefficients on cells of the declared degree", "All negative degrees contain only zero; boundary lowers degree"], ["PolynomialCell(Q)", "PolynomialMap(Q)", "PolynomialForm(Q)", "Q", "N", "Z"]),
         ("PolynomialForm(Q)", "Polynomial coordinate differential forms", "mathematics.calculus.PolynomialDifferentialForm",
          ["Retained positive ordered coordinate dimension", "Increasing differential basis masks with canonical polynomial coefficients", "All coefficient variable counts equal the coordinate dimension; mixed differential degrees allowed"], ["Poly(Q)", "PolynomialMap(Q)", "Exterior(Q)", "Vec(Q)", "Q", "N"]),
         ("Poly(Q)", "Exact rational multivariate polynomial family", "mathematics.calculus.MultivariatePolynomial",
