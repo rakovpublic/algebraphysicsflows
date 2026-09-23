@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 935 |
-| DIRECTLY_SUPPORTED | 692 |
+| Scoped records | 988 |
+| DIRECTLY_SUPPORTED | 745 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 551 |
+| IMPLEMENTED | 604 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 619 |
+| MACHINE_TESTED | 672 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 528 | 528 | 0 | 0 | 0 | 528 | 0 | 0 |
+| Concrete MathTool algebras | 581 | 581 | 0 | 0 | 0 | 581 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -536,6 +536,57 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | N.to-integer | DIRECTLY_SUPPORTED | IMPLEMENTED | Nonnegative arbitrary precision integers with addition and multiplication; native operation N.to-integer |
 | N.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Nonnegative arbitrary precision integers with addition and multiplication; native operation N.zero |
 | NaturalSemiring | DIRECTLY_SUPPORTED | IMPLEMENTED | Nonnegative arbitrary precision integers with addition and multiplication |
+| Poly(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).add |
+| Poly(Q).coefficients | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).coefficients |
+| Poly(Q).constant-part | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).constant-part |
+| Poly(Q).degree | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).degree |
+| Poly(Q).directional | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).directional |
+| Poly(Q).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).equal |
+| Poly(Q).evaluate | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).evaluate |
+| Poly(Q).from-univariate | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).from-univariate |
+| Poly(Q).gradient-at | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).gradient-at |
+| Poly(Q).hessian-at | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).hessian-at |
+| Poly(Q).is-zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).is-zero |
+| Poly(Q).laplacian | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).laplacian |
+| Poly(Q).multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).multiply |
+| Poly(Q).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).negate |
+| Poly(Q).one-like | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).one-like |
+| Poly(Q).partial | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).partial |
+| Poly(Q).partials | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).partials |
+| Poly(Q).pow | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).pow |
+| Poly(Q).primitive | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).primitive |
+| Poly(Q).scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).scale |
+| Poly(Q).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).subtract |
+| Poly(Q).term-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).term-count |
+| Poly(Q).terms | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).terms |
+| Poly(Q).to-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).to-rational |
+| Poly(Q).to-univariate | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).to-univariate |
+| Poly(Q).variable-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).variable-count |
+| Poly(Q).variables | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).variables |
+| Poly(Q).zero-like | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).zero-like |
+| PolynomialMap(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).add |
+| PolynomialMap(Q).component | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).component |
+| PolynomialMap(Q).components | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).components |
+| PolynomialMap(Q).compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).compose |
+| PolynomialMap(Q).constant-part | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).constant-part |
+| PolynomialMap(Q).curl | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).curl |
+| PolynomialMap(Q).divergence | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).divergence |
+| PolynomialMap(Q).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).equal |
+| PolynomialMap(Q).evaluate | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).evaluate |
+| PolynomialMap(Q).from-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).from-matrix |
+| PolynomialMap(Q).from-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).from-polynomial |
+| PolynomialMap(Q).gradient | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).gradient |
+| PolynomialMap(Q).identity-on-input | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).identity-on-input |
+| PolynomialMap(Q).input-dimension | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).input-dimension |
+| PolynomialMap(Q).jacobian-at | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).jacobian-at |
+| PolynomialMap(Q).linear-part | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).linear-part |
+| PolynomialMap(Q).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).negate |
+| PolynomialMap(Q).output-dimension | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).output-dimension |
+| PolynomialMap(Q).partial | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).partial |
+| PolynomialMap(Q).scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).scale |
+| PolynomialMap(Q).substitute | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).substitute |
+| PolynomialMap(Q).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).subtract |
+| PolynomialMap(Q).to-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).to-polynomial |
 | PrimeField | DIRECTLY_SUPPORTED | IMPLEMENTED | Residues in the default prime field F5; configurable exactly checked prime int modulus |
 | Q(i).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers; native operation Q(i).add |
 | Q(i).conjugate | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers; native operation Q(i).conjugate |
@@ -610,6 +661,8 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | RationalFunctionField | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator |
 | RationalMatrixAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two |
 | RationalMatrixFamily | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases |
+| RationalMultivariatePolynomialAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension |
+| RationalPolynomialMapAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions |
 | RationalPolynomialRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients |
 | RationalQuaternionAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations |
 | RationalSampleAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations |

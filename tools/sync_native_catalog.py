@@ -26,6 +26,8 @@ OWNERS = {
     "RationalTensorAlgebra": ("Tensor(Q)", "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction"),
     "RationalExteriorAlgebra": ("Exterior(Q)", "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension"),
     "RationalPolynomialRing": ("Q[x]", "Finite univariate polynomials with canonical rational coefficients"),
+    "RationalMultivariatePolynomialAlgebra": ("Poly(Q)", "Sparse exact rational polynomials with an explicit ordered positive input dimension"),
+    "RationalPolynomialMapAlgebra": ("PolynomialMap(Q)", "Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions"),
     "RationalFunctionField": ("Q(x)", "Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator"),
     "IntegerSetAlgebra": ("FiniteSet(Z)", "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets"),
     "RationalSampleAlgebra": ("Sample(Q)", "Finite ordered rational samples retaining repeated observations"),
@@ -67,6 +69,8 @@ EXTRA_TESTS = {
     "RationalQuaternionAlgebra": "NativeQuaternionTest",
     "IntegerSetAlgebra": "NativeFlatAndSetTest",
     "RationalPolynomialRing": "NativeDynamicsTest",
+    "RationalMultivariatePolynomialAlgebra": "NativeMultivariateCalculusTest",
+    "RationalPolynomialMapAlgebra": "NativeMultivariateCalculusTest",
     "RationalFunctionField": "NativeRationalFunctionTest",
     "RationalSampleAlgebra": "NativeStatisticsProbabilityTest",
     "FiniteProbabilityAlgebra": "NativeStatisticsProbabilityTest",
@@ -119,6 +123,61 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "RationalMultivariatePolynomialAlgebra": {
+        "add": "Both polynomials retain the same input dimension; add coefficients and discard zeros.",
+        "subtract": "Both polynomials retain the same input dimension; subtract coefficients and discard zeros.",
+        "multiply": "Input dimensions agree. Multiply sparse monomials and combine equal exponent tuples within the expansion budget.",
+        "negate": "Negate every coefficient and retain the declared input dimension.",
+        "scale": "Multiply every coefficient by the rational scalar; zero retains its input dimension.",
+        "variable-count": "Return the declared input dimension, including for constant and zero polynomials.",
+        "degree": "Return total degree; the zero polynomial has degree -1, in Z rather than N.",
+        "term-count": "Return the number of nonzero canonical monomial coefficients.",
+        "is-zero": "Zero is exactly empty canonical support in the retained input dimension.",
+        "equal": "Compare input dimensions and all canonical coefficients; constants in different input spaces remain distinct.",
+        "evaluate": "The rational point has exactly one coordinate per declared variable; return the exact rational value.",
+        "partial": "The zero-based variable index is smaller than the declared input dimension; differentiate in that coordinate.",
+        "partials": "Emit one wrapped partial derivative per variable in coordinate order, retaining zero and repeated derivatives.",
+        "directional": "The constant direction has the declared input dimension. Return the polynomial sum v_i*partial_i(f); the direction is not normalized.",
+        "gradient-at": "The point has the declared input dimension; return ordered partial values in a wrapper of the second operand's Vec(Q) carrier.",
+        "hessian-at": "The point has the declared input dimension; return the exact symmetric matrix of second partials, with rows and columns in variable order.",
+        "laplacian": "Sum the unmixed second partials in standard Euclidean coordinates; this equals the trace of the Hessian at each point.",
+        "primitive": "The variable index is in range. Integrate with respect to that variable, choosing the entire variable-independent polynomial to be zero.",
+        "pow": "The exponent belongs to N; the zeroth power, including 0^0 in the polynomial ring, is the unit in the same input dimension.",
+        "terms": "Emit the nonzero monomials with coefficients in ascending lexicographic exponent-tuple order; zero emits an empty list.",
+        "coefficients": "Emit nonzero coefficients in ascending lexicographic exponent-tuple order, preserving repeated coefficients.",
+        "zero-like": "Return the additive zero in the input polynomial's declared space.",
+        "one-like": "Return the multiplicative unit in the input polynomial's declared space.",
+        "from-univariate": "Transfer Q[x] to a polynomial with exactly one variable, preserving exact coefficients.",
+        "to-univariate": "Exactly one variable must be declared, even for constants; preserve coefficients in Q[x].",
+        "constant-part": "Return the coefficient of the all-zero exponent tuple, or zero if absent.",
+        "to-rational": "All nonconstant coefficients vanish; forget the input dimension and return the rational constant.",
+        "variables": "Emit the coordinate polynomials x_0 through x_(n-1) in variable order, in the same input space.",
+    },
+    "RationalPolynomialMapAlgebra": {
+        "add": "Both input and output dimensions agree; add corresponding components.",
+        "subtract": "Both input and output dimensions agree; subtract corresponding components.",
+        "negate": "Negate every component, retaining input and output dimensions.",
+        "scale": "Scale every component by the rational scalar, retaining both dimensions.",
+        "compose": "Return F(G(x)), applying the right operand first; inner output dimension equals outer input dimension. All components share one substitution work budget.",
+        "evaluate": "The point dimension equals the map input dimension; return all component values in the second operand's Vec(Q) carrier, with the map output dimension.",
+        "partial": "The zero-based variable index is in the map's input space; differentiate each component in that variable.",
+        "components": "Emit all wrapped component polynomials in output order, preserving zero and repeated components.",
+        "component": "The zero-based index is in the map's output space; return that wrapped scalar polynomial.",
+        "input-dimension": "Return the retained positive number of input variables.",
+        "output-dimension": "Return the retained positive number of scalar components.",
+        "jacobian-at": "The point has the input dimension. Matrix rows index output components and columns index input variables; this is the total derivative at the point.",
+        "divergence": "Input and output dimensions agree; return the sum of component i differentiated in variable i, the Jacobian trace.",
+        "curl": "Both dimensions are three. Return (partial_y F_z-partial_z F_y, partial_z F_x-partial_x F_z, partial_x F_y-partial_y F_x) in the standard right-handed orientation.",
+        "from-polynomial": "Make a one-output map, retaining the polynomial input dimension.",
+        "to-polynomial": "Exactly one output component is required; return that component with its input dimension.",
+        "gradient": "Transfer a scalar polynomial to the ordered map of its partial derivatives; its Jacobian is the polynomial Hessian.",
+        "identity-on-input": "Return the identity map on the input space, independent of the original output dimension.",
+        "from-matrix": "Interpret the rational matrix as a linear column-vector map; input dimension is column count and output dimension is row count.",
+        "linear-part": "Return the homogeneous degree-one coefficient matrix, equivalently the Jacobian at the origin; nonlinear terms are not preserved.",
+        "constant-part": "Return the vector of constant coefficients, equivalently evaluation at the origin.",
+        "equal": "Compare both declared dimensions and every ordered canonical scalar polynomial.",
+        "substitute": "There is one inner map component per scalar polynomial variable; substitute simultaneously and return a wrapped polynomial on the inner input space.",
+    },
     "RationalQuaternionAlgebra": {
         "multiply": "Hamilton product in operand order; i*j=k and j*i=-k. Multiplication is associative but noncommutative.",
         "divide-right": "The second quaternion is nonzero; return a*b^-1, the solution x to x*b=a.",
@@ -565,6 +624,12 @@ def record(identifier, owner, concept, paths, operation=None):
         value["references"].append("https://docs.sympy.org/latest/modules/algebras.html")
         value["required_invariants"].append("All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained.")
         value["known_limitations"].append("This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided.")
+    if owner in ("RationalMultivariatePolynomialAlgebra", "RationalPolynomialMapAlgebra"):
+        value["references"] += ["https://docs.sympy.org/latest/modules/polys/reference.html",
+                                "https://docs.sympy.org/latest/modules/matrices/matrices.html"]
+        value["required_invariants"].append("Each scalar polynomial retains its positive variable count, with immutable nonnegative exponent tuples and canonical nonzero rational coefficients. Map components share an input space and retain output order.")
+        value["known_limitations"].append("At most 32 input variables and 32 map components, total monomial degree 10000, and 100000 nonzero terms per scalar intermediate/output. A multiply, power or complete substitution/composition allows 1000000 candidate coefficient products; exponents for pow are capped at 10000. Cap exhaustion raises IMPLEMENTATION_FAILURE, not mathematical undefinedness.")
+        value["known_limitations"].append("Exact rational polynomial coordinate calculus only, with positive dimensions and standard Euclidean coordinates. No arbitrary differentiable callbacks, general smooth functions, manifolds, Groebner bases or multivariate rational functions; no formal proof of the stated identities.")
     if owner == "RationalVectorFamily":
         value["known_limitations"].append("This is a family of different vector spaces, not one vector space across all dimensions. Dimension checks run at operation execution; entries are materialized exactly.")
     if owner == "RationalMatrixFamily":
@@ -606,6 +671,10 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("Poly(Q)", "Exact rational multivariate polynomial family", "mathematics.calculus.MultivariatePolynomial",
+         ["Retained positive ordered variable count", "Nonnegative exponent tuples and exact nonzero rational coefficients", "Canonical immutable sparse support; dimension-sensitive arithmetic is partial"], ["Q", "Q[x]", "N", "Z", "Vec(Q)", "Mat(Q)", "PolynomialMap(Q)"]),
+        ("PolynomialMap(Q)", "Exact rational polynomial maps", "mathematics.calculus.PolynomialMap",
+         ["Positive explicit input and output dimensions", "Ordered scalar polynomial components share an input dimension", "Composition checks the common middle dimension; Jacobian rows are output components"], ["Poly(Q)", "Vec(Q)", "Mat(Q)", "Q", "N"]),
         ("H(Q)", "Rational Hamilton quaternion algebra", "mathematics.numbers.RationalQuaternion",
          ["Four canonical rational coefficients in scalar,i,j,k order", "Hamilton multiplication with i*j=k and j*i=-k", "Rotation actions use standard right-handed coordinates and require a nonzero quaternion"], ["Q", "Q(i)", "Vec(Q)", "Mat(Q)"]),
         ("Exterior(Q)", "Rational coordinate exterior algebras", "mathematics.linear.RationalExterior",

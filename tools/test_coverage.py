@@ -118,6 +118,13 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("x*b=a", " ".join(records["H(Q).divide-right"]["required_invariants"]))
         self.assertIn("b*x=a", " ".join(records["H(Q).divide-left"]["required_invariants"]))
         self.assertIn("no approximation", " ".join(records["H(Q).from-rotation-matrix"]["required_invariants"]))
+        self.assertIn("variable-independent polynomial", " ".join(records["Poly(Q).primitive"]["required_invariants"]))
+        self.assertIn("not normalized", " ".join(records["Poly(Q).directional"]["required_invariants"]))
+        self.assertIn("degree -1", " ".join(records["Poly(Q).degree"]["required_invariants"]))
+        self.assertIn("right operand first", " ".join(records["PolynomialMap(Q).compose"]["required_invariants"]))
+        self.assertNotIn("first relation", " ".join(records["PolynomialMap(Q).compose"]["required_invariants"]))
+        self.assertIn("rows index output", " ".join(records["PolynomialMap(Q).jacobian-at"]["required_invariants"]))
+        self.assertIn("right-handed", " ".join(records["PolynomialMap(Q).curl"]["required_invariants"]))
 
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)

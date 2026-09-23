@@ -6,6 +6,8 @@ import algebra.imp.MathTool;
 import algebraflow.IAlgebraFlow;
 import algebra.concrete.*;
 import mathematics.calculus.Polynomial;
+import mathematics.calculus.MultivariatePolynomial;
+import mathematics.calculus.PolynomialMap;
 import mathematics.core.MathFailure;
 import operations.simple.*;
 import operations.flat.*;
@@ -27,9 +29,31 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all497RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all548RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
+        String px="Poly(Q^3){[1, 0, 0]=1}",py="Poly(Q^3){[0, 1, 0]=1}",pz="Poly(Q^3){[0, 0, 1]=1}";
+        String pzero="Poly(Q^3){}",pone="Poly(Q^3){[0, 0, 0]=1}",pfirst="Poly(Q^3){[0, 0, 0]=1, [1, 0, 0]=1}";
+        String identityMap="PolynomialMap["+px+", "+py+", "+pz+"]",cycleMap="PolynomialMap["+py+", "+pz+", "+px+"]";
+        expected.put("RationalMultivariatePolynomialAlgebra",String.join("|",
+                "Poly(Q^3){[0, 0, 0]=1, [0, 1, 0]=1, [1, 0, 0]=1}",
+                "Poly(Q^3){[0, 0, 0]=1, [0, 1, 0]=-1, [1, 0, 0]=1}",
+                "Poly(Q^3){[0, 1, 0]=1, [1, 1, 0]=1}","Poly(Q^3){[0, 0, 0]=-1, [1, 0, 0]=-1}",
+                "Poly(Q^3){[0, 0, 0]=2, [1, 0, 0]=2}","3","1","2","false","false","4",pzero,
+                "["+pone+", "+pzero+", "+pzero+"]","Poly(Q^3){[0, 0, 0]=3}","[1, 0, 0]",
+                "[[0, 0, 0], [0, 0, 0], [0, 0, 0]]",pzero,"Poly(Q^3){[0, 0, 1]=1, [1, 0, 1]=1}",
+                "Poly(Q^3){[0, 0, 0]=1, [1, 0, 0]=2, [2, 0, 0]=1}","["+pone+", "+px+"]","[1, 1]",pzero,pone,
+                "Poly(Q^1){[0]=1, [1]=2, [2]=1}","Q[x][1, 2, 1]","1","6","["+px+", "+py+", "+pz+"]"));
+        expected.put("RationalPolynomialMapAlgebra",String.join("|",
+                "PolynomialMap[Poly(Q^3){[0, 1, 0]=1, [1, 0, 0]=1}, Poly(Q^3){[0, 0, 1]=1, [0, 1, 0]=1}, Poly(Q^3){[0, 0, 1]=1, [1, 0, 0]=1}]",
+                "PolynomialMap[Poly(Q^3){[0, 1, 0]=-1, [1, 0, 0]=1}, Poly(Q^3){[0, 0, 1]=-1, [0, 1, 0]=1}, Poly(Q^3){[0, 0, 1]=1, [1, 0, 0]=-1}]",
+                "PolynomialMap[Poly(Q^3){[1, 0, 0]=-1}, Poly(Q^3){[0, 1, 0]=-1}, Poly(Q^3){[0, 0, 1]=-1}]",
+                "PolynomialMap[Poly(Q^3){[1, 0, 0]=2}, Poly(Q^3){[0, 1, 0]=2}, Poly(Q^3){[0, 0, 1]=2}]",
+                cycleMap,"[3, 2, 1]","PolynomialMap["+pzero+", "+pzero+", "+pone+"]","["+px+", "+py+", "+pz+"]",pz,"3","3",
+                "[[1, 0, 0], [0, 1, 0], [0, 0, 1]]","Poly(Q^3){[0, 0, 0]=3}","PolynomialMap["+pzero+", "+pzero+", "+pzero+"]",
+                "PolynomialMap["+pfirst+"]",px,"PolynomialMap["+pone+", "+pzero+", "+pzero+"]",identityMap,
+                "PolynomialMap[Poly(Q^3){[0, 0, 1]=3, [0, 1, 0]=2, [1, 0, 0]=1}, Poly(Q^3){[0, 0, 1]=6, [0, 1, 0]=4, [1, 0, 0]=2}]",
+                "[[1, 0, 0], [0, 1, 0], [0, 0, 1]]","[0, 0, 0]","false","Poly(Q^3){[0, 0, 0]=1, [0, 1, 0]=1}"));
         String category12="Category(objects=[1, 2], arrows={1=(1,1), 2=(2,2)}, identities={1=1, 2=2}, composition={(1,1)=1, (2,2)=2})";
         String category123="Category(objects=[1, 2, 3], arrows={1=(1,1), 2=(2,2), 3=(3,3)}, identities={1=1, 2=2, 3=3}, composition={(1,1)=1, (2,2)=2, (3,3)=3})";
         String categoryEmpty="Category(objects=[], arrows={}, identities={}, composition={})";
@@ -100,12 +124,15 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(497,count);
+        assertEquals(548,count);
     }
     @SuppressWarnings({"unchecked","rawtypes"})
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
         Algebra source=math.mathTool.getAlgebra(entry.first.getAlgebraName());
         IAlgebraItem item=source.buildAlgebraItem(sample(math,source.getAlgebraName(),0));
+        if(entry.id.equals("Poly(Q).to-univariate")) item=source.buildAlgebraItem(MultivariatePolynomial.fromUnivariate(new Polynomial(Rational.ONE,Rational.of(2),Rational.ONE)));
+        if(entry.id.equals("Poly(Q).to-rational")) item=source.buildAlgebraItem(MultivariatePolynomial.constant(3,Rational.of(6)));
+        if(entry.id.equals("PolynomialMap(Q).to-polynomial")) item=source.buildAlgebraItem(new PolynomialMap(MultivariatePolynomial.variable(3,0)));
         if(entry.id.equals("Vec(Q).to-fixed")) item=source.buildAlgebraItem(new RationalVector(Rational.ONE,Rational.of(2)));
         if(entry.id.equals("Tensor(Q).to-scalar")) item=source.buildAlgebraItem(RationalTensor.scalar(Rational.of(6)));
         if(entry.id.equals("Tensor(Q).to-vector")) item=source.buildAlgebraItem(RationalTensor.fromVector(new RationalVector(Rational.ONE,Rational.of(2),Rational.of(3))));
@@ -193,6 +220,9 @@ public class ConcreteAlgebrasTest {
                     ?new Rational[][] {{Rational.ONE,Rational.of(2)},{Rational.of(3),Rational.of(4)}}
                     :new Rational[][] {{Rational.of(2),Rational.ZERO},{Rational.ZERO,Rational.of(2)}});
             case "Q[x]": return index==0?new Polynomial(Rational.ONE,Rational.of(2),Rational.ONE):new Polynomial(Rational.of(2),Rational.ONE);
+            case "Poly(Q)": return index==0?MultivariatePolynomial.constant(3,Rational.ONE).add(MultivariatePolynomial.variable(3,0)):MultivariatePolynomial.variable(3,1);
+            case "PolynomialMap(Q)": return index==0?PolynomialMap.identity(3):new PolynomialMap(
+                    MultivariatePolynomial.variable(3,1),MultivariatePolynomial.variable(3,2),MultivariatePolynomial.variable(3,0));
             case "FiniteSet(Z)": return index==0?FiniteSet.of(BigInteger.ONE,BigInteger.valueOf(2)):FiniteSet.of(BigInteger.ONE,BigInteger.valueOf(2),BigInteger.valueOf(3));
             case "Sample(Q)": return index==0?mathematics.statistics.RationalSample.of(Rational.ONE,Rational.of(2),Rational.of(3)):mathematics.statistics.RationalSample.of(Rational.of(2),Rational.of(4),Rational.of(6));
             case "FiniteDistribution(Z)":

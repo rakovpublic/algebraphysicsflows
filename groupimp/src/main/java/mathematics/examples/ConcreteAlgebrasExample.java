@@ -4,6 +4,8 @@ import algebra.concrete.ConcreteMathematics;
 import algebra.concrete.ConcreteAlgebra;
 import algebra.concrete.OperationRegistration;
 import mathematics.calculus.Polynomial;
+import mathematics.calculus.MultivariatePolynomial;
+import mathematics.calculus.PolynomialMap;
 import mathematics.foundations.Pair;
 import mathematics.foundations.FiniteSet;
 import mathematics.structures.FiniteCategory;
@@ -66,6 +68,14 @@ public final class ConcreteAlgebrasExample {
                 .<RationalMatrix>performAlgebraTransfer("to-rotation-matrix")
                 .<RationalQuaternion>performAlgebraTransfer("H(Q).from-rotation-matrix")
                 .performLeftProjectionOperation("rotate",new RationalVector(Rational.ONE,Rational.of(2),Rational.of(3))).collect());
+        MultivariatePolynomial multivariate=MultivariatePolynomial.monomial(Rational.ONE,2,1,0)
+                .add(MultivariatePolynomial.monomial(Rational.of(3),0,1,2));
+        System.out.println("Polynomial gradient at [2, 3, -1]: "+math.flow(math.multivariatePolynomials,Collections.singletonList(multivariate))
+                .<PolynomialMap>performAlgebraTransfer("PolynomialMap(Q).gradient")
+                .performLeftProjectionOperation("evaluate",new RationalVector(Rational.of(2),Rational.of(3),Rational.of(-1))).collect());
+        System.out.println("Jacobian of that gradient is the Hessian: "+math.flow(math.multivariatePolynomials,Collections.singletonList(multivariate))
+                .<PolynomialMap>performAlgebraTransfer("PolynomialMap(Q).gradient")
+                .<RationalMatrix,RationalVector>performAlgebraUnsafe("jacobian-at",new RationalVector(Rational.of(2),Rational.of(3),Rational.of(-1))).collect());
         System.out.println("Integral of x^2 from 0 to 1: "+math.flow(math.polynomials,Collections.singletonList(new Polynomial(Rational.ZERO,Rational.ZERO,Rational.ONE)))
                 .<Rational,Pair<Rational,Rational>>performAlgebraUnsafe("integrate",new Pair<>(Rational.ZERO,Rational.ONE)).collect());
         System.out.println("F5: 3 / 2 = "+math.primeFields.get(0).algebra().buildAlgebraItem(math.primeFields.get(0).member(3))

@@ -1,6 +1,6 @@
 # Concrete algebras connected to MathTool
 
-`new ConcreteMathematics()` creates real `Algebra<T>` instances and registers their native operations in the existing `MathTool`. It includes N, Z, Q, Q(i), H(Q), Boolean, Q^2, Mat2(Q), Vec(Q), Mat(Q), Affine(Q), Tensor(Q), Exterior(Q), Q[x], Q(x), S3, Z/6Z, finite sets of integers, rational samples, finite integer probability measures, finite simplicial complexes, finite integer relations/functions, finite categories/functors/natural transformations, and F5 (named Z/5Z). Each construction owns its algebra instances; separate tools do not share mutable registrations.
+`new ConcreteMathematics()` creates real `Algebra<T>` instances and registers their native operations in the existing `MathTool`. It includes N, Z, Q, Q(i), H(Q), Boolean, Q^2, Mat2(Q), Vec(Q), Mat(Q), Affine(Q), Tensor(Q), Exterior(Q), Q[x], Q(x), Poly(Q), PolynomialMap(Q), S3, Z/6Z, finite sets of integers, rational samples, finite integer probability measures, finite simplicial complexes, finite integer relations/functions, finite categories/functors/natural transformations, and F5 (named Z/5Z). Each construction owns its algebra instances; separate tools do not share mutable registrations.
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
@@ -53,6 +53,8 @@ List<String> values = math.flow(math.naturals,
 | PrimeField / Z/pZ | add, subtract, multiply, divide | negate, inverse | Fixed prime membership, exact residues |
 | ResidueRing / Z/nZ | add, subtract, multiply, unit-only divide | negate, unit-only inverse, is-unit, is-zero-divisor, lift to Z | integer powers; reduction from Z; flat solve-multiply; enumeration |
 | RationalFunctionField / Q(x) | add, subtract, multiply, divide, compose | negate, inverse, derivative, numerator/denominator | evaluate at Q; equality; polynomial embedding |
+| RationalMultivariatePolynomialAlgebra / Poly(Q) | dimension-checked add, subtract, multiply; equality -> Boolean | negate; degree -> Z; variable/term counts -> N; Laplacian; constant-part -> Q; flat partials, variables, terms and coefficients | partial, primitive by variable index; rational scale; natural powers; evaluate at Vec(Q) -> Q; directional derivative; gradient-at -> second vector carrier; hessian-at -> Mat(Q); Q[x] conversions |
+| RationalPolynomialMapAlgebra / PolynomialMap(Q) | shape-checked add, subtract, compose; equality -> Boolean | negate; input/output dimensions; flat components; divergence -> Poly(Q); curl; constant-part -> Vec(Q); linear-part -> Mat(Q) | evaluate -> second vector carrier; jacobian-at -> Mat(Q); partial/component by index; rational scale; scalar gradient and embedding; matrix embedding; simultaneous substitution into a scalar polynomial |
 | SymmetricGroup / Sn | compose | inverse, order, sign, fixed-point-count, flat cycles | apply and flat orbit at N; integer powers; equality; enumeration |
 | BooleanAlgebra / Boolean | and, or, xor, implies, equal | not | None |
 | RationalComplexField / Q(i) | add, subtract, multiply, divide | negate, conjugate, norm-squared -> Q | Q(i).embed-rational on Q -> Q(i) |
@@ -105,7 +107,7 @@ See [ConcreteAlgebrasTest](../groupimp/src/test/java/mathematics/ConcreteAlgebra
 Same-algebra unary flat operations use `IOneOperandFlatOperation` and `performOneOperandFlatOperation(name)` (or `performFlatOperation(name)`). Finite-set `subsets` is an example. Cross-algebra unary flat operations use the existing `ITransferFlatOperation`, whose return type is corrected to `List<IAlgebraItem<V>>`; `elements` transfers a finite set to its member algebra. Empty results remain valid, and every emitted member keeps its target algebra.
 
 
-The default initializer currently installs 31 algebras and 497 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
+The default initializer currently installs 33 algebras and 548 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
 
 For overloaded custom-member and unsafe operations, the most specific compatible second-operand class is selected (exact matches take priority). Re-registering the same second class replaces that overload. Ambiguous supertypes are rejected. Mathematical domains sharing one Java class need distinct operation names; overload selection does not infer a domain from a value.
 
@@ -231,6 +233,36 @@ List<String> rotated = math.flow(math.quaternions, Collections.singletonList(qua
 `to-rotation-matrix` returns an exact rational 3 by 3 orthogonal matrix with determinant one. The reverse operation checks these conditions exactly, rejects approximate or improper rotations, and returns a rational projective quaternion whose first nonzero component equals one. Its norm need not equal one. For trace different from -1, recovery uses (1+trace, R_21-R_12, R_02-R_20, R_10-R_01) before projective scaling. A half-turn uses a nonzero column of R+I as its pure quaternion axis. Neither path takes square roots. Quaternion multiplication composes rotations with the right operand acting first.
 
 This represents rational Hamilton quaternions and rational rotation matrices, not all real quaternions or arbitrary-angle symbolic rotations. Euler-angle extraction and approximate matrix fitting are not implemented. NativeQuaternionTest checks all 6,561 ternary quaternion products against an independent basis table, all 624 nonzero quaternions with components in {-2,-1,0,1,2} for exact rotation identities and matrix round-trips, both division orders, half-turns, wrong shapes, near-orthogonal rejection, large rational coefficients and serialized MathTool flows.
+
+## Multivariate polynomials and polynomial vector calculus
+
+`math.multivariatePolynomials` registers Poly(Q), a family of polynomial rings in a declared positive number of ordered variables. `MultivariatePolynomial` stores an immutable sparse map from nonnegative exponent tuples to rational coefficients. Zero coefficients disappear, but the input dimension remains part of equality, including for zero and constants. Arithmetic between different input dimensions is undefined. The zero polynomial has degree -1, so the `degree` transfer returns Z. Flat `terms` and `coefficients` use ascending lexicographic exponent order; flat `variables` and `partials` use coordinate order and retain zero and repeated results.
+
+`partial` and `primitive` take a zero-based variable index in N. The primitive sets the entire polynomial independent of that variable to zero. `directional` takes a constant rational vector and computes the sum of its coordinates times the corresponding partial derivatives; it does not normalize the vector. `gradient-at` returns Vec(Q), `hessian-at` returns Mat(Q), and `laplacian` returns a polynomial. Coordinate order determines every vector and matrix entry. `from-univariate` embeds Q[x] with one declared variable, and `to-univariate` requires exactly one variable even for constants. These use the standard coefficient differentiation and integration conventions in [SymPy's polynomial reference](https://docs.sympy.org/latest/modules/polys/reference.html).
+
+`math.polynomialMaps` registers PolynomialMap(Q), an ordered tuple of scalar polynomials with a common input dimension and an explicit output dimension. `compose` applies the right operand first and checks the middle dimension. `evaluate` returns a wrapper of the actual second-operand Vec(Q) algebra; its output dimension can differ from the input point's dimension. `jacobian-at` returns a matrix whose rows index outputs and columns index inputs, representing the total derivative at the point. `PolynomialMap(Q).gradient` transfers a scalar polynomial to a polynomial map, whose Jacobian is its Hessian. These are the [standard Jacobian and Hessian conventions](https://docs.sympy.org/latest/modules/matrices/matrices.html).
+
+```java
+MultivariatePolynomial f = MultivariatePolynomial.monomial(Rational.ONE, 2, 1, 0)
+        .add(MultivariatePolynomial.monomial(Rational.of(3), 0, 1, 2));
+RationalVector point = new RationalVector(Rational.of(2), Rational.of(3), Rational.of(-1));
+
+List<String> gradient = math.flow(math.multivariatePolynomials, Collections.singletonList(f))
+        .<PolynomialMap>performAlgebraTransfer("PolynomialMap(Q).gradient")
+        .performLeftProjectionOperation("evaluate", point).collect();
+// [[12, 7, -18]]
+
+List<String> hessian = math.flow(math.multivariatePolynomials, Collections.singletonList(f))
+        .<PolynomialMap>performAlgebraTransfer("PolynomialMap(Q).gradient")
+        .<RationalMatrix,RationalVector>performAlgebraUnsafe("jacobian-at", point).collect();
+// [[[6, 4, 0], [4, 0, -6], [0, -6, 18]]]
+```
+
+`divergence` requires equal input and output dimensions. `curl` requires dimension three on both sides and uses the standard right-handed orientation. `PolynomialMap(Q).from-matrix` builds a linear map directly from a registered Mat(Q) member. `linear-part` returns the degree-one coefficient matrix (the Jacobian at zero); `constant-part` returns the constant vector. `PolynomialMap(Q).substitute`, registered on Poly(Q), simultaneously substitutes a polynomial map into a scalar polynomial, returning a wrapper in the first operand's Poly(Q) carrier. Scalar extraction from a map requires one output component. Same-carrier and transfer operations, flat component lists, and mixed operations use the existing interfaces in `operations/simple` and `operations/flat`.
+
+Representation limits are 32 variables, 32 map components, total monomial degree 10,000, and 100,000 nonzero terms per scalar intermediate or output. Each multiply, power, or complete substitution/composition has a budget of 1,000,000 candidate coefficient products; map composition shares the budget across all components. Natural powers are capped at exponent 10,000. Exceeding a limit raises IMPLEMENTATION_FAILURE. Wrong dimensions, missing variable/component indices, and unsupported scalar conversions raise OPERATION_UNDEFINED. Coefficient bit lengths remain arbitrary precision and can still grow quickly. The implementation covers polynomial coordinate calculus with positive dimensions; it does not provide arbitrary smooth-function spaces, zero-dimensional maps, multivariate rational functions, Groebner bases, or manifold calculus.
+
+NativeMultivariateCalculusTest checks all 729 bivariate quadratics with coefficients in {-1,0,1} against independently evaluated exact centered differences. It also checks explicit higher-degree derivatives, mixed partials, product and chain rules, exact Taylor restrictions, rectangular Jacobians, right-handed curl, divergence-of-curl and curl-of-gradient identities, primitive conventions, large rational coefficients, immutable representations, shared expansion limits, actual result wrappers and serialized MathTool flows. These checks provide empirical evidence; no formal verification is claimed.
 
 ## Finite topology through the existing flow API
 
