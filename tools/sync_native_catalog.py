@@ -17,6 +17,7 @@ OWNERS = {
     "PrimeField": ("Z/5Z", "Residues in the default prime field F5; configurable exactly checked prime int modulus"),
     "ResidueRing": ("Z/6Z", "Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one"),
     "RationalComplexField": ("Q(i)", "Pairs of rational coordinates; a proper subfield of the complex numbers"),
+    "RationalQuaternionAlgebra": ("H(Q)", "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations"),
     "RationalVectorSpace": ("Q^2", "Fixed-dimensional rational vectors; default dimension two"),
     "RationalMatrixAlgebra": ("Mat2(Q)", "Fixed positive-dimensional square rational matrices; default dimension two"),
     "RationalVectorFamily": ("Vec(Q)", "Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations"),
@@ -63,6 +64,7 @@ EXTRA_TESTS = {
     "RationalAffineSpaceAlgebra": "NativeRectangularLinearTest",
     "RationalTensorAlgebra": "NativeTensorTest",
     "RationalExteriorAlgebra": "NativeExteriorTest",
+    "RationalQuaternionAlgebra": "NativeQuaternionTest",
     "IntegerSetAlgebra": "NativeFlatAndSetTest",
     "RationalPolynomialRing": "NativeDynamicsTest",
     "RationalFunctionField": "NativeRationalFunctionTest",
@@ -117,6 +119,34 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "RationalQuaternionAlgebra": {
+        "multiply": "Hamilton product in operand order; i*j=k and j*i=-k. Multiplication is associative but noncommutative.",
+        "divide-right": "The second quaternion is nonzero; return a*b^-1, the solution x to x*b=a.",
+        "divide-left": "The second quaternion is nonzero; return b^-1*a, the solution x to b*x=a.",
+        "conjugate": "Negate the three imaginary coefficients; conjugation reverses multiplication order.",
+        "inverse": "The quaternion is nonzero; return its conjugate divided by the sum of squared rational components.",
+        "norm-squared": "Return w*w+x*x+y*y+z*z as a nonnegative exact rational. Its square root is not generally rational and is not returned.",
+        "real-part": "Return the coefficient of the scalar unit.",
+        "imaginary-part": "Return the i,j,k coefficients as a three-dimensional Vec(Q) member, without requiring the real part to vanish.",
+        "components": "Emit all four rational coefficients in scalar,i,j,k order, preserving zeros and duplicates.",
+        "scale": "Multiply all coefficients by the rational scalar.",
+        "equal": "Compare all four exact coefficients; scalar multiples generally differ as algebra elements.",
+        "same-rotation": "Both quaternions are nonzero. They represent the same active rotation exactly when they differ by a nonzero rational scalar factor.",
+        "embed-rational": "Embed q as (q,0,0,0), in the center of the quaternion algebra.",
+        "to-rational": "All three imaginary coefficients vanish.",
+        "embed-complex": "Embed the selected rational complex subfield Q(i) as (real,imaginary,0,0).",
+        "to-complex": "The j and k coefficients vanish; return a member of the selected Q(i) subfield.",
+        "from-vector": "The input vector has dimension three; embed it as a pure quaternion with zero real part.",
+        "to-vector": "The real coefficient vanishes; return the three imaginary coordinates in Vec(Q).",
+        "rotate": "The quaternion is nonzero and the vector has dimension three. Return the active right-handed column-vector rotation q*(0,v)*q^-1, wrapped in the second operand carrier. Unit normalization is unnecessary.",
+        "to-rotation-matrix": "The quaternion is nonzero. Return its exact rational orthogonal 3 by 3 active rotation matrix with determinant one.",
+        "from-rotation-matrix": "The matrix is exactly 3 by 3, orthogonal and of determinant one; no approximation or orthogonalization is applied. Return a rational projective quaternion with its first nonzero component equal to one, handling trace-minus-one half-turns separately.",
+        "zero": "The additive zero quaternion.",
+        "one": "The multiplicative unit quaternion.",
+        "i": "The first imaginary basis generator, with i*i=-1.",
+        "j": "The second imaginary basis generator, with j*j=-1.",
+        "k": "The third imaginary basis generator, with k*k=-1 and i*j=k.",
+    },
     "RationalExteriorAlgebra": {
         "add": "Both elements have the same ambient dimension; add coefficients and remove zero terms.",
         "subtract": "Both elements have the same ambient dimension; subtract coefficients and remove zero terms.",
@@ -531,6 +561,10 @@ def record(identifier, owner, concept, paths, operation=None):
         value["required_invariants"].append("Canonical immutable sparse coefficients use increasing coordinate basis wedges, remove zeros and retain ambient dimension; scalar and zero values do not erase that dimension.")
         value["known_limitations"].append("Dimension is capped at 20 and sparse intermediate/output support at 100000 terms. Wedge and each complete induced matrix action allow at most 1000000 candidate coefficient products; cap exhaustion raises IMPLEMENTATION_FAILURE.")
         value["known_limitations"].append("Coordinate multivectors over Q only, with the standard positive Euclidean metric and orientation for Hodge star and insertion. No arbitrary metrics, basis-change witnesses, differential forms on manifolds or exterior derivative are supplied by this carrier.")
+    if owner == "RationalQuaternionAlgebra":
+        value["references"].append("https://docs.sympy.org/latest/modules/algebras.html")
+        value["required_invariants"].append("All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained.")
+        value["known_limitations"].append("This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided.")
     if owner == "RationalVectorFamily":
         value["known_limitations"].append("This is a family of different vector spaces, not one vector space across all dimensions. Dimension checks run at operation execution; entries are materialized exactly.")
     if owner == "RationalMatrixFamily":
@@ -572,6 +606,8 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("H(Q)", "Rational Hamilton quaternion algebra", "mathematics.numbers.RationalQuaternion",
+         ["Four canonical rational coefficients in scalar,i,j,k order", "Hamilton multiplication with i*j=k and j*i=-k", "Rotation actions use standard right-handed coordinates and require a nonzero quaternion"], ["Q", "Q(i)", "Vec(Q)", "Mat(Q)"]),
         ("Exterior(Q)", "Rational coordinate exterior algebras", "mathematics.linear.RationalExterior",
          ["Retained nonnegative ambient dimension", "Nonzero rational coefficients on increasing coordinate basis masks", "Standard Euclidean orientation and pairing; mixed homogeneous grades allowed"], ["Q", "Vec(Q)", "Mat(Q)", "N"]),
         ("Tensor(Q)", "Finite rational coordinate tensors", "mathematics.linear.RationalTensor",

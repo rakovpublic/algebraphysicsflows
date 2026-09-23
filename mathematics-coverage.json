@@ -26521,6 +26521,69 @@
       "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
     },
     {
+      "id": "concrete-algebra.RationalQuaternionAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "RationalQuaternionAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "H(Q)",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
       "id": "concrete-algebra.RationalSampleAlgebra",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "RationalSampleAlgebra",
@@ -39338,6 +39401,2034 @@
       "runtime_operation_id": "Exterior(Q).volume-in",
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "Exterior(Q).volume-in",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).add",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).add",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "H(Q)",
+      "domain_B": "H(Q)",
+      "domain_C": "H(Q)",
+      "operation_signature": "H(Q) x H(Q) -> H(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).add",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "H(Q).add",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "add",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).subtract",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).subtract",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "H(Q)",
+      "domain_B": "H(Q)",
+      "domain_C": "H(Q)",
+      "operation_signature": "H(Q) x H(Q) -> H(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).subtract",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "H(Q).subtract",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "subtract",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).multiply",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).multiply",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "H(Q)",
+      "domain_B": "H(Q)",
+      "domain_C": "H(Q)",
+      "operation_signature": "H(Q) x H(Q) -> H(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).multiply",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Hamilton product in operand order; i*j=k and j*i=-k. Multiplication is associative but noncommutative.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "H(Q).multiply",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "multiply",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).divide-right",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).divide-right",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "H(Q)",
+      "domain_B": "H(Q)",
+      "domain_C": "H(Q)",
+      "operation_signature": "H(Q) x H(Q) -> H(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).divide-right",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The second quaternion is nonzero; return a*b^-1, the solution x to x*b=a.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "H(Q).divide-right",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "divide-right",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).divide-left",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).divide-left",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "H(Q)",
+      "domain_B": "H(Q)",
+      "domain_C": "H(Q)",
+      "operation_signature": "H(Q) x H(Q) -> H(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).divide-left",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The second quaternion is nonzero; return b^-1*a, the solution x to b*x=a.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "H(Q).divide-left",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "divide-left",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).negate",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).negate",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "H(Q)",
+      "domain_B": null,
+      "domain_C": "H(Q)",
+      "operation_signature": "H(Q) -> H(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).negate",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "H(Q).negate",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "negate",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).conjugate",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).conjugate",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "H(Q)",
+      "domain_B": null,
+      "domain_C": "H(Q)",
+      "operation_signature": "H(Q) -> H(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).conjugate",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Negate the three imaginary coefficients; conjugation reverses multiplication order.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "H(Q).conjugate",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "conjugate",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).inverse",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).inverse",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "H(Q)",
+      "domain_B": null,
+      "domain_C": "H(Q)",
+      "operation_signature": "H(Q) -> H(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).inverse",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The quaternion is nonzero; return its conjugate divided by the sum of squared rational components.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "H(Q).inverse",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "inverse",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).norm-squared",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).norm-squared",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "H(Q)",
+      "domain_B": null,
+      "domain_C": "Q",
+      "operation_signature": "H(Q) -> Q",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).norm-squared",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return w*w+x*x+y*y+z*z as a nonnegative exact rational. Its square root is not generally rational and is not returned.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "H(Q).norm-squared",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "norm-squared",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).real-part",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).real-part",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "H(Q)",
+      "domain_B": null,
+      "domain_C": "Q",
+      "operation_signature": "H(Q) -> Q",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).real-part",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the coefficient of the scalar unit.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "H(Q).real-part",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "real-part",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).imaginary-part",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).imaginary-part",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "H(Q)",
+      "domain_B": null,
+      "domain_C": "Vec(Q)",
+      "operation_signature": "H(Q) -> Vec(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).imaginary-part",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the i,j,k coefficients as a three-dimensional Vec(Q) member, without requiring the real part to vanish.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "H(Q).imaginary-part",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "imaginary-part",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).components",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).components",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "H(Q)",
+      "domain_B": null,
+      "domain_C": "Q",
+      "operation_signature": "H(Q) -> List(Q)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).components",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit all four rational coefficients in scalar,i,j,k order, preserving zeros and duplicates.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "H(Q).components",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "components",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).scale",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).scale",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "H(Q)",
+      "domain_B": "Q",
+      "domain_C": "H(Q)",
+      "operation_signature": "H(Q) x Q -> H(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).scale",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Multiply all coefficients by the rational scalar.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "H(Q).scale",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "scale",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "H(Q)",
+      "domain_B": "H(Q)",
+      "domain_C": "Boolean",
+      "operation_signature": "H(Q) x H(Q) -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Compare all four exact coefficients; scalar multiples generally differ as algebra elements.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "H(Q).equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).same-rotation",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).same-rotation",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "H(Q)",
+      "domain_B": "H(Q)",
+      "domain_C": "Boolean",
+      "operation_signature": "H(Q) x H(Q) -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).same-rotation",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Both quaternions are nonzero. They represent the same active rotation exactly when they differ by a nonzero rational scalar factor.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "H(Q).same-rotation",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "same-rotation",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).embed-rational",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).embed-rational",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q",
+      "domain_B": null,
+      "domain_C": "H(Q)",
+      "operation_signature": "Q -> H(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).embed-rational",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed q as (q,0,0,0), in the center of the quaternion algebra.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "H(Q).embed-rational",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "H(Q).embed-rational",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).to-rational",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).to-rational",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "H(Q)",
+      "domain_B": null,
+      "domain_C": "Q",
+      "operation_signature": "H(Q) -> Q",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).to-rational",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "All three imaginary coefficients vanish.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "H(Q).to-rational",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-rational",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).embed-complex",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).embed-complex",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(i)",
+      "domain_B": null,
+      "domain_C": "H(Q)",
+      "operation_signature": "Q(i) -> H(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).embed-complex",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed the selected rational complex subfield Q(i) as (real,imaginary,0,0).",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "H(Q).embed-complex",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "H(Q).embed-complex",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).to-complex",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).to-complex",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "H(Q)",
+      "domain_B": null,
+      "domain_C": "Q(i)",
+      "operation_signature": "H(Q) -> Q(i)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).to-complex",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The j and k coefficients vanish; return a member of the selected Q(i) subfield.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "H(Q).to-complex",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-complex",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).from-vector",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).from-vector",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Vec(Q)",
+      "domain_B": null,
+      "domain_C": "H(Q)",
+      "operation_signature": "Vec(Q) -> H(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).from-vector",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The input vector has dimension three; embed it as a pure quaternion with zero real part.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "H(Q).from-vector",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "H(Q).from-vector",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).to-vector",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).to-vector",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "H(Q)",
+      "domain_B": null,
+      "domain_C": "Vec(Q)",
+      "operation_signature": "H(Q) -> Vec(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).to-vector",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The real coefficient vanishes; return the three imaginary coordinates in Vec(Q).",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "H(Q).to-vector",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-vector",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).rotate",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).rotate",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "H(Q)",
+      "domain_B": "Vec(Q)",
+      "domain_C": "Vec(Q)",
+      "operation_signature": "H(Q) x Vec(Q) -> Vec(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).rotate",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The quaternion is nonzero and the vector has dimension three. Return the active right-handed column-vector rotation q*(0,v)*q^-1, wrapped in the second operand carrier. Unit normalization is unnecessary.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "H(Q).rotate",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "rotate",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).to-rotation-matrix",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).to-rotation-matrix",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "H(Q)",
+      "domain_B": null,
+      "domain_C": "Mat(Q)",
+      "operation_signature": "H(Q) -> Mat(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).to-rotation-matrix",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The quaternion is nonzero. Return its exact rational orthogonal 3 by 3 active rotation matrix with determinant one.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "H(Q).to-rotation-matrix",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-rotation-matrix",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).from-rotation-matrix",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).from-rotation-matrix",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Q)",
+      "domain_B": null,
+      "domain_C": "H(Q)",
+      "operation_signature": "Mat(Q) -> H(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).from-rotation-matrix",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The matrix is exactly 3 by 3, orthogonal and of determinant one; no approximation or orthogonalization is applied. Return a rational projective quaternion with its first nonzero component equal to one, handling trace-minus-one half-turns separately.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "H(Q).from-rotation-matrix",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "H(Q).from-rotation-matrix",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).zero",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).zero",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "H(Q)",
+      "operation_signature": "Unit -> H(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).zero",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The additive zero quaternion.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "H(Q).zero",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "H(Q).zero",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).one",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).one",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "H(Q)",
+      "operation_signature": "Unit -> H(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).one",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The multiplicative unit quaternion.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "H(Q).one",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "H(Q).one",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).i",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).i",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "H(Q)",
+      "operation_signature": "Unit -> H(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).i",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The first imaginary basis generator, with i*i=-1.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "H(Q).i",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "H(Q).i",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).j",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).j",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "H(Q)",
+      "operation_signature": "Unit -> H(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).j",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The second imaginary basis generator, with j*j=-1.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "H(Q).j",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "H(Q).j",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).k",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).k",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "H(Q)",
+      "operation_signature": "Unit -> H(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).k",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The third imaginary basis generator, with k*k=-1 and i*j=k.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-23",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "H(Q).k",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "H(Q).k",
       "legacy_operation_interface": "ITransferOperation"
     },
     {
@@ -59509,6 +61600,12 @@
         "FiniteDistribution(Z).variance",
         "FiniteSet(Z).maximum",
         "FiniteSet(Z).minimum",
+        "H(Q).components",
+        "H(Q).embed-rational",
+        "H(Q).norm-squared",
+        "H(Q).real-part",
+        "H(Q).scale",
+        "H(Q).to-rational",
         "Mat(Q).determinant",
         "Mat(Q).least-squares-error",
         "Mat(Q).scale",
@@ -59675,6 +61772,8 @@
         "C"
       ],
       "supported_operations": [
+        "H(Q).embed-complex",
+        "H(Q).to-complex",
         "Q(i).add",
         "Q(i).conjugate",
         "Q(i).divide",
@@ -59798,6 +61897,8 @@
         "FiniteSet(Z).contains",
         "FiniteSet(Z).equal",
         "FiniteSet(Z).subset",
+        "H(Q).equal",
+        "H(Q).same-rotation",
         "Mat(Q).equal",
         "Q(x).equal",
         "Q.equal",
@@ -59851,6 +61952,11 @@
         "FiniteNaturalTransformation.empty",
         "FiniteRelation(Z,Z).empty",
         "FiniteSet(Z).empty",
+        "H(Q).i",
+        "H(Q).j",
+        "H(Q).k",
+        "H(Q).one",
+        "H(Q).zero",
         "Mat2(Q).one",
         "Mat2(Q).zero",
         "N.one",
@@ -61355,6 +63461,10 @@
         "Exterior(Q).from-vector",
         "Exterior(Q).interior",
         "Exterior(Q).to-vector",
+        "H(Q).from-vector",
+        "H(Q).imaginary-part",
+        "H(Q).rotate",
+        "H(Q).to-vector",
         "Mat(Q).apply",
         "Mat(Q).column-space-basis",
         "Mat(Q).columns",
@@ -61420,6 +63530,8 @@
         "Affine(Q).least-squares",
         "Affine(Q).solve",
         "Exterior(Q).apply",
+        "H(Q).from-rotation-matrix",
+        "H(Q).to-rotation-matrix",
         "Mat(Q).add",
         "Mat(Q).apply",
         "Mat(Q).column-count",
@@ -61677,6 +63789,74 @@
         "Retained nonnegative ambient dimension",
         "Nonzero rational coefficients on increasing coordinate basis masks",
         "Standard Euclidean orientation and pairing; mixed homogeneous grades allowed"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-23"
+      }
+    },
+    {
+      "id": "H(Q)",
+      "name": "Rational Hamilton quaternion algebra",
+      "description": "Rational Hamilton quaternion algebra",
+      "member_representation": "mathematics.numbers.RationalQuaternion",
+      "membership_rules": [
+        "Four canonical rational coefficients in scalar,i,j,k order",
+        "Hamilton multiplication with i*j=k and j*i=-k",
+        "Rotation actions use standard right-handed coordinates and require a nonzero quaternion"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "Q",
+        "Q(i)",
+        "Vec(Q)",
+        "Mat(Q)"
+      ],
+      "supported_operations": [
+        "H(Q).add",
+        "H(Q).components",
+        "H(Q).conjugate",
+        "H(Q).divide-left",
+        "H(Q).divide-right",
+        "H(Q).embed-complex",
+        "H(Q).embed-rational",
+        "H(Q).equal",
+        "H(Q).from-rotation-matrix",
+        "H(Q).from-vector",
+        "H(Q).i",
+        "H(Q).imaginary-part",
+        "H(Q).inverse",
+        "H(Q).j",
+        "H(Q).k",
+        "H(Q).multiply",
+        "H(Q).negate",
+        "H(Q).norm-squared",
+        "H(Q).one",
+        "H(Q).real-part",
+        "H(Q).rotate",
+        "H(Q).same-rotation",
+        "H(Q).scale",
+        "H(Q).subtract",
+        "H(Q).to-complex",
+        "H(Q).to-rational",
+        "H(Q).to-rotation-matrix",
+        "H(Q).to-vector",
+        "H(Q).zero"
+      ],
+      "invariants": [
+        "Four canonical rational coefficients in scalar,i,j,k order",
+        "Hamilton multiplication with i*j=k and j*i=-k",
+        "Rotation actions use standard right-handed coordinates and require a nonzero quaternion"
       ],
       "references": [
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"

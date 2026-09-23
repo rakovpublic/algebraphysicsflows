@@ -115,6 +115,9 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("Repeated basis factors vanish", " ".join(records["Exterior(Q).wedge"]["required_invariants"]))
         self.assertIn("oriented orthonormal", " ".join(records["Exterior(Q).hodge-star"]["required_invariants"]))
         self.assertIn("covariant induced map", " ".join(records["Exterior(Q).apply"]["required_invariants"]))
+        self.assertIn("x*b=a", " ".join(records["H(Q).divide-right"]["required_invariants"]))
+        self.assertIn("b*x=a", " ".join(records["H(Q).divide-left"]["required_invariants"]))
+        self.assertIn("no approximation", " ".join(records["H(Q).from-rotation-matrix"]["required_invariants"]))
 
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)

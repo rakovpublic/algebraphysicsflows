@@ -27,7 +27,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all468RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all497RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String category12="Category(objects=[1, 2], arrows={1=(1,1), 2=(2,2)}, identities={1=1, 2=2}, composition={(1,1)=1, (2,2)=2})";
@@ -71,6 +71,7 @@ public class ConcreteAlgebrasTest {
         expected.put("IntegerRing","8|4|12|2|6|3|0|-6|6|3|true|false|[3, 0]|0|1");
         expected.put("RationalField","8|4|12|3|-6|1/6|true|false|[8, 4]|0|1");
         expected.put("RationalComplexField","(4)+(3)i|(-2)+(1)i|(1)+(7)i|(1/2)+(1/2)i|(-1)+(-2)i|(1)+(-2)i|5|(6)+(0)i|(0)+(0)i|(1)+(0)i");
+        expected.put("RationalQuaternionAlgebra","Quaternion[3, 1, 4, 7]|Quaternion[-1, 3, 2, 1]|Quaternion[-11, 8, -3, 16]|Quaternion[1, 0, 1, 0]|Quaternion[1, 2/3, -1/3, 2/3]|Quaternion[-1, -2, -3, -4]|Quaternion[1, -2, -3, -4]|Quaternion[1/30, -1/15, -1/10, -2/15]|30|1|[2, 3, 4]|[1, 2, 3, 4]|Quaternion[2, 4, 6, 8]|false|false|Quaternion[6, 0, 0, 0]|6|Quaternion[1, 2, 0, 0]|(1)+(2)i|Quaternion[0, 1, 2, 3]|[1, 2, 3]|[-1, 2, 3]|[[-2/3, 2/15, 11/15], [2/3, -1/3, 2/3], [1/3, 14/15, 2/15]]|Quaternion[1, 0, 0, 1]|Quaternion[0, 0, 0, 0]|Quaternion[1, 0, 0, 0]|Quaternion[0, 1, 0, 0]|Quaternion[0, 0, 1, 0]|Quaternion[0, 0, 0, 1]");
         expected.put("RationalVectorSpace","[4, 6]|[-2, -2]|[-1, -2]|[2, 4]|[18, 24]|[[18, 24]]|11|[[2, 4]]|[[2, 4], [-2, -4]]|[0, 0]");
         expected.put("RationalMatrixAlgebra","[[3, 2], [3, 6]]|[[2, 4], [6, 8]]|[[-1, 2], [3, 2]]|[[-1, -2], [-3, -4]]|[[1, 3], [2, 4]]|[[-2, 1], [3/2, -1/2]]|-2|5|[[2, 4], [6, 8]]|[11, 25]|[-2, 5/2]|[[0, 0], [0, 0]]|[[1, 0], [0, 1]]|2");
         expected.put("RationalVectorFamily","[4, 4, 4]|[-2, 0, 2]|[-1, -2, -3]|[2, 4, 6]|10|3|[1, 2, 3]|[0, 0, 0]|[1, 2]|[1, 2]|[]");
@@ -99,7 +100,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(468,count);
+        assertEquals(497,count);
     }
     @SuppressWarnings({"unchecked","rawtypes"})
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
@@ -110,6 +111,11 @@ public class ConcreteAlgebrasTest {
         if(entry.id.equals("Tensor(Q).to-vector")) item=source.buildAlgebraItem(RationalTensor.fromVector(new RationalVector(Rational.ONE,Rational.of(2),Rational.of(3))));
         if(entry.id.equals("Exterior(Q).to-scalar")) item=source.buildAlgebraItem(RationalExterior.scalar(3,Rational.of(2)));
         if(entry.id.equals("Exterior(Q).to-vector")) item=source.buildAlgebraItem(RationalExterior.fromVector(new RationalVector(Rational.ONE,Rational.of(2),Rational.of(3))));
+        if(entry.id.equals("H(Q).to-rational")) item=source.buildAlgebraItem(RationalQuaternion.scalar(Rational.of(6)));
+        if(entry.id.equals("H(Q).to-complex")) item=source.buildAlgebraItem(new RationalQuaternion(Rational.ONE,Rational.of(2),Rational.ZERO,Rational.ZERO));
+        if(entry.id.equals("H(Q).to-vector")) item=source.buildAlgebraItem(new RationalQuaternion(Rational.ZERO,Rational.ONE,Rational.of(2),Rational.of(3)));
+        if(entry.id.equals("H(Q).from-rotation-matrix")) item=source.buildAlgebraItem(new RationalMatrix(new Rational[][]{
+                {Rational.ZERO,Rational.of(-1),Rational.ZERO},{Rational.ONE,Rational.ZERO,Rational.ZERO},{Rational.ZERO,Rational.ZERO,Rational.ONE}}));
         if(Arrays.asList("Mat(Q).to-fixed","Mat(Q).inverse","Mat(Q).determinant","Mat(Q).trace").contains(entry.id))
             item=source.buildAlgebraItem(sample(math,"Mat2(Q)",0));
         if(entry.id.startsWith("FiniteCone.")) {
@@ -167,6 +173,8 @@ public class ConcreteAlgebrasTest {
             case "N": case "Z": return BigInteger.valueOf(index==0?6:2);
             case "Q": return Rational.of(index==0?6:2);
             case "Q(i)": return index==0?new RationalComplex(Rational.ONE,Rational.of(2)):new RationalComplex(Rational.of(3),Rational.ONE);
+            case "H(Q)": return index==0?new RationalQuaternion(Rational.ONE,Rational.of(2),Rational.of(3),Rational.of(4))
+                    :new RationalQuaternion(Rational.of(2),Rational.of(-1),Rational.ONE,Rational.of(3));
             case "Q^2": return index==0?new RationalVector(Rational.ONE,Rational.of(2)):new RationalVector(Rational.of(3),Rational.of(4));
             case "Vec(Q)": return index==0?new RationalVector(Rational.ONE,Rational.of(2),Rational.of(3)):new RationalVector(Rational.of(3),Rational.of(2),Rational.ONE);
             case "Tensor(Q)": return new RationalTensor(new int[]{2,2},Rational.of(1+4*index),Rational.of(2+4*index),Rational.of(3+4*index),Rational.of(4+4*index));

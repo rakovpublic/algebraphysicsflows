@@ -1,6 +1,6 @@
 # Concrete algebras connected to MathTool
 
-`new ConcreteMathematics()` creates real `Algebra<T>` instances and registers their native operations in the existing `MathTool`. It includes N, Z, Q, Q(i), Boolean, Q^2, Mat2(Q), Vec(Q), Mat(Q), Affine(Q), Tensor(Q), Exterior(Q), Q[x], Q(x), S3, Z/6Z, finite sets of integers, rational samples, finite integer probability measures, finite simplicial complexes, finite integer relations/functions, finite categories/functors/natural transformations, and F5 (named Z/5Z). Each construction owns its algebra instances; separate tools do not share mutable registrations.
+`new ConcreteMathematics()` creates real `Algebra<T>` instances and registers their native operations in the existing `MathTool`. It includes N, Z, Q, Q(i), H(Q), Boolean, Q^2, Mat2(Q), Vec(Q), Mat(Q), Affine(Q), Tensor(Q), Exterior(Q), Q[x], Q(x), S3, Z/6Z, finite sets of integers, rational samples, finite integer probability measures, finite simplicial complexes, finite integer relations/functions, finite categories/functors/natural transformations, and F5 (named Z/5Z). Each construction owns its algebra instances; separate tools do not share mutable registrations.
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
@@ -56,6 +56,7 @@ List<String> values = math.flow(math.naturals,
 | SymmetricGroup / Sn | compose | inverse, order, sign, fixed-point-count, flat cycles | apply and flat orbit at N; integer powers; equality; enumeration |
 | BooleanAlgebra / Boolean | and, or, xor, implies, equal | not | None |
 | RationalComplexField / Q(i) | add, subtract, multiply, divide | negate, conjugate, norm-squared -> Q | Q(i).embed-rational on Q -> Q(i) |
+| RationalQuaternionAlgebra / H(Q) | add, subtract, Hamilton multiply, left/right division; equal/same-rotation -> Boolean | negate, conjugate, inverse; norm-squared/real-part -> Q; imaginary-part -> Vec(Q); flat components -> Q | rational/complex embeddings; pure vector conversions; rotations -> Vec(Q); exact rotation matrix conversions; zero/one/i/j/k |
 | RationalVectorSpace / Q^n | add, subtract | negate | scale by Q -> Q^n; dot -> Q; flat scale-flat and scale-signs |
 | RationalMatrixAlgebra / Matn(Q) | add, subtract, multiply | negate, transpose, inverse, determinant -> Q, trace -> Q, rank -> N | scale by Q; apply to Q^n; solve with nonsingular matrix |
 | RationalVectorFamily / Vec(Q) | partial add, subtract, dot -> Q | negate; dimension -> N; flat entries -> Q; zero-like | scale by Q; fixed-carrier conversions; empty vector constant |
@@ -104,13 +105,15 @@ See [ConcreteAlgebrasTest](../groupimp/src/test/java/mathematics/ConcreteAlgebra
 Same-algebra unary flat operations use `IOneOperandFlatOperation` and `performOneOperandFlatOperation(name)` (or `performFlatOperation(name)`). Finite-set `subsets` is an example. Cross-algebra unary flat operations use the existing `ITransferFlatOperation`, whose return type is corrected to `List<IAlgebraItem<V>>`; `elements` transfers a finite set to its member algebra. Empty results remain valid, and every emitted member keeps its target algebra.
 
 
-The default initializer currently installs 30 algebras and 468 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
+The default initializer currently installs 31 algebras and 497 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
 
 For overloaded custom-member and unsafe operations, the most specific compatible second-operand class is selected (exact matches take priority). Re-registering the same second class replaces that overload. Ambiguous supertypes are rejected. Mathematical domains sharing one Java class need distinct operation names; overload selection does not infer a domain from a value.
 
 Fixed `Matn(Q).solve` returns the exact vector solving M x = b for nonsingular square M. Singular matrices are outside that operation; the affine solution operation below handles them. `rank` returns a member of N. `derivative-order` accepts arbitrary nonnegative BigInteger orders and returns zero when the order exceeds the finite polynomial degree.
 
 ## Rectangular matrices and affine solution sets
+
+The matrix and vector families also connect to the exterior and quaternion algebras below, using their actual registered carrier instances.
 
 `math.finiteVectors`, `math.rectangularMatrices` and `math.affineSpaces` register `Vec(Q)`, `Mat(Q)` and `Affine(Q)` in the same MathTool. Vec(Q) holds finite rational vectors, including the zero-dimensional vector. Mat(Q) holds dense rational matrices with positive row and column counts. Addition and dot products require matching dimensions; matrix multiplication requires matching inner dimensions. These carriers are families of spaces with partial operations across shapes. `apply` uses ILeftProjectionOperation and returns a Vec(Q) wrapper whose dimension is the number of matrix rows.
 
@@ -205,6 +208,29 @@ List<String> cross = math.flow(math.finiteVectors,
 `from-vector` embeds in degree one. `to-vector` rejects nonzero terms outside degree one; zero maps to the zero vector of its retained dimension. `to-scalar` accepts only scalar support, while `scalar-part` is always defined. `zero-in`, `one-in` and `volume-in` are qualified transfers from N, taking ambient dimension as input. Dimension zero has volume equal to the scalar unit.
 
 The representation caps ambient dimension at 20 and sparse support at 100,000 terms, including intermediate results. Wedge and each complete induced matrix action cap candidate coefficient products at 1,000,000. Exhaustion raises IMPLEMENTATION_FAILURE. Arbitrary metrics, manifold differential forms and exterior derivatives remain outside this carrier. NativeExteriorTest covers basis sign oracles, associativity, Hodge and insertion identities, all 729 ternary cross-product pairs, all 729 ternary 2 by 3 minor maps, all 512 binary 3 by 3 determinants, exact large coefficients, resource limits and serialized native flows.
+
+## Rational Hamilton quaternions and rotations
+
+`math.quaternions` registers H(Q), the Hamilton division algebra with four exact rational coefficients w+x*i+y*j+z*k. It uses i*i=j*j=k*k=i*j*k=-1, so i*j=k while j*i=-k. Every nonzero element has inverse conjugate(q)/norm-squared(q). Multiplication is associative and noncommutative. The `divide-right` operation returns a*b^-1, solving x*b=a; `divide-left` returns b^-1*a, solving b*x=a. Their order is explicit in the API. These are the standard Hamilton conventions documented by [SymPy's quaternion API](https://docs.sympy.org/latest/modules/algebras.html).
+
+`H(Q).embed-rational` and `H(Q).embed-complex` connect Q and the chosen Q(i) subfield. Reverse transfers reject components outside those subfields. `H(Q).from-vector` accepts exactly three coordinates and builds a pure quaternion; `to-vector` requires zero real part. `imaginary-part` always returns the i,j,k coordinates. Flat `components` retains all four entries, including zero and repeated coordinates. `norm-squared` stays rational; no generally irrational square root is substituted.
+
+For any nonzero q, `rotate` returns q*(0,v)*q^-1 as a Vec(Q) wrapper. This is an active right-handed rotation of column vectors. It requires dimension three and does not require unit norm. All nonzero rational scalar multiples represent the same rotation; `same-rotation` checks this explicitly, while `equal` compares all coefficients as algebra elements. Both operands of same-rotation must be nonzero.
+
+~~~java
+RationalQuaternion quarterTurn = new RationalQuaternion(
+        Rational.ONE, Rational.ZERO, Rational.ZERO, Rational.ONE);
+List<String> rotated = math.flow(math.quaternions, Collections.singletonList(quarterTurn))
+        .<RationalMatrix>performAlgebraTransfer("to-rotation-matrix")
+        .<RationalQuaternion>performAlgebraTransfer("H(Q).from-rotation-matrix")
+        .performLeftProjectionOperation("rotate",
+                new RationalVector(Rational.ONE, Rational.of(2), Rational.of(3)))
+        .collect(); // ["[-2, 1, 3]"]
+~~~
+
+`to-rotation-matrix` returns an exact rational 3 by 3 orthogonal matrix with determinant one. The reverse operation checks these conditions exactly, rejects approximate or improper rotations, and returns a rational projective quaternion whose first nonzero component equals one. Its norm need not equal one. For trace different from -1, recovery uses (1+trace, R_21-R_12, R_02-R_20, R_10-R_01) before projective scaling. A half-turn uses a nonzero column of R+I as its pure quaternion axis. Neither path takes square roots. Quaternion multiplication composes rotations with the right operand acting first.
+
+This represents rational Hamilton quaternions and rational rotation matrices, not all real quaternions or arbitrary-angle symbolic rotations. Euler-angle extraction and approximate matrix fitting are not implemented. NativeQuaternionTest checks all 6,561 ternary quaternion products against an independent basis table, all 624 nonzero quaternions with components in {-2,-1,0,1,2} for exact rotation identities and matrix round-trips, both division orders, half-turns, wrong shapes, near-orthogonal rejection, large rational coefficients and serialized MathTool flows.
 
 ## Finite topology through the existing flow API
 

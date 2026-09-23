@@ -19,6 +19,7 @@ import mathematics.linear.RationalAffineSpace;
 import mathematics.linear.RationalTensor;
 import mathematics.linear.RationalExterior;
 import mathematics.numbers.Rational;
+import mathematics.numbers.RationalQuaternion;
 import java.math.BigInteger;
 import java.util.*;
 
@@ -60,6 +61,11 @@ public final class ConcreteAlgebrasExample {
                 .<RationalExterior>performAlgebraTransfer("Exterior(Q).from-vector")
                 .performOperation("wedge",RationalExterior.fromVector(new RationalVector(Rational.of(4),Rational.of(5),Rational.of(6))))
                 .performOneOperandOperation("hodge-star").<RationalVector>performAlgebraTransfer("to-vector").collect());
+        System.out.println("Exact quaternion quarter-turn around z: "+math.flow(math.quaternions,
+                Collections.singletonList(new RationalQuaternion(Rational.ONE,Rational.ZERO,Rational.ZERO,Rational.ONE)))
+                .<RationalMatrix>performAlgebraTransfer("to-rotation-matrix")
+                .<RationalQuaternion>performAlgebraTransfer("H(Q).from-rotation-matrix")
+                .performLeftProjectionOperation("rotate",new RationalVector(Rational.ONE,Rational.of(2),Rational.of(3))).collect());
         System.out.println("Integral of x^2 from 0 to 1: "+math.flow(math.polynomials,Collections.singletonList(new Polynomial(Rational.ZERO,Rational.ZERO,Rational.ONE)))
                 .<Rational,Pair<Rational,Rational>>performAlgebraUnsafe("integrate",new Pair<>(Rational.ZERO,Rational.ONE)).collect());
         System.out.println("F5: 3 / 2 = "+math.primeFields.get(0).algebra().buildAlgebraItem(math.primeFields.get(0).member(3))

@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 905 |
-| DIRECTLY_SUPPORTED | 662 |
+| Scoped records | 935 |
+| DIRECTLY_SUPPORTED | 692 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 521 |
+| IMPLEMENTED | 551 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 589 |
+| MACHINE_TESTED | 619 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 498 | 498 | 0 | 0 | 0 | 498 | 0 | 0 |
+| Concrete MathTool algebras | 528 | 528 | 0 | 0 | 0 | 528 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -452,6 +452,35 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | FiniteSet(Z).symmetric-difference | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).symmetric-difference |
 | FiniteSet(Z).union | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).union |
 | FiniteSimplicialAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels and unreduced homology over F2 |
+| H(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).add |
+| H(Q).components | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).components |
+| H(Q).conjugate | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).conjugate |
+| H(Q).divide-left | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).divide-left |
+| H(Q).divide-right | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).divide-right |
+| H(Q).embed-complex | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).embed-complex |
+| H(Q).embed-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).embed-rational |
+| H(Q).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).equal |
+| H(Q).from-rotation-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).from-rotation-matrix |
+| H(Q).from-vector | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).from-vector |
+| H(Q).i | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).i |
+| H(Q).imaginary-part | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).imaginary-part |
+| H(Q).inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).inverse |
+| H(Q).j | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).j |
+| H(Q).k | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).k |
+| H(Q).multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).multiply |
+| H(Q).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).negate |
+| H(Q).norm-squared | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).norm-squared |
+| H(Q).one | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).one |
+| H(Q).real-part | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).real-part |
+| H(Q).rotate | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).rotate |
+| H(Q).same-rotation | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).same-rotation |
+| H(Q).scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).scale |
+| H(Q).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).subtract |
+| H(Q).to-complex | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).to-complex |
+| H(Q).to-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).to-rational |
+| H(Q).to-rotation-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).to-rotation-matrix |
+| H(Q).to-vector | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).to-vector |
+| H(Q).zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).zero |
 | IntegerRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient |
 | IntegerSetAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets |
 | Mat(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).add |
@@ -582,6 +611,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | RationalMatrixAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two |
 | RationalMatrixFamily | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases |
 | RationalPolynomialRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients |
+| RationalQuaternionAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations |
 | RationalSampleAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations |
 | RationalTensorAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction |
 | RationalVectorFamily | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations |
