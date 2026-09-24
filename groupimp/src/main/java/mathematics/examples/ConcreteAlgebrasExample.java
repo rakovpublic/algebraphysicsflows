@@ -21,6 +21,7 @@ import mathematics.structures.FiniteCocone;
 import mathematics.structures.AbelianGroupType;
 import mathematics.structures.PresentedAbelianGroup;
 import mathematics.structures.AbelianGroupElement;
+import mathematics.structures.AbelianGroupHomomorphism;
 import mathematics.topology.FiniteSimplicialComplex;
 import mathematics.linear.RationalVector;
 import mathematics.linear.IntegerVector;
@@ -54,6 +55,11 @@ public final class ConcreteAlgebrasExample {
         System.out.println("Group presented by columns (2,0,0), (0,3,0): "+math.flow(math.integerMatrices,Collections.singletonList(presentation))
                 .<AbelianGroupType>performAlgebraTransfer("cokernel").collect());
         IntegerMatrix finitePresentation=new IntegerMatrix(new BigInteger[][]{{BigInteger.valueOf(2),BigInteger.ZERO},{BigInteger.ZERO,BigInteger.valueOf(3)}});
+        System.out.println("Kernel type of doubling on Z/2 + Z/3: "+math.flow(math.integerMatrices,Collections.singletonList(finitePresentation))
+                .<PresentedAbelianGroup>performAlgebraTransfer("PresentedAbelianGroup.from-matrix")
+                .<AbelianGroupHomomorphism,BigInteger>performAlgebraUnsafe("AbelianGroupHomomorphism.scaling-on",BigInteger.valueOf(2))
+                .<PresentedAbelianGroup>performAlgebraTransfer("kernel")
+                .<AbelianGroupType>performAlgebraTransfer("as-type").collect());
         System.out.println("Orders of all elements in Z/2 + Z/3: "+math.flow(math.integerMatrices,Collections.singletonList(finitePresentation))
                 .<PresentedAbelianGroup>performAlgebraTransfer("PresentedAbelianGroup.from-matrix")
                 .<AbelianGroupElement>performFlatAlgebraTransfer("AbelianGroupElement.elements")

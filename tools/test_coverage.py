@@ -173,6 +173,11 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("first-carrier wrappers", " ".join(records["AbelianGroupElement.multiplication-preimages"]["required_invariants"]))
         self.assertIn("second Vec(Z)", " ".join(records["AbelianGroupElement.reduce"]["required_invariants"]))
         self.assertIn("4096", " ".join(records["AbelianGroupElement.elements"]["known_limitations"]))
+        self.assertIn("right operand first", " ".join(records["AbelianGroupHomomorphism.compose"]["required_invariants"]))
+        self.assertIn("K*C=R_source", " ".join(records["AbelianGroupHomomorphism.kernel"]["required_invariants"]))
+        self.assertIn("second AbelianGroupElement", " ".join(records["AbelianGroupHomomorphism.apply"]["required_invariants"]))
+        self.assertIn("coset by the kernel", " ".join(records["AbelianGroupHomomorphism.preimage"]["required_invariants"]))
+        self.assertIn("5000000", " ".join(records["AbelianGroupHomomorphism.inverse"]["known_limitations"]))
 
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)

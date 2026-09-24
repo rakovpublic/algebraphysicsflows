@@ -16,8 +16,11 @@ public final class PresentedAbelianGroup implements Serializable {
     private final List<BigInteger> factors;
     private final AbelianGroupType type;
     public PresentedAbelianGroup(IntegerMatrix relations) {
+        this(relations,new IntegerSmithNormalForm.Computation());
+    }
+    PresentedAbelianGroup(IntegerMatrix relations,IntegerSmithNormalForm.Computation work) {
         this.relations=Objects.requireNonNull(relations);
-        IntegerSmithNormalForm.Decomposition smith=new IntegerSmithNormalForm.Computation().decompose(relations);
+        IntegerSmithNormalForm.Decomposition smith=work.decompose(relations);
         toSmith=smith.left(); factors=smith.invariantFactors();
         type=new AbelianGroupType(BigInteger.valueOf(relations.rows()-factors.size()),factors);
     }

@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1230 |
-| DIRECTLY_SUPPORTED | 987 |
+| Scoped records | 1263 |
+| DIRECTLY_SUPPORTED | 1020 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 846 |
+| IMPLEMENTED | 879 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 914 |
+| MACHINE_TESTED | 947 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 823 | 823 | 0 | 0 | 0 | 823 | 0 | 0 |
+| Concrete MathTool algebras | 856 | 856 | 0 | 0 | 0 | 856 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -208,6 +208,39 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | AbelianGroupElement.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.zero |
 | AbelianGroupElement.zero-like | DIRECTLY_SUPPORTED | IMPLEMENTED | Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.zero-like |
 | AbelianGroupElementAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates |
+| AbelianGroupHomomorphism.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.add |
+| AbelianGroupHomomorphism.apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.apply |
+| AbelianGroupHomomorphism.cokernel | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.cokernel |
+| AbelianGroupHomomorphism.cokernel-projection | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.cokernel-projection |
+| AbelianGroupHomomorphism.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.compose |
+| AbelianGroupHomomorphism.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.equal |
+| AbelianGroupHomomorphism.from-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.from-matrix |
+| AbelianGroupHomomorphism.from-smith-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.from-smith-matrix |
+| AbelianGroupHomomorphism.generator-images | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.generator-images |
+| AbelianGroupHomomorphism.has-preimage | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.has-preimage |
+| AbelianGroupHomomorphism.identity-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.identity-on |
+| AbelianGroupHomomorphism.image | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.image |
+| AbelianGroupHomomorphism.image-inclusion | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.image-inclusion |
+| AbelianGroupHomomorphism.image-projection | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.image-projection |
+| AbelianGroupHomomorphism.inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.inverse |
+| AbelianGroupHomomorphism.is-injective | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.is-injective |
+| AbelianGroupHomomorphism.is-isomorphism | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.is-isomorphism |
+| AbelianGroupHomomorphism.is-surjective | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.is-surjective |
+| AbelianGroupHomomorphism.is-zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.is-zero |
+| AbelianGroupHomomorphism.kernel | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.kernel |
+| AbelianGroupHomomorphism.kernel-inclusion | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.kernel-inclusion |
+| AbelianGroupHomomorphism.matrix-lift | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.matrix-lift |
+| AbelianGroupHomomorphism.negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.negate |
+| AbelianGroupHomomorphism.preimage | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.preimage |
+| AbelianGroupHomomorphism.scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.scale |
+| AbelianGroupHomomorphism.scaling-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.scaling-on |
+| AbelianGroupHomomorphism.smith-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.smith-matrix |
+| AbelianGroupHomomorphism.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.source |
+| AbelianGroupHomomorphism.subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.subtract |
+| AbelianGroupHomomorphism.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.target |
+| AbelianGroupHomomorphism.zero-between | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.zero-between |
+| AbelianGroupHomomorphism.zero-like | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices; native operation AbelianGroupHomomorphism.zero-like |
+| AbelianGroupHomomorphismAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices |
 | AbelianGroupType.cyclic | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.cyclic |
 | AbelianGroupType.direct-sum | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.direct-sum |
 | AbelianGroupType.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.equal |

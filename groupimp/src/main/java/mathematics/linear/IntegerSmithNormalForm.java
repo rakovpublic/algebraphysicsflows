@@ -22,18 +22,48 @@ public final class IntegerSmithNormalForm {
         public int rank() { return factors.size(); }
         public List<BigInteger> invariantFactors() { return factors; }
     }
-    /** A shared arithmetic budget for several boundary matrices in one homology computation. */
+    /** A shared arithmetic budget for a compound integer linear computation. */
     public static final class Computation {
         private long remaining=5000000;
-        void use(long amount) {
+        public void use(long amount) {
+            if(amount<0) throw new IllegalArgumentException("Work charges must be nonnegative");
+            if(amount>remaining) {
+                remaining=0;
+                throw new MathFailure(MathFailure.Kind.IMPLEMENTATION_FAILURE,"Integer linear computation exceeds 5000000 work units");
+            }
             remaining-=amount;
-            if(remaining<0) throw new MathFailure(MathFailure.Kind.IMPLEMENTATION_FAILURE,"Integer linear computation exceeds 5000000 work units");
         }
         public List<BigInteger> invariantFactors(BigInteger[][] input) {
             return reduce(input,input.length==0?0:input[0].length,false).invariantFactors();
         }
         public Decomposition decompose(IntegerMatrix matrix) { return reduce(matrix.copyEntries(),matrix.columns(),true); }
         public List<BigInteger> invariantFactors(IntegerMatrix matrix) { return reduce(matrix.copyEntries(),matrix.columns(),false).invariantFactors(); }
+        public IntegerMatrix multiply(IntegerMatrix a,IntegerMatrix b) { return a.multiply(b,this); }
+        public IntegerVector apply(IntegerMatrix a,IntegerVector b) { return a.multiply(b,this); }
+        public IntegerMatrix inverseUnimodular(IntegerMatrix a) { return a.inverseUnimodular(this); }
+        public IntegerMatrix kernelMatrix(IntegerMatrix a) {
+            Decomposition smith=decompose(a); int columns=a.columns()-smith.rank();
+            use((long)a.columns()*columns); BigInteger[][] result=IntegerMatrix.zeros(a.columns(),columns);
+            for(int r=0;r<a.columns();r++) for(int c=0;c<columns;c++) result[r][c]=smith.right().get(r,c+smith.rank());
+            return new IntegerMatrix(a.columns(),columns,result);
+        }
+        public boolean hasSolution(IntegerMatrix a,IntegerVector b) {
+            if(b.dimension()!=a.rows()) throw MathFailure.undefined("Right-hand side dimension must match matrix rows");
+            return IntegerMatrix.solveCoordinates(decompose(a),b,this)!=null;
+        }
+        /** Solve several right-hand sides with one decomposition and one shared work budget. */
+        public IntegerMatrix solve(IntegerMatrix a,IntegerMatrix b) {
+            if(b.rows()!=a.rows()) throw MathFailure.undefined("Right-hand side dimension must match matrix rows");
+            Decomposition smith=decompose(a); use((long)a.columns()*b.columns());
+            BigInteger[][] result=IntegerMatrix.zeros(a.columns(),b.columns());
+            for(int c=0;c<b.columns();c++) {
+                IntegerVector y=IntegerMatrix.solveCoordinates(smith,b.column(c),this);
+                if(y==null) throw MathFailure.undefined("This linear system has no integer solution");
+                IntegerVector x=apply(smith.right(),y);
+                for(int r=0;r<a.columns();r++) result[r][c]=x.get(r);
+            }
+            return new IntegerMatrix(a.columns(),b.columns(),result);
+        }
         private Decomposition reduce(BigInteger[][] input,int columns,boolean transform) {
             int rows=input.length;
             if(rows>MAX_DIMENSION || columns>MAX_DIMENSION)

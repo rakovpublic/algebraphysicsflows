@@ -42,6 +42,7 @@ OWNERS = {
     "AbelianGroupTypeAlgebra": ("AbelianGroupType", "Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors"),
     "PresentedAbelianGroupAlgebra": ("PresentedAbelianGroup", "Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps"),
     "AbelianGroupElementAlgebra": ("AbelianGroupElement", "Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates"),
+    "AbelianGroupHomomorphismAlgebra": ("AbelianGroupHomomorphism", "Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices"),
     "FiniteIntegerRelationAlgebra": ("FiniteRelation(Z,Z)", "Finite-support relations on the actual registered integer Algebra"),
     "FiniteIntegerFunctionAlgebra": ("FiniteFunction(Z,Z)", "Total maps between explicit finite integer sets, preserving declared domain and codomain"),
     "FiniteCategoryAlgebra": ("FiniteCategory", "Finite categories with integer object/arrow labels and exhaustively checked composition tables"),
@@ -93,6 +94,7 @@ EXTRA_TESTS = {
     "AbelianGroupTypeAlgebra": "NativeAbelianGroupTest",
     "PresentedAbelianGroupAlgebra": "NativePresentedAbelianTest",
     "AbelianGroupElementAlgebra": "NativePresentedAbelianTest",
+    "AbelianGroupHomomorphismAlgebra": "NativeAbelianHomomorphismTest",
     "FiniteIntegerRelationAlgebra": "NativeRelationTest",
     "FiniteIntegerFunctionAlgebra": "NativeFiniteFunctionTest",
     "FiniteCategoryAlgebra": "NativeCategoryTest",
@@ -141,6 +143,40 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "AbelianGroupHomomorphismAlgebra": {
+        "compose": "Apply the right operand first. The first source presentation must equal the second target presentation, including its coordinate map.",
+        "add": "Source and target presentations must agree for both maps; add their images pointwise in the target group.",
+        "subtract": "Source and target presentations must agree; subtract images pointwise in the target group.",
+        "negate": "Negate all generator images in the target, retaining both presentations.",
+        "scale": "Multiply all generator images by the supplied integer, with canonical target residues.",
+        "source": "Return the retained source presentation, not just its isomorphism type.",
+        "target": "Return the retained target presentation, not just its isomorphism type.",
+        "smith-matrix": "Return target rows by source columns in full Smith coordinates, including killed coordinates. Each target row is reduced modulo its nonzero Smith factor.",
+        "matrix-lift": "Return one integer lift in the original generator coordinates: U_target^-1 * M * U_source. Different lifts may define the same quotient map.",
+        "apply": "The element must belong to the retained source presentation; the result belongs to the target presentation, wrapped by the second AbelianGroupElement Algebra.",
+        "generator-images": "Emit wrapped target elements in original source generator order, retaining zero or redundant images and an empty list for no generators.",
+        "is-zero": "All source generator images must be zero in the target quotient.",
+        "equal": "Compare both retained boundary presentations and canonical generator-image matrices, not raw integer lifts or only isomorphism types.",
+        "identity-on": "Construct the identity on the supplied presentation; killed Smith-coordinate columns normalize to zero.",
+        "zero-between": "Construct the zero map from the first presentation to the second, retaining both boundaries.",
+        "zero-like": "Construct the zero map with the same source and target presentations.",
+        "kernel": "Let K be an integral basis of x such that M*x is a target relation. Present the kernel by coordinates C solving K*C=R_source in full Smith coordinates.",
+        "kernel-inclusion": "Return the injective map from the computed kernel presentation into the original source. Its composition with the original map is zero.",
+        "image": "Present the image as the source Smith-coordinate free module modulo the lattice K of vectors sent to target relations.",
+        "image-inclusion": "Return the injective map from the computed image presentation into the original target.",
+        "image-projection": "Return the surjective map from the source to the computed image presentation. Image inclusion composed with this projection equals the original map.",
+        "cokernel": "Present the target modulo the image by adjoining the map columns to the target Smith relation columns.",
+        "cokernel-projection": "Return the surjective map from the original target to the computed cokernel; its composition with the original map is zero.",
+        "is-injective": "True exactly when the kernel is trivial. Resource exhaustion propagates as IMPLEMENTATION_FAILURE, never false.",
+        "is-surjective": "True exactly when the cokernel is trivial. Resource exhaustion propagates as IMPLEMENTATION_FAILURE, never false.",
+        "is-isomorphism": "The kernel and cokernel must both be trivial; all reductions share one work budget.",
+        "inverse": "Defined only for an isomorphism. Solve for generator preimages, check source relations and the inverse identity; return the map with exchanged presentations.",
+        "has-preimage": "The element must belong to the target presentation; test integer solvability of M*x - R_target*y = element. Resource failures propagate, never returning false.",
+        "preimage": "Return one source element mapping to the supplied target element, in the second AbelianGroupElement carrier wrapper. Undefined when no preimage exists; the full fiber is a coset by the kernel.",
+        "from-matrix": "The paired boundaries are source then target. Columns are images of original source generators in original target coordinates; every source relation must map to a target relation.",
+        "from-smith-matrix": "The paired boundaries are source then target. Use full Smith coordinates, with target rows and source columns; every source relation must map to a target relation.",
+        "scaling-on": "Construct the endomorphism multiplying every element of the supplied presentation by the integer operand.",
+    },
     "PresentedAbelianGroupAlgebra": {
         "from-matrix": "An m by n integer matrix presents Z^m modulo the subgroup generated by its columns. Retain the relation matrix and a Smith-coordinate map U, where U*A*V=D.",
         "from-type": "Construct a diagonal presentation with nontrivial torsion generators first and free generators last. The total generator count must fit the implementation dimension cap; oversized ranks are implementation failures.",
@@ -782,6 +818,11 @@ def record(identifier, owner, concept, paths, operation=None):
         paths = paths + ["groupimp/src/main/java/mathematics/probability/FiniteMarkovKernel.java"]
     if owner == "AbelianGroupTypeAlgebra":
         paths = paths + ["groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"]
+    if owner == "AbelianGroupHomomorphismAlgebra":
+        paths = paths + ["groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+                         "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+                         "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+                         "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
     if owner in ("PresentedAbelianGroupAlgebra", "AbelianGroupElementAlgebra"):
         paths = paths + ["groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
                          "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
@@ -876,11 +917,16 @@ def record(identifier, owner, concept, paths, operation=None):
         value["references"].append("https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html")
     if owner in ("IntegerVectorFamily", "IntegerMatrixFamily"):
         value["known_limitations"].append("Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.")
+    if owner == "AbelianGroupHomomorphismAlgebra":
+        value["required_invariants"].append("The normalized target Smith-coordinate columns respect all source relations. Both actual boundary presentations are retained; isomorphic groups are not implicitly identified.")
+        value["known_limitations"] += ["Every auxiliary matrix, including [M,-R_target], is limited to 256 rows and columns. Each compound map computation shares a 5000000-unit integer work budget across reductions, solves and products. Dense costs apply even to identities; exhaustion raises IMPLEMENTATION_FAILURE and never a false decision. Integer bit lengths remain unbounded.",
+            "Only finitely presented abelian groups over Z. Preimage returns one representative, not a full fiber or a minimal-norm lift. No automatic isomorphism search, arbitrary module coefficients, subgroup lattice enumeration, nonabelian maps or induced homology maps are implemented."]
+        value["references"].append("https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_morphism.html")
     if owner in ("PresentedAbelianGroupAlgebra", "AbelianGroupElementAlgebra"):
         value["required_invariants"].append("Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type.")
         value["known_limitations"] += ["Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
             "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
-            "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."]
+            "Only finitely presented abelian groups over Z are represented. Explicit maps and their kernel/image/cokernel presentations live in AbelianGroupHomomorphism; these carriers alone do not enumerate subgroups, search for isomorphisms or construct homology generators. Nonabelian group presentations are outside scope."]
         value["references"] += ["https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
                                 "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"]
     if owner == "IntegerMatrixFamily":
@@ -1008,6 +1054,10 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("AbelianGroupHomomorphism", "Explicit abelian-group homomorphisms", "mathematics.structures.AbelianGroupHomomorphism",
+         ["Retained source and target presentations", "Normalized target Smith-coordinate generator images", "Every source relation maps to zero in the target quotient"], ["PresentedAbelianGroup", "AbelianGroupElement", "PresentedAbelianGroup.pair", "Mat(Z)", "Z", "Boolean"]),
+        ("PresentedAbelianGroup.pair", "Source and target abelian presentations", "mathematics.foundations.Pair<PresentedAbelianGroup,PresentedAbelianGroup>",
+         ["Both entries belong to the registered PresentedAbelianGroup Algebra", "The first entry is the source and the second is the target"], ["PresentedAbelianGroup", "AbelianGroupHomomorphism", "Mat(Z)"]),
         ("PresentedAbelianGroup", "Retained finite abelian presentations", "mathematics.structures.PresentedAbelianGroup",
          ["An explicit integer matrix presents Z^rows modulo its column image", "A retained unimodular Smith-coordinate map", "Equality includes presentation and coordinate map; isomorphism type is separate"], ["Mat(Z)", "Vec(Z)", "AbelianGroupType", "AbelianGroupElement", "N", "Boolean"]),
         ("AbelianGroupElement", "Elements of finitely presented abelian groups", "mathematics.structures.AbelianGroupElement",

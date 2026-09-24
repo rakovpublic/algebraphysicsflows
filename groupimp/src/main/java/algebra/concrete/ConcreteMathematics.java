@@ -43,6 +43,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final IntegerMatrixFamily integerMatrices;
     public final PresentedAbelianGroupAlgebra presentedAbelianGroups;
     public final AbelianGroupElementAlgebra abelianGroupElements;
+    public final AbelianGroupHomomorphismAlgebra abelianHomomorphisms;
     public final RationalAffineSpaceAlgebra affineSpaces;
     public final FiniteMarkovAlgebra markovKernels;
     public final RationalTensorAlgebra tensors;
@@ -68,6 +69,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         integerMatrices=new IntegerMatrixFamily(integers,integerVectors,naturals,booleans,rectangularMatrices,abelianGroups);
         presentedAbelianGroups=new PresentedAbelianGroupAlgebra(integerMatrices,abelianGroups,naturals,booleans);
         abelianGroupElements=new AbelianGroupElementAlgebra(presentedAbelianGroups,integerVectors,integers,naturals,booleans);
+        abelianHomomorphisms=new AbelianGroupHomomorphismAlgebra(presentedAbelianGroups,abelianGroupElements,integerMatrices,integers,booleans);
         complexes=new FiniteSimplicialAlgebra(booleans,naturals,integers,abelianGroups,integerMatrices);
         affineSpaces=new RationalAffineSpaceAlgebra(rectangularMatrices,finiteVectors,naturals,booleans);
         markovKernels=new FiniteMarkovAlgebra(integers,integerSets,integerProbabilities,integerFunctions,rectangularMatrices,finiteVectors,rationals,naturals,booleans);
@@ -94,6 +96,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         values.add(abelianGroups);
         values.add(integerVectors); values.add(integerMatrices);
         values.add(presentedAbelianGroups); values.add(abelianGroupElements);
+        values.add(abelianHomomorphisms);
         values.addAll(fields); algebras=Collections.unmodifiableList(values);
         for(ConcreteAlgebra<?> algebra : algebras) {
             algebra.register(mathTool);

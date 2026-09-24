@@ -107,7 +107,7 @@ public final class IntegerMatrix implements Serializable {
         if(b.dimension()!=rows) throw MathFailure.undefined("Right-hand side dimension must match matrix rows"); return work.decompose(this);
     }
     /** Coordinates y with D*y=U*b and free coordinates zero, or null when inconsistent over Z. */
-    private static IntegerVector solveCoordinates(IntegerSmithNormalForm.Decomposition smith,IntegerVector b,IntegerSmithNormalForm.Computation work) {
+    static IntegerVector solveCoordinates(IntegerSmithNormalForm.Decomposition smith,IntegerVector b,IntegerSmithNormalForm.Computation work) {
         IntegerVector transformed=smith.left().multiply(b,work); BigInteger[] y=new BigInteger[smith.right().rows()]; Arrays.fill(y,BigInteger.ZERO);
         for(int i=0;i<transformed.dimension();i++) {
             if(i<smith.rank()) {
@@ -131,8 +131,11 @@ public final class IntegerMatrix implements Serializable {
         return Collections.unmodifiableList(result);
     }
     public IntegerMatrix inverseUnimodular() {
+        return inverseUnimodular(new IntegerSmithNormalForm.Computation());
+    }
+    IntegerMatrix inverseUnimodular(IntegerSmithNormalForm.Computation work) {
         if(rows!=columns) throw MathFailure.undefined("An integer inverse requires a square matrix");
-        IntegerSmithNormalForm.Computation work=new IntegerSmithNormalForm.Computation(); IntegerSmithNormalForm.Decomposition smith=work.decompose(this);
+        IntegerSmithNormalForm.Decomposition smith=work.decompose(this);
         if(smith.rank()!=rows) throw MathFailure.undefined("The matrix is not unimodular");
         for(int i=0;i<rows;i++) if(!smith.diagonal().get(i,i).equals(BigInteger.ONE)) throw MathFailure.undefined("The matrix is not unimodular");
         return smith.right().multiply(smith.left(),work);
