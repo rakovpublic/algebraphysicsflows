@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1087 |
-| DIRECTLY_SUPPORTED | 844 |
+| Scoped records | 1122 |
+| DIRECTLY_SUPPORTED | 879 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 703 |
+| IMPLEMENTED | 738 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 771 |
+| MACHINE_TESTED | 806 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 680 | 680 | 0 | 0 | 0 | 680 | 0 | 0 |
+| Concrete MathTool algebras | 715 | 715 | 0 | 0 | 0 | 715 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -397,6 +397,41 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | FiniteFunctorAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Covariant functors between validated finite category tables with total object and arrow maps |
 | FiniteIntegerFunctionAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Total maps between explicit finite integer sets, preserving declared domain and codomain |
 | FiniteIntegerRelationAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite-support relations on the actual registered integer Algebra |
+| FiniteMarkov(Z).absorbing-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).absorbing-on |
+| FiniteMarkov(Z).absorbing-states | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).absorbing-states |
+| FiniteMarkov(Z).apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).apply |
+| FiniteMarkov(Z).codomain | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).codomain |
+| FiniteMarkov(Z).codomain-size | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).codomain-size |
+| FiniteMarkov(Z).communicating-classes | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).communicating-classes |
+| FiniteMarkov(Z).compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).compose |
+| FiniteMarkov(Z).domain | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).domain |
+| FiniteMarkov(Z).domain-size | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).domain-size |
+| FiniteMarkov(Z).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).equal |
+| FiniteMarkov(Z).from-function | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).from-function |
+| FiniteMarkov(Z).from-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).from-matrix |
+| FiniteMarkov(Z).hitting-probabilities | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).hitting-probabilities |
+| FiniteMarkov(Z).identity-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).identity-on |
+| FiniteMarkov(Z).identity-on-codomain | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).identity-on-codomain |
+| FiniteMarkov(Z).identity-on-domain | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).identity-on-domain |
+| FiniteMarkov(Z).is-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).is-chain |
+| FiniteMarkov(Z).is-deterministic | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).is-deterministic |
+| FiniteMarkov(Z).is-irreducible | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).is-irreducible |
+| FiniteMarkov(Z).is-reversible | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).is-reversible |
+| FiniteMarkov(Z).is-stationary | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).is-stationary |
+| FiniteMarkov(Z).mean-hitting-times | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).mean-hitting-times |
+| FiniteMarkov(Z).orbit | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).orbit |
+| FiniteMarkov(Z).power | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).power |
+| FiniteMarkov(Z).recurrent-classes | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).recurrent-classes |
+| FiniteMarkov(Z).reverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).reverse |
+| FiniteMarkov(Z).row | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).row |
+| FiniteMarkov(Z).rows | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).rows |
+| FiniteMarkov(Z).stationary | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).stationary |
+| FiniteMarkov(Z).stationary-extremes | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).stationary-extremes |
+| FiniteMarkov(Z).to-function | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).to-function |
+| FiniteMarkov(Z).to-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).to-matrix |
+| FiniteMarkov(Z).transient-states | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).transient-states |
+| FiniteMarkov(Z).transition-probability | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets; native operation FiniteMarkov(Z).transition-probability |
+| FiniteMarkovAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets |
 | FiniteNaturalTransformation.component | DIRECTLY_SUPPORTED | IMPLEMENTED | Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.component |
 | FiniteNaturalTransformation.component-fiber | DIRECTLY_SUPPORTED | IMPLEMENTED | Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.component-fiber |
 | FiniteNaturalTransformation.component-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Natural transformations between parallel finite functors with every naturality square checked; native operation FiniteNaturalTransformation.component-map |

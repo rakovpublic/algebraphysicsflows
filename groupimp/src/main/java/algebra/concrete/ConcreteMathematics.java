@@ -39,6 +39,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final RationalVectorFamily finiteVectors;
     public final RationalMatrixFamily rectangularMatrices;
     public final RationalAffineSpaceAlgebra affineSpaces;
+    public final FiniteMarkovAlgebra markovKernels;
     public final RationalTensorAlgebra tensors;
     public final RationalExteriorAlgebra exterior;
     public final RationalQuaternionAlgebra quaternions;
@@ -59,6 +60,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         finiteVectors=new RationalVectorFamily(rationals,naturals,vectors);
         rectangularMatrices=new RationalMatrixFamily(rationals,finiteVectors,naturals,booleans,matrices,polynomials);
         affineSpaces=new RationalAffineSpaceAlgebra(rectangularMatrices,finiteVectors,naturals,booleans);
+        markovKernels=new FiniteMarkovAlgebra(integers,integerSets,integerProbabilities,integerFunctions,rectangularMatrices,finiteVectors,rationals,naturals,booleans);
         tensors=new RationalTensorAlgebra(rationals,finiteVectors,rectangularMatrices,naturals,booleans);
         exterior=new RationalExteriorAlgebra(rationals,finiteVectors,rectangularMatrices,naturals,booleans);
         quaternions=new RationalQuaternionAlgebra(rationals,complexRationals,finiteVectors,rectangularMatrices,booleans);
@@ -78,6 +80,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         values.add(multivariatePolynomials); values.add(polynomialMaps);
         values.add(polynomialForms);
         values.add(polynomialCells); values.add(polynomialChains);
+        values.add(markovKernels);
         values.addAll(fields); algebras=Collections.unmodifiableList(values);
         for(ConcreteAlgebra<?> algebra : algebras) {
             algebra.register(mathTool);

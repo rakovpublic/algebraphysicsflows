@@ -1,6 +1,6 @@
 # Concrete algebras connected to MathTool
 
-`new ConcreteMathematics()` creates real `Algebra<T>` instances and registers their native operations in the existing `MathTool`. It includes N, Z, Q, Q(i), H(Q), Boolean, Q^2, Mat2(Q), Vec(Q), Mat(Q), Affine(Q), Tensor(Q), Exterior(Q), Q[x], Q(x), Poly(Q), PolynomialMap(Q), PolynomialForm(Q), PolynomialCell(Q), PolynomialChain(Q), S3, Z/6Z, finite sets of integers, rational samples, finite integer probability measures, finite simplicial complexes, finite integer relations/functions, finite categories/functors/natural transformations, and F5 (named Z/5Z). Each construction owns its algebra instances; separate tools do not share mutable registrations.
+`new ConcreteMathematics()` creates real `Algebra<T>` instances and registers their native operations in the existing `MathTool`. It includes N, Z, Q, Q(i), H(Q), Boolean, Q^2, Mat2(Q), Vec(Q), Mat(Q), Affine(Q), Tensor(Q), Exterior(Q), Q[x], Q(x), Poly(Q), PolynomialMap(Q), PolynomialForm(Q), PolynomialCell(Q), PolynomialChain(Q), S3, Z/6Z, finite sets of integers, rational samples, finite integer probability measures and stochastic kernels, finite simplicial complexes, finite integer relations/functions, finite categories/functors/natural transformations, and F5 (named Z/5Z). Each construction owns its algebra instances; separate tools do not share mutable registrations.
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
@@ -46,6 +46,7 @@ List<String> values = math.flow(math.naturals,
 | FiniteSimplicialAlgebra / FiniteComplex | union, intersection | dimension/Euler characteristic -> Z; vertex-count -> N | equality/subcomplex -> Boolean; skeleton; degree-indexed simplex count/Betti number; flat Betti numbers -> N |
 | RationalSampleAlgebra / Sample(Q) | concatenate | size -> N, mean/variance -> Q, center | covariance -> Q; scale by Q; flat transfer elements -> Q |
 | FiniteProbabilityAlgebra / FiniteDistribution(Z) | — | support -> finite set, support-size -> N, expectation/variance -> Q | event/point probability -> Q; conditioning; flat transfer outcomes -> Z; point mass from Z |
+| FiniteMarkovAlgebra / FiniteMarkov(Z) | typed compose; equality -> Boolean | domain/codomain; counts; row distributions; deterministic function and matrix conversions; communicating/recurrent classes; stationary extremes and unique stationary law | apply to a distribution -> second carrier; powers; flat marginal orbits; transition probabilities; time reversal; detailed balance; absorbing events; hitting probabilities and mean times -> Vec(Q) |
 | IntegerSetAlgebra (extends FiniteSetAlgebra) / FiniteSet(Z) | union, intersection, difference, symmetric-difference, complement-in | cardinality -> N | subset/equal -> Boolean; contains; insert/remove; unary flat subsets; flat transfer elements -> Z |
 | NaturalSemiring / N | add, multiply | successor, to-integer | None |
 | IntegerRing / Z | add, subtract, multiply, gcd, lcm, quotient, remainder | negate, to-rational | greater/equal -> Boolean; divide-rational -> Q; flat quotient-remainder |
@@ -110,11 +111,49 @@ See [ConcreteAlgebrasTest](../groupimp/src/test/java/mathematics/ConcreteAlgebra
 Same-algebra unary flat operations use `IOneOperandFlatOperation` and `performOneOperandFlatOperation(name)` (or `performFlatOperation(name)`). Finite-set `subsets` is an example. Cross-algebra unary flat operations use the existing `ITransferFlatOperation`, whose return type is corrected to `List<IAlgebraItem<V>>`; `elements` transfers a finite set to its member algebra. Empty results remain valid, and every emitted member keeps its target algebra.
 
 
-The default initializer currently installs 36 algebras and 644 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
+The default initializer currently installs 37 algebras and 678 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
 
 For overloaded custom-member and unsafe operations, the most specific compatible second-operand class is selected (exact matches take priority). Re-registering the same second class replaces that overload. Ambiguous supertypes are rejected. Mathematical domains sharing one Java class need distinct operation names; overload selection does not infer a domain from a value.
 
 Fixed `Matn(Q).solve` returns the exact vector solving M x = b for nonsingular square M. Singular matrices are outside that operation; the affine solution operation below handles them. `rank` returns a member of N. `derivative-order` accepts arbitrary nonnegative BigInteger orders and returns zero when the order exceeds the finite polynomial degree.
+
+## Finite exact Markov kernels and chains
+
+`math.markovKernels` registers `FiniteMarkov(Z)`: exact stochastic kernels between two explicit finite integer state sets. Each source state has a FiniteDistribution(Z) row with nonnegative rational masses summing exactly to one. Rows use the same actual integer Algebra as the probability carrier. Both boundaries are retained, including unused target labels, and labels are canonicalized into increasing integer order. Row support alone does not determine a kernel's codomain.
+
+`from-matrix` accepts a Mat(Q) member and the existing finite-function boundary pair; row and column counts must match the sorted source and target sets. Entries must be nonnegative and rows must sum exactly to one. `to-matrix` preserves this ordering. `from-function` embeds a finite function as Dirac rows; `to-function` requires every row to be Dirac. `identity-on` is registered on FiniteSet(Z); `identity-on-domain` and `identity-on-codomain` work directly on a kernel. Empty sources are allowed, including the empty identity, but cannot transfer to the current positive-shape matrix carrier.
+
+`compose(K,L)` applies L first, then K, and requires exact equality of the middle declared sets and outcome Algebra. For row-stochastic matrices its order is P_L*P_K. `apply` advances a distribution as pi*P, requiring support within the source set. It uses ILeftProjectionOperation and returns the existing FiniteDistribution(Z) wrapper. `row` returns one conditional law, while flat `rows` preserves duplicate row laws. `power` and flat `orbit` require equal source and target sets. An orbit contains the initial distribution followed by each time marginal, retaining repetitions; it does not generate a random sample path.
+
+For a chain, `communicating-classes` uses the graph of positive-probability edges. `recurrent-classes` selects closed classes; `transient-states` returns their complement. `stationary-extremes` emits one exact stationary law per recurrent class, ordered by the class's least label. Their rational convex mixtures give all rational stationary laws. Scalar `stationary` requires exactly one recurrent class, including cases with transient states. Periodic chains can have a unique stationary law without their successive distributions converging to it. These conventions follow [QuantEcon's Markov-chain definitions](https://quanteconpy.readthedocs.io/en/latest/markov/core.html).
+
+`is-stationary` checks pi*P=pi. `is-reversible` checks detailed balance, including candidate distributions with zero masses. `reverse` requires a stationary law strictly positive at every declared state, then computes Q_ij=pi_j*P_ji/pi_i. With a zero-mass state, its reverse row is not determined by this formula, so the operation is undefined.
+
+`absorbing-on` replaces event-state rows with self-transitions. `hitting-probabilities` returns the eventual probability of first reaching an event from each state, in sorted label order. It includes time zero: event-state entries are one and unreachable-state entries are zero. Reachability fixes the zero boundary before an exact rational linear system is solved. `mean-hitting-times` has event-state entries zero and solves the corresponding first-step equations. It returns a Vec(Q) only when every starting state's mean is finite; otherwise it raises OPERATION_UNDEFINED because Q cannot hold infinity. A probability vector here need not sum to one, so it is not a distribution carrier member.
+
+```java
+FiniteSet<BigInteger> states = FiniteSet.of(BigInteger.ZERO, BigInteger.ONE);
+FiniteMarkovKernel kernel = math.markovKernels.fromMatrix(new RationalMatrix(new Rational[][] {
+        {Rational.of(1,2), Rational.of(1,2)},
+        {Rational.of(1,4), Rational.of(3,4)}}), states, states);
+List<String> stationary = math.flow(math.markovKernels, Collections.singletonList(kernel))
+        .<FiniteDistribution<BigInteger>>performAlgebraTransfer("stationary")
+        .collect(); // ["Distribution{0=1/3, 1=2/3}"]
+List<String> meanTimes = math.flow(math.markovKernels, Collections.singletonList(kernel))
+        .<RationalVector,FiniteSet<BigInteger>>performAlgebraUnsafe("mean-hitting-times",
+                FiniteSet.of(BigInteger.ONE))
+        .collect(); // ["[2, 0]"]
+FiniteDistribution<BigInteger> initial = new FiniteDistribution<>(math.integers.algebra(),
+        Collections.singletonMap(BigInteger.ZERO, Rational.ONE));
+List<String> marginals = math.flow(math.markovKernels, Collections.singletonList(kernel))
+        .<FiniteDistribution<BigInteger>,Pair<FiniteDistribution<BigInteger>,BigInteger>>performFlatAlgebraUnsafe(
+                "orbit", new Pair<>(initial, BigInteger.valueOf(2)))
+        .collect(); // point mass at 0; [1/2,1/2]; [3/8,5/8]
+```
+
+The empty chain has no stationary laws, no communicating classes, and empty hitting vectors; its scalar stationary operation is undefined. Boundary mismatch, out-of-domain states, or an unsupported finite/infinite result is OPERATION_UNDEFINED. Invalid constructed rows are INVALID_MEMBER. Limits are 64 states per boundary, 10000 power/orbit steps, and a conservative 5000000-unit work budget per whole computation. Composition and powers share the budget, and orbits preflight their full cost. Dense shape-based costs also apply to sparse rows. Exhaustion is IMPLEMENTATION_FAILURE; coefficient bit lengths remain unbounded.
+
+NativeMarkovTest checks 25 two-state chains against closed-form stationarity and hitting times, weighted path enumeration for 64 three-state chains, cycle laws for all 27 deterministic three-state functions, and every one of the 343 nonempty-row support graphs on three states against graph search and independent directed spanning-tree stationary weights. It also verifies gambler's ruin, reducible and periodic examples, partial/infinite hitting times, time reversal, empty boundaries, exact large coefficients, resource failures, actual carrier identity, and serialized native flows. Continuous-time generators, random path sampling, convergence rates and infinite-state processes remain outside this implementation.
 
 ## Rectangular matrices and affine solution sets
 

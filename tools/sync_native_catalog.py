@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DATABASE = ROOT / "mathematics-coverage.json"
 MANIFEST = ROOT / "groupimp/src/test/resources/mathematics/concrete-catalog.tsv"
-DATE = "2026-09-23"
+DATE = "2026-09-24"
 OWNERS = {
     "BooleanAlgebra": ("Boolean", "Boolean truth values with Boolean operations"),
     "NaturalSemiring": ("N", "Nonnegative arbitrary precision integers with addition and multiplication"),
@@ -35,6 +35,7 @@ OWNERS = {
     "IntegerSetAlgebra": ("FiniteSet(Z)", "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets"),
     "RationalSampleAlgebra": ("Sample(Q)", "Finite ordered rational samples retaining repeated observations"),
     "FiniteProbabilityAlgebra": ("FiniteDistribution(Z)", "Finite integer distributions with exact nonnegative rational masses summing to one"),
+    "FiniteMarkovAlgebra": ("FiniteMarkov(Z)", "Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets"),
     "FiniteSimplicialAlgebra": ("FiniteComplex", "Finite abstract simplicial complexes with integer labels and unreduced homology over F2"),
     "FiniteIntegerRelationAlgebra": ("FiniteRelation(Z,Z)", "Finite-support relations on the actual registered integer Algebra"),
     "FiniteIntegerFunctionAlgebra": ("FiniteFunction(Z,Z)", "Total maps between explicit finite integer sets, preserving declared domain and codomain"),
@@ -80,6 +81,7 @@ EXTRA_TESTS = {
     "RationalFunctionField": "NativeRationalFunctionTest",
     "RationalSampleAlgebra": "NativeStatisticsProbabilityTest",
     "FiniteProbabilityAlgebra": "NativeStatisticsProbabilityTest",
+    "FiniteMarkovAlgebra": "NativeMarkovTest",
     "FiniteSimplicialAlgebra": "NativeTopologyTest",
     "FiniteIntegerRelationAlgebra": "NativeRelationTest",
     "FiniteIntegerFunctionAlgebra": "NativeFiniteFunctionTest",
@@ -129,6 +131,42 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "FiniteMarkovAlgebra": {
+        "compose": "Apply the second kernel first and then the first kernel. The declared middle finite state sets and actual outcome Algebra must agree exactly; unused codomain labels still participate in typing. Transition matrices multiply P_second * P_first.",
+        "domain": "Return the complete declared source set in increasing integer-label order, including states with no incoming transitions.",
+        "codomain": "Return the complete declared target set in increasing integer-label order, including zero-probability targets.",
+        "domain-size": "Return the number of declared source states, including zero for an empty kernel.",
+        "codomain-size": "Return the number of declared target states; an empty source may have a nonempty target.",
+        "is-chain": "Test equality of the declared source and target finite sets, including the empty endokernel.",
+        "equal": "Compare actual outcome Algebra identity, both declared boundaries and every exact row probability, independently of input insertion order.",
+        "row": "The argument belongs to the declared source set. Return its conditional probability distribution on the target states in the existing FiniteDistribution(Z) carrier.",
+        "rows": "Emit all conditional row distributions in increasing source-label order; identical distributions in different rows are retained.",
+        "apply": "The distribution uses the kernel's outcome Algebra and has support inside its domain. Return pi*P in the second operand's FiniteDistribution(Z) IAlgebraItem wrapper, summing coincident contributions exactly.",
+        "transition-probability": "The first state is in the source and the second state in the target. Return the exact transition probability, including zero for an absent supported edge.",
+        "to-matrix": "Both boundary sizes are positive. Emit the row-stochastic matrix whose rows and columns follow increasing source and target labels; the current matrix carrier cannot hold zero-sized shapes.",
+        "from-matrix": "Matrix shape equals the two boundary sizes, with labels sorted independently. Every entry is nonnegative and every row sums exactly to one; invalid stochastic data make the operation undefined.",
+        "from-function": "Embed a total finite integer function as Dirac row measures, retaining its complete domain and codomain.",
+        "to-function": "Every row must be a Dirac distribution. Return the total finite function with exactly the same declared boundaries; an empty source is permitted.",
+        "is-deterministic": "Every conditional row has support size one; true vacuously for an empty source.",
+        "identity-on": "Build a kernel with one Dirac self-transition at each supplied integer state; the empty set gives the empty identity.",
+        "identity-on-domain": "Build the identity kernel on the complete declared source set.",
+        "identity-on-codomain": "Build the identity kernel on the complete declared target set.",
+        "power": "Source equals target and exponent is nonnegative. Return the exact n-step kernel; exponent zero gives the identity on all declared states. Composition shares one work budget across the whole exponentiation.",
+        "orbit": "Source equals target, the initial distribution is supported there, and step count is nonnegative. Emit the initial law followed by each successive time marginal, retaining repetitions; these are distributions, not random sample paths. Preflight the whole orbit against one aggregate work budget.",
+        "communicating-classes": "Source equals target. Emit strongly connected components of the positive-transition graph, ordered by their least integer label; a zero-length path supplies self-reachability.",
+        "recurrent-classes": "Source equals target. Emit closed communicating classes, with no positive transition leaving the class, ordered by their least label.",
+        "transient-states": "Source equals target. Return all declared states outside the closed communicating classes.",
+        "absorbing-states": "Source equals target. Return precisely states whose self-transition probability is one.",
+        "is-irreducible": "Source equals target. Return whether there is exactly one communicating class; false for the empty state space.",
+        "stationary-extremes": "Source equals target. Emit one normalized exact stationary distribution per recurrent class, in class order. Every rational stationary law is a rational convex mixture of these extremes; this does not enumerate all stationary laws or assert convergence of powers. Empty state space emits no laws.",
+        "stationary": "Source equals target and there is exactly one recurrent class. Return its unique stationary law, which may vanish at transient states. Undefined for the empty chain or multiple stationary extremes.",
+        "is-stationary": "Source equals target and the distribution is supported there with matching outcome Algebra. Test the exact equality pi*P=pi.",
+        "reverse": "Source equals target. The supplied distribution is stationary and strictly positive at every declared state. Return Q_ij=pi_j*P_ji/pi_i; rows at zero-mass states are deliberately undefined.",
+        "is-reversible": "Source equals target and the distribution is supported there. Test detailed balance pi_i*P_ij=pi_j*P_ji for every pair, allowing zero masses; detailed balance implies stationarity.",
+        "absorbing-on": "Source equals target and the event is a subset of the state space. Replace event-state rows by Dirac self-transitions, retaining all boundaries and other rows.",
+        "hitting-probabilities": "Source equals target and the event is a subset of the state space. Return the eventual first-hit probability from each state in increasing label order. First hitting includes time zero; target entries are one and unreachable entries zero. Output is a vector of probabilities, not a normalized distribution.",
+        "mean-hitting-times": "Source equals target and the event is a subset of the state space. Return exact mean first-hit times including time zero, ordered by state label. Undefined if any state has infinite expectation, since Q cannot represent infinity; the empty chain returns an empty vector.",
+    },
     "PolynomialCellAlgebra": {
         "product": "Concatenate ambient coordinates and parameter coordinates, putting first-cell parameters first; this fixes product orientation and includes point factors.",
         "dimension": "Return parameter dimension, including zero for a point; this is not the rank or geometric image dimension.",
@@ -615,6 +653,8 @@ def record(identifier, owner, concept, paths, operation=None):
                          "groupimp/src/main/java/mathematics/linear/RationalMatrixSpectral.java"]
     if owner in ("RationalMultivariatePolynomialAlgebra", "PolynomialDifferentialFormAlgebra"):
         tests.append("groupimp/src/test/java/operations/NativePolynomialChainsTest.java")
+    if owner == "FiniteMarkovAlgebra":
+        paths = paths + ["groupimp/src/main/java/mathematics/probability/FiniteMarkovKernel.java"]
     value = {
         "id": identifier, "mathematical_area": "Concrete MathTool algebras",
         "subfield": owner, "concept": concept, "specification_section": 0,
@@ -675,6 +715,12 @@ def record(identifier, owner, concept, paths, operation=None):
             value["known_limitations"].append("Iteration is capped at 10000 steps; exceeding it is IMPLEMENTATION_FAILURE. Exact values can still grow rapidly within this limit.")
         if operation_name in ("argmin", "argmax", "minimum", "maximum", "minimizers", "maximizers"):
             value["known_limitations"].append("Optimality is relative only to the explicit finite feasible set, not all integers or reals.")
+    if owner == "FiniteMarkovAlgebra":
+        value["required_invariants"].append("Rows are normalized nonnegative rational measures using the actual integer Algebra. Complete source/target finite sets are retained and ordered by integer label, separately from positive support.")
+        value["known_limitations"].append("Each boundary has at most 64 states; powers and marginal orbits accept at most 10000 steps. Each whole composition, power, orbit, graph analysis or linear-system calculation has a conservative 5000000-unit work budget, with dense shape-based charges even for sparse rows. Exhaustion raises IMPLEMENTATION_FAILURE, never a false stationary result or truncated list. Coefficient bit lengths are unbounded.")
+        value["known_limitations"].append("Finite discrete-time kernels on integer states only. Empty sources are allowed; chain operations require equal declared boundaries. There is no continuous-time generator, path sampler, convergence certification, mixing-time calculation or infinite-state process. Mean hitting times are an all-state rational vector and are undefined if any entry is infinite.")
+        value["references"].append("https://quanteconpy.readthedocs.io/en/latest/markov/core.html")
+        value["references"].append("https://python.quantecon.org/finite_markov.html")
     if owner == "FiniteSimplicialAlgebra":
         value["known_limitations"] += ["Construction materializes faces and caps each input facet at 20 vertices.",
             "Homology computes unreduced F2 dimensions only; no integral torsion, persistence or homeomorphism decision."]
@@ -800,6 +846,13 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("FiniteMarkov(Z)", "Finite exact stochastic kernels", "mathematics.probability.FiniteMarkovKernel",
+         ["Actual integer outcome Algebra retained", "Explicit source and target sets in increasing label order", "One normalized rational row measure per source state, supported in the target set"],
+         ["Z", "Q", "N", "FiniteSet(Z)", "FiniteDistribution(Z)", "FiniteFunction(Z,Z)", "Mat(Q)", "Vec(Q)"]),
+        ("ZxZ.markov", "Source and destination transition states", "mathematics.foundations.Pair<BigInteger,BigInteger>",
+         ["Both states belong to the actual integer Algebra; kernel boundary membership is checked at execution"], ["Z", "FiniteMarkov(Z)"]),
+        ("FiniteDistribution(Z)xN.markov", "Markov marginal orbit inputs", "mathematics.foundations.Pair<FiniteDistribution<BigInteger>,BigInteger>",
+         ["Initial finite measure uses the actual integer outcome Algebra", "Step count is a nonnegative integer; execution additionally enforces state support and resource limits"], ["FiniteDistribution(Z)", "N", "FiniteMarkov(Z)"]),
         ("PolynomialCell(Q)", "Polynomially parametrized cubical cells", "mathematics.calculus.PolynomialCell",
          ["Positive ambient coordinate dimension and nonnegative parameter dimension", "Explicit rational point or ordered polynomial parametrization on the real unit cube", "Parameter orientation retained; equality is parametrization equality"], ["PolynomialMap(Q)", "PolynomialForm(Q)", "Vec(Q)", "Q", "N", "PolynomialChain(Q)"]),
         ("PolynomialChain(Q)", "Finite rational polynomial cubical chains", "mathematics.calculus.PolynomialChain",

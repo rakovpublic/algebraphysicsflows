@@ -25,6 +25,8 @@ import mathematics.structures.FiniteAdjunction;
 import mathematics.structures.FiniteCone;
 import mathematics.structures.FiniteCocone;
 import mathematics.examples.ConcreteAlgebrasExample;
+import mathematics.probability.FiniteMarkovKernel;
+import mathematics.probability.FiniteDistribution;
 import org.junit.Test;
 import java.io.*;
 import java.math.BigInteger;
@@ -32,9 +34,21 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all644RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all678RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
+        String kernel="Kernel[1, 2]->[1, 2]{1=Distribution{1=1/2, 2=1/2}, 2=Distribution{1=1/4, 2=3/4}}";
+        String kernelIdentity="Kernel[1, 2]->[1, 2]{1=Distribution{1=1}, 2=Distribution{2=1}}";
+        String kernelPower="Kernel[1, 2]->[1, 2]{1=Distribution{1=3/8, 2=5/8}, 2=Distribution{1=5/16, 2=11/16}}";
+        String stationary="Distribution{1=1/3, 2=2/3}";
+        expected.put("FiniteMarkovAlgebra",String.join("|",kernel,"[1, 2]","[1, 2]","2","2","true","false",
+                "Distribution{1=1/4, 2=3/4}","[Distribution{1=1/2, 2=1/2}, Distribution{1=1/4, 2=3/4}]",
+                "Distribution{1=1/2, 2=1/2}","1/2","[[1/2, 1/2], [1/4, 3/4]]",kernel,
+                "Kernel[1, 2, 3]->[1, 2, 3]{1=Distribution{2=1}, 2=Distribution{3=1}, 3=Distribution{1=1}}",
+                "Function[1, 2]->[1, 2]{1=1, 2=2}","false",kernelIdentity,kernelIdentity,kernelIdentity,kernelPower,
+                "[Distribution{1=1}, Distribution{1=1/2, 2=1/2}, Distribution{1=3/8, 2=5/8}]",
+                "[[1, 2]]","[[1, 2]]","[]","[]","true","["+stationary+"]",stationary,"false",kernel,"true",
+                "Kernel[1, 2]->[1, 2]{1=Distribution{1=1/2, 2=1/2}, 2=Distribution{2=1}}","[1, 1]","[2, 0]"));
         String px="Poly(Q^3){[1, 0, 0]=1}",py="Poly(Q^3){[0, 1, 0]=1}",pz="Poly(Q^3){[0, 0, 1]=1}";
         String pzero="Poly(Q^3){}",pone="Poly(Q^3){[0, 0, 0]=1}",pfirst="Poly(Q^3){[0, 0, 0]=1, [1, 0, 0]=1}";
         String identityMap="PolynomialMap["+px+", "+py+", "+pz+"]",cycleMap="PolynomialMap["+py+", "+pz+", "+px+"]";
@@ -152,12 +166,14 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(644,count);
+        assertEquals(678,count);
     }
     @SuppressWarnings({"unchecked","rawtypes"})
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
         Algebra source=math.mathTool.getAlgebra(entry.first.getAlgebraName());
         IAlgebraItem item=source.buildAlgebraItem(sample(math,source.getAlgebraName(),0));
+        if(entry.id.equals("FiniteMarkov(Z).from-matrix")) item=source.buildAlgebraItem(((FiniteMarkovKernel)sample(math,"FiniteMarkov(Z)",0)).toMatrix());
+        if(entry.id.equals("FiniteMarkov(Z).to-function")) item=source.buildAlgebraItem(sample(math,"FiniteMarkov(Z)",1));
         List<String> spectralNames=Arrays.asList("characteristic-polynomial","minimal-polynomial","evaluate-polynomial",
                 "rational-eigenvalues","eigenspace-basis","generalized-eigenspace-basis","eigenvalue-multiplicity",
                 "is-diagonalizable-over-q","diagonalize-over-q","pow");
@@ -201,6 +217,14 @@ public class ConcreteAlgebrasTest {
         if(operation instanceof IOneOperandOperation) return item.performOneOperandOperation(alias).perform().getResult().toString();
         if(operation instanceof ITransferOperation) return item.performAlgebraTransfer(alias).perform().getResult().toString();
         Object second=entry.second==null?null:sample(math,entry.second.getAlgebraName(),1);
+        if(entry.id.equals("FiniteMarkov(Z).from-matrix")) second=new Pair<>(FiniteSet.of(BigInteger.ONE,BigInteger.valueOf(2)),FiniteSet.of(BigInteger.ONE,BigInteger.valueOf(2)));
+        if(entry.id.equals("FiniteMarkov(Z).reverse") || entry.id.equals("FiniteMarkov(Z).is-reversible")) {
+            Map<BigInteger,Rational> stationaryMasses=new LinkedHashMap<>();
+            stationaryMasses.put(BigInteger.ONE,Rational.of(1,3)); stationaryMasses.put(BigInteger.valueOf(2),Rational.of(2,3));
+            second=new FiniteDistribution<>(math.integers.algebra(),stationaryMasses);
+        }
+        if(Arrays.asList("FiniteMarkov(Z).absorbing-on","FiniteMarkov(Z).hitting-probabilities","FiniteMarkov(Z).mean-hitting-times").contains(entry.id))
+            second=FiniteSet.of(BigInteger.valueOf(2));
         if(entry.id.equals("Mat(Q).evaluate-at-matrix") || entry.id.equals("Mat2(Q).evaluate-at-matrix"))
             second=new RationalMatrix(new Rational[][]{{Rational.of(2),Rational.ONE},{Rational.ZERO,Rational.of(3)}});
         if(entry.id.equals("PolynomialCell(Q).evaluate")) second=new RationalVector();
@@ -237,6 +261,13 @@ public class ConcreteAlgebrasTest {
     }
     private Object sample(ConcreteMathematics math,String domain,int index) {
         switch(domain) {
+            case "FiniteMarkov(Z)": {
+                FiniteSet<BigInteger> labels=FiniteSet.of(BigInteger.ONE,BigInteger.valueOf(2));
+                return index==1?FiniteMarkovKernel.identity(math.integers.algebra(),labels):math.markovKernels.fromMatrix(new RationalMatrix(new Rational[][]{
+                        {Rational.of(1,2),Rational.of(1,2)},{Rational.of(1,4),Rational.of(3,4)}}),labels,labels);
+            }
+            case "ZxZ.markov": return new Pair<>(BigInteger.ONE,BigInteger.valueOf(2));
+            case "FiniteDistribution(Z)xN.markov": return new Pair<>(new FiniteDistribution<>(math.integers.algebra(),Collections.singletonMap(BigInteger.ONE,Rational.ONE)),BigInteger.valueOf(2));
             case "Unit": return Unit.INSTANCE;
             case "FiniteComplex": return new mathematics.topology.FiniteSimplicialComplex(index==0
                     ?Arrays.asList(FiniteSet.of(0,1),FiniteSet.of(1,2),FiniteSet.of(0,2))

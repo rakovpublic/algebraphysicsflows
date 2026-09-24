@@ -25,6 +25,8 @@ import mathematics.linear.RationalTensor;
 import mathematics.linear.RationalExterior;
 import mathematics.numbers.Rational;
 import mathematics.numbers.RationalQuaternion;
+import mathematics.probability.FiniteMarkovKernel;
+import mathematics.probability.FiniteDistribution;
 import java.math.BigInteger;
 import java.util.*;
 
@@ -38,6 +40,13 @@ public final class ConcreteAlgebrasExample {
             return;
         }
         System.out.println("MathTool: "+math.mathTool.getName()+", concrete algebras: "+math.algebras().size()+", operations: "+math.operations().size());
+        FiniteSet<BigInteger> markovStates=FiniteSet.of(BigInteger.ZERO,BigInteger.ONE);
+        FiniteMarkovKernel markov=math.markovKernels.fromMatrix(new RationalMatrix(new Rational[][]{
+                {Rational.of(1,2),Rational.of(1,2)},{Rational.of(1,4),Rational.of(3,4)}}),markovStates,markovStates);
+        System.out.println("Unique exact stationary distribution: "+math.flow(math.markovKernels,Collections.singletonList(markov))
+                .<FiniteDistribution<BigInteger>>performAlgebraTransfer("stationary").collect());
+        System.out.println("Mean first hitting times of state 1: "+math.flow(math.markovKernels,Collections.singletonList(markov))
+                .<RationalVector,FiniteSet<BigInteger>>performAlgebraUnsafe("mean-hitting-times",FiniteSet.of(BigInteger.ONE)).collect());
         RationalMatrix spectralMatrix=new RationalMatrix(new Rational[][]{{Rational.of(2),Rational.ONE},{Rational.ZERO,Rational.of(3)}});
         System.out.println("Rational roots of the characteristic polynomial of [[2,1],[0,3]]: "+math.flow(math.rectangularMatrices,Collections.singletonList(spectralMatrix))
                 .<Polynomial>performAlgebraTransfer("characteristic-polynomial").<Rational>performFlatAlgebraTransfer("rational-roots").collect());

@@ -143,6 +143,13 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("5000000", " ".join(records["Mat(Q).minimal-polynomial"]["known_limitations"]))
         self.assertIn("never a partial list", " ".join(records["Q[x].rational-roots"]["required_invariants"]))
         self.assertIn("zero polynomial", " ".join(records["Q[x].root-multiplicity"]["required_invariants"]))
+        self.assertIn("second kernel first", " ".join(records["FiniteMarkov(Z).compose"]["required_invariants"]))
+        self.assertIn("second operand's", " ".join(records["FiniteMarkov(Z).apply"]["required_invariants"]))
+        self.assertIn("not random sample paths", " ".join(records["FiniteMarkov(Z).orbit"]["required_invariants"]))
+        self.assertIn("not enumerate all stationary laws", " ".join(records["FiniteMarkov(Z).stationary-extremes"]["required_invariants"]))
+        self.assertIn("strictly positive", " ".join(records["FiniteMarkov(Z).reverse"]["required_invariants"]))
+        self.assertIn("infinite expectation", " ".join(records["FiniteMarkov(Z).mean-hitting-times"]["required_invariants"]))
+        self.assertIn("5000000", " ".join(records["FiniteMarkov(Z).power"]["known_limitations"]))
 
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)
