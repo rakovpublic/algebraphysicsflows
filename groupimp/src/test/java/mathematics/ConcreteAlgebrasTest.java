@@ -25,6 +25,7 @@ import mathematics.structures.FiniteAdjunction;
 import mathematics.structures.FiniteCone;
 import mathematics.structures.FiniteCocone;
 import mathematics.structures.AbelianGroupType;
+import mathematics.structures.PresentedAbelianGroup;
 import mathematics.examples.ConcreteAlgebrasExample;
 import mathematics.probability.FiniteMarkovKernel;
 import mathematics.probability.FiniteDistribution;
@@ -35,10 +36,18 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all748RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all781RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String integerMatrix="ZMatrix(2x2)[[2, 0], [0, 3]]",integerIdentity="ZMatrix(2x2)[[1, 0], [0, 1]]";
+        String presented="PresentedAbelianGroup("+integerMatrix+")";
+        String[] element=new String[6]; for(int i=0;i<element.length;i++) element[i]="AbelianElement(group="+presented+", smith=[0, "+i+"])";
+        expected.put("PresentedAbelianGroupAlgebra",String.join("|",presented,"PresentedAbelianGroup(ZMatrix(2x1)[[6], [0]])",
+                integerMatrix,"AbelianGroup(rank=0, torsion=[6])","2","2","true","6","false","true",
+                "PresentedAbelianGroup(ZMatrix(4x4)[[2, 0, 0, 0], [0, 3, 0, 0], [0, 0, 3, 0], [0, 0, 0, 2]])","PresentedAbelianGroup(ZMatrix(0x0)[])"));
+        expected.put("AbelianGroupElementAlgebra",String.join("|",element[5],element[5],element[4],element[4],"false",presented,"[0, 2]","[2, -2]",
+                "false","true","3",element[0],"["+element[0]+", "+element[2]+", "+element[4]+"]","["+element[1]+", "+element[4]+"]",
+                element[1],element[2],element[0],"["+element[3]+", "+element[2]+"]","["+element[1]+"]","["+String.join(", ",element)+"]","[0, 1]"));
         expected.put("IntegerVectorFamily","[6, 9]|[-2, -3]|[-2, -3]|[4, 6]|26|2|[2, 3]|[0, 0]|false|[2, 3]|[1, 2, 3]|[]");
         expected.put("IntegerMatrixFamily",String.join("|","ZMatrix(2x2)[[3, 0], [0, 4]]","ZMatrix(2x2)[[1, 0], [0, 2]]",
                 integerMatrix,"ZMatrix(2x2)[[-2, 0], [0, -3]]",integerMatrix,"ZMatrix(2x2)[[4, 0], [0, 6]]","[8, 18]","false","2","2",
@@ -182,7 +191,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(748,count);
+        assertEquals(781,count);
     }
     @SuppressWarnings({"unchecked","rawtypes"})
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
@@ -237,6 +246,8 @@ public class ConcreteAlgebrasTest {
         if(operation instanceof IOneOperandOperation) return item.performOneOperandOperation(alias).perform().getResult().toString();
         if(operation instanceof ITransferOperation) return item.performAlgebraTransfer(alias).perform().getResult().toString();
         Object second=entry.second==null?null:sample(math,entry.second.getAlgebraName(),1);
+        if(Arrays.asList("AbelianGroupElement.project","AbelianGroupElement.from-smith","AbelianGroupElement.reduce").contains(entry.id))
+            second=new IntegerVector(BigInteger.ONE,BigInteger.valueOf(2));
         if(entry.id.equals("FiniteMarkov(Z).from-matrix")) second=new Pair<>(FiniteSet.of(BigInteger.ONE,BigInteger.valueOf(2)),FiniteSet.of(BigInteger.ONE,BigInteger.valueOf(2)));
         if(entry.id.equals("FiniteMarkov(Z).reverse") || entry.id.equals("FiniteMarkov(Z).is-reversible")) {
             Map<BigInteger,Rational> stationaryMasses=new LinkedHashMap<>();
@@ -281,6 +292,10 @@ public class ConcreteAlgebrasTest {
     }
     private Object sample(ConcreteMathematics math,String domain,int index) {
         switch(domain) {
+            case "PresentedAbelianGroup": return new PresentedAbelianGroup(new IntegerMatrix(new BigInteger[][]{
+                    {BigInteger.valueOf(index==0?2:3),BigInteger.ZERO},{BigInteger.ZERO,BigInteger.valueOf(index==0?3:2)}}));
+            case "AbelianGroupElement": return ((PresentedAbelianGroup)sample(math,"PresentedAbelianGroup",0))
+                    .fromSmith(new IntegerVector(BigInteger.ZERO,BigInteger.valueOf(index==0?2:3)));
             case "Vec(Z)": return new IntegerVector(BigInteger.valueOf(index==0?2:4),BigInteger.valueOf(index==0?3:6));
             case "Mat(Z)": return index==0?new IntegerMatrix(new BigInteger[][]{{BigInteger.valueOf(2),BigInteger.ZERO},{BigInteger.ZERO,BigInteger.valueOf(3)}}):IntegerMatrix.identity(2);
             case "AbelianGroupType": return index==0?new AbelianGroupType(BigInteger.ONE,Collections.singletonList(BigInteger.valueOf(6)))

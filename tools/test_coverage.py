@@ -166,6 +166,13 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("never false", " ".join(records["Mat(Z).has-integer-solution"]["required_invariants"]))
         self.assertIn("5000000", " ".join(records["Mat(Z).inverse-unimodular"]["known_limitations"]))
         self.assertIn("0 by vertex-count", " ".join(records["FiniteComplex.boundary-matrix"]["required_invariants"]))
+        self.assertIn("columns", " ".join(records["PresentedAbelianGroup.from-matrix"]["required_invariants"]))
+        self.assertIn("not merely", " ".join(records["PresentedAbelianGroup.equal"]["required_invariants"]))
+        self.assertIn("ambient group is infinite", " ".join(records["AbelianGroupElement.order"]["required_invariants"]))
+        self.assertIn("Infinite fibers are undefined", " ".join(records["AbelianGroupElement.multiplication-preimages"]["required_invariants"]))
+        self.assertIn("first-carrier wrappers", " ".join(records["AbelianGroupElement.multiplication-preimages"]["required_invariants"]))
+        self.assertIn("second Vec(Z)", " ".join(records["AbelianGroupElement.reduce"]["required_invariants"]))
+        self.assertIn("4096", " ".join(records["AbelianGroupElement.elements"]["known_limitations"]))
 
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)

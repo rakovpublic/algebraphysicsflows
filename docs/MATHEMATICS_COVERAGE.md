@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1195 |
-| DIRECTLY_SUPPORTED | 952 |
+| Scoped records | 1230 |
+| DIRECTLY_SUPPORTED | 987 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 811 |
+| IMPLEMENTED | 846 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 879 |
+| MACHINE_TESTED | 914 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 788 | 788 | 0 | 0 | 0 | 788 | 0 | 0 |
+| Concrete MathTool algebras | 823 | 823 | 0 | 0 | 0 | 823 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -186,6 +186,28 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 
 | Concept | Representation | Implementation | Scope |
 | --- | --- | --- | --- |
+| AbelianGroupElement.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.add |
+| AbelianGroupElement.cyclic-subgroup | DIRECTLY_SUPPORTED | IMPLEMENTED | Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.cyclic-subgroup |
+| AbelianGroupElement.elements | DIRECTLY_SUPPORTED | IMPLEMENTED | Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.elements |
+| AbelianGroupElement.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.equal |
+| AbelianGroupElement.from-smith | DIRECTLY_SUPPORTED | IMPLEMENTED | Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.from-smith |
+| AbelianGroupElement.generators | DIRECTLY_SUPPORTED | IMPLEMENTED | Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.generators |
+| AbelianGroupElement.group | DIRECTLY_SUPPORTED | IMPLEMENTED | Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.group |
+| AbelianGroupElement.is-torsion | DIRECTLY_SUPPORTED | IMPLEMENTED | Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.is-torsion |
+| AbelianGroupElement.is-zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.is-zero |
+| AbelianGroupElement.multiplication-preimages | DIRECTLY_SUPPORTED | IMPLEMENTED | Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.multiplication-preimages |
+| AbelianGroupElement.negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.negate |
+| AbelianGroupElement.order | DIRECTLY_SUPPORTED | IMPLEMENTED | Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.order |
+| AbelianGroupElement.project | DIRECTLY_SUPPORTED | IMPLEMENTED | Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.project |
+| AbelianGroupElement.reduce | DIRECTLY_SUPPORTED | IMPLEMENTED | Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.reduce |
+| AbelianGroupElement.representative | DIRECTLY_SUPPORTED | IMPLEMENTED | Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.representative |
+| AbelianGroupElement.scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.scale |
+| AbelianGroupElement.smith-coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.smith-coordinates |
+| AbelianGroupElement.smith-generators | DIRECTLY_SUPPORTED | IMPLEMENTED | Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.smith-generators |
+| AbelianGroupElement.subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.subtract |
+| AbelianGroupElement.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.zero |
+| AbelianGroupElement.zero-like | DIRECTLY_SUPPORTED | IMPLEMENTED | Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.zero-like |
+| AbelianGroupElementAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates |
 | AbelianGroupType.cyclic | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.cyclic |
 | AbelianGroupType.direct-sum | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.direct-sum |
 | AbelianGroupType.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.equal |
@@ -780,6 +802,19 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | PolynomialMap(Q).substitute | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).substitute |
 | PolynomialMap(Q).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).subtract |
 | PolynomialMap(Q).to-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions; native operation PolynomialMap(Q).to-polynomial |
+| PresentedAbelianGroup.as-type | DIRECTLY_SUPPORTED | IMPLEMENTED | Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps; native operation PresentedAbelianGroup.as-type |
+| PresentedAbelianGroup.direct-sum | DIRECTLY_SUPPORTED | IMPLEMENTED | Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps; native operation PresentedAbelianGroup.direct-sum |
+| PresentedAbelianGroup.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps; native operation PresentedAbelianGroup.equal |
+| PresentedAbelianGroup.from-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps; native operation PresentedAbelianGroup.from-matrix |
+| PresentedAbelianGroup.from-type | DIRECTLY_SUPPORTED | IMPLEMENTED | Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps; native operation PresentedAbelianGroup.from-type |
+| PresentedAbelianGroup.generator-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps; native operation PresentedAbelianGroup.generator-count |
+| PresentedAbelianGroup.is-finite | DIRECTLY_SUPPORTED | IMPLEMENTED | Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps; native operation PresentedAbelianGroup.is-finite |
+| PresentedAbelianGroup.isomorphic | DIRECTLY_SUPPORTED | IMPLEMENTED | Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps; native operation PresentedAbelianGroup.isomorphic |
+| PresentedAbelianGroup.order | DIRECTLY_SUPPORTED | IMPLEMENTED | Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps; native operation PresentedAbelianGroup.order |
+| PresentedAbelianGroup.relation-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps; native operation PresentedAbelianGroup.relation-count |
+| PresentedAbelianGroup.relation-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps; native operation PresentedAbelianGroup.relation-matrix |
+| PresentedAbelianGroup.trivial | DIRECTLY_SUPPORTED | IMPLEMENTED | Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps; native operation PresentedAbelianGroup.trivial |
+| PresentedAbelianGroupAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps |
 | PrimeField | DIRECTLY_SUPPORTED | IMPLEMENTED | Residues in the default prime field F5; configurable exactly checked prime int modulus |
 | Q(i).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers; native operation Q(i).add |
 | Q(i).conjugate | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers; native operation Q(i).conjugate |

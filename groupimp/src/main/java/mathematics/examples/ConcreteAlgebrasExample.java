@@ -19,6 +19,8 @@ import mathematics.structures.FiniteAdjunction;
 import mathematics.structures.FiniteCone;
 import mathematics.structures.FiniteCocone;
 import mathematics.structures.AbelianGroupType;
+import mathematics.structures.PresentedAbelianGroup;
+import mathematics.structures.AbelianGroupElement;
 import mathematics.topology.FiniteSimplicialComplex;
 import mathematics.linear.RationalVector;
 import mathematics.linear.IntegerVector;
@@ -51,6 +53,16 @@ public final class ConcreteAlgebrasExample {
                 {BigInteger.ZERO,BigInteger.valueOf(3)},{BigInteger.ZERO,BigInteger.ZERO}});
         System.out.println("Group presented by columns (2,0,0), (0,3,0): "+math.flow(math.integerMatrices,Collections.singletonList(presentation))
                 .<AbelianGroupType>performAlgebraTransfer("cokernel").collect());
+        IntegerMatrix finitePresentation=new IntegerMatrix(new BigInteger[][]{{BigInteger.valueOf(2),BigInteger.ZERO},{BigInteger.ZERO,BigInteger.valueOf(3)}});
+        System.out.println("Orders of all elements in Z/2 + Z/3: "+math.flow(math.integerMatrices,Collections.singletonList(finitePresentation))
+                .<PresentedAbelianGroup>performAlgebraTransfer("PresentedAbelianGroup.from-matrix")
+                .<AbelianGroupElement>performFlatAlgebraTransfer("AbelianGroupElement.elements")
+                .<BigInteger>performAlgebraTransfer("order").collect());
+        System.out.println("Smith coordinates of solutions of 2*x=(0,2) in that quotient: "+math.flow(math.integerMatrices,Collections.singletonList(finitePresentation))
+                .<PresentedAbelianGroup>performAlgebraTransfer("PresentedAbelianGroup.from-matrix")
+                .<AbelianGroupElement,IntegerVector>performAlgebraUnsafe("AbelianGroupElement.from-smith",new IntegerVector(BigInteger.ZERO,BigInteger.valueOf(2)))
+                .performFlatCustomMemberOperation("multiplication-preimages",BigInteger.valueOf(2))
+                .<IntegerVector>performAlgebraTransfer("smith-coordinates").collect());
         FiniteSimplicialComplex projectivePlane=new FiniteSimplicialComplex(Arrays.asList(
                 FiniteSet.of(0,1,2),FiniteSet.of(0,1,3),FiniteSet.of(0,2,4),FiniteSet.of(0,3,5),FiniteSet.of(0,4,5),
                 FiniteSet.of(1,2,5),FiniteSet.of(1,3,4),FiniteSet.of(1,4,5),FiniteSet.of(2,3,4),FiniteSet.of(2,3,5)));

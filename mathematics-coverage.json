@@ -25043,6 +25043,75 @@
       "assessment_depth": "INITIAL_TRIAGE"
     },
     {
+      "id": "concrete-algebra.AbelianGroupElementAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupElementAlgebra",
+      "concept": "AbelianGroupElementAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "AbelianGroupElement",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
       "id": "concrete-algebra.AbelianGroupTypeAlgebra",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "AbelianGroupTypeAlgebra",
@@ -26424,6 +26493,75 @@
       "provenance": {
         "definition_source": "docs/CONCRETE_ALGEBRAS.md",
         "implementation_source": "groupimp/src/main/java/algebra/concrete/PolynomialDifferentialFormAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
+      "id": "concrete-algebra.PresentedAbelianGroupAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PresentedAbelianGroupAlgebra",
+      "concept": "PresentedAbelianGroupAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "PresentedAbelianGroup",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PresentedAbelianGroupAlgebra.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PresentedAbelianGroupAlgebra.java",
         "implemented_by": "Codex",
         "generated_by_model": "not recorded",
         "reviewed_by": null,
@@ -80345,6 +80483,2519 @@
       "legacy_operation_interface": "ITransferOperation"
     },
     {
+      "id": "concrete-operation.PresentedAbelianGroup.from-matrix",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PresentedAbelianGroupAlgebra",
+      "concept": "PresentedAbelianGroup.from-matrix",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": null,
+      "domain_C": "PresentedAbelianGroup",
+      "operation_signature": "Mat(Z) -> PresentedAbelianGroup",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps; native operation PresentedAbelianGroup.from-matrix",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "An m by n integer matrix presents Z^m modulo the subgroup generated by its columns. Retain the relation matrix and a Smith-coordinate map U, where U*A*V=D.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PresentedAbelianGroupAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PresentedAbelianGroupAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PresentedAbelianGroup.from-matrix",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "PresentedAbelianGroup.from-matrix",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.PresentedAbelianGroup.from-type",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PresentedAbelianGroupAlgebra",
+      "concept": "PresentedAbelianGroup.from-type",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupType",
+      "domain_B": null,
+      "domain_C": "PresentedAbelianGroup",
+      "operation_signature": "AbelianGroupType -> PresentedAbelianGroup",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps; native operation PresentedAbelianGroup.from-type",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Construct a diagonal presentation with nontrivial torsion generators first and free generators last. The total generator count must fit the implementation dimension cap; oversized ranks are implementation failures.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PresentedAbelianGroupAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PresentedAbelianGroupAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PresentedAbelianGroup.from-type",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "PresentedAbelianGroup.from-type",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.PresentedAbelianGroup.relation-matrix",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PresentedAbelianGroupAlgebra",
+      "concept": "PresentedAbelianGroup.relation-matrix",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PresentedAbelianGroup",
+      "domain_B": null,
+      "domain_C": "Mat(Z)",
+      "operation_signature": "PresentedAbelianGroup -> Mat(Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps; native operation PresentedAbelianGroup.relation-matrix",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the retained column relation matrix, including redundant or zero relations and empty dimensions.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PresentedAbelianGroupAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PresentedAbelianGroupAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PresentedAbelianGroup.relation-matrix",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "relation-matrix",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.PresentedAbelianGroup.as-type",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PresentedAbelianGroupAlgebra",
+      "concept": "PresentedAbelianGroup.as-type",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PresentedAbelianGroup",
+      "domain_B": null,
+      "domain_C": "AbelianGroupType",
+      "operation_signature": "PresentedAbelianGroup -> AbelianGroupType",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps; native operation PresentedAbelianGroup.as-type",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Forget the chosen presentation and return its canonical abelian-group isomorphism type.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PresentedAbelianGroupAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PresentedAbelianGroupAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PresentedAbelianGroup.as-type",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "as-type",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.PresentedAbelianGroup.generator-count",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PresentedAbelianGroupAlgebra",
+      "concept": "PresentedAbelianGroup.generator-count",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PresentedAbelianGroup",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "PresentedAbelianGroup -> N",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps; native operation PresentedAbelianGroup.generator-count",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the number of original generators, equal to the relation matrix row count; this need not be the minimal number of generators.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PresentedAbelianGroupAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PresentedAbelianGroupAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PresentedAbelianGroup.generator-count",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "generator-count",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.PresentedAbelianGroup.relation-count",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PresentedAbelianGroupAlgebra",
+      "concept": "PresentedAbelianGroup.relation-count",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PresentedAbelianGroup",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "PresentedAbelianGroup -> N",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps; native operation PresentedAbelianGroup.relation-count",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the number of supplied relation columns, including zero or redundant relations.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PresentedAbelianGroupAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PresentedAbelianGroupAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PresentedAbelianGroup.relation-count",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "relation-count",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.PresentedAbelianGroup.is-finite",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PresentedAbelianGroupAlgebra",
+      "concept": "PresentedAbelianGroup.is-finite",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PresentedAbelianGroup",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "PresentedAbelianGroup -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps; native operation PresentedAbelianGroup.is-finite",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Test whether the classified free rank is zero.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PresentedAbelianGroupAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PresentedAbelianGroupAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PresentedAbelianGroup.is-finite",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "is-finite",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.PresentedAbelianGroup.order",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PresentedAbelianGroupAlgebra",
+      "concept": "PresentedAbelianGroup.order",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PresentedAbelianGroup",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "PresentedAbelianGroup -> N",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps; native operation PresentedAbelianGroup.order",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The presented group must be finite; return its cardinality, including one for the trivial group. Infinite order is not encoded by a natural-number sentinel.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PresentedAbelianGroupAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PresentedAbelianGroupAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "PresentedAbelianGroup.order",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "order",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.PresentedAbelianGroup.equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PresentedAbelianGroupAlgebra",
+      "concept": "PresentedAbelianGroup.equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PresentedAbelianGroup",
+      "domain_B": "PresentedAbelianGroup",
+      "domain_C": "Boolean",
+      "operation_signature": "PresentedAbelianGroup x PresentedAbelianGroup -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps; native operation PresentedAbelianGroup.equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Compare the retained relation matrix and stored Smith-coordinate map, not merely group isomorphism types.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PresentedAbelianGroupAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PresentedAbelianGroupAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PresentedAbelianGroup.equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.PresentedAbelianGroup.isomorphic",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PresentedAbelianGroupAlgebra",
+      "concept": "PresentedAbelianGroup.isomorphic",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PresentedAbelianGroup",
+      "domain_B": "PresentedAbelianGroup",
+      "domain_C": "Boolean",
+      "operation_signature": "PresentedAbelianGroup x PresentedAbelianGroup -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps; native operation PresentedAbelianGroup.isomorphic",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Compare canonical free ranks and torsion factors. This decides group isomorphism in this scope without constructing an isomorphism between the presentations.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PresentedAbelianGroupAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PresentedAbelianGroupAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PresentedAbelianGroup.isomorphic",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "isomorphic",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.PresentedAbelianGroup.direct-sum",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PresentedAbelianGroupAlgebra",
+      "concept": "PresentedAbelianGroup.direct-sum",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PresentedAbelianGroup",
+      "domain_B": "PresentedAbelianGroup",
+      "domain_C": "PresentedAbelianGroup",
+      "operation_signature": "PresentedAbelianGroup x PresentedAbelianGroup -> PresentedAbelianGroup",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps; native operation PresentedAbelianGroup.direct-sum",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Build the block-diagonal relation matrix, with the first presentation's generators and relations preceding the second. The combined shape remains subject to the implementation cap.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PresentedAbelianGroupAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PresentedAbelianGroupAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PresentedAbelianGroup.direct-sum",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "direct-sum",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.PresentedAbelianGroup.trivial",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "PresentedAbelianGroupAlgebra",
+      "concept": "PresentedAbelianGroup.trivial",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "PresentedAbelianGroup",
+      "operation_signature": "Unit -> PresentedAbelianGroup",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps; native operation PresentedAbelianGroup.trivial",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The zero-generator, zero-relation presentation gives the trivial group.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/PresentedAbelianGroupAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/PresentedAbelianGroupAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "PresentedAbelianGroup.trivial",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "PresentedAbelianGroup.trivial",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupElement.add",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupElementAlgebra",
+      "concept": "AbelianGroupElement.add",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupElement",
+      "domain_B": "AbelianGroupElement",
+      "domain_C": "AbelianGroupElement",
+      "operation_signature": "AbelianGroupElement x AbelianGroupElement -> AbelianGroupElement",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.add",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Both elements must retain the same presentation and Smith-coordinate map. Add and reduce finite coordinates; isomorphic groups are not implicitly identified.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "AbelianGroupElement.add",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "add",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupElement.subtract",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupElementAlgebra",
+      "concept": "AbelianGroupElement.subtract",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupElement",
+      "domain_B": "AbelianGroupElement",
+      "domain_C": "AbelianGroupElement",
+      "operation_signature": "AbelianGroupElement x AbelianGroupElement -> AbelianGroupElement",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.subtract",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Both presentations and coordinate maps must agree; subtract and normalize within that group.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "AbelianGroupElement.subtract",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "subtract",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupElement.negate",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupElementAlgebra",
+      "concept": "AbelianGroupElement.negate",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupElement",
+      "domain_B": null,
+      "domain_C": "AbelianGroupElement",
+      "operation_signature": "AbelianGroupElement -> AbelianGroupElement",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.negate",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the additive inverse in the same presented group.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupElement.negate",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "negate",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupElement.scale",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupElementAlgebra",
+      "concept": "AbelianGroupElement.scale",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupElement",
+      "domain_B": "Z",
+      "domain_C": "AbelianGroupElement",
+      "operation_signature": "AbelianGroupElement x Z -> AbelianGroupElement",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.scale",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Multiply by any integer, including negative and zero scalars. Return the first element carrier's wrapper with its presentation retained.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupElement.scale",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "scale",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupElement.equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupElementAlgebra",
+      "concept": "AbelianGroupElement.equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupElement",
+      "domain_B": "AbelianGroupElement",
+      "domain_C": "Boolean",
+      "operation_signature": "AbelianGroupElement x AbelianGroupElement -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Equality includes the presentation, stored coordinate map and every canonical Smith coordinate; elements of different presentations compare unequal.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupElement.equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupElement.group",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupElementAlgebra",
+      "concept": "AbelianGroupElement.group",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupElement",
+      "domain_B": null,
+      "domain_C": "PresentedAbelianGroup",
+      "operation_signature": "AbelianGroupElement -> PresentedAbelianGroup",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.group",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the element's retained presented group.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupElement.group",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "group",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupElement.smith-coordinates",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupElementAlgebra",
+      "concept": "AbelianGroupElement.smith-coordinates",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupElement",
+      "domain_B": null,
+      "domain_C": "Vec(Z)",
+      "operation_signature": "AbelianGroupElement -> Vec(Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.smith-coordinates",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the full canonical vector in the retained Smith basis: residues in [0,d_i) for nonzero diagonal factors, zero at unit factors, and arbitrary integers in free coordinates.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupElement.smith-coordinates",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "smith-coordinates",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupElement.representative",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupElementAlgebra",
+      "concept": "AbelianGroupElement.representative",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupElement",
+      "domain_B": null,
+      "domain_C": "Vec(Z)",
+      "operation_signature": "AbelianGroupElement -> Vec(Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.representative",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return one original-generator coordinate vector obtained by solving U*x=canonical Smith coordinates. Reprojection recovers the element; the lift is not generally additive and is not a minimum-norm representative.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupElement.representative",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "representative",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupElement.is-zero",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupElementAlgebra",
+      "concept": "AbelianGroupElement.is-zero",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupElement",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "AbelianGroupElement -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.is-zero",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "All canonical Smith coordinates are zero.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupElement.is-zero",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "is-zero",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupElement.is-torsion",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupElementAlgebra",
+      "concept": "AbelianGroupElement.is-torsion",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupElement",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "AbelianGroupElement -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.is-torsion",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "All free coordinates are zero. Torsion elements may belong to an infinite presented group; the zero element is torsion.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupElement.is-torsion",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "is-torsion",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupElement.order",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupElementAlgebra",
+      "concept": "AbelianGroupElement.order",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupElement",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "AbelianGroupElement -> N",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.order",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The element must be torsion, even if its ambient group is infinite. Return the lcm of d_i/gcd(d_i,a_i), including order one for zero; infinite order is undefined in N.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "AbelianGroupElement.order",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "order",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupElement.zero-like",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupElementAlgebra",
+      "concept": "AbelianGroupElement.zero-like",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupElement",
+      "domain_B": null,
+      "domain_C": "AbelianGroupElement",
+      "operation_signature": "AbelianGroupElement -> AbelianGroupElement",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.zero-like",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the additive identity of the same presentation.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupElement.zero-like",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "zero-like",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupElement.cyclic-subgroup",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupElementAlgebra",
+      "concept": "AbelianGroupElement.cyclic-subgroup",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupElement",
+      "domain_B": null,
+      "domain_C": "AbelianGroupElement",
+      "operation_signature": "AbelianGroupElement -> List(AbelianGroupElement)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.cyclic-subgroup",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The element has finite order. Emit zero, a, 2*a, ... up to but excluding order(a)*a, with no repeated endpoint. This enumerates its finite cyclic subgroup, subject to the output cap.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "groupimp/src/main/java/operations/flat/OneOperandFlatOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "AbelianGroupElement.cyclic-subgroup",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "cyclic-subgroup",
+      "legacy_operation_interface": "IOneOperandFlatOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupElement.multiplication-preimages",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupElementAlgebra",
+      "concept": "AbelianGroupElement.multiplication-preimages",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupElement",
+      "domain_B": "Z",
+      "domain_C": "AbelianGroupElement",
+      "operation_signature": "AbelianGroupElement x Z -> List(AbelianGroupElement)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.multiplication-preimages",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit all x with n*x=a for the integer second operand n. Nonzero n has finite fibers, possibly empty. For n=0, a nonzero target gives an empty list; a zero target requires a finite ambient group. Infinite fibers are undefined, while oversized finite fibers raise IMPLEMENTATION_FAILURE. Enumeration uses mixed-radix Smith coordinates with the first coordinate varying fastest; return first-carrier wrappers.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "groupimp/src/main/java/operations/flat/CustomMemberFlatOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "AbelianGroupElement.multiplication-preimages",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "multiplication-preimages",
+      "legacy_operation_interface": "ICustomMemberFlatOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupElement.project",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupElementAlgebra",
+      "concept": "AbelianGroupElement.project",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PresentedAbelianGroup",
+      "domain_B": "Vec(Z)",
+      "domain_C": "AbelianGroupElement",
+      "operation_signature": "PresentedAbelianGroup x Vec(Z) -> AbelianGroupElement",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.project",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The vector dimension equals the original generator count. Apply the retained map U, reduce finite Smith coordinates and return an element of this quotient. Every relation column projects to zero.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "AbelianGroupElement.project",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "AbelianGroupElement.project",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupElement.from-smith",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupElementAlgebra",
+      "concept": "AbelianGroupElement.from-smith",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PresentedAbelianGroup",
+      "domain_B": "Vec(Z)",
+      "domain_C": "AbelianGroupElement",
+      "operation_signature": "PresentedAbelianGroup x Vec(Z) -> AbelianGroupElement",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.from-smith",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The vector has the full original generator count but is interpreted in the retained Smith basis, then normalized. Original-generator and Smith-coordinate inputs are different conventions.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "AbelianGroupElement.from-smith",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "AbelianGroupElement.from-smith",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupElement.zero",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupElementAlgebra",
+      "concept": "AbelianGroupElement.zero",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PresentedAbelianGroup",
+      "domain_B": null,
+      "domain_C": "AbelianGroupElement",
+      "operation_signature": "PresentedAbelianGroup -> AbelianGroupElement",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.zero",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Construct the additive identity in the supplied presented group.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupElement.zero",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "AbelianGroupElement.zero",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupElement.generators",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupElementAlgebra",
+      "concept": "AbelianGroupElement.generators",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PresentedAbelianGroup",
+      "domain_B": null,
+      "domain_C": "AbelianGroupElement",
+      "operation_signature": "PresentedAbelianGroup -> List(AbelianGroupElement)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.generators",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit the projected original coordinate basis in generator order, retaining zero or redundant generators and duplicates.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupElement.generators",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "AbelianGroupElement.generators",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupElement.smith-generators",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupElementAlgebra",
+      "concept": "AbelianGroupElement.smith-generators",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PresentedAbelianGroup",
+      "domain_B": null,
+      "domain_C": "AbelianGroupElement",
+      "operation_signature": "PresentedAbelianGroup -> List(AbelianGroupElement)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.smith-generators",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit the unit vectors in nonunit finite and free Smith coordinates, in coordinate order. Killed coordinates are omitted; this is a minimal generating list.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupElement.smith-generators",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "AbelianGroupElement.smith-generators",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupElement.elements",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupElementAlgebra",
+      "concept": "AbelianGroupElement.elements",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PresentedAbelianGroup",
+      "domain_B": null,
+      "domain_C": "AbelianGroupElement",
+      "operation_signature": "PresentedAbelianGroup -> List(AbelianGroupElement)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.elements",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The supplied group is finite. Emit every canonical element once, beginning with zero, in mixed-radix Smith order with the first coordinate varying fastest. The trivial group emits one element, not an empty list.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "AbelianGroupElement.elements",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "AbelianGroupElement.elements",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupElement.reduce",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupElementAlgebra",
+      "concept": "AbelianGroupElement.reduce",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "PresentedAbelianGroup",
+      "domain_B": "Vec(Z)",
+      "domain_C": "Vec(Z)",
+      "operation_signature": "PresentedAbelianGroup x Vec(Z) -> Vec(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates; native operation AbelianGroupElement.reduce",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The vector dimension matches the original generator count. Return its canonical Smith coordinates in the actual second Vec(Z) carrier's IAlgebraItem wrapper; this output is not an original-coordinate representative.",
+        "Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativePresentedAbelianTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
+        "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
+        "Only finitely presented abelian groups over Z are represented. No arbitrary quotient-module morphisms, isomorphism witnesses between presentations, general subgroup presentations, nonabelian group presentations or homology generators are implemented by these carriers."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
+        "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupElementAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "AbelianGroupElement.reduce",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "AbelianGroupElement.reduce",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
       "id": "concrete-operation.Z/5Z.add",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "PrimeField",
@@ -80944,6 +83595,7 @@
         "Z"
       ],
       "supported_operations": [
+        "AbelianGroupElement.order",
         "AbelianGroupType.cyclic",
         "AbelianGroupType.exponent",
         "AbelianGroupType.free-on",
@@ -81025,6 +83677,9 @@
         "PolynomialMap(Q).input-dimension",
         "PolynomialMap(Q).output-dimension",
         "PolynomialMap(Q).partial",
+        "PresentedAbelianGroup.generator-count",
+        "PresentedAbelianGroup.order",
+        "PresentedAbelianGroup.relation-count",
         "Q[x].derivative-order",
         "Q[x].root-multiplicity",
         "S3.apply",
@@ -81074,6 +83729,8 @@
         "Q"
       ],
       "supported_operations": [
+        "AbelianGroupElement.multiplication-preimages",
+        "AbelianGroupElement.scale",
         "FiniteAdjunction.transpose",
         "FiniteAdjunction.untranspose",
         "FiniteCategory.compose",
@@ -81482,6 +84139,9 @@
       "subdomains": [],
       "related_domains": [],
       "supported_operations": [
+        "AbelianGroupElement.equal",
+        "AbelianGroupElement.is-torsion",
+        "AbelianGroupElement.is-zero",
         "AbelianGroupType.equal",
         "AbelianGroupType.is-cyclic",
         "AbelianGroupType.is-finite",
@@ -81555,6 +84215,9 @@
         "PolynomialForm(Q).equal",
         "PolynomialForm(Q).is-zero",
         "PolynomialMap(Q).equal",
+        "PresentedAbelianGroup.equal",
+        "PresentedAbelianGroup.is-finite",
+        "PresentedAbelianGroup.isomorphic",
         "Q(x).equal",
         "Q.equal",
         "Q.greater",
@@ -81619,6 +84282,7 @@
         "Mat2(Q).zero",
         "N.one",
         "N.zero",
+        "PresentedAbelianGroup.trivial",
         "Q(i).one",
         "Q(i).zero",
         "Q(x).one",
@@ -84172,7 +86836,9 @@
         "AbelianGroupType.zero",
         "FiniteComplex.integral-homology",
         "FiniteComplex.integral-homology-groups",
-        "Mat(Z).cokernel"
+        "Mat(Z).cokernel",
+        "PresentedAbelianGroup.as-type",
+        "PresentedAbelianGroup.from-type"
       ],
       "invariants": [
         "Nonnegative arbitrary-precision free rank",
@@ -84213,6 +86879,11 @@
         "Mat(Z)"
       ],
       "supported_operations": [
+        "AbelianGroupElement.from-smith",
+        "AbelianGroupElement.project",
+        "AbelianGroupElement.reduce",
+        "AbelianGroupElement.representative",
+        "AbelianGroupElement.smith-coordinates",
         "Mat(Z).apply",
         "Mat(Z).columns",
         "Mat(Z).has-integer-solution",
@@ -84304,12 +86975,135 @@
         "Mat(Z).subtract",
         "Mat(Z).to-rational",
         "Mat(Z).transpose",
-        "Mat(Z).zero-like"
+        "Mat(Z).zero-like",
+        "PresentedAbelianGroup.from-matrix",
+        "PresentedAbelianGroup.relation-matrix"
       ],
       "invariants": [
         "Explicit nonnegative row and column counts, including empty shapes",
         "Immutable rectangular arbitrary-precision entries",
         "Maps Z^columns to Z^rows; composition checks the middle dimension"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-24"
+      }
+    },
+    {
+      "id": "PresentedAbelianGroup",
+      "name": "Retained finite abelian presentations",
+      "description": "Retained finite abelian presentations",
+      "member_representation": "mathematics.structures.PresentedAbelianGroup",
+      "membership_rules": [
+        "An explicit integer matrix presents Z^rows modulo its column image",
+        "A retained unimodular Smith-coordinate map",
+        "Equality includes presentation and coordinate map; isomorphism type is separate"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "Mat(Z)",
+        "Vec(Z)",
+        "AbelianGroupType",
+        "AbelianGroupElement",
+        "N",
+        "Boolean"
+      ],
+      "supported_operations": [
+        "AbelianGroupElement.elements",
+        "AbelianGroupElement.from-smith",
+        "AbelianGroupElement.generators",
+        "AbelianGroupElement.group",
+        "AbelianGroupElement.project",
+        "AbelianGroupElement.reduce",
+        "AbelianGroupElement.smith-generators",
+        "AbelianGroupElement.zero",
+        "PresentedAbelianGroup.as-type",
+        "PresentedAbelianGroup.direct-sum",
+        "PresentedAbelianGroup.equal",
+        "PresentedAbelianGroup.from-matrix",
+        "PresentedAbelianGroup.from-type",
+        "PresentedAbelianGroup.generator-count",
+        "PresentedAbelianGroup.is-finite",
+        "PresentedAbelianGroup.isomorphic",
+        "PresentedAbelianGroup.order",
+        "PresentedAbelianGroup.relation-count",
+        "PresentedAbelianGroup.relation-matrix",
+        "PresentedAbelianGroup.trivial"
+      ],
+      "invariants": [
+        "An explicit integer matrix presents Z^rows modulo its column image",
+        "A retained unimodular Smith-coordinate map",
+        "Equality includes presentation and coordinate map; isomorphism type is separate"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-24"
+      }
+    },
+    {
+      "id": "AbelianGroupElement",
+      "name": "Elements of finitely presented abelian groups",
+      "description": "Elements of finitely presented abelian groups",
+      "member_representation": "mathematics.structures.AbelianGroupElement",
+      "membership_rules": [
+        "Retained presented group and Smith-coordinate map",
+        "Canonical residues at nonzero Smith factors and arbitrary free integer coordinates",
+        "Additive operations require matching presentations"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "PresentedAbelianGroup",
+        "Vec(Z)",
+        "Z",
+        "N",
+        "Boolean"
+      ],
+      "supported_operations": [
+        "AbelianGroupElement.add",
+        "AbelianGroupElement.cyclic-subgroup",
+        "AbelianGroupElement.elements",
+        "AbelianGroupElement.equal",
+        "AbelianGroupElement.from-smith",
+        "AbelianGroupElement.generators",
+        "AbelianGroupElement.group",
+        "AbelianGroupElement.is-torsion",
+        "AbelianGroupElement.is-zero",
+        "AbelianGroupElement.multiplication-preimages",
+        "AbelianGroupElement.negate",
+        "AbelianGroupElement.order",
+        "AbelianGroupElement.project",
+        "AbelianGroupElement.representative",
+        "AbelianGroupElement.scale",
+        "AbelianGroupElement.smith-coordinates",
+        "AbelianGroupElement.smith-generators",
+        "AbelianGroupElement.subtract",
+        "AbelianGroupElement.zero",
+        "AbelianGroupElement.zero-like"
+      ],
+      "invariants": [
+        "Retained presented group and Smith-coordinate map",
+        "Canonical residues at nonzero Smith factors and arbitrary free integer coordinates",
+        "Additive operations require matching presentations"
       ],
       "references": [
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
