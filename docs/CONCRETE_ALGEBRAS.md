@@ -51,6 +51,7 @@ List<String> values = math.flow(math.naturals,
 | IntegralHomologyAlgebra / IntegralHomology | retained-boundary equality -> Boolean | boundary/cycle matrices; presented group/type; ranks; flat cycle/boundary bases and class representatives; cycle-to-homology projection | consecutive-boundary and simplicial-degree construction; cycle/boundary tests; class-of and representative; bounding chains; maps induced by degree matrices |
 | FiniteSimplicialMapAlgebra / SimplicialMap | compose; equality/contiguity -> Boolean | inverse; source/target/image; vertex function; injectivity and simplex/vertex surjectivity; flat vertex images, chain matrices and homology maps | construction from finite functions and complex pairs; inclusions; restrictions; simplex images/fibers; degreewise chain/homology maps; ordered simplex bases |
 | RelativeSimplicialAlgebra / RelativeComplex | labelled-pair equality -> Boolean | ambient/subcomplex; dimension and Euler characteristic; flat boundaries and constructive homology by degree; inclusion simplicial map | pair construction; quotient chains and bases; homology and torsion types; inclusion, quotient, lift and connecting matrices; scalar/flat long exact sequence maps |
+| RelativeSimplicialMapAlgebra / RelativeMap | compose; equality/pair contiguity -> Boolean | inverse; source/target pairs; ambient/subcomplex maps; image/corestriction; flat relative chain and homology maps | construction from an ambient map and pair boundaries; identities/inclusions; absolute/diagonal extensions; restriction; degreewise relative maps and four-map naturality lists |
 | RationalSampleAlgebra / Sample(Q) | concatenate | size -> N, mean/variance -> Q, center | covariance -> Q; scale by Q; flat transfer elements -> Q |
 | FiniteProbabilityAlgebra / FiniteDistribution(Z) | — | support -> finite set, support-size -> N, expectation/variance -> Q | event/point probability -> Q; conditioning; flat transfer outcomes -> Z; point mass from Z |
 | FiniteMarkovAlgebra / FiniteMarkov(Z) | typed compose; equality -> Boolean | domain/codomain; counts; row distributions; deterministic function and matrix conversions; communicating/recurrent classes; stationary extremes and unique stationary law | apply to a distribution -> second carrier; powers; flat marginal orbits; transition probabilities; time reversal; detailed balance; absorbing events; hitting probabilities and mean times -> Vec(Q) |
@@ -120,7 +121,7 @@ See [ConcreteAlgebrasTest](../groupimp/src/test/java/mathematics/ConcreteAlgebra
 Same-algebra unary flat operations use `IOneOperandFlatOperation` and `performOneOperandFlatOperation(name)` (or `performFlatOperation(name)`). Finite-set `subsets` is an example. Cross-algebra unary flat operations use the existing `ITransferFlatOperation`, whose return type is corrected to `List<IAlgebraItem<V>>`; `elements` transfers a finite set to its member algebra. Empty results remain valid, and every emitted member keeps its target algebra.
 
 
-The default initializer currently installs 46 algebras and 897 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
+The default initializer currently installs 47 algebras and 923 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
 
 For overloaded custom-member and unsafe operations, the most specific compatible second-operand class is selected (exact matches take priority). Re-registering the same second class replaces that overload. Ambiguous supertypes are rejected. Mathematical domains sharing one Java class need distinct operation names; overload selection does not infer a domain from a value.
 
@@ -885,6 +886,46 @@ math.flow(math.complexes, Collections.singletonList(interval))
 
 Thus the relative edge generator maps to the right endpoint minus the left endpoint. For a filled triangle relative to its boundary circle, the degree-two connecting map is an isomorphism Z->Z. For the projective plane relative to its one-skeleton, the connecting map is injective between rank-ten free groups with cokernel Z/2, retaining the integral index information.
 
-Each complex is limited to 4096 nonempty simplices. Each required matrix basis is limited to 256 simplices; relative bases are filtered before this bound, so a large diagonal pair can have computable zero relative homology even when its absolute matrices exceed the bound. Operations involving full ambient/subcomplex matrices require those bases to fit too. A 5,000,000-unit work budget is shared across each compound homology calculation, degree list or three-map segment. Exhaustion raises IMPLEMENTATION_FAILURE without partial lists; integer coefficient bit lengths remain unbounded. General maps between pairs, reduced homology, relative cohomology, cup products, persistence and excision witnesses remain outside scope.
+Each complex is limited to 4096 nonempty simplices. Each required matrix basis is limited to 256 simplices; relative bases are filtered before this bound, so a large diagonal pair can have computable zero relative homology even when its absolute matrices exceed the bound. Operations involving full ambient/subcomplex matrices require those bases to fit too. A 5,000,000-unit work budget is shared across each compound homology calculation, degree list or three-map segment. Exhaustion raises IMPLEMENTATION_FAILURE without partial lists; integer coefficient bit lengths remain unbounded. RelativeMap supplies simplicial maps between pairs and naturality maps separately. Arbitrary relative chain maps, reduced homology, relative cohomology, cup products, persistence and excision witnesses remain outside scope.
 
 NativeRelativeHomologyTest checks 1,024 graph/vertex-subcomplex pairs against independent connectivity formulas, disks relative to boundary spheres through dimension four, projective-plane torsion and its index-two connecting image, exactness over Z, chain identities and orientation signs, empty and huge degrees, basis and aggregate work limits, actual wrappers and serialized flows. All 27 registrations also have explicit expected results in ConcreteAlgebrasTest.
+
+## Simplicial maps of pairs
+
+`math.relativeMaps` registers 26 operations on RelativeMap. A map (X,A)->(Y,B) retains the full source and target pairs and an existing SimplicialMap X->Y. Construction validates exact agreement of the ambient boundaries and requires the image of every A simplex to belong to B. Checking only the vertices would be insufficient when B is not an induced subcomplex. The `ambient-map` and `subcomplex-map` transfers expose the actual maps X->Y and A->B.
+
+`RelativeMap.from-map` accepts the ambient map followed by `Pair<RelativeSimplicialComplex,RelativeSimplicialComplex>` with source first. `RelativeMap.identity-on` and `RelativeMap.inclusion` construct identities and componentwise inclusions. `RelativeMap.absolute` extends X->Y to (X,empty)->(Y,empty); `RelativeMap.diagonal` extends it to (X,X)->(Y,Y). Composition applies the right operand first and requires equality of both components of the middle pair. Inversion requires an ambient simplicial isomorphism that maps A onto B. An ambient isomorphism alone need not give a pair isomorphism.
+
+Relative chain matrices use the existing quotient simplex bases and orientation signs. A column is zero if its simplex collapses or its image lies in B. The implementation constructs the quotient matrix directly, so it does not require a potentially larger ambient matrix. `homology-map` returns the induced integral AbelianGroupHomomorphism, retaining source and target presentations and torsion. `source-homology` and `target-homology` expose its coordinate models. Flat matrix/map lists run from degree zero through the larger ambient dimension and retain zero groups and empty matrix dimensions.
+
+`long-exact-maps(k)` emits four vertical maps, in order, for the two existing long-exact segments:
+
+```text
+H_k(A)  -> H_k(X) -> H_k(X,A) -> H_(k-1)(A)
+  |          |          |            |
+  v          v          v            v
+H_k(B)  -> H_k(Y) -> H_k(Y,B) -> H_(k-1)(B)
+```
+
+All three squares commute, including the square with the connecting homomorphism. The fourth vertical map at degree zero is 0->0 under the unreduced convention. The first two maps are also available as `subcomplex-homology-map` and `ambient-homology-map`. These follow the [naturality of the long exact sequence of a pair](https://pi.math.cornell.edu/~hatcher/AT/AT.pdf).
+
+```java
+Map<BigInteger, BigInteger> vertices = new TreeMap<>();
+vertices.put(BigInteger.ZERO, BigInteger.ONE);
+vertices.put(BigInteger.ONE, BigInteger.ZERO);
+FiniteSimplicialMap reflection = new FiniteSimplicialMap(interval, interval, vertices);
+RelativeSimplicialComplex pair = new RelativeSimplicialComplex(interval, endpoints);
+math.flow(math.simplicialMaps, Collections.singletonList(reflection))
+    .<RelativeSimplicialMap, Pair<RelativeSimplicialComplex, RelativeSimplicialComplex>>
+        performAlgebraUnsafe("RelativeMap.from-map", new Pair<>(pair, pair))
+    .<AbelianGroupHomomorphism, BigInteger>
+        performAlgebraUnsafe("homology-map", BigInteger.ONE)
+    .<IntegerMatrix>performAlgebraTransfer("smith-matrix")
+    .collect(); // [ZMatrix(1x1)[[-1]]]
+```
+
+Here `interval` and `endpoints` are the complexes in the preceding example. Reversing the interval changes the relative edge class by -1 and swaps the endpoints, as required by the connecting square. Pair contiguity is stricter than ambient contiguity: unions of images of A simplices must lie in B as well. In particular, the interval identity and reflection are ambient-contiguous but are not contiguous as maps relative to the two endpoints. `image` returns (f(X),f(A)), `corestrict-image` retains that target pair, and `restrict` accepts a componentwise source subpair while retaining the complete original target.
+
+The existing bounds apply: 4096 nonempty simplices per boundary complex, 256 simplices per required matrix basis, and a shared 5,000,000-unit integer budget per compound homology computation, entire degree list or four-map naturality list. Relative bases are filtered before the matrix bound; ambient/subcomplex homology needs the corresponding full bases. Exhaustion raises IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths remain unbounded. Arbitrary relative chain maps, explicit chain-homotopy witnesses, reduced homology, relative cohomology, persistence, subdivision and excision witnesses remain outside scope.
+
+NativeRelativeSimplicialMapTest checks 256 tetrahedron pair maps against determinant signs, all 27 triangle pair maps and 729 compositions, all three naturality squares, a degree-two covering whose relative map is surjective, projective-plane torsion, pair contiguity, zero quotient images, pair isomorphisms, image/restriction behavior, empty and relabelled boundaries, shared degree/four-map budgets, actual native wrappers and serialized flows. Each of the 26 registrations has an explicit expected result in ConcreteAlgebrasTest.

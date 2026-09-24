@@ -27840,7 +27840,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -27853,6 +27853,77 @@
       "provenance": {
         "definition_source": "docs/CONCRETE_ALGEBRAS.md",
         "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
+      "id": "concrete-algebra.RelativeSimplicialMapAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeSimplicialMapAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "RelativeMap",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
         "implemented_by": "Codex",
         "generated_by_model": "not recorded",
         "reviewed_by": null,
@@ -90118,7 +90189,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -90195,7 +90266,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -90272,7 +90343,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -90349,7 +90420,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -90426,7 +90497,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -90503,7 +90574,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -90580,7 +90651,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -90658,7 +90729,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -90735,7 +90806,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -90813,7 +90884,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -90890,7 +90961,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -90968,7 +91039,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -91045,7 +91116,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -91123,7 +91194,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -91200,7 +91271,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -91277,7 +91348,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -91354,7 +91425,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -91431,7 +91502,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -91508,7 +91579,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -91585,7 +91656,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -91662,7 +91733,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -91739,7 +91810,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -91816,7 +91887,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -91894,7 +91965,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -91971,7 +92042,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -92048,7 +92119,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -92125,7 +92196,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."
+        "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -92154,6 +92225,2037 @@
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "inclusion",
       "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeMap.from-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeMap.from-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "SimplicialMap",
+      "domain_B": "RelativeComplex.pair",
+      "domain_C": "RelativeMap",
+      "operation_signature": "SimplicialMap x RelativeComplex.pair -> RelativeMap",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.from-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The first operand is the ambient SimplicialMap and the second contains source then target RelativeComplex values. Require exact ambient boundaries and f(A) contained in B simplex by simplex, not just on vertex sets.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "RelativeMap.from-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "RelativeMap.from-map",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeMap.compose",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeMap.compose",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeMap",
+      "domain_B": "RelativeMap",
+      "domain_C": "RelativeMap",
+      "operation_signature": "RelativeMap x RelativeMap -> RelativeMap",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.compose",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Apply the right operand first. Both labelled components of the middle pair must be equal; equality of ambient complexes alone is insufficient.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "RelativeMap.compose",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "compose",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeMap.inverse",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeMap.inverse",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeMap",
+      "domain_B": null,
+      "domain_C": "RelativeMap",
+      "operation_signature": "RelativeMap -> RelativeMap",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.inverse",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Defined exactly when the ambient map is a simplicial isomorphism and f(A)=B. The inverse must also preserve the chosen subcomplexes.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "RelativeMap.inverse",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "inverse",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeMap.source",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeMap.source",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeMap",
+      "domain_B": null,
+      "domain_C": "RelativeComplex",
+      "operation_signature": "RelativeMap -> RelativeComplex",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.source",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the retained source pair (X,A), including both full labelled complexes.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeMap.source",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "source",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeMap.target",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeMap.target",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeMap",
+      "domain_B": null,
+      "domain_C": "RelativeComplex",
+      "operation_signature": "RelativeMap -> RelativeComplex",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.target",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the retained target pair (Y,B), including simplices not reached by the map.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeMap.target",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "target",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeMap.ambient-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeMap.ambient-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeMap",
+      "domain_B": null,
+      "domain_C": "SimplicialMap",
+      "operation_signature": "RelativeMap -> SimplicialMap",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.ambient-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the validated ambient SimplicialMap X->Y with its complete original boundaries.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeMap.ambient-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ambient-map",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeMap.subcomplex-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeMap.subcomplex-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeMap",
+      "domain_B": null,
+      "domain_C": "SimplicialMap",
+      "operation_signature": "RelativeMap -> SimplicialMap",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.subcomplex-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the restricted SimplicialMap A->B with the full declared B as target, not just the image of A.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeMap.subcomplex-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "subcomplex-map",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeMap.equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeMap.equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeMap",
+      "domain_B": "RelativeMap",
+      "domain_C": "Boolean",
+      "operation_signature": "RelativeMap x RelativeMap -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Compare both labelled pairs and the ambient vertex map; equality of homology maps or group types is insufficient.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeMap.equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeMap.is-isomorphism",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeMap.is-isomorphism",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeMap",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "RelativeMap -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.is-isomorphism",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "True exactly when the ambient map is a simplicial isomorphism and its restriction maps A onto all of B.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeMap.is-isomorphism",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "is-isomorphism",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeMap.identity-on",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeMap.identity-on",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeComplex",
+      "domain_B": null,
+      "domain_C": "RelativeMap",
+      "operation_signature": "RelativeComplex -> RelativeMap",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.identity-on",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Construct the identity pair map, with identity relative chain matrices and induced homology maps.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeMap.identity-on",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "RelativeMap.identity-on",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeMap.inclusion",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeMap.inclusion",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeComplex",
+      "domain_B": "RelativeComplex",
+      "domain_C": "RelativeMap",
+      "operation_signature": "RelativeComplex x RelativeComplex -> RelativeMap",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.inclusion",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require componentwise inclusions X contained in Y and A contained in B. Use identity vertex labels and retain both full target components.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "RelativeMap.inclusion",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "RelativeMap.inclusion",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeMap.absolute",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeMap.absolute",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "SimplicialMap",
+      "domain_B": null,
+      "domain_C": "RelativeMap",
+      "operation_signature": "SimplicialMap -> RelativeMap",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.absolute",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Extend a SimplicialMap X->Y to (X,empty)->(Y,empty). Relative chain and homology maps agree with the original unreduced maps.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeMap.absolute",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "RelativeMap.absolute",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeMap.diagonal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeMap.diagonal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "SimplicialMap",
+      "domain_B": null,
+      "domain_C": "RelativeMap",
+      "operation_signature": "SimplicialMap -> RelativeMap",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.diagonal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Extend a SimplicialMap X->Y to (X,X)->(Y,Y). All relative chain groups vanish, while ambient and subcomplex maps remain available.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeMap.diagonal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "RelativeMap.diagonal",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeMap.chain-matrix",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeMap.chain-matrix",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeMap",
+      "domain_B": "N",
+      "domain_C": "Mat(Z)",
+      "operation_signature": "RelativeMap x N -> Mat(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.chain-matrix",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Use ordered quotient simplex bases and increasing-vertex orientation signs. Collapsed simplices and images in B give zero columns. Rows index the target relative degree and columns the source; no full ambient matrix is required.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeMap.chain-matrix",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "chain-matrix",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeMap.chain-matrices",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeMap.chain-matrices",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeMap",
+      "domain_B": null,
+      "domain_C": "Mat(Z)",
+      "operation_signature": "RelativeMap -> List(Mat(Z))",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.chain-matrices",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit relative chain matrices from degree zero through the larger ambient dimension, retaining zero-sized shapes. Two empty ambient complexes give an empty list; one work budget covers the entire list.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeMap.chain-matrices",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "chain-matrices",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeMap.homology-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeMap.homology-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeMap",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "RelativeMap x N -> AbelianGroupHomomorphism",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.homology-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Construct the integral map H_k(X,A)->H_k(Y,B) with both actual retained presentations. Source and target homology construction and the induced map share one work budget.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeMap.homology-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "homology-map",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeMap.homology-maps",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeMap.homology-maps",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeMap",
+      "domain_B": null,
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "RelativeMap -> List(AbelianGroupHomomorphism)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.homology-maps",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit relative integral homology maps from zero through the larger ambient dimension. A single work budget covers the entire list, including homology constructions and matrix calculations.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeMap.homology-maps",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "homology-maps",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeMap.source-homology",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeMap.source-homology",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeMap",
+      "domain_B": "N",
+      "domain_C": "IntegralHomology",
+      "operation_signature": "RelativeMap x N -> IntegralHomology",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.source-homology",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the retained source pair's constructive integral relative homology in the supplied nonnegative degree.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeMap.source-homology",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "source-homology",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeMap.target-homology",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeMap.target-homology",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeMap",
+      "domain_B": "N",
+      "domain_C": "IntegralHomology",
+      "operation_signature": "RelativeMap x N -> IntegralHomology",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.target-homology",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the retained target pair's constructive integral relative homology in the supplied nonnegative degree.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeMap.target-homology",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "target-homology",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeMap.ambient-homology-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeMap.ambient-homology-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeMap",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "RelativeMap x N -> AbelianGroupHomomorphism",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.ambient-homology-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the unreduced integral homology map H_k(X)->H_k(Y) induced by the ambient simplicial map.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeMap.ambient-homology-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ambient-homology-map",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeMap.subcomplex-homology-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeMap.subcomplex-homology-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeMap",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "RelativeMap x N -> AbelianGroupHomomorphism",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.subcomplex-homology-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the unreduced integral homology map H_k(A)->H_k(B) induced by the restricted simplicial map.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeMap.subcomplex-homology-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "subcomplex-homology-map",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeMap.long-exact-maps",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeMap.long-exact-maps",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeMap",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "RelativeMap x N -> List(AbelianGroupHomomorphism)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.long-exact-maps",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit the four vertical maps on H_k(A), H_k(X), H_k(X,A), H_(k-1)(A) into the corresponding target groups, in that order. They commute with inclusion, quotient and connecting maps. At degree zero the fourth map is 0->0 because H_-1=0. One shared work budget covers all four maps; no partial list is returned.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/operations/flat/MixedFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeMap.long-exact-maps",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "long-exact-maps",
+      "legacy_operation_interface": "IUnsafeFlatOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeMap.contiguous",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeMap.contiguous",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeMap",
+      "domain_B": "RelativeMap",
+      "domain_C": "Boolean",
+      "operation_signature": "RelativeMap x RelativeMap -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.contiguous",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require equal source and target pairs. For every X simplex, the union of its images must lie in Y; for every A simplex, that union must also lie in B. Ambient contiguity alone is insufficient. Pair-contiguous maps induce equal relative homology maps.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "RelativeMap.contiguous",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "contiguous",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeMap.image",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeMap.image",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeMap",
+      "domain_B": null,
+      "domain_C": "RelativeComplex",
+      "operation_signature": "RelativeMap -> RelativeComplex",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.image",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the pair (f(X),f(A)) of actual image subcomplexes, which need not be the induced complexes on their vertex sets.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeMap.image",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "image",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeMap.corestrict-image",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeMap.corestrict-image",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeMap",
+      "domain_B": null,
+      "domain_C": "RelativeMap",
+      "operation_signature": "RelativeMap -> RelativeMap",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.corestrict-image",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Retain the full source pair and vertex map and replace the target by (f(X),f(A)). This need not be an isomorphism when the map collapses simplices or vertices.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeMap.corestrict-image",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "corestrict-image",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeMap.restrict",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialMapAlgebra",
+      "concept": "RelativeMap.restrict",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeMap",
+      "domain_B": "RelativeComplex",
+      "domain_C": "RelativeMap",
+      "operation_signature": "RelativeMap x RelativeComplex -> RelativeMap",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.restrict",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The supplied pair (C,D) must satisfy C contained in X and D contained in A. Restrict the ambient vertex map to C and retain the full original target pair, using the first RelativeMap wrapper.",
+        "The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeSimplicialMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+        "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "RelativeMap.restrict",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "restrict",
+      "legacy_operation_interface": "ICustomMemberOperation"
     },
     {
       "id": "concrete-operation.Z/5Z.add",
@@ -92862,6 +94964,13 @@
         "RelativeComplex.quotient-homology",
         "RelativeComplex.simplex-basis",
         "RelativeComplex.simplex-count",
+        "RelativeMap.ambient-homology-map",
+        "RelativeMap.chain-matrix",
+        "RelativeMap.homology-map",
+        "RelativeMap.long-exact-maps",
+        "RelativeMap.source-homology",
+        "RelativeMap.subcomplex-homology-map",
+        "RelativeMap.target-homology",
         "S3.apply",
         "S3.fixed-point-count",
         "S3.orbit",
@@ -93426,6 +95535,9 @@
         "Q.greater",
         "RelativeComplex.equal",
         "RelativeComplex.is-acyclic-degree",
+        "RelativeMap.contiguous",
+        "RelativeMap.equal",
+        "RelativeMap.is-isomorphism",
         "S3.equal",
         "SimplicialMap.contiguous",
         "SimplicialMap.equal",
@@ -96236,6 +98348,8 @@
         "RelativeComplex.inclusion-matrix",
         "RelativeComplex.lift-matrix",
         "RelativeComplex.projection-matrix",
+        "RelativeMap.chain-matrices",
+        "RelativeMap.chain-matrix",
         "SimplicialMap.chain-matrices",
         "SimplicialMap.chain-matrix"
       ],
@@ -96454,6 +98568,11 @@
         "RelativeComplex.inclusion-homology",
         "RelativeComplex.long-exact-segment",
         "RelativeComplex.quotient-homology",
+        "RelativeMap.ambient-homology-map",
+        "RelativeMap.homology-map",
+        "RelativeMap.homology-maps",
+        "RelativeMap.long-exact-maps",
+        "RelativeMap.subcomplex-homology-map",
         "SimplicialMap.homology-map",
         "SimplicialMap.homology-maps"
       ],
@@ -96568,6 +98687,8 @@
         "IntegralHomology.zero-class",
         "RelativeComplex.homology",
         "RelativeComplex.homology-degrees",
+        "RelativeMap.source-homology",
+        "RelativeMap.target-homology",
         "SimplicialMap.source-homology",
         "SimplicialMap.target-homology"
       ],
@@ -96655,6 +98776,11 @@
       ],
       "supported_operations": [
         "RelativeComplex.inclusion",
+        "RelativeMap.absolute",
+        "RelativeMap.ambient-map",
+        "RelativeMap.diagonal",
+        "RelativeMap.from-map",
+        "RelativeMap.subcomplex-map",
         "SimplicialMap.chain-matrices",
         "SimplicialMap.chain-matrix",
         "SimplicialMap.compose",
@@ -96792,12 +98918,124 @@
         "RelativeComplex.quotient-homology",
         "RelativeComplex.simplex-basis",
         "RelativeComplex.simplex-count",
-        "RelativeComplex.subcomplex"
+        "RelativeComplex.subcomplex",
+        "RelativeMap.identity-on",
+        "RelativeMap.image",
+        "RelativeMap.inclusion",
+        "RelativeMap.restrict",
+        "RelativeMap.source",
+        "RelativeMap.target"
       ],
       "invariants": [
         "Retained labelled ambient complex X and subcomplex A",
         "Quotient chains on simplices of X outside A with increasing-vertex orientations",
         "Unreduced integral relative homology and inclusion, quotient, connecting maps"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-24"
+      }
+    },
+    {
+      "id": "RelativeMap",
+      "name": "Simplicial maps of pairs and natural relative homology maps",
+      "description": "Simplicial maps of pairs and natural relative homology maps",
+      "member_representation": "mathematics.topology.RelativeSimplicialMap",
+      "membership_rules": [
+        "Retained full source and target labelled pairs",
+        "Ambient simplicial map carrying every source subcomplex simplex into the target subcomplex",
+        "Oriented quotient chain matrices and integral homology maps natural with the long exact sequence"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "RelativeComplex",
+        "RelativeComplex.pair",
+        "SimplicialMap",
+        "Mat(Z)",
+        "IntegralHomology",
+        "AbelianGroupHomomorphism",
+        "N",
+        "Boolean"
+      ],
+      "supported_operations": [
+        "RelativeMap.absolute",
+        "RelativeMap.ambient-homology-map",
+        "RelativeMap.ambient-map",
+        "RelativeMap.chain-matrices",
+        "RelativeMap.chain-matrix",
+        "RelativeMap.compose",
+        "RelativeMap.contiguous",
+        "RelativeMap.corestrict-image",
+        "RelativeMap.diagonal",
+        "RelativeMap.equal",
+        "RelativeMap.from-map",
+        "RelativeMap.homology-map",
+        "RelativeMap.homology-maps",
+        "RelativeMap.identity-on",
+        "RelativeMap.image",
+        "RelativeMap.inclusion",
+        "RelativeMap.inverse",
+        "RelativeMap.is-isomorphism",
+        "RelativeMap.long-exact-maps",
+        "RelativeMap.restrict",
+        "RelativeMap.source",
+        "RelativeMap.source-homology",
+        "RelativeMap.subcomplex-homology-map",
+        "RelativeMap.subcomplex-map",
+        "RelativeMap.target",
+        "RelativeMap.target-homology"
+      ],
+      "invariants": [
+        "Retained full source and target labelled pairs",
+        "Ambient simplicial map carrying every source subcomplex simplex into the target subcomplex",
+        "Oriented quotient chain matrices and integral homology maps natural with the long exact sequence"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-24"
+      }
+    },
+    {
+      "id": "RelativeComplex.pair",
+      "name": "Source and target pairs for a relative simplicial map",
+      "description": "Source and target pairs for a relative simplicial map",
+      "member_representation": "mathematics.foundations.Pair<RelativeSimplicialComplex,RelativeSimplicialComplex>",
+      "membership_rules": [
+        "Both values belong to the actual RelativeComplex Algebra",
+        "First entry is the source pair and second is the target pair"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "RelativeComplex",
+        "RelativeMap",
+        "SimplicialMap"
+      ],
+      "supported_operations": [
+        "RelativeMap.from-map"
+      ],
+      "invariants": [
+        "Both values belong to the actual RelativeComplex Algebra",
+        "First entry is the source pair and second is the target pair"
       ],
       "references": [
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"

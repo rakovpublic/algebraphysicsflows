@@ -194,6 +194,12 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("entire three-map segment", " ".join(records["RelativeComplex.long-exact-segment"]["required_invariants"]))
         self.assertIn("entire list", " ".join(records["RelativeComplex.homology-degrees"]["required_invariants"]))
         self.assertIn("5000000", " ".join(records["RelativeComplex.homology"]["known_limitations"]))
+        self.assertIn("f(A) contained in B", " ".join(records["RelativeMap.from-map"]["required_invariants"]))
+        self.assertIn("images in B give zero columns", " ".join(records["RelativeMap.chain-matrix"]["required_invariants"]))
+        self.assertIn("Ambient contiguity alone is insufficient", " ".join(records["RelativeMap.contiguous"]["required_invariants"]))
+        self.assertIn("all four maps", " ".join(records["RelativeMap.long-exact-maps"]["required_invariants"]))
+        self.assertIn("entire list", " ".join(records["RelativeMap.homology-maps"]["required_invariants"]))
+        self.assertIn("5000000", " ".join(records["RelativeMap.long-exact-maps"]["known_limitations"]))
 
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)

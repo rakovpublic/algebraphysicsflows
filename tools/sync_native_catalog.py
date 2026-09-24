@@ -46,6 +46,7 @@ OWNERS = {
     "IntegralHomologyAlgebra": ("IntegralHomology", "Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation"),
     "FiniteSimplicialMapAlgebra": ("SimplicialMap", "Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps"),
     "RelativeSimplicialAlgebra": ("RelativeComplex", "Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps"),
+    "RelativeSimplicialMapAlgebra": ("RelativeMap", "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps"),
     "FiniteIntegerRelationAlgebra": ("FiniteRelation(Z,Z)", "Finite-support relations on the actual registered integer Algebra"),
     "FiniteIntegerFunctionAlgebra": ("FiniteFunction(Z,Z)", "Total maps between explicit finite integer sets, preserving declared domain and codomain"),
     "FiniteCategoryAlgebra": ("FiniteCategory", "Finite categories with integer object/arrow labels and exhaustively checked composition tables"),
@@ -101,6 +102,7 @@ EXTRA_TESTS = {
     "IntegralHomologyAlgebra": "NativeConstructiveHomologyTest",
     "FiniteSimplicialMapAlgebra": "NativeSimplicialMapTest",
     "RelativeSimplicialAlgebra": "NativeRelativeHomologyTest",
+    "RelativeSimplicialMapAlgebra": "NativeRelativeSimplicialMapTest",
     "FiniteIntegerRelationAlgebra": "NativeRelationTest",
     "FiniteIntegerFunctionAlgebra": "NativeFiniteFunctionTest",
     "FiniteCategoryAlgebra": "NativeCategoryTest",
@@ -149,6 +151,34 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "RelativeSimplicialMapAlgebra": {
+        "from-map": "The first operand is the ambient SimplicialMap and the second contains source then target RelativeComplex values. Require exact ambient boundaries and f(A) contained in B simplex by simplex, not just on vertex sets.",
+        "compose": "Apply the right operand first. Both labelled components of the middle pair must be equal; equality of ambient complexes alone is insufficient.",
+        "inverse": "Defined exactly when the ambient map is a simplicial isomorphism and f(A)=B. The inverse must also preserve the chosen subcomplexes.",
+        "source": "Return the retained source pair (X,A), including both full labelled complexes.",
+        "target": "Return the retained target pair (Y,B), including simplices not reached by the map.",
+        "ambient-map": "Return the validated ambient SimplicialMap X->Y with its complete original boundaries.",
+        "subcomplex-map": "Return the restricted SimplicialMap A->B with the full declared B as target, not just the image of A.",
+        "equal": "Compare both labelled pairs and the ambient vertex map; equality of homology maps or group types is insufficient.",
+        "is-isomorphism": "True exactly when the ambient map is a simplicial isomorphism and its restriction maps A onto all of B.",
+        "identity-on": "Construct the identity pair map, with identity relative chain matrices and induced homology maps.",
+        "inclusion": "Require componentwise inclusions X contained in Y and A contained in B. Use identity vertex labels and retain both full target components.",
+        "absolute": "Extend a SimplicialMap X->Y to (X,empty)->(Y,empty). Relative chain and homology maps agree with the original unreduced maps.",
+        "diagonal": "Extend a SimplicialMap X->Y to (X,X)->(Y,Y). All relative chain groups vanish, while ambient and subcomplex maps remain available.",
+        "chain-matrix": "Use ordered quotient simplex bases and increasing-vertex orientation signs. Collapsed simplices and images in B give zero columns. Rows index the target relative degree and columns the source; no full ambient matrix is required.",
+        "chain-matrices": "Emit relative chain matrices from degree zero through the larger ambient dimension, retaining zero-sized shapes. Two empty ambient complexes give an empty list; one work budget covers the entire list.",
+        "homology-map": "Construct the integral map H_k(X,A)->H_k(Y,B) with both actual retained presentations. Source and target homology construction and the induced map share one work budget.",
+        "homology-maps": "Emit relative integral homology maps from zero through the larger ambient dimension. A single work budget covers the entire list, including homology constructions and matrix calculations.",
+        "source-homology": "Return the retained source pair's constructive integral relative homology in the supplied nonnegative degree.",
+        "target-homology": "Return the retained target pair's constructive integral relative homology in the supplied nonnegative degree.",
+        "ambient-homology-map": "Return the unreduced integral homology map H_k(X)->H_k(Y) induced by the ambient simplicial map.",
+        "subcomplex-homology-map": "Return the unreduced integral homology map H_k(A)->H_k(B) induced by the restricted simplicial map.",
+        "long-exact-maps": "Emit the four vertical maps on H_k(A), H_k(X), H_k(X,A), H_(k-1)(A) into the corresponding target groups, in that order. They commute with inclusion, quotient and connecting maps. At degree zero the fourth map is 0->0 because H_-1=0. One shared work budget covers all four maps; no partial list is returned.",
+        "contiguous": "Require equal source and target pairs. For every X simplex, the union of its images must lie in Y; for every A simplex, that union must also lie in B. Ambient contiguity alone is insufficient. Pair-contiguous maps induce equal relative homology maps.",
+        "image": "Return the pair (f(X),f(A)) of actual image subcomplexes, which need not be the induced complexes on their vertex sets.",
+        "corestrict-image": "Retain the full source pair and vertex map and replace the target by (f(X),f(A)). This need not be an isomorphism when the map collapses simplices or vertices.",
+        "restrict": "The supplied pair (C,D) must satisfy C contained in X and D contained in A. Restrict the ambient vertex map to C and retain the full original target pair, using the first RelativeMap wrapper.",
+    },
     "RelativeSimplicialAlgebra": {
         "from-complexes": "The first complex is X and the second is A. Require A to be a labelled subcomplex of X, not just a complex with a subset of its vertices. Return the RelativeComplex wrapper.",
         "ambient": "Return the complete retained ambient complex X, including all simplex labels.",
@@ -937,6 +967,13 @@ def record(identifier, owner, concept, paths, operation=None):
                          "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
                          "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
                          "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
+    if owner == "RelativeSimplicialMapAlgebra":
+        paths = paths + ["groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+                         "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+                         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+                         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+                         "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
     if owner in ("PresentedAbelianGroupAlgebra", "AbelianGroupElementAlgebra"):
         paths = paths + ["groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
                          "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
@@ -1051,9 +1088,15 @@ def record(identifier, owner, concept, paths, operation=None):
     if owner == "RelativeSimplicialAlgebra":
         value["required_invariants"].append("The retained A is a labelled subcomplex of X. Relative chains are the quotient C(X)/C(A), with increasing-vertex orientations and unreduced integral homology. Inclusion, quotient and connecting maps retain their actual homology presentations.")
         value["known_limitations"] += ["Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-            "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."]
+            "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."]
         value["references"] += ["https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
                                 "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex.html"]
+    if owner == "RelativeSimplicialMapAlgebra":
+        value["required_invariants"].append("The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares.")
+        value["known_limitations"] += ["Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+            "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."]
+        value["references"] += ["https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+                                "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"]
     if owner in ("PresentedAbelianGroupAlgebra", "AbelianGroupElementAlgebra"):
         value["required_invariants"].append("Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type.")
         value["known_limitations"] += ["Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
@@ -1186,6 +1229,10 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("RelativeMap", "Simplicial maps of pairs and natural relative homology maps", "mathematics.topology.RelativeSimplicialMap",
+         ["Retained full source and target labelled pairs", "Ambient simplicial map carrying every source subcomplex simplex into the target subcomplex", "Oriented quotient chain matrices and integral homology maps natural with the long exact sequence"], ["RelativeComplex", "RelativeComplex.pair", "SimplicialMap", "Mat(Z)", "IntegralHomology", "AbelianGroupHomomorphism", "N", "Boolean"]),
+        ("RelativeComplex.pair", "Source and target pairs for a relative simplicial map", "mathematics.foundations.Pair<RelativeSimplicialComplex,RelativeSimplicialComplex>",
+         ["Both values belong to the actual RelativeComplex Algebra", "First entry is the source pair and second is the target pair"], ["RelativeComplex", "RelativeMap", "SimplicialMap"]),
         ("RelativeComplex", "Relative integral simplicial homology and long exact sequence maps", "mathematics.topology.RelativeSimplicialComplex",
          ["Retained labelled ambient complex X and subcomplex A", "Quotient chains on simplices of X outside A with increasing-vertex orientations", "Unreduced integral relative homology and inclusion, quotient, connecting maps"], ["FiniteComplex", "FiniteSet(Z)", "Z", "N", "Boolean", "Mat(Z)", "IntegralHomology", "AbelianGroupType", "AbelianGroupHomomorphism", "SimplicialMap"]),
         ("SimplicialMap", "Finite simplicial maps and induced integral maps", "mathematics.topology.FiniteSimplicialMap",

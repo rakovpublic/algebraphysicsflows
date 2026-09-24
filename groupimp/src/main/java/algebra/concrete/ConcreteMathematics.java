@@ -47,6 +47,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final IntegralHomologyAlgebra integralHomology;
     public final FiniteSimplicialMapAlgebra simplicialMaps;
     public final RelativeSimplicialAlgebra relativeComplexes;
+    public final RelativeSimplicialMapAlgebra relativeMaps;
     public final RationalAffineSpaceAlgebra affineSpaces;
     public final FiniteMarkovAlgebra markovKernels;
     public final RationalTensorAlgebra tensors;
@@ -77,6 +78,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         integralHomology=new IntegralHomologyAlgebra(complexes,integerMatrices,integerVectors,presentedAbelianGroups,abelianGroups,abelianGroupElements,abelianHomomorphisms,naturals,booleans);
         simplicialMaps=new FiniteSimplicialMapAlgebra(complexes,integerFunctions,integerSets,integers,naturals,booleans,integerMatrices,integralHomology,abelianHomomorphisms);
         relativeComplexes=new RelativeSimplicialAlgebra(complexes,integerSets,integers,naturals,booleans,integerMatrices,integralHomology,abelianGroups,abelianHomomorphisms,simplicialMaps);
+        relativeMaps=new RelativeSimplicialMapAlgebra(relativeComplexes,simplicialMaps,integers,naturals,booleans,integerMatrices,integralHomology,abelianHomomorphisms);
         affineSpaces=new RationalAffineSpaceAlgebra(rectangularMatrices,finiteVectors,naturals,booleans);
         markovKernels=new FiniteMarkovAlgebra(integers,integerSets,integerProbabilities,integerFunctions,rectangularMatrices,finiteVectors,rationals,naturals,booleans);
         tensors=new RationalTensorAlgebra(rationals,finiteVectors,rectangularMatrices,naturals,booleans);
@@ -106,6 +108,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         values.add(integralHomology);
         values.add(simplicialMaps);
         values.add(relativeComplexes);
+        values.add(relativeMaps);
         values.addAll(fields); algebras=Collections.unmodifiableList(values);
         for(ConcreteAlgebra<?> algebra : algebras) {
             algebra.register(mathTool);

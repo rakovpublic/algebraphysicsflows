@@ -26,6 +26,7 @@ import mathematics.topology.FiniteSimplicialComplex;
 import mathematics.topology.IntegralHomology;
 import mathematics.topology.FiniteSimplicialMap;
 import mathematics.topology.RelativeSimplicialComplex;
+import mathematics.topology.RelativeSimplicialMap;
 import mathematics.linear.RationalVector;
 import mathematics.linear.IntegerVector;
 import mathematics.linear.IntegerMatrix;
@@ -96,6 +97,12 @@ public final class ConcreteAlgebrasExample {
         System.out.println("Connecting map H1(interval,endpoints) -> H0(endpoints): "+math.flow(math.complexes,Collections.singletonList(interval))
                 .<RelativeSimplicialComplex>performCustomResultOperation("RelativeComplex.from-complexes",endpoints)
                 .<AbelianGroupHomomorphism,BigInteger>performAlgebraUnsafe("connecting-homology",BigInteger.ONE)
+                .<IntegerMatrix>performAlgebraTransfer("smith-matrix").collect());
+        RelativeSimplicialComplex intervalPair=new RelativeSimplicialComplex(interval,endpoints);
+        Map<BigInteger,BigInteger> reverseInterval=new TreeMap<>(); reverseInterval.put(BigInteger.ZERO,BigInteger.ONE); reverseInterval.put(BigInteger.ONE,BigInteger.ZERO);
+        System.out.println("Interval reflection acts by -1 on H1(interval,endpoints): "+math.flow(math.simplicialMaps,Collections.singletonList(new FiniteSimplicialMap(interval,interval,reverseInterval)))
+                .<RelativeSimplicialMap,Pair<RelativeSimplicialComplex,RelativeSimplicialComplex>>performAlgebraUnsafe("RelativeMap.from-map",new Pair<>(intervalPair,intervalPair))
+                .<AbelianGroupHomomorphism,BigInteger>performAlgebraUnsafe("homology-map",BigInteger.ONE)
                 .<IntegerMatrix>performAlgebraTransfer("smith-matrix").collect());
         System.out.println("Projective-plane rational Betti numbers: "+math.flow(math.complexes,Collections.singletonList(projectivePlane))
                 .<BigInteger>performFlatAlgebraTransfer("rational-betti-numbers").collect());

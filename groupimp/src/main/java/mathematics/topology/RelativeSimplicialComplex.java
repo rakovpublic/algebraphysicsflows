@@ -36,7 +36,7 @@ public final class RelativeSimplicialComplex implements Serializable {
         if(degree.signum()<0 || degree.compareTo(BigInteger.valueOf(complex.dimension()))>0) return Collections.emptyList();
         return IntegralSimplicialHomology.orderedBasis(complex,omit,degree.intValueExact());
     }
-    private List<FiniteSet<Integer>> basis(BigInteger degree) { return basis(ambient,subcomplex,degree); }
+    List<FiniteSet<Integer>> basis(BigInteger degree) { return basis(ambient,subcomplex,degree); }
     public int simplexCount(BigInteger degree) { requireDegree(degree); return basis(degree).size(); }
     public List<FiniteSet<BigInteger>> simplexBasis(BigInteger degree) {
         requireDegree(degree); List<FiniteSet<BigInteger>> result=new ArrayList<>();
@@ -77,7 +77,8 @@ public final class RelativeSimplicialComplex implements Serializable {
         for(int k=0;k<=ambient.dimension();k++) result.add(boundaryMatrix(BigInteger.valueOf(k),work)); return Collections.unmodifiableList(result);
     }
     public IntegralHomology homology(BigInteger degree) { requireDegree(degree); return homology(degree,new Computation()); }
-    private IntegralHomology homology(BigInteger degree,Computation work) {
+    IntegralHomology homology(BigInteger degree,Computation work) {
+        requireDegree(degree);
         return new IntegralHomology(boundaryMatrix(degree,work),boundaryMatrix(degree.add(BigInteger.ONE),work),work);
     }
     public List<IntegralHomology> homologyDegrees() {

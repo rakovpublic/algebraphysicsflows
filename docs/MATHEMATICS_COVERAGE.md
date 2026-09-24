@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1350 |
-| DIRECTLY_SUPPORTED | 1107 |
+| Scoped records | 1377 |
+| DIRECTLY_SUPPORTED | 1134 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 966 |
+| IMPLEMENTED | 993 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1034 |
+| MACHINE_TESTED | 1061 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 943 | 943 | 0 | 0 | 0 | 943 | 0 | 0 |
+| Concrete MathTool algebras | 970 | 970 | 0 | 0 | 0 | 970 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -988,7 +988,34 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | RelativeComplex.simplex-basis | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.simplex-basis |
 | RelativeComplex.simplex-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.simplex-count |
 | RelativeComplex.subcomplex | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.subcomplex |
+| RelativeMap.absolute | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.absolute |
+| RelativeMap.ambient-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.ambient-homology-map |
+| RelativeMap.ambient-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.ambient-map |
+| RelativeMap.chain-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.chain-matrices |
+| RelativeMap.chain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.chain-matrix |
+| RelativeMap.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.compose |
+| RelativeMap.contiguous | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.contiguous |
+| RelativeMap.corestrict-image | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.corestrict-image |
+| RelativeMap.diagonal | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.diagonal |
+| RelativeMap.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.equal |
+| RelativeMap.from-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.from-map |
+| RelativeMap.homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.homology-map |
+| RelativeMap.homology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.homology-maps |
+| RelativeMap.identity-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.identity-on |
+| RelativeMap.image | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.image |
+| RelativeMap.inclusion | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.inclusion |
+| RelativeMap.inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.inverse |
+| RelativeMap.is-isomorphism | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.is-isomorphism |
+| RelativeMap.long-exact-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.long-exact-maps |
+| RelativeMap.restrict | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.restrict |
+| RelativeMap.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.source |
+| RelativeMap.source-homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.source-homology |
+| RelativeMap.subcomplex-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.subcomplex-homology-map |
+| RelativeMap.subcomplex-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.subcomplex-map |
+| RelativeMap.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.target |
+| RelativeMap.target-homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.target-homology |
 | RelativeSimplicialAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps |
+| RelativeSimplicialMapAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps |
 | ResidueRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one |
 | S3.apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree; native operation S3.apply |
 | S3.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree; native operation S3.compose |

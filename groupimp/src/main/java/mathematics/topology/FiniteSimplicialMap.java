@@ -18,7 +18,7 @@ public final class FiniteSimplicialMap implements Serializable {
     public FiniteSimplicialMap(FiniteSimplicialComplex source,FiniteSimplicialComplex target,Map<BigInteger,BigInteger> vertices) {
         this(source,target,vertices,new Computation());
     }
-    private FiniteSimplicialMap(FiniteSimplicialComplex source,FiniteSimplicialComplex target,Map<BigInteger,BigInteger> vertices,Computation work) {
+    FiniteSimplicialMap(FiniteSimplicialComplex source,FiniteSimplicialComplex target,Map<BigInteger,BigInteger> vertices,Computation work) {
         this.source=Objects.requireNonNull(source); this.target=Objects.requireNonNull(target); checkSize(source); checkSize(target);
         if(!Objects.requireNonNull(vertices).keySet().equals(vertexSet(source).members()))
             throw MathFailure.undefined("A simplicial vertex map must cover exactly the source vertices");
@@ -62,7 +62,7 @@ public final class FiniteSimplicialMap implements Serializable {
         List<BigInteger> result=new ArrayList<>(); for(Map.Entry<BigInteger,BigInteger> entry : vertices.entrySet()) if(entry.getValue().equals(vertex)) result.add(entry.getKey());
         return Collections.unmodifiableList(result);
     }
-    private FiniteSimplicialComplex image(Computation work) {
+    FiniteSimplicialComplex image(Computation work) {
         Set<FiniteSet<Integer>> faces=new HashSet<>(); for(FiniteSet<Integer> face : source.faces()) faces.add(imageOf(face,work));
         return FiniteSimplicialComplex.fromClosedFaces(faces);
     }
@@ -71,17 +71,18 @@ public final class FiniteSimplicialMap implements Serializable {
     public boolean isVertexSurjective() { return new HashSet<>(vertices.values()).equals(vertexSet(target).members()); }
     public boolean isSurjective() { return image().equals(target); }
     public boolean isIsomorphism() { return isInjective() && isSurjective(); }
-    public FiniteSimplicialMap inverse() {
+    public FiniteSimplicialMap inverse() { return inverse(new Computation()); }
+    FiniteSimplicialMap inverse(Computation work) {
         if(!isInjective()) throw MathFailure.undefined("A simplicial inverse requires a vertex bijection and simplex preservation in both directions");
-        Computation work=new Computation();
         if(!image(work).equals(target)) throw MathFailure.undefined("The image must equal the target complex");
         Map<BigInteger,BigInteger> inverse=new TreeMap<>(); for(Map.Entry<BigInteger,BigInteger> entry : vertices.entrySet()) inverse.put(entry.getValue(),entry.getKey());
         return new FiniteSimplicialMap(target,source,inverse,work);
     }
     /** Apply the right operand first, with equality of the full labelled middle complexes. */
-    public FiniteSimplicialMap compose(FiniteSimplicialMap before) {
+    public FiniteSimplicialMap compose(FiniteSimplicialMap before) { return compose(before,new Computation()); }
+    FiniteSimplicialMap compose(FiniteSimplicialMap before,Computation work) {
         if(!source.equals(before.target)) throw MathFailure.undefined("Simplicial composition requires equal middle complexes");
-        Computation work=new Computation(); work.use(before.vertices.size()); Map<BigInteger,BigInteger> values=new TreeMap<>();
+        work.use(before.vertices.size()); Map<BigInteger,BigInteger> values=new TreeMap<>();
         for(Map.Entry<BigInteger,BigInteger> entry : before.vertices.entrySet()) values.put(entry.getKey(),mapVertex(entry.getValue()));
         return new FiniteSimplicialMap(before.source,target,values,work);
     }
@@ -114,9 +115,9 @@ public final class FiniteSimplicialMap implements Serializable {
     public static FiniteSimplicialMap emptyTo(FiniteSimplicialComplex target) {
         return new FiniteSimplicialMap(new FiniteSimplicialComplex(Collections.emptyList()),target,Collections.emptyMap());
     }
-    public boolean contiguous(FiniteSimplicialMap other) {
+    public boolean contiguous(FiniteSimplicialMap other) { return contiguous(other,new Computation()); }
+    boolean contiguous(FiniteSimplicialMap other,Computation work) {
         if(!source.equals(other.source) || !target.equals(other.target)) throw MathFailure.undefined("Contiguity requires the same source and target complexes");
-        Computation work=new Computation();
         for(FiniteSet<Integer> simplex : source.faces()) if(!target.faces().contains(imageOf(simplex,work).union(other.imageOf(simplex,work)))) return false;
         return true;
     }
@@ -134,8 +135,9 @@ public final class FiniteSimplicialMap implements Serializable {
         return Collections.unmodifiableList(result);
     }
     public IntegerMatrix chainMatrix(BigInteger degree) { return chainMatrix(degree,new Computation()); }
-    private IntegerMatrix chainMatrix(BigInteger degree,Computation work) {
-        List<FiniteSet<Integer>> rows=basis(target,degree),columns=basis(source,degree);
+    IntegerMatrix chainMatrix(BigInteger degree,Computation work) { return chainMatrix(basis(target,degree),basis(source,degree),work); }
+    /** Ordered full or quotient bases; an image outside the selected row basis is zero in the quotient. */
+    IntegerMatrix chainMatrix(List<FiniteSet<Integer>> rows,List<FiniteSet<Integer>> columns,Computation work) {
         work.use((long)rows.size()*columns.size()); BigInteger[][] entries=new BigInteger[rows.size()][columns.size()];
         for(BigInteger[] row : entries) Arrays.fill(row,BigInteger.ZERO);
         Map<FiniteSet<Integer>,Integer> positions=new HashMap<>(); for(int r=0;r<rows.size();r++) positions.put(rows.get(r),r);
@@ -144,7 +146,8 @@ public final class FiniteSimplicialMap implements Serializable {
             work.use((long)labels.size()*labels.size()); for(int label : labels) images.add(mapVertex(BigInteger.valueOf(label)).intValueExact());
             Set<Integer> distinct=new HashSet<>(images); if(distinct.size()!=labels.size()) continue;
             int sign=1; for(int i=0;i<images.size();i++) for(int j=i+1;j<images.size();j++) if(images.get(i)>images.get(j)) sign=-sign;
-            entries[positions.get(new FiniteSet<>(distinct))][c]=BigInteger.valueOf(sign);
+            Integer row=positions.get(new FiniteSet<>(distinct));
+            if(row!=null) entries[row][c]=BigInteger.valueOf(sign);
         }
         return new IntegerMatrix(rows.size(),columns.size(),entries);
     }
@@ -156,7 +159,7 @@ public final class FiniteSimplicialMap implements Serializable {
     public IntegralHomology sourceHomology(BigInteger degree) { return IntegralHomology.atDegree(source,degree); }
     public IntegralHomology targetHomology(BigInteger degree) { return IntegralHomology.atDegree(target,degree); }
     public AbelianGroupHomomorphism homologyMap(BigInteger degree) { return homologyMap(degree,new Computation()); }
-    private AbelianGroupHomomorphism homologyMap(BigInteger degree,Computation work) {
+    AbelianGroupHomomorphism homologyMap(BigInteger degree,Computation work) {
         IntegralHomology first=IntegralHomology.atDegree(source,degree,work);
         IntegralHomology second=source.equals(target)?first:IntegralHomology.atDegree(target,degree,work);
         return first.inducedMap(second,chainMatrix(degree,work),work);
