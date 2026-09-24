@@ -18,6 +18,8 @@ import mathematics.structures.FiniteEquivalence;
 import mathematics.structures.FiniteAdjunction;
 import mathematics.structures.FiniteCone;
 import mathematics.structures.FiniteCocone;
+import mathematics.structures.AbelianGroupType;
+import mathematics.topology.FiniteSimplicialComplex;
 import mathematics.linear.RationalVector;
 import mathematics.linear.RationalMatrix;
 import mathematics.linear.RationalAffineSpace;
@@ -40,6 +42,16 @@ public final class ConcreteAlgebrasExample {
             return;
         }
         System.out.println("MathTool: "+math.mathTool.getName()+", concrete algebras: "+math.algebras().size()+", operations: "+math.operations().size());
+        FiniteSimplicialComplex projectivePlane=new FiniteSimplicialComplex(Arrays.asList(
+                FiniteSet.of(0,1,2),FiniteSet.of(0,1,3),FiniteSet.of(0,2,4),FiniteSet.of(0,3,5),FiniteSet.of(0,4,5),
+                FiniteSet.of(1,2,5),FiniteSet.of(1,3,4),FiniteSet.of(1,4,5),FiniteSet.of(2,3,4),FiniteSet.of(2,3,5)));
+        System.out.println("Integral H1 of the projective plane: "+math.flow(math.complexes,Collections.singletonList(projectivePlane))
+                .<AbelianGroupType,BigInteger>performAlgebraUnsafe("integral-homology",BigInteger.ONE).collect());
+        System.out.println("Its integral torsion factors by degree: "+math.flow(math.complexes,Collections.singletonList(projectivePlane))
+                .<AbelianGroupType>performFlatAlgebraTransfer("integral-homology-groups")
+                .<BigInteger>performFlatAlgebraTransfer("invariant-factors").collect());
+        System.out.println("Its rational Betti numbers: "+math.flow(math.complexes,Collections.singletonList(projectivePlane))
+                .<BigInteger>performFlatAlgebraTransfer("rational-betti-numbers").collect());
         FiniteSet<BigInteger> markovStates=FiniteSet.of(BigInteger.ZERO,BigInteger.ONE);
         FiniteMarkovKernel markov=math.markovKernels.fromMatrix(new RationalMatrix(new Rational[][]{
                 {Rational.of(1,2),Rational.of(1,2)},{Rational.of(1,4),Rational.of(3,4)}}),markovStates,markovStates);

@@ -1,10 +1,11 @@
 package algebra.concrete;
 
 import mathematics.topology.FiniteSimplicialComplex;
+import mathematics.structures.AbelianGroupType;
 import java.math.BigInteger;
 import java.util.*;
 
-/** Finite labelled abstract simplicial complexes; unreduced homology over F2. */
+/** Finite labelled abstract simplicial complexes with unreduced coefficient-specific homology. */
 public final class FiniteSimplicialAlgebra extends ConcreteAlgebra<FiniteSimplicialComplex> {
     public FiniteSimplicialAlgebra(BooleanAlgebra truth,NaturalSemiring naturals,IntegerRing integers) {
         super(carrier("FiniteComplex",FiniteSimplicialComplex.class,
@@ -34,5 +35,18 @@ public final class FiniteSimplicialAlgebra extends ConcreteAlgebra<FiniteSimplic
     }
     private static boolean aboveDimension(FiniteSimplicialComplex complex,BigInteger degree) {
         return degree.compareTo(BigInteger.valueOf(complex.dimension()))>0;
+    }
+    public FiniteSimplicialAlgebra(BooleanAlgebra truth,NaturalSemiring naturals,IntegerRing integers,AbelianGroupTypeAlgebra groups) {
+        this(truth,naturals,integers);
+        binary("integral-homology",algebra(),naturals.algebra(),groups.algebra(),false,FiniteSimplicialComplex::integralHomology);
+        unaryFlat("integral-homology-groups",algebra(),groups.algebra(),false,FiniteSimplicialComplex::integralHomologyGroups);
+        binary("rational-betti-number",algebra(),naturals.algebra(),naturals.algebra(),false,(c,k) -> c.integralHomology(k).freeRank());
+        unaryFlat("rational-betti-numbers",algebra(),naturals.algebra(),false,c -> {
+            List<BigInteger> result=new ArrayList<>();
+            for(AbelianGroupType group : c.integralHomologyGroups()) result.add(group.freeRank()); return result;
+        });
+        flat("boundary-invariant-factors",algebra(),naturals.algebra(),naturals.algebra(),false,FiniteSimplicialComplex::integralBoundaryInvariants);
+        law("Integral homology is unreduced, with ascending vertex orientation and Smith invariant factors; rational Betti numbers are the integral free ranks.");
+        law("The existing betti-number and betti-numbers operations retain their F2 coefficients; torsion can distinguish them from rational Betti numbers.");
     }
 }

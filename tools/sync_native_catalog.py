@@ -36,7 +36,8 @@ OWNERS = {
     "RationalSampleAlgebra": ("Sample(Q)", "Finite ordered rational samples retaining repeated observations"),
     "FiniteProbabilityAlgebra": ("FiniteDistribution(Z)", "Finite integer distributions with exact nonnegative rational masses summing to one"),
     "FiniteMarkovAlgebra": ("FiniteMarkov(Z)", "Exact rational stochastic kernels between explicit finite integer state sets, including empty source sets"),
-    "FiniteSimplicialAlgebra": ("FiniteComplex", "Finite abstract simplicial complexes with integer labels and unreduced homology over F2"),
+    "FiniteSimplicialAlgebra": ("FiniteComplex", "Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers"),
+    "AbelianGroupTypeAlgebra": ("AbelianGroupType", "Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors"),
     "FiniteIntegerRelationAlgebra": ("FiniteRelation(Z,Z)", "Finite-support relations on the actual registered integer Algebra"),
     "FiniteIntegerFunctionAlgebra": ("FiniteFunction(Z,Z)", "Total maps between explicit finite integer sets, preserving declared domain and codomain"),
     "FiniteCategoryAlgebra": ("FiniteCategory", "Finite categories with integer object/arrow labels and exhaustively checked composition tables"),
@@ -83,6 +84,7 @@ EXTRA_TESTS = {
     "FiniteProbabilityAlgebra": "NativeStatisticsProbabilityTest",
     "FiniteMarkovAlgebra": "NativeMarkovTest",
     "FiniteSimplicialAlgebra": "NativeTopologyTest",
+    "AbelianGroupTypeAlgebra": "NativeAbelianGroupTest",
     "FiniteIntegerRelationAlgebra": "NativeRelationTest",
     "FiniteIntegerFunctionAlgebra": "NativeFiniteFunctionTest",
     "FiniteCategoryAlgebra": "NativeCategoryTest",
@@ -131,6 +133,38 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "AbelianGroupTypeAlgebra": {
+        "direct-sum": "Return the isomorphism type of the finite direct sum, combining free ranks and canonically normalizing cyclic factors.",
+        "tensor-product": "Tensor over Z. Free ranks multiply; free-torsion pairs contribute repeated cyclic factors and torsion pairs contribute gcd factors.",
+        "hom-group": "Return the abelian-group isomorphism type Hom_Z(first,second), with source first and target second. Individual homomorphisms and chosen generators are not returned.",
+        "tor1": "Return Tor_1^Z(first,second); free summands contribute zero and pairs of cyclic torsion orders contribute their gcd.",
+        "ext1": "Return Ext^1_Z(first,second), with source first and target second. A cyclic source of order n contributes target/n*target; free source summands contribute zero. No extension witness is constructed.",
+        "equal": "Compare canonical free rank and torsion factors; this is isomorphism-type equality, not equality of chosen presentations.",
+        "free-rank": "Return the nonnegative arbitrary-precision rank of the free direct summand.",
+        "torsion-factor-count": "Return the number of nontrivial canonical cyclic torsion invariant factors.",
+        "minimal-generators": "Return free rank plus the number of nontrivial invariant factors, the minimal number of group generators.",
+        "is-finite": "A finitely generated abelian group is finite exactly when its free rank is zero.",
+        "is-torsion-free": "The torsion factor list is empty; this includes the trivial group.",
+        "is-cyclic": "Accept a finite group with at most one torsion factor, or Z. The trivial group is cyclic.",
+        "is-trivial": "Both the free rank and the torsion factor count are zero.",
+        "order": "The free rank must be zero. Return the product of torsion factors; the trivial group has order one. Infinite order is undefined in N.",
+        "exponent": "The free rank must be zero. Return the largest invariant factor, or one for the trivial group; no finite exponent exists for a nonzero free summand.",
+        "torsion-part": "Retain the torsion invariant factors and set free rank to zero.",
+        "free-part": "Retain the free rank and discard torsion factors, representing the quotient by torsion up to isomorphism.",
+        "invariant-factors": "Emit nontrivial cyclic torsion orders, each greater than one and dividing the next. Free rank is separate; a torsion-free group emits an empty list.",
+        "repeat": "Take the direct sum of the supplied natural number of copies; zero copies give the trivial group. Return the first group carrier's wrapper.",
+        "free-on": "Construct Z^n for the supplied natural number n; zero gives the trivial group.",
+        "cyclic": "Construct Z/nZ for n in N, with n=0 denoting Z and n=1 the trivial group.",
+        "zero": "The direct-sum identity is the trivial group, with rank zero and no torsion factors.",
+        "one": "The tensor-product identity is Z, with rank one and no torsion factors.",
+    },
+    "FiniteSimplicialAlgebra": {
+        "integral-homology": "Return unreduced H_k(-;Z) as a canonical abelian-group isomorphism type. The natural degree may be arbitrarily large; degrees above the complex dimension give the trivial group. Boundaries use increasing vertex orientation.",
+        "integral-homology-groups": "Emit unreduced integral homology types in degrees zero through the complex dimension, including trivial groups. The empty complex emits an empty list; all degrees share one Smith-reduction budget.",
+        "rational-betti-number": "Return the integral free rank, equal to dim_Q H_k(-;Q). This differs from the existing F2 Betti number when torsion contributes; above-dimension degrees give zero.",
+        "rational-betti-numbers": "Emit unreduced rational Betti numbers in ascending degree order; these are the integral free ranks. The empty complex emits an empty list.",
+        "boundary-invariant-factors": "Emit positive nonzero Smith factors of the oriented integral boundary from degree k to k-1, including unit factors. Degree zero and above-dimension boundaries emit an empty list; these are not just homology torsion factors.",
+    },
     "FiniteMarkovAlgebra": {
         "compose": "Apply the second kernel first and then the first kernel. The declared middle finite state sets and actual outcome Algebra must agree exactly; unused codomain labels still participate in typing. Transition matrices multiply P_second * P_first.",
         "domain": "Return the complete declared source set in increasing integer-label order, including states with no incoming transitions.",
@@ -655,6 +689,13 @@ def record(identifier, owner, concept, paths, operation=None):
         tests.append("groupimp/src/test/java/operations/NativePolynomialChainsTest.java")
     if owner == "FiniteMarkovAlgebra":
         paths = paths + ["groupimp/src/main/java/mathematics/probability/FiniteMarkovKernel.java"]
+    if owner == "AbelianGroupTypeAlgebra":
+        paths = paths + ["groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"]
+    if owner == "FiniteSimplicialAlgebra":
+        tests.append("groupimp/src/test/java/operations/NativeIntegralHomologyTest.java")
+        paths = paths + ["groupimp/src/main/java/mathematics/topology/FiniteSimplicialComplex.java",
+                         "groupimp/src/main/java/mathematics/topology/IntegralSimplicialHomology.java",
+                         "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
     value = {
         "id": identifier, "mathematical_area": "Concrete MathTool algebras",
         "subfield": owner, "concept": concept, "specification_section": 0,
@@ -723,8 +764,15 @@ def record(identifier, owner, concept, paths, operation=None):
         value["references"].append("https://python.quantecon.org/finite_markov.html")
     if owner == "FiniteSimplicialAlgebra":
         value["known_limitations"] += ["Construction materializes faces and caps each input facet at 20 vertices.",
-            "Homology computes unreduced F2 dimensions only; no integral torsion, persistence or homeomorphism decision."]
+            "Integral homology, rational Betti numbers and boundary Smith factors allow at most 256 simplices in each required degree and share a 5000000-unit Smith-reduction budget per complete calculation. Exhaustion raises IMPLEMENTATION_FAILURE, never a partial invariant list. BigInteger coefficient bit lengths are unbounded.",
+            "Homology returns isomorphism types, not cycle representatives, chosen generators or induced maps. No persistence, cup products or homeomorphism decision is implemented. Existing betti-number and betti-numbers retain F2 coefficients."]
         value["references"].append("https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html")
+        value["references"].append("https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_examples.html")
+    if owner == "AbelianGroupTypeAlgebra":
+        value["required_invariants"].append("Free rank is nonnegative; canonical torsion factors are greater than one and each divides the next. Equality classifies group isomorphism types.")
+        value["known_limitations"] += ["At most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; exhaustion raises IMPLEMENTATION_FAILURE. Free rank and coefficient bit lengths are arbitrary precision. Normalization uses gcd/lcm without prime factorization.",
+            "No chosen group elements, presentations, generators, homomorphisms or extension witnesses are represented. Hom, tensor, Tor_1 and Ext^1 classify resulting abelian groups only; arbitrary modules and higher derived functors are outside this scope."]
+        value["references"].append("https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html")
     if owner == "FiniteIntegerRelationAlgebra":
         value["known_limitations"].append("Finite support only; equality includes source/target Algebra identity and pair equality. Function totality is restricted to an explicit finite carrier.")
     if owner == "FiniteIntegerFunctionAlgebra":
@@ -846,6 +894,8 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("AbelianGroupType", "Finitely generated abelian-group isomorphism types", "mathematics.structures.AbelianGroupType",
+         ["Nonnegative arbitrary-precision free rank", "Canonical cyclic torsion factors greater than one, each dividing the next", "No chosen elements, generators or maps; equality is group isomorphism-type equality"], ["N", "Boolean", "FiniteComplex"]),
         ("FiniteMarkov(Z)", "Finite exact stochastic kernels", "mathematics.probability.FiniteMarkovKernel",
          ["Actual integer outcome Algebra retained", "Explicit source and target sets in increasing label order", "One normalized rational row measure per source state, supported in the target set"],
          ["Z", "Q", "N", "FiniteSet(Z)", "FiniteDistribution(Z)", "FiniteFunction(Z,Z)", "Mat(Q)", "Vec(Q)"]),

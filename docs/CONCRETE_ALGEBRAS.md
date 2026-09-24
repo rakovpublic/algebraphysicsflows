@@ -1,6 +1,6 @@
 # Concrete algebras connected to MathTool
 
-`new ConcreteMathematics()` creates real `Algebra<T>` instances and registers their native operations in the existing `MathTool`. It includes N, Z, Q, Q(i), H(Q), Boolean, Q^2, Mat2(Q), Vec(Q), Mat(Q), Affine(Q), Tensor(Q), Exterior(Q), Q[x], Q(x), Poly(Q), PolynomialMap(Q), PolynomialForm(Q), PolynomialCell(Q), PolynomialChain(Q), S3, Z/6Z, finite sets of integers, rational samples, finite integer probability measures and stochastic kernels, finite simplicial complexes, finite integer relations/functions, finite categories/functors/natural transformations, and F5 (named Z/5Z). Each construction owns its algebra instances; separate tools do not share mutable registrations.
+`new ConcreteMathematics()` creates real `Algebra<T>` instances and registers their native operations in the existing `MathTool`. It includes N, Z, Q, Q(i), H(Q), Boolean, Q^2, Mat2(Q), Vec(Q), Mat(Q), Affine(Q), Tensor(Q), Exterior(Q), Q[x], Q(x), Poly(Q), PolynomialMap(Q), PolynomialForm(Q), PolynomialCell(Q), PolynomialChain(Q), S3, Z/6Z, finite sets of integers, rational samples, finite integer probability measures and stochastic kernels, finite simplicial complexes with integral homology, finitely generated abelian-group types, finite integer relations/functions, finite categories/functors/natural transformations, and F5 (named Z/5Z). Each construction owns its algebra instances; separate tools do not share mutable registrations.
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
@@ -43,7 +43,8 @@ List<String> values = math.flow(math.naturals,
 | FiniteConeAlgebra / FiniteCone | equality -> Boolean; lift -> Z; flat mediators -> Z | diagram; vertex; leg-map; flat legs; natural-transformation; is-limit | leg; reindex/map by a functor; limit; flat cones-at; from-transformation |
 | FiniteCoconeAlgebra / FiniteCocone | equality -> Boolean; descend -> Z; flat mediators -> Z | diagram; vertex; leg-map; flat legs; natural-transformation; is-colimit; opposite -> Cone | leg; reindex/map by a functor; colimit; flat cocones-at; from-transformation; opposite-cone |
 | FiniteIntegerRelationAlgebra / FiniteRelation(Z,Z) | union, intersection, compose | inverse, transitive-closure; domain/range -> finite set; cardinality -> N | image/preimage -> second set carrier; contains/function checks -> Boolean; finite identity |
-| FiniteSimplicialAlgebra / FiniteComplex | union, intersection | dimension/Euler characteristic -> Z; vertex-count -> N | equality/subcomplex -> Boolean; skeleton; degree-indexed simplex count/Betti number; flat Betti numbers -> N |
+| FiniteSimplicialAlgebra / FiniteComplex | union, intersection | dimension/Euler characteristic -> Z; vertex-count -> N; flat integral homology types and F2/rational Betti numbers | equality/subcomplex -> Boolean; skeleton; degree-indexed simplex count, integral homology and F2/rational Betti number; flat integral boundary invariant factors |
+| AbelianGroupTypeAlgebra / AbelianGroupType | direct-sum, tensor-product, hom-group, tor1, ext1; equality -> Boolean | free rank; minimal generator and torsion factor counts; finite/cyclic/trivial/torsion-free checks; finite order/exponent; torsion/free parts; flat invariant factors | repeat by N -> first group carrier; free-on and cyclic from N; trivial and Z constants |
 | RationalSampleAlgebra / Sample(Q) | concatenate | size -> N, mean/variance -> Q, center | covariance -> Q; scale by Q; flat transfer elements -> Q |
 | FiniteProbabilityAlgebra / FiniteDistribution(Z) | — | support -> finite set, support-size -> N, expectation/variance -> Q | event/point probability -> Q; conditioning; flat transfer outcomes -> Z; point mass from Z |
 | FiniteMarkovAlgebra / FiniteMarkov(Z) | typed compose; equality -> Boolean | domain/codomain; counts; row distributions; deterministic function and matrix conversions; communicating/recurrent classes; stationary extremes and unique stationary law | apply to a distribution -> second carrier; powers; flat marginal orbits; transition probabilities; time reversal; detailed balance; absorbing events; hitting probabilities and mean times -> Vec(Q) |
@@ -111,7 +112,7 @@ See [ConcreteAlgebrasTest](../groupimp/src/test/java/mathematics/ConcreteAlgebra
 Same-algebra unary flat operations use `IOneOperandFlatOperation` and `performOneOperandFlatOperation(name)` (or `performFlatOperation(name)`). Finite-set `subsets` is an example. Cross-algebra unary flat operations use the existing `ITransferFlatOperation`, whose return type is corrected to `List<IAlgebraItem<V>>`; `elements` transfers a finite set to its member algebra. Empty results remain valid, and every emitted member keeps its target algebra.
 
 
-The default initializer currently installs 37 algebras and 678 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
+The default initializer currently installs 38 algebras and 706 named operations. Every registered operation is exercised through its native interface with an independently specified expected result in ConcreteAlgebrasTest. Sample statistics distinguish population and sample denominators; finite probability measures retain normalized rational masses. Conditioning on probability zero is undefined. Distributions retain their actual outcome Algebra, so two different carriers with the same Java member class are not silently identified.
 
 For overloaded custom-member and unsafe operations, the most specific compatible second-operand class is selected (exact matches take priority). Re-registering the same second class replaces that overload. Ambiguous supertypes are rejected. Mathematical domains sharing one Java class need distinct operation names; overload selection does not infer a domain from a value.
 
@@ -376,7 +377,41 @@ List<String> betti = math.flow(math.complexes, Collections.singletonList(circle)
         .<BigInteger>performFlatAlgebraTransfer("betti-numbers").collect(); // ["1", "1"]
 ~~~
 
-The constructor closes facets under nonempty faces. Betti numbers are unreduced dimensions over F2; equality compares labelled simplex sets. The empty complex has dimension -1, Euler characteristic zero and an empty Betti list. Facet materialization is limited to 20 vertices. There is no integral torsion or persistent-homology computation. The homology and Euler-characteristic conventions follow the standard finite simplicial definitions in [Hatcher, chapter 2](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf). NativeTopologyTest checks circles, filled triangles, the tetrahedron boundary, all 64 labelled graphs on four vertices and serialized flows.
+The constructor closes facets under nonempty faces; equality compares labelled simplex sets. The existing `betti-number` and `betti-numbers` operations use unreduced F2 homology. The empty complex has dimension -1, Euler characteristic zero and empty degree lists. Facet materialization is limited to 20 vertices. The homology and Euler-characteristic conventions follow the standard finite simplicial definitions in [Hatcher, chapter 2](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf).
+
+`integral-homology` returns H_k(-;Z) in the actual `math.abelianGroups` carrier; `integral-homology-groups` emits degrees zero through the complex dimension, including trivial groups. `rational-betti-number` and its flat plural return their free ranks. `boundary-invariant-factors` emits positive nonzero Smith factors of the oriented boundary from degree k to k-1, including ones. Boundary orientation uses increasing vertex labels. Degrees above the dimension give a trivial group, zero Betti number or empty boundary list, including arbitrarily large BigInteger degrees.
+
+~~~java
+FiniteSimplicialComplex projectivePlane = new FiniteSimplicialComplex(Arrays.asList(
+        FiniteSet.of(0,1,2), FiniteSet.of(0,1,3), FiniteSet.of(0,2,4), FiniteSet.of(0,3,5), FiniteSet.of(0,4,5),
+        FiniteSet.of(1,2,5), FiniteSet.of(1,3,4), FiniteSet.of(1,4,5), FiniteSet.of(2,3,4), FiniteSet.of(2,3,5)));
+List<String> h1 = math.flow(math.complexes, Collections.singletonList(projectivePlane))
+        .<AbelianGroupType,BigInteger>performAlgebraUnsafe("integral-homology", BigInteger.ONE)
+        .collect(); // ["AbelianGroup(rank=0, torsion=[2])"]
+List<String> torsion = math.flow(math.complexes, Collections.singletonList(projectivePlane))
+        .<AbelianGroupType>performFlatAlgebraTransfer("integral-homology-groups")
+        .<BigInteger>performFlatAlgebraTransfer("invariant-factors").collect(); // ["2"]
+~~~
+
+This projective plane has integral homology [Z, Z/2Z, 0], rational Betti numbers [1,0,0], and F2 Betti numbers [1,1,1]. Integral calculations allow at most 256 simplices in each required degree and share a 5,000,000-unit Smith-reduction budget across an entire degree list. Exhaustion raises IMPLEMENTATION_FAILURE; coefficient bit lengths remain unbounded. The result describes group isomorphism types; chosen cycles, induced maps, cup products and persistence remain unimplemented. The existing three-argument FiniteSimplicialAlgebra constructor retains its original operations; the new four-argument overload adds these operations using the supplied AbelianGroupTypeAlgebra.
+
+NativeIntegralHomologyTest checks Smith factors against independent minors for 625 integer 2 by 2 and 512 binary 3 by 3 matrices, and homology against spheres, balls, a torus, the projective plane, Moore spaces with torsion orders 3 through 10, suspensions and disconnected examples. NativeTopologyTest preserves the original F2 checks. Native wrappers and serialized homology flows are also covered.
+
+## Finitely generated abelian-group types
+
+`math.abelianGroups` registers `AbelianGroupType`, a canonical representation of Z^r plus finite cyclic summands with orders d_1 | ... | d_t, each greater than one. It classifies groups up to isomorphism, without chosen elements or homomorphisms. Direct sum and tensor product over Z form a commutative semiring of these types, with the trivial group as zero and Z as one. Normalization uses gcd/lcm and requires no prime factorization.
+
+`hom-group` and `ext1` take the source first and target second; `tor1` computes Tor_1 over Z. Results are group types rather than individual maps or extension witnesses. `repeat` takes a natural multiplicity; `free-on` constructs Z^n and `cyclic` constructs Z/nZ, including n=0 for Z and n=1 for the trivial group. `order` and `exponent` require finite groups and both return one for the trivial group. `minimal-generators` returns r+t. Flat `invariant-factors` emits torsion orders only.
+
+~~~java
+AbelianGroupType c6 = AbelianGroupType.cyclic(BigInteger.valueOf(6));
+AbelianGroupType c4 = AbelianGroupType.cyclic(BigInteger.valueOf(4));
+List<String> tensor = math.flow(math.abelianGroups, Collections.singletonList(c6))
+        .performOperation("tensor-product", c4)
+        .<BigInteger>performFlatAlgebraTransfer("invariant-factors").collect(); // ["2"]
+~~~
+
+Construction and arithmetic allow at most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; larger calculations raise IMPLEMENTATION_FAILURE. Free rank and coefficient sizes are arbitrary precision. NativeAbelianGroupTest compares normalization with independent element-order histograms for 144 pairs of cyclic groups, counts finite homomorphisms independently, checks tensor/Hom/Tor/Ext identities and validates actual wrappers and serialized flows. General module presentations and homomorphism witnesses remain future work.
 
 ## Finite optimization and discrete dynamics
 

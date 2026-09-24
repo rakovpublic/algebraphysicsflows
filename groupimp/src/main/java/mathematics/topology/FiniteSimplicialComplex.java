@@ -2,11 +2,12 @@ package mathematics.topology;
 
 import mathematics.core.MathFailure;
 import mathematics.foundations.FiniteSet;
+import mathematics.structures.AbelianGroupType;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.*;
 
-/** Finite abstract simplicial complexes; homology dimensions over F_2 only, unreduced. */
+/** Finite abstract simplicial complexes, with unreduced F2 dimensions and integral homology types. */
 public final class FiniteSimplicialComplex implements Serializable {
     private static final long serialVersionUID=1L;
     private final Set<FiniteSet<Integer>> simplices;
@@ -53,6 +54,15 @@ public final class FiniteSimplicialComplex implements Serializable {
         if(dimension<0) throw MathFailure.invalid("Negative homology degree");
         if(dimension>dimension()) return 0;
         return simplices(dimension).size()-boundaryRank(dimension)-boundaryRank(dimension+1);
+    }
+    public AbelianGroupType integralHomology(BigInteger degree) {
+        if(degree.signum()<0) throw MathFailure.undefined("Homology degree must be nonnegative");
+        return degree.compareTo(BigInteger.valueOf(dimension()))>0?AbelianGroupType.ZERO:new IntegralSimplicialHomology(this).group(degree.intValueExact());
+    }
+    public List<AbelianGroupType> integralHomologyGroups() { return new IntegralSimplicialHomology(this).groups(); }
+    public List<BigInteger> integralBoundaryInvariants(BigInteger degree) {
+        if(degree.signum()<0) throw MathFailure.undefined("Boundary degree must be nonnegative");
+        return degree.compareTo(BigInteger.valueOf(dimension()))>0?Collections.emptyList():new IntegralSimplicialHomology(this).boundary(degree.intValueExact());
     }
     private int boundaryRank(int degree) {
         if(degree==0) return 0;

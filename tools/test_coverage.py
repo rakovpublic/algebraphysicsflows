@@ -150,6 +150,14 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("strictly positive", " ".join(records["FiniteMarkov(Z).reverse"]["required_invariants"]))
         self.assertIn("infinite expectation", " ".join(records["FiniteMarkov(Z).mean-hitting-times"]["required_invariants"]))
         self.assertIn("5000000", " ".join(records["FiniteMarkov(Z).power"]["known_limitations"]))
+        self.assertIn("source first", " ".join(records["AbelianGroupType.hom-group"]["required_invariants"]))
+        self.assertIn("source first", " ".join(records["AbelianGroupType.ext1"]["required_invariants"]))
+        self.assertIn("n=0 denoting Z", " ".join(records["AbelianGroupType.cyclic"]["required_invariants"]))
+        self.assertIn("free rank must be zero", " ".join(records["AbelianGroupType.order"]["required_invariants"]))
+        self.assertIn("unreduced", " ".join(records["FiniteComplex.integral-homology"]["required_invariants"]))
+        self.assertIn("existing F2", " ".join(records["FiniteComplex.rational-betti-number"]["required_invariants"]))
+        self.assertIn("including unit factors", " ".join(records["FiniteComplex.boundary-invariant-factors"]["required_invariants"]))
+        self.assertIn("5000000", " ".join(records["FiniteComplex.integral-homology-groups"]["known_limitations"]))
 
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)

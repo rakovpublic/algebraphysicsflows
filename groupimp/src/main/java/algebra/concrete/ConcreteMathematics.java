@@ -18,7 +18,8 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final ResidueRing residues=new ResidueRing(java.math.BigInteger.valueOf(6),integers,booleans);
     public final NaturalSemiring naturals=new NaturalSemiring(integers);
     public final SymmetricGroup permutations=new SymmetricGroup(3,naturals,integers,booleans);
-    public final FiniteSimplicialAlgebra complexes=new FiniteSimplicialAlgebra(booleans,naturals,integers);
+    public final AbelianGroupTypeAlgebra abelianGroups=new AbelianGroupTypeAlgebra(naturals,booleans);
+    public final FiniteSimplicialAlgebra complexes=new FiniteSimplicialAlgebra(booleans,naturals,integers,abelianGroups);
     public final RationalPolynomialRing polynomials=new RationalPolynomialRing(rationals,naturals);
     public final RationalFunctionField rationalFunctions=new RationalFunctionField(polynomials,rationals,booleans);
     public final IntegerSetAlgebra integerSets=new IntegerSetAlgebra(integers,booleans,naturals,rationals,polynomials);
@@ -81,6 +82,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         values.add(polynomialForms);
         values.add(polynomialCells); values.add(polynomialChains);
         values.add(markovKernels);
+        values.add(abelianGroups);
         values.addAll(fields); algebras=Collections.unmodifiableList(values);
         for(ConcreteAlgebra<?> algebra : algebras) {
             algebra.register(mathTool);

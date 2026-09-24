@@ -24687,25 +24687,30 @@
       "concept": "homology",
       "specification_section": 23,
       "record_kind": "OPERATION",
-      "domain_A": "FiniteSimplicialComplex",
+      "domain_A": "FiniteComplex",
       "domain_B": null,
-      "domain_C": "N",
-      "operation_signature": "betti-F2: FiniteSimplicialComplex -> N*",
+      "domain_C": "AbelianGroupType",
+      "operation_signature": "FiniteComplex -> List(AbelianGroupType)",
       "arity": 1,
       "scalar_or_flat": "LIST",
-      "representation_scope": "Unreduced Betti numbers of finite simplicial complexes over F2; no integer torsion information",
+      "representation_scope": "Unreduced integral homology isomorphism types of finite simplicial complexes, including free rank and torsion; F2 and rational Betti numbers are available separately",
       "required_invariants": [
-        "Boundary matrices over F2",
-        "Betti dimension is kernel dimension minus image dimension"
+        "Oriented integer boundary matrices use increasing vertex labels and compose to zero.",
+        "Smith factors determine torsion; free rank is chain rank minus the two adjacent boundary ranks.",
+        "Degree lists retain trivial groups and use unreduced homology."
       ],
       "representation_status": "DIRECTLY_SUPPORTED",
-      "framework_mapping": "topology/FiniteSimplicialComplex provides the stated scoped member/operation; Domain and checked operations enforce declared carriers.",
+      "framework_mapping": "FiniteSimplicialAlgebra registers scalar mixed and flat transfer operations in the original MathTool; results use the actual AbelianGroupType Algebra wrappers.",
       "implementation_status": "PARTIAL",
       "implementation_paths": [
-        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialComplex.java"
+        "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralSimplicialHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
       ],
       "tests": [
-        "groupimp/src/test/java/mathematics/ProbabilityAppliedTest.java"
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java",
+        "groupimp/src/test/java/operations/NativeTopologyTest.java",
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -24714,22 +24719,24 @@
       "review_notes": "Provisional mapping; specialist review pending.",
       "formal_verification_status": "UNVERIFIED",
       "known_limitations": [
-        "Unreduced Betti numbers of finite simplicial complexes over F2; no integer torsion information only. No generalization beyond this scope is certified."
+        "Finite stored simplicial complexes only; no cycle representatives, induced homology maps, persistence or cup products.",
+        "Integral calculations allow 256 simplices in each required degree and a shared 5000000-unit Smith-reduction budget; exhaustion raises IMPLEMENTATION_FAILURE. Coefficient bit lengths are unbounded."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
-        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
         "definition_source": "docs/UNIVERSAL_MATHEMATICS_SPEC.md",
-        "implementation_source": "groupimp/src/main/java/mathematics/topology/FiniteSimplicialComplex.java",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
         "implemented_by": "Codex",
         "generated_by_model": "not recorded",
         "reviewed_by": null,
-        "version": "1",
-        "date": "2026-09-21",
+        "version": "2",
+        "date": "2026-09-24",
         "assumptions": [
           "Classification is scoped, provisional and not a proof."
         ],
@@ -25034,6 +25041,71 @@
       },
       "msc_area": "54",
       "assessment_depth": "INITIAL_TRIAGE"
+    },
+    {
+      "id": "concrete-algebra.AbelianGroupTypeAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupTypeAlgebra",
+      "concept": "AbelianGroupTypeAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "AbelianGroupType",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Free rank is nonnegative; canonical torsion factors are greater than one and each divides the next. Equality classifies group isomorphism types."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeAbelianGroupTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; exhaustion raises IMPLEMENTATION_FAILURE. Free rank and coefficient bit lengths are arbitrary precision. Normalization uses gcd/lcm without prime factorization.",
+        "No chosen group elements, presentations, generators, homomorphisms or extension witnesses are represented. Hom, tensor, Tor_1 and Ext^1 classify resulting abelian groups only; arbitrary modules and higher derived functors are outside this scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
     },
     {
       "id": "concrete-algebra.BooleanAlgebra",
@@ -25803,7 +25875,7 @@
       "operation_signature": null,
       "arity": null,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Finite abstract simplicial complexes with integer labels and unreduced homology over F2",
+      "representation_scope": "Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -25813,11 +25885,15 @@
       "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
-        "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java"
+        "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralSimplicialHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeTopologyTest.java"
+        "groupimp/src/test/java/operations/NativeTopologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -25829,13 +25905,15 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Construction materializes faces and caps each input facet at 20 vertices.",
-        "Homology computes unreduced F2 dimensions only; no integral torsion, persistence or homeomorphism decision."
+        "Integral homology, rational Betti numbers and boundary Smith factors allow at most 256 simplices in each required degree and share a 5000000-unit Smith-reduction budget per complete calculation. Exhaustion raises IMPLEMENTATION_FAILURE, never a partial invariant list. BigInteger coefficient bit lengths are unbounded.",
+        "Homology returns isomorphism types, not cycle representatives, chosen generators or induced maps. No persistence, cup products or homeomorphism decision is implemented. Existing betti-number and betti-numbers retain F2 coefficients."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_examples.html"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -49431,7 +49509,7 @@
       "operation_signature": "FiniteComplex x FiniteComplex -> FiniteComplex",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.union",
+      "representation_scope": "Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.union",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -49442,11 +49520,15 @@
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
         "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
-        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralSimplicialHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeTopologyTest.java"
+        "groupimp/src/test/java/operations/NativeTopologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -49458,13 +49540,15 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Construction materializes faces and caps each input facet at 20 vertices.",
-        "Homology computes unreduced F2 dimensions only; no integral torsion, persistence or homeomorphism decision."
+        "Integral homology, rational Betti numbers and boundary Smith factors allow at most 256 simplices in each required degree and share a 5000000-unit Smith-reduction budget per complete calculation. Exhaustion raises IMPLEMENTATION_FAILURE, never a partial invariant list. BigInteger coefficient bit lengths are unbounded.",
+        "Homology returns isomorphism types, not cycle representatives, chosen generators or induced maps. No persistence, cup products or homeomorphism decision is implemented. Existing betti-number and betti-numbers retain F2 coefficients."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_examples.html"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -49500,7 +49584,7 @@
       "operation_signature": "FiniteComplex x FiniteComplex -> FiniteComplex",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.intersection",
+      "representation_scope": "Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.intersection",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -49511,11 +49595,15 @@
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
         "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
-        "groupimp/src/main/java/operations/simple/ClosedOperation.java"
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralSimplicialHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeTopologyTest.java"
+        "groupimp/src/test/java/operations/NativeTopologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -49527,13 +49615,15 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Construction materializes faces and caps each input facet at 20 vertices.",
-        "Homology computes unreduced F2 dimensions only; no integral torsion, persistence or homeomorphism decision."
+        "Integral homology, rational Betti numbers and boundary Smith factors allow at most 256 simplices in each required degree and share a 5000000-unit Smith-reduction budget per complete calculation. Exhaustion raises IMPLEMENTATION_FAILURE, never a partial invariant list. BigInteger coefficient bit lengths are unbounded.",
+        "Homology returns isomorphism types, not cycle representatives, chosen generators or induced maps. No persistence, cup products or homeomorphism decision is implemented. Existing betti-number and betti-numbers retain F2 coefficients."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_examples.html"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -49569,7 +49659,7 @@
       "operation_signature": "FiniteComplex x FiniteComplex -> Boolean",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.equal",
+      "representation_scope": "Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.equal",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -49580,11 +49670,15 @@
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
         "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
-        "groupimp/src/main/java/operations/simple/CustomResultOperation.java"
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralSimplicialHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeTopologyTest.java"
+        "groupimp/src/test/java/operations/NativeTopologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -49596,13 +49690,15 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Construction materializes faces and caps each input facet at 20 vertices.",
-        "Homology computes unreduced F2 dimensions only; no integral torsion, persistence or homeomorphism decision."
+        "Integral homology, rational Betti numbers and boundary Smith factors allow at most 256 simplices in each required degree and share a 5000000-unit Smith-reduction budget per complete calculation. Exhaustion raises IMPLEMENTATION_FAILURE, never a partial invariant list. BigInteger coefficient bit lengths are unbounded.",
+        "Homology returns isomorphism types, not cycle representatives, chosen generators or induced maps. No persistence, cup products or homeomorphism decision is implemented. Existing betti-number and betti-numbers retain F2 coefficients."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_examples.html"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -49638,7 +49734,7 @@
       "operation_signature": "FiniteComplex x FiniteComplex -> Boolean",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.subcomplex",
+      "representation_scope": "Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.subcomplex",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -49649,11 +49745,15 @@
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
         "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
-        "groupimp/src/main/java/operations/simple/CustomResultOperation.java"
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralSimplicialHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeTopologyTest.java"
+        "groupimp/src/test/java/operations/NativeTopologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -49665,13 +49765,15 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Construction materializes faces and caps each input facet at 20 vertices.",
-        "Homology computes unreduced F2 dimensions only; no integral torsion, persistence or homeomorphism decision."
+        "Integral homology, rational Betti numbers and boundary Smith factors allow at most 256 simplices in each required degree and share a 5000000-unit Smith-reduction budget per complete calculation. Exhaustion raises IMPLEMENTATION_FAILURE, never a partial invariant list. BigInteger coefficient bit lengths are unbounded.",
+        "Homology returns isomorphism types, not cycle representatives, chosen generators or induced maps. No persistence, cup products or homeomorphism decision is implemented. Existing betti-number and betti-numbers retain F2 coefficients."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_examples.html"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -49707,7 +49809,7 @@
       "operation_signature": "FiniteComplex -> Z",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.dimension",
+      "representation_scope": "Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.dimension",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -49718,11 +49820,15 @@
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
         "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
-        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralSimplicialHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeTopologyTest.java"
+        "groupimp/src/test/java/operations/NativeTopologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -49734,13 +49840,15 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Construction materializes faces and caps each input facet at 20 vertices.",
-        "Homology computes unreduced F2 dimensions only; no integral torsion, persistence or homeomorphism decision."
+        "Integral homology, rational Betti numbers and boundary Smith factors allow at most 256 simplices in each required degree and share a 5000000-unit Smith-reduction budget per complete calculation. Exhaustion raises IMPLEMENTATION_FAILURE, never a partial invariant list. BigInteger coefficient bit lengths are unbounded.",
+        "Homology returns isomorphism types, not cycle representatives, chosen generators or induced maps. No persistence, cup products or homeomorphism decision is implemented. Existing betti-number and betti-numbers retain F2 coefficients."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_examples.html"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -49776,7 +49884,7 @@
       "operation_signature": "FiniteComplex -> Z",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.euler-characteristic",
+      "representation_scope": "Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.euler-characteristic",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -49787,11 +49895,15 @@
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
         "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
-        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralSimplicialHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeTopologyTest.java"
+        "groupimp/src/test/java/operations/NativeTopologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -49803,13 +49915,15 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Construction materializes faces and caps each input facet at 20 vertices.",
-        "Homology computes unreduced F2 dimensions only; no integral torsion, persistence or homeomorphism decision."
+        "Integral homology, rational Betti numbers and boundary Smith factors allow at most 256 simplices in each required degree and share a 5000000-unit Smith-reduction budget per complete calculation. Exhaustion raises IMPLEMENTATION_FAILURE, never a partial invariant list. BigInteger coefficient bit lengths are unbounded.",
+        "Homology returns isomorphism types, not cycle representatives, chosen generators or induced maps. No persistence, cup products or homeomorphism decision is implemented. Existing betti-number and betti-numbers retain F2 coefficients."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_examples.html"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -49845,7 +49959,7 @@
       "operation_signature": "FiniteComplex -> N",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.vertex-count",
+      "representation_scope": "Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.vertex-count",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -49856,11 +49970,15 @@
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
         "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
-        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralSimplicialHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeTopologyTest.java"
+        "groupimp/src/test/java/operations/NativeTopologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -49872,13 +49990,15 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Construction materializes faces and caps each input facet at 20 vertices.",
-        "Homology computes unreduced F2 dimensions only; no integral torsion, persistence or homeomorphism decision."
+        "Integral homology, rational Betti numbers and boundary Smith factors allow at most 256 simplices in each required degree and share a 5000000-unit Smith-reduction budget per complete calculation. Exhaustion raises IMPLEMENTATION_FAILURE, never a partial invariant list. BigInteger coefficient bit lengths are unbounded.",
+        "Homology returns isomorphism types, not cycle representatives, chosen generators or induced maps. No persistence, cup products or homeomorphism decision is implemented. Existing betti-number and betti-numbers retain F2 coefficients."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_examples.html"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -49914,7 +50034,7 @@
       "operation_signature": "FiniteComplex x N -> N",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.simplex-count",
+      "representation_scope": "Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.simplex-count",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -49926,11 +50046,15 @@
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
         "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
-        "groupimp/src/main/java/operations/simple/SecondResultOperation.java"
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralSimplicialHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeTopologyTest.java"
+        "groupimp/src/test/java/operations/NativeTopologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -49942,13 +50066,15 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Construction materializes faces and caps each input facet at 20 vertices.",
-        "Homology computes unreduced F2 dimensions only; no integral torsion, persistence or homeomorphism decision."
+        "Integral homology, rational Betti numbers and boundary Smith factors allow at most 256 simplices in each required degree and share a 5000000-unit Smith-reduction budget per complete calculation. Exhaustion raises IMPLEMENTATION_FAILURE, never a partial invariant list. BigInteger coefficient bit lengths are unbounded.",
+        "Homology returns isomorphism types, not cycle representatives, chosen generators or induced maps. No persistence, cup products or homeomorphism decision is implemented. Existing betti-number and betti-numbers retain F2 coefficients."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_examples.html"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -49984,7 +50110,7 @@
       "operation_signature": "FiniteComplex x N -> N",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.betti-number",
+      "representation_scope": "Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.betti-number",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -49996,11 +50122,15 @@
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
         "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
-        "groupimp/src/main/java/operations/simple/SecondResultOperation.java"
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralSimplicialHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeTopologyTest.java"
+        "groupimp/src/test/java/operations/NativeTopologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -50012,13 +50142,15 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Construction materializes faces and caps each input facet at 20 vertices.",
-        "Homology computes unreduced F2 dimensions only; no integral torsion, persistence or homeomorphism decision."
+        "Integral homology, rational Betti numbers and boundary Smith factors allow at most 256 simplices in each required degree and share a 5000000-unit Smith-reduction budget per complete calculation. Exhaustion raises IMPLEMENTATION_FAILURE, never a partial invariant list. BigInteger coefficient bit lengths are unbounded.",
+        "Homology returns isomorphism types, not cycle representatives, chosen generators or induced maps. No persistence, cup products or homeomorphism decision is implemented. Existing betti-number and betti-numbers retain F2 coefficients."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_examples.html"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -50054,7 +50186,7 @@
       "operation_signature": "FiniteComplex x N -> FiniteComplex",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.skeleton",
+      "representation_scope": "Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.skeleton",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -50066,11 +50198,15 @@
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
         "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
-        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java"
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralSimplicialHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeTopologyTest.java"
+        "groupimp/src/test/java/operations/NativeTopologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -50082,13 +50218,15 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Construction materializes faces and caps each input facet at 20 vertices.",
-        "Homology computes unreduced F2 dimensions only; no integral torsion, persistence or homeomorphism decision."
+        "Integral homology, rational Betti numbers and boundary Smith factors allow at most 256 simplices in each required degree and share a 5000000-unit Smith-reduction budget per complete calculation. Exhaustion raises IMPLEMENTATION_FAILURE, never a partial invariant list. BigInteger coefficient bit lengths are unbounded.",
+        "Homology returns isomorphism types, not cycle representatives, chosen generators or induced maps. No persistence, cup products or homeomorphism decision is implemented. Existing betti-number and betti-numbers retain F2 coefficients."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_examples.html"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -50124,7 +50262,7 @@
       "operation_signature": "FiniteComplex -> List(N)",
       "arity": 1,
       "scalar_or_flat": "LIST",
-      "representation_scope": "Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.betti-numbers",
+      "representation_scope": "Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.betti-numbers",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -50136,11 +50274,15 @@
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
         "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
-        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java"
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralSimplicialHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeTopologyTest.java"
+        "groupimp/src/test/java/operations/NativeTopologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -50152,13 +50294,15 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Construction materializes faces and caps each input facet at 20 vertices.",
-        "Homology computes unreduced F2 dimensions only; no integral torsion, persistence or homeomorphism decision."
+        "Integral homology, rational Betti numbers and boundary Smith factors allow at most 256 simplices in each required degree and share a 5000000-unit Smith-reduction budget per complete calculation. Exhaustion raises IMPLEMENTATION_FAILURE, never a partial invariant list. BigInteger coefficient bit lengths are unbounded.",
+        "Homology returns isomorphism types, not cycle representatives, chosen generators or induced maps. No persistence, cup products or homeomorphism decision is implemented. Existing betti-number and betti-numbers retain F2 coefficients."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_examples.html"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -50194,7 +50338,7 @@
       "operation_signature": "Unit -> FiniteComplex",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.empty",
+      "representation_scope": "Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.empty",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -50205,11 +50349,15 @@
       "implementation_status": "IMPLEMENTED",
       "implementation_paths": [
         "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
-        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralSimplicialHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeTopologyTest.java"
+        "groupimp/src/test/java/operations/NativeTopologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -50221,13 +50369,15 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Construction materializes faces and caps each input facet at 20 vertices.",
-        "Homology computes unreduced F2 dimensions only; no integral torsion, persistence or homeomorphism decision."
+        "Integral homology, rational Betti numbers and boundary Smith factors allow at most 256 simplices in each required degree and share a 5000000-unit Smith-reduction budget per complete calculation. Exhaustion raises IMPLEMENTATION_FAILURE, never a partial invariant list. BigInteger coefficient bit lengths are unbounded.",
+        "Homology returns isomorphism types, not cycle representatives, chosen generators or induced maps. No persistence, cup products or homeomorphism decision is implemented. Existing betti-number and betti-numbers retain F2 coefficients."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_examples.html"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -50249,6 +50399,389 @@
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "FiniteComplex.empty",
       "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteComplex.integral-homology",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteSimplicialAlgebra",
+      "concept": "FiniteComplex.integral-homology",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteComplex",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupType",
+      "operation_signature": "FiniteComplex x N -> AbelianGroupType",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.integral-homology",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return unreduced H_k(-;Z) as a canonical abelian-group isomorphism type. The natural degree may be arbitrarily large; degrees above the complex dimension give the trivial group. Boundaries use increasing vertex orientation."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralSimplicialHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTopologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Construction materializes faces and caps each input facet at 20 vertices.",
+        "Integral homology, rational Betti numbers and boundary Smith factors allow at most 256 simplices in each required degree and share a 5000000-unit Smith-reduction budget per complete calculation. Exhaustion raises IMPLEMENTATION_FAILURE, never a partial invariant list. BigInteger coefficient bit lengths are unbounded.",
+        "Homology returns isomorphism types, not cycle representatives, chosen generators or induced maps. No persistence, cup products or homeomorphism decision is implemented. Existing betti-number and betti-numbers retain F2 coefficients."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_examples.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteComplex.integral-homology",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "integral-homology",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteComplex.integral-homology-groups",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteSimplicialAlgebra",
+      "concept": "FiniteComplex.integral-homology-groups",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteComplex",
+      "domain_B": null,
+      "domain_C": "AbelianGroupType",
+      "operation_signature": "FiniteComplex -> List(AbelianGroupType)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.integral-homology-groups",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit unreduced integral homology types in degrees zero through the complex dimension, including trivial groups. The empty complex emits an empty list; all degrees share one Smith-reduction budget.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralSimplicialHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTopologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Construction materializes faces and caps each input facet at 20 vertices.",
+        "Integral homology, rational Betti numbers and boundary Smith factors allow at most 256 simplices in each required degree and share a 5000000-unit Smith-reduction budget per complete calculation. Exhaustion raises IMPLEMENTATION_FAILURE, never a partial invariant list. BigInteger coefficient bit lengths are unbounded.",
+        "Homology returns isomorphism types, not cycle representatives, chosen generators or induced maps. No persistence, cup products or homeomorphism decision is implemented. Existing betti-number and betti-numbers retain F2 coefficients."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_examples.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteComplex.integral-homology-groups",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "integral-homology-groups",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteComplex.rational-betti-number",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteSimplicialAlgebra",
+      "concept": "FiniteComplex.rational-betti-number",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteComplex",
+      "domain_B": "N",
+      "domain_C": "N",
+      "operation_signature": "FiniteComplex x N -> N",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.rational-betti-number",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the integral free rank, equal to dim_Q H_k(-;Q). This differs from the existing F2 Betti number when torsion contributes; above-dimension degrees give zero."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralSimplicialHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTopologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Construction materializes faces and caps each input facet at 20 vertices.",
+        "Integral homology, rational Betti numbers and boundary Smith factors allow at most 256 simplices in each required degree and share a 5000000-unit Smith-reduction budget per complete calculation. Exhaustion raises IMPLEMENTATION_FAILURE, never a partial invariant list. BigInteger coefficient bit lengths are unbounded.",
+        "Homology returns isomorphism types, not cycle representatives, chosen generators or induced maps. No persistence, cup products or homeomorphism decision is implemented. Existing betti-number and betti-numbers retain F2 coefficients."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_examples.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteComplex.rational-betti-number",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "rational-betti-number",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteComplex.rational-betti-numbers",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteSimplicialAlgebra",
+      "concept": "FiniteComplex.rational-betti-numbers",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteComplex",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "FiniteComplex -> List(N)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.rational-betti-numbers",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit unreduced rational Betti numbers in ascending degree order; these are the integral free ranks. The empty complex emits an empty list.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralSimplicialHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTopologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Construction materializes faces and caps each input facet at 20 vertices.",
+        "Integral homology, rational Betti numbers and boundary Smith factors allow at most 256 simplices in each required degree and share a 5000000-unit Smith-reduction budget per complete calculation. Exhaustion raises IMPLEMENTATION_FAILURE, never a partial invariant list. BigInteger coefficient bit lengths are unbounded.",
+        "Homology returns isomorphism types, not cycle representatives, chosen generators or induced maps. No persistence, cup products or homeomorphism decision is implemented. Existing betti-number and betti-numbers retain F2 coefficients."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_examples.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteComplex.rational-betti-numbers",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "rational-betti-numbers",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteComplex.boundary-invariant-factors",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteSimplicialAlgebra",
+      "concept": "FiniteComplex.boundary-invariant-factors",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteComplex",
+      "domain_B": "N",
+      "domain_C": "N",
+      "operation_signature": "FiniteComplex x N -> List(N)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.boundary-invariant-factors",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit positive nonzero Smith factors of the oriented integral boundary from degree k to k-1, including unit factors. Degree zero and above-dimension boundaries emit an empty list; these are not just homology torsion factors.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
+        "groupimp/src/main/java/operations/flat/SecondResultFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralSimplicialHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTopologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Construction materializes faces and caps each input facet at 20 vertices.",
+        "Integral homology, rational Betti numbers and boundary Smith factors allow at most 256 simplices in each required degree and share a 5000000-unit Smith-reduction budget per complete calculation. Exhaustion raises IMPLEMENTATION_FAILURE, never a partial invariant list. BigInteger coefficient bit lengths are unbounded.",
+        "Homology returns isomorphism types, not cycle representatives, chosen generators or induced maps. No persistence, cup products or homeomorphism decision is implemented. Existing betti-number and betti-numbers retain F2 coefficients."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_examples.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteComplex.boundary-invariant-factors",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "boundary-invariant-factors",
+      "legacy_operation_interface": "ILeftProjectionFlatOperation"
     },
     {
       "id": "concrete-operation.FiniteRelation(Z,Z).union",
@@ -74979,6 +75512,1663 @@
       "legacy_operation_interface": "IUnsafeOperation"
     },
     {
+      "id": "concrete-operation.AbelianGroupType.direct-sum",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupTypeAlgebra",
+      "concept": "AbelianGroupType.direct-sum",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupType",
+      "domain_B": "AbelianGroupType",
+      "domain_C": "AbelianGroupType",
+      "operation_signature": "AbelianGroupType x AbelianGroupType -> AbelianGroupType",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.direct-sum",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the isomorphism type of the finite direct sum, combining free ranks and canonically normalizing cyclic factors.",
+        "Free rank is nonnegative; canonical torsion factors are greater than one and each divides the next. Equality classifies group isomorphism types."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeAbelianGroupTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; exhaustion raises IMPLEMENTATION_FAILURE. Free rank and coefficient bit lengths are arbitrary precision. Normalization uses gcd/lcm without prime factorization.",
+        "No chosen group elements, presentations, generators, homomorphisms or extension witnesses are represented. Hom, tensor, Tor_1 and Ext^1 classify resulting abelian groups only; arbitrary modules and higher derived functors are outside this scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupType.direct-sum",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "direct-sum",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupType.tensor-product",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupTypeAlgebra",
+      "concept": "AbelianGroupType.tensor-product",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupType",
+      "domain_B": "AbelianGroupType",
+      "domain_C": "AbelianGroupType",
+      "operation_signature": "AbelianGroupType x AbelianGroupType -> AbelianGroupType",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.tensor-product",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Tensor over Z. Free ranks multiply; free-torsion pairs contribute repeated cyclic factors and torsion pairs contribute gcd factors.",
+        "Free rank is nonnegative; canonical torsion factors are greater than one and each divides the next. Equality classifies group isomorphism types."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeAbelianGroupTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; exhaustion raises IMPLEMENTATION_FAILURE. Free rank and coefficient bit lengths are arbitrary precision. Normalization uses gcd/lcm without prime factorization.",
+        "No chosen group elements, presentations, generators, homomorphisms or extension witnesses are represented. Hom, tensor, Tor_1 and Ext^1 classify resulting abelian groups only; arbitrary modules and higher derived functors are outside this scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupType.tensor-product",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "tensor-product",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupType.hom-group",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupTypeAlgebra",
+      "concept": "AbelianGroupType.hom-group",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupType",
+      "domain_B": "AbelianGroupType",
+      "domain_C": "AbelianGroupType",
+      "operation_signature": "AbelianGroupType x AbelianGroupType -> AbelianGroupType",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.hom-group",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the abelian-group isomorphism type Hom_Z(first,second), with source first and target second. Individual homomorphisms and chosen generators are not returned.",
+        "Free rank is nonnegative; canonical torsion factors are greater than one and each divides the next. Equality classifies group isomorphism types."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeAbelianGroupTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; exhaustion raises IMPLEMENTATION_FAILURE. Free rank and coefficient bit lengths are arbitrary precision. Normalization uses gcd/lcm without prime factorization.",
+        "No chosen group elements, presentations, generators, homomorphisms or extension witnesses are represented. Hom, tensor, Tor_1 and Ext^1 classify resulting abelian groups only; arbitrary modules and higher derived functors are outside this scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupType.hom-group",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "hom-group",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupType.tor1",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupTypeAlgebra",
+      "concept": "AbelianGroupType.tor1",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupType",
+      "domain_B": "AbelianGroupType",
+      "domain_C": "AbelianGroupType",
+      "operation_signature": "AbelianGroupType x AbelianGroupType -> AbelianGroupType",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.tor1",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return Tor_1^Z(first,second); free summands contribute zero and pairs of cyclic torsion orders contribute their gcd.",
+        "Free rank is nonnegative; canonical torsion factors are greater than one and each divides the next. Equality classifies group isomorphism types."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeAbelianGroupTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; exhaustion raises IMPLEMENTATION_FAILURE. Free rank and coefficient bit lengths are arbitrary precision. Normalization uses gcd/lcm without prime factorization.",
+        "No chosen group elements, presentations, generators, homomorphisms or extension witnesses are represented. Hom, tensor, Tor_1 and Ext^1 classify resulting abelian groups only; arbitrary modules and higher derived functors are outside this scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupType.tor1",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "tor1",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupType.ext1",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupTypeAlgebra",
+      "concept": "AbelianGroupType.ext1",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupType",
+      "domain_B": "AbelianGroupType",
+      "domain_C": "AbelianGroupType",
+      "operation_signature": "AbelianGroupType x AbelianGroupType -> AbelianGroupType",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.ext1",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return Ext^1_Z(first,second), with source first and target second. A cyclic source of order n contributes target/n*target; free source summands contribute zero. No extension witness is constructed.",
+        "Free rank is nonnegative; canonical torsion factors are greater than one and each divides the next. Equality classifies group isomorphism types."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeAbelianGroupTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; exhaustion raises IMPLEMENTATION_FAILURE. Free rank and coefficient bit lengths are arbitrary precision. Normalization uses gcd/lcm without prime factorization.",
+        "No chosen group elements, presentations, generators, homomorphisms or extension witnesses are represented. Hom, tensor, Tor_1 and Ext^1 classify resulting abelian groups only; arbitrary modules and higher derived functors are outside this scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupType.ext1",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ext1",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupType.equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupTypeAlgebra",
+      "concept": "AbelianGroupType.equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupType",
+      "domain_B": "AbelianGroupType",
+      "domain_C": "Boolean",
+      "operation_signature": "AbelianGroupType x AbelianGroupType -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Compare canonical free rank and torsion factors; this is isomorphism-type equality, not equality of chosen presentations.",
+        "Free rank is nonnegative; canonical torsion factors are greater than one and each divides the next. Equality classifies group isomorphism types."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeAbelianGroupTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; exhaustion raises IMPLEMENTATION_FAILURE. Free rank and coefficient bit lengths are arbitrary precision. Normalization uses gcd/lcm without prime factorization.",
+        "No chosen group elements, presentations, generators, homomorphisms or extension witnesses are represented. Hom, tensor, Tor_1 and Ext^1 classify resulting abelian groups only; arbitrary modules and higher derived functors are outside this scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupType.equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupType.free-rank",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupTypeAlgebra",
+      "concept": "AbelianGroupType.free-rank",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupType",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "AbelianGroupType -> N",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.free-rank",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the nonnegative arbitrary-precision rank of the free direct summand.",
+        "Free rank is nonnegative; canonical torsion factors are greater than one and each divides the next. Equality classifies group isomorphism types."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeAbelianGroupTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; exhaustion raises IMPLEMENTATION_FAILURE. Free rank and coefficient bit lengths are arbitrary precision. Normalization uses gcd/lcm without prime factorization.",
+        "No chosen group elements, presentations, generators, homomorphisms or extension witnesses are represented. Hom, tensor, Tor_1 and Ext^1 classify resulting abelian groups only; arbitrary modules and higher derived functors are outside this scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupType.free-rank",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "free-rank",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupType.torsion-factor-count",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupTypeAlgebra",
+      "concept": "AbelianGroupType.torsion-factor-count",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupType",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "AbelianGroupType -> N",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.torsion-factor-count",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the number of nontrivial canonical cyclic torsion invariant factors.",
+        "Free rank is nonnegative; canonical torsion factors are greater than one and each divides the next. Equality classifies group isomorphism types."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeAbelianGroupTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; exhaustion raises IMPLEMENTATION_FAILURE. Free rank and coefficient bit lengths are arbitrary precision. Normalization uses gcd/lcm without prime factorization.",
+        "No chosen group elements, presentations, generators, homomorphisms or extension witnesses are represented. Hom, tensor, Tor_1 and Ext^1 classify resulting abelian groups only; arbitrary modules and higher derived functors are outside this scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupType.torsion-factor-count",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "torsion-factor-count",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupType.minimal-generators",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupTypeAlgebra",
+      "concept": "AbelianGroupType.minimal-generators",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupType",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "AbelianGroupType -> N",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.minimal-generators",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return free rank plus the number of nontrivial invariant factors, the minimal number of group generators.",
+        "Free rank is nonnegative; canonical torsion factors are greater than one and each divides the next. Equality classifies group isomorphism types."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeAbelianGroupTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; exhaustion raises IMPLEMENTATION_FAILURE. Free rank and coefficient bit lengths are arbitrary precision. Normalization uses gcd/lcm without prime factorization.",
+        "No chosen group elements, presentations, generators, homomorphisms or extension witnesses are represented. Hom, tensor, Tor_1 and Ext^1 classify resulting abelian groups only; arbitrary modules and higher derived functors are outside this scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupType.minimal-generators",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "minimal-generators",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupType.is-finite",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupTypeAlgebra",
+      "concept": "AbelianGroupType.is-finite",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupType",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "AbelianGroupType -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.is-finite",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "A finitely generated abelian group is finite exactly when its free rank is zero.",
+        "Free rank is nonnegative; canonical torsion factors are greater than one and each divides the next. Equality classifies group isomorphism types."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeAbelianGroupTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; exhaustion raises IMPLEMENTATION_FAILURE. Free rank and coefficient bit lengths are arbitrary precision. Normalization uses gcd/lcm without prime factorization.",
+        "No chosen group elements, presentations, generators, homomorphisms or extension witnesses are represented. Hom, tensor, Tor_1 and Ext^1 classify resulting abelian groups only; arbitrary modules and higher derived functors are outside this scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupType.is-finite",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "is-finite",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupType.is-torsion-free",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupTypeAlgebra",
+      "concept": "AbelianGroupType.is-torsion-free",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupType",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "AbelianGroupType -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.is-torsion-free",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The torsion factor list is empty; this includes the trivial group.",
+        "Free rank is nonnegative; canonical torsion factors are greater than one and each divides the next. Equality classifies group isomorphism types."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeAbelianGroupTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; exhaustion raises IMPLEMENTATION_FAILURE. Free rank and coefficient bit lengths are arbitrary precision. Normalization uses gcd/lcm without prime factorization.",
+        "No chosen group elements, presentations, generators, homomorphisms or extension witnesses are represented. Hom, tensor, Tor_1 and Ext^1 classify resulting abelian groups only; arbitrary modules and higher derived functors are outside this scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupType.is-torsion-free",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "is-torsion-free",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupType.is-cyclic",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupTypeAlgebra",
+      "concept": "AbelianGroupType.is-cyclic",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupType",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "AbelianGroupType -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.is-cyclic",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Accept a finite group with at most one torsion factor, or Z. The trivial group is cyclic.",
+        "Free rank is nonnegative; canonical torsion factors are greater than one and each divides the next. Equality classifies group isomorphism types."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeAbelianGroupTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; exhaustion raises IMPLEMENTATION_FAILURE. Free rank and coefficient bit lengths are arbitrary precision. Normalization uses gcd/lcm without prime factorization.",
+        "No chosen group elements, presentations, generators, homomorphisms or extension witnesses are represented. Hom, tensor, Tor_1 and Ext^1 classify resulting abelian groups only; arbitrary modules and higher derived functors are outside this scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupType.is-cyclic",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "is-cyclic",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupType.is-trivial",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupTypeAlgebra",
+      "concept": "AbelianGroupType.is-trivial",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupType",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "AbelianGroupType -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.is-trivial",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Both the free rank and the torsion factor count are zero.",
+        "Free rank is nonnegative; canonical torsion factors are greater than one and each divides the next. Equality classifies group isomorphism types."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeAbelianGroupTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; exhaustion raises IMPLEMENTATION_FAILURE. Free rank and coefficient bit lengths are arbitrary precision. Normalization uses gcd/lcm without prime factorization.",
+        "No chosen group elements, presentations, generators, homomorphisms or extension witnesses are represented. Hom, tensor, Tor_1 and Ext^1 classify resulting abelian groups only; arbitrary modules and higher derived functors are outside this scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupType.is-trivial",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "is-trivial",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupType.order",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupTypeAlgebra",
+      "concept": "AbelianGroupType.order",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupType",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "AbelianGroupType -> N",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.order",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The free rank must be zero. Return the product of torsion factors; the trivial group has order one. Infinite order is undefined in N.",
+        "Free rank is nonnegative; canonical torsion factors are greater than one and each divides the next. Equality classifies group isomorphism types."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeAbelianGroupTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; exhaustion raises IMPLEMENTATION_FAILURE. Free rank and coefficient bit lengths are arbitrary precision. Normalization uses gcd/lcm without prime factorization.",
+        "No chosen group elements, presentations, generators, homomorphisms or extension witnesses are represented. Hom, tensor, Tor_1 and Ext^1 classify resulting abelian groups only; arbitrary modules and higher derived functors are outside this scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "AbelianGroupType.order",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "order",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupType.exponent",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupTypeAlgebra",
+      "concept": "AbelianGroupType.exponent",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupType",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "AbelianGroupType -> N",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.exponent",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The free rank must be zero. Return the largest invariant factor, or one for the trivial group; no finite exponent exists for a nonzero free summand.",
+        "Free rank is nonnegative; canonical torsion factors are greater than one and each divides the next. Equality classifies group isomorphism types."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeAbelianGroupTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; exhaustion raises IMPLEMENTATION_FAILURE. Free rank and coefficient bit lengths are arbitrary precision. Normalization uses gcd/lcm without prime factorization.",
+        "No chosen group elements, presentations, generators, homomorphisms or extension witnesses are represented. Hom, tensor, Tor_1 and Ext^1 classify resulting abelian groups only; arbitrary modules and higher derived functors are outside this scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "AbelianGroupType.exponent",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "exponent",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupType.torsion-part",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupTypeAlgebra",
+      "concept": "AbelianGroupType.torsion-part",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupType",
+      "domain_B": null,
+      "domain_C": "AbelianGroupType",
+      "operation_signature": "AbelianGroupType -> AbelianGroupType",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.torsion-part",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Retain the torsion invariant factors and set free rank to zero.",
+        "Free rank is nonnegative; canonical torsion factors are greater than one and each divides the next. Equality classifies group isomorphism types."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeAbelianGroupTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; exhaustion raises IMPLEMENTATION_FAILURE. Free rank and coefficient bit lengths are arbitrary precision. Normalization uses gcd/lcm without prime factorization.",
+        "No chosen group elements, presentations, generators, homomorphisms or extension witnesses are represented. Hom, tensor, Tor_1 and Ext^1 classify resulting abelian groups only; arbitrary modules and higher derived functors are outside this scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupType.torsion-part",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "torsion-part",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupType.free-part",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupTypeAlgebra",
+      "concept": "AbelianGroupType.free-part",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupType",
+      "domain_B": null,
+      "domain_C": "AbelianGroupType",
+      "operation_signature": "AbelianGroupType -> AbelianGroupType",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.free-part",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Retain the free rank and discard torsion factors, representing the quotient by torsion up to isomorphism.",
+        "Free rank is nonnegative; canonical torsion factors are greater than one and each divides the next. Equality classifies group isomorphism types."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeAbelianGroupTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; exhaustion raises IMPLEMENTATION_FAILURE. Free rank and coefficient bit lengths are arbitrary precision. Normalization uses gcd/lcm without prime factorization.",
+        "No chosen group elements, presentations, generators, homomorphisms or extension witnesses are represented. Hom, tensor, Tor_1 and Ext^1 classify resulting abelian groups only; arbitrary modules and higher derived functors are outside this scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupType.free-part",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "free-part",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupType.invariant-factors",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupTypeAlgebra",
+      "concept": "AbelianGroupType.invariant-factors",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupType",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "AbelianGroupType -> List(N)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.invariant-factors",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit nontrivial cyclic torsion orders, each greater than one and dividing the next. Free rank is separate; a torsion-free group emits an empty list.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Free rank is nonnegative; canonical torsion factors are greater than one and each divides the next. Equality classifies group isomorphism types."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeAbelianGroupTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; exhaustion raises IMPLEMENTATION_FAILURE. Free rank and coefficient bit lengths are arbitrary precision. Normalization uses gcd/lcm without prime factorization.",
+        "No chosen group elements, presentations, generators, homomorphisms or extension witnesses are represented. Hom, tensor, Tor_1 and Ext^1 classify resulting abelian groups only; arbitrary modules and higher derived functors are outside this scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupType.invariant-factors",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "invariant-factors",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupType.repeat",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupTypeAlgebra",
+      "concept": "AbelianGroupType.repeat",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "AbelianGroupType",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupType",
+      "operation_signature": "AbelianGroupType x N -> AbelianGroupType",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.repeat",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Take the direct sum of the supplied natural number of copies; zero copies give the trivial group. Return the first group carrier's wrapper.",
+        "Free rank is nonnegative; canonical torsion factors are greater than one and each divides the next. Equality classifies group isomorphism types."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeAbelianGroupTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; exhaustion raises IMPLEMENTATION_FAILURE. Free rank and coefficient bit lengths are arbitrary precision. Normalization uses gcd/lcm without prime factorization.",
+        "No chosen group elements, presentations, generators, homomorphisms or extension witnesses are represented. Hom, tensor, Tor_1 and Ext^1 classify resulting abelian groups only; arbitrary modules and higher derived functors are outside this scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupType.repeat",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "repeat",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupType.free-on",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupTypeAlgebra",
+      "concept": "AbelianGroupType.free-on",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "N",
+      "domain_B": null,
+      "domain_C": "AbelianGroupType",
+      "operation_signature": "N -> AbelianGroupType",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.free-on",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Construct Z^n for the supplied natural number n; zero gives the trivial group.",
+        "Free rank is nonnegative; canonical torsion factors are greater than one and each divides the next. Equality classifies group isomorphism types."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeAbelianGroupTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; exhaustion raises IMPLEMENTATION_FAILURE. Free rank and coefficient bit lengths are arbitrary precision. Normalization uses gcd/lcm without prime factorization.",
+        "No chosen group elements, presentations, generators, homomorphisms or extension witnesses are represented. Hom, tensor, Tor_1 and Ext^1 classify resulting abelian groups only; arbitrary modules and higher derived functors are outside this scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupType.free-on",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "AbelianGroupType.free-on",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupType.cyclic",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupTypeAlgebra",
+      "concept": "AbelianGroupType.cyclic",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "N",
+      "domain_B": null,
+      "domain_C": "AbelianGroupType",
+      "operation_signature": "N -> AbelianGroupType",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.cyclic",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Construct Z/nZ for n in N, with n=0 denoting Z and n=1 the trivial group.",
+        "Free rank is nonnegative; canonical torsion factors are greater than one and each divides the next. Equality classifies group isomorphism types."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeAbelianGroupTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; exhaustion raises IMPLEMENTATION_FAILURE. Free rank and coefficient bit lengths are arbitrary precision. Normalization uses gcd/lcm without prime factorization.",
+        "No chosen group elements, presentations, generators, homomorphisms or extension witnesses are represented. Hom, tensor, Tor_1 and Ext^1 classify resulting abelian groups only; arbitrary modules and higher derived functors are outside this scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupType.cyclic",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "AbelianGroupType.cyclic",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupType.zero",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupTypeAlgebra",
+      "concept": "AbelianGroupType.zero",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "AbelianGroupType",
+      "operation_signature": "Unit -> AbelianGroupType",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.zero",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The direct-sum identity is the trivial group, with rank zero and no torsion factors.",
+        "Free rank is nonnegative; canonical torsion factors are greater than one and each divides the next. Equality classifies group isomorphism types."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeAbelianGroupTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; exhaustion raises IMPLEMENTATION_FAILURE. Free rank and coefficient bit lengths are arbitrary precision. Normalization uses gcd/lcm without prime factorization.",
+        "No chosen group elements, presentations, generators, homomorphisms or extension witnesses are represented. Hom, tensor, Tor_1 and Ext^1 classify resulting abelian groups only; arbitrary modules and higher derived functors are outside this scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupType.zero",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "AbelianGroupType.zero",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.AbelianGroupType.one",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "AbelianGroupTypeAlgebra",
+      "concept": "AbelianGroupType.one",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "AbelianGroupType",
+      "operation_signature": "Unit -> AbelianGroupType",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.one",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The tensor-product identity is Z, with rank one and no torsion factors.",
+        "Free rank is nonnegative; canonical torsion factors are greater than one and each divides the next. Equality classifies group isomorphism types."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeAbelianGroupTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; exhaustion raises IMPLEMENTATION_FAILURE. Free rank and coefficient bit lengths are arbitrary precision. Normalization uses gcd/lcm without prime factorization.",
+        "No chosen group elements, presentations, generators, homomorphisms or extension witnesses are represented. Hom, tensor, Tor_1 and Ext^1 classify resulting abelian groups only; arbitrary modules and higher derived functors are outside this scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/AbelianGroupTypeAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "AbelianGroupType.one",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "AbelianGroupType.one",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
       "id": "concrete-operation.Z/5Z.add",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "PrimeField",
@@ -75578,6 +77768,15 @@
         "Z"
       ],
       "supported_operations": [
+        "AbelianGroupType.cyclic",
+        "AbelianGroupType.exponent",
+        "AbelianGroupType.free-on",
+        "AbelianGroupType.free-rank",
+        "AbelianGroupType.invariant-factors",
+        "AbelianGroupType.minimal-generators",
+        "AbelianGroupType.order",
+        "AbelianGroupType.repeat",
+        "AbelianGroupType.torsion-factor-count",
         "Affine(Q).ambient-dimension",
         "Affine(Q).dimension",
         "Exterior(Q).ambient-dimension",
@@ -75592,6 +77791,10 @@
         "FiniteCategory.object-count",
         "FiniteComplex.betti-number",
         "FiniteComplex.betti-numbers",
+        "FiniteComplex.boundary-invariant-factors",
+        "FiniteComplex.integral-homology",
+        "FiniteComplex.rational-betti-number",
+        "FiniteComplex.rational-betti-numbers",
         "FiniteComplex.simplex-count",
         "FiniteComplex.skeleton",
         "FiniteComplex.vertex-count",
@@ -76092,6 +78295,11 @@
       "subdomains": [],
       "related_domains": [],
       "supported_operations": [
+        "AbelianGroupType.equal",
+        "AbelianGroupType.is-cyclic",
+        "AbelianGroupType.is-finite",
+        "AbelianGroupType.is-torsion-free",
+        "AbelianGroupType.is-trivial",
         "Affine(Q).contains",
         "Affine(Q).equal",
         "Affine(Q).is-empty",
@@ -76199,6 +78407,8 @@
       "subdomains": [],
       "related_domains": [],
       "supported_operations": [
+        "AbelianGroupType.one",
+        "AbelianGroupType.zero",
         "Boolean.one",
         "Boolean.zero",
         "FiniteAdjunction.empty",
@@ -76468,11 +78678,16 @@
       "supported_operations": [
         "FiniteComplex.betti-number",
         "FiniteComplex.betti-numbers",
+        "FiniteComplex.boundary-invariant-factors",
         "FiniteComplex.dimension",
         "FiniteComplex.empty",
         "FiniteComplex.equal",
         "FiniteComplex.euler-characteristic",
+        "FiniteComplex.integral-homology",
+        "FiniteComplex.integral-homology-groups",
         "FiniteComplex.intersection",
+        "FiniteComplex.rational-betti-number",
+        "FiniteComplex.rational-betti-numbers",
         "FiniteComplex.simplex-count",
         "FiniteComplex.skeleton",
         "FiniteComplex.subcomplex",
@@ -78703,6 +80918,69 @@
       "invariants": [
         "Initial finite measure uses the actual integer outcome Algebra",
         "Step count is a nonnegative integer; execution additionally enforces state support and resource limits"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-24"
+      }
+    },
+    {
+      "id": "AbelianGroupType",
+      "name": "Finitely generated abelian-group isomorphism types",
+      "description": "Finitely generated abelian-group isomorphism types",
+      "member_representation": "mathematics.structures.AbelianGroupType",
+      "membership_rules": [
+        "Nonnegative arbitrary-precision free rank",
+        "Canonical cyclic torsion factors greater than one, each dividing the next",
+        "No chosen elements, generators or maps; equality is group isomorphism-type equality"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "N",
+        "Boolean",
+        "FiniteComplex"
+      ],
+      "supported_operations": [
+        "AbelianGroupType.cyclic",
+        "AbelianGroupType.direct-sum",
+        "AbelianGroupType.equal",
+        "AbelianGroupType.exponent",
+        "AbelianGroupType.ext1",
+        "AbelianGroupType.free-on",
+        "AbelianGroupType.free-part",
+        "AbelianGroupType.free-rank",
+        "AbelianGroupType.hom-group",
+        "AbelianGroupType.invariant-factors",
+        "AbelianGroupType.is-cyclic",
+        "AbelianGroupType.is-finite",
+        "AbelianGroupType.is-torsion-free",
+        "AbelianGroupType.is-trivial",
+        "AbelianGroupType.minimal-generators",
+        "AbelianGroupType.one",
+        "AbelianGroupType.order",
+        "AbelianGroupType.repeat",
+        "AbelianGroupType.tensor-product",
+        "AbelianGroupType.tor1",
+        "AbelianGroupType.torsion-factor-count",
+        "AbelianGroupType.torsion-part",
+        "AbelianGroupType.zero",
+        "FiniteComplex.integral-homology",
+        "FiniteComplex.integral-homology-groups"
+      ],
+      "invariants": [
+        "Nonnegative arbitrary-precision free rank",
+        "Canonical cyclic torsion factors greater than one, each dividing the next",
+        "No chosen elements, generators or maps; equality is group isomorphism-type equality"
       ],
       "references": [
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"

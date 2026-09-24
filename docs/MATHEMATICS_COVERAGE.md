@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1122 |
-| DIRECTLY_SUPPORTED | 879 |
+| Scoped records | 1151 |
+| DIRECTLY_SUPPORTED | 908 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 738 |
+| IMPLEMENTED | 767 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 806 |
+| MACHINE_TESTED | 835 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 715 | 715 | 0 | 0 | 0 | 715 | 0 | 0 |
+| Concrete MathTool algebras | 744 | 744 | 0 | 0 | 0 | 744 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -186,6 +186,30 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 
 | Concept | Representation | Implementation | Scope |
 | --- | --- | --- | --- |
+| AbelianGroupType.cyclic | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.cyclic |
+| AbelianGroupType.direct-sum | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.direct-sum |
+| AbelianGroupType.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.equal |
+| AbelianGroupType.exponent | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.exponent |
+| AbelianGroupType.ext1 | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.ext1 |
+| AbelianGroupType.free-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.free-on |
+| AbelianGroupType.free-part | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.free-part |
+| AbelianGroupType.free-rank | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.free-rank |
+| AbelianGroupType.hom-group | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.hom-group |
+| AbelianGroupType.invariant-factors | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.invariant-factors |
+| AbelianGroupType.is-cyclic | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.is-cyclic |
+| AbelianGroupType.is-finite | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.is-finite |
+| AbelianGroupType.is-torsion-free | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.is-torsion-free |
+| AbelianGroupType.is-trivial | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.is-trivial |
+| AbelianGroupType.minimal-generators | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.minimal-generators |
+| AbelianGroupType.one | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.one |
+| AbelianGroupType.order | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.order |
+| AbelianGroupType.repeat | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.repeat |
+| AbelianGroupType.tensor-product | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.tensor-product |
+| AbelianGroupType.tor1 | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.tor1 |
+| AbelianGroupType.torsion-factor-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.torsion-factor-count |
+| AbelianGroupType.torsion-part | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.torsion-part |
+| AbelianGroupType.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors; native operation AbelianGroupType.zero |
+| AbelianGroupTypeAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical finitely generated abelian-group isomorphism types, with free rank and cyclic torsion invariant factors |
 | Affine(Q).ambient-dimension | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).ambient-dimension |
 | Affine(Q).at | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).at |
 | Affine(Q).closest-point | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).closest-point |
@@ -298,18 +322,23 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | FiniteCocone.reindex | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.reindex |
 | FiniteCocone.vertex | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories; native operation FiniteCocone.vertex |
 | FiniteCoconeAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cocones over finite diagrams with bounded exhaustive colimit construction through opposite categories |
-| FiniteComplex.betti-number | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.betti-number |
-| FiniteComplex.betti-numbers | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.betti-numbers |
-| FiniteComplex.dimension | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.dimension |
-| FiniteComplex.empty | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.empty |
-| FiniteComplex.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.equal |
-| FiniteComplex.euler-characteristic | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.euler-characteristic |
-| FiniteComplex.intersection | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.intersection |
-| FiniteComplex.simplex-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.simplex-count |
-| FiniteComplex.skeleton | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.skeleton |
-| FiniteComplex.subcomplex | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.subcomplex |
-| FiniteComplex.union | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.union |
-| FiniteComplex.vertex-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels and unreduced homology over F2; native operation FiniteComplex.vertex-count |
+| FiniteComplex.betti-number | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.betti-number |
+| FiniteComplex.betti-numbers | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.betti-numbers |
+| FiniteComplex.boundary-invariant-factors | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.boundary-invariant-factors |
+| FiniteComplex.dimension | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.dimension |
+| FiniteComplex.empty | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.empty |
+| FiniteComplex.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.equal |
+| FiniteComplex.euler-characteristic | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.euler-characteristic |
+| FiniteComplex.integral-homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.integral-homology |
+| FiniteComplex.integral-homology-groups | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.integral-homology-groups |
+| FiniteComplex.intersection | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.intersection |
+| FiniteComplex.rational-betti-number | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.rational-betti-number |
+| FiniteComplex.rational-betti-numbers | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.rational-betti-numbers |
+| FiniteComplex.simplex-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.simplex-count |
+| FiniteComplex.skeleton | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.skeleton |
+| FiniteComplex.subcomplex | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.subcomplex |
+| FiniteComplex.union | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.union |
+| FiniteComplex.vertex-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.vertex-count |
 | FiniteCone.cones-at | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.cones-at |
 | FiniteCone.diagram | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.diagram |
 | FiniteCone.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Validated cones over finite diagrams with bounded exhaustive limit construction and unique-factorization checks; native operation FiniteCone.equal |
@@ -486,7 +515,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | FiniteSet(Z).subsets | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).subsets |
 | FiniteSet(Z).symmetric-difference | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).symmetric-difference |
 | FiniteSet(Z).union | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).union |
-| FiniteSimplicialAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels and unreduced homology over F2 |
+| FiniteSimplicialAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers |
 | H(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).add |
 | H(Q).components | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).components |
 | H(Q).conjugate | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).conjugate |
@@ -1326,7 +1355,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | fiber bundles | REQUIRES_EXTENSION | CATALOG_ONLY | General fiber bundles with machine-checkable membership/structure evidence; initial decomposition remains open |
 | fundamental group | REQUIRES_EXTENSION | CATALOG_ONLY | General fundamental group with machine-checkable membership/structure evidence; initial decomposition remains open |
 | homeomorphisms | DIRECTLY_SUPPORTED | CATALOG_ONLY | Bijective tables between finite topological spaces |
-| homology | DIRECTLY_SUPPORTED | PARTIAL | Unreduced Betti numbers of finite simplicial complexes over F2; no integer torsion information |
+| homology | DIRECTLY_SUPPORTED | PARTIAL | Unreduced integral homology isomorphism types of finite simplicial complexes, including free rank and torsion; F2 and rational Betti numbers are available separately |
 | homotopy | REQUIRES_EXTENSION | CATALOG_ONLY | General homotopy with machine-checkable membership/structure evidence; initial decomposition remains open |
 | knot structures | REQUIRES_EXTENSION | CATALOG_ONLY | General knot structures with machine-checkable membership/structure evidence; initial decomposition remains open |
 | open/closed sets | DIRECTLY_SUPPORTED | CATALOG_ONLY | Subsets of a specified finite topology |
