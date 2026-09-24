@@ -21,6 +21,8 @@ import mathematics.structures.FiniteCocone;
 import mathematics.structures.AbelianGroupType;
 import mathematics.topology.FiniteSimplicialComplex;
 import mathematics.linear.RationalVector;
+import mathematics.linear.IntegerVector;
+import mathematics.linear.IntegerMatrix;
 import mathematics.linear.RationalMatrix;
 import mathematics.linear.RationalAffineSpace;
 import mathematics.linear.RationalTensor;
@@ -42,6 +44,13 @@ public final class ConcreteAlgebrasExample {
             return;
         }
         System.out.println("MathTool: "+math.mathTool.getName()+", concrete algebras: "+math.algebras().size()+", operations: "+math.operations().size());
+        IntegerMatrix equation=new IntegerMatrix(new BigInteger[][]{{BigInteger.valueOf(2),BigInteger.valueOf(3)}});
+        System.out.println("Integer solutions of 2*x+3*y=1: particular then kernel basis: "+math.flow(math.integerMatrices,Collections.singletonList(equation))
+                .performLeftProjectionFlatOperation("solve-generators",new IntegerVector(BigInteger.ONE)).collect());
+        IntegerMatrix presentation=new IntegerMatrix(new BigInteger[][]{{BigInteger.valueOf(2),BigInteger.ZERO},
+                {BigInteger.ZERO,BigInteger.valueOf(3)},{BigInteger.ZERO,BigInteger.ZERO}});
+        System.out.println("Group presented by columns (2,0,0), (0,3,0): "+math.flow(math.integerMatrices,Collections.singletonList(presentation))
+                .<AbelianGroupType>performAlgebraTransfer("cokernel").collect());
         FiniteSimplicialComplex projectivePlane=new FiniteSimplicialComplex(Arrays.asList(
                 FiniteSet.of(0,1,2),FiniteSet.of(0,1,3),FiniteSet.of(0,2,4),FiniteSet.of(0,3,5),FiniteSet.of(0,4,5),
                 FiniteSet.of(1,2,5),FiniteSet.of(1,3,4),FiniteSet.of(1,4,5),FiniteSet.of(2,3,4),FiniteSet.of(2,3,5)));

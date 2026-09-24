@@ -158,6 +158,14 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("existing F2", " ".join(records["FiniteComplex.rational-betti-number"]["required_invariants"]))
         self.assertIn("including unit factors", " ".join(records["FiniteComplex.boundary-invariant-factors"]["required_invariants"]))
         self.assertIn("5000000", " ".join(records["FiniteComplex.integral-homology-groups"]["known_limitations"]))
+        self.assertIn("denominator one", " ".join(records["Vec(Z).from-rational"]["required_invariants"]))
+        self.assertIn("[U,D,V]", " ".join(records["Mat(Z).smith-decomposition"]["required_invariants"]))
+        self.assertIn("whole integer kernel", " ".join(records["Mat(Z).kernel-basis"]["required_invariants"]))
+        self.assertIn("not the saturation", " ".join(records["Mat(Z).image-basis"]["required_invariants"]))
+        self.assertIn("particular solution first", " ".join(records["Mat(Z).solve-generators"]["required_invariants"]))
+        self.assertIn("never false", " ".join(records["Mat(Z).has-integer-solution"]["required_invariants"]))
+        self.assertIn("5000000", " ".join(records["Mat(Z).inverse-unimodular"]["known_limitations"]))
+        self.assertIn("0 by vertex-count", " ".join(records["FiniteComplex.boundary-matrix"]["required_invariants"]))
 
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)

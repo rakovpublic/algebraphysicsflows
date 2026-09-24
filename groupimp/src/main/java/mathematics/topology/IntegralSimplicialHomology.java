@@ -3,6 +3,7 @@ package mathematics.topology;
 import mathematics.core.MathFailure;
 import mathematics.foundations.FiniteSet;
 import mathematics.linear.IntegerSmithNormalForm;
+import mathematics.linear.IntegerMatrix;
 import mathematics.structures.AbelianGroupType;
 import java.math.BigInteger;
 import java.util.*;
@@ -34,21 +35,22 @@ final class IntegralSimplicialHomology {
     }
     List<BigInteger> boundary(int degree) {
         if(degree<=0 || degree>complex.dimension()) return Collections.emptyList();
-        if(!boundaries.containsKey(degree)) {
-            List<FiniteSet<Integer>> rows=basis(degree-1),columns=basis(degree);
-            BigInteger[][] matrix=new BigInteger[rows.size()][columns.size()];
-            for(BigInteger[] row : matrix) Arrays.fill(row,BigInteger.ZERO);
-            Map<FiniteSet<Integer>,Integer> positions=new HashMap<>(); for(int i=0;i<rows.size();i++) positions.put(rows.get(i),i);
-            for(int c=0;c<columns.size();c++) {
-                List<Integer> simplex=vertices(columns.get(c));
-                for(int i=0;i<simplex.size();i++) {
-                    List<Integer> face=new ArrayList<>(simplex); face.remove(i);
-                    matrix[positions.get(new FiniteSet<>(face))][c]=(i&1)==0?BigInteger.ONE:BigInteger.ONE.negate();
-                }
-            }
-            boundaries.put(degree,smith.invariantFactors(matrix));
-        }
+        if(!boundaries.containsKey(degree)) boundaries.put(degree,smith.invariantFactors(boundaryMatrix(degree)));
         return boundaries.get(degree);
+    }
+    IntegerMatrix boundaryMatrix(int degree) {
+        List<FiniteSet<Integer>> rows=basis(degree-1),columns=basis(degree);
+        BigInteger[][] matrix=new BigInteger[rows.size()][columns.size()];
+        for(BigInteger[] row : matrix) Arrays.fill(row,BigInteger.ZERO);
+        Map<FiniteSet<Integer>,Integer> positions=new HashMap<>(); for(int i=0;i<rows.size();i++) positions.put(rows.get(i),i);
+        for(int c=0;degree>0 && c<columns.size();c++) {
+            List<Integer> simplex=vertices(columns.get(c));
+            for(int i=0;i<simplex.size();i++) {
+                List<Integer> face=new ArrayList<>(simplex); face.remove(i);
+                matrix[positions.get(new FiniteSet<>(face))][c]=(i&1)==0?BigInteger.ONE:BigInteger.ONE.negate();
+            }
+        }
+        return new IntegerMatrix(rows.size(),columns.size(),matrix);
     }
     AbelianGroupType group(int degree) {
         if(degree<0) throw MathFailure.undefined("Homology degree must be nonnegative");

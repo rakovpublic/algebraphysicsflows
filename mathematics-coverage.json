@@ -25893,7 +25893,8 @@
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
         "groupimp/src/test/java/operations/NativeTopologyTest.java",
-        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -25919,6 +25920,72 @@
       "provenance": {
         "definition_source": "docs/CONCRETE_ALGEBRAS.md",
         "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
+      "id": "concrete-algebra.IntegerMatrixFamily",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "IntegerMatrixFamily",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "Mat(Z)",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
         "implemented_by": "Codex",
         "generated_by_model": "not recorded",
         "reviewed_by": null,
@@ -26040,6 +26107,68 @@
       "provenance": {
         "definition_source": "docs/CONCRETE_ALGEBRAS.md",
         "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerSetAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
+      "id": "concrete-algebra.IntegerVectorFamily",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerVectorFamily",
+      "concept": "IntegerVectorFamily",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "Vec(Z)",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite integer coordinate vectors with retained nonnegative dimension",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerVectorFamily.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerVector.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerVectorFamily.java",
         "implemented_by": "Codex",
         "generated_by_model": "not recorded",
         "reviewed_by": null,
@@ -49528,7 +49657,8 @@
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
         "groupimp/src/test/java/operations/NativeTopologyTest.java",
-        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -49603,7 +49733,8 @@
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
         "groupimp/src/test/java/operations/NativeTopologyTest.java",
-        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -49678,7 +49809,8 @@
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
         "groupimp/src/test/java/operations/NativeTopologyTest.java",
-        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -49753,7 +49885,8 @@
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
         "groupimp/src/test/java/operations/NativeTopologyTest.java",
-        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -49828,7 +49961,8 @@
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
         "groupimp/src/test/java/operations/NativeTopologyTest.java",
-        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -49903,7 +50037,8 @@
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
         "groupimp/src/test/java/operations/NativeTopologyTest.java",
-        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -49978,7 +50113,8 @@
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
         "groupimp/src/test/java/operations/NativeTopologyTest.java",
-        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -50054,7 +50190,8 @@
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
         "groupimp/src/test/java/operations/NativeTopologyTest.java",
-        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -50130,7 +50267,8 @@
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
         "groupimp/src/test/java/operations/NativeTopologyTest.java",
-        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -50206,7 +50344,8 @@
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
         "groupimp/src/test/java/operations/NativeTopologyTest.java",
-        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -50282,7 +50421,8 @@
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
         "groupimp/src/test/java/operations/NativeTopologyTest.java",
-        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -50357,7 +50497,8 @@
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
         "groupimp/src/test/java/operations/NativeTopologyTest.java",
-        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -50433,7 +50574,8 @@
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
         "groupimp/src/test/java/operations/NativeTopologyTest.java",
-        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -50510,7 +50652,8 @@
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
         "groupimp/src/test/java/operations/NativeTopologyTest.java",
-        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -50586,7 +50729,8 @@
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
         "groupimp/src/test/java/operations/NativeTopologyTest.java",
-        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -50663,7 +50807,8 @@
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
         "groupimp/src/test/java/operations/NativeTopologyTest.java",
-        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -50740,7 +50885,8 @@
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
         "groupimp/src/test/java/operations/NativeTopologyTest.java",
-        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java"
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -50782,6 +50928,83 @@
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "boundary-invariant-factors",
       "legacy_operation_interface": "ILeftProjectionFlatOperation"
+    },
+    {
+      "id": "concrete-operation.FiniteComplex.boundary-matrix",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "FiniteSimplicialAlgebra",
+      "concept": "FiniteComplex.boundary-matrix",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteComplex",
+      "domain_B": "N",
+      "domain_C": "Mat(Z)",
+      "operation_signature": "FiniteComplex x N -> Mat(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.boundary-matrix",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the oriented integer boundary from degree k to k-1 in Mat(Z). Bases are lexicographically ordered increasing-vertex simplices. Degree zero is 0 by vertex-count; dimension+1 retains the top-degree row count and zero columns; higher degrees are 0 by 0. Adjacent boundaries multiply to zero."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/FiniteSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralSimplicialHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeTopologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralHomologyTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Construction materializes faces and caps each input facet at 20 vertices.",
+        "Integral homology, rational Betti numbers and boundary Smith factors allow at most 256 simplices in each required degree and share a 5000000-unit Smith-reduction budget per complete calculation. Exhaustion raises IMPLEMENTATION_FAILURE, never a partial invariant list. BigInteger coefficient bit lengths are unbounded.",
+        "Homology returns isomorphism types, not cycle representatives, chosen generators or induced maps. No persistence, cup products or homeomorphism decision is implemented. Existing betti-number and betti-numbers retain F2 coefficients."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html",
+        "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_examples.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/FiniteSimplicialAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "FiniteComplex.boundary-matrix",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "boundary-matrix",
+      "legacy_operation_interface": "IUnsafeOperation"
     },
     {
       "id": "concrete-operation.FiniteRelation(Z,Z).union",
@@ -77169,6 +77392,2959 @@
       "legacy_operation_interface": "ITransferOperation"
     },
     {
+      "id": "concrete-operation.Vec(Z).add",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerVectorFamily",
+      "concept": "Vec(Z).add",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Vec(Z)",
+      "domain_B": "Vec(Z)",
+      "domain_C": "Vec(Z)",
+      "operation_signature": "Vec(Z) x Vec(Z) -> Vec(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).add",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Vector dimensions must agree; add integer coordinates."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerVectorFamily.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerVector.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerVectorFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Vec(Z).add",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "add",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.Vec(Z).subtract",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerVectorFamily",
+      "concept": "Vec(Z).subtract",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Vec(Z)",
+      "domain_B": "Vec(Z)",
+      "domain_C": "Vec(Z)",
+      "operation_signature": "Vec(Z) x Vec(Z) -> Vec(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).subtract",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Vector dimensions must agree; subtract the second vector from the first."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerVectorFamily.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerVector.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerVectorFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Vec(Z).subtract",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "subtract",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.Vec(Z).negate",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerVectorFamily",
+      "concept": "Vec(Z).negate",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Vec(Z)",
+      "domain_B": null,
+      "domain_C": "Vec(Z)",
+      "operation_signature": "Vec(Z) -> Vec(Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).negate",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Negate every coordinate, retaining dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerVectorFamily.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerVector.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerVectorFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Vec(Z).negate",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "negate",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.Vec(Z).scale",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerVectorFamily",
+      "concept": "Vec(Z).scale",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Vec(Z)",
+      "domain_B": "Z",
+      "domain_C": "Vec(Z)",
+      "operation_signature": "Vec(Z) x Z -> Vec(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).scale",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Multiply coordinates by the integer second operand; return the first vector carrier's wrapper."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerVectorFamily.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerVector.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerVectorFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Vec(Z).scale",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "scale",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.Vec(Z).dot",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerVectorFamily",
+      "concept": "Vec(Z).dot",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Vec(Z)",
+      "domain_B": "Vec(Z)",
+      "domain_C": "Z",
+      "operation_signature": "Vec(Z) x Vec(Z) -> Z",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).dot",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Dimensions must agree. Use the standard integer coordinate pairing; the empty pairing is zero."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerVectorFamily.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerVector.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerVectorFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Vec(Z).dot",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "dot",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.Vec(Z).dimension",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerVectorFamily",
+      "concept": "Vec(Z).dimension",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Vec(Z)",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "Vec(Z) -> N",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).dimension",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the retained nonnegative coordinate count."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerVectorFamily.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerVector.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerVectorFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Vec(Z).dimension",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "dimension",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Vec(Z).entries",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerVectorFamily",
+      "concept": "Vec(Z).entries",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Vec(Z)",
+      "domain_B": null,
+      "domain_C": "Z",
+      "operation_signature": "Vec(Z) -> List(Z)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).entries",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit integer coordinates in order, preserving duplicates and the empty list.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerVectorFamily.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerVector.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerVectorFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Vec(Z).entries",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "entries",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.Vec(Z).zero-like",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerVectorFamily",
+      "concept": "Vec(Z).zero-like",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Vec(Z)",
+      "domain_B": null,
+      "domain_C": "Vec(Z)",
+      "operation_signature": "Vec(Z) -> Vec(Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).zero-like",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the zero vector of the same dimension."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerVectorFamily.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerVector.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerVectorFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Vec(Z).zero-like",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "zero-like",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.Vec(Z).equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerVectorFamily",
+      "concept": "Vec(Z).equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Vec(Z)",
+      "domain_B": "Vec(Z)",
+      "domain_C": "Boolean",
+      "operation_signature": "Vec(Z) x Vec(Z) -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Compare dimensions and every exact coordinate."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerVectorFamily.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerVector.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerVectorFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Vec(Z).equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.Vec(Z).to-rational",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerVectorFamily",
+      "concept": "Vec(Z).to-rational",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Vec(Z)",
+      "domain_B": null,
+      "domain_C": "Vec(Q)",
+      "operation_signature": "Vec(Z) -> Vec(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).to-rational",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed coordinates in the actual Vec(Q) carrier; dimension zero is supported."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerVectorFamily.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerVector.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerVectorFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Vec(Z).to-rational",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-rational",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Vec(Z).from-rational",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerVectorFamily",
+      "concept": "Vec(Z).from-rational",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Vec(Q)",
+      "domain_B": null,
+      "domain_C": "Vec(Z)",
+      "operation_signature": "Vec(Q) -> Vec(Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).from-rational",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Every rational coordinate must have denominator one; rounding is not performed."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerVectorFamily.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerVector.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerVectorFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Vec(Z).from-rational",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "Vec(Z).from-rational",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Vec(Z).empty",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerVectorFamily",
+      "concept": "Vec(Z).empty",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "Vec(Z)",
+      "operation_signature": "Unit -> Vec(Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).empty",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the unique vector in dimension zero."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerVectorFamily.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerVector.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerVectorFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Vec(Z).empty",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "Vec(Z).empty",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).add",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).add",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": "Mat(Z)",
+      "domain_C": "Mat(Z)",
+      "operation_signature": "Mat(Z) x Mat(Z) -> Mat(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).add",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Both row and column dimensions must agree; add entries over Z."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Mat(Z).add",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "add",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).subtract",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).subtract",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": "Mat(Z)",
+      "domain_C": "Mat(Z)",
+      "operation_signature": "Mat(Z) x Mat(Z) -> Mat(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).subtract",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Both row and column dimensions must agree; subtract the second matrix from the first."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Mat(Z).subtract",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "subtract",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).multiply",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).multiply",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": "Mat(Z)",
+      "domain_C": "Mat(Z)",
+      "operation_signature": "Mat(Z) x Mat(Z) -> Mat(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).multiply",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The first column count equals the second row count. Composition applies the second matrix first; zero inner dimensions retain the outer shape."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Mat(Z).multiply",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "multiply",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).negate",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).negate",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": null,
+      "domain_C": "Mat(Z)",
+      "operation_signature": "Mat(Z) -> Mat(Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).negate",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Negate entries while retaining both dimensions."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Mat(Z).negate",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "negate",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).transpose",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).transpose",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": null,
+      "domain_C": "Mat(Z)",
+      "operation_signature": "Mat(Z) -> Mat(Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).transpose",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Exchange row and column dimensions, including empty dimensions."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Mat(Z).transpose",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "transpose",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).scale",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).scale",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": "Z",
+      "domain_C": "Mat(Z)",
+      "operation_signature": "Mat(Z) x Z -> Mat(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).scale",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Scale every entry by the integer second operand and return the first matrix wrapper."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Mat(Z).scale",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "scale",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).apply",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).apply",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": "Vec(Z)",
+      "domain_C": "Vec(Z)",
+      "operation_signature": "Mat(Z) x Vec(Z) -> Vec(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).apply",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The vector dimension equals the matrix column count. Return the actual second Vec(Z) carrier's wrapper, with dimension equal to the row count."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Mat(Z).apply",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "apply",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": "Mat(Z)",
+      "domain_C": "Boolean",
+      "operation_signature": "Mat(Z) x Mat(Z) -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Compare both retained dimensions and all entries; distinct empty shapes remain different."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Mat(Z).equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).row-count",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).row-count",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "Mat(Z) -> N",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).row-count",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the retained number of rows, including zero."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Mat(Z).row-count",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "row-count",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).column-count",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).column-count",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "Mat(Z) -> N",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).column-count",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the retained number of columns, including zero."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Mat(Z).column-count",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "column-count",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).rows",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).rows",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": null,
+      "domain_C": "Vec(Z)",
+      "operation_signature": "Mat(Z) -> List(Vec(Z))",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).rows",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit one Vec(Z) row per row index; an m by 0 matrix emits m empty vectors.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Mat(Z).rows",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "rows",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).columns",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).columns",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": null,
+      "domain_C": "Vec(Z)",
+      "operation_signature": "Mat(Z) -> List(Vec(Z))",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).columns",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit one Vec(Z) column per column index; a 0 by n matrix emits n empty vectors.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Mat(Z).columns",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "columns",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).zero-like",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).zero-like",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": null,
+      "domain_C": "Mat(Z)",
+      "operation_signature": "Mat(Z) -> Mat(Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).zero-like",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the zero matrix of the same retained shape."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Mat(Z).zero-like",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "zero-like",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).identity-on-domain",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).identity-on-domain",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": null,
+      "domain_C": "Mat(Z)",
+      "operation_signature": "Mat(Z) -> Mat(Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).identity-on-domain",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the identity on Z^columns, including the 0 by 0 identity."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Mat(Z).identity-on-domain",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "identity-on-domain",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).identity-on-codomain",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).identity-on-codomain",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": null,
+      "domain_C": "Mat(Z)",
+      "operation_signature": "Mat(Z) -> Mat(Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).identity-on-codomain",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the identity on Z^rows, including the 0 by 0 identity."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Mat(Z).identity-on-codomain",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "identity-on-codomain",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).smith-invariant-factors",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).smith-invariant-factors",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "Mat(Z) -> List(N)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).smith-invariant-factors",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit positive nonzero Smith factors, including ones, each dividing the next. Zero diagonal entries are omitted.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Mat(Z).smith-invariant-factors",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "smith-invariant-factors",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).smith-form",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).smith-form",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": null,
+      "domain_C": "Mat(Z)",
+      "operation_signature": "Mat(Z) -> Mat(Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).smith-form",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return D with the same rectangular shape and positive nonzero Smith factors followed by zero diagonal entries."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Mat(Z).smith-form",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "smith-form",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).smith-decomposition",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).smith-decomposition",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": null,
+      "domain_C": "Mat(Z)",
+      "operation_signature": "Mat(Z) -> List(Mat(Z))",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).smith-decomposition",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit exactly [U,D,V] with U*A*V=D; U and V are square unimodular integer matrices on the codomain and domain. D is canonical, while the witnesses are algorithm-selected and need not be canonical.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/flat/OneOperandFlatOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Mat(Z).smith-decomposition",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "smith-decomposition",
+      "legacy_operation_interface": "IOneOperandFlatOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).kernel-basis",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).kernel-basis",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": null,
+      "domain_C": "Vec(Z)",
+      "operation_signature": "Mat(Z) -> List(Vec(Z))",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).kernel-basis",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit the trailing columns of the Smith right witness V. They form a basis of the whole integer kernel lattice, not merely a rational nullspace basis; an injective map emits an empty list.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Mat(Z).kernel-basis",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "kernel-basis",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).image-basis",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).image-basis",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": null,
+      "domain_C": "Vec(Z)",
+      "operation_signature": "Mat(Z) -> List(Vec(Z))",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).image-basis",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit A times the first rank(A) columns of V. This is a basis of the actual image lattice, preserving its index in its rational span; it is not the saturation.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Mat(Z).image-basis",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "image-basis",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).cokernel",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).cokernel",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": null,
+      "domain_C": "AbelianGroupType",
+      "operation_signature": "Mat(Z) -> AbelianGroupType",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).cokernel",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Classify Z^rows/image(A) in the actual AbelianGroupType carrier. The free rank is rows minus rank(A), and nonunit Smith factors give torsion; matrix columns are relations."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Mat(Z).cokernel",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "cokernel",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).rank",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).rank",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "Mat(Z) -> N",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).rank",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the number of nonzero Smith factors, equal to rank over Q."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Mat(Z).rank",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "rank",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).nullity",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).nullity",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "Mat(Z) -> N",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).nullity",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return columns minus rank, the rank of the integer kernel."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Mat(Z).nullity",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "nullity",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).has-integer-solution",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).has-integer-solution",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": "Vec(Z)",
+      "domain_C": "Boolean",
+      "operation_signature": "Mat(Z) x Vec(Z) -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).has-integer-solution",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The right-hand side has one coordinate per row. Test divisibility of U*b by the nonzero Smith factors and zero residual coordinates. Resource exhaustion raises IMPLEMENTATION_FAILURE, never false."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Mat(Z).has-integer-solution",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "has-integer-solution",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).solve-particular",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).solve-particular",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": "Vec(Z)",
+      "domain_C": "Vec(Z)",
+      "operation_signature": "Mat(Z) x Vec(Z) -> Vec(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).solve-particular",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The right-hand side matches the rows and an integer solution must exist. Set free Smith coordinates to zero and return x=V*y in the second Vec(Z) carrier; this is not a minimum-norm solution."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Mat(Z).solve-particular",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "solve-particular",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).solve-generators",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).solve-generators",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": "Vec(Z)",
+      "domain_C": "Vec(Z)",
+      "operation_signature": "Mat(Z) x Vec(Z) -> List(Vec(Z))",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).solve-generators",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The right-hand side matches the rows and an integer solution must exist. Emit a particular solution first, then an integral kernel basis; all solutions are x0 plus arbitrary integer combinations of the remaining vectors. This finite list parametrizes solutions rather than enumerating them.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/flat/SecondResultFlatOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Mat(Z).solve-generators",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "solve-generators",
+      "legacy_operation_interface": "ILeftProjectionFlatOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).inverse-unimodular",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).inverse-unimodular",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": null,
+      "domain_C": "Mat(Z)",
+      "operation_signature": "Mat(Z) -> Mat(Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).inverse-unimodular",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The matrix is square and all Smith factors are one with full rank, equivalently determinant is plus or minus one. Return V*U; the empty square matrix is invertible. Rational invertibility alone is insufficient."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Mat(Z).inverse-unimodular",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "inverse-unimodular",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).to-rational",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).to-rational",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Z)",
+      "domain_B": null,
+      "domain_C": "Mat(Q)",
+      "operation_signature": "Mat(Z) -> Mat(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).to-rational",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Both dimensions must be positive because the current Mat(Q) carrier excludes empty shapes. Embed entries exactly in the actual rational matrix carrier."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Mat(Z).to-rational",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-rational",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Mat(Z).from-rational",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegerMatrixFamily",
+      "concept": "Mat(Z).from-rational",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Q)",
+      "domain_B": null,
+      "domain_C": "Mat(Z)",
+      "operation_signature": "Mat(Q) -> Mat(Z)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).from-rational",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Every entry must have denominator one; preserve both dimensions. Rounding is not performed."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegerLinearTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.",
+        "Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.",
+        "Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegerMatrixFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-24",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Mat(Z).from-rational",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "Mat(Z).from-rational",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
       "id": "concrete-operation.Z/5Z.add",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "PrimeField",
@@ -77792,6 +80968,7 @@
         "FiniteComplex.betti-number",
         "FiniteComplex.betti-numbers",
         "FiniteComplex.boundary-invariant-factors",
+        "FiniteComplex.boundary-matrix",
         "FiniteComplex.integral-homology",
         "FiniteComplex.rational-betti-number",
         "FiniteComplex.rational-betti-numbers",
@@ -77812,6 +80989,11 @@
         "Mat(Q).pow",
         "Mat(Q).rank",
         "Mat(Q).row-count",
+        "Mat(Z).column-count",
+        "Mat(Z).nullity",
+        "Mat(Z).rank",
+        "Mat(Z).row-count",
+        "Mat(Z).smith-invariant-factors",
         "Mat2(Q).eigenvalue-multiplicity",
         "Mat2(Q).pow",
         "Mat2(Q).rank",
@@ -77854,6 +81036,7 @@
         "Tensor(Q).shape",
         "Tensor(Q).size",
         "Vec(Q).dimension",
+        "Vec(Z).dimension",
         "betti-F2"
       ],
       "invariants": [
@@ -77943,12 +81126,16 @@
         "FiniteSet(Z).maximizers",
         "FiniteSet(Z).minimizers",
         "FiniteSet(Z).remove",
+        "Mat(Z).scale",
         "N-to-Z",
         "N.to-integer",
         "Poly(Q).degree",
         "PolynomialChain(Q).degree",
         "S3.power",
         "S3.sign",
+        "Vec(Z).dot",
+        "Vec(Z).entries",
+        "Vec(Z).scale",
         "Z-to-Q",
         "Z.add",
         "Z.divide-rational",
@@ -78357,6 +81544,8 @@
         "H(Q).same-rotation",
         "Mat(Q).equal",
         "Mat(Q).is-diagonalizable-over-q",
+        "Mat(Z).equal",
+        "Mat(Z).has-integer-solution",
         "Mat2(Q).is-diagonalizable-over-q",
         "Poly(Q).equal",
         "Poly(Q).is-zero",
@@ -78371,6 +81560,7 @@
         "Q.greater",
         "S3.equal",
         "Tensor(Q).equal",
+        "Vec(Z).equal",
         "Z.equal",
         "Z.greater",
         "Z/6Z.equal",
@@ -78443,6 +81633,7 @@
         "Sample(Q).empty",
         "Tensor(Q).one",
         "Vec(Q).empty",
+        "Vec(Z).empty",
         "Z.one",
         "Z.zero",
         "Z/5Z.one",
@@ -78679,6 +81870,7 @@
         "FiniteComplex.betti-number",
         "FiniteComplex.betti-numbers",
         "FiniteComplex.boundary-invariant-factors",
+        "FiniteComplex.boundary-matrix",
         "FiniteComplex.dimension",
         "FiniteComplex.empty",
         "FiniteComplex.equal",
@@ -80025,7 +83217,9 @@
         "Vec(Q).scale",
         "Vec(Q).subtract",
         "Vec(Q).to-fixed",
-        "Vec(Q).zero-like"
+        "Vec(Q).zero-like",
+        "Vec(Z).from-rational",
+        "Vec(Z).to-rational"
       ],
       "invariants": [
         "Finite nonnegative dimension",
@@ -80116,6 +83310,8 @@
         "Mat(Q).trace",
         "Mat(Q).transpose",
         "Mat(Q).zero-like",
+        "Mat(Z).from-rational",
+        "Mat(Z).to-rational",
         "Poly(Q).hessian-at",
         "PolynomialMap(Q).from-matrix",
         "PolynomialMap(Q).jacobian-at",
@@ -80975,12 +84171,145 @@
         "AbelianGroupType.torsion-part",
         "AbelianGroupType.zero",
         "FiniteComplex.integral-homology",
-        "FiniteComplex.integral-homology-groups"
+        "FiniteComplex.integral-homology-groups",
+        "Mat(Z).cokernel"
       ],
       "invariants": [
         "Nonnegative arbitrary-precision free rank",
         "Canonical cyclic torsion factors greater than one, each dividing the next",
         "No chosen elements, generators or maps; equality is group isomorphism-type equality"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-24"
+      }
+    },
+    {
+      "id": "Vec(Z)",
+      "name": "Finite free integer coordinate modules",
+      "description": "Finite free integer coordinate modules",
+      "member_representation": "mathematics.linear.IntegerVector",
+      "membership_rules": [
+        "Retained nonnegative dimension",
+        "Immutable arbitrary-precision integer entries",
+        "Addition and dot product require equal dimensions"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "Z",
+        "N",
+        "Boolean",
+        "Vec(Q)",
+        "Mat(Z)"
+      ],
+      "supported_operations": [
+        "Mat(Z).apply",
+        "Mat(Z).columns",
+        "Mat(Z).has-integer-solution",
+        "Mat(Z).image-basis",
+        "Mat(Z).kernel-basis",
+        "Mat(Z).rows",
+        "Mat(Z).solve-generators",
+        "Mat(Z).solve-particular",
+        "Vec(Z).add",
+        "Vec(Z).dimension",
+        "Vec(Z).dot",
+        "Vec(Z).empty",
+        "Vec(Z).entries",
+        "Vec(Z).equal",
+        "Vec(Z).from-rational",
+        "Vec(Z).negate",
+        "Vec(Z).scale",
+        "Vec(Z).subtract",
+        "Vec(Z).to-rational",
+        "Vec(Z).zero-like"
+      ],
+      "invariants": [
+        "Retained nonnegative dimension",
+        "Immutable arbitrary-precision integer entries",
+        "Addition and dot product require equal dimensions"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-24"
+      }
+    },
+    {
+      "id": "Mat(Z)",
+      "name": "Integer matrices with Smith witnesses",
+      "description": "Integer matrices with Smith witnesses",
+      "member_representation": "mathematics.linear.IntegerMatrix",
+      "membership_rules": [
+        "Explicit nonnegative row and column counts, including empty shapes",
+        "Immutable rectangular arbitrary-precision entries",
+        "Maps Z^columns to Z^rows; composition checks the middle dimension"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "Z",
+        "N",
+        "Boolean",
+        "Vec(Z)",
+        "Mat(Q)",
+        "AbelianGroupType",
+        "FiniteComplex"
+      ],
+      "supported_operations": [
+        "FiniteComplex.boundary-matrix",
+        "Mat(Z).add",
+        "Mat(Z).apply",
+        "Mat(Z).cokernel",
+        "Mat(Z).column-count",
+        "Mat(Z).columns",
+        "Mat(Z).equal",
+        "Mat(Z).from-rational",
+        "Mat(Z).has-integer-solution",
+        "Mat(Z).identity-on-codomain",
+        "Mat(Z).identity-on-domain",
+        "Mat(Z).image-basis",
+        "Mat(Z).inverse-unimodular",
+        "Mat(Z).kernel-basis",
+        "Mat(Z).multiply",
+        "Mat(Z).negate",
+        "Mat(Z).nullity",
+        "Mat(Z).rank",
+        "Mat(Z).row-count",
+        "Mat(Z).rows",
+        "Mat(Z).scale",
+        "Mat(Z).smith-decomposition",
+        "Mat(Z).smith-form",
+        "Mat(Z).smith-invariant-factors",
+        "Mat(Z).solve-generators",
+        "Mat(Z).solve-particular",
+        "Mat(Z).subtract",
+        "Mat(Z).to-rational",
+        "Mat(Z).transpose",
+        "Mat(Z).zero-like"
+      ],
+      "invariants": [
+        "Explicit nonnegative row and column counts, including empty shapes",
+        "Immutable rectangular arbitrary-precision entries",
+        "Maps Z^columns to Z^rows; composition checks the middle dimension"
       ],
       "references": [
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"

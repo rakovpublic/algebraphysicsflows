@@ -35,9 +35,17 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all706RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all748RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
+        String integerMatrix="ZMatrix(2x2)[[2, 0], [0, 3]]",integerIdentity="ZMatrix(2x2)[[1, 0], [0, 1]]";
+        expected.put("IntegerVectorFamily","[6, 9]|[-2, -3]|[-2, -3]|[4, 6]|26|2|[2, 3]|[0, 0]|false|[2, 3]|[1, 2, 3]|[]");
+        expected.put("IntegerMatrixFamily",String.join("|","ZMatrix(2x2)[[3, 0], [0, 4]]","ZMatrix(2x2)[[1, 0], [0, 2]]",
+                integerMatrix,"ZMatrix(2x2)[[-2, 0], [0, -3]]",integerMatrix,"ZMatrix(2x2)[[4, 0], [0, 6]]","[8, 18]","false","2","2",
+                "[[2, 0], [0, 3]]","[[2, 0], [0, 3]]","ZMatrix(2x2)[[0, 0], [0, 0]]",integerIdentity,integerIdentity,"[1, 6]",
+                "ZMatrix(2x2)[[1, 0], [0, 6]]","[ZMatrix(2x2)[[1, 1], [3, 2]], ZMatrix(2x2)[[1, 0], [0, 6]], ZMatrix(2x2)[[-1, 3], [1, -2]]]",
+                "[]","[[-2, 3], [6, -6]]","AbelianGroup(rank=0, torsion=[6])","2","0","true","[2, 2]","[[2, 2]]",
+                "ZMatrix(2x2)[[1, -2], [0, 1]]","[[2, 0], [0, 3]]","ZMatrix(2x3)[[1, 2, 3], [2, 4, 6]]"));
         expected.put("AbelianGroupTypeAlgebra",String.join("|",
                 "AbelianGroup(rank=3, torsion=[2, 12, 12])","AbelianGroup(rank=2, torsion=[2, 2, 6, 6, 12, 12])",
                 "AbelianGroup(rank=2, torsion=[2, 2, 12, 12])","AbelianGroup(rank=0, torsion=[2, 6])",
@@ -154,7 +162,7 @@ public class ConcreteAlgebrasTest {
         expected.put("IntegerSetAlgebra","[1, 2, 3]|[1, 2]|[]|[3]|true|false|true|[1, 2]|[1]|2|[1, 2]|[[], [1], [2], [1, 2]]|[3]|[]|[1]|[2]|3|4|[1]|[2]");
         expected.put("RationalSampleAlgebra","Sample[1, 2, 3, 2, 4, 6]|3|2|2/3|1|Sample[-1, 0, 1]|4/3|2|Sample[2, 4, 6]|[1, 2, 3]|Sample[]");
         expected.put("FiniteProbabilityAlgebra","1|0|Distribution{1=1/4, 3=3/4}|[1, 3]|2|[1, 3]|false|Distribution{6=1}|5/2|3/4");
-        expected.put("FiniteSimplicialAlgebra","Complex[[0], [1], [2], [0, 1], [0, 2], [1, 2], [0, 1, 2]]|Complex[[0], [1], [2], [0, 1], [0, 2], [1, 2]]|false|true|1|0|3|0|0|Complex[[0], [1], [2], [0, 1], [0, 2], [1, 2]]|[1, 1]|Complex[]|AbelianGroup(rank=0, torsion=[])|[AbelianGroup(rank=1, torsion=[]), AbelianGroup(rank=1, torsion=[])]|0|[1, 1]|[]");
+        expected.put("FiniteSimplicialAlgebra","Complex[[0], [1], [2], [0, 1], [0, 2], [1, 2], [0, 1, 2]]|Complex[[0], [1], [2], [0, 1], [0, 2], [1, 2]]|false|true|1|0|3|0|0|Complex[[0], [1], [2], [0, 1], [0, 2], [1, 2]]|[1, 1]|Complex[]|AbelianGroup(rank=0, torsion=[])|[AbelianGroup(rank=1, torsion=[]), AbelianGroup(rank=1, torsion=[])]|0|[1, 1]|[]|ZMatrix(3x0)[[], [], []]");
         expected.put("FiniteIntegerRelationAlgebra","Relation[(1,2), (2,3), (2,4), (3,5)]|Relation[]|Relation[(1,4), (2,5)]|Relation[(2,1), (3,2)]|Relation[(1,2), (2,3), (1,3)]|false|false|[1, 2]|[2, 3]|2|true|[2, 3]|[1, 2]|false|Relation[]|Relation[(1,1), (2,2)]");
         expected.put("RationalFunctionField","Q(x)(Q[x][1, 1, 1])/(Q[x][0, 1])|Q(x)(Q[x][1, -1, -1])/(Q[x][0, 1])|Q(x)(Q[x][1, 1])/(Q[x][0, 1])|Q(x)(Q[x][1])/(Q[x][0, 1, 1])|Q(x)(Q[x][1])/(Q[x][1, 1])|Q(x)(Q[x][-1])/(Q[x][0, 1])|Q(x)(Q[x][0, 1])/(Q[x][1])|Q(x)(Q[x][-1])/(Q[x][0, 0, 1])|1/2|Q[x][1]|Q[x][0, 1]|Q(x)(Q[x][1, 2, 1])/(Q[x][1])|false|Q(x)(Q[x][0])/(Q[x][1])|Q(x)(Q[x][1])/(Q[x][1])");
         expected.put("SymmetricGroup","Perm[2, 1, 0]|Perm[2, 0, 1]|false|3|1|0|0|Perm[2, 0, 1]|[2, 0, 1]|[Perm[1, 2, 0]]|Perm[0, 1, 2]|[Perm[0, 1, 2], Perm[0, 2, 1], Perm[1, 0, 2], Perm[1, 2, 0], Perm[2, 0, 1], Perm[2, 1, 0]]");
@@ -174,12 +182,14 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(706,count);
+        assertEquals(748,count);
     }
     @SuppressWarnings({"unchecked","rawtypes"})
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
         Algebra source=math.mathTool.getAlgebra(entry.first.getAlgebraName());
         IAlgebraItem item=source.buildAlgebraItem(sample(math,source.getAlgebraName(),0));
+        if(entry.id.equals("Mat(Z).inverse-unimodular")) item=source.buildAlgebraItem(new IntegerMatrix(new BigInteger[][]{
+                {BigInteger.ONE,BigInteger.valueOf(2)},{BigInteger.ZERO,BigInteger.ONE}}));
         if(entry.id.equals("AbelianGroupType.order") || entry.id.equals("AbelianGroupType.exponent"))
             item=source.buildAlgebraItem(AbelianGroupType.cyclic(BigInteger.valueOf(6)));
         if(entry.id.equals("FiniteMarkov(Z).from-matrix")) item=source.buildAlgebraItem(((FiniteMarkovKernel)sample(math,"FiniteMarkov(Z)",0)).toMatrix());
@@ -271,6 +281,8 @@ public class ConcreteAlgebrasTest {
     }
     private Object sample(ConcreteMathematics math,String domain,int index) {
         switch(domain) {
+            case "Vec(Z)": return new IntegerVector(BigInteger.valueOf(index==0?2:4),BigInteger.valueOf(index==0?3:6));
+            case "Mat(Z)": return index==0?new IntegerMatrix(new BigInteger[][]{{BigInteger.valueOf(2),BigInteger.ZERO},{BigInteger.ZERO,BigInteger.valueOf(3)}}):IntegerMatrix.identity(2);
             case "AbelianGroupType": return index==0?new AbelianGroupType(BigInteger.ONE,Collections.singletonList(BigInteger.valueOf(6)))
                     :new AbelianGroupType(BigInteger.valueOf(2),Arrays.asList(BigInteger.valueOf(4),BigInteger.valueOf(12)));
             case "FiniteMarkov(Z)": {

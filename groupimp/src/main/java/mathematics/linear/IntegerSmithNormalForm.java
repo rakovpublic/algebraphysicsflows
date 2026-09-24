@@ -4,26 +4,49 @@ import mathematics.core.MathFailure;
 import java.math.BigInteger;
 import java.util.*;
 
-/** Positive nonzero Smith invariant factors; no change-of-basis matrices are returned. */
+/** Exact Smith reduction, optionally retaining unimodular witnesses U*A*V=D. */
 public final class IntegerSmithNormalForm {
     public static final int MAX_DIMENSION=256;
     private IntegerSmithNormalForm() {}
     public static List<BigInteger> invariantFactors(BigInteger[][] matrix) { return new Computation().invariantFactors(matrix); }
+    /** Immutable witnesses; diagonal entries are positive nonzero factors followed by zeros. */
+    public static final class Decomposition {
+        private final IntegerMatrix left,diagonal,right;
+        private final List<BigInteger> factors;
+        private Decomposition(IntegerMatrix left,IntegerMatrix diagonal,IntegerMatrix right,List<BigInteger> factors) {
+            this.left=left; this.diagonal=diagonal; this.right=right; this.factors=Collections.unmodifiableList(factors);
+        }
+        public IntegerMatrix left() { return left; }
+        public IntegerMatrix diagonal() { return diagonal; }
+        public IntegerMatrix right() { return right; }
+        public int rank() { return factors.size(); }
+        public List<BigInteger> invariantFactors() { return factors; }
+    }
     /** A shared arithmetic budget for several boundary matrices in one homology computation. */
     public static final class Computation {
         private long remaining=5000000;
-        private void use(long amount) {
+        void use(long amount) {
             remaining-=amount;
-            if(remaining<0) throw new MathFailure(MathFailure.Kind.IMPLEMENTATION_FAILURE,"Smith reduction exceeds 5000000 integer work units");
+            if(remaining<0) throw new MathFailure(MathFailure.Kind.IMPLEMENTATION_FAILURE,"Integer linear computation exceeds 5000000 work units");
         }
         public List<BigInteger> invariantFactors(BigInteger[][] input) {
-            int rows=input.length,columns=rows==0?0:input[0].length;
+            return reduce(input,input.length==0?0:input[0].length,false).invariantFactors();
+        }
+        public Decomposition decompose(IntegerMatrix matrix) { return reduce(matrix.copyEntries(),matrix.columns(),true); }
+        public List<BigInteger> invariantFactors(IntegerMatrix matrix) { return reduce(matrix.copyEntries(),matrix.columns(),false).invariantFactors(); }
+        private Decomposition reduce(BigInteger[][] input,int columns,boolean transform) {
+            int rows=input.length;
             if(rows>MAX_DIMENSION || columns>MAX_DIMENSION)
                 throw new MathFailure(MathFailure.Kind.IMPLEMENTATION_FAILURE,"Smith reduction allows at most 256 rows and columns");
             use((long)rows*columns); BigInteger[][] a=new BigInteger[rows][columns];
             for(int r=0;r<rows;r++) {
                 if(input[r].length!=columns) throw MathFailure.invalid("Ragged integer matrix");
                 for(int c=0;c<columns;c++) a[r][c]=Objects.requireNonNull(input[r][c]);
+            }
+            BigInteger[][] left=null,right=null;
+            if(transform) {
+                use((long)rows*rows+(long)columns*columns);
+                left=IntegerMatrix.identity(rows).copyEntries(); right=IntegerMatrix.identity(columns).copyEntries();
             }
             List<BigInteger> result=new ArrayList<>();
             for(int k=0;k<Math.min(rows,columns);k++) {
@@ -32,18 +55,21 @@ public final class IntegerSmithNormalForm {
                         && (pivotRow<0 || a[r][c].abs().compareTo(a[pivotRow][pivotColumn].abs())<0)) { pivotRow=r; pivotColumn=c; }
                 if(pivotRow<0) break;
                 swapRows(a,k,pivotRow); swapColumns(a,k,pivotColumn);
+                if(transform) { swapRows(left,k,pivotRow); swapColumns(right,k,pivotColumn); }
                 while(true) {
                     use(rows+columns); boolean restart=false;
                     for(int r=k+1;r<rows;r++) if(a[r][k].signum()!=0) {
                         BigInteger quotient=a[r][k].divide(a[k][k]); use(columns-k);
                         for(int c=k;c<columns;c++) a[r][c]=a[r][c].subtract(quotient.multiply(a[k][c]));
-                        if(a[r][k].signum()!=0) { swapRows(a,k,r); restart=true; break; }
+                        if(transform) subtractRow(left,r,k,quotient);
+                        if(a[r][k].signum()!=0) { swapRows(a,k,r); if(transform) swapRows(left,k,r); restart=true; break; }
                     }
                     if(restart) continue;
                     for(int c=k+1;c<columns;c++) if(a[k][c].signum()!=0) {
                         BigInteger quotient=a[k][c].divide(a[k][k]); use(rows-k);
                         for(int r=k;r<rows;r++) a[r][c]=a[r][c].subtract(quotient.multiply(a[r][k]));
-                        if(a[k][c].signum()!=0) { swapColumns(a,k,c); restart=true; break; }
+                        if(transform) subtractColumn(right,c,k,quotient);
+                        if(a[k][c].signum()!=0) { swapColumns(a,k,c); if(transform) swapColumns(right,k,c); restart=true; break; }
                     }
                     if(restart) continue;
                     // A diagonal pivot must divide the remaining block, not just its own row/column.
@@ -56,10 +82,24 @@ public final class IntegerSmithNormalForm {
                     if(offending<0) break;
                     use(columns-k);
                     for(int c=k;c<columns;c++) a[k][c]=a[k][c].add(a[offending][c]);
+                    if(transform) subtractRow(left,k,offending,BigInteger.ONE.negate());
+                }
+                if(transform && a[k][k].signum()<0) {
+                    use(columns-k); for(int c=k;c<columns;c++) a[k][c]=a[k][c].negate();
+                    subtractRow(left,k,k,BigInteger.valueOf(2));
                 }
                 result.add(a[k][k].abs());
             }
-            return Collections.unmodifiableList(result);
+            return transform?new Decomposition(new IntegerMatrix(left),new IntegerMatrix(rows,columns,a),new IntegerMatrix(right),result)
+                    :new Decomposition(null,null,null,result);
+        }
+        private void subtractRow(BigInteger[][] matrix,int target,int source,BigInteger factor) {
+            use(matrix[target].length);
+            for(int c=0;c<matrix[target].length;c++) matrix[target][c]=matrix[target][c].subtract(factor.multiply(matrix[source][c]));
+        }
+        private void subtractColumn(BigInteger[][] matrix,int target,int source,BigInteger factor) {
+            use(matrix.length);
+            for(BigInteger[] row : matrix) row[target]=row[target].subtract(factor.multiply(row[source]));
         }
         private void swapRows(BigInteger[][] matrix,int a,int b) {
             BigInteger[] row=matrix[a]; matrix[a]=matrix[b]; matrix[b]=row;

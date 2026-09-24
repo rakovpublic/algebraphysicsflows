@@ -3,6 +3,7 @@ package mathematics.topology;
 import mathematics.core.MathFailure;
 import mathematics.foundations.FiniteSet;
 import mathematics.structures.AbelianGroupType;
+import mathematics.linear.IntegerMatrix;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.*;
@@ -60,6 +61,12 @@ public final class FiniteSimplicialComplex implements Serializable {
         return degree.compareTo(BigInteger.valueOf(dimension()))>0?AbelianGroupType.ZERO:new IntegralSimplicialHomology(this).group(degree.intValueExact());
     }
     public List<AbelianGroupType> integralHomologyGroups() { return new IntegralSimplicialHomology(this).groups(); }
+    /** Rows and columns use lexicographic increasing-vertex simplices in degrees k-1 and k. */
+    public IntegerMatrix integralBoundaryMatrix(BigInteger degree) {
+        if(degree.signum()<0) throw MathFailure.undefined("Boundary degree must be nonnegative");
+        return degree.compareTo(BigInteger.valueOf(dimension()+1))>0?IntegerMatrix.zero(0,0)
+                :new IntegralSimplicialHomology(this).boundaryMatrix(degree.intValueExact());
+    }
     public List<BigInteger> integralBoundaryInvariants(BigInteger degree) {
         if(degree.signum()<0) throw MathFailure.undefined("Boundary degree must be nonnegative");
         return degree.compareTo(BigInteger.valueOf(dimension()))>0?Collections.emptyList():new IntegralSimplicialHomology(this).boundary(degree.intValueExact());

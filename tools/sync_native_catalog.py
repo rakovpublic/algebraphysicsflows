@@ -22,6 +22,8 @@ OWNERS = {
     "RationalMatrixAlgebra": ("Mat2(Q)", "Fixed positive-dimensional square rational matrices; default dimension two"),
     "RationalVectorFamily": ("Vec(Q)", "Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations"),
     "RationalMatrixFamily": ("Mat(Q)", "Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases"),
+    "IntegerVectorFamily": ("Vec(Z)", "Finite integer coordinate vectors with retained nonnegative dimension"),
+    "IntegerMatrixFamily": ("Mat(Z)", "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses"),
     "RationalAffineSpaceAlgebra": ("Affine(Q)", "Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension"),
     "RationalTensorAlgebra": ("Tensor(Q)", "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction"),
     "RationalExteriorAlgebra": ("Exterior(Q)", "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension"),
@@ -68,6 +70,8 @@ INTERFACES = {
 EXTRA_TESTS = {
     "RationalVectorFamily": "NativeRectangularLinearTest",
     "RationalMatrixFamily": "NativeRectangularLinearTest",
+    "IntegerVectorFamily": "NativeIntegerLinearTest",
+    "IntegerMatrixFamily": "NativeIntegerLinearTest",
     "RationalAffineSpaceAlgebra": "NativeRectangularLinearTest",
     "RationalTensorAlgebra": "NativeTensorTest",
     "RationalExteriorAlgebra": "NativeExteriorTest",
@@ -133,6 +137,51 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "IntegerVectorFamily": {
+        "add": "Vector dimensions must agree; add integer coordinates.",
+        "subtract": "Vector dimensions must agree; subtract the second vector from the first.",
+        "negate": "Negate every coordinate, retaining dimension.",
+        "scale": "Multiply coordinates by the integer second operand; return the first vector carrier's wrapper.",
+        "dot": "Dimensions must agree. Use the standard integer coordinate pairing; the empty pairing is zero.",
+        "dimension": "Return the retained nonnegative coordinate count.",
+        "entries": "Emit integer coordinates in order, preserving duplicates and the empty list.",
+        "zero-like": "Return the zero vector of the same dimension.",
+        "equal": "Compare dimensions and every exact coordinate.",
+        "to-rational": "Embed coordinates in the actual Vec(Q) carrier; dimension zero is supported.",
+        "from-rational": "Every rational coordinate must have denominator one; rounding is not performed.",
+        "empty": "Return the unique vector in dimension zero.",
+    },
+    "IntegerMatrixFamily": {
+        "add": "Both row and column dimensions must agree; add entries over Z.",
+        "subtract": "Both row and column dimensions must agree; subtract the second matrix from the first.",
+        "multiply": "The first column count equals the second row count. Composition applies the second matrix first; zero inner dimensions retain the outer shape.",
+        "negate": "Negate entries while retaining both dimensions.",
+        "transpose": "Exchange row and column dimensions, including empty dimensions.",
+        "scale": "Scale every entry by the integer second operand and return the first matrix wrapper.",
+        "apply": "The vector dimension equals the matrix column count. Return the actual second Vec(Z) carrier's wrapper, with dimension equal to the row count.",
+        "equal": "Compare both retained dimensions and all entries; distinct empty shapes remain different.",
+        "row-count": "Return the retained number of rows, including zero.",
+        "column-count": "Return the retained number of columns, including zero.",
+        "rows": "Emit one Vec(Z) row per row index; an m by 0 matrix emits m empty vectors.",
+        "columns": "Emit one Vec(Z) column per column index; a 0 by n matrix emits n empty vectors.",
+        "zero-like": "Return the zero matrix of the same retained shape.",
+        "identity-on-domain": "Return the identity on Z^columns, including the 0 by 0 identity.",
+        "identity-on-codomain": "Return the identity on Z^rows, including the 0 by 0 identity.",
+        "smith-invariant-factors": "Emit positive nonzero Smith factors, including ones, each dividing the next. Zero diagonal entries are omitted.",
+        "smith-form": "Return D with the same rectangular shape and positive nonzero Smith factors followed by zero diagonal entries.",
+        "smith-decomposition": "Emit exactly [U,D,V] with U*A*V=D; U and V are square unimodular integer matrices on the codomain and domain. D is canonical, while the witnesses are algorithm-selected and need not be canonical.",
+        "kernel-basis": "Emit the trailing columns of the Smith right witness V. They form a basis of the whole integer kernel lattice, not merely a rational nullspace basis; an injective map emits an empty list.",
+        "image-basis": "Emit A times the first rank(A) columns of V. This is a basis of the actual image lattice, preserving its index in its rational span; it is not the saturation.",
+        "cokernel": "Classify Z^rows/image(A) in the actual AbelianGroupType carrier. The free rank is rows minus rank(A), and nonunit Smith factors give torsion; matrix columns are relations.",
+        "rank": "Return the number of nonzero Smith factors, equal to rank over Q.",
+        "nullity": "Return columns minus rank, the rank of the integer kernel.",
+        "has-integer-solution": "The right-hand side has one coordinate per row. Test divisibility of U*b by the nonzero Smith factors and zero residual coordinates. Resource exhaustion raises IMPLEMENTATION_FAILURE, never false.",
+        "solve-particular": "The right-hand side matches the rows and an integer solution must exist. Set free Smith coordinates to zero and return x=V*y in the second Vec(Z) carrier; this is not a minimum-norm solution.",
+        "solve-generators": "The right-hand side matches the rows and an integer solution must exist. Emit a particular solution first, then an integral kernel basis; all solutions are x0 plus arbitrary integer combinations of the remaining vectors. This finite list parametrizes solutions rather than enumerating them.",
+        "inverse-unimodular": "The matrix is square and all Smith factors are one with full rank, equivalently determinant is plus or minus one. Return V*U; the empty square matrix is invertible. Rational invertibility alone is insufficient.",
+        "to-rational": "Both dimensions must be positive because the current Mat(Q) carrier excludes empty shapes. Embed entries exactly in the actual rational matrix carrier.",
+        "from-rational": "Every entry must have denominator one; preserve both dimensions. Rounding is not performed.",
+    },
     "AbelianGroupTypeAlgebra": {
         "direct-sum": "Return the isomorphism type of the finite direct sum, combining free ranks and canonically normalizing cyclic factors.",
         "tensor-product": "Tensor over Z. Free ranks multiply; free-torsion pairs contribute repeated cyclic factors and torsion pairs contribute gcd factors.",
@@ -159,6 +208,7 @@ OWNER_CONDITIONS = {
         "one": "The tensor-product identity is Z, with rank one and no torsion factors.",
     },
     "FiniteSimplicialAlgebra": {
+        "boundary-matrix": "Return the oriented integer boundary from degree k to k-1 in Mat(Z). Bases are lexicographically ordered increasing-vertex simplices. Degree zero is 0 by vertex-count; dimension+1 retains the top-degree row count and zero columns; higher degrees are 0 by 0. Adjacent boundaries multiply to zero.",
         "integral-homology": "Return unreduced H_k(-;Z) as a canonical abelian-group isomorphism type. The natural degree may be arbitrarily large; degrees above the complex dimension give the trivial group. Boundaries use increasing vertex orientation.",
         "integral-homology-groups": "Emit unreduced integral homology types in degrees zero through the complex dimension, including trivial groups. The empty complex emits an empty list; all degrees share one Smith-reduction budget.",
         "rational-betti-number": "Return the integral free rank, equal to dim_Q H_k(-;Q). This differs from the existing F2 Betti number when torsion contributes; above-dimension degrees give zero.",
@@ -691,8 +741,14 @@ def record(identifier, owner, concept, paths, operation=None):
         paths = paths + ["groupimp/src/main/java/mathematics/probability/FiniteMarkovKernel.java"]
     if owner == "AbelianGroupTypeAlgebra":
         paths = paths + ["groupimp/src/main/java/mathematics/structures/AbelianGroupType.java"]
+    if owner == "IntegerVectorFamily":
+        paths = paths + ["groupimp/src/main/java/mathematics/linear/IntegerVector.java"]
+    if owner == "IntegerMatrixFamily":
+        paths = paths + ["groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
+                         "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
     if owner == "FiniteSimplicialAlgebra":
         tests.append("groupimp/src/test/java/operations/NativeIntegralHomologyTest.java")
+        tests.append("groupimp/src/test/java/operations/NativeIntegerLinearTest.java")
         paths = paths + ["groupimp/src/main/java/mathematics/topology/FiniteSimplicialComplex.java",
                          "groupimp/src/main/java/mathematics/topology/IntegralSimplicialHomology.java",
                          "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
@@ -773,6 +829,12 @@ def record(identifier, owner, concept, paths, operation=None):
         value["known_limitations"] += ["At most 256 canonical torsion factors and 1024 supplied/intermediate cyclic factors; exhaustion raises IMPLEMENTATION_FAILURE. Free rank and coefficient bit lengths are arbitrary precision. Normalization uses gcd/lcm without prime factorization.",
             "No chosen group elements, presentations, generators, homomorphisms or extension witnesses are represented. Hom, tensor, Tor_1 and Ext^1 classify resulting abelian groups only; arbitrary modules and higher derived functors are outside this scope."]
         value["references"].append("https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html")
+    if owner in ("IntegerVectorFamily", "IntegerMatrixFamily"):
+        value["known_limitations"].append("Each coordinate dimension is at most 256; integer coefficient bit lengths remain unbounded. Oversized representations raise IMPLEMENTATION_FAILURE. No floating-point approximation or coordinate rounding is used.")
+    if owner == "IntegerMatrixFamily":
+        value["known_limitations"].append("Each matrix product, Smith reduction, lattice basis, inverse or solve calculation has a 5000000-unit integer work budget shared across reduction, witness updates and subsequent products. Dense costs apply even to sparse or identity inputs; exhaustion may occur below the dimension cap and is IMPLEMENTATION_FAILURE, never nonexistence or an incomplete basis.")
+        value["known_limitations"].append("Matrices represent maps between finite free Z-modules. Cokernels return abelian-group isomorphism types, without quotient elements, quotient maps or arbitrary finitely presented module morphisms. No Hermite form, lattice reduction, shortest vector or minimal-norm integer optimization is provided.")
+        value["references"].append("https://doc.sagemath.org/html/en/reference/matrices/sage/matrix/matrix_integer_dense.html")
     if owner == "FiniteIntegerRelationAlgebra":
         value["known_limitations"].append("Finite support only; equality includes source/target Algebra identity and pair equality. Function totality is restricted to an explicit finite carrier.")
     if owner == "FiniteIntegerFunctionAlgebra":
@@ -894,6 +956,10 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("Vec(Z)", "Finite free integer coordinate modules", "mathematics.linear.IntegerVector",
+         ["Retained nonnegative dimension", "Immutable arbitrary-precision integer entries", "Addition and dot product require equal dimensions"], ["Z", "N", "Boolean", "Vec(Q)", "Mat(Z)"]),
+        ("Mat(Z)", "Integer matrices with Smith witnesses", "mathematics.linear.IntegerMatrix",
+         ["Explicit nonnegative row and column counts, including empty shapes", "Immutable rectangular arbitrary-precision entries", "Maps Z^columns to Z^rows; composition checks the middle dimension"], ["Z", "N", "Boolean", "Vec(Z)", "Mat(Q)", "AbelianGroupType", "FiniteComplex"]),
         ("AbelianGroupType", "Finitely generated abelian-group isomorphism types", "mathematics.structures.AbelianGroupType",
          ["Nonnegative arbitrary-precision free rank", "Canonical cyclic torsion factors greater than one, each dividing the next", "No chosen elements, generators or maps; equality is group isomorphism-type equality"], ["N", "Boolean", "FiniteComplex"]),
         ("FiniteMarkov(Z)", "Finite exact stochastic kernels", "mathematics.probability.FiniteMarkovKernel",

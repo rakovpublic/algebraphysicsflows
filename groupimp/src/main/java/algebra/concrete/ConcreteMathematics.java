@@ -19,7 +19,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final NaturalSemiring naturals=new NaturalSemiring(integers);
     public final SymmetricGroup permutations=new SymmetricGroup(3,naturals,integers,booleans);
     public final AbelianGroupTypeAlgebra abelianGroups=new AbelianGroupTypeAlgebra(naturals,booleans);
-    public final FiniteSimplicialAlgebra complexes=new FiniteSimplicialAlgebra(booleans,naturals,integers,abelianGroups);
+    public final FiniteSimplicialAlgebra complexes;
     public final RationalPolynomialRing polynomials=new RationalPolynomialRing(rationals,naturals);
     public final RationalFunctionField rationalFunctions=new RationalFunctionField(polynomials,rationals,booleans);
     public final IntegerSetAlgebra integerSets=new IntegerSetAlgebra(integers,booleans,naturals,rationals,polynomials);
@@ -39,6 +39,8 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final RationalMatrixAlgebra matrices;
     public final RationalVectorFamily finiteVectors;
     public final RationalMatrixFamily rectangularMatrices;
+    public final IntegerVectorFamily integerVectors;
+    public final IntegerMatrixFamily integerMatrices;
     public final RationalAffineSpaceAlgebra affineSpaces;
     public final FiniteMarkovAlgebra markovKernels;
     public final RationalTensorAlgebra tensors;
@@ -60,6 +62,9 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         matrices=new RationalMatrixAlgebra(rationals,vectors,naturals,polynomials,booleans);
         finiteVectors=new RationalVectorFamily(rationals,naturals,vectors);
         rectangularMatrices=new RationalMatrixFamily(rationals,finiteVectors,naturals,booleans,matrices,polynomials);
+        integerVectors=new IntegerVectorFamily(integers,naturals,booleans,finiteVectors);
+        integerMatrices=new IntegerMatrixFamily(integers,integerVectors,naturals,booleans,rectangularMatrices,abelianGroups);
+        complexes=new FiniteSimplicialAlgebra(booleans,naturals,integers,abelianGroups,integerMatrices);
         affineSpaces=new RationalAffineSpaceAlgebra(rectangularMatrices,finiteVectors,naturals,booleans);
         markovKernels=new FiniteMarkovAlgebra(integers,integerSets,integerProbabilities,integerFunctions,rectangularMatrices,finiteVectors,rationals,naturals,booleans);
         tensors=new RationalTensorAlgebra(rationals,finiteVectors,rectangularMatrices,naturals,booleans);
@@ -83,6 +88,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         values.add(polynomialCells); values.add(polynomialChains);
         values.add(markovKernels);
         values.add(abelianGroups);
+        values.add(integerVectors); values.add(integerMatrices);
         values.addAll(fields); algebras=Collections.unmodifiableList(values);
         for(ConcreteAlgebra<?> algebra : algebras) {
             algebra.register(mathTool);

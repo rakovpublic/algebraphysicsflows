@@ -49,4 +49,9 @@ public final class FiniteSimplicialAlgebra extends ConcreteAlgebra<FiniteSimplic
         law("Integral homology is unreduced, with ascending vertex orientation and Smith invariant factors; rational Betti numbers are the integral free ranks.");
         law("The existing betti-number and betti-numbers operations retain their F2 coefficients; torsion can distinguish them from rational Betti numbers.");
     }
+    public FiniteSimplicialAlgebra(BooleanAlgebra truth,NaturalSemiring naturals,IntegerRing integers,
+                                   AbelianGroupTypeAlgebra groups,IntegerMatrixFamily matrices) {
+        this(truth,naturals,integers,groups);
+        binary("boundary-matrix",algebra(),naturals.algebra(),matrices.algebra(),false,FiniteSimplicialComplex::integralBoundaryMatrix);
+    }
 }

@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1151 |
-| DIRECTLY_SUPPORTED | 908 |
+| Scoped records | 1195 |
+| DIRECTLY_SUPPORTED | 952 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 767 |
+| IMPLEMENTED | 811 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 835 |
+| MACHINE_TESTED | 879 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 744 | 744 | 0 | 0 | 0 | 744 | 0 | 0 |
+| Concrete MathTool algebras | 788 | 788 | 0 | 0 | 0 | 788 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -325,6 +325,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | FiniteComplex.betti-number | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.betti-number |
 | FiniteComplex.betti-numbers | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.betti-numbers |
 | FiniteComplex.boundary-invariant-factors | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.boundary-invariant-factors |
+| FiniteComplex.boundary-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.boundary-matrix |
 | FiniteComplex.dimension | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.dimension |
 | FiniteComplex.empty | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.empty |
 | FiniteComplex.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers; native operation FiniteComplex.equal |
@@ -545,8 +546,10 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | H(Q).to-rotation-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).to-rotation-matrix |
 | H(Q).to-vector | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).to-vector |
 | H(Q).zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).zero |
+| IntegerMatrixFamily | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses |
 | IntegerRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient |
 | IntegerSetAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets |
+| IntegerVectorFamily | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer coordinate vectors with retained nonnegative dimension |
 | Mat(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).add |
 | Mat(Q).apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).apply |
 | Mat(Q).characteristic-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).characteristic-polynomial |
@@ -591,6 +594,35 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Mat(Q).trace | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).trace |
 | Mat(Q).transpose | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).transpose |
 | Mat(Q).zero-like | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).zero-like |
+| Mat(Z).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).add |
+| Mat(Z).apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).apply |
+| Mat(Z).cokernel | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).cokernel |
+| Mat(Z).column-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).column-count |
+| Mat(Z).columns | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).columns |
+| Mat(Z).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).equal |
+| Mat(Z).from-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).from-rational |
+| Mat(Z).has-integer-solution | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).has-integer-solution |
+| Mat(Z).identity-on-codomain | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).identity-on-codomain |
+| Mat(Z).identity-on-domain | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).identity-on-domain |
+| Mat(Z).image-basis | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).image-basis |
+| Mat(Z).inverse-unimodular | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).inverse-unimodular |
+| Mat(Z).kernel-basis | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).kernel-basis |
+| Mat(Z).multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).multiply |
+| Mat(Z).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).negate |
+| Mat(Z).nullity | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).nullity |
+| Mat(Z).rank | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).rank |
+| Mat(Z).row-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).row-count |
+| Mat(Z).rows | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).rows |
+| Mat(Z).scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).scale |
+| Mat(Z).smith-decomposition | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).smith-decomposition |
+| Mat(Z).smith-form | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).smith-form |
+| Mat(Z).smith-invariant-factors | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).smith-invariant-factors |
+| Mat(Z).solve-generators | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).solve-generators |
+| Mat(Z).solve-particular | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).solve-particular |
+| Mat(Z).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).subtract |
+| Mat(Z).to-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).to-rational |
+| Mat(Z).transpose | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).transpose |
+| Mat(Z).zero-like | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).zero-like |
 | Mat2(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).add |
 | Mat2(Q).apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).apply |
 | Mat2(Q).characteristic-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).characteristic-polynomial |
@@ -891,6 +923,18 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Vec(Q).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations; native operation Vec(Q).subtract |
 | Vec(Q).to-fixed | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations; native operation Vec(Q).to-fixed |
 | Vec(Q).zero-like | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations; native operation Vec(Q).zero-like |
+| Vec(Z).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).add |
+| Vec(Z).dimension | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).dimension |
+| Vec(Z).dot | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).dot |
+| Vec(Z).empty | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).empty |
+| Vec(Z).entries | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).entries |
+| Vec(Z).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).equal |
+| Vec(Z).from-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).from-rational |
+| Vec(Z).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).negate |
+| Vec(Z).scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).scale |
+| Vec(Z).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).subtract |
+| Vec(Z).to-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).to-rational |
+| Vec(Z).zero-like | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).zero-like |
 | Z.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient; native operation Z.add |
 | Z.divide-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient; native operation Z.divide-rational |
 | Z.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient; native operation Z.equal |
