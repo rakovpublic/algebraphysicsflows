@@ -45,6 +45,7 @@ OWNERS = {
     "AbelianGroupHomomorphismAlgebra": ("AbelianGroupHomomorphism", "Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices"),
     "IntegralHomologyAlgebra": ("IntegralHomology", "Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation"),
     "FiniteSimplicialMapAlgebra": ("SimplicialMap", "Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps"),
+    "RelativeSimplicialAlgebra": ("RelativeComplex", "Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps"),
     "FiniteIntegerRelationAlgebra": ("FiniteRelation(Z,Z)", "Finite-support relations on the actual registered integer Algebra"),
     "FiniteIntegerFunctionAlgebra": ("FiniteFunction(Z,Z)", "Total maps between explicit finite integer sets, preserving declared domain and codomain"),
     "FiniteCategoryAlgebra": ("FiniteCategory", "Finite categories with integer object/arrow labels and exhaustively checked composition tables"),
@@ -99,6 +100,7 @@ EXTRA_TESTS = {
     "AbelianGroupHomomorphismAlgebra": "NativeAbelianHomomorphismTest",
     "IntegralHomologyAlgebra": "NativeConstructiveHomologyTest",
     "FiniteSimplicialMapAlgebra": "NativeSimplicialMapTest",
+    "RelativeSimplicialAlgebra": "NativeRelativeHomologyTest",
     "FiniteIntegerRelationAlgebra": "NativeRelationTest",
     "FiniteIntegerFunctionAlgebra": "NativeFiniteFunctionTest",
     "FiniteCategoryAlgebra": "NativeCategoryTest",
@@ -147,6 +149,35 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "RelativeSimplicialAlgebra": {
+        "from-complexes": "The first complex is X and the second is A. Require A to be a labelled subcomplex of X, not just a complex with a subset of its vertices. Return the RelativeComplex wrapper.",
+        "ambient": "Return the complete retained ambient complex X, including all simplex labels.",
+        "subcomplex": "Return the complete retained subcomplex A, including all simplex labels.",
+        "equal": "Compare both labelled complexes, not only relative homology types or quotient chain dimensions.",
+        "dimension": "Return the largest dimension of a simplex of X outside A, or -1 if the relative chain complex is zero.",
+        "euler-characteristic": "Return chi(X)-chi(A), equivalently the alternating sum of relative integral Betti numbers.",
+        "simplex-count": "Count the degree-k simplices of X outside A. The nonnegative degree uses the second N carrier wrapper; the selected basis is capped at 256 simplices.",
+        "simplex-basis": "Emit wrapped FiniteSet(Z) simplices of X outside A in lexicographic increasing-vertex order, matching the relative matrix and vector coordinates.",
+        "boundary-matrix": "Use the alternating oriented face boundary and discard faces in A. Rows index relative degree k-1, columns degree k. Degree zero has zero rows in the unreduced convention.",
+        "boundary-matrices": "Emit quotient boundaries for degrees zero through dim(X), including zero-sized shapes. An empty ambient complex gives an empty list; the entire list shares one work budget.",
+        "homology": "Construct H_k(X,A;Z) with its full integral cycle lattice and boundary quotient presentation. Return the actual IntegralHomology wrapper, retaining cycle representatives and bounding-chain operations.",
+        "homology-degrees": "Emit constructive relative homology for degrees zero through dim(X). Every boundary construction and Smith calculation for the entire list shares one work budget; exhaustion returns no partial list.",
+        "homology-type": "Return the canonical isomorphism type of H_k(X,A;Z), including torsion factors, in the actual AbelianGroupType wrapper.",
+        "homology-types": "Emit integral relative homology types for degrees zero through dim(X), including trivial groups. A single work budget covers the entire list.",
+        "betti-number": "Return the free rank of integral relative homology, equivalently the relative rational Betti number, using the second N wrapper.",
+        "is-acyclic-degree": "True exactly when integral relative homology is trivial in the supplied degree, including absence of torsion; free rank zero alone is insufficient.",
+        "projection-matrix": "The chain map C_k(X)->C_k(X,A) kills A simplices and preserves other ordered generators. Rows are relative and columns ambient coordinates.",
+        "lift-matrix": "Transpose the projection matrix to give the zero-on-A chain-group section. Projection after lift is identity; this is generally not a chain map.",
+        "inclusion-matrix": "The chain map C_k(A)->C_k(X) embeds each ordered A simplex with coefficient one, using ambient rows and subcomplex columns.",
+        "connecting-chain-matrix": "Take the A-component of the boundary of a zero-on-A lift. Rows index A in degree k-1 and columns relative chains in degree k. It sends relative cycles to cycles in A; arbitrary relative chains need not give cycles.",
+        "inclusion-homology": "Construct the induced map H_k(A)->H_k(X) with both actual retained presentations. All construction and map calculations share one work budget.",
+        "quotient-homology": "Construct the induced map H_k(X)->H_k(X,A) from the quotient chain matrix, retaining both presentations and one shared work budget.",
+        "connecting-homology": "Send a relative cycle to the class of its lifted boundary in H_(k-1)(A). The unreduced convention sets H_-1(A)=0, so degree zero gives the zero map into the trivial group. A single work budget covers both homologies and the induced map.",
+        "long-exact-segment": "Emit inclusion, quotient, connecting in that order: H_k(A)->H_k(X)->H_k(X,A)->H_(k-1)(A). Consecutive compositions vanish and images equal the next kernels. One work budget covers the entire three-map segment, including homology constructions.",
+        "absolute": "Construct (X,empty), whose relative chains and homology agree with the original unreduced chains and homology of X.",
+        "diagonal": "Construct (X,X), whose relative chain groups vanish in every degree. Its displayed degree list still runs through dim(X).",
+        "inclusion": "Return the actual SimplicialMap inclusion A->X, so existing vertex, chain and homology operations can be reused.",
+    },
     "FiniteSimplicialMapAlgebra": {
         "compose": "Apply the right operand first. The full labelled middle complexes must be equal, not just their vertex sets or homology types.",
         "inverse": "Defined exactly for simplicial isomorphisms: a vertex bijection whose image contains every target simplex. Vertex bijectivity alone is insufficient.",
@@ -900,6 +931,12 @@ def record(identifier, owner, concept, paths, operation=None):
                          "groupimp/src/main/java/mathematics/topology/IntegralSimplicialHomology.java",
                          "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
                          "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"]
+    if owner == "RelativeSimplicialAlgebra":
+        paths = paths + ["groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+                         "groupimp/src/main/java/mathematics/topology/IntegralSimplicialHomology.java",
+                         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+                         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+                         "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
     if owner in ("PresentedAbelianGroupAlgebra", "AbelianGroupElementAlgebra"):
         paths = paths + ["groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
                          "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
@@ -1002,15 +1039,21 @@ def record(identifier, owner, concept, paths, operation=None):
     if owner == "IntegralHomologyAlgebra":
         value["required_invariants"].append("Consecutive integer boundaries compose to zero. Cycles use a full integral kernel basis; homology retains the quotient by actual integral boundaries. Induced maps respect these quotients.")
         value["known_limitations"] += ["Every chain and auxiliary matrix dimension is at most 256. Each construction, solve, generator computation or induced-map calculation shares a 5000000-unit work budget across Smith reductions and matrix products. Dense costs apply to sparse and identity matrices; exhaustion raises IMPLEMENTATION_FAILURE, never false or a truncated witness list. Integer bit lengths remain unbounded.",
-            "One degree of a finite free integer chain complex only. Chain coordinates require the retained basis convention; quotient elements retain the resulting presented group. A representative is a set-theoretic section, not generally an additive section or shortest cycle. The supplied degree map is checked for cycle and boundary preservation. SimplicialMap separately constructs chain and homology maps from vertex maps; arbitrary complete chain-map builders, reduced/relative homology, persistence, cohomology and cup products remain outside scope."]
+            "One degree of a finite free integer chain complex only. Chain coordinates require the retained basis convention; quotient elements retain the resulting presented group. A representative is a set-theoretic section, not generally an additive section or shortest cycle. The supplied degree map is checked for cycle and boundary preservation. SimplicialMap constructs vertex-defined chain maps; RelativeComplex constructs relative homology and long exact sequence maps. Arbitrary complete chain-map builders, reduced homology, persistence, cohomology and cup products remain outside scope."]
         value["references"] += ["https://doc.sagemath.org/html/en/reference/homology/sage/homology/chain_complex.html",
                                 "https://doc.sagemath.org/html/en/reference/homology/sage/homology/homology_morphism.html"]
     if owner == "FiniteSimplicialMapAlgebra":
         value["required_invariants"].append("Vertex maps are total on the declared source and preserve every nonempty simplex. Chain matrices commute with the oriented integral boundaries and respect composition, including collapsed simplices.")
         value["known_limitations"] += ["Map construction allows at most 4096 nonempty simplices per complex. Each matrix degree and required homology boundary has at most 256 simplices. Each compound chain/homology calculation has a shared 5000000-unit integer work budget; flat degree lists share it across all outputs. Resource exhaustion raises IMPLEMENTATION_FAILURE, never false or a partial list; coefficient bit lengths remain unbounded.",
-            "Finite abstract complexes with Java int vertex labels, exposed through Z-valued native operations. Homology is unreduced over Z. No subdivision, simplicial approximation, arbitrary chain-map builder, contiguity-chain or general homotopy search, relative/persistent homology or cohomology is provided. Vertex-surjective maps need not hit every simplex."]
+            "Finite abstract complexes with Java int vertex labels, exposed through Z-valued native operations. Homology is unreduced over Z. RelativeComplex separately supplies relative homology and long exact sequence maps. No subdivision, simplicial approximation, arbitrary chain-map builder, contiguity-chain or general homotopy search, persistent homology or cohomology is provided. Vertex-surjective maps need not hit every simplex."]
         value["references"] += ["https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html",
                                 "https://doc.sagemath.org/html/en/reference/homology/sage/homology/chain_complex_morphism.html"]
+    if owner == "RelativeSimplicialAlgebra":
+        value["required_invariants"].append("The retained A is a labelled subcomplex of X. Relative chains are the quotient C(X)/C(A), with increasing-vertex orientations and unreduced integral homology. Inclusion, quotient and connecting maps retain their actual homology presentations.")
+        value["known_limitations"] += ["Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+            "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. No general maps between pairs, reduced homology, relative cohomology, cup products, persistent homology, excision witnesses or homotopy search are implemented."]
+        value["references"] += ["https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+                                "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex.html"]
     if owner in ("PresentedAbelianGroupAlgebra", "AbelianGroupElementAlgebra"):
         value["required_invariants"].append("Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type.")
         value["known_limitations"] += ["Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
@@ -1143,6 +1186,8 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("RelativeComplex", "Relative integral simplicial homology and long exact sequence maps", "mathematics.topology.RelativeSimplicialComplex",
+         ["Retained labelled ambient complex X and subcomplex A", "Quotient chains on simplices of X outside A with increasing-vertex orientations", "Unreduced integral relative homology and inclusion, quotient, connecting maps"], ["FiniteComplex", "FiniteSet(Z)", "Z", "N", "Boolean", "Mat(Z)", "IntegralHomology", "AbelianGroupType", "AbelianGroupHomomorphism", "SimplicialMap"]),
         ("SimplicialMap", "Finite simplicial maps and induced integral maps", "mathematics.topology.FiniteSimplicialMap",
          ["Complete labelled source and target complexes", "Total vertex map preserving every source simplex", "Increasing-vertex chain orientations; collapsed simplices map to zero"], ["FiniteComplex", "FiniteComplex.pair", "FiniteFunction(Z,Z)", "FiniteSet(Z)", "Z", "N", "Boolean", "Mat(Z)", "IntegralHomology", "AbelianGroupHomomorphism"]),
         ("FiniteComplex.pair", "Source and target complexes for a vertex map", "mathematics.foundations.Pair<FiniteSimplicialComplex,FiniteSimplicialComplex>",

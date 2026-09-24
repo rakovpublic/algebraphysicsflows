@@ -25,6 +25,7 @@ import mathematics.structures.AbelianGroupHomomorphism;
 import mathematics.topology.FiniteSimplicialComplex;
 import mathematics.topology.IntegralHomology;
 import mathematics.topology.FiniteSimplicialMap;
+import mathematics.topology.RelativeSimplicialComplex;
 import mathematics.linear.RationalVector;
 import mathematics.linear.IntegerVector;
 import mathematics.linear.IntegerMatrix;
@@ -90,6 +91,12 @@ public final class ConcreteAlgebrasExample {
         System.out.println("Projective-plane torsion factors by degree: "+math.flow(math.complexes,Collections.singletonList(projectivePlane))
                 .<AbelianGroupType>performFlatAlgebraTransfer("integral-homology-groups")
                 .<BigInteger>performFlatAlgebraTransfer("invariant-factors").collect());
+        FiniteSimplicialComplex interval=new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0,1)));
+        FiniteSimplicialComplex endpoints=new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0),FiniteSet.of(1)));
+        System.out.println("Connecting map H1(interval,endpoints) -> H0(endpoints): "+math.flow(math.complexes,Collections.singletonList(interval))
+                .<RelativeSimplicialComplex>performCustomResultOperation("RelativeComplex.from-complexes",endpoints)
+                .<AbelianGroupHomomorphism,BigInteger>performAlgebraUnsafe("connecting-homology",BigInteger.ONE)
+                .<IntegerMatrix>performAlgebraTransfer("smith-matrix").collect());
         System.out.println("Projective-plane rational Betti numbers: "+math.flow(math.complexes,Collections.singletonList(projectivePlane))
                 .<BigInteger>performFlatAlgebraTransfer("rational-betti-numbers").collect());
         FiniteSet<BigInteger> markovStates=FiniteSet.of(BigInteger.ZERO,BigInteger.ONE);

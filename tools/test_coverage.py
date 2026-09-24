@@ -188,6 +188,12 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("entire list", " ".join(records["SimplicialMap.homology-maps"]["required_invariants"]))
         self.assertIn("second Z wrappers", " ".join(records["SimplicialMap.vertex-fiber"]["required_invariants"]))
         self.assertIn("4096", " ".join(records["SimplicialMap.compose"]["known_limitations"]))
+        self.assertIn("labelled subcomplex", " ".join(records["RelativeComplex.from-complexes"]["required_invariants"]))
+        self.assertIn("generally not a chain map", " ".join(records["RelativeComplex.lift-matrix"]["required_invariants"]))
+        self.assertIn("H_-1(A)=0", " ".join(records["RelativeComplex.connecting-homology"]["required_invariants"]))
+        self.assertIn("entire three-map segment", " ".join(records["RelativeComplex.long-exact-segment"]["required_invariants"]))
+        self.assertIn("entire list", " ".join(records["RelativeComplex.homology-degrees"]["required_invariants"]))
+        self.assertIn("5000000", " ".join(records["RelativeComplex.homology"]["known_limitations"]))
 
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)

@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1322 |
-| DIRECTLY_SUPPORTED | 1079 |
+| Scoped records | 1350 |
+| DIRECTLY_SUPPORTED | 1107 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 938 |
+| IMPLEMENTED | 966 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1006 |
+| MACHINE_TESTED | 1034 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 915 | 915 | 0 | 0 | 0 | 915 | 0 | 0 |
+| Concrete MathTool algebras | 943 | 943 | 0 | 0 | 0 | 943 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -961,6 +961,34 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | RationalTensorAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction |
 | RationalVectorFamily | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations |
 | RationalVectorSpace | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed-dimensional rational vectors; default dimension two |
+| RelativeComplex.absolute | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.absolute |
+| RelativeComplex.ambient | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.ambient |
+| RelativeComplex.betti-number | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.betti-number |
+| RelativeComplex.boundary-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.boundary-matrices |
+| RelativeComplex.boundary-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.boundary-matrix |
+| RelativeComplex.connecting-chain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.connecting-chain-matrix |
+| RelativeComplex.connecting-homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.connecting-homology |
+| RelativeComplex.diagonal | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.diagonal |
+| RelativeComplex.dimension | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.dimension |
+| RelativeComplex.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.equal |
+| RelativeComplex.euler-characteristic | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.euler-characteristic |
+| RelativeComplex.from-complexes | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.from-complexes |
+| RelativeComplex.homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.homology |
+| RelativeComplex.homology-degrees | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.homology-degrees |
+| RelativeComplex.homology-type | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.homology-type |
+| RelativeComplex.homology-types | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.homology-types |
+| RelativeComplex.inclusion | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.inclusion |
+| RelativeComplex.inclusion-homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.inclusion-homology |
+| RelativeComplex.inclusion-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.inclusion-matrix |
+| RelativeComplex.is-acyclic-degree | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.is-acyclic-degree |
+| RelativeComplex.lift-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.lift-matrix |
+| RelativeComplex.long-exact-segment | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.long-exact-segment |
+| RelativeComplex.projection-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.projection-matrix |
+| RelativeComplex.quotient-homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.quotient-homology |
+| RelativeComplex.simplex-basis | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.simplex-basis |
+| RelativeComplex.simplex-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.simplex-count |
+| RelativeComplex.subcomplex | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.subcomplex |
+| RelativeSimplicialAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps |
 | ResidueRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one |
 | S3.apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree; native operation S3.apply |
 | S3.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree; native operation S3.compose |

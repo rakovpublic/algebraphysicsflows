@@ -30,6 +30,7 @@ import mathematics.structures.AbelianGroupHomomorphism;
 import mathematics.topology.IntegralHomology;
 import mathematics.topology.FiniteSimplicialComplex;
 import mathematics.topology.FiniteSimplicialMap;
+import mathematics.topology.RelativeSimplicialComplex;
 import mathematics.examples.ConcreteAlgebrasExample;
 import mathematics.probability.FiniteMarkovKernel;
 import mathematics.probability.FiniteDistribution;
@@ -40,7 +41,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all870RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all897RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String discrete="Complex[[0], [1]]",emptyComplex="Complex[]";
@@ -48,6 +49,17 @@ public class ConcreteAlgebrasTest {
         String freeTwo="PresentedAbelianGroup(ZMatrix(2x0)[[], []])",emptyGroup="PresentedAbelianGroup(ZMatrix(0x0)[])";
         String swapMatrix="ZMatrix(2x2)[[0, 1], [1, 0]]",emptyMatrix="ZMatrix(0x0)[]";
         String emptyHomology="IntegralHomology(outgoing="+emptyMatrix+", incoming="+emptyMatrix+")";
+        String edge="Complex[[0], [1], [0, 1]]",freeOne="PresentedAbelianGroup(ZMatrix(1x0)[[]])";
+        String intervalPair="RelativeComplex(ambient="+edge+", subcomplex="+discrete+")",connectingMatrix="ZMatrix(2x1)[[-1], [1]]";
+        String relativeH0="IntegralHomology(outgoing=ZMatrix(0x0)[], incoming=ZMatrix(0x1)[])";
+        String relativeH1="IntegralHomology(outgoing=ZMatrix(0x1)[], incoming=ZMatrix(1x0)[[]])";
+        String inclusionH1=homString(emptyGroup,emptyGroup,emptyMatrix),quotientH1=homString(emptyGroup,freeOne,"ZMatrix(1x0)[[]]");
+        String connectingH1=homString(freeOne,freeTwo,connectingMatrix);
+        expected.put("RelativeSimplicialAlgebra",String.join("|",intervalPair,edge,discrete,"false","1","-1","1","[[0, 1]]","ZMatrix(0x1)[]",
+                "[ZMatrix(0x0)[], ZMatrix(0x1)[]]",relativeH1,"["+relativeH0+", "+relativeH1+"]","AbelianGroup(rank=1, torsion=[])",
+                "[AbelianGroup(rank=0, torsion=[]), AbelianGroup(rank=1, torsion=[])]","1","false","ZMatrix(1x1)[[1]]","ZMatrix(1x1)[[1]]","ZMatrix(1x0)[[]]",
+                connectingMatrix,inclusionH1,quotientH1,connectingH1,"["+inclusionH1+", "+quotientH1+", "+connectingH1+"]",
+                "RelativeComplex(ambient="+edge+", subcomplex="+emptyComplex+")","RelativeComplex(ambient="+edge+", subcomplex="+edge+")",simplicialString(discrete,edge,"{0=0, 1=1}")));
         expected.put("FiniteSimplicialMapAlgebra",String.join("|",swap,swap,discrete,discrete,"Function[0, 1]->[0, 1]{0=1, 1=0}","1","[1, 0]",
                 discrete,"true","true","true","true","false",simplicialIdentity,simplicialIdentity,swap,emptyMatrix,"["+swapMatrix+"]",
                 homString(emptyGroup,emptyGroup,emptyMatrix),"["+homString(freeTwo,freeTwo,swapMatrix)+"]",emptyHomology,emptyHomology,
@@ -219,11 +231,12 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(870,count);
+        assertEquals(897,count);
     }
     private static String homString(String source,String target,String matrix) { return "AbelianHom(source="+source+", target="+target+", smith="+matrix+")"; }
     private static String simplicialString(String source,String target,String vertices) { return "SimplicialMap(source="+source+", target="+target+", vertices="+vertices+")"; }
     private static FiniteSimplicialComplex simplicialTestComplex() { return new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0),FiniteSet.of(1))); }
+    private static FiniteSimplicialComplex relativeTestEdge() { return new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0,1))); }
     private static FiniteSimplicialMap simplicialTestMap(int index) {
         Map<BigInteger,BigInteger> vertices=new TreeMap<>(); vertices.put(BigInteger.ZERO,BigInteger.valueOf(index==0?1:0)); vertices.put(BigInteger.ONE,BigInteger.valueOf(index==0?0:1));
         return new FiniteSimplicialMap(simplicialTestComplex(),simplicialTestComplex(),vertices);
@@ -238,6 +251,7 @@ public class ConcreteAlgebrasTest {
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
         Algebra source=math.mathTool.getAlgebra(entry.first.getAlgebraName());
         IAlgebraItem item=source.buildAlgebraItem(sample(math,source.getAlgebraName(),0));
+        if(owner instanceof RelativeSimplicialAlgebra && source==math.complexes.algebra()) item=source.buildAlgebraItem(relativeTestEdge());
         if(owner instanceof FiniteSimplicialMapAlgebra) {
             if(source==math.complexes.algebra()) item=source.buildAlgebraItem(simplicialTestComplex());
             if(source==math.integerFunctions.algebra()) item=source.buildAlgebraItem(math.integerFunctions.member(
@@ -298,6 +312,10 @@ public class ConcreteAlgebrasTest {
         if(operation instanceof IOneOperandOperation) return item.performOneOperandOperation(alias).perform().getResult().toString();
         if(operation instanceof ITransferOperation) return item.performAlgebraTransfer(alias).perform().getResult().toString();
         Object second=entry.second==null?null:sample(math,entry.second.getAlgebraName(),1);
+        if(owner instanceof RelativeSimplicialAlgebra) {
+            if(entry.second==math.complexes.algebra()) second=simplicialTestComplex();
+            if(entry.second==math.naturals.algebra()) second=BigInteger.ONE;
+        }
         if(owner instanceof FiniteSimplicialMapAlgebra) {
             if(entry.second==math.complexes.algebra()) second=simplicialTestComplex();
             if(entry.second==math.integers.algebra()) second=BigInteger.ZERO;
@@ -358,6 +376,7 @@ public class ConcreteAlgebrasTest {
     }
     private Object sample(ConcreteMathematics math,String domain,int index) {
         switch(domain) {
+            case "RelativeComplex": return index==0?new RelativeSimplicialComplex(relativeTestEdge(),simplicialTestComplex()):RelativeSimplicialComplex.absolute(relativeTestEdge());
             case "SimplicialMap": return simplicialTestMap(index);
             case "FiniteComplex.pair": return new Pair<>(simplicialTestComplex(),simplicialTestComplex());
             case "IntegralHomology": return homologyTestValue(index==0?6:4);

@@ -19,19 +19,22 @@ final class IntegralSimplicialHomology {
         List<Integer> result=new ArrayList<>(simplex.members()); Collections.sort(result); return result;
     }
     List<FiniteSet<Integer>> basis(int degree) {
-        if(degree<0 || degree>complex.dimension()) return Collections.emptyList();
-        if(!bases.containsKey(degree)) {
-            List<FiniteSet<Integer>> result=new ArrayList<>(complex.simplices(degree));
-            if(result.size()>IntegerSmithNormalForm.MAX_DIMENSION)
-                throw new MathFailure(MathFailure.Kind.IMPLEMENTATION_FAILURE,"Integral homology allows at most 256 simplices in each required degree");
-            result.sort((a,b) -> {
-                List<Integer> first=vertices(a),second=vertices(b);
-                for(int i=0;i<first.size();i++) { int order=first.get(i).compareTo(second.get(i)); if(order!=0) return order; }
-                return 0;
-            });
-            bases.put(degree,result);
-        }
+        if(!bases.containsKey(degree)) bases.put(degree,orderedBasis(complex,null,degree));
         return bases.get(degree);
+    }
+    /** The quotient basis removes subcomplex simplices before applying the dimension cap. */
+    static List<FiniteSet<Integer>> orderedBasis(FiniteSimplicialComplex complex,FiniteSimplicialComplex omit,int degree) {
+        if(degree<0 || degree>complex.dimension()) return Collections.emptyList();
+        List<FiniteSet<Integer>> result=new ArrayList<>();
+        for(FiniteSet<Integer> simplex : complex.simplices(degree)) if(omit==null || !omit.faces().contains(simplex)) result.add(simplex);
+        if(result.size()>IntegerSmithNormalForm.MAX_DIMENSION)
+            throw new MathFailure(MathFailure.Kind.IMPLEMENTATION_FAILURE,"Integral homology allows at most 256 simplices in each required degree");
+        result.sort((a,b) -> {
+            List<Integer> first=vertices(a),second=vertices(b);
+            for(int i=0;i<first.size();i++) { int order=first.get(i).compareTo(second.get(i)); if(order!=0) return order; }
+            return 0;
+        });
+        return Collections.unmodifiableList(result);
     }
     List<BigInteger> boundary(int degree) {
         if(degree<=0 || degree>complex.dimension()) return Collections.emptyList();
