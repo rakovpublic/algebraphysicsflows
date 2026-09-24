@@ -28,6 +28,8 @@ import mathematics.structures.AbelianGroupType;
 import mathematics.structures.PresentedAbelianGroup;
 import mathematics.structures.AbelianGroupHomomorphism;
 import mathematics.topology.IntegralHomology;
+import mathematics.topology.FiniteSimplicialComplex;
+import mathematics.topology.FiniteSimplicialMap;
 import mathematics.examples.ConcreteAlgebrasExample;
 import mathematics.probability.FiniteMarkovKernel;
 import mathematics.probability.FiniteDistribution;
@@ -38,9 +40,18 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all840RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all870RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
+        String discrete="Complex[[0], [1]]",emptyComplex="Complex[]";
+        String swap=simplicialString(discrete,discrete,"{0=1, 1=0}"),simplicialIdentity=simplicialString(discrete,discrete,"{0=0, 1=1}");
+        String freeTwo="PresentedAbelianGroup(ZMatrix(2x0)[[], []])",emptyGroup="PresentedAbelianGroup(ZMatrix(0x0)[])";
+        String swapMatrix="ZMatrix(2x2)[[0, 1], [1, 0]]",emptyMatrix="ZMatrix(0x0)[]";
+        String emptyHomology="IntegralHomology(outgoing="+emptyMatrix+", incoming="+emptyMatrix+")";
+        expected.put("FiniteSimplicialMapAlgebra",String.join("|",swap,swap,discrete,discrete,"Function[0, 1]->[0, 1]{0=1, 1=0}","1","[1, 0]",
+                discrete,"true","true","true","true","false",simplicialIdentity,simplicialIdentity,swap,emptyMatrix,"["+swapMatrix+"]",
+                homString(emptyGroup,emptyGroup,emptyMatrix),"["+homString(freeTwo,freeTwo,swapMatrix)+"]",emptyHomology,emptyHomology,
+                "false","[1]",swap,swap,"[1]","[]",simplicialString(discrete,discrete,"{0=0, 1=0}"),simplicialString(emptyComplex,discrete,"{}")));
         String cyclic="PresentedAbelianGroup(ZMatrix(1x1)[[6]])",trivial="PresentedAbelianGroup(ZMatrix(1x1)[[1]])";
         String quotient="PresentedAbelianGroup(ZMatrix(1x2)[[6, 5]])";
         String[] hom=new String[6]; for(int i=0;i<hom.length;i++) hom[i]=homString(cyclic,cyclic,"ZMatrix(1x1)[["+i+"]]");
@@ -208,9 +219,15 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(840,count);
+        assertEquals(870,count);
     }
     private static String homString(String source,String target,String matrix) { return "AbelianHom(source="+source+", target="+target+", smith="+matrix+")"; }
+    private static String simplicialString(String source,String target,String vertices) { return "SimplicialMap(source="+source+", target="+target+", vertices="+vertices+")"; }
+    private static FiniteSimplicialComplex simplicialTestComplex() { return new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0),FiniteSet.of(1))); }
+    private static FiniteSimplicialMap simplicialTestMap(int index) {
+        Map<BigInteger,BigInteger> vertices=new TreeMap<>(); vertices.put(BigInteger.ZERO,BigInteger.valueOf(index==0?1:0)); vertices.put(BigInteger.ONE,BigInteger.valueOf(index==0?0:1));
+        return new FiniteSimplicialMap(simplicialTestComplex(),simplicialTestComplex(),vertices);
+    }
     private static PresentedAbelianGroup homomorphismTestGroup() {
         return new PresentedAbelianGroup(new IntegerMatrix(new BigInteger[][]{{BigInteger.valueOf(6)}}));
     }
@@ -221,6 +238,11 @@ public class ConcreteAlgebrasTest {
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
         Algebra source=math.mathTool.getAlgebra(entry.first.getAlgebraName());
         IAlgebraItem item=source.buildAlgebraItem(sample(math,source.getAlgebraName(),0));
+        if(owner instanceof FiniteSimplicialMapAlgebra) {
+            if(source==math.complexes.algebra()) item=source.buildAlgebraItem(simplicialTestComplex());
+            if(source==math.integerFunctions.algebra()) item=source.buildAlgebraItem(math.integerFunctions.member(
+                    FiniteSimplicialMap.vertexSet(simplicialTestComplex()),FiniteSimplicialMap.vertexSet(simplicialTestComplex()),simplicialTestMap(0).vertexMap()));
+        }
         if(owner instanceof IntegralHomologyAlgebra && source==math.integerMatrices.algebra())
             item=source.buildAlgebraItem(IntegerMatrix.zero(0,1));
         if(owner instanceof AbelianGroupHomomorphismAlgebra) {
@@ -276,6 +298,11 @@ public class ConcreteAlgebrasTest {
         if(operation instanceof IOneOperandOperation) return item.performOneOperandOperation(alias).perform().getResult().toString();
         if(operation instanceof ITransferOperation) return item.performAlgebraTransfer(alias).perform().getResult().toString();
         Object second=entry.second==null?null:sample(math,entry.second.getAlgebraName(),1);
+        if(owner instanceof FiniteSimplicialMapAlgebra) {
+            if(entry.second==math.complexes.algebra()) second=simplicialTestComplex();
+            if(entry.second==math.integers.algebra()) second=BigInteger.ZERO;
+            if(entry.second==math.integerSets.algebra()) second=FiniteSet.of(BigInteger.ZERO);
+        }
         if(owner instanceof IntegralHomologyAlgebra) {
             if(entry.second==math.integerMatrices.algebra()) second=new IntegerMatrix(new BigInteger[][]{{BigInteger.valueOf(6)}});
             if(entry.second==math.integerVectors.algebra()) second=new IntegerVector(BigInteger.valueOf(name.equals("bounding-chain")?12:2));
@@ -331,6 +358,8 @@ public class ConcreteAlgebrasTest {
     }
     private Object sample(ConcreteMathematics math,String domain,int index) {
         switch(domain) {
+            case "SimplicialMap": return simplicialTestMap(index);
+            case "FiniteComplex.pair": return new Pair<>(simplicialTestComplex(),simplicialTestComplex());
             case "IntegralHomology": return homologyTestValue(index==0?6:4);
             case "IntegralHomology.map-input": return new Pair<>(homologyTestValue(6),new IntegerMatrix(new BigInteger[][]{{BigInteger.valueOf(2)}}));
             case "AbelianGroupHomomorphism": return AbelianGroupHomomorphism.scaling(homomorphismTestGroup(),BigInteger.valueOf(index==0?5:2));

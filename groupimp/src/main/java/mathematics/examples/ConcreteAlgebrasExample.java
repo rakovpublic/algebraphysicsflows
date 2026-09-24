@@ -24,6 +24,7 @@ import mathematics.structures.AbelianGroupElement;
 import mathematics.structures.AbelianGroupHomomorphism;
 import mathematics.topology.FiniteSimplicialComplex;
 import mathematics.topology.IntegralHomology;
+import mathematics.topology.FiniteSimplicialMap;
 import mathematics.linear.RationalVector;
 import mathematics.linear.IntegerVector;
 import mathematics.linear.IntegerMatrix;
@@ -78,10 +79,18 @@ public final class ConcreteAlgebrasExample {
         System.out.println("An integral cycle representing its order-two class: "+math.flow(math.complexes,Collections.singletonList(projectivePlane))
                 .<IntegralHomology,BigInteger>performAlgebraUnsafe("IntegralHomology.at-degree",BigInteger.ONE)
                 .<IntegerVector>performFlatAlgebraTransfer("generators").collect());
-        System.out.println("Its integral torsion factors by degree: "+math.flow(math.complexes,Collections.singletonList(projectivePlane))
+        FiniteSimplicialComplex circle=new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0,1),FiniteSet.of(0,2),FiniteSet.of(1,2)));
+        Map<BigInteger,BigInteger> reflectionVertices=new TreeMap<>();
+        reflectionVertices.put(BigInteger.ZERO,BigInteger.ONE); reflectionVertices.put(BigInteger.ONE,BigInteger.ZERO); reflectionVertices.put(BigInteger.valueOf(2),BigInteger.valueOf(2));
+        System.out.println("Circle reflection acts by -1 on integral H1: "+math.flow(math.integerFunctions,Collections.singletonList(math.integerFunctions.member(
+                FiniteSimplicialMap.vertexSet(circle),FiniteSimplicialMap.vertexSet(circle),reflectionVertices)))
+                .<FiniteSimplicialMap,Pair<FiniteSimplicialComplex,FiniteSimplicialComplex>>performAlgebraUnsafe("SimplicialMap.from-function",new Pair<>(circle,circle))
+                .<AbelianGroupHomomorphism,BigInteger>performAlgebraUnsafe("homology-map",BigInteger.ONE)
+                .<IntegerMatrix>performAlgebraTransfer("smith-matrix").collect());
+        System.out.println("Projective-plane torsion factors by degree: "+math.flow(math.complexes,Collections.singletonList(projectivePlane))
                 .<AbelianGroupType>performFlatAlgebraTransfer("integral-homology-groups")
                 .<BigInteger>performFlatAlgebraTransfer("invariant-factors").collect());
-        System.out.println("Its rational Betti numbers: "+math.flow(math.complexes,Collections.singletonList(projectivePlane))
+        System.out.println("Projective-plane rational Betti numbers: "+math.flow(math.complexes,Collections.singletonList(projectivePlane))
                 .<BigInteger>performFlatAlgebraTransfer("rational-betti-numbers").collect());
         FiniteSet<BigInteger> markovStates=FiniteSet.of(BigInteger.ZERO,BigInteger.ONE);
         FiniteMarkovKernel markov=math.markovKernels.fromMatrix(new RationalMatrix(new Rational[][]{

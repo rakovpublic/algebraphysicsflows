@@ -44,6 +44,7 @@ OWNERS = {
     "AbelianGroupElementAlgebra": ("AbelianGroupElement", "Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates"),
     "AbelianGroupHomomorphismAlgebra": ("AbelianGroupHomomorphism", "Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices"),
     "IntegralHomologyAlgebra": ("IntegralHomology", "Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation"),
+    "FiniteSimplicialMapAlgebra": ("SimplicialMap", "Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps"),
     "FiniteIntegerRelationAlgebra": ("FiniteRelation(Z,Z)", "Finite-support relations on the actual registered integer Algebra"),
     "FiniteIntegerFunctionAlgebra": ("FiniteFunction(Z,Z)", "Total maps between explicit finite integer sets, preserving declared domain and codomain"),
     "FiniteCategoryAlgebra": ("FiniteCategory", "Finite categories with integer object/arrow labels and exhaustively checked composition tables"),
@@ -97,6 +98,7 @@ EXTRA_TESTS = {
     "AbelianGroupElementAlgebra": "NativePresentedAbelianTest",
     "AbelianGroupHomomorphismAlgebra": "NativeAbelianHomomorphismTest",
     "IntegralHomologyAlgebra": "NativeConstructiveHomologyTest",
+    "FiniteSimplicialMapAlgebra": "NativeSimplicialMapTest",
     "FiniteIntegerRelationAlgebra": "NativeRelationTest",
     "FiniteIntegerFunctionAlgebra": "NativeFiniteFunctionTest",
     "FiniteCategoryAlgebra": "NativeCategoryTest",
@@ -145,6 +147,38 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "FiniteSimplicialMapAlgebra": {
+        "compose": "Apply the right operand first. The full labelled middle complexes must be equal, not just their vertex sets or homology types.",
+        "inverse": "Defined exactly for simplicial isomorphisms: a vertex bijection whose image contains every target simplex. Vertex bijectivity alone is insufficient.",
+        "source": "Return the complete retained source complex, including its labels and simplices.",
+        "target": "Return the complete retained target complex, including simplices not reached by the map.",
+        "vertex-map": "Return a FiniteFunction using the actual registered integer Algebra, with domain and codomain equal to the declared complex vertex sets.",
+        "map-vertex": "The input must be a source vertex. Return its image in the second Z carrier wrapper.",
+        "vertex-images": "Emit wrapped vertex images in ascending source-label order, preserving repetitions and an empty list for an empty source.",
+        "image": "Return the subcomplex consisting of images of source simplices. This need not be the induced subcomplex on the image vertices.",
+        "is-injective": "True exactly when the vertex map is injective, equivalently a simplicial isomorphism onto its image subcomplex.",
+        "is-surjective": "True exactly when every target simplex is an image simplex. Surjectivity on vertices alone is insufficient.",
+        "is-isomorphism": "Require an injective vertex map and equality of the image subcomplex with the full target complex.",
+        "is-vertex-surjective": "Compare the image vertex set with the full target vertex set, without asserting surjectivity on higher simplices.",
+        "equal": "Compare both labelled boundary complexes and the complete vertex map, not merely the induced chain or homology maps.",
+        "identity-on": "Construct the identity on every vertex of the supplied complex; all chain and homology maps are identities.",
+        "inclusion": "The first complex must be a labelled subcomplex of the second; retain the second as the full target.",
+        "from-function": "The boundary pair is source then target. Function domain and codomain must equal their vertex sets, and the image of every source simplex must be a target simplex.",
+        "chain-matrix": "Use lexicographic simplex bases with increasing-vertex orientations. Each noncollapsed simplex maps with its permutation sign; collapsed simplices map to zero. Rows index target simplices and columns source simplices in the supplied nonnegative degree.",
+        "chain-matrices": "Emit degree matrices from zero through the larger complex dimension, including zero-sized rectangular shapes. Two empty complexes give an empty list; all degrees share one work budget.",
+        "homology-map": "Return the induced integral homomorphism in the supplied nonnegative degree using the actual retained homology presentations. Source and target homology construction and the induced map share one work budget.",
+        "homology-maps": "Emit induced integral homomorphisms from degree zero through the larger complex dimension. A single work budget covers the entire list, including both homology constructions and all products; exhaustion returns no partial list.",
+        "source-homology": "Construct the retained source's unreduced integral homology in the supplied degree, with its cycle basis and presented quotient.",
+        "target-homology": "Construct the retained target's unreduced integral homology in the supplied degree, with its cycle basis and presented quotient.",
+        "contiguous": "Require equal source and target complexes. For every source simplex, the union of both image vertex sets must be a target simplex. Contiguity implies equal induced homology maps but is not a general homotopy decision.",
+        "vertex-fiber": "The vertex must belong to the declared target. Emit all source vertices mapping to it in ascending order using second Z wrappers; unreachable target vertices give an empty list.",
+        "restrict": "The second operand must be a source subcomplex. Restrict the vertex map and retain the full original target, returning the first SimplicialMap carrier wrapper.",
+        "corestrict-image": "Retain the full source and vertex map, replacing the target by the actual image subcomplex.",
+        "map-simplex": "The input must be a nonempty source simplex. Return its image vertex set in the second FiniteSet(Z) wrapper; collapsed images have lower dimension.",
+        "simplex-basis": "Emit the nonempty simplices in the supplied nonnegative degree in lexicographic increasing-vertex order, matching all boundary and chain matrices. Each degree is capped at 256 simplices.",
+        "constant-at": "The supplied integer must label a target vertex, even for an empty source. Retain the boundaries and send every source vertex to that point.",
+        "empty-to": "Construct the unique map from the empty complex into the supplied full target complex.",
+    },
     "IntegralHomologyAlgebra": {
         "from-boundaries": "The first matrix is outgoing d_k and the second is incoming d_(k+1). Middle dimensions must match and outgoing times incoming must be zero over Z.",
         "at-degree": "Compute unreduced integral homology in the supplied nonnegative degree. Chains use lexicographically ordered simplices, each oriented by increasing vertex labels. Empty and above-top degrees retain the actual adjacent matrix shapes.",
@@ -860,6 +894,12 @@ def record(identifier, owner, concept, paths, operation=None):
                          "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
                          "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
                          "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
+    if owner == "FiniteSimplicialMapAlgebra":
+        paths = paths + ["groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+                         "groupimp/src/main/java/mathematics/topology/FiniteSimplicialComplex.java",
+                         "groupimp/src/main/java/mathematics/topology/IntegralSimplicialHomology.java",
+                         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+                         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"]
     if owner in ("PresentedAbelianGroupAlgebra", "AbelianGroupElementAlgebra"):
         paths = paths + ["groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
                          "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
@@ -962,9 +1002,15 @@ def record(identifier, owner, concept, paths, operation=None):
     if owner == "IntegralHomologyAlgebra":
         value["required_invariants"].append("Consecutive integer boundaries compose to zero. Cycles use a full integral kernel basis; homology retains the quotient by actual integral boundaries. Induced maps respect these quotients.")
         value["known_limitations"] += ["Every chain and auxiliary matrix dimension is at most 256. Each construction, solve, generator computation or induced-map calculation shares a 5000000-unit work budget across Smith reductions and matrix products. Dense costs apply to sparse and identity matrices; exhaustion raises IMPLEMENTATION_FAILURE, never false or a truncated witness list. Integer bit lengths remain unbounded.",
-            "One degree of a finite free integer chain complex only. Chain coordinates require the retained basis convention; quotient elements retain the resulting presented group. A representative is a set-theoretic section, not generally an additive section or shortest cycle. The supplied degree map is checked for cycle and boundary preservation, but no complete chain map or simplicial vertex map is constructed. Reduced/relative homology, persistence, cohomology and cup products remain outside scope."]
+            "One degree of a finite free integer chain complex only. Chain coordinates require the retained basis convention; quotient elements retain the resulting presented group. A representative is a set-theoretic section, not generally an additive section or shortest cycle. The supplied degree map is checked for cycle and boundary preservation. SimplicialMap separately constructs chain and homology maps from vertex maps; arbitrary complete chain-map builders, reduced/relative homology, persistence, cohomology and cup products remain outside scope."]
         value["references"] += ["https://doc.sagemath.org/html/en/reference/homology/sage/homology/chain_complex.html",
                                 "https://doc.sagemath.org/html/en/reference/homology/sage/homology/homology_morphism.html"]
+    if owner == "FiniteSimplicialMapAlgebra":
+        value["required_invariants"].append("Vertex maps are total on the declared source and preserve every nonempty simplex. Chain matrices commute with the oriented integral boundaries and respect composition, including collapsed simplices.")
+        value["known_limitations"] += ["Map construction allows at most 4096 nonempty simplices per complex. Each matrix degree and required homology boundary has at most 256 simplices. Each compound chain/homology calculation has a shared 5000000-unit integer work budget; flat degree lists share it across all outputs. Resource exhaustion raises IMPLEMENTATION_FAILURE, never false or a partial list; coefficient bit lengths remain unbounded.",
+            "Finite abstract complexes with Java int vertex labels, exposed through Z-valued native operations. Homology is unreduced over Z. No subdivision, simplicial approximation, arbitrary chain-map builder, contiguity-chain or general homotopy search, relative/persistent homology or cohomology is provided. Vertex-surjective maps need not hit every simplex."]
+        value["references"] += ["https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html",
+                                "https://doc.sagemath.org/html/en/reference/homology/sage/homology/chain_complex_morphism.html"]
     if owner in ("PresentedAbelianGroupAlgebra", "AbelianGroupElementAlgebra"):
         value["required_invariants"].append("Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type.")
         value["known_limitations"] += ["Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
@@ -1097,6 +1143,10 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("SimplicialMap", "Finite simplicial maps and induced integral maps", "mathematics.topology.FiniteSimplicialMap",
+         ["Complete labelled source and target complexes", "Total vertex map preserving every source simplex", "Increasing-vertex chain orientations; collapsed simplices map to zero"], ["FiniteComplex", "FiniteComplex.pair", "FiniteFunction(Z,Z)", "FiniteSet(Z)", "Z", "N", "Boolean", "Mat(Z)", "IntegralHomology", "AbelianGroupHomomorphism"]),
+        ("FiniteComplex.pair", "Source and target complexes for a vertex map", "mathematics.foundations.Pair<FiniteSimplicialComplex,FiniteSimplicialComplex>",
+         ["Both values belong to the registered FiniteComplex Algebra", "First entry is the source and second is the target"], ["FiniteComplex", "FiniteFunction(Z,Z)", "SimplicialMap"]),
         ("IntegralHomology", "Constructive integral homology in one degree", "mathematics.topology.IntegralHomology",
          ["Consecutive boundary matrices share the middle dimension and compose to zero", "Retained full integral cycle basis and boundary coordinates", "Presented quotient with chain representatives and degreewise induced maps"], ["FiniteComplex", "Mat(Z)", "Vec(Z)", "PresentedAbelianGroup", "AbelianGroupType", "AbelianGroupElement", "AbelianGroupHomomorphism", "IntegralHomology.map-input", "N", "Boolean"]),
         ("IntegralHomology.map-input", "Target homology and a degree matrix", "mathematics.foundations.Pair<IntegralHomology,IntegerMatrix>",

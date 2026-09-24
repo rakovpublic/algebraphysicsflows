@@ -15,17 +15,23 @@ public final class IntegralHomology implements Serializable {
     private final IntegerMatrix outgoing,incoming,cycles;
     private final PresentedAbelianGroup group;
     public IntegralHomology(IntegerMatrix outgoing,IntegerMatrix incoming) {
+        this(outgoing,incoming,new Computation());
+    }
+    /** Share reductions and products with a larger homology-map calculation. */
+    public IntegralHomology(IntegerMatrix outgoing,IntegerMatrix incoming,Computation work) {
         this.outgoing=Objects.requireNonNull(outgoing); this.incoming=Objects.requireNonNull(incoming);
         if(outgoing.columns()!=incoming.rows()) throw MathFailure.undefined("Consecutive boundaries must share the middle chain dimension");
-        Computation work=new Computation();
         if(!work.multiply(outgoing,incoming).equals(IntegerMatrix.zero(outgoing.rows(),incoming.columns())))
             throw MathFailure.undefined("Consecutive boundaries must compose to zero");
         cycles=work.kernelMatrix(outgoing);
         group=new PresentedAbelianGroup(work.solve(cycles,incoming),work);
     }
     public static IntegralHomology atDegree(FiniteSimplicialComplex complex,BigInteger degree) {
+        return atDegree(complex,degree,new Computation());
+    }
+    public static IntegralHomology atDegree(FiniteSimplicialComplex complex,BigInteger degree,Computation work) {
         if(degree.signum()<0) throw MathFailure.undefined("Homology degree must be nonnegative");
-        return new IntegralHomology(complex.integralBoundaryMatrix(degree),complex.integralBoundaryMatrix(degree.add(BigInteger.ONE)));
+        return new IntegralHomology(complex.integralBoundaryMatrix(degree),complex.integralBoundaryMatrix(degree.add(BigInteger.ONE)),work);
     }
     public IntegerMatrix outgoingBoundary() { return outgoing; }
     public IntegerMatrix incomingBoundary() { return incoming; }
@@ -75,9 +81,11 @@ public final class IntegralHomology implements Serializable {
     }
     /** The given degree matrix must preserve cycles and boundaries; adjacent chain-map data is not inferred. */
     public AbelianGroupHomomorphism inducedMap(IntegralHomology target,IntegerMatrix degreeMap) {
+        return inducedMap(target,degreeMap,new Computation());
+    }
+    public AbelianGroupHomomorphism inducedMap(IntegralHomology target,IntegerMatrix degreeMap,Computation work) {
         if(degreeMap.columns()!=chainRank() || degreeMap.rows()!=target.chainRank())
             throw MathFailure.undefined("The degree map must have target chain rows and source chain columns");
-        Computation work=new Computation();
         // Integral solvability checks cycle preservation; the quotient map constructor checks boundary preservation.
         IntegerMatrix onCycles=work.solve(target.cycles,work.multiply(degreeMap,cycles));
         return AbelianGroupHomomorphism.fromMatrix(group,target.group,onCycles,work);

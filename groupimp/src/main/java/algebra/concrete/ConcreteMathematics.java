@@ -45,6 +45,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final AbelianGroupElementAlgebra abelianGroupElements;
     public final AbelianGroupHomomorphismAlgebra abelianHomomorphisms;
     public final IntegralHomologyAlgebra integralHomology;
+    public final FiniteSimplicialMapAlgebra simplicialMaps;
     public final RationalAffineSpaceAlgebra affineSpaces;
     public final FiniteMarkovAlgebra markovKernels;
     public final RationalTensorAlgebra tensors;
@@ -73,6 +74,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         abelianHomomorphisms=new AbelianGroupHomomorphismAlgebra(presentedAbelianGroups,abelianGroupElements,integerMatrices,integers,booleans);
         complexes=new FiniteSimplicialAlgebra(booleans,naturals,integers,abelianGroups,integerMatrices);
         integralHomology=new IntegralHomologyAlgebra(complexes,integerMatrices,integerVectors,presentedAbelianGroups,abelianGroups,abelianGroupElements,abelianHomomorphisms,naturals,booleans);
+        simplicialMaps=new FiniteSimplicialMapAlgebra(complexes,integerFunctions,integerSets,integers,naturals,booleans,integerMatrices,integralHomology,abelianHomomorphisms);
         affineSpaces=new RationalAffineSpaceAlgebra(rectangularMatrices,finiteVectors,naturals,booleans);
         markovKernels=new FiniteMarkovAlgebra(integers,integerSets,integerProbabilities,integerFunctions,rectangularMatrices,finiteVectors,rationals,naturals,booleans);
         tensors=new RationalTensorAlgebra(rationals,finiteVectors,rectangularMatrices,naturals,booleans);
@@ -100,6 +102,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         values.add(presentedAbelianGroups); values.add(abelianGroupElements);
         values.add(abelianHomomorphisms);
         values.add(integralHomology);
+        values.add(simplicialMaps);
         values.addAll(fields); algebras=Collections.unmodifiableList(values);
         for(ConcreteAlgebra<?> algebra : algebras) {
             algebra.register(mathTool);

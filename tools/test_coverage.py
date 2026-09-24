@@ -183,6 +183,11 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("need not be additive", " ".join(records["IntegralHomology.representative"]["required_invariants"]))
         self.assertIn("preserve cycles and boundaries", " ".join(records["IntegralHomology.induced-map"]["required_invariants"]))
         self.assertIn("5000000", " ".join(records["IntegralHomology.generators"]["known_limitations"]))
+        self.assertIn("collapsed simplices map to zero", " ".join(records["SimplicialMap.chain-matrix"]["required_invariants"]))
+        self.assertIn("Vertex bijectivity alone is insufficient", " ".join(records["SimplicialMap.inverse"]["required_invariants"]))
+        self.assertIn("entire list", " ".join(records["SimplicialMap.homology-maps"]["required_invariants"]))
+        self.assertIn("second Z wrappers", " ".join(records["SimplicialMap.vertex-fiber"]["required_invariants"]))
+        self.assertIn("4096", " ".join(records["SimplicialMap.compose"]["known_limitations"]))
 
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)

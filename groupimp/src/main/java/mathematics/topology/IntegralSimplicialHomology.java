@@ -15,10 +15,10 @@ final class IntegralSimplicialHomology {
     private final Map<Integer,List<FiniteSet<Integer>>> bases=new HashMap<>();
     private final Map<Integer,List<BigInteger>> boundaries=new HashMap<>();
     IntegralSimplicialHomology(FiniteSimplicialComplex complex) { this.complex=complex; }
-    private static List<Integer> vertices(FiniteSet<Integer> simplex) {
+    static List<Integer> vertices(FiniteSet<Integer> simplex) {
         List<Integer> result=new ArrayList<>(simplex.members()); Collections.sort(result); return result;
     }
-    private List<FiniteSet<Integer>> basis(int degree) {
+    List<FiniteSet<Integer>> basis(int degree) {
         if(degree<0 || degree>complex.dimension()) return Collections.emptyList();
         if(!bases.containsKey(degree)) {
             List<FiniteSet<Integer>> result=new ArrayList<>(complex.simplices(degree));

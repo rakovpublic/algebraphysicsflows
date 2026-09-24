@@ -22,6 +22,8 @@ public final class FiniteSimplicialComplex implements Serializable {
     private FiniteSimplicialComplex(Set<FiniteSet<Integer>> closedFaces,boolean alreadyClosed) {
         simplices=Collections.unmodifiableSet(new LinkedHashSet<>(closedFaces));
     }
+    Set<FiniteSet<Integer>> faces() { return simplices; }
+    static FiniteSimplicialComplex fromClosedFaces(Set<FiniteSet<Integer>> faces) { return new FiniteSimplicialComplex(faces,true); }
     public FiniteSimplicialComplex union(FiniteSimplicialComplex other) {
         Set<FiniteSet<Integer>> result=new LinkedHashSet<>(simplices); result.addAll(other.simplices);
         return new FiniteSimplicialComplex(result,true);

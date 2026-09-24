@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1291 |
-| DIRECTLY_SUPPORTED | 1048 |
+| Scoped records | 1322 |
+| DIRECTLY_SUPPORTED | 1079 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 907 |
+| IMPLEMENTED | 938 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 975 |
+| MACHINE_TESTED | 1006 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 884 | 884 | 0 | 0 | 0 | 884 | 0 | 0 |
+| Concrete MathTool algebras | 915 | 915 | 0 | 0 | 0 | 915 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -572,6 +572,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | FiniteSet(Z).symmetric-difference | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).symmetric-difference |
 | FiniteSet(Z).union | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).union |
 | FiniteSimplicialAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers |
+| FiniteSimplicialMapAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps |
 | H(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).add |
 | H(Q).components | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).components |
 | H(Q).conjugate | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).conjugate |
@@ -984,6 +985,36 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Sample(Q).sample-variance | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations; native operation Sample(Q).sample-variance |
 | Sample(Q).scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations; native operation Sample(Q).scale |
 | Sample(Q).size | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations; native operation Sample(Q).size |
+| SimplicialMap.chain-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.chain-matrices |
+| SimplicialMap.chain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.chain-matrix |
+| SimplicialMap.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.compose |
+| SimplicialMap.constant-at | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.constant-at |
+| SimplicialMap.contiguous | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.contiguous |
+| SimplicialMap.corestrict-image | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.corestrict-image |
+| SimplicialMap.empty-to | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.empty-to |
+| SimplicialMap.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.equal |
+| SimplicialMap.from-function | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.from-function |
+| SimplicialMap.homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.homology-map |
+| SimplicialMap.homology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.homology-maps |
+| SimplicialMap.identity-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.identity-on |
+| SimplicialMap.image | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.image |
+| SimplicialMap.inclusion | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.inclusion |
+| SimplicialMap.inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.inverse |
+| SimplicialMap.is-injective | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.is-injective |
+| SimplicialMap.is-isomorphism | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.is-isomorphism |
+| SimplicialMap.is-surjective | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.is-surjective |
+| SimplicialMap.is-vertex-surjective | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.is-vertex-surjective |
+| SimplicialMap.map-simplex | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.map-simplex |
+| SimplicialMap.map-vertex | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.map-vertex |
+| SimplicialMap.restrict | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.restrict |
+| SimplicialMap.simplex-basis | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.simplex-basis |
+| SimplicialMap.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.source |
+| SimplicialMap.source-homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.source-homology |
+| SimplicialMap.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.target |
+| SimplicialMap.target-homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.target-homology |
+| SimplicialMap.vertex-fiber | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.vertex-fiber |
+| SimplicialMap.vertex-images | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.vertex-images |
+| SimplicialMap.vertex-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.vertex-map |
 | SymmetricGroup | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree |
 | Tensor(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).add |
 | Tensor(Q).contract | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).contract |
