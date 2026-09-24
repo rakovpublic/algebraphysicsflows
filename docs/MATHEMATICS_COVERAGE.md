@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1263 |
-| DIRECTLY_SUPPORTED | 1020 |
+| Scoped records | 1291 |
+| DIRECTLY_SUPPORTED | 1048 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 879 |
+| IMPLEMENTED | 907 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 947 |
+| MACHINE_TESTED | 975 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 856 | 856 | 0 | 0 | 0 | 856 | 0 | 0 |
+| Concrete MathTool algebras | 884 | 884 | 0 | 0 | 0 | 884 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -605,6 +605,34 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | IntegerRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient |
 | IntegerSetAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets |
 | IntegerVectorFamily | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer coordinate vectors with retained nonnegative dimension |
+| IntegralHomology.as-type | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.as-type |
+| IntegralHomology.at-degree | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.at-degree |
+| IntegralHomology.betti-number | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.betti-number |
+| IntegralHomology.boundary-basis | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.boundary-basis |
+| IntegralHomology.boundary-coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.boundary-coordinates |
+| IntegralHomology.boundary-rank | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.boundary-rank |
+| IntegralHomology.bounding-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.bounding-chain |
+| IntegralHomology.chain-rank | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.chain-rank |
+| IntegralHomology.class-of | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.class-of |
+| IntegralHomology.cycle-basis | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.cycle-basis |
+| IntegralHomology.cycle-coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.cycle-coordinates |
+| IntegralHomology.cycle-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.cycle-matrix |
+| IntegralHomology.cycle-rank | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.cycle-rank |
+| IntegralHomology.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.equal |
+| IntegralHomology.from-boundaries | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.from-boundaries |
+| IntegralHomology.from-cycle-coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.from-cycle-coordinates |
+| IntegralHomology.generators | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.generators |
+| IntegralHomology.group | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.group |
+| IntegralHomology.incoming-boundary | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.incoming-boundary |
+| IntegralHomology.induced-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.induced-map |
+| IntegralHomology.is-acyclic | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.is-acyclic |
+| IntegralHomology.is-boundary | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.is-boundary |
+| IntegralHomology.is-cycle | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.is-cycle |
+| IntegralHomology.outgoing-boundary | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.outgoing-boundary |
+| IntegralHomology.projection | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.projection |
+| IntegralHomology.representative | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.representative |
+| IntegralHomology.zero-class | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.zero-class |
+| IntegralHomologyAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation |
 | Mat(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).add |
 | Mat(Q).apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).apply |
 | Mat(Q).characteristic-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases; native operation Mat(Q).characteristic-polynomial |

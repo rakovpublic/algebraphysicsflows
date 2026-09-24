@@ -18,7 +18,8 @@ public final class PresentedAbelianGroup implements Serializable {
     public PresentedAbelianGroup(IntegerMatrix relations) {
         this(relations,new IntegerSmithNormalForm.Computation());
     }
-    PresentedAbelianGroup(IntegerMatrix relations,IntegerSmithNormalForm.Computation work) {
+    /** Construct within the shared budget of a larger exact calculation. */
+    public PresentedAbelianGroup(IntegerMatrix relations,IntegerSmithNormalForm.Computation work) {
         this.relations=Objects.requireNonNull(relations);
         IntegerSmithNormalForm.Decomposition smith=work.decompose(relations);
         toSmith=smith.left(); factors=smith.invariantFactors();

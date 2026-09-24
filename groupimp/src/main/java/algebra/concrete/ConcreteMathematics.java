@@ -44,6 +44,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final PresentedAbelianGroupAlgebra presentedAbelianGroups;
     public final AbelianGroupElementAlgebra abelianGroupElements;
     public final AbelianGroupHomomorphismAlgebra abelianHomomorphisms;
+    public final IntegralHomologyAlgebra integralHomology;
     public final RationalAffineSpaceAlgebra affineSpaces;
     public final FiniteMarkovAlgebra markovKernels;
     public final RationalTensorAlgebra tensors;
@@ -71,6 +72,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         abelianGroupElements=new AbelianGroupElementAlgebra(presentedAbelianGroups,integerVectors,integers,naturals,booleans);
         abelianHomomorphisms=new AbelianGroupHomomorphismAlgebra(presentedAbelianGroups,abelianGroupElements,integerMatrices,integers,booleans);
         complexes=new FiniteSimplicialAlgebra(booleans,naturals,integers,abelianGroups,integerMatrices);
+        integralHomology=new IntegralHomologyAlgebra(complexes,integerMatrices,integerVectors,presentedAbelianGroups,abelianGroups,abelianGroupElements,abelianHomomorphisms,naturals,booleans);
         affineSpaces=new RationalAffineSpaceAlgebra(rectangularMatrices,finiteVectors,naturals,booleans);
         markovKernels=new FiniteMarkovAlgebra(integers,integerSets,integerProbabilities,integerFunctions,rectangularMatrices,finiteVectors,rationals,naturals,booleans);
         tensors=new RationalTensorAlgebra(rationals,finiteVectors,rectangularMatrices,naturals,booleans);
@@ -97,6 +99,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         values.add(integerVectors); values.add(integerMatrices);
         values.add(presentedAbelianGroups); values.add(abelianGroupElements);
         values.add(abelianHomomorphisms);
+        values.add(integralHomology);
         values.addAll(fields); algebras=Collections.unmodifiableList(values);
         for(ConcreteAlgebra<?> algebra : algebras) {
             algebra.register(mathTool);

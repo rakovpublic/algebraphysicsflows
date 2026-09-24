@@ -23,6 +23,7 @@ import mathematics.structures.PresentedAbelianGroup;
 import mathematics.structures.AbelianGroupElement;
 import mathematics.structures.AbelianGroupHomomorphism;
 import mathematics.topology.FiniteSimplicialComplex;
+import mathematics.topology.IntegralHomology;
 import mathematics.linear.RationalVector;
 import mathematics.linear.IntegerVector;
 import mathematics.linear.IntegerMatrix;
@@ -74,6 +75,9 @@ public final class ConcreteAlgebrasExample {
                 FiniteSet.of(1,2,5),FiniteSet.of(1,3,4),FiniteSet.of(1,4,5),FiniteSet.of(2,3,4),FiniteSet.of(2,3,5)));
         System.out.println("Integral H1 of the projective plane: "+math.flow(math.complexes,Collections.singletonList(projectivePlane))
                 .<AbelianGroupType,BigInteger>performAlgebraUnsafe("integral-homology",BigInteger.ONE).collect());
+        System.out.println("An integral cycle representing its order-two class: "+math.flow(math.complexes,Collections.singletonList(projectivePlane))
+                .<IntegralHomology,BigInteger>performAlgebraUnsafe("IntegralHomology.at-degree",BigInteger.ONE)
+                .<IntegerVector>performFlatAlgebraTransfer("generators").collect());
         System.out.println("Its integral torsion factors by degree: "+math.flow(math.complexes,Collections.singletonList(projectivePlane))
                 .<AbelianGroupType>performFlatAlgebraTransfer("integral-homology-groups")
                 .<BigInteger>performFlatAlgebraTransfer("invariant-factors").collect());

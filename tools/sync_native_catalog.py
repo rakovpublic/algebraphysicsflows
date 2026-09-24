@@ -43,6 +43,7 @@ OWNERS = {
     "PresentedAbelianGroupAlgebra": ("PresentedAbelianGroup", "Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps"),
     "AbelianGroupElementAlgebra": ("AbelianGroupElement", "Elements of retained finitely presented abelian groups, with canonical finite residues and free integer coordinates"),
     "AbelianGroupHomomorphismAlgebra": ("AbelianGroupHomomorphism", "Relation-respecting homomorphisms between retained abelian presentations with canonical Smith-coordinate matrices"),
+    "IntegralHomologyAlgebra": ("IntegralHomology", "Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation"),
     "FiniteIntegerRelationAlgebra": ("FiniteRelation(Z,Z)", "Finite-support relations on the actual registered integer Algebra"),
     "FiniteIntegerFunctionAlgebra": ("FiniteFunction(Z,Z)", "Total maps between explicit finite integer sets, preserving declared domain and codomain"),
     "FiniteCategoryAlgebra": ("FiniteCategory", "Finite categories with integer object/arrow labels and exhaustively checked composition tables"),
@@ -95,6 +96,7 @@ EXTRA_TESTS = {
     "PresentedAbelianGroupAlgebra": "NativePresentedAbelianTest",
     "AbelianGroupElementAlgebra": "NativePresentedAbelianTest",
     "AbelianGroupHomomorphismAlgebra": "NativeAbelianHomomorphismTest",
+    "IntegralHomologyAlgebra": "NativeConstructiveHomologyTest",
     "FiniteIntegerRelationAlgebra": "NativeRelationTest",
     "FiniteIntegerFunctionAlgebra": "NativeFiniteFunctionTest",
     "FiniteCategoryAlgebra": "NativeCategoryTest",
@@ -143,6 +145,35 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "IntegralHomologyAlgebra": {
+        "from-boundaries": "The first matrix is outgoing d_k and the second is incoming d_(k+1). Middle dimensions must match and outgoing times incoming must be zero over Z.",
+        "at-degree": "Compute unreduced integral homology in the supplied nonnegative degree. Chains use lexicographically ordered simplices, each oriented by increasing vertex labels. Empty and above-top degrees retain the actual adjacent matrix shapes.",
+        "outgoing-boundary": "Return the retained matrix d_k from the chosen chain group to the preceding chain group.",
+        "incoming-boundary": "Return the retained matrix d_(k+1) into the chosen chain group, including redundant and zero columns.",
+        "cycle-matrix": "Columns give a basis K of the full integral cycle lattice, not a rational kernel with independently cleared denominators.",
+        "boundary-coordinates": "Return the unique matrix R with K*R=incoming, where K is the retained integral cycle basis. Its columns present the homology quotient.",
+        "group": "Return the presented group Z^cycle-rank modulo boundary coordinates. Its original generators refer to the retained cycle basis.",
+        "as-type": "Return the canonical integral homology isomorphism type, including torsion and free rank.",
+        "chain-rank": "Return the rank of the chosen free chain group, equal to the outgoing column and incoming row count.",
+        "cycle-rank": "Return the rank of the full integral kernel of the outgoing boundary.",
+        "boundary-rank": "Return the rank of the incoming image, equal to cycle-rank minus the homology free rank.",
+        "betti-number": "Return the integral homology free rank, equivalently the rational Betti number in this degree; torsion does not contribute.",
+        "is-acyclic": "True exactly when homology in this single degree is trivial, including the absence of torsion. This does not assert that an entire complex is acyclic.",
+        "equal": "Compare both retained boundary matrices and their dimensions, not just the resulting homology types.",
+        "cycle-basis": "Emit the columns of the full integral cycle basis in order as wrapped vectors in the original chain coordinates.",
+        "boundary-basis": "Emit an integral basis of the actual incoming image, retaining its lattice index rather than replacing it with its saturation.",
+        "generators": "Emit chain representatives of minimal Smith generators: nontrivial torsion factors followed by free coordinates. Omit killed generators and emit an empty list for trivial homology.",
+        "is-cycle": "The vector must have the chosen chain dimension; true exactly when its outgoing boundary is zero.",
+        "is-boundary": "The vector must have the chosen chain dimension; test integral solvability against the incoming matrix. Noncycles return false; resource failures propagate rather than returning false.",
+        "class-of": "The input must be an integral cycle. Solve in the cycle basis and project to the retained presented homology group, returning an AbelianGroupElement wrapper.",
+        "representative": "The class must belong to the retained homology presentation. Return one cycle in original chain coordinates. This section need not be additive and is not a shortest-cycle algorithm.",
+        "bounding-chain": "The input must be a boundary. Return one vector in the next chain group whose incoming boundary is the input, using the second Vec(Z) wrapper; undefined for a nonboundary.",
+        "cycle-coordinates": "The input must be a cycle. Return its unique coordinates in the retained integral cycle basis using the second Vec(Z) wrapper.",
+        "from-cycle-coordinates": "The input dimension must equal the cycle rank. Apply the cycle matrix to obtain a cycle in the original chain coordinates using the second Vec(Z) wrapper.",
+        "projection": "Return the surjective AbelianGroupHomomorphism from the free cycle-coordinate group onto the retained presented homology group, not a projection defined on all chains.",
+        "induced-map": "The pair supplies target homology and a matrix with target-chain rows and source-chain columns. It must preserve cycles and boundaries. Return the induced map between the retained homology presentations; no adjacent chain-map components are inferred.",
+        "zero-class": "Return the zero AbelianGroupElement of the retained homology presentation.",
+    },
     "AbelianGroupHomomorphismAlgebra": {
         "compose": "Apply the right operand first. The first source presentation must equal the second target presentation, including its coordinate map.",
         "add": "Source and target presentations must agree for both maps; add their images pointwise in the target group.",
@@ -823,6 +854,12 @@ def record(identifier, owner, concept, paths, operation=None):
                          "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
                          "groupimp/src/main/java/mathematics/linear/IntegerMatrix.java",
                          "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
+    if owner == "IntegralHomologyAlgebra":
+        paths = paths + ["groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+                         "groupimp/src/main/java/mathematics/topology/IntegralSimplicialHomology.java",
+                         "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+                         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+                         "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
     if owner in ("PresentedAbelianGroupAlgebra", "AbelianGroupElementAlgebra"):
         paths = paths + ["groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
                          "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
@@ -907,7 +944,7 @@ def record(identifier, owner, concept, paths, operation=None):
     if owner == "FiniteSimplicialAlgebra":
         value["known_limitations"] += ["Construction materializes faces and caps each input facet at 20 vertices.",
             "Integral homology, rational Betti numbers and boundary Smith factors allow at most 256 simplices in each required degree and share a 5000000-unit Smith-reduction budget per complete calculation. Exhaustion raises IMPLEMENTATION_FAILURE, never a partial invariant list. BigInteger coefficient bit lengths are unbounded.",
-            "Homology returns isomorphism types, not cycle representatives, chosen generators or induced maps. No persistence, cup products or homeomorphism decision is implemented. Existing betti-number and betti-numbers retain F2 coefficients."]
+            "These homology operations return isomorphism types. IntegralHomology.at-degree separately constructs cycle representatives, bounding chains and degreewise induced maps. No persistence, cup products or homeomorphism decision is implemented. Existing betti-number and betti-numbers retain F2 coefficients."]
         value["references"].append("https://pi.math.cornell.edu/~hatcher/AT/ATchapters.html")
         value["references"].append("https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_examples.html")
     if owner == "AbelianGroupTypeAlgebra":
@@ -920,13 +957,19 @@ def record(identifier, owner, concept, paths, operation=None):
     if owner == "AbelianGroupHomomorphismAlgebra":
         value["required_invariants"].append("The normalized target Smith-coordinate columns respect all source relations. Both actual boundary presentations are retained; isomorphic groups are not implicitly identified.")
         value["known_limitations"] += ["Every auxiliary matrix, including [M,-R_target], is limited to 256 rows and columns. Each compound map computation shares a 5000000-unit integer work budget across reductions, solves and products. Dense costs apply even to identities; exhaustion raises IMPLEMENTATION_FAILURE and never a false decision. Integer bit lengths remain unbounded.",
-            "Only finitely presented abelian groups over Z. Preimage returns one representative, not a full fiber or a minimal-norm lift. No automatic isomorphism search, arbitrary module coefficients, subgroup lattice enumeration, nonabelian maps or induced homology maps are implemented."]
+            "Only finitely presented abelian groups over Z. Preimage returns one representative, not a full fiber or a minimal-norm lift. No automatic isomorphism search, arbitrary module coefficients, subgroup lattice enumeration or nonabelian maps are implemented. IntegralHomology separately constructs induced maps from supplied degree matrices."]
         value["references"].append("https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_morphism.html")
+    if owner == "IntegralHomologyAlgebra":
+        value["required_invariants"].append("Consecutive integer boundaries compose to zero. Cycles use a full integral kernel basis; homology retains the quotient by actual integral boundaries. Induced maps respect these quotients.")
+        value["known_limitations"] += ["Every chain and auxiliary matrix dimension is at most 256. Each construction, solve, generator computation or induced-map calculation shares a 5000000-unit work budget across Smith reductions and matrix products. Dense costs apply to sparse and identity matrices; exhaustion raises IMPLEMENTATION_FAILURE, never false or a truncated witness list. Integer bit lengths remain unbounded.",
+            "One degree of a finite free integer chain complex only. Chain coordinates require the retained basis convention; quotient elements retain the resulting presented group. A representative is a set-theoretic section, not generally an additive section or shortest cycle. The supplied degree map is checked for cycle and boundary preservation, but no complete chain map or simplicial vertex map is constructed. Reduced/relative homology, persistence, cohomology and cup products remain outside scope."]
+        value["references"] += ["https://doc.sagemath.org/html/en/reference/homology/sage/homology/chain_complex.html",
+                                "https://doc.sagemath.org/html/en/reference/homology/sage/homology/homology_morphism.html"]
     if owner in ("PresentedAbelianGroupAlgebra", "AbelianGroupElementAlgebra"):
         value["required_invariants"].append("Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type.")
         value["known_limitations"] += ["Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
             "Finite element, cyclic-subgroup and scaling-fiber enumeration is capped at 4096 results; oversized finite outputs raise IMPLEMENTATION_FAILURE without a truncated result. Infinite outputs are outside these flat operations.",
-            "Only finitely presented abelian groups over Z are represented. Explicit maps and their kernel/image/cokernel presentations live in AbelianGroupHomomorphism; these carriers alone do not enumerate subgroups, search for isomorphisms or construct homology generators. Nonabelian group presentations are outside scope."]
+            "Only finitely presented abelian groups over Z are represented. Explicit maps and their kernel/image/cokernel presentations live in AbelianGroupHomomorphism; IntegralHomology supplies homology generators. These carriers alone do not enumerate subgroups or search for isomorphisms. Nonabelian group presentations are outside scope."]
         value["references"] += ["https://doc.sagemath.org/html/en/reference/groups/sage/groups/additive_abelian/additive_abelian_group.html",
                                 "https://doc.sagemath.org/html/en/reference/modules/sage/modules/fg_pid/fgp_module.html"]
     if owner == "IntegerMatrixFamily":
@@ -1054,6 +1097,10 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("IntegralHomology", "Constructive integral homology in one degree", "mathematics.topology.IntegralHomology",
+         ["Consecutive boundary matrices share the middle dimension and compose to zero", "Retained full integral cycle basis and boundary coordinates", "Presented quotient with chain representatives and degreewise induced maps"], ["FiniteComplex", "Mat(Z)", "Vec(Z)", "PresentedAbelianGroup", "AbelianGroupType", "AbelianGroupElement", "AbelianGroupHomomorphism", "IntegralHomology.map-input", "N", "Boolean"]),
+        ("IntegralHomology.map-input", "Target homology and a degree matrix", "mathematics.foundations.Pair<IntegralHomology,IntegerMatrix>",
+         ["First entry is the target homology value", "Second entry belongs to the actual Mat(Z) Algebra", "Execution checks chain dimensions and preservation of cycles and boundaries"], ["IntegralHomology", "Mat(Z)", "AbelianGroupHomomorphism"]),
         ("AbelianGroupHomomorphism", "Explicit abelian-group homomorphisms", "mathematics.structures.AbelianGroupHomomorphism",
          ["Retained source and target presentations", "Normalized target Smith-coordinate generator images", "Every source relation maps to zero in the target quotient"], ["PresentedAbelianGroup", "AbelianGroupElement", "PresentedAbelianGroup.pair", "Mat(Z)", "Z", "Boolean"]),
         ("PresentedAbelianGroup.pair", "Source and target abelian presentations", "mathematics.foundations.Pair<PresentedAbelianGroup,PresentedAbelianGroup>",

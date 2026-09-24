@@ -178,6 +178,11 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("second AbelianGroupElement", " ".join(records["AbelianGroupHomomorphism.apply"]["required_invariants"]))
         self.assertIn("coset by the kernel", " ".join(records["AbelianGroupHomomorphism.preimage"]["required_invariants"]))
         self.assertIn("5000000", " ".join(records["AbelianGroupHomomorphism.inverse"]["known_limitations"]))
+        self.assertIn("compose to zero", " ".join(records["IntegralHomology.from-boundaries"]["required_invariants"]))
+        self.assertIn("second Vec(Z)", " ".join(records["IntegralHomology.bounding-chain"]["required_invariants"]))
+        self.assertIn("need not be additive", " ".join(records["IntegralHomology.representative"]["required_invariants"]))
+        self.assertIn("preserve cycles and boundaries", " ".join(records["IntegralHomology.induced-map"]["required_invariants"]))
+        self.assertIn("5000000", " ".join(records["IntegralHomology.generators"]["known_limitations"]))
 
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)

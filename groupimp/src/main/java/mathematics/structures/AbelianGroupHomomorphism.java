@@ -33,7 +33,10 @@ public final class AbelianGroupHomomorphism implements Serializable {
     }
     /** Matrix columns are images of the original presentation generators. */
     public static AbelianGroupHomomorphism fromMatrix(PresentedAbelianGroup source,PresentedAbelianGroup target,IntegerMatrix matrix) {
-        Computation work=new Computation();
+        return fromMatrix(source,target,matrix,new Computation());
+    }
+    /** Construct an original-coordinate map within a compound calculation's budget. */
+    public static AbelianGroupHomomorphism fromMatrix(PresentedAbelianGroup source,PresentedAbelianGroup target,IntegerMatrix matrix,Computation work) {
         return new AbelianGroupHomomorphism(source,target,work.multiply(work.multiply(target.smithCoordinateMap(),matrix),
                 work.inverseUnimodular(source.smithCoordinateMap())),work);
     }

@@ -51,6 +51,12 @@ public final class IntegerSmithNormalForm {
             if(b.dimension()!=a.rows()) throw MathFailure.undefined("Right-hand side dimension must match matrix rows");
             return IntegerMatrix.solveCoordinates(decompose(a),b,this)!=null;
         }
+        public IntegerVector solve(IntegerMatrix a,IntegerVector b) {
+            if(b.dimension()!=a.rows()) throw MathFailure.undefined("Right-hand side dimension must match matrix rows");
+            Decomposition smith=decompose(a); IntegerVector y=IntegerMatrix.solveCoordinates(smith,b,this);
+            if(y==null) throw MathFailure.undefined("This linear system has no integer solution");
+            return apply(smith.right(),y);
+        }
         /** Solve several right-hand sides with one decomposition and one shared work budget. */
         public IntegerMatrix solve(IntegerMatrix a,IntegerMatrix b) {
             if(b.rows()!=a.rows()) throw MathFailure.undefined("Right-hand side dimension must match matrix rows");
