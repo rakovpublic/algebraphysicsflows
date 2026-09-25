@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1166 native operations from 54 algebra builders.
+The default initializer currently installs 1190 native operations from 55 algebra builders.
 
 ## Existing API usage
 
@@ -58,6 +58,7 @@ List<String> values = math.flow(math.naturals,
 | SimplicialCoverMapAlgebra / CoverMap | compose; equality/piecewise contiguity -> Boolean | inverse; source/target covers; union/left/right/intersection maps; swap both covers; image/corestriction; flat sum matrices/maps; two excision RelativeMaps | construction from a union map and paired covers; identity/inclusion; restriction; degreewise sum/component homology and contravariant cohomology maps; four-map Mayer-Vietoris naturality lists for each theory |
 | RelativeSimplicialChainAlgebra / RelativeChain | pair/degree-checked add/subtract; equality/homology comparison -> Boolean | boundary; negate; pair/degree/coordinates; cycle/boundary predicates; fillings; homology/class; flat cycle generators; absolute lift and connecting cycle | projection from absolute chains; integer scale; pair-map pushforward; relative pairing; both standard relative cap products and their matrices/induced maps; zero and flat basis constructors |
 | RelativeCapProductAlgebra / RelativeCap | equality of retained chain and target -> Boolean | chain; target pair; boundary | bind a chain to an explicit target pair; replace chain; general relative cap, class, matrices and induced homology/cohomology maps |
+| RelativeSimplicialTripleAlgebra / RelativeTriple | equality of the full nested triple -> Boolean | outer, total and inner pairs; inclusion and quotient pair maps | quotient chain/cochain matrices; homology and cohomology maps; flat exact segments; typed connecting cycles/cocycles |
 | SimplicialChainAlgebra / SimplicialChain | context-checked add/subtract; equality/homology comparison -> Boolean | boundary; negate; complex/degree/coordinates; cycle/boundary predicates; fillings; homology/class; flat cycle generators; augmentation | integer scale; coordinates; pushforward; pairing; cap and cap-class; fixed-chain/cochain cap matrices and induced maps; zero and flat basis constructors |
 | SimplicialCochainAlgebra / SimplicialCochain | same-context add/subtract; cup; equality/cohomologous -> Boolean; cup-class -> AbelianGroupElement | negate; complex/degree/coordinates; coboundary; zero/cocycle/coboundary tests; cohomology model/class; cobounding coordinates; flat cocycle generators | degreewise zero/basis construction and unit; integer scaling; coordinate replacement; representative; evaluation; pullback; scalar/flat cohomology models and contravariant maps |
 | RelativeSimplicialCochainAlgebra / RelativeCochain | same-pair add/subtract; cup on union pairs; equality/cohomologous -> Boolean; cup-class -> AbelianGroupElement | negate; pair/degree/coordinates; coboundary; cocycle/coboundary tests; cohomology model/class; primitives; flat cocycle generators; absolute extension | zero/basis construction; absolute conversion; scaling/coordinates/representative/evaluation; pair-map pullback; connecting cocycle; scalar/flat relative cohomology and natural exact-sequence maps |
@@ -1341,3 +1342,52 @@ The executable example constructs these inputs. `RelativeCap.on` and `cap` use t
 All required quotient bases are filtered before the 256-simplex bound. The ambient complex has at most 4096 nonempty simplices. Each class or induced-map calculation shares one 5,000,000-unit integer work budget across validation, models and induction. Exceeding these limits raises IMPLEMENTATION_FAILURE. Integer bit lengths remain unbounded. Negative chain degrees contain only zero; cochain degrees are nonnegative. Sorted representatives need not be natural on chains under arbitrary relabelling, although the induced classes are natural. No automatic orientation, fundamental-class construction or manifold/duality certification is supplied.
 
 NativeRelativeCapProductTest checks explicit square duality, 729 independent coefficient calculations, boundary identities for all 361 pairs of triangle subcomplexes, three-subcomplex cup compatibility, both standard special cases, representative independence, eight square symmetries, projective-plane torsion, ignored-coordinate contracts, invalid contexts, filtered basis bounds, shared work budgets, empty/huge degrees and serialized native flows. All 12 registrations have explicit expected results in ConcreteAlgebrasTest.
+
+## Nested relative triples
+
+`math.relativeTriples` adds 24 native operations on `RelativeTriple`, retaining a labelled inclusion `B subset A subset X`. Construct it from the outer pair `(X,A)` and base B. The three pair accessors return `outer-pair = (X,A)`, `total-pair = (X,B)` and `inner-pair = (A,B)`.
+
+The quotient chain groups form a short exact sequence, yielding the homology sequence of a triple and its cohomological counterpart:
+
+```text
+0 -> C_k(A,B) -> C_k(X,B) -> C_k(X,A) -> 0
+H_k(A,B) -> H_k(X,B) -> H_k(X,A) -> H_(k-1)(A,B)
+H^k(X,A) -> H^k(X,B) -> H^k(A,B) -> H^(k+1)(X,A)
+```
+
+The chain inclusion and quotient are selectors on the filtered simplex bases. Connecting homology takes the boundary of a zero-on-A/B lift, modulo B. The connecting cochain matrix is the transpose of the connecting chain matrix one degree higher. See [Hatcher, section 2.1](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf) for the sequence of a triple and [chapter 3](https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf) for dual cochain sequences.
+
+| Operations | Contract |
+| --- | --- |
+| `RelativeTriple.from-pair` | Outer RelativeComplex and base FiniteComplex -> validated triple; registered on RelativeComplex |
+| `outer-pair`, `total-pair`, `inner-pair`, `equal` | Inspect full labelled pairs or compare triples |
+| `inclusion-map`, `quotient-map` | Actual RelativeMap values `(A,B)->(X,B)` and `(X,B)->(X,A)` |
+| `inclusion-matrix`, `quotient-matrix`, `lift-matrix` | Chain inclusion, quotient and zero-on-A/B section |
+| `connecting-chain-matrix` | Degree-lowering matrix from outer to inner quotient chains |
+| `inclusion-homology`, `quotient-homology`, `connecting-homology` | The three integral homology maps above |
+| flat `long-exact-segment` | Those three maps in sequence order, with a shared work budget |
+| `connect-cycle` | RelativeChain on the full outer pair -> connecting RelativeChain on the full inner pair |
+| `extension-matrix`, `restriction-matrix`, `connecting-cochain-matrix` | Dual cochain matrices, with connecting degree raised by one |
+| `extension-cohomology`, `restriction-cohomology`, `connecting-cohomology` | The three integral cohomology maps above |
+| flat `long-exact-cohomology-segment` | Those three maps in sequence order, with a shared work budget |
+| `connect-cocycle` | RelativeCochain on the full inner pair -> connecting RelativeCochain on the full outer pair |
+
+The typed connecting operations require cycles or cocycles, preserve the complete output pair, and return the second operand carrier's actual `IAlgebraItem` through `ILeftProjectionOperation`. Scalar maps and flat segments retain integer quotient presentations, including torsion. Inclusion and quotient maps can also be used with the existing pushforward and pullback operations.
+
+For the interval X with A both endpoints and B endpoint 0, the connecting cycle of the oriented edge is endpoint 1 modulo B:
+
+```java
+List<String> result = math.flow(math.relativeComplexes,
+    Collections.singletonList(intervalPair))
+    .<RelativeSimplicialTriple,FiniteSimplicialComplex>performAlgebraUnsafe(
+        "RelativeTriple.from-pair", endpointZero)
+    .performLeftProjectionOperation("connect-cycle", orientedEdge)
+    .<IntegerVector>performAlgebraTransfer("coordinates")
+    .collect(); // ["[1]"]
+```
+
+The executable example also runs the flat cohomology sequence. With B empty, positive-degree connecting homology agrees with the existing pair sequence. At degree zero the target is the zero group in degree -1, retaining the same presentation as a typed chain on `(A,B)`; that presentation can differ from the canonical zero presentation in the older pair API. Matrix and exact-sequence operations accept nonnegative degrees. Typed chains permit negative zero groups; connecting cochains always raise a nonnegative degree.
+
+Every required quotient basis is filtered before its 256-simplex limit; each complex has at most 4096 nonempty simplices. A single 5,000,000-unit integer budget covers each compound map, and each entire flat segment shares it across all four quotient models and three induced maps. Exhaustion raises IMPLEMENTATION_FAILURE without a partial list; integer bit lengths remain unbounded. The zero-on-A/B section is generally not a chain map, and the connecting matrices need not be natural on raw representatives. Induced maps are natural under maps preserving A and B. Standalone maps of triples, arbitrary chain maps, other coefficients, subdivision, continuous maps and explicit homotopy witnesses remain outside this carrier's scope.
+
+NativeRelativeTripleTest checks 216 graph triples against independent connectivity ranks and integral exactness, chain identities for every nested pair of triangle subcomplexes, disks through dimension four, projective-plane index-two images and cohomological torsion, both pair-sequence specializations, representative independence, all 27 triangle-boundary vertex maps and all six naturality squares, nonnatural connecting matrices, filtered bases, shared segment budgets, invalid inputs, empty/huge degrees, actual second-operand wrappers and serialized flows. All 24 registrations have explicit expected results in ConcreteAlgebrasTest.

@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1627 |
-| DIRECTLY_SUPPORTED | 1384 |
+| Scoped records | 1652 |
+| DIRECTLY_SUPPORTED | 1409 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1243 |
+| IMPLEMENTED | 1268 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1311 |
+| MACHINE_TESTED | 1336 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1220 | 1220 | 0 | 0 | 0 | 1220 | 0 | 0 |
+| Concrete MathTool algebras | 1245 | 1245 | 0 | 0 | 0 | 1245 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -1154,6 +1154,31 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | RelativeSimplicialChainAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology |
 | RelativeSimplicialCochainAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences |
 | RelativeSimplicialMapAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps |
+| RelativeSimplicialTripleAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives |
+| RelativeTriple.connect-cocycle | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.connect-cocycle |
+| RelativeTriple.connect-cycle | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.connect-cycle |
+| RelativeTriple.connecting-chain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.connecting-chain-matrix |
+| RelativeTriple.connecting-cochain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.connecting-cochain-matrix |
+| RelativeTriple.connecting-cohomology | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.connecting-cohomology |
+| RelativeTriple.connecting-homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.connecting-homology |
+| RelativeTriple.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.equal |
+| RelativeTriple.extension-cohomology | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.extension-cohomology |
+| RelativeTriple.extension-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.extension-matrix |
+| RelativeTriple.from-pair | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.from-pair |
+| RelativeTriple.inclusion-homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.inclusion-homology |
+| RelativeTriple.inclusion-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.inclusion-map |
+| RelativeTriple.inclusion-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.inclusion-matrix |
+| RelativeTriple.inner-pair | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.inner-pair |
+| RelativeTriple.lift-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.lift-matrix |
+| RelativeTriple.long-exact-cohomology-segment | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.long-exact-cohomology-segment |
+| RelativeTriple.long-exact-segment | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.long-exact-segment |
+| RelativeTriple.outer-pair | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.outer-pair |
+| RelativeTriple.quotient-homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.quotient-homology |
+| RelativeTriple.quotient-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.quotient-map |
+| RelativeTriple.quotient-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.quotient-matrix |
+| RelativeTriple.restriction-cohomology | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.restriction-cohomology |
+| RelativeTriple.restriction-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.restriction-matrix |
+| RelativeTriple.total-pair | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.total-pair |
 | ResidueRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one |
 | S3.apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree; native operation S3.apply |
 | S3.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree; native operation S3.compose |

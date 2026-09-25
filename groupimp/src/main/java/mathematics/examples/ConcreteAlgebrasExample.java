@@ -24,6 +24,7 @@ import mathematics.structures.AbelianGroupElement;
 import mathematics.structures.AbelianGroupHomomorphism;
 import mathematics.topology.FiniteSimplicialComplex;
 import mathematics.topology.RelativeCapProduct;
+import mathematics.topology.RelativeSimplicialTriple;
 import mathematics.topology.IntegralHomology;
 import mathematics.topology.FiniteSimplicialMap;
 import mathematics.topology.RelativeSimplicialComplex;
@@ -93,6 +94,14 @@ public final class ConcreteAlgebrasExample {
         RelativeSimplicialComplex intervalCapPair=new RelativeSimplicialComplex(new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0,1))),
                 new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0),FiniteSet.of(1))));
         RelativeSimplicialChain intervalCycle=new RelativeSimplicialChain(intervalCapPair,BigInteger.ONE,new IntegerVector(BigInteger.ONE));
+        FiniteSimplicialComplex basedEndpoint=new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0)));
+        System.out.println("Triple connecting cycle relative to endpoint zero: "+math.flow(math.relativeComplexes,Collections.singletonList(intervalCapPair))
+                .<RelativeSimplicialTriple,FiniteSimplicialComplex>performAlgebraUnsafe("RelativeTriple.from-pair",basedEndpoint)
+                .performLeftProjectionOperation("connect-cycle",intervalCycle).<IntegerVector>performAlgebraTransfer("coordinates").collect());
+        RelativeSimplicialTriple basedInterval=new RelativeSimplicialTriple(intervalCapPair,basedEndpoint);
+        System.out.println("Triple cohomology segment isomorphism flags: "+math.flow(math.relativeTriples,Collections.singletonList(basedInterval))
+                .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("long-exact-cohomology-segment",BigInteger.ZERO)
+                .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
         RelativeSimplicialCochain intervalCocycle=new RelativeSimplicialCochain(intervalCapPair,BigInteger.ONE,new IntegerVector(BigInteger.valueOf(3)));
         FiniteSimplicialComplex squareCapComplex=new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0,1,2),FiniteSet.of(0,2,3)));
         FiniteSimplicialComplex horizontalEdges=new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0,1),FiniteSet.of(2,3))),

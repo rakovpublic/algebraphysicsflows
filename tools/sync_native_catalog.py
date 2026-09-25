@@ -53,6 +53,7 @@ OWNERS = {
     "SimplicialChainAlgebra": ("SimplicialChain", "Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps"),
     "RelativeSimplicialChainAlgebra": ("RelativeChain", "Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology"),
     "RelativeCapProductAlgebra": ("RelativeCap", "Integral relative cap products with independently supplied cochain and target subcomplexes, retaining a chain context and inducing homology and cohomology maps"),
+    "RelativeSimplicialTripleAlgebra": ("RelativeTriple", "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives"),
     "RelativeSimplicialCochainAlgebra": ("RelativeCochain", "Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences"),
     "FiniteIntegerRelationAlgebra": ("FiniteRelation(Z,Z)", "Finite-support relations on the actual registered integer Algebra"),
     "FiniteIntegerFunctionAlgebra": ("FiniteFunction(Z,Z)", "Total maps between explicit finite integer sets, preserving declared domain and codomain"),
@@ -116,6 +117,7 @@ EXTRA_TESTS = {
     "SimplicialChainAlgebra": "NativeSimplicialChainTest",
     "RelativeSimplicialChainAlgebra": "NativeRelativeChainTest",
     "RelativeCapProductAlgebra": "NativeRelativeCapProductTest",
+    "RelativeSimplicialTripleAlgebra": "NativeRelativeTripleTest",
     "RelativeSimplicialCochainAlgebra": "NativeRelativeCochainTest",
     "FiniteIntegerRelationAlgebra": "NativeRelationTest",
     "FiniteIntegerFunctionAlgebra": "NativeFiniteFunctionTest",
@@ -165,6 +167,32 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "RelativeSimplicialTripleAlgebra": {
+        "from-pair": "Construct a triple from the full outer pair (X,A) and a labelled base subcomplex B. Require B contained in A; retain outer (X,A), total (X,B) and inner (A,B). Registered on RelativeComplex as RelativeTriple.from-pair.",
+        "outer-pair": "Return the complete retained outer pair (X,A), including all labelled simplices.",
+        "total-pair": "Return the complete retained total pair (X,B).",
+        "inner-pair": "Return the complete retained inner pair (A,B).",
+        "equal": "Compare all labelled complexes X, A and B; equality of ranks or isomorphism types is insufficient.",
+        "inclusion-map": "Return the actual RelativeMap (A,B)->(X,B) induced by labelled inclusion, retaining both full pairs.",
+        "quotient-map": "Return the actual RelativeMap (X,B)->(X,A) induced by the identity on X and inclusion B into A.",
+        "inclusion-matrix": "In nonnegative degree k, include quotient simplex coordinates C_k(A,B)->C_k(X,B). Both bases are filtered modulo B before dimension limits.",
+        "quotient-matrix": "In nonnegative degree k, discard A/B coordinates from C_k(X,B) to obtain C_k(X,A). Both quotient bases are filtered before limits.",
+        "lift-matrix": "Insert zeros on A/B into C_k(X,B). This section of the quotient is generally not a chain map; it retains the same labelled triples and nonnegative degree.",
+        "connecting-chain-matrix": "Take the (A,B) coordinates of the boundary of a zero-on-A/B lift of a chain on (X,A). This C_k(X,A)->C_(k-1)(A,B) matrix maps cycles to cycles and is zero for k=0; arbitrary noncycles need not map to cycles.",
+        "inclusion-homology": "Return H_k(A,B)->H_k(X,B), using the filtered inclusion matrix and one shared budget for both integral quotient models and induction.",
+        "quotient-homology": "Return H_k(X,B)->H_k(X,A), using the filtered projection and one shared budget for both integral quotient models and induction.",
+        "connecting-homology": "Return H_k(X,A)->H_(k-1)(A,B), taking the boundary of a lift modulo B. For k=0 the target is the zero group with the same retained presentation as a typed degree-minus-one chain on (A,B), which need not equal a canonical zero presentation.",
+        "long-exact-segment": "Emit three maps in order: inclusion, quotient, connecting, from H_k(A,B) through H_k(X,B), H_k(X,A), H_(k-1)(A,B). One budget covers all four quotient models and the entire list; no partial list is returned on exhaustion.",
+        "connect-cycle": "Require a relative cycle on the full outer pair (X,A). Return its lifted boundary modulo B as a RelativeChain on the full inner pair (A,B), lowering the integer degree. Negative-degree inputs are zero. Return the second operand carrier's IAlgebraItem through ILeftProjectionOperation.",
+        "extension-matrix": "Transpose the quotient matrix to extend C^k(X,A)->C^k(X,B) by zero on A/B; this is a cochain map.",
+        "restriction-matrix": "Transpose the inclusion matrix to restrict C^k(X,B)->C^k(A,B); this is a cochain map.",
+        "connecting-cochain-matrix": "Transpose the connecting chain matrix in degree k+1, giving C^k(A,B)->C^(k+1)(X,A) from zero extension followed by coboundary. It induces the connecting homomorphism on cocycles.",
+        "extension-cohomology": "Return H^k(X,A)->H^k(X,B), retaining both integral presentations and one shared budget across models and induction.",
+        "restriction-cohomology": "Return H^k(X,B)->H^k(A,B), retaining both integral presentations and one shared budget across models and induction.",
+        "connecting-cohomology": "Return H^k(A,B)->H^(k+1)(X,A), with integral torsion and one shared budget across both quotient models and induction.",
+        "long-exact-cohomology-segment": "Emit extension, restriction, connecting in order through H^k(X,A), H^k(X,B), H^k(A,B), H^(k+1)(X,A). One budget covers all four quotient models and the entire list; consecutive images equal kernels over Z.",
+        "connect-cocycle": "Require a relative cocycle on the full inner pair (A,B). Extend by zero on X outside A, take coboundary modulo the pair data and return a RelativeCochain on the full outer pair (X,A) in degree k+1, using the second operand carrier's IAlgebraItem wrapper.",
+    },
     "RelativeCapProductAlgebra": {
         "on": "Bind a RelativeChain on (X,D) to an explicit target pair (X,B). Require identical full labelled ambient complexes and B contained in D. This constructor is registered on the source chain algebra as RelativeCap.on.",
         "chain": "Return the retained RelativeChain, including its full source pair (X,D), integer degree and coordinates.",
@@ -1278,6 +1306,15 @@ def record(identifier, owner, concept, paths, operation=None):
                          "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
                          "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
                          "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
+    if owner == "RelativeSimplicialTripleAlgebra":
+        paths = paths + ["groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+                         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+                         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+                         "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
     if owner == "RelativeSimplicialChainAlgebra":
         paths = paths + ["groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
                          "groupimp/src/main/java/mathematics/topology/SimplicialChain.java",
@@ -1454,6 +1491,11 @@ def record(identifier, owner, concept, paths, operation=None):
         value["known_limitations"] += ["Each complex has at most 4096 nonempty simplices; every required matrix/vector basis has at most 256 simplices, including adjacent degrees and cap source/target bases. Each compound homology, class, cap-class, induced-map or generator-list computation shares one 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE without a false predicate or partial list. Integer coefficient bit lengths are unbounded.",
             "Only homogeneous unreduced integral chains on finite labelled abstract complexes are represented. Chain addition requires equal full complexes and degrees. Homology class wrappers retain presentations, while chains supply geometric context. The chosen sorted cap formula is not generally natural on chains under arbitrary vertex relabelling, although it is natural on homology. RelativeChain supplies quotient chains and the two standard relative cap products. A cap cohomology map does not certify manifold status, orientation or a fundamental class. RelativeCap supplies general cap products with explicit A and B. Automatic fundamental-class construction, other coefficients, mixed-degree chains, Poincare-duality certification and explicit cap homotopies remain outside scope."]
         value["references"].append("https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf")
+    if owner == "RelativeSimplicialTripleAlgebra":
+        value["required_invariants"].append("The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers.")
+        value["known_limitations"] += ["At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
+            "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."]
+        value["references"] += ["https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf", "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"]
     if owner == "RelativeCapProductAlgebra":
         value["required_invariants"].append("All three labelled pairs are checked: chain on (X,A union B), cochain on (X,A), target (X,B). The signed boundary identity holds on chains. Integral homology products are independent of representatives, natural on classes under maps preserving A and B, and compatible with relative cup products. All wrappers use the original registered algebras.")
         value["known_limitations"] += ["Each ambient complex has at most 4096 nonempty simplices. Each required quotient basis has at most 256 simplices, filtered before bounds; no full absolute basis is required unless selected by an empty subcomplex. Adjacent degrees must also fit for induced maps. Every compound class or induced-map operation shares one 5000000-unit integer work budget across validation, models and induction; exhaustion raises IMPLEMENTATION_FAILURE. Integer coefficient bit lengths are unbounded.",
@@ -1596,6 +1638,8 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("RelativeTriple", "Integral exact homology and cohomology of nested simplicial triples", "mathematics.topology.RelativeSimplicialTriple",
+         ["Retained full labelled inclusions B subset A subset X and outer/total/inner quotient pairs", "Short exact quotient chain sequence and its dual cochain sequence", "Typed degree-lowering connecting cycles and degree-raising connecting cocycles", "Integral long exact sequences with retained quotient presentations and shared whole-segment work budgets"], ["RelativeComplex", "FiniteComplex", "RelativeMap", "RelativeChain", "RelativeCochain", "Mat(Z)", "N", "Boolean", "AbelianGroupHomomorphism"]),
         ("RelativeCap", "General integral relative cap products with explicit targets", "mathematics.topology.RelativeCapProduct",
          ["Retained chain on (X,D) and explicit target (X,B), with B contained in D", "Cochain on (X,A) checked against the exact simplex-wise union D=A union B", "Filtered source, cochain and target quotient bases with signed boundary and relative cup compatibility", "Induced integral homology/cohomology maps with retained presentations and shared computation budgets"], ["RelativeChain", "RelativeComplex", "RelativeCochain", "Mat(Z)", "Boolean", "AbelianGroupElement", "AbelianGroupHomomorphism"]),
         ("RelativeChain", "Integral quotient chains and relative cap products", "mathematics.topology.RelativeSimplicialChain",

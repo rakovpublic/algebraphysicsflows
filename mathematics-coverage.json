@@ -28152,6 +28152,79 @@
       "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
     },
     {
+      "id": "concrete-algebra.RelativeSimplicialTripleAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialTripleAlgebra",
+      "concept": "RelativeSimplicialTripleAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "RelativeTriple",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeTripleTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-25",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
       "id": "concrete-algebra.ResidueRing",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "ResidueRing",
@@ -114032,6 +114105,1928 @@
       "legacy_operation_interface": "IUnsafeOperation"
     },
     {
+      "id": "concrete-operation.RelativeTriple.from-pair",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialTripleAlgebra",
+      "concept": "RelativeTriple.from-pair",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeComplex",
+      "domain_B": "FiniteComplex",
+      "domain_C": "RelativeTriple",
+      "operation_signature": "RelativeComplex x FiniteComplex -> RelativeTriple",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.from-pair",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Construct a triple from the full outer pair (X,A) and a labelled base subcomplex B. Require B contained in A; retain outer (X,A), total (X,B) and inner (A,B). Registered on RelativeComplex as RelativeTriple.from-pair.",
+        "The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeTripleTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-25",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "RelativeTriple.from-pair",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "RelativeTriple.from-pair",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeTriple.outer-pair",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialTripleAlgebra",
+      "concept": "RelativeTriple.outer-pair",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeTriple",
+      "domain_B": null,
+      "domain_C": "RelativeComplex",
+      "operation_signature": "RelativeTriple -> RelativeComplex",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.outer-pair",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the complete retained outer pair (X,A), including all labelled simplices.",
+        "The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeTripleTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-25",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeTriple.outer-pair",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "outer-pair",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeTriple.total-pair",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialTripleAlgebra",
+      "concept": "RelativeTriple.total-pair",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeTriple",
+      "domain_B": null,
+      "domain_C": "RelativeComplex",
+      "operation_signature": "RelativeTriple -> RelativeComplex",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.total-pair",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the complete retained total pair (X,B).",
+        "The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeTripleTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-25",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeTriple.total-pair",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "total-pair",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeTriple.inner-pair",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialTripleAlgebra",
+      "concept": "RelativeTriple.inner-pair",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeTriple",
+      "domain_B": null,
+      "domain_C": "RelativeComplex",
+      "operation_signature": "RelativeTriple -> RelativeComplex",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.inner-pair",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the complete retained inner pair (A,B).",
+        "The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeTripleTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-25",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeTriple.inner-pair",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "inner-pair",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeTriple.equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialTripleAlgebra",
+      "concept": "RelativeTriple.equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeTriple",
+      "domain_B": "RelativeTriple",
+      "domain_C": "Boolean",
+      "operation_signature": "RelativeTriple x RelativeTriple -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Compare all labelled complexes X, A and B; equality of ranks or isomorphism types is insufficient.",
+        "The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeTripleTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-25",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeTriple.equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeTriple.inclusion-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialTripleAlgebra",
+      "concept": "RelativeTriple.inclusion-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeTriple",
+      "domain_B": null,
+      "domain_C": "RelativeMap",
+      "operation_signature": "RelativeTriple -> RelativeMap",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.inclusion-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the actual RelativeMap (A,B)->(X,B) induced by labelled inclusion, retaining both full pairs.",
+        "The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeTripleTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-25",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeTriple.inclusion-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "inclusion-map",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeTriple.quotient-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialTripleAlgebra",
+      "concept": "RelativeTriple.quotient-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeTriple",
+      "domain_B": null,
+      "domain_C": "RelativeMap",
+      "operation_signature": "RelativeTriple -> RelativeMap",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.quotient-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the actual RelativeMap (X,B)->(X,A) induced by the identity on X and inclusion B into A.",
+        "The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeTripleTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-25",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeTriple.quotient-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "quotient-map",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeTriple.inclusion-matrix",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialTripleAlgebra",
+      "concept": "RelativeTriple.inclusion-matrix",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeTriple",
+      "domain_B": "N",
+      "domain_C": "Mat(Z)",
+      "operation_signature": "RelativeTriple x N -> Mat(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.inclusion-matrix",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "In nonnegative degree k, include quotient simplex coordinates C_k(A,B)->C_k(X,B). Both bases are filtered modulo B before dimension limits.",
+        "The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeTripleTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-25",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeTriple.inclusion-matrix",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "inclusion-matrix",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeTriple.quotient-matrix",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialTripleAlgebra",
+      "concept": "RelativeTriple.quotient-matrix",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeTriple",
+      "domain_B": "N",
+      "domain_C": "Mat(Z)",
+      "operation_signature": "RelativeTriple x N -> Mat(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.quotient-matrix",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "In nonnegative degree k, discard A/B coordinates from C_k(X,B) to obtain C_k(X,A). Both quotient bases are filtered before limits.",
+        "The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeTripleTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-25",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeTriple.quotient-matrix",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "quotient-matrix",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeTriple.lift-matrix",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialTripleAlgebra",
+      "concept": "RelativeTriple.lift-matrix",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeTriple",
+      "domain_B": "N",
+      "domain_C": "Mat(Z)",
+      "operation_signature": "RelativeTriple x N -> Mat(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.lift-matrix",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Insert zeros on A/B into C_k(X,B). This section of the quotient is generally not a chain map; it retains the same labelled triples and nonnegative degree.",
+        "The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeTripleTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-25",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeTriple.lift-matrix",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "lift-matrix",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeTriple.connecting-chain-matrix",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialTripleAlgebra",
+      "concept": "RelativeTriple.connecting-chain-matrix",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeTriple",
+      "domain_B": "N",
+      "domain_C": "Mat(Z)",
+      "operation_signature": "RelativeTriple x N -> Mat(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.connecting-chain-matrix",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Take the (A,B) coordinates of the boundary of a zero-on-A/B lift of a chain on (X,A). This C_k(X,A)->C_(k-1)(A,B) matrix maps cycles to cycles and is zero for k=0; arbitrary noncycles need not map to cycles.",
+        "The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeTripleTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-25",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeTriple.connecting-chain-matrix",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "connecting-chain-matrix",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeTriple.inclusion-homology",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialTripleAlgebra",
+      "concept": "RelativeTriple.inclusion-homology",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeTriple",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "RelativeTriple x N -> AbelianGroupHomomorphism",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.inclusion-homology",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return H_k(A,B)->H_k(X,B), using the filtered inclusion matrix and one shared budget for both integral quotient models and induction.",
+        "The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeTripleTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-25",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeTriple.inclusion-homology",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "inclusion-homology",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeTriple.quotient-homology",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialTripleAlgebra",
+      "concept": "RelativeTriple.quotient-homology",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeTriple",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "RelativeTriple x N -> AbelianGroupHomomorphism",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.quotient-homology",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return H_k(X,B)->H_k(X,A), using the filtered projection and one shared budget for both integral quotient models and induction.",
+        "The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeTripleTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-25",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeTriple.quotient-homology",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "quotient-homology",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeTriple.connecting-homology",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialTripleAlgebra",
+      "concept": "RelativeTriple.connecting-homology",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeTriple",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "RelativeTriple x N -> AbelianGroupHomomorphism",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.connecting-homology",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return H_k(X,A)->H_(k-1)(A,B), taking the boundary of a lift modulo B. For k=0 the target is the zero group with the same retained presentation as a typed degree-minus-one chain on (A,B), which need not equal a canonical zero presentation.",
+        "The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeTripleTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-25",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeTriple.connecting-homology",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "connecting-homology",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeTriple.long-exact-segment",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialTripleAlgebra",
+      "concept": "RelativeTriple.long-exact-segment",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeTriple",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "RelativeTriple x N -> List(AbelianGroupHomomorphism)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.long-exact-segment",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit three maps in order: inclusion, quotient, connecting, from H_k(A,B) through H_k(X,B), H_k(X,A), H_(k-1)(A,B). One budget covers all four quotient models and the entire list; no partial list is returned on exhaustion.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "groupimp/src/main/java/operations/flat/MixedFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeTripleTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-25",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeTriple.long-exact-segment",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "long-exact-segment",
+      "legacy_operation_interface": "IUnsafeFlatOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeTriple.connect-cycle",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialTripleAlgebra",
+      "concept": "RelativeTriple.connect-cycle",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeTriple",
+      "domain_B": "RelativeChain",
+      "domain_C": "RelativeChain",
+      "operation_signature": "RelativeTriple x RelativeChain -> RelativeChain",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.connect-cycle",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require a relative cycle on the full outer pair (X,A). Return its lifted boundary modulo B as a RelativeChain on the full inner pair (A,B), lowering the integer degree. Negative-degree inputs are zero. Return the second operand carrier's IAlgebraItem through ILeftProjectionOperation.",
+        "The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeTripleTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-25",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "RelativeTriple.connect-cycle",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "connect-cycle",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeTriple.extension-matrix",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialTripleAlgebra",
+      "concept": "RelativeTriple.extension-matrix",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeTriple",
+      "domain_B": "N",
+      "domain_C": "Mat(Z)",
+      "operation_signature": "RelativeTriple x N -> Mat(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.extension-matrix",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Transpose the quotient matrix to extend C^k(X,A)->C^k(X,B) by zero on A/B; this is a cochain map.",
+        "The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeTripleTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-25",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeTriple.extension-matrix",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "extension-matrix",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeTriple.restriction-matrix",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialTripleAlgebra",
+      "concept": "RelativeTriple.restriction-matrix",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeTriple",
+      "domain_B": "N",
+      "domain_C": "Mat(Z)",
+      "operation_signature": "RelativeTriple x N -> Mat(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.restriction-matrix",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Transpose the inclusion matrix to restrict C^k(X,B)->C^k(A,B); this is a cochain map.",
+        "The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeTripleTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-25",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeTriple.restriction-matrix",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "restriction-matrix",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeTriple.connecting-cochain-matrix",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialTripleAlgebra",
+      "concept": "RelativeTriple.connecting-cochain-matrix",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeTriple",
+      "domain_B": "N",
+      "domain_C": "Mat(Z)",
+      "operation_signature": "RelativeTriple x N -> Mat(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.connecting-cochain-matrix",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Transpose the connecting chain matrix in degree k+1, giving C^k(A,B)->C^(k+1)(X,A) from zero extension followed by coboundary. It induces the connecting homomorphism on cocycles.",
+        "The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeTripleTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-25",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeTriple.connecting-cochain-matrix",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "connecting-cochain-matrix",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeTriple.extension-cohomology",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialTripleAlgebra",
+      "concept": "RelativeTriple.extension-cohomology",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeTriple",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "RelativeTriple x N -> AbelianGroupHomomorphism",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.extension-cohomology",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return H^k(X,A)->H^k(X,B), retaining both integral presentations and one shared budget across models and induction.",
+        "The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeTripleTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-25",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeTriple.extension-cohomology",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "extension-cohomology",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeTriple.restriction-cohomology",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialTripleAlgebra",
+      "concept": "RelativeTriple.restriction-cohomology",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeTriple",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "RelativeTriple x N -> AbelianGroupHomomorphism",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.restriction-cohomology",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return H^k(X,B)->H^k(A,B), retaining both integral presentations and one shared budget across models and induction.",
+        "The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeTripleTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-25",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeTriple.restriction-cohomology",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "restriction-cohomology",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeTriple.connecting-cohomology",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialTripleAlgebra",
+      "concept": "RelativeTriple.connecting-cohomology",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeTriple",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "RelativeTriple x N -> AbelianGroupHomomorphism",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.connecting-cohomology",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return H^k(A,B)->H^(k+1)(X,A), with integral torsion and one shared budget across both quotient models and induction.",
+        "The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeTripleTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-25",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeTriple.connecting-cohomology",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "connecting-cohomology",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeTriple.long-exact-cohomology-segment",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialTripleAlgebra",
+      "concept": "RelativeTriple.long-exact-cohomology-segment",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeTriple",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "RelativeTriple x N -> List(AbelianGroupHomomorphism)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.long-exact-cohomology-segment",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit extension, restriction, connecting in order through H^k(X,A), H^k(X,B), H^k(A,B), H^(k+1)(X,A). One budget covers all four quotient models and the entire list; consecutive images equal kernels over Z.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "groupimp/src/main/java/operations/flat/MixedFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeTripleTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-25",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "RelativeTriple.long-exact-cohomology-segment",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "long-exact-cohomology-segment",
+      "legacy_operation_interface": "IUnsafeFlatOperation"
+    },
+    {
+      "id": "concrete-operation.RelativeTriple.connect-cocycle",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RelativeSimplicialTripleAlgebra",
+      "concept": "RelativeTriple.connect-cocycle",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeTriple",
+      "domain_B": "RelativeCochain",
+      "domain_C": "RelativeCochain",
+      "operation_signature": "RelativeTriple x RelativeCochain -> RelativeCochain",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.connect-cocycle",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require a relative cocycle on the full inner pair (A,B). Extend by zero on X outside A, take coboundary modulo the pair data and return a RelativeCochain on the full outer pair (X,A) in degree k+1, using the second operand carrier's IAlgebraItem wrapper.",
+        "The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeRelativeTripleTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RelativeSimplicialTripleAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-25",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "RelativeTriple.connect-cocycle",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "connect-cocycle",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
       "id": "concrete-operation.Z/5Z.add",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "PrimeField",
@@ -114780,6 +116775,21 @@
         "RelativeMap.source-homology",
         "RelativeMap.subcomplex-homology-map",
         "RelativeMap.target-homology",
+        "RelativeTriple.connecting-chain-matrix",
+        "RelativeTriple.connecting-cochain-matrix",
+        "RelativeTriple.connecting-cohomology",
+        "RelativeTriple.connecting-homology",
+        "RelativeTriple.extension-cohomology",
+        "RelativeTriple.extension-matrix",
+        "RelativeTriple.inclusion-homology",
+        "RelativeTriple.inclusion-matrix",
+        "RelativeTriple.lift-matrix",
+        "RelativeTriple.long-exact-cohomology-segment",
+        "RelativeTriple.long-exact-segment",
+        "RelativeTriple.quotient-homology",
+        "RelativeTriple.quotient-matrix",
+        "RelativeTriple.restriction-cohomology",
+        "RelativeTriple.restriction-matrix",
         "S3.apply",
         "S3.fixed-point-count",
         "S3.orbit",
@@ -115421,6 +117431,7 @@
         "RelativeMap.contiguous",
         "RelativeMap.equal",
         "RelativeMap.is-isomorphism",
+        "RelativeTriple.equal",
         "S3.equal",
         "SimplicialChain.equal",
         "SimplicialChain.homologous",
@@ -115772,6 +117783,7 @@
         "RelativeComplex.diagonal",
         "RelativeComplex.from-complexes",
         "RelativeComplex.subcomplex",
+        "RelativeTriple.from-pair",
         "SimplicialChain.basis-on",
         "SimplicialChain.complex",
         "SimplicialChain.zero-on",
@@ -118285,6 +120297,13 @@
         "RelativeComplex.projection-matrix",
         "RelativeMap.chain-matrices",
         "RelativeMap.chain-matrix",
+        "RelativeTriple.connecting-chain-matrix",
+        "RelativeTriple.connecting-cochain-matrix",
+        "RelativeTriple.extension-matrix",
+        "RelativeTriple.inclusion-matrix",
+        "RelativeTriple.lift-matrix",
+        "RelativeTriple.quotient-matrix",
+        "RelativeTriple.restriction-matrix",
         "SimplicialChain.cap-cohomology-matrix",
         "SimplicialChain.cap-matrix",
         "SimplicialCover.connecting-chain-matrix",
@@ -118562,6 +120581,14 @@
         "RelativeMap.homology-maps",
         "RelativeMap.long-exact-maps",
         "RelativeMap.subcomplex-homology-map",
+        "RelativeTriple.connecting-cohomology",
+        "RelativeTriple.connecting-homology",
+        "RelativeTriple.extension-cohomology",
+        "RelativeTriple.inclusion-homology",
+        "RelativeTriple.long-exact-cohomology-segment",
+        "RelativeTriple.long-exact-segment",
+        "RelativeTriple.quotient-homology",
+        "RelativeTriple.restriction-cohomology",
         "SimplicialChain.cap-cohomology-map",
         "SimplicialChain.cap-homology-map",
         "SimplicialCochain.cohomology-map",
@@ -118986,7 +121013,11 @@
         "RelativeMap.inclusion",
         "RelativeMap.restrict",
         "RelativeMap.source",
-        "RelativeMap.target"
+        "RelativeMap.target",
+        "RelativeTriple.from-pair",
+        "RelativeTriple.inner-pair",
+        "RelativeTriple.outer-pair",
+        "RelativeTriple.total-pair"
       ],
       "invariants": [
         "Retained labelled ambient complex X and subcomplex A",
@@ -119064,6 +121095,8 @@
         "RelativeMap.subcomplex-map",
         "RelativeMap.target",
         "RelativeMap.target-homology",
+        "RelativeTriple.inclusion-map",
+        "RelativeTriple.quotient-map",
         "SimplicialCover.excision-map"
       ],
       "invariants": [
@@ -119496,7 +121529,8 @@
         "RelativeCochain.scale",
         "RelativeCochain.subtract",
         "RelativeCochain.with-coordinates",
-        "RelativeCochain.zero-on"
+        "RelativeCochain.zero-on",
+        "RelativeTriple.connect-cocycle"
       ],
       "invariants": [
         "Full labelled simplicial pair, nonnegative degree and integral coordinates dual to the quotient-chain basis",
@@ -119671,7 +121705,8 @@
         "RelativeChain.scale",
         "RelativeChain.subtract",
         "RelativeChain.with-coordinates",
-        "RelativeChain.zero-on"
+        "RelativeChain.zero-on",
+        "RelativeTriple.connect-cycle"
       ],
       "invariants": [
         "Full labelled pair, integer degree and integral coordinates outside the subcomplex",
@@ -119735,6 +121770,76 @@
         "Cochain on (X,A) checked against the exact simplex-wise union D=A union B",
         "Filtered source, cochain and target quotient bases with signed boundary and relative cup compatibility",
         "Induced integral homology/cohomology maps with retained presentations and shared computation budgets"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-25"
+      }
+    },
+    {
+      "id": "RelativeTriple",
+      "name": "Integral exact homology and cohomology of nested simplicial triples",
+      "description": "Integral exact homology and cohomology of nested simplicial triples",
+      "member_representation": "mathematics.topology.RelativeSimplicialTriple",
+      "membership_rules": [
+        "Retained full labelled inclusions B subset A subset X and outer/total/inner quotient pairs",
+        "Short exact quotient chain sequence and its dual cochain sequence",
+        "Typed degree-lowering connecting cycles and degree-raising connecting cocycles",
+        "Integral long exact sequences with retained quotient presentations and shared whole-segment work budgets"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "RelativeComplex",
+        "FiniteComplex",
+        "RelativeMap",
+        "RelativeChain",
+        "RelativeCochain",
+        "Mat(Z)",
+        "N",
+        "Boolean",
+        "AbelianGroupHomomorphism"
+      ],
+      "supported_operations": [
+        "RelativeTriple.connect-cocycle",
+        "RelativeTriple.connect-cycle",
+        "RelativeTriple.connecting-chain-matrix",
+        "RelativeTriple.connecting-cochain-matrix",
+        "RelativeTriple.connecting-cohomology",
+        "RelativeTriple.connecting-homology",
+        "RelativeTriple.equal",
+        "RelativeTriple.extension-cohomology",
+        "RelativeTriple.extension-matrix",
+        "RelativeTriple.from-pair",
+        "RelativeTriple.inclusion-homology",
+        "RelativeTriple.inclusion-map",
+        "RelativeTriple.inclusion-matrix",
+        "RelativeTriple.inner-pair",
+        "RelativeTriple.lift-matrix",
+        "RelativeTriple.long-exact-cohomology-segment",
+        "RelativeTriple.long-exact-segment",
+        "RelativeTriple.outer-pair",
+        "RelativeTriple.quotient-homology",
+        "RelativeTriple.quotient-map",
+        "RelativeTriple.quotient-matrix",
+        "RelativeTriple.restriction-cohomology",
+        "RelativeTriple.restriction-matrix",
+        "RelativeTriple.total-pair"
+      ],
+      "invariants": [
+        "Retained full labelled inclusions B subset A subset X and outer/total/inner quotient pairs",
+        "Short exact quotient chain sequence and its dual cochain sequence",
+        "Typed degree-lowering connecting cycles and degree-raising connecting cocycles",
+        "Integral long exact sequences with retained quotient presentations and shared whole-segment work budgets"
       ],
       "references": [
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"

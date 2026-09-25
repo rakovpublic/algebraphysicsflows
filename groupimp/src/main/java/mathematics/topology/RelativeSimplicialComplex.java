@@ -65,7 +65,7 @@ public final class RelativeSimplicialComplex implements Serializable {
         }
         return new IntegerMatrix(rows.size(),columns.size(),entries);
     }
-    private static IntegerMatrix selector(List<FiniteSet<Integer>> rows,List<FiniteSet<Integer>> columns,Computation work) {
+    static IntegerMatrix selector(List<FiniteSet<Integer>> rows,List<FiniteSet<Integer>> columns,Computation work) {
         BigInteger[][] entries=zeros(rows.size(),columns.size(),work); Map<FiniteSet<Integer>,Integer> index=positions(rows);
         for(int c=0;c<columns.size();c++) { Integer row=index.get(columns.get(c)); if(row!=null) entries[row][c]=BigInteger.ONE; }
         return new IntegerMatrix(rows.size(),columns.size(),entries);
