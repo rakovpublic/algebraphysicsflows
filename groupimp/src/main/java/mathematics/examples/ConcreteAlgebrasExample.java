@@ -28,6 +28,7 @@ import mathematics.topology.FiniteSimplicialMap;
 import mathematics.topology.RelativeSimplicialComplex;
 import mathematics.topology.RelativeSimplicialMap;
 import mathematics.topology.SimplicialCover;
+import mathematics.topology.SimplicialCoverMap;
 import mathematics.linear.RationalVector;
 import mathematics.linear.IntegerVector;
 import mathematics.linear.IntegerMatrix;
@@ -89,6 +90,13 @@ public final class ConcreteAlgebrasExample {
                 .<SimplicialCover>performCustomResultOperation("SimplicialCover.from-complexes",closingEdge)
                 .<AbelianGroupHomomorphism,BigInteger>performAlgebraUnsafe("connecting-homology-map",BigInteger.ONE)
                 .<IntegerMatrix>performAlgebraTransfer("smith-matrix").collect());
+        SimplicialCover circleCover=new SimplicialCover(arc,closingEdge);
+        Map<BigInteger,BigInteger> reverseCoverVertices=new TreeMap<>();
+        reverseCoverVertices.put(BigInteger.ZERO,BigInteger.valueOf(2)); reverseCoverVertices.put(BigInteger.ONE,BigInteger.ONE); reverseCoverVertices.put(BigInteger.valueOf(2),BigInteger.ZERO);
+        System.out.println("The four Mayer-Vietoris reflection maps are isomorphisms: "+math.flow(math.simplicialMaps,Collections.singletonList(new FiniteSimplicialMap(circle,circle,reverseCoverVertices)))
+                .<SimplicialCoverMap,Pair<SimplicialCover,SimplicialCover>>performAlgebraUnsafe("CoverMap.from-map",new Pair<>(circleCover,circleCover))
+                .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("long-exact-maps",BigInteger.ONE)
+                .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
         Map<BigInteger,BigInteger> reflectionVertices=new TreeMap<>();
         reflectionVertices.put(BigInteger.ZERO,BigInteger.ONE); reflectionVertices.put(BigInteger.ONE,BigInteger.ZERO); reflectionVertices.put(BigInteger.valueOf(2),BigInteger.valueOf(2));
         System.out.println("Circle reflection acts by -1 on integral H1: "+math.flow(math.integerFunctions,Collections.singletonList(math.integerFunctions.member(

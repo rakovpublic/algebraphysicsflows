@@ -16,7 +16,7 @@ public final class RelativeSimplicialMap implements Serializable {
     public RelativeSimplicialMap(RelativeSimplicialComplex source,RelativeSimplicialComplex target,FiniteSimplicialMap ambient) {
         this(source,target,ambient,new Computation());
     }
-    private RelativeSimplicialMap(RelativeSimplicialComplex source,RelativeSimplicialComplex target,FiniteSimplicialMap ambient,Computation work) {
+    RelativeSimplicialMap(RelativeSimplicialComplex source,RelativeSimplicialComplex target,FiniteSimplicialMap ambient,Computation work) {
         this.source=Objects.requireNonNull(source); this.target=Objects.requireNonNull(target); this.ambient=Objects.requireNonNull(ambient);
         if(!source.ambient().equals(ambient.source()) || !target.ambient().equals(ambient.target()))
             throw MathFailure.undefined("A map of pairs must retain exactly the ambient map's source and target complexes");

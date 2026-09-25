@@ -33,6 +33,7 @@ import mathematics.topology.FiniteSimplicialMap;
 import mathematics.topology.RelativeSimplicialComplex;
 import mathematics.topology.RelativeSimplicialMap;
 import mathematics.topology.SimplicialCover;
+import mathematics.topology.SimplicialCoverMap;
 import mathematics.examples.ConcreteAlgebrasExample;
 import mathematics.probability.FiniteMarkovKernel;
 import mathematics.probability.FiniteDistribution;
@@ -43,7 +44,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all952RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all984RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String discrete="Complex[[0], [1]]",emptyComplex="Complex[]";
@@ -58,6 +59,14 @@ public class ConcreteAlgebrasTest {
         String alphaMatrix="ZMatrix(2x1)[[1], [-1]]",betaMatrix="ZMatrix(1x2)[[1, 1]]";
         String alpha=homString(freeOne,freeTwo,alphaMatrix),beta=homString(freeTwo,freeOne,betaMatrix),delta=homString(freeOne,emptyGroup,"ZMatrix(0x1)[]");
         String diagonalPoint="RelativeComplex(ambient="+point+", subcomplex="+point+")";
+        String pointCoverMap="CoverMap(source="+pointCover+", target="+pointCover+", vertices={0=0})",pointMap=simplicialString(point,point,"{0=0}");
+        String identityTwo="ZMatrix(2x2)[[1, 0], [0, 1]]",identityOneMap=homString(freeOne,freeOne,"ZMatrix(1x1)[[1]]"),identityTwoMap=homString(freeTwo,freeTwo,identityTwo);
+        String relativePointMap=relativeMapString(diagonalPoint,diagonalPoint,"{0=0}");
+        expected.put("SimplicialCoverMapAlgebra",String.join("|",pointCoverMap,pointCoverMap,pointCoverMap,pointCover,pointCover,pointMap,pointMap,pointMap,pointMap,
+                "true","true",pointCoverMap,pointCoverMap,pointCoverMap,identityTwo,"["+identityTwo+"]",identityTwoMap,"["+identityTwoMap+"]",
+                sumPointHomology,sumPointHomology,identityOneMap,identityOneMap,identityOneMap,identityOneMap,
+                "["+identityOneMap+", "+identityTwoMap+", "+identityOneMap+", "+homString(emptyGroup,emptyGroup,emptyMatrix)+"]",
+                relativePointMap,relativePointMap,"["+relativePointMap+", "+relativePointMap+"]","true",pointCover,pointCoverMap,pointCoverMap));
         expected.put("SimplicialCoverAlgebra",String.join("|",pointCover,point,point,point,point,pointCover,"false","1","ZMatrix(0x2)[]","[ZMatrix(0x2)[]]",
                 sumPointHomology,"["+sumPointHomology+"]",pointHomology,pointHomology,pointHomology,pointHomology,
                 alphaMatrix,betaMatrix,"ZMatrix(2x1)[[1], [0]]","ZMatrix(0x1)[]",alpha,beta,delta,"["+alpha+", "+beta+", "+delta+"]",
@@ -253,7 +262,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(952,count);
+        assertEquals(984,count);
     }
     private static String homString(String source,String target,String matrix) { return "AbelianHom(source="+source+", target="+target+", smith="+matrix+")"; }
     private static String simplicialString(String source,String target,String vertices) { return "SimplicialMap(source="+source+", target="+target+", vertices="+vertices+")"; }
@@ -261,6 +270,7 @@ public class ConcreteAlgebrasTest {
     private static FiniteSimplicialComplex simplicialTestComplex() { return new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0),FiniteSet.of(1))); }
     private static FiniteSimplicialComplex relativeTestEdge() { return new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0,1))); }
     private static FiniteSimplicialComplex coverTestPoint() { return new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))); }
+    private static SimplicialCover coverMapTestCover() { return new SimplicialCover(coverTestPoint(),coverTestPoint()); }
     private static RelativeSimplicialComplex relativeTestPair() { return new RelativeSimplicialComplex(relativeTestEdge(),simplicialTestComplex()); }
     private static RelativeSimplicialMap relativeTestMap(int index) {
         return new RelativeSimplicialMap(relativeTestPair(),relativeTestPair(),new FiniteSimplicialMap(relativeTestEdge(),relativeTestEdge(),simplicialTestMap(index).vertexMap()));
@@ -280,6 +290,7 @@ public class ConcreteAlgebrasTest {
         Algebra source=math.mathTool.getAlgebra(entry.first.getAlgebraName());
         IAlgebraItem item=source.buildAlgebraItem(sample(math,source.getAlgebraName(),0));
         if(owner instanceof SimplicialCoverAlgebra && source==math.complexes.algebra()) item=source.buildAlgebraItem(coverTestPoint());
+        if(owner instanceof SimplicialCoverMapAlgebra && source==math.simplicialMaps.algebra()) item=source.buildAlgebraItem(FiniteSimplicialMap.identity(coverTestPoint()));
         if(owner instanceof RelativeSimplicialAlgebra && source==math.complexes.algebra()) item=source.buildAlgebraItem(relativeTestEdge());
         if(owner instanceof RelativeSimplicialMapAlgebra && source==math.simplicialMaps.algebra()) item=source.buildAlgebraItem(relativeTestMap(0).ambientMap());
         if(owner instanceof FiniteSimplicialMapAlgebra) {
@@ -342,6 +353,10 @@ public class ConcreteAlgebrasTest {
         if(operation instanceof IOneOperandOperation) return item.performOneOperandOperation(alias).perform().getResult().toString();
         if(operation instanceof ITransferOperation) return item.performAlgebraTransfer(alias).perform().getResult().toString();
         Object second=entry.second==null?null:sample(math,entry.second.getAlgebraName(),1);
+        if(owner instanceof SimplicialCoverMapAlgebra) {
+            if(entry.second==math.simplicialCovers.algebra()) second=coverMapTestCover();
+            if(entry.second==math.naturals.algebra()) second=BigInteger.ZERO;
+        }
         if(owner instanceof SimplicialCoverAlgebra) {
             if(entry.second==math.complexes.algebra()) second=coverTestPoint();
             if(entry.second==math.naturals.algebra()) second=BigInteger.ZERO;
@@ -414,6 +429,8 @@ public class ConcreteAlgebrasTest {
     }
     private Object sample(ConcreteMathematics math,String domain,int index) {
         switch(domain) {
+            case "CoverMap": return SimplicialCoverMap.identity(coverMapTestCover());
+            case "SimplicialCover.pair": return new Pair<>(coverMapTestCover(),coverMapTestCover());
             case "SimplicialCover": return new SimplicialCover(coverTestPoint(),index==0?coverTestPoint():new FiniteSimplicialComplex(Collections.emptyList()));
             case "RelativeMap": return relativeTestMap(index);
             case "RelativeComplex.pair": return new Pair<>(relativeTestPair(),relativeTestPair());

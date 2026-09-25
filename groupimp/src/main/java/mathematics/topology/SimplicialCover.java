@@ -50,7 +50,10 @@ public final class SimplicialCover implements Serializable {
     }
     public IntegerMatrix sumBoundaryMatrix(BigInteger degree) { requireDegree(degree); return sumBoundaryMatrix(degree,new Computation()); }
     private IntegerMatrix sumBoundaryMatrix(BigInteger degree,Computation work) {
-        IntegerMatrix a=boundary(left,degree,work),b=boundary(right,degree,work);
+        return blockDiagonal(boundary(left,degree,work),boundary(right,degree,work),work);
+    }
+    /** Shared left-then-right block convention for sum boundaries and maps. */
+    static IntegerMatrix blockDiagonal(IntegerMatrix a,IntegerMatrix b,Computation work) {
         int rows=a.rows()+b.rows(),columns=a.columns()+b.columns(); BigInteger[][] entries=zeros(rows,columns,work);
         for(int r=0;r<a.rows();r++) for(int c=0;c<a.columns();c++) entries[r][c]=a.get(r,c);
         for(int r=0;r<b.rows();r++) for(int c=0;c<b.columns();c++) entries[a.rows()+r][a.columns()+c]=b.get(r,c);
@@ -61,7 +64,8 @@ public final class SimplicialCover implements Serializable {
         for(int k=0;k<=union.dimension();k++) result.add(sumBoundaryMatrix(BigInteger.valueOf(k),work)); return Collections.unmodifiableList(result);
     }
     public IntegralHomology sumHomology(BigInteger degree) { requireDegree(degree); return sumHomology(degree,new Computation()); }
-    private IntegralHomology sumHomology(BigInteger degree,Computation work) {
+    IntegralHomology sumHomology(BigInteger degree,Computation work) {
+        requireDegree(degree);
         return new IntegralHomology(sumBoundaryMatrix(degree,work),sumBoundaryMatrix(degree.add(BigInteger.ONE),work),work);
     }
     public List<IntegralHomology> sumHomologyDegrees() {

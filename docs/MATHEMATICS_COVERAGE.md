@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1407 |
-| DIRECTLY_SUPPORTED | 1164 |
+| Scoped records | 1440 |
+| DIRECTLY_SUPPORTED | 1197 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1023 |
+| IMPLEMENTED | 1056 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1091 |
+| MACHINE_TESTED | 1124 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1000 | 1000 | 0 | 0 | 0 | 1000 | 0 | 0 |
+| Concrete MathTool algebras | 1033 | 1033 | 0 | 0 | 0 | 1033 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -287,6 +287,38 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Boolean.xor | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.xor |
 | Boolean.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.zero |
 | BooleanAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations |
+| CoverMap.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.compose |
+| CoverMap.contiguous | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.contiguous |
+| CoverMap.corestrict-image | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.corestrict-image |
+| CoverMap.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.equal |
+| CoverMap.excision-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.excision-maps |
+| CoverMap.from-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.from-map |
+| CoverMap.identity-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.identity-on |
+| CoverMap.image | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.image |
+| CoverMap.inclusion | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.inclusion |
+| CoverMap.intersection-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.intersection-homology-map |
+| CoverMap.intersection-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.intersection-map |
+| CoverMap.inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.inverse |
+| CoverMap.is-isomorphism | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.is-isomorphism |
+| CoverMap.left-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.left-homology-map |
+| CoverMap.left-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.left-map |
+| CoverMap.left-relative-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.left-relative-map |
+| CoverMap.long-exact-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.long-exact-maps |
+| CoverMap.restrict | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.restrict |
+| CoverMap.right-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.right-homology-map |
+| CoverMap.right-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.right-map |
+| CoverMap.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.source |
+| CoverMap.source-sum-homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.source-sum-homology |
+| CoverMap.sum-chain-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.sum-chain-matrices |
+| CoverMap.sum-chain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.sum-chain-matrix |
+| CoverMap.sum-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.sum-homology-map |
+| CoverMap.sum-homology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.sum-homology-maps |
+| CoverMap.swap | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.swap |
+| CoverMap.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.target |
+| CoverMap.target-sum-homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.target-sum-homology |
+| CoverMap.union-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.union-homology-map |
+| CoverMap.union-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.union-map |
+| CoverMap.union-relative-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.union-relative-map |
 | Exterior(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).add |
 | Exterior(Q).ambient-dimension | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).ambient-dimension |
 | Exterior(Q).apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).apply |
@@ -1070,6 +1102,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | SimplicialCover.union-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.union-homology-map |
 | SimplicialCover.union-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.union-matrix |
 | SimplicialCoverAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps |
+| SimplicialCoverMapAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams |
 | SimplicialMap.chain-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.chain-matrices |
 | SimplicialMap.chain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.chain-matrix |
 | SimplicialMap.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.compose |

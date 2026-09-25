@@ -48,6 +48,7 @@ OWNERS = {
     "RelativeSimplicialAlgebra": ("RelativeComplex", "Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps"),
     "RelativeSimplicialMapAlgebra": ("RelativeMap", "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps"),
     "SimplicialCoverAlgebra": ("SimplicialCover", "Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps"),
+    "SimplicialCoverMapAlgebra": ("CoverMap", "Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams"),
     "FiniteIntegerRelationAlgebra": ("FiniteRelation(Z,Z)", "Finite-support relations on the actual registered integer Algebra"),
     "FiniteIntegerFunctionAlgebra": ("FiniteFunction(Z,Z)", "Total maps between explicit finite integer sets, preserving declared domain and codomain"),
     "FiniteCategoryAlgebra": ("FiniteCategory", "Finite categories with integer object/arrow labels and exhaustively checked composition tables"),
@@ -105,6 +106,7 @@ EXTRA_TESTS = {
     "RelativeSimplicialAlgebra": "NativeRelativeHomologyTest",
     "RelativeSimplicialMapAlgebra": "NativeRelativeSimplicialMapTest",
     "SimplicialCoverAlgebra": "NativeMayerVietorisTest",
+    "SimplicialCoverMapAlgebra": "NativeSimplicialCoverMapTest",
     "FiniteIntegerRelationAlgebra": "NativeRelationTest",
     "FiniteIntegerFunctionAlgebra": "NativeFiniteFunctionTest",
     "FiniteCategoryAlgebra": "NativeCategoryTest",
@@ -153,6 +155,40 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "SimplicialCoverMapAlgebra": {
+        "from-map": "The ambient SimplicialMap must have exactly the supplied source and target unions. It must carry every simplex of A into A' and every simplex of B into B'; checking vertices alone is insufficient. The boundary pair contains source cover first.",
+        "compose": "Apply the right operand first. The complete ordered middle covers must agree, not only their unions.",
+        "inverse": "The union map must be a simplicial isomorphism and carry both ordered pieces onto the corresponding target pieces. An ambient isomorphism alone is insufficient.",
+        "source": "Return the complete ordered source cover.",
+        "target": "Return the complete ordered target cover.",
+        "union-map": "Return the retained simplicial map U->U' on the full unions.",
+        "left-map": "Return the simplicial restriction A->A', retaining the full target left piece.",
+        "right-map": "Return the simplicial restriction B->B', retaining the full target right piece.",
+        "intersection-map": "Return the simplicial restriction I->I', where each intersection is that of its actual cover pieces.",
+        "equal": "Compare full ordered source and target covers and the total union vertex map.",
+        "is-isomorphism": "True exactly when the union map is a simplicial isomorphism and both ordered target pieces are the images of their source pieces.",
+        "identity-on": "Construct the identity on the supplied ordered cover, including its full labelled pieces.",
+        "inclusion": "Require A contained in A' and B contained in B' simplex by simplex, and use the identity on source vertex labels.",
+        "swap": "Swap both source and target pieces simultaneously while retaining the union vertex map. This is an involution preserving composition.",
+        "sum-chain-matrix": "Return the block diagonal of the left and right oriented chain matrices in the nonnegative degree, with left coordinates first. Combined source and target ranks must fit the matrix bound.",
+        "sum-chain-matrices": "Emit sum chain matrices from degree zero through the larger union dimension, retaining zero-sized shapes. The entire list shares one work budget; two empty unions give an empty list.",
+        "sum-homology-map": "Induce the map between the actual source and target block-chain homology presentations. Both homology constructions and the induced map share one work budget.",
+        "sum-homology-maps": "Emit sum homology maps from degree zero through the larger union dimension. The entire list shares one work budget, including all homology constructions; exhaustion returns no partial list.",
+        "source-sum-homology": "Return the source cover's IntegralHomology of C(A) direct-sum C(B) in the supplied nonnegative degree.",
+        "target-sum-homology": "Return the target cover's IntegralHomology of C(A') direct-sum C(B') in the supplied nonnegative degree.",
+        "union-homology-map": "Return H_k(U)->H_k(U') induced by the retained union simplicial map.",
+        "intersection-homology-map": "Return H_k(I)->H_k(I') induced by the restriction to the cover intersections.",
+        "left-homology-map": "Return H_k(A)->H_k(A') induced by the left restriction, compatible with the sum inclusion and projection maps.",
+        "right-homology-map": "Return H_k(B)->H_k(B') induced by the right restriction, compatible with the sum inclusion and projection maps.",
+        "long-exact-maps": "Emit all four vertical maps on H_k(I), sum homology, H_k(U), H_(k-1)(I), in order, between the two Mayer-Vietoris segments. All three squares commute on homology. At k=0 the fourth map is 0->0. One work budget covers all four maps.",
+        "left-relative-map": "Return the actual RelativeMap (A,I)->(A',I') induced by the left restriction.",
+        "union-relative-map": "Return the actual RelativeMap (U,B)->(U',B') induced by the union map.",
+        "excision-maps": "Emit the left-relative and union-relative maps, in that order, sharing one construction budget. They commute with the excision inclusions as RelativeMap values, hence also on relative chains and homology.",
+        "contiguous": "Require equal ordered source and target covers, then check contiguity in each target piece. Ambient contiguity alone is insufficient. Piecewise contiguity implies equal induced homology maps.",
+        "image": "Return the ordered cover (f(A),f(B)). Its intersection is f(A) intersection f(B), which can strictly contain f(I).",
+        "corestrict-image": "Keep the complete source cover and vertex map, replacing the target by the actual image cover (f(A),f(B)).",
+        "restrict": "The supplied cover must be contained componentwise in the source cover. Restrict the union vertex map and retain the full original target, using the first CoverMap wrapper.",
+    },
     "SimplicialCoverAlgebra": {
         "from-complexes": "Retain ordered left and right complexes A and B. The ambient complex is exactly their simplex-wise union, so every ambient simplex belongs to a piece. This does not infer a cover of an externally supplied larger complex from vertex coverage.",
         "left": "Return the complete labelled left complex A.",
@@ -1014,6 +1050,15 @@ def record(identifier, owner, concept, paths, operation=None):
                          "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
                          "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
                          "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
+    if owner == "SimplicialCoverMapAlgebra":
+        paths = paths + ["groupimp/src/main/java/mathematics/topology/SimplicialCoverMap.java",
+                         "groupimp/src/main/java/mathematics/topology/SimplicialCover.java",
+                         "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+                         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+                         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+                         "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
     if owner in ("PresentedAbelianGroupAlgebra", "AbelianGroupElementAlgebra"):
         paths = paths + ["groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
                          "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
@@ -1140,7 +1185,12 @@ def record(identifier, owner, concept, paths, operation=None):
     if owner == "SimplicialCoverAlgebra":
         value["required_invariants"].append("The ordered pieces cover their actual simplex-wise union. Sum chains use left then right coordinates; intersection inclusion is (i,-j), union is addition, and connecting homology uses the boundary of the left part. All homology is unreduced over Z with retained presentations.")
         value["known_limitations"] += ["The union has at most 4096 nonempty simplices. Every required matrix dimension is at most 256, including the sum of both chain ranks for block matrices. Each compound homology/map calculation, whole degree list or three-map exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false result or truncated list; coefficient bit lengths remain unbounded.",
-            "Two finite labelled subcomplexes only. The splitting is a chain-group section, not generally a chain map or homology splitting. Excision is the explicit simplicial inclusion (A,A intersection B)->(A union B,B), not arbitrary topological excision. General cover morphisms and Mayer-Vietoris naturality maps, many-set covers, reduced/relative Mayer-Vietoris, spectral sequences, cohomology and continuous covers remain outside scope."]
+            "Two finite labelled subcomplexes only. The splitting is a chain-group section, not generally a chain map or homology splitting. Excision is the explicit simplicial inclusion (A,A intersection B)->(A union B,B), not arbitrary topological excision. CoverMap supplies piece-preserving simplicial maps and Mayer-Vietoris/excision naturality. Many-set covers, reduced/relative Mayer-Vietoris, spectral sequences, cohomology and continuous covers remain outside scope."]
+        value["references"].append("https://pi.math.cornell.edu/~hatcher/AT/AT.pdf")
+    if owner == "SimplicialCoverMapAlgebra":
+        value["required_invariants"].append("The union map preserves each ordered piece simplex by simplex. Block-diagonal sum maps commute with boundaries and the signed intersection and union maps. The induced integral homology maps commute with all three Mayer-Vietoris squares, and the two relative maps commute with excision.")
+        value["known_limitations"] += ["Each union has at most 4096 nonempty simplices. Each required matrix dimension is at most 256, including the combined left and right chain ranks. Every compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
+            "Only piece-preserving simplicial maps of ordered two-subcomplex covers are represented. The chosen chain-group splittings and connecting chain matrices need not commute with cover maps; the connecting square is natural on homology. Contiguity is sufficient, not a general homotopy decision. No arbitrary chain-map builder, explicit chain-homotopy witness, many-set covers, reduced/relative Mayer-Vietoris, cohomology, persistence, subdivision or continuous-map representation is supplied."]
         value["references"].append("https://pi.math.cornell.edu/~hatcher/AT/AT.pdf")
     if owner in ("PresentedAbelianGroupAlgebra", "AbelianGroupElementAlgebra"):
         value["required_invariants"].append("Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type.")
@@ -1274,6 +1324,10 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("CoverMap", "Maps of ordered covers with natural Mayer-Vietoris and excision diagrams", "mathematics.topology.SimplicialCoverMap",
+         ["Retained full ordered source and target covers", "Union simplicial map preserving each ordered piece", "Functorial sum homology and four vertical Mayer-Vietoris maps with retained integral presentations", "Two actual relative maps commuting with the excision inclusions"], ["SimplicialCover", "SimplicialCover.pair", "SimplicialMap", "Mat(Z)", "IntegralHomology", "AbelianGroupHomomorphism", "RelativeMap", "N", "Boolean"]),
+        ("SimplicialCover.pair", "Source and target ordered covers for a cover map", "mathematics.foundations.Pair<SimplicialCover,SimplicialCover>",
+         ["Both values belong to the actual SimplicialCover Algebra", "First entry is the source cover and second is the target cover"], ["SimplicialCover", "CoverMap", "SimplicialMap"]),
         ("SimplicialCover", "Two-subcomplex covers with integral Mayer-Vietoris maps", "mathematics.topology.SimplicialCover",
          ["Ordered finite labelled pieces A and B with ambient complex exactly their simplex-wise union", "Left-then-right sum chain coordinates and signed intersection inclusion (i,-j)", "Retained integral homology presentations, exact sequence maps and simplicial excision"], ["FiniteComplex", "Z", "N", "Boolean", "Mat(Z)", "IntegralHomology", "AbelianGroupHomomorphism", "RelativeMap"]),
         ("RelativeMap", "Simplicial maps of pairs and natural relative homology maps", "mathematics.topology.RelativeSimplicialMap",

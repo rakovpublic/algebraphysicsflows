@@ -1,6 +1,6 @@
 # Concrete algebras connected to MathTool
 
-`new ConcreteMathematics()` creates real `Algebra<T>` instances and registers their native operations in the existing `MathTool`. It includes N, Z, Q, Q(i), H(Q), Boolean, Q^2, Mat2(Q), Vec(Q), Mat(Q), Vec(Z), Mat(Z), Affine(Q), Tensor(Q), Exterior(Q), Q[x], Q(x), Poly(Q), PolynomialMap(Q), PolynomialForm(Q), PolynomialCell(Q), PolynomialChain(Q), S3, Z/6Z, finite sets of integers, rational samples, finite integer probability measures and stochastic kernels, finite simplicial complexes and vertex maps with constructive integral homology, finitely generated abelian-group types, explicit abelian presentations, quotient elements and homomorphisms, finite integer relations/functions, finite categories/functors/natural transformations, and F5 (named Z/5Z). Each construction owns its algebra instances; separate tools do not share mutable registrations.
+`new ConcreteMathematics()` creates real `Algebra<T>` instances and registers their native operations in the existing `MathTool`. It includes N, Z, Q, Q(i), H(Q), Boolean, Q^2, Mat2(Q), Vec(Q), Mat(Q), Vec(Z), Mat(Z), Affine(Q), Tensor(Q), Exterior(Q), Q[x], Q(x), Poly(Q), PolynomialMap(Q), PolynomialForm(Q), PolynomialCell(Q), PolynomialChain(Q), S3, Z/6Z, finite sets of integers, rational samples, finite integer probability measures and stochastic kernels, finite simplicial complexes and vertex maps with constructive integral homology, relative pairs and their maps, ordered covers and their maps with natural Mayer-Vietoris/excision diagrams, finitely generated abelian-group types, explicit abelian presentations, quotient elements and homomorphisms, finite integer relations/functions, finite categories/functors/natural transformations, and F5 (named Z/5Z). Each construction owns its algebra instances; separate tools do not share mutable registrations.
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
@@ -53,6 +53,7 @@ List<String> values = math.flow(math.naturals,
 | RelativeSimplicialAlgebra / RelativeComplex | labelled-pair equality -> Boolean | ambient/subcomplex; dimension and Euler characteristic; flat boundaries and constructive homology by degree; inclusion simplicial map | pair construction; quotient chains and bases; homology and torsion types; inclusion, quotient, lift and connecting matrices; scalar/flat long exact sequence maps |
 | RelativeSimplicialMapAlgebra / RelativeMap | compose; equality/pair contiguity -> Boolean | inverse; source/target pairs; ambient/subcomplex maps; image/corestriction; flat relative chain and homology maps | construction from an ambient map and pair boundaries; identities/inclusions; absolute/diagonal extensions; restriction; degreewise relative maps and four-map naturality lists |
 | SimplicialCoverAlgebra / SimplicialCover | ordered-cover equality -> Boolean | left/right/union/intersection; swap; Euler characteristic; flat sum boundaries/homology; excision RelativeMap | cover construction; direct-sum homology and component maps; signed intersection/addition/splitting matrices; scalar/flat Mayer-Vietoris homomorphisms |
+| SimplicialCoverMapAlgebra / CoverMap | compose; equality/piecewise contiguity -> Boolean | inverse; source/target covers; union/left/right/intersection maps; swap both covers; image/corestriction; flat sum matrices/maps; two excision RelativeMaps | construction from a union map and paired covers; identity/inclusion; restriction; degreewise sum/component homology maps and four-map Mayer-Vietoris naturality lists |
 | RationalSampleAlgebra / Sample(Q) | concatenate | size -> N, mean/variance -> Q, center | covariance -> Q; scale by Q; flat transfer elements -> Q |
 | FiniteProbabilityAlgebra / FiniteDistribution(Z) | — | support -> finite set, support-size -> N, expectation/variance -> Q | event/point probability -> Q; conditioning; flat transfer outcomes -> Z; point mass from Z |
 | FiniteMarkovAlgebra / FiniteMarkov(Z) | typed compose; equality -> Boolean | domain/codomain; counts; row distributions; deterministic function and matrix conversions; communicating/recurrent classes; stationary extremes and unique stationary law | apply to a distribution -> second carrier; powers; flat marginal orbits; transition probabilities; time reversal; detailed balance; absorbing events; hitting probabilities and mean times -> Vec(Q) |
@@ -971,6 +972,52 @@ This circle generator maps to the difference of the two intersection vertices. S
 
 `excision-map` returns the actual RelativeMap inclusion (A,I)->(U,B). The relative ordered simplex bases and boundaries on both sides agree, making its relative chain matrices identities and its homology maps isomorphisms. Its ambient inclusion A->U need not have an inverse. This is the finite simplicial excision witness for this cover; it does not represent general topological excision.
 
-The union is limited to 4096 nonempty simplices. Every required matrix dimension is limited to 256, including the combined chain ranks of A and B in sum matrices. Each compound homology/map computation, whole degree list or three-map segment shares a 5,000,000-unit integer budget. Exhaustion raises IMPLEMENTATION_FAILURE without a partial list; integer bit lengths remain unbounded. General cover morphisms and Mayer-Vietoris naturality maps, many-set covers, reduced/relative Mayer-Vietoris, spectral sequences, cohomology and continuous covers remain outside scope.
+The union is limited to 4096 nonempty simplices. Every required matrix dimension is limited to 256, including the combined chain ranks of A and B in sum matrices. Each compound homology/map computation, whole degree list or three-map segment shares a 5,000,000-unit integer budget. Exhaustion raises IMPLEMENTATION_FAILURE without a partial list; integer bit lengths remain unbounded. CoverMap supplies piece-preserving simplicial maps and Mayer-Vietoris/excision naturality. Many-set covers, reduced/relative Mayer-Vietoris, spectral sequences, cohomology and continuous covers remain outside scope.
 
 NativeMayerVietorisTest checks 64 ordered graph covers against independent Betti formulas and integral exactness, sphere covers through dimension four, circle orientation, projective-plane torsion and an index-two image, direct-sum identities with torsion, swap signs, chain sections, excision isomorphisms, empty and nested covers, aggregate limits, native wrappers and serialized flows. All 29 registrations have explicit expected results in ConcreteAlgebrasTest.
+
+## Maps of ordered covers and naturality
+
+`math.coverMaps` registers 32 operations on CoverMap. A SimplicialCoverMap retains ordered source (A,B) and target (A',B') covers and a simplicial map f:U->U' carrying each A simplex into A' and each B simplex into B'. The ambient map must have exactly the declared unions as its boundaries. Checking vertex membership alone would miss simplices absent from a target piece, so validation checks every simplex. Unary transfers expose the union map and its left, right and intersection restrictions in the existing SimplicialMap algebra.
+
+`CoverMap.from-map` takes the union SimplicialMap followed by `Pair<SimplicialCover,SimplicialCover>`, source first. `CoverMap.identity-on` and `CoverMap.inclusion` construct identities and componentwise inclusions. Composition applies the right operand first and requires equality of the complete ordered middle cover. Inversion requires an ambient simplicial isomorphism carrying each source piece onto its corresponding target piece; equal unions alone are insufficient. `swap` exchanges both covers' pieces simultaneously and preserves composition.
+
+`sum-chain-matrix(k)` is block diagonal on the two restrictions, with left coordinates first. These matrices commute with the sum boundaries, the signed intersection maps (i,-j), and union addition. `sum-homology-map(k)` retains the actual source and target sum-chain presentations, also available through the two sum-homology transfers. The four individual union/intersection/left/right homology maps retain the corresponding absolute presentations and agree with the sum component inclusions/projections. Flat sum matrices and homology maps range from degree zero through the larger union dimension, preserving zero-sized shapes; two empty unions give empty lists.
+
+`long-exact-maps(k)` emits the four vertical maps in this order:
+
+```text
+H_k(I)  -> H_k(C(A) + C(B))   -> H_k(U)  -> H_(k-1)(I)
+  |               |               |             |
+  v               v               v             v
+H_k(I') -> H_k(C(A') + C(B')) -> H_k(U') -> H_(k-1)(I')
+```
+
+All three squares commute, including torsion and the connecting homomorphism; the fourth map at k=0 is 0->0. This implements [naturality of the Mayer-Vietoris sequence](https://pi.math.cornell.edu/~hatcher/AT/AT.pdf). The deterministic left-first chain splittings and connecting chain matrices need not commute with a cover map. For example, enlarging the left arc of a circle cover to the entire circle changes the chosen lift. Naturality holds on homology even when that chain-level equality fails.
+
+Using the `arc` and `closingEdge` from the preceding example, reflection reverses the circle class and exchanges the two intersection vertices:
+
+```java
+SimplicialCover cover = new SimplicialCover(arc, closingEdge);
+Map<BigInteger, BigInteger> vertices = new TreeMap<>();
+vertices.put(BigInteger.ZERO, BigInteger.valueOf(2));
+vertices.put(BigInteger.ONE, BigInteger.ONE);
+vertices.put(BigInteger.valueOf(2), BigInteger.ZERO);
+FiniteSimplicialMap reflection = new FiniteSimplicialMap(
+    cover.union(), cover.union(), vertices);
+math.flow(math.simplicialMaps, Collections.singletonList(reflection))
+    .<SimplicialCoverMap, Pair<SimplicialCover, SimplicialCover>>
+        performAlgebraUnsafe("CoverMap.from-map", new Pair<>(cover, cover))
+    .<AbelianGroupHomomorphism, BigInteger>
+        performFlatAlgebraUnsafe("long-exact-maps", BigInteger.ONE)
+    .<Boolean>performAlgebraTransfer("is-isomorphism")
+    .collect(); // [true, true, true, true]
+```
+
+`left-relative-map` gives (A,I)->(A',I') and `union-relative-map` gives (U,B)->(U',B'); unary flat `excision-maps` emits them in that order. They commute with the existing excision inclusions as actual RelativeMap values. Their relative chain and homology maps therefore give the corresponding commuting excision diagrams through the existing operations.
+
+`contiguous` requires the same ordered boundaries and tests contiguity inside each target piece; ambient contiguity alone is insufficient. Piecewise contiguous maps induce equal homology maps. `image` is the cover (f(A),f(B)): its intersection can strictly contain f(I), as when disjoint source vertices in different pieces map to one common target vertex. `corestrict-image` uses that full image cover. `restrict` takes a componentwise source subcover and retains the original target, returning the first CoverMap carrier wrapper through ICustomMemberOperation.
+
+Each union has at most 4096 nonempty simplices, and every required matrix dimension is at most 256, including combined left/right chain ranks. Each compound homology computation, whole degree list or four-map naturality list shares one 5,000,000-unit integer budget; the two excision-map constructions also share one budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial lists, independently of mathematical undefinedness; coefficient bit lengths remain unbounded. Arbitrary chain-map builders, explicit chain-homotopy witnesses, many-set covers, reduced/relative Mayer-Vietoris, cohomology, persistence, subdivision and continuous covers remain outside scope.
+
+NativeSimplicialCoverMapTest checks all 27 maps of a doubled circle and 729 compositions against independent winding numbers, circle/sphere reflection signs, projective-plane torsion, all three Mayer-Vietoris squares and the excision diagram, nonnatural chain splittings, piecewise contiguity, strict growth of image intersections, cover inversion and restriction, empty and extreme-labelled complexes, shared list budgets, actual wrappers and serialized flows. All 32 registrations have explicit expected results in ConcreteAlgebrasTest.
