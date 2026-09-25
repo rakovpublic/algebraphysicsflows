@@ -35,6 +35,7 @@ import mathematics.topology.RelativeSimplicialMap;
 import mathematics.topology.SimplicialCover;
 import mathematics.topology.SimplicialCoverMap;
 import mathematics.topology.SimplicialCochain;
+import mathematics.topology.SimplicialChain;
 import mathematics.topology.RelativeSimplicialCochain;
 import mathematics.examples.ConcreteAlgebrasExample;
 import mathematics.probability.FiniteMarkovKernel;
@@ -46,7 +47,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all1085RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all1115RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String discrete="Complex[[0], [1]]",emptyComplex="Complex[]";
@@ -66,6 +67,12 @@ public class ConcreteAlgebrasTest {
         String relativePointMap=relativeMapString(diagonalPoint,diagonalPoint,"{0=0}");
         String zeroCochain="SimplicialCochain(complex="+point+", degree=0, coordinates=[0])",unitCochain="SimplicialCochain(complex="+point+", degree=0, coordinates=[1])";
         String zeroClass="AbelianElement(group="+freeOne+", smith=[0])";
+        String zeroChain="SimplicialChain(complex="+point+", degree=0, coordinates=[0])",unitChain="SimplicialChain(complex="+point+", degree=0, coordinates=[1])";
+        String zeroChainMap=homString(freeOne,freeOne,"ZMatrix(1x1)[[0]]");
+        expected.put("SimplicialChainAlgebra",String.join("|",zeroChain,"["+unitChain+"]",zeroChain,zeroChain,zeroChain,zeroChain,"true",point,"0","[0]",
+                "SimplicialChain(complex="+point+", degree=0, coordinates=[3])","true","SimplicialChain(complex="+point+", degree=-1, coordinates=[])",
+                "true","true","[]","true",pointHomology,zeroClass,zeroChain,"["+unitChain+"]",zeroChain,"0",zeroChain,zeroClass,
+                "ZMatrix(1x1)[[0]]",zeroChainMap,"ZMatrix(1x1)[[0]]",zeroChainMap,"0"));
         String absolutePoint="RelativeComplex(ambient="+point+", subcomplex="+emptyComplex+")";
         String relativeZeroCochain="RelativeCochain(pair="+absolutePoint+", degree=0, coordinates=[0])",relativeUnit="RelativeCochain(pair="+absolutePoint+", degree=0, coordinates=[1])";
         String relativeNext="RelativeCochain(pair="+absolutePoint+", degree=1, coordinates=[])",zeroNextGroup="PresentedAbelianGroup(ZMatrix(0x1)[])";
@@ -286,7 +293,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(1085,count);
+        assertEquals(1115,count);
     }
     private static String homString(String source,String target,String matrix) { return "AbelianHom(source="+source+", target="+target+", smith="+matrix+")"; }
     private static String simplicialString(String source,String target,String vertices) { return "SimplicialMap(source="+source+", target="+target+", vertices="+vertices+")"; }
@@ -319,6 +326,7 @@ public class ConcreteAlgebrasTest {
             if(source==math.relativeMaps.algebra()) item=source.buildAlgebraItem(RelativeSimplicialMap.identity(relativeCochainTestPair()));
             if(entry.id.equals("RelativeCochain.connect-cocycle")) item=source.buildAlgebraItem(SimplicialCochain.zero(new FiniteSimplicialComplex(Collections.emptyList()),BigInteger.ZERO));
         }
+        if(owner instanceof SimplicialChainAlgebra && source==math.complexes.algebra()) item=source.buildAlgebraItem(coverTestPoint());
         if(owner instanceof SimplicialCochainAlgebra) {
             if(source==math.complexes.algebra()) item=source.buildAlgebraItem(coverTestPoint());
             if(source==math.simplicialMaps.algebra()) item=source.buildAlgebraItem(FiniteSimplicialMap.identity(coverTestPoint()));
@@ -387,6 +395,12 @@ public class ConcreteAlgebrasTest {
         if(operation instanceof IOneOperandOperation) return item.performOneOperandOperation(alias).perform().getResult().toString();
         if(operation instanceof ITransferOperation) return item.performAlgebraTransfer(alias).perform().getResult().toString();
         Object second=entry.second==null?null:sample(math,entry.second.getAlgebraName(),1);
+        if(owner instanceof SimplicialChainAlgebra) {
+            if(entry.second==math.integers.algebra() || entry.second==math.naturals.algebra()) second=BigInteger.ZERO;
+            if(entry.second==math.integerVectors.algebra()) second=new IntegerVector(BigInteger.valueOf(3));
+            if(entry.second==math.abelianGroupElements.algebra()) second=SimplicialChain.zero(coverTestPoint(),BigInteger.ZERO).homology().group().zero();
+            if(entry.second==math.simplicialMaps.algebra()) second=FiniteSimplicialMap.identity(coverTestPoint());
+        }
         if(owner instanceof RelativeSimplicialCochainAlgebra) {
             if(entry.second==math.relativeComplexes.algebra()) second=relativeCochainTestPair();
             if(entry.second==math.naturals.algebra()) second=BigInteger.ZERO;
@@ -478,6 +492,7 @@ public class ConcreteAlgebrasTest {
         switch(domain) {
             case "RelativeCochain": return RelativeSimplicialCochain.zero(relativeCochainTestPair(),BigInteger.ZERO);
             case "SimplicialCochain": return SimplicialCochain.zero(coverTestPoint(),BigInteger.ZERO);
+            case "SimplicialChain": return SimplicialChain.zero(coverTestPoint(),BigInteger.ZERO);
             case "CoverMap": return SimplicialCoverMap.identity(coverMapTestCover());
             case "SimplicialCover.pair": return new Pair<>(coverMapTestCover(),coverMapTestCover());
             case "SimplicialCover": return new SimplicialCover(coverTestPoint(),index==0?coverTestPoint():new FiniteSimplicialComplex(Collections.emptyList()));

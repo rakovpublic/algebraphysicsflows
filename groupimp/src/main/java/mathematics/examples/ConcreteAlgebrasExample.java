@@ -30,6 +30,7 @@ import mathematics.topology.RelativeSimplicialMap;
 import mathematics.topology.SimplicialCover;
 import mathematics.topology.SimplicialCoverMap;
 import mathematics.topology.SimplicialCochain;
+import mathematics.topology.SimplicialChain;
 import mathematics.topology.RelativeSimplicialCochain;
 import mathematics.linear.RationalVector;
 import mathematics.linear.IntegerVector;
@@ -86,6 +87,13 @@ public final class ConcreteAlgebrasExample {
                 .<IntegralHomology,BigInteger>performAlgebraUnsafe("IntegralHomology.at-degree",BigInteger.ONE)
                 .<IntegerVector>performFlatAlgebraTransfer("generators").collect());
         FiniteSimplicialComplex circle=new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0,1),FiniteSet.of(0,2),FiniteSet.of(1,2)));
+        SimplicialChain orientedCircle=new SimplicialChain(circle,BigInteger.ONE,new IntegerVector(BigInteger.ONE,BigInteger.ONE.negate(),BigInteger.ONE));
+        SimplicialCochain circleCocycle=new SimplicialCochain(circle,BigInteger.ONE,new IntegerVector(BigInteger.ONE,BigInteger.ZERO,BigInteger.ZERO));
+        System.out.println("Circle cycle capped with its unit-period cocycle has augmentation: "+math.flow(math.simplicialChains,Collections.singletonList(orientedCircle))
+                .performCustomMemberOperation("cap",circleCocycle).<BigInteger>performAlgebraTransfer("augmentation").collect());
+        System.out.println("Capping the circle fundamental cycle gives H^1 -> H_0 isomorphism: "+math.flow(math.simplicialChains,Collections.singletonList(orientedCircle))
+                .<AbelianGroupHomomorphism,BigInteger>performAlgebraUnsafe("cap-cohomology-map",BigInteger.ONE)
+                .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
         FiniteSimplicialComplex arc=new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0,1),FiniteSet.of(1,2)));
         FiniteSimplicialComplex closingEdge=new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0,2)));
         System.out.println("Mayer-Vietoris connecting map for two arcs covering the circle: "+math.flow(math.complexes,Collections.singletonList(arc))

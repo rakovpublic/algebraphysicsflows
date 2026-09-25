@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1543 |
-| DIRECTLY_SUPPORTED | 1300 |
+| Scoped records | 1574 |
+| DIRECTLY_SUPPORTED | 1331 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1159 |
+| IMPLEMENTED | 1190 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1227 |
+| MACHINE_TESTED | 1258 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1136 | 1136 | 0 | 0 | 0 | 1136 | 0 | 0 |
+| Concrete MathTool algebras | 1167 | 1167 | 0 | 0 | 0 | 1167 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -1125,6 +1125,37 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Sample(Q).sample-variance | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations; native operation Sample(Q).sample-variance |
 | Sample(Q).scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations; native operation Sample(Q).scale |
 | Sample(Q).size | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations; native operation Sample(Q).size |
+| SimplicialChain.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.add |
+| SimplicialChain.augmentation | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.augmentation |
+| SimplicialChain.basis-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.basis-on |
+| SimplicialChain.boundary | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.boundary |
+| SimplicialChain.bounding-coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.bounding-coordinates |
+| SimplicialChain.cap | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.cap |
+| SimplicialChain.cap-class | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.cap-class |
+| SimplicialChain.cap-cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.cap-cohomology-map |
+| SimplicialChain.cap-cohomology-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.cap-cohomology-matrix |
+| SimplicialChain.cap-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.cap-homology-map |
+| SimplicialChain.cap-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.cap-matrix |
+| SimplicialChain.class-of | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.class-of |
+| SimplicialChain.complex | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.complex |
+| SimplicialChain.coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.coordinates |
+| SimplicialChain.cycle-generators | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.cycle-generators |
+| SimplicialChain.degree | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.degree |
+| SimplicialChain.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.equal |
+| SimplicialChain.evaluate | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.evaluate |
+| SimplicialChain.homologous | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.homologous |
+| SimplicialChain.homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.homology |
+| SimplicialChain.is-boundary | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.is-boundary |
+| SimplicialChain.is-cycle | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.is-cycle |
+| SimplicialChain.is-zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.is-zero |
+| SimplicialChain.negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.negate |
+| SimplicialChain.pushforward | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.pushforward |
+| SimplicialChain.representative | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.representative |
+| SimplicialChain.scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.scale |
+| SimplicialChain.subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.subtract |
+| SimplicialChain.with-coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.with-coordinates |
+| SimplicialChain.zero-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.zero-on |
+| SimplicialChainAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps |
 | SimplicialCochain.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.add |
 | SimplicialCochain.basis-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.basis-on |
 | SimplicialCochain.class-of | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.class-of |
