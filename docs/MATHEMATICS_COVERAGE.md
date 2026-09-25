@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1614 |
-| DIRECTLY_SUPPORTED | 1371 |
+| Scoped records | 1627 |
+| DIRECTLY_SUPPORTED | 1384 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1230 |
+| IMPLEMENTED | 1243 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1298 |
+| MACHINE_TESTED | 1311 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1207 | 1207 | 0 | 0 | 0 | 1207 | 0 | 0 |
+| Concrete MathTool algebras | 1220 | 1220 | 0 | 0 | 0 | 1220 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -1004,6 +1004,19 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | RationalTensorAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction |
 | RationalVectorFamily | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations |
 | RationalVectorSpace | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed-dimensional rational vectors; default dimension two |
+| RelativeCap.boundary | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral relative cap products with independently supplied cochain and target subcomplexes, retaining a chain context and inducing homology and cohomology maps; native operation RelativeCap.boundary |
+| RelativeCap.cap | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral relative cap products with independently supplied cochain and target subcomplexes, retaining a chain context and inducing homology and cohomology maps; native operation RelativeCap.cap |
+| RelativeCap.cap-class | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral relative cap products with independently supplied cochain and target subcomplexes, retaining a chain context and inducing homology and cohomology maps; native operation RelativeCap.cap-class |
+| RelativeCap.cap-cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral relative cap products with independently supplied cochain and target subcomplexes, retaining a chain context and inducing homology and cohomology maps; native operation RelativeCap.cap-cohomology-map |
+| RelativeCap.cap-cohomology-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral relative cap products with independently supplied cochain and target subcomplexes, retaining a chain context and inducing homology and cohomology maps; native operation RelativeCap.cap-cohomology-matrix |
+| RelativeCap.cap-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral relative cap products with independently supplied cochain and target subcomplexes, retaining a chain context and inducing homology and cohomology maps; native operation RelativeCap.cap-homology-map |
+| RelativeCap.cap-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral relative cap products with independently supplied cochain and target subcomplexes, retaining a chain context and inducing homology and cohomology maps; native operation RelativeCap.cap-matrix |
+| RelativeCap.chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral relative cap products with independently supplied cochain and target subcomplexes, retaining a chain context and inducing homology and cohomology maps; native operation RelativeCap.chain |
+| RelativeCap.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral relative cap products with independently supplied cochain and target subcomplexes, retaining a chain context and inducing homology and cohomology maps; native operation RelativeCap.equal |
+| RelativeCap.on | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral relative cap products with independently supplied cochain and target subcomplexes, retaining a chain context and inducing homology and cohomology maps; native operation RelativeCap.on |
+| RelativeCap.target-pair | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral relative cap products with independently supplied cochain and target subcomplexes, retaining a chain context and inducing homology and cohomology maps; native operation RelativeCap.target-pair |
+| RelativeCap.with-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral relative cap products with independently supplied cochain and target subcomplexes, retaining a chain context and inducing homology and cohomology maps; native operation RelativeCap.with-chain |
+| RelativeCapProductAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral relative cap products with independently supplied cochain and target subcomplexes, retaining a chain context and inducing homology and cohomology maps |
 | RelativeChain.absolute | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.absolute |
 | RelativeChain.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.add |
 | RelativeChain.basis-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.basis-on |

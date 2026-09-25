@@ -37,6 +37,7 @@ import mathematics.topology.SimplicialCoverMap;
 import mathematics.topology.SimplicialCochain;
 import mathematics.topology.SimplicialChain;
 import mathematics.topology.RelativeSimplicialChain;
+import mathematics.topology.RelativeCapProduct;
 import mathematics.topology.RelativeSimplicialCochain;
 import mathematics.examples.ConcreteAlgebrasExample;
 import mathematics.probability.FiniteMarkovKernel;
@@ -48,7 +49,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all1154RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all1166RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String discrete="Complex[[0], [1]]",emptyComplex="Complex[]";
@@ -76,6 +77,10 @@ public class ConcreteAlgebrasTest {
                 "ZMatrix(1x1)[[0]]",zeroChainMap,"ZMatrix(1x1)[[0]]",zeroChainMap,"0"));
         String absolutePoint="RelativeComplex(ambient="+point+", subcomplex="+emptyComplex+")";
         String relativeZeroChain="RelativeChain(pair="+absolutePoint+", degree=0, coordinates=[0])",relativeUnitChain="RelativeChain(pair="+absolutePoint+", degree=0, coordinates=[1])";
+        String relativeCap="RelativeCap(chain="+relativeZeroChain+", target="+absolutePoint+")";
+        expected.put("RelativeCapProductAlgebra",String.join("|",relativeCap,relativeZeroChain,absolutePoint,relativeCap,
+                "RelativeCap(chain=RelativeChain(pair="+absolutePoint+", degree=-1, coordinates=[]), target="+absolutePoint+")","true",
+                relativeZeroChain,zeroClass,"ZMatrix(1x1)[[0]]",zeroChainMap,"ZMatrix(1x1)[[0]]",zeroChainMap));
         expected.put("RelativeSimplicialChainAlgebra",String.join("|",relativeZeroChain,"["+relativeUnitChain+"]",relativeZeroChain,relativeZeroChain,
                 relativeZeroChain,relativeZeroChain,relativeZeroChain,relativeZeroChain,"true",absolutePoint,"0","[0]",
                 "RelativeChain(pair="+absolutePoint+", degree=0, coordinates=[3])","true","RelativeChain(pair="+absolutePoint+", degree=-1, coordinates=[])",
@@ -301,7 +306,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(1154,count);
+        assertEquals(1166,count);
     }
     private static String homString(String source,String target,String matrix) { return "AbelianHom(source="+source+", target="+target+", smith="+matrix+")"; }
     private static String simplicialString(String source,String target,String vertices) { return "SimplicialMap(source="+source+", target="+target+", vertices="+vertices+")"; }
@@ -404,6 +409,7 @@ public class ConcreteAlgebrasTest {
         if(operation instanceof IOneOperandOperation) return item.performOneOperandOperation(alias).perform().getResult().toString();
         if(operation instanceof ITransferOperation) return item.performAlgebraTransfer(alias).perform().getResult().toString();
         Object second=entry.second==null?null:sample(math,entry.second.getAlgebraName(),1);
+        if(owner instanceof RelativeCapProductAlgebra && entry.second==math.relativeComplexes.algebra()) second=relativeCochainTestPair();
         if(owner instanceof RelativeSimplicialChainAlgebra) {
             if(entry.second==math.integers.algebra() || entry.second==math.naturals.algebra()) second=BigInteger.ZERO;
             if(entry.second==math.integerVectors.algebra()) second=new IntegerVector(BigInteger.valueOf(3));
@@ -510,6 +516,7 @@ public class ConcreteAlgebrasTest {
             case "SimplicialCochain": return SimplicialCochain.zero(coverTestPoint(),BigInteger.ZERO);
             case "SimplicialChain": return SimplicialChain.zero(coverTestPoint(),BigInteger.ZERO);
             case "RelativeChain": return RelativeSimplicialChain.zero(relativeCochainTestPair(),BigInteger.ZERO);
+            case "RelativeCap": return new RelativeCapProduct(RelativeSimplicialChain.zero(relativeCochainTestPair(),BigInteger.ZERO),relativeCochainTestPair());
             case "CoverMap": return SimplicialCoverMap.identity(coverMapTestCover());
             case "SimplicialCover.pair": return new Pair<>(coverMapTestCover(),coverMapTestCover());
             case "SimplicialCover": return new SimplicialCover(coverTestPoint(),index==0?coverTestPoint():new FiniteSimplicialComplex(Collections.emptyList()));

@@ -23,6 +23,7 @@ import mathematics.structures.PresentedAbelianGroup;
 import mathematics.structures.AbelianGroupElement;
 import mathematics.structures.AbelianGroupHomomorphism;
 import mathematics.topology.FiniteSimplicialComplex;
+import mathematics.topology.RelativeCapProduct;
 import mathematics.topology.IntegralHomology;
 import mathematics.topology.FiniteSimplicialMap;
 import mathematics.topology.RelativeSimplicialComplex;
@@ -93,6 +94,16 @@ public final class ConcreteAlgebrasExample {
                 new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0),FiniteSet.of(1))));
         RelativeSimplicialChain intervalCycle=new RelativeSimplicialChain(intervalCapPair,BigInteger.ONE,new IntegerVector(BigInteger.ONE));
         RelativeSimplicialCochain intervalCocycle=new RelativeSimplicialCochain(intervalCapPair,BigInteger.ONE,new IntegerVector(BigInteger.valueOf(3)));
+        FiniteSimplicialComplex squareCapComplex=new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0,1,2),FiniteSet.of(0,2,3)));
+        FiniteSimplicialComplex horizontalEdges=new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0,1),FiniteSet.of(2,3))),
+                verticalEdges=new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0,3),FiniteSet.of(1,2)));
+        RelativeSimplicialChain squareFundamental=new RelativeSimplicialChain(new RelativeSimplicialComplex(squareCapComplex,horizontalEdges.union(verticalEdges)),
+                BigInteger.valueOf(2),new IntegerVector(BigInteger.ONE,BigInteger.ONE));
+        RelativeSimplicialCochain verticalDifference=new RelativeSimplicialCochain(new RelativeSimplicialComplex(squareCapComplex,horizontalEdges),
+                BigInteger.ONE,new IntegerVector(BigInteger.ONE,BigInteger.ONE,BigInteger.ONE));
+        System.out.println("Square cap from horizontal to vertical relative data: "+math.flow(math.relativeChains,Collections.singletonList(squareFundamental))
+                .<RelativeCapProduct,RelativeSimplicialComplex>performAlgebraUnsafe("RelativeCap.on",new RelativeSimplicialComplex(squareCapComplex,verticalEdges))
+                .<RelativeSimplicialChain,RelativeSimplicialCochain>performAlgebraUnsafe("cap",verticalDifference).<IntegerVector>performAlgebraTransfer("coordinates").collect());
         System.out.println("Relative interval cap gives an absolute zero-chain of augmentation: "+math.flow(math.relativeChains,Collections.singletonList(intervalCycle))
                 .<SimplicialChain,RelativeSimplicialCochain>performAlgebraUnsafe("relative-cap",intervalCocycle).<BigInteger>performAlgebraTransfer("augmentation").collect());
         System.out.println("Relative interval connecting cycle on its endpoints: "+math.flow(math.relativeChains,Collections.singletonList(intervalCycle))

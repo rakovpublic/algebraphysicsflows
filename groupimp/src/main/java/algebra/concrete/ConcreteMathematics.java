@@ -54,6 +54,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final RelativeSimplicialCochainAlgebra relativeCochains;
     public final SimplicialChainAlgebra simplicialChains;
     public final RelativeSimplicialChainAlgebra relativeChains;
+    public final RelativeCapProductAlgebra relativeCaps;
     public final RationalAffineSpaceAlgebra affineSpaces;
     public final FiniteMarkovAlgebra markovKernels;
     public final RationalTensorAlgebra tensors;
@@ -91,6 +92,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         relativeCochains=new RelativeSimplicialCochainAlgebra(relativeComplexes,relativeMaps,cochains,integerVectors,integerMatrices,integers,naturals,booleans,integralHomology,abelianGroupElements,abelianHomomorphisms);
         simplicialChains=new SimplicialChainAlgebra(complexes,simplicialMaps,cochains,integerVectors,integerMatrices,integers,naturals,booleans,integralHomology,abelianGroupElements,abelianHomomorphisms);
         relativeChains=new RelativeSimplicialChainAlgebra(relativeComplexes,relativeMaps,simplicialChains,cochains,relativeCochains,integerVectors,integerMatrices,integers,naturals,booleans,integralHomology,abelianGroupElements,abelianHomomorphisms);
+        relativeCaps=new RelativeCapProductAlgebra(relativeChains,relativeComplexes,relativeCochains,integerMatrices,abelianGroupElements,abelianHomomorphisms,booleans);
         affineSpaces=new RationalAffineSpaceAlgebra(rectangularMatrices,finiteVectors,naturals,booleans);
         markovKernels=new FiniteMarkovAlgebra(integers,integerSets,integerProbabilities,integerFunctions,rectangularMatrices,finiteVectors,rationals,naturals,booleans);
         tensors=new RationalTensorAlgebra(rationals,finiteVectors,rectangularMatrices,naturals,booleans);
@@ -127,6 +129,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         values.add(relativeCochains);
         values.add(simplicialChains);
         values.add(relativeChains);
+        values.add(relativeCaps);
         values.addAll(fields); algebras=Collections.unmodifiableList(values);
         for(ConcreteAlgebra<?> algebra : algebras) {
             algebra.register(mathTool);

@@ -65,7 +65,7 @@ public final class RelativeSimplicialChain implements Serializable {
     public RelativeSimplicialChain boundary() {
         Computation work=new Computation(); return new RelativeSimplicialChain(pair,degree.subtract(BigInteger.ONE),work.apply(pair.boundaryMatrix(degree,work),coordinates));
     }
-    private boolean isCycle(Computation work) {
+    boolean isCycle(Computation work) {
         IntegerVector value=work.apply(pair.boundaryMatrix(degree,work),coordinates); return value.equals(IntegerVector.zero(value.dimension()));
     }
     public boolean isCycle() { return isCycle(new Computation()); }
