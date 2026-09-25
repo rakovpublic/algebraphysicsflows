@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1440 |
-| DIRECTLY_SUPPORTED | 1197 |
+| Scoped records | 1471 |
+| DIRECTLY_SUPPORTED | 1228 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1056 |
+| IMPLEMENTED | 1087 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1124 |
+| MACHINE_TESTED | 1155 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1033 | 1033 | 0 | 0 | 0 | 1033 | 0 | 0 |
+| Concrete MathTool algebras | 1064 | 1064 | 0 | 0 | 0 | 1064 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -1072,6 +1072,37 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Sample(Q).sample-variance | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations; native operation Sample(Q).sample-variance |
 | Sample(Q).scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations; native operation Sample(Q).scale |
 | Sample(Q).size | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations; native operation Sample(Q).size |
+| SimplicialCochain.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.add |
+| SimplicialCochain.basis-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.basis-on |
+| SimplicialCochain.class-of | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.class-of |
+| SimplicialCochain.coboundary | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.coboundary |
+| SimplicialCochain.cobounding-coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.cobounding-coordinates |
+| SimplicialCochain.cocycle-generators | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.cocycle-generators |
+| SimplicialCochain.cohomologous | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.cohomologous |
+| SimplicialCochain.cohomology | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.cohomology |
+| SimplicialCochain.cohomology-degrees | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.cohomology-degrees |
+| SimplicialCochain.cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.cohomology-map |
+| SimplicialCochain.cohomology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.cohomology-maps |
+| SimplicialCochain.cohomology-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.cohomology-on |
+| SimplicialCochain.complex | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.complex |
+| SimplicialCochain.coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.coordinates |
+| SimplicialCochain.cup | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.cup |
+| SimplicialCochain.cup-class | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.cup-class |
+| SimplicialCochain.degree | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.degree |
+| SimplicialCochain.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.equal |
+| SimplicialCochain.evaluate | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.evaluate |
+| SimplicialCochain.is-coboundary | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.is-coboundary |
+| SimplicialCochain.is-cocycle | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.is-cocycle |
+| SimplicialCochain.is-zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.is-zero |
+| SimplicialCochain.negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.negate |
+| SimplicialCochain.pullback | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.pullback |
+| SimplicialCochain.representative | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.representative |
+| SimplicialCochain.scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.scale |
+| SimplicialCochain.subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.subtract |
+| SimplicialCochain.unit-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.unit-on |
+| SimplicialCochain.with-coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.with-coordinates |
+| SimplicialCochain.zero-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.zero-on |
+| SimplicialCochainAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks |
 | SimplicialCover.connecting-chain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.connecting-chain-matrix |
 | SimplicialCover.connecting-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.connecting-homology-map |
 | SimplicialCover.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.equal |

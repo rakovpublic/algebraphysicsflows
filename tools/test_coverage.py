@@ -215,6 +215,14 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("entire list", " ".join(records["CoverMap.sum-homology-maps"]["required_invariants"]))
         self.assertIn("5000000", " ".join(records["CoverMap.long-exact-maps"]["known_limitations"]))
         self.assertIn("need not commute", " ".join(records["CoverMap.long-exact-maps"]["known_limitations"]))
+        self.assertIn("Alexander-Whitney", " ".join(records["SimplicialCochain.cup"]["required_invariants"]))
+        self.assertIn("not generally graded commutative on cochains", " ".join(records["SimplicialCochain.cup"]["required_invariants"]))
+        self.assertIn("H^k(target)->H^k(source)", " ".join(records["SimplicialCochain.cohomology-map"]["required_invariants"]))
+        self.assertIn("two cocycles", " ".join(records["SimplicialCochain.cup-class"]["required_invariants"]))
+        self.assertIn("noncocycles are undefined", " ".join(records["SimplicialCochain.cohomologous"]["required_invariants"]))
+        self.assertIn("empty vector", " ".join(records["SimplicialCochain.cobounding-coordinates"]["required_invariants"]))
+        self.assertIn("entire list", " ".join(records["SimplicialCochain.cohomology-degrees"]["required_invariants"]))
+        self.assertIn("5000000", " ".join(records["SimplicialCochain.cohomology-maps"]["known_limitations"]))
 
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)

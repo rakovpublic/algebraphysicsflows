@@ -29,6 +29,7 @@ import mathematics.topology.RelativeSimplicialComplex;
 import mathematics.topology.RelativeSimplicialMap;
 import mathematics.topology.SimplicialCover;
 import mathematics.topology.SimplicialCoverMap;
+import mathematics.topology.SimplicialCochain;
 import mathematics.linear.RationalVector;
 import mathematics.linear.IntegerVector;
 import mathematics.linear.IntegerMatrix;
@@ -90,6 +91,13 @@ public final class ConcreteAlgebrasExample {
                 .<SimplicialCover>performCustomResultOperation("SimplicialCover.from-complexes",closingEdge)
                 .<AbelianGroupHomomorphism,BigInteger>performAlgebraUnsafe("connecting-homology-map",BigInteger.ONE)
                 .<IntegerMatrix>performAlgebraTransfer("smith-matrix").collect());
+        System.out.println("Integral cohomology of the projective plane, by degree: "+math.flow(math.complexes,Collections.singletonList(projectivePlane))
+                .<IntegralHomology>performFlatAlgebraTransfer("SimplicialCochain.cohomology-degrees")
+                .<AbelianGroupType>performAlgebraTransfer("as-type").collect());
+        System.out.println("Coboundary of vertex values 0, 1, 3 on the circle: "+math.flow(math.complexes,Collections.singletonList(circle))
+                .<SimplicialCochain,BigInteger>performAlgebraUnsafe("SimplicialCochain.zero-on",BigInteger.ZERO)
+                .performCustomMemberOperation("with-coordinates",new IntegerVector(BigInteger.ZERO,BigInteger.ONE,BigInteger.valueOf(3)))
+                .performOneOperandOperation("coboundary").<IntegerVector>performAlgebraTransfer("coordinates").collect());
         SimplicialCover circleCover=new SimplicialCover(arc,closingEdge);
         Map<BigInteger,BigInteger> reverseCoverVertices=new TreeMap<>();
         reverseCoverVertices.put(BigInteger.ZERO,BigInteger.valueOf(2)); reverseCoverVertices.put(BigInteger.ONE,BigInteger.ONE); reverseCoverVertices.put(BigInteger.valueOf(2),BigInteger.ZERO);

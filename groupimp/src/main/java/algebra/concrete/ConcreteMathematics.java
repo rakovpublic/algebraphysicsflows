@@ -50,6 +50,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final RelativeSimplicialMapAlgebra relativeMaps;
     public final SimplicialCoverAlgebra simplicialCovers;
     public final SimplicialCoverMapAlgebra coverMaps;
+    public final SimplicialCochainAlgebra cochains;
     public final RationalAffineSpaceAlgebra affineSpaces;
     public final FiniteMarkovAlgebra markovKernels;
     public final RationalTensorAlgebra tensors;
@@ -83,6 +84,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         relativeMaps=new RelativeSimplicialMapAlgebra(relativeComplexes,simplicialMaps,integers,naturals,booleans,integerMatrices,integralHomology,abelianHomomorphisms);
         simplicialCovers=new SimplicialCoverAlgebra(complexes,integers,naturals,booleans,integerMatrices,integralHomology,abelianHomomorphisms,relativeMaps);
         coverMaps=new SimplicialCoverMapAlgebra(simplicialCovers,simplicialMaps,relativeMaps,integers,naturals,booleans,integerMatrices,integralHomology,abelianHomomorphisms);
+        cochains=new SimplicialCochainAlgebra(complexes,simplicialMaps,integerVectors,integers,naturals,booleans,integralHomology,abelianGroupElements,abelianHomomorphisms);
         affineSpaces=new RationalAffineSpaceAlgebra(rectangularMatrices,finiteVectors,naturals,booleans);
         markovKernels=new FiniteMarkovAlgebra(integers,integerSets,integerProbabilities,integerFunctions,rectangularMatrices,finiteVectors,rationals,naturals,booleans);
         tensors=new RationalTensorAlgebra(rationals,finiteVectors,rectangularMatrices,naturals,booleans);
@@ -115,6 +117,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         values.add(relativeMaps);
         values.add(simplicialCovers);
         values.add(coverMaps);
+        values.add(cochains);
         values.addAll(fields); algebras=Collections.unmodifiableList(values);
         for(ConcreteAlgebra<?> algebra : algebras) {
             algebra.register(mathTool);

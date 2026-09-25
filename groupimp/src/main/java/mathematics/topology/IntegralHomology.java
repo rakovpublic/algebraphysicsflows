@@ -48,7 +48,9 @@ public final class IntegralHomology implements Serializable {
     public List<IntegerVector> boundaryBasis() { return incoming.imageBasis(); }
     /** Representatives of minimal Smith generators: nontrivial torsion first, then free generators. */
     public List<IntegerVector> generators() {
-        Computation work=new Computation();
+        return generators(new Computation());
+    }
+    public List<IntegerVector> generators(Computation work) {
         IntegerMatrix representatives=work.multiply(cycles,work.inverseUnimodular(group.smithCoordinateMap()));
         List<IntegerVector> result=new ArrayList<>();
         for(AbelianGroupElement generator : group.smithGenerators()) {
@@ -63,13 +65,17 @@ public final class IntegralHomology implements Serializable {
     public IntegerVector cycleCoordinates(IntegerVector cycle) { return new Computation().solve(cycles,cycle); }
     public IntegerVector fromCycleCoordinates(IntegerVector coordinates) { return cycles.multiply(coordinates); }
     public AbelianGroupElement classOf(IntegerVector cycle) {
-        Computation work=new Computation();
+        return classOf(cycle,new Computation());
+    }
+    public AbelianGroupElement classOf(IntegerVector cycle,Computation work) {
         return group.fromSmith(work.apply(group.smithCoordinateMap(),work.solve(cycles,cycle)));
     }
     /** One cycle representative; this is a set-theoretic section, generally not an additive map. */
     public IntegerVector representative(AbelianGroupElement element) {
+        return representative(element,new Computation());
+    }
+    public IntegerVector representative(AbelianGroupElement element,Computation work) {
         if(!group.equals(element.group())) throw MathFailure.undefined("The class must belong to this retained homology presentation");
-        Computation work=new Computation();
         return work.apply(cycles,work.solve(group.smithCoordinateMap(),element.smithCoordinates()));
     }
     public IntegerVector boundingChain(IntegerVector boundary) { return new Computation().solve(incoming,boundary); }
