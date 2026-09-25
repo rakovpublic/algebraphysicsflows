@@ -21,7 +21,7 @@ public final class SimplicialChain implements Serializable {
         this.complex=Objects.requireNonNull(complex); this.degree=Objects.requireNonNull(degree); this.coordinates=Objects.requireNonNull(coordinates);
         if(basis(complex,degree).size()!=coordinates.dimension()) throw MathFailure.undefined("Chain coordinates must match the full complex and degree");
     }
-    private static List<FiniteSet<Integer>> basis(FiniteSimplicialComplex complex,BigInteger degree) {
+    static List<FiniteSet<Integer>> basis(FiniteSimplicialComplex complex,BigInteger degree) {
         if(complex.faces().size()>FiniteSimplicialMap.MAX_SIMPLICES)
             throw new MathFailure(MathFailure.Kind.IMPLEMENTATION_FAILURE,"Simplicial chains allow at most 4096 nonempty simplices");
         return degree.signum()<0 || degree.compareTo(BigInteger.valueOf(complex.dimension()))>0?Collections.emptyList():IntegralSimplicialHomology.orderedBasis(complex,null,degree.intValueExact());
@@ -65,7 +65,7 @@ public final class SimplicialChain implements Serializable {
         if(!isCycle(work) || !other.isCycle(work)) throw MathFailure.undefined("Homology comparison requires two cycles");
         return work.hasSolution(boundary(complex,degree.add(BigInteger.ONE),work),coordinates.add(other.coordinates.scale(BigInteger.ONE.negate())));
     }
-    private static IntegralHomology homology(FiniteSimplicialComplex complex,BigInteger degree,Computation work) {
+    static IntegralHomology homology(FiniteSimplicialComplex complex,BigInteger degree,Computation work) {
         return new IntegralHomology(boundary(complex,degree,work),boundary(complex,degree.add(BigInteger.ONE),work),work);
     }
     public IntegralHomology homology() { return homology(complex,degree,new Computation()); }
@@ -98,13 +98,20 @@ public final class SimplicialChain implements Serializable {
                                             IntegerVector coefficients,boolean fixedCochain,Computation work) {
         cochainDegree(cochainDegree);
         List<FiniteSet<Integer>> chains=basis(complex,chainDegree),cochains=basis(complex,cochainDegree),target=basis(complex,chainDegree.subtract(cochainDegree));
+        return capMatrix(chains,cochains,target,cochainDegree,coefficients,fixedCochain,work);
+    }
+    /** Missing front faces have zero cochain value; missing back faces vanish in the target quotient. */
+    static IntegerMatrix capMatrix(List<FiniteSet<Integer>> chains,List<FiniteSet<Integer>> cochains,List<FiniteSet<Integer>> target,
+                                   BigInteger cochainDegree,IntegerVector coefficients,boolean fixedCochain,Computation work) {
+        cochainDegree(cochainDegree);
         int columns=fixedCochain?chains.size():cochains.size(); work.use((long)target.size()*columns);
         BigInteger[][] entries=new BigInteger[target.size()][columns]; for(BigInteger[] row : entries) Arrays.fill(row,BigInteger.ZERO);
         if(!chains.isEmpty() && !target.isEmpty()) {
             int split=cochainDegree.intValueExact(); Map<FiniteSet<Integer>,Integer> front=positions(cochains),back=positions(target);
             for(int c=0;c<chains.size();c++) {
                 List<Integer> vertices=IntegralSimplicialHomology.vertices(chains.get(c)); work.use(vertices.size());
-                int head=front.get(new FiniteSet<>(vertices.subList(0,split+1))),tail=back.get(new FiniteSet<>(vertices.subList(split,vertices.size())));
+                Integer head=front.get(new FiniteSet<>(vertices.subList(0,split+1))),tail=back.get(new FiniteSet<>(vertices.subList(split,vertices.size())));
+                if(head==null || tail==null) continue;
                 int column=fixedCochain?c:head; BigInteger value=coefficients.get(fixedCochain?head:c);
                 entries[tail][column]=entries[tail][column].add(value);
             }

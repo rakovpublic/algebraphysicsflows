@@ -31,6 +31,7 @@ import mathematics.topology.SimplicialCover;
 import mathematics.topology.SimplicialCoverMap;
 import mathematics.topology.SimplicialCochain;
 import mathematics.topology.SimplicialChain;
+import mathematics.topology.RelativeSimplicialChain;
 import mathematics.topology.RelativeSimplicialCochain;
 import mathematics.linear.RationalVector;
 import mathematics.linear.IntegerVector;
@@ -88,6 +89,14 @@ public final class ConcreteAlgebrasExample {
                 .<IntegerVector>performFlatAlgebraTransfer("generators").collect());
         FiniteSimplicialComplex circle=new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0,1),FiniteSet.of(0,2),FiniteSet.of(1,2)));
         SimplicialChain orientedCircle=new SimplicialChain(circle,BigInteger.ONE,new IntegerVector(BigInteger.ONE,BigInteger.ONE.negate(),BigInteger.ONE));
+        RelativeSimplicialComplex intervalCapPair=new RelativeSimplicialComplex(new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0,1))),
+                new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0),FiniteSet.of(1))));
+        RelativeSimplicialChain intervalCycle=new RelativeSimplicialChain(intervalCapPair,BigInteger.ONE,new IntegerVector(BigInteger.ONE));
+        RelativeSimplicialCochain intervalCocycle=new RelativeSimplicialCochain(intervalCapPair,BigInteger.ONE,new IntegerVector(BigInteger.valueOf(3)));
+        System.out.println("Relative interval cap gives an absolute zero-chain of augmentation: "+math.flow(math.relativeChains,Collections.singletonList(intervalCycle))
+                .<SimplicialChain,RelativeSimplicialCochain>performAlgebraUnsafe("relative-cap",intervalCocycle).<BigInteger>performAlgebraTransfer("augmentation").collect());
+        System.out.println("Relative interval connecting cycle on its endpoints: "+math.flow(math.relativeChains,Collections.singletonList(intervalCycle))
+                .<SimplicialChain>performAlgebraTransfer("connect-cycle").<IntegerVector>performAlgebraTransfer("coordinates").collect());
         SimplicialCochain circleCocycle=new SimplicialCochain(circle,BigInteger.ONE,new IntegerVector(BigInteger.ONE,BigInteger.ZERO,BigInteger.ZERO));
         System.out.println("Circle cycle capped with its unit-period cocycle has augmentation: "+math.flow(math.simplicialChains,Collections.singletonList(orientedCircle))
                 .performCustomMemberOperation("cap",circleCocycle).<BigInteger>performAlgebraTransfer("augmentation").collect());

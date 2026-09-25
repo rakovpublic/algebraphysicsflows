@@ -1,10 +1,10 @@
 # Concrete algebras connected to MathTool
 
-`new ConcreteMathematics()` creates real `Algebra<T>` instances and registers their native operations in the existing `MathTool`. It includes N, Z, Q, Q(i), H(Q), Boolean, Q^2, Mat2(Q), Vec(Q), Mat(Q), Vec(Z), Mat(Z), Affine(Q), Tensor(Q), Exterior(Q), Q[x], Q(x), Poly(Q), PolynomialMap(Q), PolynomialForm(Q), PolynomialCell(Q), PolynomialChain(Q), S3, Z/6Z, finite sets of integers, rational samples, finite integer probability measures and stochastic kernels, finite simplicial complexes and vertex maps with constructive integral homology, relative pairs and their maps, ordered covers and their maps with natural Mayer-Vietoris/excision diagrams, integral and relative cochains with cup products and natural contravariant cohomology sequences, typed integral chains with pairing and cap products, finitely generated abelian-group types, explicit abelian presentations, quotient elements and homomorphisms, finite integer relations/functions, finite categories/functors/natural transformations, and F5 (named Z/5Z). Each construction owns its algebra instances; separate tools do not share mutable registrations.
+`new ConcreteMathematics()` creates real `Algebra<T>` instances and registers their native operations in the existing `MathTool`. It includes N, Z, Q, Q(i), H(Q), Boolean, Q^2, Mat2(Q), Vec(Q), Mat(Q), Vec(Z), Mat(Z), Affine(Q), Tensor(Q), Exterior(Q), Q[x], Q(x), Poly(Q), PolynomialMap(Q), PolynomialForm(Q), PolynomialCell(Q), PolynomialChain(Q), S3, Z/6Z, finite sets of integers, rational samples, finite integer probability measures and stochastic kernels, finite simplicial complexes and vertex maps with constructive integral homology, relative pairs and their maps, ordered covers and their maps with natural Mayer-Vietoris/excision diagrams, integral and relative cochains with cup products and natural contravariant cohomology sequences, typed integral and relative chains with connecting cycles, pairing and cap products, finitely generated abelian-group types, explicit abelian presentations, quotient elements and homomorphisms, finite integer relations/functions, finite categories/functors/natural transformations, and F5 (named Z/5Z). Each construction owns its algebra instances; separate tools do not share mutable registrations.
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1115 native operations from 52 algebra builders.
+The default initializer currently installs 1154 native operations from 53 algebra builders.
 
 ## Existing API usage
 
@@ -56,6 +56,7 @@ List<String> values = math.flow(math.naturals,
 | RelativeSimplicialMapAlgebra / RelativeMap | compose; equality/pair contiguity -> Boolean | inverse; source/target pairs; ambient/subcomplex maps; image/corestriction; flat relative chain and homology maps | construction from an ambient map and pair boundaries; identities/inclusions; absolute/diagonal extensions; restriction; degreewise relative maps and four-map naturality lists |
 | SimplicialCoverAlgebra / SimplicialCover | ordered-cover equality -> Boolean | left/right/union/intersection; swap; Euler characteristic; flat sum boundaries/coboundaries and homology/cohomology; excision RelativeMap | cover construction; direct-sum homology/cohomology and component maps; signed intersection/addition/splitting and restriction/difference matrices; scalar/flat homological and cohomological Mayer-Vietoris maps |
 | SimplicialCoverMapAlgebra / CoverMap | compose; equality/piecewise contiguity -> Boolean | inverse; source/target covers; union/left/right/intersection maps; swap both covers; image/corestriction; flat sum matrices/maps; two excision RelativeMaps | construction from a union map and paired covers; identity/inclusion; restriction; degreewise sum/component homology and contravariant cohomology maps; four-map Mayer-Vietoris naturality lists for each theory |
+| RelativeSimplicialChainAlgebra / RelativeChain | pair/degree-checked add/subtract; equality/homology comparison -> Boolean | boundary; negate; pair/degree/coordinates; cycle/boundary predicates; fillings; homology/class; flat cycle generators; absolute lift and connecting cycle | projection from absolute chains; integer scale; pair-map pushforward; relative pairing; both standard relative cap products and their matrices/induced maps; zero and flat basis constructors |
 | SimplicialChainAlgebra / SimplicialChain | context-checked add/subtract; equality/homology comparison -> Boolean | boundary; negate; complex/degree/coordinates; cycle/boundary predicates; fillings; homology/class; flat cycle generators; augmentation | integer scale; coordinates; pushforward; pairing; cap and cap-class; fixed-chain/cochain cap matrices and induced maps; zero and flat basis constructors |
 | SimplicialCochainAlgebra / SimplicialCochain | same-context add/subtract; cup; equality/cohomologous -> Boolean; cup-class -> AbelianGroupElement | negate; complex/degree/coordinates; coboundary; zero/cocycle/coboundary tests; cohomology model/class; cobounding coordinates; flat cocycle generators | degreewise zero/basis construction and unit; integer scaling; coordinate replacement; representative; evaluation; pullback; scalar/flat cohomology models and contravariant maps |
 | RelativeSimplicialCochainAlgebra / RelativeCochain | same-pair add/subtract; cup on union pairs; equality/cohomologous -> Boolean; cup-class -> AbelianGroupElement | negate; pair/degree/coordinates; coboundary; cocycle/coboundary tests; cohomology model/class; primitives; flat cocycle generators; absolute extension | zero/basis construction; absolute conversion; scaling/coordinates/representative/evaluation; pair-map pullback; connecting cocycle; scalar/flat relative cohomology and natural exact-sequence maps |
@@ -1056,7 +1057,7 @@ For degrees p and q, `cup` evaluates on an increasing simplex by multiplying the
 
 `pullback` accepts a simplicial map f:X->Y when the cochain is on exactly Y, and applies the transpose of its oriented chain matrix. It preserves degree, commutes with coboundary, reverses composition, and sends collapsed positive-degree simplices to zero. Scalar `SimplicialCochain.cohomology-map` and unary flat `cohomology-maps`, registered on SimplicialMap, return H^k(Y)->H^k(X). The flat list runs through the larger boundary dimension. For arbitrary vertex maps, cup naturality holds on cohomology; equality of the cochain products is not asserted. Reversing an edge already supplies a counterexample for nonconstant degree-zero cochains, while the torus axis swap preserves cup classes and reverses the top class.
 
-Each complex has at most 4096 nonempty simplices, and each required vector or matrix basis has at most 256 simplices. A 5,000,000-unit integer budget covers each compound cohomology construction, projection, representative computation, generator list, cup-class or induced map. Each whole cohomology-model/map degree list shares one budget across all outputs; exhaustion raises IMPLEMENTATION_FAILURE without a partial list. Coefficient bit lengths remain unbounded. The scope is homogeneous unreduced integral cochains on finite abstract complexes. RelativeCochain supplies relative cup products and natural long exact cohomology sequences. Other coefficient rings, mixed-degree ring carriers, explicit cup homotopies, relative cap products, Steenrod operations, persistence and continuous maps remain future work.
+Each complex has at most 4096 nonempty simplices, and each required vector or matrix basis has at most 256 simplices. A 5,000,000-unit integer budget covers each compound cohomology construction, projection, representative computation, generator list, cup-class or induced map. Each whole cohomology-model/map degree list shares one budget across all outputs; exhaustion raises IMPLEMENTATION_FAILURE without a partial list. Coefficient bit lengths remain unbounded. The scope is homogeneous unreduced integral cochains on finite abstract complexes. RelativeCochain supplies relative cup products and natural long exact cohomology sequences. Other coefficient rings, mixed-degree ring carriers, explicit cup homotopies, general cap products with independently chosen subcomplexes A and B, Steenrod operations, persistence and continuous maps remain future work.
 
 NativeSimplicialCochainTest checks 729 ternary cochains against independent cup coefficients and differential identities, all 256 tetrahedron vertex maps against signed pullback formulas, all 27 circle maps and 729 contravariant compositions, and all 64 four-vertex graphs against independent connectivity counts. Further tests check the integral torus cup ring, representative independence, nonnatural cochain products, projective-plane torsion, dual evaluation, primitives, empty/high-degree/extreme-label cases, whole-list resource budgets, native wrappers and serialized flows. All 30 registrations have explicit expected results in ConcreteAlgebrasTest.
 
@@ -1110,7 +1111,7 @@ H^k(X,A) -> H^k(X) -> H^k(A) -> H^(k+1)(X,A)
 
 All three squares commute. The chosen connecting cochain matrices need not commute before taking cohomology; tests include such a pair inclusion. Existing simplicial excision RelativeMaps induce relative cohomology isomorphisms in the reversed direction, even when their ambient maps are not invertible.
 
-Each boundary complex has at most 4096 nonempty simplices and each required matrix/vector basis at most 256. Relative bases are filtered first; operations involving full ambient or subcomplex cochains, such as extension and exact sequences, also require those bases to fit. Each compound cohomology, class, cup-class or map computation shares a 5,000,000-unit integer budget, as does each whole degree list, three-map exact segment or four-map naturality list. Exhaustion raises IMPLEMENTATION_FAILURE without partial lists; integer bit lengths remain unbounded. Other coefficients, mixed-degree ring carriers, explicit cup homotopies, relative cap products, higher cohomology operations, persistence and continuous maps remain outside scope.
+Each boundary complex has at most 4096 nonempty simplices and each required matrix/vector basis at most 256. Relative bases are filtered first; operations involving full ambient or subcomplex cochains, such as extension and exact sequences, also require those bases to fit. Each compound cohomology, class, cup-class or map computation shares a 5,000,000-unit integer budget, as does each whole degree list, three-map exact segment or four-map naturality list. Exhaustion raises IMPLEMENTATION_FAILURE without partial lists; integer bit lengths remain unbounded. Other coefficients, mixed-degree ring carriers, explicit cup homotopies, general cap products with independently chosen subcomplexes A and B, higher cohomology operations, persistence and continuous maps remain outside scope.
 
 NativeRelativeCochainTest checks 1,024 graph/vertex-subcomplex pairs against independent connectivity formulas, all 27 triangle pair maps and 729 compositions against vertex-potential formulas, and 729 relative cochain products. It also checks square products and orientation reversal, disks through dimension four, projective-plane torsion and index-two images, integer exactness, all naturality squares, excision, zero extensions and primitives, filtered basis limits, whole-list resource failures, actual wrappers and serialized flows. All 41 registrations have explicit expected results in ConcreteAlgebrasTest.
 
@@ -1230,6 +1231,67 @@ List<String> duality = math.flow(math.simplicialChains,
 
 `cap` is an actual `ICustomMemberOperation`: chain A times cochain B returns the first chain algebra's `IAlgebraItem` wrapper. `boundary` uses `IOneOperandOperation`, and `cycle-generators` uses `IOneOperandFlatOperation`. All other registrations likewise reuse `operations/simple` and `operations/flat` through the original Algebra and AlgebraFlow.
 
-Each complex has at most 4096 nonempty simplices and each required vector/matrix basis at most 256 simplices. This includes adjacent degrees for homology and the source, cochain and target degrees for cap matrices. Each compound homology, class, cap-class, induced-map or generator-list calculation shares one 5,000,000-unit integer work budget, including both models of an induced map. Exhaustion raises IMPLEMENTATION_FAILURE without false predicates or partial lists. Integer bit lengths are unbounded. The scope is homogeneous unreduced integral chains; relative cap products, mixed-degree chain carriers, other coefficients, automatic fundamental-class construction, manifold/orientation certification and explicit cap homotopies remain outside scope.
+Each complex has at most 4096 nonempty simplices and each required vector/matrix basis at most 256 simplices. This includes adjacent degrees for homology and the source, cochain and target degrees for cap matrices. Each compound homology, class, cap-class, induced-map or generator-list calculation shares one 5,000,000-unit integer work budget, including both models of an induced map. Exhaustion raises IMPLEMENTATION_FAILURE without false predicates or partial lists. Integer bit lengths are unbounded. The scope is homogeneous unreduced integral chains; general cap products with independently chosen subcomplexes A and B, mixed-degree chain carriers, other coefficients, automatic fundamental-class construction, manifold/orientation certification and explicit cap homotopies remain outside scope.
 
 NativeSimplicialChainTest checks independent cap coefficients and differential signs for 729 ternary cochains, cup-module identities, explicit torus intersection signs, sphere duality maps through dimension four, projective-plane torsion, invariance under changing representatives, all 27 circle maps and 729 pushforward compositions, all 256 tetrahedron maps, cap naturality on classes, zero and negative-degree conventions, invalid contexts, basis and shared-map limits, original wrappers and repeatable serialized flows. All 30 registrations have explicit independent expected values in ConcreteAlgebrasTest.
+
+
+## Relative simplicial chains and the two standard relative cap products
+
+`math.relativeChains` adds 39 native operations on `RelativeChain`. A value retains a complete labelled pair `(X,A)`, an integer degree and integral coordinates on simplices of X outside A. Quotient bases are filtered before the dimension bound. As with SimplicialChain, negative-degree groups contain only zero chains.
+
+`RelativeChain.from-absolute` projects an absolute chain modulo A; the input can have nonzero coefficients on A. Projection commutes with boundary. `lift-absolute` inserts zeros on A and is a section of that projection, but generally fails to commute with boundary. `connect-cycle` requires a relative cycle and returns the boundary of its zero-on-A lift as a SimplicialChain on the full subcomplex A. In positive source degree its homology class equals the existing connecting homomorphism; in nonpositive degrees it is zero under the unreduced convention.
+
+The two cap products use the existing front/back formula:
+
+```
+cap:          C_n(X,A) x C^p(X)   -> C_(n-p)(X,A)
+relative-cap: C_n(X,A) x C^p(X,A) -> C_(n-p)(X)
+```
+
+For `cap`, back faces in A vanish in the quotient target. For `relative-cap`, front faces in A have zero cochain value, which makes the result independent of the choice of chain lift; back faces in A must remain in the absolute target. Both products satisfy the signed boundary identity and descend to integral homology. These are the two standard relative forms described in [Hatcher, section 3.3](https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf). Naturality under arbitrary pair maps holds on homology classes; chosen sorted chain representatives need not agree.
+
+| Operations | Meaning |
+| --- | --- |
+| `RelativeChain.zero-on`, flat `RelativeChain.basis-on` | Pair and integer degree -> relative chains |
+| `RelativeChain.absolute`, `RelativeChain.from-absolute` | Absolute embedding on `(X,empty)` or projection onto a supplied pair |
+| `add`, `subtract`, `negate`, `scale`, `equal`, `is-zero` | Integral arithmetic retaining full pair and degree |
+| `pair`, `degree`, `coordinates`, `with-coordinates` | Context and quotient coordinates |
+| `boundary`, `is-cycle`, `is-boundary`, `bounding-coordinates`, `homologous` | Quotient differential, integral filling and relative cycle comparison |
+| `homology`, `class-of`, `representative`, flat `cycle-generators` | Existing integral quotient presentations and typed cycle representatives |
+| `pushforward`, `evaluate` | Pair-map action and pairing with a RelativeCochain on the same pair and degree |
+| `lift-absolute`, `connect-cycle` | Zero-on-A absolute lift and connecting cycle on A |
+| `cap`, `cap-class`, `relative-cap`, `relative-cap-class` | The two cap products and their homology classes |
+| `cap-matrix`, `cap-homology-map`, `relative-cap-matrix`, `relative-cap-homology-map` | Fix a supplied cochain; use the first chain's pair and source degree, ignoring its coordinates |
+| `cap-cohomology-matrix`, `cap-cohomology-map`, `relative-cap-cohomology-matrix`, `relative-cap-cohomology-map` | Fix the supplied relative chain and a nonnegative cochain degree |
+
+For a fixed p-cocycle, the homology operations give `H_n(X,A)->H_(n-p)(X,A)` or `H_n(X,A)->H_(n-p)(X)`, respectively. For a fixed relative n-cycle, the cohomology operations give `H^p(X)->H_(n-p)(X,A)` or `H^p(X,A)->H_(n-p)(X)`. All maps preserve the actual integer presentations, including torsion. Matrix operations accept arbitrary cochains/chains; induced maps require the fixed operand to be closed. A supplied relative cycle is not automatically a certified fundamental class, and the resulting map need not be an isomorphism.
+
+```java
+RelativeSimplicialComplex pair = new RelativeSimplicialComplex(
+    new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0, 1))),
+    new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0), FiniteSet.of(1))));
+RelativeSimplicialChain interval = new RelativeSimplicialChain(
+    pair, BigInteger.ONE, new IntegerVector(BigInteger.ONE));
+RelativeSimplicialCochain cocycle = new RelativeSimplicialCochain(
+    pair, BigInteger.ONE, new IntegerVector(BigInteger.valueOf(3)));
+
+List<String> period = math.flow(math.relativeChains,
+    Collections.singletonList(interval))
+    .<SimplicialChain, RelativeSimplicialCochain>performAlgebraUnsafe(
+        "relative-cap", cocycle)
+    .<BigInteger>performAlgebraTransfer("augmentation")
+    .collect(); // ["3"]
+
+List<String> endpoints = math.flow(math.relativeChains,
+    Collections.singletonList(interval))
+    .<SimplicialChain>performAlgebraTransfer("connect-cycle")
+    .<IntegerVector>performAlgebraTransfer("coordinates")
+    .collect(); // ["[-1, 1]"]
+```
+
+`cap` returns the first RelativeChain wrapper through ICustomMemberOperation. `relative-cap` returns the actual SimplicialChain wrapper through the existing mixed-operation interface. Boundary and flat cycle generators use the original unary operation interfaces. No parallel execution engine is introduced.
+
+Each boundary complex has at most 4096 nonempty simplices and each required basis has at most 256 simplices. Relative bases are filtered first. Absolute lifts, absolute cap outputs, absolute cochain actions and adjacent homology degrees require the corresponding full bases to fit; a small quotient does not remove these additional requirements. Each compound homology, class, cap-class, induced-map or generator-list calculation shares one 5,000,000-unit integer work budget, including both models of each induced map. Exhaustion raises IMPLEMENTATION_FAILURE without partial lists or false predicates. Integer bit lengths are unbounded. General cap products with independently chosen subcomplexes A and B, automatic fundamental-class/orientation construction, mixed-degree chains, other coefficients, explicit cap homotopies and manifold/Lefschetz-duality certification remain outside scope.
+
+NativeRelativeChainTest checks both cap maps for disks through dimension four and an annulus, 729 independent cap coefficient calculations, signed boundary and cup-module identities, quotient projection versus non-chain-map lifts, all 27 triangle pair maps and 729 pushforward compositions, connecting and cap naturality on classes, representative independence, projective-plane torsion fillings, filtered bases, negative/huge degrees, shared budgets and serialized native flows. All 39 registrations have explicit expected results in ConcreteAlgebrasTest.

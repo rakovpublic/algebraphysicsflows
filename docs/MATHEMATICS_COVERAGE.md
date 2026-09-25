@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1574 |
-| DIRECTLY_SUPPORTED | 1331 |
+| Scoped records | 1614 |
+| DIRECTLY_SUPPORTED | 1371 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1190 |
+| IMPLEMENTED | 1230 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1258 |
+| MACHINE_TESTED | 1298 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1167 | 1167 | 0 | 0 | 0 | 1167 | 0 | 0 |
+| Concrete MathTool algebras | 1207 | 1207 | 0 | 0 | 0 | 1207 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -1004,6 +1004,45 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | RationalTensorAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction |
 | RationalVectorFamily | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations |
 | RationalVectorSpace | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed-dimensional rational vectors; default dimension two |
+| RelativeChain.absolute | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.absolute |
+| RelativeChain.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.add |
+| RelativeChain.basis-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.basis-on |
+| RelativeChain.boundary | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.boundary |
+| RelativeChain.bounding-coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.bounding-coordinates |
+| RelativeChain.cap | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.cap |
+| RelativeChain.cap-class | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.cap-class |
+| RelativeChain.cap-cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.cap-cohomology-map |
+| RelativeChain.cap-cohomology-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.cap-cohomology-matrix |
+| RelativeChain.cap-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.cap-homology-map |
+| RelativeChain.cap-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.cap-matrix |
+| RelativeChain.class-of | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.class-of |
+| RelativeChain.connect-cycle | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.connect-cycle |
+| RelativeChain.coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.coordinates |
+| RelativeChain.cycle-generators | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.cycle-generators |
+| RelativeChain.degree | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.degree |
+| RelativeChain.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.equal |
+| RelativeChain.evaluate | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.evaluate |
+| RelativeChain.from-absolute | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.from-absolute |
+| RelativeChain.homologous | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.homologous |
+| RelativeChain.homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.homology |
+| RelativeChain.is-boundary | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.is-boundary |
+| RelativeChain.is-cycle | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.is-cycle |
+| RelativeChain.is-zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.is-zero |
+| RelativeChain.lift-absolute | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.lift-absolute |
+| RelativeChain.negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.negate |
+| RelativeChain.pair | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.pair |
+| RelativeChain.pushforward | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.pushforward |
+| RelativeChain.relative-cap | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.relative-cap |
+| RelativeChain.relative-cap-class | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.relative-cap-class |
+| RelativeChain.relative-cap-cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.relative-cap-cohomology-map |
+| RelativeChain.relative-cap-cohomology-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.relative-cap-cohomology-matrix |
+| RelativeChain.relative-cap-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.relative-cap-homology-map |
+| RelativeChain.relative-cap-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.relative-cap-matrix |
+| RelativeChain.representative | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.representative |
+| RelativeChain.scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.scale |
+| RelativeChain.subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.subtract |
+| RelativeChain.with-coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.with-coordinates |
+| RelativeChain.zero-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology; native operation RelativeChain.zero-on |
 | RelativeCochain.absolute | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.absolute |
 | RelativeCochain.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.add |
 | RelativeCochain.ambient-cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.ambient-cohomology-map |
@@ -1099,6 +1138,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | RelativeMap.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.target |
 | RelativeMap.target-homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.target-homology |
 | RelativeSimplicialAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps |
+| RelativeSimplicialChainAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology |
 | RelativeSimplicialCochainAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences |
 | RelativeSimplicialMapAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps |
 | ResidueRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one |

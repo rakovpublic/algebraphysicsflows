@@ -61,7 +61,7 @@ public final class RelativeSimplicialCochain implements Serializable {
     public RelativeSimplicialCochain coboundary() {
         Computation work=new Computation(); return new RelativeSimplicialCochain(pair,degree.add(BigInteger.ONE),work.apply(differential(pair,degree,work),coordinates));
     }
-    private boolean isCocycle(Computation work) {
+    boolean isCocycle(Computation work) {
         IntegerVector result=work.apply(differential(pair,degree,work),coordinates); return result.equals(IntegerVector.zero(result.dimension()));
     }
     public boolean isCocycle() { return isCocycle(new Computation()); }
@@ -81,7 +81,7 @@ public final class RelativeSimplicialCochain implements Serializable {
         return new RelativeSimplicialCochain(target,total,SimplicialCochain.cupCoordinates(pair.basis(degree),coordinates,other.pair.basis(other.degree),other.coordinates,target.basis(total),degree,work));
     }
     public static IntegralHomology cohomology(RelativeSimplicialComplex pair,BigInteger degree) { return cohomology(pair,degree,new Computation()); }
-    private static IntegralHomology cohomology(RelativeSimplicialComplex pair,BigInteger degree,Computation work) {
+    static IntegralHomology cohomology(RelativeSimplicialComplex pair,BigInteger degree,Computation work) {
         requireDegree(degree); return new IntegralHomology(differential(pair,degree,work),pair.boundaryMatrix(degree,work).transpose(),work);
     }
     public IntegralHomology cohomology() { return cohomology(pair,degree); }
