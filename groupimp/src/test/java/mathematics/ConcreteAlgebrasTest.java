@@ -46,7 +46,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all1055RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all1085RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String discrete="Complex[[0], [1]]",emptyComplex="Complex[]";
@@ -70,6 +70,8 @@ public class ConcreteAlgebrasTest {
         String relativeZeroCochain="RelativeCochain(pair="+absolutePoint+", degree=0, coordinates=[0])",relativeUnit="RelativeCochain(pair="+absolutePoint+", degree=0, coordinates=[1])";
         String relativeNext="RelativeCochain(pair="+absolutePoint+", degree=1, coordinates=[])",zeroNextGroup="PresentedAbelianGroup(ZMatrix(0x1)[])";
         String cohomologyConnecting=homString(emptyGroup,zeroNextGroup,emptyMatrix),emptyIdentity=homString(emptyGroup,emptyGroup,emptyMatrix);
+        String restriction=homString(freeOne,freeTwo,"ZMatrix(2x1)[[1], [1]]"),difference=homString(freeTwo,freeOne,"ZMatrix(1x2)[[1, -1]]");
+        String coverConnecting=homString(freeOne,zeroNextGroup,"ZMatrix(0x1)[]");
         expected.put("RelativeSimplicialCochainAlgebra",String.join("|",relativeZeroCochain,"["+relativeUnit+"]",relativeZeroCochain,relativeZeroCochain,relativeZeroCochain,relativeZeroCochain,relativeZeroCochain,relativeZeroCochain,relativeZeroCochain,
                 "true",absolutePoint,"0","[0]","RelativeCochain(pair="+absolutePoint+", degree=0, coordinates=[3])",relativeNext,"true","true","true","true",pointHomology,
                 zeroClass,relativeZeroCochain,"[]","["+relativeUnit+"]",zeroClass,"0",relativeZeroCochain,zeroCochain,relativeNext,pointHomology,"["+pointHomology+"]",
@@ -82,12 +84,18 @@ public class ConcreteAlgebrasTest {
                 "true","true",pointCoverMap,pointCoverMap,pointCoverMap,identityTwo,"["+identityTwo+"]",identityTwoMap,"["+identityTwoMap+"]",
                 sumPointHomology,sumPointHomology,identityOneMap,identityOneMap,identityOneMap,identityOneMap,
                 "["+identityOneMap+", "+identityTwoMap+", "+identityOneMap+", "+homString(emptyGroup,emptyGroup,emptyMatrix)+"]",
-                relativePointMap,relativePointMap,"["+relativePointMap+", "+relativePointMap+"]","true",pointCover,pointCoverMap,pointCoverMap));
+                relativePointMap,relativePointMap,"["+relativePointMap+", "+relativePointMap+"]","true",pointCover,pointCoverMap,pointCoverMap,
+                identityTwo,"["+identityTwo+"]",identityTwoMap,"["+identityTwoMap+"]",sumPointHomology,sumPointHomology,
+                identityOneMap,identityOneMap,identityOneMap,identityOneMap,"["+identityOneMap+", "+identityTwoMap+", "+identityOneMap+", "+homString(zeroNextGroup,zeroNextGroup,emptyMatrix)+"]"));
         expected.put("SimplicialCoverAlgebra",String.join("|",pointCover,point,point,point,point,pointCover,"false","1","ZMatrix(0x2)[]","[ZMatrix(0x2)[]]",
                 sumPointHomology,"["+sumPointHomology+"]",pointHomology,pointHomology,pointHomology,pointHomology,
                 alphaMatrix,betaMatrix,"ZMatrix(2x1)[[1], [0]]","ZMatrix(0x1)[]",alpha,beta,delta,"["+alpha+", "+beta+", "+delta+"]",
                 homString(freeOne,freeTwo,"ZMatrix(2x1)[[1], [0]]"),homString(freeOne,freeTwo,"ZMatrix(2x1)[[0], [1]]"),
-                homString(freeTwo,freeOne,"ZMatrix(1x2)[[1, 0]]"),homString(freeTwo,freeOne,"ZMatrix(1x2)[[0, 1]]"),relativeMapString(diagonalPoint,diagonalPoint,"{0=0}")));
+                homString(freeTwo,freeOne,"ZMatrix(1x2)[[1, 0]]"),homString(freeTwo,freeOne,"ZMatrix(1x2)[[0, 1]]"),relativeMapString(diagonalPoint,diagonalPoint,"{0=0}"),
+                "ZMatrix(0x2)[]","[ZMatrix(0x2)[]]",sumPointHomology,"["+sumPointHomology+"]",pointHomology,pointHomology,pointHomology,pointHomology,
+                "ZMatrix(2x1)[[1], [1]]","ZMatrix(1x2)[[1, -1]]","ZMatrix(0x1)[]",restriction,difference,coverConnecting,"["+restriction+", "+difference+", "+coverConnecting+"]",
+                homString(freeOne,freeTwo,"ZMatrix(2x1)[[1], [0]]"),homString(freeOne,freeTwo,"ZMatrix(2x1)[[0], [1]]"),
+                homString(freeTwo,freeOne,"ZMatrix(1x2)[[1, 0]]"),homString(freeTwo,freeOne,"ZMatrix(1x2)[[0, 1]]")));
         String intervalPair="RelativeComplex(ambient="+edge+", subcomplex="+discrete+")",connectingMatrix="ZMatrix(2x1)[[-1], [1]]";
         String relativeH0="IntegralHomology(outgoing=ZMatrix(0x0)[], incoming=ZMatrix(0x1)[])";
         String relativeH1="IntegralHomology(outgoing=ZMatrix(0x1)[], incoming=ZMatrix(1x0)[[]])";
@@ -278,7 +286,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(1055,count);
+        assertEquals(1085,count);
     }
     private static String homString(String source,String target,String matrix) { return "AbelianHom(source="+source+", target="+target+", smith="+matrix+")"; }
     private static String simplicialString(String source,String target,String vertices) { return "SimplicialMap(source="+source+", target="+target+", vertices="+vertices+")"; }

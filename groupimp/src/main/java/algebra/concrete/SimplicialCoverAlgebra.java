@@ -37,10 +37,31 @@ public final class SimplicialCoverAlgebra extends ConcreteAlgebra<SimplicialCove
         binary("left-projection-map",algebra(),naturals.algebra(),maps.algebra(),false,SimplicialCover::leftProjectionMap);
         binary("right-projection-map",algebra(),naturals.algebra(),maps.algebra(),false,SimplicialCover::rightProjectionMap);
         unary("excision-map",algebra(),relativeMaps.algebra(),false,SimplicialCover::excisionMap);
+        binary("sum-coboundary-matrix",algebra(),naturals.algebra(),matrices.algebra(),false,SimplicialCover::sumCoboundaryMatrix);
+        unaryFlat("sum-coboundary-matrices",algebra(),matrices.algebra(),false,SimplicialCover::sumCoboundaryMatrices);
+        binary("sum-cohomology",algebra(),naturals.algebra(),homology.algebra(),false,SimplicialCover::sumCohomology);
+        unaryFlat("sum-cohomology-degrees",algebra(),homology.algebra(),false,SimplicialCover::sumCohomologyDegrees);
+        binary("left-cohomology",algebra(),naturals.algebra(),homology.algebra(),false,SimplicialCover::leftCohomology);
+        binary("right-cohomology",algebra(),naturals.algebra(),homology.algebra(),false,SimplicialCover::rightCohomology);
+        binary("intersection-cohomology",algebra(),naturals.algebra(),homology.algebra(),false,SimplicialCover::intersectionCohomology);
+        binary("union-cohomology",algebra(),naturals.algebra(),homology.algebra(),false,SimplicialCover::unionCohomology);
+        binary("restriction-matrix",algebra(),naturals.algebra(),matrices.algebra(),false,SimplicialCover::restrictionMatrix);
+        binary("difference-matrix",algebra(),naturals.algebra(),matrices.algebra(),false,SimplicialCover::differenceMatrix);
+        binary("connecting-cochain-matrix",algebra(),naturals.algebra(),matrices.algebra(),false,SimplicialCover::connectingCochainMatrix);
+        binary("restriction-cohomology-map",algebra(),naturals.algebra(),maps.algebra(),false,SimplicialCover::restrictionCohomologyMap);
+        binary("difference-cohomology-map",algebra(),naturals.algebra(),maps.algebra(),false,SimplicialCover::differenceCohomologyMap);
+        binary("connecting-cohomology-map",algebra(),naturals.algebra(),maps.algebra(),false,SimplicialCover::connectingCohomologyMap);
+        flat("long-exact-cohomology-segment",algebra(),naturals.algebra(),maps.algebra(),false,SimplicialCover::longExactCohomologySegment);
+        binary("left-cohomology-inclusion-map",algebra(),naturals.algebra(),maps.algebra(),false,SimplicialCover::leftCohomologyInclusionMap);
+        binary("right-cohomology-inclusion-map",algebra(),naturals.algebra(),maps.algebra(),false,SimplicialCover::rightCohomologyInclusionMap);
+        binary("left-cohomology-projection-map",algebra(),naturals.algebra(),maps.algebra(),false,SimplicialCover::leftCohomologyProjectionMap);
+        binary("right-cohomology-projection-map",algebra(),naturals.algebra(),maps.algebra(),false,SimplicialCover::rightCohomologyProjectionMap);
         law("The ordered pieces cover their union simplex by simplex. Sum chains use left coordinates followed by right coordinates.");
         law("The intersection chain map is (i,-j), the union map is addition, and their sequence is short exact over Z.");
         law("The connecting map sends a union cycle to the boundary of its left part. Splitting assigns shared simplices left and need not be a chain map.");
         law("The Mayer-Vietoris homology sequence is exact. Component inclusions and projections exhibit the sum homology as the direct sum of the two homologies.");
         law("The inclusion (A,A intersection B)->(A union B,B) induces an isomorphism on integral relative chains and homology.");
+        law("The cohomological Mayer-Vietoris sequence uses restriction to both pieces, left-minus-right restriction to the intersection, and a degree-raising connecting homomorphism.");
+        law("Sum cohomology retains integral presentations, including torsion. Connecting cochains extend on the left and differentiate; swapping pieces negates the induced connecting homomorphism.");
     }
 }

@@ -131,8 +131,65 @@ public final class SimplicialCover implements Serializable {
         return Collections.unmodifiableList(Arrays.asList(i.inducedMap(sum,intersectionMatrix(degree,work),work),
                 sum.inducedMap(u,unionMatrix(degree,work),work),u.inducedMap(connectingTarget(degree,work),connectingChainMatrix(degree,work),work)));
     }
+    /** Differential on C^k(A) direct-sum C^k(B), retaining left-then-right coordinates. */
+    public IntegerMatrix sumCoboundaryMatrix(BigInteger degree) { requireDegree(degree); return sumCoboundaryMatrix(degree,new Computation()); }
+    private IntegerMatrix sumCoboundaryMatrix(BigInteger degree,Computation work) {
+        return sumBoundaryMatrix(degree.add(BigInteger.ONE),work).transpose();
+    }
+    public List<IntegerMatrix> sumCoboundaryMatrices() {
+        Computation work=new Computation(); List<IntegerMatrix> result=new ArrayList<>();
+        for(int k=0;k<=union.dimension();k++) result.add(sumCoboundaryMatrix(BigInteger.valueOf(k),work)); return Collections.unmodifiableList(result);
+    }
+    public IntegralHomology sumCohomology(BigInteger degree) { return sumCohomology(degree,new Computation()); }
+    IntegralHomology sumCohomology(BigInteger degree,Computation work) {
+        requireDegree(degree);
+        return new IntegralHomology(sumCoboundaryMatrix(degree,work),sumBoundaryMatrix(degree,work).transpose(),work);
+    }
+    public List<IntegralHomology> sumCohomologyDegrees() {
+        Computation work=new Computation(); List<IntegralHomology> result=new ArrayList<>();
+        for(int k=0;k<=union.dimension();k++) result.add(sumCohomology(BigInteger.valueOf(k),work)); return Collections.unmodifiableList(result);
+    }
+    public IntegralHomology leftCohomology(BigInteger degree) { return SimplicialCochain.cohomology(left,degree); }
+    public IntegralHomology rightCohomology(BigInteger degree) { return SimplicialCochain.cohomology(right,degree); }
+    public IntegralHomology intersectionCohomology(BigInteger degree) { return SimplicialCochain.cohomology(intersection,degree); }
+    public IntegralHomology unionCohomology(BigInteger degree) { return SimplicialCochain.cohomology(union,degree); }
+    /** Restrict a union cochain to both ordered pieces. */
+    public IntegerMatrix restrictionMatrix(BigInteger degree) { return unionMatrix(degree).transpose(); }
+    /** Restrict both components to the intersection and subtract right from left. */
+    public IntegerMatrix differenceMatrix(BigInteger degree) { return intersectionMatrix(degree).transpose(); }
+    /** Extend an intersection cocycle by zero in A, differentiate there, and glue with zero on B.
+     * The formula on arbitrary cochains need not be natural; the induced cohomology map is natural. */
+    public IntegerMatrix connectingCochainMatrix(BigInteger degree) { requireDegree(degree); return connectingCochainMatrix(degree,new Computation()); }
+    private IntegerMatrix connectingCochainMatrix(BigInteger degree,Computation work) {
+        return connectingChainMatrix(degree.add(BigInteger.ONE),work).transpose();
+    }
+    public AbelianGroupHomomorphism restrictionCohomologyMap(BigInteger degree) {
+        requireDegree(degree); Computation work=new Computation();
+        return SimplicialCochain.cohomology(union,degree,work).inducedMap(sumCohomology(degree,work),unionMatrix(degree,work).transpose(),work);
+    }
+    public AbelianGroupHomomorphism differenceCohomologyMap(BigInteger degree) {
+        requireDegree(degree); Computation work=new Computation();
+        return sumCohomology(degree,work).inducedMap(SimplicialCochain.cohomology(intersection,degree,work),intersectionMatrix(degree,work).transpose(),work);
+    }
+    public AbelianGroupHomomorphism connectingCohomologyMap(BigInteger degree) {
+        requireDegree(degree); Computation work=new Computation();
+        return SimplicialCochain.cohomology(intersection,degree,work).inducedMap(SimplicialCochain.cohomology(union,degree.add(BigInteger.ONE),work),connectingCochainMatrix(degree,work),work);
+    }
+    /** H^k(U)->H^k(A) direct-sum H^k(B)->H^k(I)->H^(k+1)(U), three maps in order. */
+    public List<AbelianGroupHomomorphism> longExactCohomologySegment(BigInteger degree) {
+        requireDegree(degree); Computation work=new Computation();
+        IntegralHomology u=SimplicialCochain.cohomology(union,degree,work),sum=sumCohomology(degree,work),i=SimplicialCochain.cohomology(intersection,degree,work);
+        return Collections.unmodifiableList(Arrays.asList(u.inducedMap(sum,unionMatrix(degree,work).transpose(),work),
+                sum.inducedMap(i,intersectionMatrix(degree,work).transpose(),work),
+                i.inducedMap(SimplicialCochain.cohomology(union,degree.add(BigInteger.ONE),work),connectingCochainMatrix(degree,work),work)));
+    }
     private AbelianGroupHomomorphism componentMap(BigInteger degree,boolean second,boolean projection) {
-        requireDegree(degree); Computation work=new Computation(); IntegralHomology component=homology(second?right:left,degree,work),sum=sumHomology(degree,work);
+        return componentMap(degree,second,projection,false);
+    }
+    private AbelianGroupHomomorphism componentMap(BigInteger degree,boolean second,boolean projection,boolean cohomology) {
+        requireDegree(degree); Computation work=new Computation();
+        IntegralHomology component=cohomology?SimplicialCochain.cohomology(second?right:left,degree,work):homology(second?right:left,degree,work);
+        IntegralHomology sum=cohomology?sumCohomology(degree,work):sumHomology(degree,work);
         int n=component.chainRank(),total=sum.chainRank(),offset=second?basis(left,degree).size():0;
         int rows=projection?n:total,columns=projection?total:n; BigInteger[][] entries=zeros(rows,columns,work);
         for(int i=0;i<n;i++) entries[projection?i:offset+i][projection?offset+i:i]=BigInteger.ONE;
@@ -142,6 +199,10 @@ public final class SimplicialCover implements Serializable {
     public AbelianGroupHomomorphism rightInclusionMap(BigInteger degree) { return componentMap(degree,true,false); }
     public AbelianGroupHomomorphism leftProjectionMap(BigInteger degree) { return componentMap(degree,false,true); }
     public AbelianGroupHomomorphism rightProjectionMap(BigInteger degree) { return componentMap(degree,true,true); }
+    public AbelianGroupHomomorphism leftCohomologyInclusionMap(BigInteger degree) { return componentMap(degree,false,false,true); }
+    public AbelianGroupHomomorphism rightCohomologyInclusionMap(BigInteger degree) { return componentMap(degree,true,false,true); }
+    public AbelianGroupHomomorphism leftCohomologyProjectionMap(BigInteger degree) { return componentMap(degree,false,true,true); }
+    public AbelianGroupHomomorphism rightCohomologyProjectionMap(BigInteger degree) { return componentMap(degree,true,true,true); }
     /** Simplicial excision: (A,A intersection B)->(A union B,B) induces an integral chain isomorphism. */
     public RelativeSimplicialMap excisionMap() {
         return RelativeSimplicialMap.inclusion(new RelativeSimplicialComplex(left,intersection),new RelativeSimplicialComplex(union,right));

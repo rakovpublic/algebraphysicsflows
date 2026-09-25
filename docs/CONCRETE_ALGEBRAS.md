@@ -4,6 +4,8 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
+The default initializer currently installs 1085 native operations from 51 algebra builders.
+
 ## Existing API usage
 
 ```java
@@ -52,8 +54,8 @@ List<String> values = math.flow(math.naturals,
 | FiniteSimplicialMapAlgebra / SimplicialMap | compose; equality/contiguity -> Boolean | inverse; source/target/image; vertex function; injectivity and simplex/vertex surjectivity; flat vertex images, chain matrices and homology maps | construction from finite functions and complex pairs; inclusions; restrictions; simplex images/fibers; degreewise chain/homology maps; ordered simplex bases |
 | RelativeSimplicialAlgebra / RelativeComplex | labelled-pair equality -> Boolean | ambient/subcomplex; dimension and Euler characteristic; flat boundaries and constructive homology by degree; inclusion simplicial map | pair construction; quotient chains and bases; homology and torsion types; inclusion, quotient, lift and connecting matrices; scalar/flat long exact sequence maps |
 | RelativeSimplicialMapAlgebra / RelativeMap | compose; equality/pair contiguity -> Boolean | inverse; source/target pairs; ambient/subcomplex maps; image/corestriction; flat relative chain and homology maps | construction from an ambient map and pair boundaries; identities/inclusions; absolute/diagonal extensions; restriction; degreewise relative maps and four-map naturality lists |
-| SimplicialCoverAlgebra / SimplicialCover | ordered-cover equality -> Boolean | left/right/union/intersection; swap; Euler characteristic; flat sum boundaries/homology; excision RelativeMap | cover construction; direct-sum homology and component maps; signed intersection/addition/splitting matrices; scalar/flat Mayer-Vietoris homomorphisms |
-| SimplicialCoverMapAlgebra / CoverMap | compose; equality/piecewise contiguity -> Boolean | inverse; source/target covers; union/left/right/intersection maps; swap both covers; image/corestriction; flat sum matrices/maps; two excision RelativeMaps | construction from a union map and paired covers; identity/inclusion; restriction; degreewise sum/component homology maps and four-map Mayer-Vietoris naturality lists |
+| SimplicialCoverAlgebra / SimplicialCover | ordered-cover equality -> Boolean | left/right/union/intersection; swap; Euler characteristic; flat sum boundaries/coboundaries and homology/cohomology; excision RelativeMap | cover construction; direct-sum homology/cohomology and component maps; signed intersection/addition/splitting and restriction/difference matrices; scalar/flat homological and cohomological Mayer-Vietoris maps |
+| SimplicialCoverMapAlgebra / CoverMap | compose; equality/piecewise contiguity -> Boolean | inverse; source/target covers; union/left/right/intersection maps; swap both covers; image/corestriction; flat sum matrices/maps; two excision RelativeMaps | construction from a union map and paired covers; identity/inclusion; restriction; degreewise sum/component homology and contravariant cohomology maps; four-map Mayer-Vietoris naturality lists for each theory |
 | SimplicialCochainAlgebra / SimplicialCochain | same-context add/subtract; cup; equality/cohomologous -> Boolean; cup-class -> AbelianGroupElement | negate; complex/degree/coordinates; coboundary; zero/cocycle/coboundary tests; cohomology model/class; cobounding coordinates; flat cocycle generators | degreewise zero/basis construction and unit; integer scaling; coordinate replacement; representative; evaluation; pullback; scalar/flat cohomology models and contravariant maps |
 | RelativeSimplicialCochainAlgebra / RelativeCochain | same-pair add/subtract; cup on union pairs; equality/cohomologous -> Boolean; cup-class -> AbelianGroupElement | negate; pair/degree/coordinates; coboundary; cocycle/coboundary tests; cohomology model/class; primitives; flat cocycle generators; absolute extension | zero/basis construction; absolute conversion; scaling/coordinates/representative/evaluation; pair-map pullback; connecting cocycle; scalar/flat relative cohomology and natural exact-sequence maps |
 | RationalSampleAlgebra / Sample(Q) | concatenate | size -> N, mean/variance -> Q, center | covariance -> Q; scale by Q; flat transfer elements -> Q |
@@ -974,9 +976,9 @@ This circle generator maps to the difference of the two intersection vertices. S
 
 `excision-map` returns the actual RelativeMap inclusion (A,I)->(U,B). The relative ordered simplex bases and boundaries on both sides agree, making its relative chain matrices identities and its homology maps isomorphisms. Its ambient inclusion A->U need not have an inverse. This is the finite simplicial excision witness for this cover; it does not represent general topological excision.
 
-The union is limited to 4096 nonempty simplices. Every required matrix dimension is limited to 256, including the combined chain ranks of A and B in sum matrices. Each compound homology/map computation, whole degree list or three-map segment shares a 5,000,000-unit integer budget. Exhaustion raises IMPLEMENTATION_FAILURE without a partial list; integer bit lengths remain unbounded. CoverMap supplies piece-preserving simplicial maps and Mayer-Vietoris/excision naturality. Many-set covers, reduced/relative Mayer-Vietoris, spectral sequences, cohomological Mayer-Vietoris and continuous covers remain outside scope.
+The union is limited to 4096 nonempty simplices. Every required matrix dimension is limited to 256, including the combined chain ranks of A and B in sum matrices. Each compound homology/map computation, whole degree list or three-map segment shares a 5,000,000-unit integer budget. Exhaustion raises IMPLEMENTATION_FAILURE without a partial list; integer bit lengths remain unbounded. CoverMap supplies piece-preserving simplicial maps and Mayer-Vietoris/excision naturality. Many-set covers, reduced/relative Mayer-Vietoris, spectral sequences and continuous covers remain outside scope.
 
-NativeMayerVietorisTest checks 64 ordered graph covers against independent Betti formulas and integral exactness, sphere covers through dimension four, circle orientation, projective-plane torsion and an index-two image, direct-sum identities with torsion, swap signs, chain sections, excision isomorphisms, empty and nested covers, aggregate limits, native wrappers and serialized flows. All 29 registrations have explicit expected results in ConcreteAlgebrasTest.
+NativeMayerVietorisTest checks 64 ordered graph covers against independent Betti formulas and integral exactness, sphere covers through dimension four, circle orientation, projective-plane torsion and an index-two image, direct-sum identities with torsion, swap signs, chain sections, excision isomorphisms, empty and nested covers, aggregate limits, native wrappers and serialized flows. All 48 cover registrations, including the cohomology operations below, have explicit expected results in ConcreteAlgebrasTest.
 
 ## Maps of ordered covers and naturality
 
@@ -1020,9 +1022,9 @@ math.flow(math.simplicialMaps, Collections.singletonList(reflection))
 
 `contiguous` requires the same ordered boundaries and tests contiguity inside each target piece; ambient contiguity alone is insufficient. Piecewise contiguous maps induce equal homology maps. `image` is the cover (f(A),f(B)): its intersection can strictly contain f(I), as when disjoint source vertices in different pieces map to one common target vertex. `corestrict-image` uses that full image cover. `restrict` takes a componentwise source subcover and retains the original target, returning the first CoverMap carrier wrapper through ICustomMemberOperation.
 
-Each union has at most 4096 nonempty simplices, and every required matrix dimension is at most 256, including combined left/right chain ranks. Each compound homology computation, whole degree list or four-map naturality list shares one 5,000,000-unit integer budget; the two excision-map constructions also share one budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial lists, independently of mathematical undefinedness; coefficient bit lengths remain unbounded. Arbitrary chain-map builders, explicit chain-homotopy witnesses, many-set covers, reduced/relative Mayer-Vietoris, cohomological Mayer-Vietoris, persistence, subdivision and continuous covers remain outside scope.
+Each union has at most 4096 nonempty simplices, and every required matrix dimension is at most 256, including combined left/right chain ranks. Each compound homology computation, whole degree list or four-map naturality list shares one 5,000,000-unit integer budget; the two excision-map constructions also share one budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial lists, independently of mathematical undefinedness; coefficient bit lengths remain unbounded. Arbitrary chain-map builders, explicit chain-homotopy witnesses, many-set covers, reduced/relative Mayer-Vietoris, persistence, subdivision and continuous covers remain outside scope.
 
-NativeSimplicialCoverMapTest checks all 27 maps of a doubled circle and 729 compositions against independent winding numbers, circle/sphere reflection signs, projective-plane torsion, all three Mayer-Vietoris squares and the excision diagram, nonnatural chain splittings, piecewise contiguity, strict growth of image intersections, cover inversion and restriction, empty and extreme-labelled complexes, shared list budgets, actual wrappers and serialized flows. All 32 registrations have explicit expected results in ConcreteAlgebrasTest.
+NativeSimplicialCoverMapTest checks all 27 maps of a doubled circle and 729 compositions against independent winding numbers, circle/sphere reflection signs, projective-plane torsion, all three Mayer-Vietoris squares and the excision diagram, nonnatural chain splittings, piecewise contiguity, strict growth of image intersections, cover inversion and restriction, empty and extreme-labelled complexes, shared list budgets, actual wrappers and serialized flows. All 43 cover-map registrations, including the cohomology operations below, have explicit expected results in ConcreteAlgebrasTest.
 
 ## Integral simplicial cochains and cup products
 
@@ -1053,7 +1055,7 @@ For degrees p and q, `cup` evaluates on an increasing simplex by multiplying the
 
 `pullback` accepts a simplicial map f:X->Y when the cochain is on exactly Y, and applies the transpose of its oriented chain matrix. It preserves degree, commutes with coboundary, reverses composition, and sends collapsed positive-degree simplices to zero. Scalar `SimplicialCochain.cohomology-map` and unary flat `cohomology-maps`, registered on SimplicialMap, return H^k(Y)->H^k(X). The flat list runs through the larger boundary dimension. For arbitrary vertex maps, cup naturality holds on cohomology; equality of the cochain products is not asserted. Reversing an edge already supplies a counterexample for nonconstant degree-zero cochains, while the torus axis swap preserves cup classes and reverses the top class.
 
-Each complex has at most 4096 nonempty simplices, and each required vector or matrix basis has at most 256 simplices. A 5,000,000-unit integer budget covers each compound cohomology construction, projection, representative computation, generator list, cup-class or induced map. Each whole cohomology-model/map degree list shares one budget across all outputs; exhaustion raises IMPLEMENTATION_FAILURE without a partial list. Coefficient bit lengths remain unbounded. The scope is homogeneous unreduced integral cochains on finite abstract complexes. RelativeCochain supplies relative cup products and natural long exact cohomology sequences. Other coefficient rings, mixed-degree ring carriers, cohomological Mayer-Vietoris operations, explicit cup homotopies, cap products, Steenrod operations, persistence and continuous maps remain future work.
+Each complex has at most 4096 nonempty simplices, and each required vector or matrix basis has at most 256 simplices. A 5,000,000-unit integer budget covers each compound cohomology construction, projection, representative computation, generator list, cup-class or induced map. Each whole cohomology-model/map degree list shares one budget across all outputs; exhaustion raises IMPLEMENTATION_FAILURE without a partial list. Coefficient bit lengths remain unbounded. The scope is homogeneous unreduced integral cochains on finite abstract complexes. RelativeCochain supplies relative cup products and natural long exact cohomology sequences. Other coefficient rings, mixed-degree ring carriers, explicit cup homotopies, cap products, Steenrod operations, persistence and continuous maps remain future work.
 
 NativeSimplicialCochainTest checks 729 ternary cochains against independent cup coefficients and differential identities, all 256 tetrahedron vertex maps against signed pullback formulas, all 27 circle maps and 729 contravariant compositions, and all 64 four-vertex graphs against independent connectivity counts. Further tests check the integral torus cup ring, representative independence, nonnatural cochain products, projective-plane torsion, dual evaluation, primitives, empty/high-degree/extreme-label cases, whole-list resource budgets, native wrappers and serialized flows. All 30 registrations have explicit expected results in ConcreteAlgebrasTest.
 
@@ -1107,6 +1109,66 @@ H^k(X,A) -> H^k(X) -> H^k(A) -> H^(k+1)(X,A)
 
 All three squares commute. The chosen connecting cochain matrices need not commute before taking cohomology; tests include such a pair inclusion. Existing simplicial excision RelativeMaps induce relative cohomology isomorphisms in the reversed direction, even when their ambient maps are not invertible.
 
-Each boundary complex has at most 4096 nonempty simplices and each required matrix/vector basis at most 256. Relative bases are filtered first; operations involving full ambient or subcomplex cochains, such as extension and exact sequences, also require those bases to fit. Each compound cohomology, class, cup-class or map computation shares a 5,000,000-unit integer budget, as does each whole degree list, three-map exact segment or four-map naturality list. Exhaustion raises IMPLEMENTATION_FAILURE without partial lists; integer bit lengths remain unbounded. Other coefficients, mixed-degree ring carriers, cohomological Mayer-Vietoris sequences, explicit cup homotopies, cap products, higher cohomology operations, persistence and continuous maps remain outside scope.
+Each boundary complex has at most 4096 nonempty simplices and each required matrix/vector basis at most 256. Relative bases are filtered first; operations involving full ambient or subcomplex cochains, such as extension and exact sequences, also require those bases to fit. Each compound cohomology, class, cup-class or map computation shares a 5,000,000-unit integer budget, as does each whole degree list, three-map exact segment or four-map naturality list. Exhaustion raises IMPLEMENTATION_FAILURE without partial lists; integer bit lengths remain unbounded. Other coefficients, mixed-degree ring carriers, explicit cup homotopies, cap products, higher cohomology operations, persistence and continuous maps remain outside scope.
 
 NativeRelativeCochainTest checks 1,024 graph/vertex-subcomplex pairs against independent connectivity formulas, all 27 triangle pair maps and 729 compositions against vertex-potential formulas, and 729 relative cochain products. It also checks square products and orientation reversal, disks through dimension four, projective-plane torsion and index-two images, integer exactness, all naturality squares, excision, zero extensions and primitives, filtered basis limits, whole-list resource failures, actual wrappers and serialized flows. All 41 registrations have explicit expected results in ConcreteAlgebrasTest.
+
+
+## Cohomological Mayer-Vietoris in the existing cover algebras
+
+`math.simplicialCovers` and `math.coverMaps` also support integral cohomological Mayer-Vietoris, with 19 and 11 additional operations respectively. They reuse the same ordered cover values and the existing `Mat(Z)`, `IntegralHomology` and `AbelianGroupHomomorphism` algebras. No new operation interfaces or execution engine are introduced.
+
+For `U = A union B` and `I = A intersection B`, the cochain sequence is
+
+```
+0 -> C^k(U) --restriction--> C^k(A) direct-sum C^k(B) --difference--> C^k(I) -> 0
+```
+
+Sum coordinates place A before B. Restriction records both restrictions; difference takes left minus right. The sum differential in degree k is the transpose of the sum chain boundary in degree k+1. Its kernel modulo the preceding image is retained as an actual integral quotient presentation, so torsion is preserved. The mathematical sequence follows the dual construction in [Hatcher, section 3.1](https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf); here covers are simplex-wise unions of finite subcomplexes.
+
+`long-exact-cohomology-segment(k)` emits three homomorphisms in order:
+
+```
+H^k(U) -> H^k(A) direct-sum H^k(B) -> H^k(I) -> H^(k+1)(U)
+```
+
+The connecting formula extends an intersection cocycle by zero in A, differentiates, and glues that result with zero on B. The matrix equals the transpose of `connecting-chain-matrix(k+1)`; its well-defined induced map raises degree and has no extra sign. Swapping A and B negates the induced map. The chosen formula on arbitrary cochains need not commute with cover maps, while the induced maps on cohomology do. For a projective plane covered by a punctured plane and a triangle, the difference map in degree one has index two; its connecting map surjects onto `H^2(U;Z) = Z/2Z`.
+
+| Owner | Operations |
+| --- | --- |
+| SimplicialCover | `sum-coboundary-matrix`, flat `sum-coboundary-matrices`, `sum-cohomology`, flat `sum-cohomology-degrees` |
+| SimplicialCover | `left-cohomology`, `right-cohomology`, `intersection-cohomology`, `union-cohomology` |
+| SimplicialCover | `restriction-matrix`, `difference-matrix`, `connecting-cochain-matrix` |
+| SimplicialCover | `restriction-cohomology-map`, `difference-cohomology-map`, `connecting-cohomology-map`, flat `long-exact-cohomology-segment` |
+| SimplicialCover | `left-cohomology-inclusion-map`, `right-cohomology-inclusion-map`, `left-cohomology-projection-map`, `right-cohomology-projection-map` |
+| CoverMap | `sum-cochain-matrix`, flat `sum-cochain-matrices`, `sum-cohomology-map`, flat `sum-cohomology-maps` |
+| CoverMap | `source-sum-cohomology`, `target-sum-cohomology`, `union-cohomology-map`, `intersection-cohomology-map`, `left-cohomology-map`, `right-cohomology-map` |
+| CoverMap | flat `long-exact-cohomology-maps` |
+
+A cover map from `(A,B)` to `(A',B')` induces cohomology maps from target to source. `source-sum-cohomology(k)` is therefore the codomain model, and `target-sum-cohomology(k)` the domain model. `long-exact-cohomology-maps(k)` emits four target-to-source vertical maps on union degree k, sum degree k, intersection degree k, and union degree k+1. All three squares commute, and composition reverses order. Component inclusions/projections give explicit direct-sum identifications, including torsion. Existing excision relative maps induce contravariant cohomology isomorphisms through `RelativeCochain.cohomology-map`.
+
+```java
+FiniteSimplicialComplex arc = new FiniteSimplicialComplex(
+    Arrays.asList(FiniteSet.of(0, 1), FiniteSet.of(1, 2)));
+FiniteSimplicialComplex closingEdge = new FiniteSimplicialComplex(
+    Collections.singletonList(FiniteSet.of(0, 2)));
+SimplicialCover cover = new SimplicialCover(arc, closingEdge);
+
+List<String> surjective = math.flow(math.simplicialCovers,
+    Collections.singletonList(cover))
+    .<AbelianGroupHomomorphism, BigInteger>performAlgebraUnsafe(
+        "connecting-cohomology-map", BigInteger.ZERO)
+    .<Boolean>performAlgebraTransfer("is-surjective")
+    .collect(); // ["true"]
+
+List<String> identitySquares = math.flow(math.coverMaps,
+    Collections.singletonList(SimplicialCoverMap.identity(cover)))
+    .<AbelianGroupHomomorphism, BigInteger>performFlatAlgebraUnsafe(
+        "long-exact-cohomology-maps", BigInteger.ZERO)
+    .<Boolean>performAlgebraTransfer("is-isomorphism")
+    .collect(); // ["true", "true", "true", "true"]
+```
+
+All degree arguments are nonnegative. Degree lists run from zero through the union dimension (the larger union dimension for a cover map), with empty lists for empty unions. Scalar computations retain zero-sized shapes above the dimension, including arbitrarily large BigInteger degrees. Each union has at most 4096 nonempty simplices; every required matrix dimension is at most 256, including the combined left/right cochain rank. Each compound model/map calculation, whole degree list, three-map segment or four-map naturality list shares one 5,000,000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial outputs; integer coefficient bit lengths are unbounded. Many-set covers, reduced/relative Mayer-Vietoris, other coefficients, spectral sequences, persistent cohomology and continuous covers remain outside scope.
+
+NativeCohomologicalMayerVietorisTest checks exactness on 64 graph covers, sphere connecting maps through dimension four, the projective plane's index-two difference and degree-two torsion, direct-sum identities, all 27 discrete maps and 729 contravariant compositions, reflection signs, all naturality squares, nonnatural cochain formulas, swapping signs, relative excision compatibility, empty shapes, negative/huge degrees, combined-rank and aggregate budgets, native wrappers and serialized flows. ConcreteAlgebrasTest supplies independent expected values for all 30 added registrations.

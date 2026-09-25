@@ -45,6 +45,18 @@ public final class SimplicialCoverMapAlgebra extends ConcreteAlgebra<SimplicialC
         unary("image",algebra(),covers.algebra(),false,SimplicialCoverMap::image);
         unary("corestrict-image",algebra(),algebra(),false,SimplicialCoverMap::corestrictImage);
         binary("restrict",algebra(),covers.algebra(),algebra(),true,SimplicialCoverMap::restrict);
+        binary("sum-cochain-matrix",algebra(),naturals.algebra(),matrices.algebra(),false,SimplicialCoverMap::sumCochainMatrix);
+        unaryFlat("sum-cochain-matrices",algebra(),matrices.algebra(),false,SimplicialCoverMap::sumCochainMatrices);
+        binary("sum-cohomology-map",algebra(),naturals.algebra(),maps.algebra(),false,SimplicialCoverMap::sumCohomologyMap);
+        unaryFlat("sum-cohomology-maps",algebra(),maps.algebra(),false,SimplicialCoverMap::sumCohomologyMaps);
+        binary("source-sum-cohomology",algebra(),naturals.algebra(),homology.algebra(),false,SimplicialCoverMap::sourceSumCohomology);
+        binary("target-sum-cohomology",algebra(),naturals.algebra(),homology.algebra(),false,SimplicialCoverMap::targetSumCohomology);
+        binary("union-cohomology-map",algebra(),naturals.algebra(),maps.algebra(),false,SimplicialCoverMap::unionCohomologyMap);
+        binary("intersection-cohomology-map",algebra(),naturals.algebra(),maps.algebra(),false,SimplicialCoverMap::intersectionCohomologyMap);
+        binary("left-cohomology-map",algebra(),naturals.algebra(),maps.algebra(),false,SimplicialCoverMap::leftCohomologyMap);
+        binary("right-cohomology-map",algebra(),naturals.algebra(),maps.algebra(),false,SimplicialCoverMap::rightCohomologyMap);
+        flat("long-exact-cohomology-maps",algebra(),naturals.algebra(),maps.algebra(),false,SimplicialCoverMap::longExactCohomologyMaps);
+        law("Cochain matrices and integral cohomology maps are contravariant. The four target-to-source maps commute with all three cohomological Mayer-Vietoris maps.");
         law("A cover map preserves each ordered piece simplex by simplex; composition requires equality of the complete middle cover.");
         law("Sum-chain matrices are block diagonal and preserve boundaries, identities and composition. Their integral homology maps retain the sum presentations.");
         law("The four homology maps commute with all three Mayer-Vietoris maps, including the connecting homomorphism.");

@@ -102,6 +102,33 @@ public final class SimplicialCoverMap implements Serializable {
         }
         return Collections.unmodifiableList(result);
     }
+    /** Contravariant cochain pullback on the two pieces, in left-then-right coordinates. */
+    public IntegerMatrix sumCochainMatrix(BigInteger degree) { return sumChainMatrix(degree).transpose(); }
+    public List<IntegerMatrix> sumCochainMatrices() {
+        Computation work=new Computation(); List<IntegerMatrix> result=new ArrayList<>();
+        for(int k=0;k<=topDegree();k++) result.add(sumChainMatrix(BigInteger.valueOf(k),work).transpose()); return Collections.unmodifiableList(result);
+    }
+    public IntegralHomology sourceSumCohomology(BigInteger degree) { return source.sumCohomology(degree); }
+    public IntegralHomology targetSumCohomology(BigInteger degree) { return target.sumCohomology(degree); }
+    public AbelianGroupHomomorphism sumCohomologyMap(BigInteger degree) { return sumCohomologyMap(degree,new Computation()); }
+    private AbelianGroupHomomorphism sumCohomologyMap(BigInteger degree,Computation work) {
+        requireDegree(degree); IntegralHomology from=target.sumCohomology(degree,work),to=source.equals(target)?from:source.sumCohomology(degree,work);
+        return from.inducedMap(to,sumChainMatrix(degree,work).transpose(),work);
+    }
+    public List<AbelianGroupHomomorphism> sumCohomologyMaps() {
+        Computation work=new Computation(); List<AbelianGroupHomomorphism> result=new ArrayList<>();
+        for(int k=0;k<=topDegree();k++) result.add(sumCohomologyMap(BigInteger.valueOf(k),work)); return Collections.unmodifiableList(result);
+    }
+    public AbelianGroupHomomorphism unionCohomologyMap(BigInteger degree) { return SimplicialCochain.cohomologyMap(union,degree); }
+    public AbelianGroupHomomorphism intersectionCohomologyMap(BigInteger degree) { return SimplicialCochain.cohomologyMap(intersection,degree); }
+    public AbelianGroupHomomorphism leftCohomologyMap(BigInteger degree) { return SimplicialCochain.cohomologyMap(left,degree); }
+    public AbelianGroupHomomorphism rightCohomologyMap(BigInteger degree) { return SimplicialCochain.cohomologyMap(right,degree); }
+    /** Four target-to-source maps on H^k(U), sum cohomology, H^k(I), H^(k+1)(U). */
+    public List<AbelianGroupHomomorphism> longExactCohomologyMaps(BigInteger degree) {
+        requireDegree(degree); Computation work=new Computation();
+        return Collections.unmodifiableList(Arrays.asList(SimplicialCochain.cohomologyMap(union,degree,work),sumCohomologyMap(degree,work),
+                SimplicialCochain.cohomologyMap(intersection,degree,work),SimplicialCochain.cohomologyMap(union,degree.add(BigInteger.ONE),work)));
+    }
     private RelativeSimplicialMap leftRelativeMap(Computation work) {
         return new RelativeSimplicialMap(new RelativeSimplicialComplex(source.left(),source.intersection()),
                 new RelativeSimplicialComplex(target.left(),target.intersection()),left,work);

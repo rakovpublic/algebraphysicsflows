@@ -100,11 +100,18 @@ public final class ConcreteAlgebrasExample {
                 .performCustomMemberOperation("with-coordinates",new IntegerVector(BigInteger.ZERO,BigInteger.ONE,BigInteger.valueOf(3)))
                 .performOneOperandOperation("coboundary").<IntegerVector>performAlgebraTransfer("coordinates").collect());
         SimplicialCover circleCover=new SimplicialCover(arc,closingEdge);
+        System.out.println("The cohomological Mayer-Vietoris map onto H^1(circle) is surjective: "+math.flow(math.simplicialCovers,Collections.singletonList(circleCover))
+                .<AbelianGroupHomomorphism,BigInteger>performAlgebraUnsafe("connecting-cohomology-map",BigInteger.ZERO)
+                .<Boolean>performAlgebraTransfer("is-surjective").collect());
         Map<BigInteger,BigInteger> reverseCoverVertices=new TreeMap<>();
         reverseCoverVertices.put(BigInteger.ZERO,BigInteger.valueOf(2)); reverseCoverVertices.put(BigInteger.ONE,BigInteger.ONE); reverseCoverVertices.put(BigInteger.valueOf(2),BigInteger.ZERO);
         System.out.println("The four Mayer-Vietoris reflection maps are isomorphisms: "+math.flow(math.simplicialMaps,Collections.singletonList(new FiniteSimplicialMap(circle,circle,reverseCoverVertices)))
                 .<SimplicialCoverMap,Pair<SimplicialCover,SimplicialCover>>performAlgebraUnsafe("CoverMap.from-map",new Pair<>(circleCover,circleCover))
                 .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("long-exact-maps",BigInteger.ONE)
+                .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
+        System.out.println("The four contravariant Mayer-Vietoris reflection maps are isomorphisms: "+math.flow(math.simplicialMaps,Collections.singletonList(new FiniteSimplicialMap(circle,circle,reverseCoverVertices)))
+                .<SimplicialCoverMap,Pair<SimplicialCover,SimplicialCover>>performAlgebraUnsafe("CoverMap.from-map",new Pair<>(circleCover,circleCover))
+                .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("long-exact-cohomology-maps",BigInteger.ZERO)
                 .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
         Map<BigInteger,BigInteger> reflectionVertices=new TreeMap<>();
         reflectionVertices.put(BigInteger.ZERO,BigInteger.ONE); reflectionVertices.put(BigInteger.ONE,BigInteger.ZERO); reflectionVertices.put(BigInteger.valueOf(2),BigInteger.valueOf(2));
