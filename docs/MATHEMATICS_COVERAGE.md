@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1377 |
-| DIRECTLY_SUPPORTED | 1134 |
+| Scoped records | 1407 |
+| DIRECTLY_SUPPORTED | 1164 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 993 |
+| IMPLEMENTED | 1023 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1061 |
+| MACHINE_TESTED | 1091 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 970 | 970 | 0 | 0 | 0 | 970 | 0 | 0 |
+| Concrete MathTool algebras | 1000 | 1000 | 0 | 0 | 0 | 1000 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -1040,6 +1040,36 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Sample(Q).sample-variance | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations; native operation Sample(Q).sample-variance |
 | Sample(Q).scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations; native operation Sample(Q).scale |
 | Sample(Q).size | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations; native operation Sample(Q).size |
+| SimplicialCover.connecting-chain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.connecting-chain-matrix |
+| SimplicialCover.connecting-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.connecting-homology-map |
+| SimplicialCover.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.equal |
+| SimplicialCover.euler-characteristic | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.euler-characteristic |
+| SimplicialCover.excision-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.excision-map |
+| SimplicialCover.from-complexes | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.from-complexes |
+| SimplicialCover.intersection | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.intersection |
+| SimplicialCover.intersection-homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.intersection-homology |
+| SimplicialCover.intersection-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.intersection-homology-map |
+| SimplicialCover.intersection-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.intersection-matrix |
+| SimplicialCover.left | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.left |
+| SimplicialCover.left-homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.left-homology |
+| SimplicialCover.left-inclusion-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.left-inclusion-map |
+| SimplicialCover.left-projection-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.left-projection-map |
+| SimplicialCover.long-exact-segment | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.long-exact-segment |
+| SimplicialCover.right | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.right |
+| SimplicialCover.right-homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.right-homology |
+| SimplicialCover.right-inclusion-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.right-inclusion-map |
+| SimplicialCover.right-projection-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.right-projection-map |
+| SimplicialCover.split-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.split-matrix |
+| SimplicialCover.sum-boundary-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.sum-boundary-matrices |
+| SimplicialCover.sum-boundary-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.sum-boundary-matrix |
+| SimplicialCover.sum-homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.sum-homology |
+| SimplicialCover.sum-homology-degrees | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.sum-homology-degrees |
+| SimplicialCover.swap | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.swap |
+| SimplicialCover.union | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.union |
+| SimplicialCover.union-homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.union-homology |
+| SimplicialCover.union-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.union-homology-map |
+| SimplicialCover.union-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps; native operation SimplicialCover.union-matrix |
+| SimplicialCoverAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps |
 | SimplicialMap.chain-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.chain-matrices |
 | SimplicialMap.chain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.chain-matrix |
 | SimplicialMap.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.compose |

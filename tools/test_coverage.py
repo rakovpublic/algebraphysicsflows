@@ -200,6 +200,12 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("all four maps", " ".join(records["RelativeMap.long-exact-maps"]["required_invariants"]))
         self.assertIn("entire list", " ".join(records["RelativeMap.homology-maps"]["required_invariants"]))
         self.assertIn("5000000", " ".join(records["RelativeMap.long-exact-maps"]["known_limitations"]))
+        self.assertIn("(i,-j)", " ".join(records["SimplicialCover.intersection-matrix"]["required_invariants"]))
+        self.assertIn("generally not a chain map", " ".join(records["SimplicialCover.split-matrix"]["required_invariants"]))
+        self.assertIn("H_-1(I)=0", " ".join(records["SimplicialCover.connecting-homology-map"]["required_invariants"]))
+        self.assertIn("entire three-map segment", " ".join(records["SimplicialCover.long-exact-segment"]["required_invariants"]))
+        self.assertIn("need not be invertible", " ".join(records["SimplicialCover.excision-map"]["required_invariants"]))
+        self.assertIn("sum of both chain ranks", " ".join(records["SimplicialCover.sum-homology"]["known_limitations"]))
 
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)

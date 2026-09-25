@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DATABASE = ROOT / "mathematics-coverage.json"
 MANIFEST = ROOT / "groupimp/src/test/resources/mathematics/concrete-catalog.tsv"
-DATE = "2026-09-24"
+DATE = "2026-09-25"
 OWNERS = {
     "BooleanAlgebra": ("Boolean", "Boolean truth values with Boolean operations"),
     "NaturalSemiring": ("N", "Nonnegative arbitrary precision integers with addition and multiplication"),
@@ -47,6 +47,7 @@ OWNERS = {
     "FiniteSimplicialMapAlgebra": ("SimplicialMap", "Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps"),
     "RelativeSimplicialAlgebra": ("RelativeComplex", "Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps"),
     "RelativeSimplicialMapAlgebra": ("RelativeMap", "Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps"),
+    "SimplicialCoverAlgebra": ("SimplicialCover", "Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps"),
     "FiniteIntegerRelationAlgebra": ("FiniteRelation(Z,Z)", "Finite-support relations on the actual registered integer Algebra"),
     "FiniteIntegerFunctionAlgebra": ("FiniteFunction(Z,Z)", "Total maps between explicit finite integer sets, preserving declared domain and codomain"),
     "FiniteCategoryAlgebra": ("FiniteCategory", "Finite categories with integer object/arrow labels and exhaustively checked composition tables"),
@@ -103,6 +104,7 @@ EXTRA_TESTS = {
     "FiniteSimplicialMapAlgebra": "NativeSimplicialMapTest",
     "RelativeSimplicialAlgebra": "NativeRelativeHomologyTest",
     "RelativeSimplicialMapAlgebra": "NativeRelativeSimplicialMapTest",
+    "SimplicialCoverAlgebra": "NativeMayerVietorisTest",
     "FiniteIntegerRelationAlgebra": "NativeRelationTest",
     "FiniteIntegerFunctionAlgebra": "NativeFiniteFunctionTest",
     "FiniteCategoryAlgebra": "NativeCategoryTest",
@@ -151,6 +153,37 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "SimplicialCoverAlgebra": {
+        "from-complexes": "Retain ordered left and right complexes A and B. The ambient complex is exactly their simplex-wise union, so every ambient simplex belongs to a piece. This does not infer a cover of an externally supplied larger complex from vertex coverage.",
+        "left": "Return the complete labelled left complex A.",
+        "right": "Return the complete labelled right complex B.",
+        "union": "Return the simplex-wise union U=A union B, the ambient complex covered by these pieces.",
+        "intersection": "Return the simplex-wise intersection I=A intersection B, including its actual labels and simplices.",
+        "swap": "Exchange the ordered pieces. This exchanges the direct-sum blocks and negates the induced connecting homomorphism on the same union/intersection presentations.",
+        "equal": "Compare both ordered labelled pieces. Equal unions alone do not imply equal covers.",
+        "euler-characteristic": "Return chi(A)+chi(B)-chi(I), equal to chi(U).",
+        "sum-boundary-matrix": "Return the block diagonal of the two oriented boundaries, with all left chain coordinates before all right coordinates in both degrees. Combined rows and columns must each fit the matrix bound.",
+        "sum-boundary-matrices": "Emit block-diagonal boundaries for degrees zero through dim(U), including zero-sized shapes. The entire list shares one work budget; the empty union yields an empty list.",
+        "sum-homology": "Construct homology of the block-diagonal chain complex C(A) direct-sum C(B). It retains an actual IntegralHomology presentation; it is not implicitly identified with a separately normalized group direct sum.",
+        "sum-homology-degrees": "Emit constructive sum homology for degrees zero through dim(U). A single work budget covers the entire list, including boundaries and Smith calculations; exhaustion returns no partial list.",
+        "left-homology": "Return the left complex's unreduced integral homology in the supplied nonnegative degree, retaining its chain basis and quotient presentation.",
+        "right-homology": "Return the right complex's unreduced integral homology in the supplied nonnegative degree, retaining its chain basis and quotient presentation.",
+        "intersection-homology": "Return constructive unreduced integral homology of the actual intersection I in the supplied degree.",
+        "union-homology": "Return constructive unreduced integral homology of the actual simplex-wise union U in the supplied degree.",
+        "intersection-matrix": "Use the signed inclusion (i,-j): each intersection simplex maps with coefficient +1 into the left block and -1 into the right block.",
+        "union-matrix": "Send (a,b) to a+b in union coordinates, including addition of coefficients of shared simplices. Together with (i,-j), this forms a short exact sequence of integral chain groups.",
+        "split-matrix": "A chain-group section of the union matrix, assigning shared simplices to the left. It is generally not a chain map and is not a homology splitting.",
+        "connecting-chain-matrix": "Take the intersection component of the boundary of the left part of a union chain. On union cycles that whole boundary lies in the intersection; arbitrary chains need not have that property.",
+        "intersection-homology-map": "Return the integral homomorphism H_k(I)->H_k(C(A) direct-sum C(B)) induced by (i,-j), retaining both presentations and one shared work budget.",
+        "union-homology-map": "Return the integral homomorphism from sum homology to H_k(U) induced by addition, retaining both presentations and one shared work budget.",
+        "connecting-homology-map": "Send a union cycle class to the class of the boundary of its left part in H_(k-1)(I), with no extra sign. At degree zero H_-1(I)=0 under the unreduced convention. All homology and map calculations share one work budget.",
+        "long-exact-segment": "Emit intersection, union, connecting maps in that order: H_k(I)->H_k(C(A) direct-sum C(B))->H_k(U)->H_(k-1)(I). Images equal the next kernels over Z, including torsion. One work budget covers the entire three-map segment.",
+        "left-inclusion-map": "Embed H_k(A) into the retained sum homology via inclusion of the left chain block. This map supplies the actual presentation-aware direct-sum identification.",
+        "right-inclusion-map": "Embed H_k(B) into the retained sum homology via inclusion of the right chain block, with positive sign.",
+        "left-projection-map": "Project the retained sum homology onto H_k(A) using the left chain coordinates. It is a left inverse to the left inclusion and kills the right inclusion.",
+        "right-projection-map": "Project the retained sum homology onto H_k(B) using the right chain coordinates. The two inclusion-projection composites sum to the identity on sum homology.",
+        "excision-map": "Return the RelativeMap inclusion (A,I)->(U,B). Its ordered quotient simplex bases agree, so it induces a relative chain isomorphism and integral homology isomorphism. Its ambient simplicial map need not be invertible.",
+    },
     "RelativeSimplicialMapAlgebra": {
         "from-map": "The first operand is the ambient SimplicialMap and the second contains source then target RelativeComplex values. Require exact ambient boundaries and f(A) contained in B simplex by simplex, not just on vertex sets.",
         "compose": "Apply the right operand first. Both labelled components of the middle pair must be equal; equality of ambient complexes alone is insufficient.",
@@ -974,6 +1007,13 @@ def record(identifier, owner, concept, paths, operation=None):
                          "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
                          "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
                          "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
+    if owner == "SimplicialCoverAlgebra":
+        paths = paths + ["groupimp/src/main/java/mathematics/topology/SimplicialCover.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+                         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+                         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+                         "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
     if owner in ("PresentedAbelianGroupAlgebra", "AbelianGroupElementAlgebra"):
         paths = paths + ["groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
                          "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
@@ -1088,15 +1128,20 @@ def record(identifier, owner, concept, paths, operation=None):
     if owner == "RelativeSimplicialAlgebra":
         value["required_invariants"].append("The retained A is a labelled subcomplex of X. Relative chains are the quotient C(X)/C(A), with increasing-vertex orientations and unreduced integral homology. Inclusion, quotient and connecting maps retain their actual homology presentations.")
         value["known_limitations"] += ["Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-            "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap separately supplies simplicial maps between pairs and natural long exact sequence maps. Reduced homology, relative cohomology, cup products, persistent homology, excision witnesses and general homotopy search remain outside scope."]
+            "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap supplies simplicial maps between pairs; SimplicialCover supplies excision for a two-subcomplex union. Reduced homology, relative cohomology, cup products, persistent homology, general topological excision and homotopy search remain outside scope."]
         value["references"] += ["https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
                                 "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex.html"]
     if owner == "RelativeSimplicialMapAlgebra":
         value["required_invariants"].append("The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares.")
         value["known_limitations"] += ["Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-            "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision, excision witness or continuous-map representation is supplied."]
+            "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. SimplicialCover constructs the excision map for a two-subcomplex union separately. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision or continuous-map representation is supplied."]
         value["references"] += ["https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
                                 "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"]
+    if owner == "SimplicialCoverAlgebra":
+        value["required_invariants"].append("The ordered pieces cover their actual simplex-wise union. Sum chains use left then right coordinates; intersection inclusion is (i,-j), union is addition, and connecting homology uses the boundary of the left part. All homology is unreduced over Z with retained presentations.")
+        value["known_limitations"] += ["The union has at most 4096 nonempty simplices. Every required matrix dimension is at most 256, including the sum of both chain ranks for block matrices. Each compound homology/map calculation, whole degree list or three-map exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false result or truncated list; coefficient bit lengths remain unbounded.",
+            "Two finite labelled subcomplexes only. The splitting is a chain-group section, not generally a chain map or homology splitting. Excision is the explicit simplicial inclusion (A,A intersection B)->(A union B,B), not arbitrary topological excision. General cover morphisms and Mayer-Vietoris naturality maps, many-set covers, reduced/relative Mayer-Vietoris, spectral sequences, cohomology and continuous covers remain outside scope."]
+        value["references"].append("https://pi.math.cornell.edu/~hatcher/AT/AT.pdf")
     if owner in ("PresentedAbelianGroupAlgebra", "AbelianGroupElementAlgebra"):
         value["required_invariants"].append("Relations are integer matrix columns. Each presentation retains the Smith-coordinate map; element equality and arithmetic respect that presentation, not only its abstract isomorphism type.")
         value["known_limitations"] += ["Presentations allow at most 256 generators and 256 relations. Construction and representative lifting use bounded integer Smith calculations with a 5000000-unit budget per calculation; exhaustion is IMPLEMENTATION_FAILURE. Coefficient bit lengths remain unbounded.",
@@ -1229,6 +1274,8 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("SimplicialCover", "Two-subcomplex covers with integral Mayer-Vietoris maps", "mathematics.topology.SimplicialCover",
+         ["Ordered finite labelled pieces A and B with ambient complex exactly their simplex-wise union", "Left-then-right sum chain coordinates and signed intersection inclusion (i,-j)", "Retained integral homology presentations, exact sequence maps and simplicial excision"], ["FiniteComplex", "Z", "N", "Boolean", "Mat(Z)", "IntegralHomology", "AbelianGroupHomomorphism", "RelativeMap"]),
         ("RelativeMap", "Simplicial maps of pairs and natural relative homology maps", "mathematics.topology.RelativeSimplicialMap",
          ["Retained full source and target labelled pairs", "Ambient simplicial map carrying every source subcomplex simplex into the target subcomplex", "Oriented quotient chain matrices and integral homology maps natural with the long exact sequence"], ["RelativeComplex", "RelativeComplex.pair", "SimplicialMap", "Mat(Z)", "IntegralHomology", "AbelianGroupHomomorphism", "N", "Boolean"]),
         ("RelativeComplex.pair", "Source and target pairs for a relative simplicial map", "mathematics.foundations.Pair<RelativeSimplicialComplex,RelativeSimplicialComplex>",

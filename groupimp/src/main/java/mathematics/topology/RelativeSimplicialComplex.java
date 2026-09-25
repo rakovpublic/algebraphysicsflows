@@ -54,7 +54,7 @@ public final class RelativeSimplicialComplex implements Serializable {
         Map<FiniteSet<Integer>,Integer> result=new HashMap<>(); for(int i=0;i<basis.size();i++) result.put(basis.get(i),i); return result;
     }
     /** Retain only oriented faces occurring in the selected row basis. */
-    private static IntegerMatrix boundary(List<FiniteSet<Integer>> rows,List<FiniteSet<Integer>> columns,Computation work) {
+    static IntegerMatrix boundary(List<FiniteSet<Integer>> rows,List<FiniteSet<Integer>> columns,Computation work) {
         BigInteger[][] entries=zeros(rows.size(),columns.size(),work); Map<FiniteSet<Integer>,Integer> index=positions(rows);
         for(int c=0;c<columns.size();c++) {
             List<Integer> simplex=IntegralSimplicialHomology.vertices(columns.get(c)); work.use((long)simplex.size()*simplex.size());
