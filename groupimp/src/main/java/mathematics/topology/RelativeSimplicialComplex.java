@@ -71,7 +71,7 @@ public final class RelativeSimplicialComplex implements Serializable {
         return new IntegerMatrix(rows.size(),columns.size(),entries);
     }
     public IntegerMatrix boundaryMatrix(BigInteger degree) { requireDegree(degree); return boundaryMatrix(degree,new Computation()); }
-    private IntegerMatrix boundaryMatrix(BigInteger degree,Computation work) { return boundary(basis(degree.subtract(BigInteger.ONE)),basis(degree),work); }
+    IntegerMatrix boundaryMatrix(BigInteger degree,Computation work) { return boundary(basis(degree.subtract(BigInteger.ONE)),basis(degree),work); }
     public List<IntegerMatrix> boundaryMatrices() {
         Computation work=new Computation(); List<IntegerMatrix> result=new ArrayList<>();
         for(int k=0;k<=ambient.dimension();k++) result.add(boundaryMatrix(BigInteger.valueOf(k),work)); return Collections.unmodifiableList(result);
@@ -90,14 +90,14 @@ public final class RelativeSimplicialComplex implements Serializable {
         List<AbelianGroupType> result=new ArrayList<>(); for(IntegralHomology degree : homologyDegrees()) result.add(degree.type()); return Collections.unmodifiableList(result);
     }
     public IntegerMatrix projectionMatrix(BigInteger degree) { requireDegree(degree); return projectionMatrix(degree,new Computation()); }
-    private IntegerMatrix projectionMatrix(BigInteger degree,Computation work) { return selector(basis(degree),basis(ambient,null,degree),work); }
+    IntegerMatrix projectionMatrix(BigInteger degree,Computation work) { return selector(basis(degree),basis(ambient,null,degree),work); }
     /** The canonical zero-on-A lift is a chain-group section, generally not a chain map. */
     public IntegerMatrix liftMatrix(BigInteger degree) { return projectionMatrix(degree).transpose(); }
     public IntegerMatrix inclusionMatrix(BigInteger degree) { requireDegree(degree); return inclusionMatrix(degree,new Computation()); }
-    private IntegerMatrix inclusionMatrix(BigInteger degree,Computation work) { return selector(basis(ambient,null,degree),basis(subcomplex,null,degree),work); }
+    IntegerMatrix inclusionMatrix(BigInteger degree,Computation work) { return selector(basis(ambient,null,degree),basis(subcomplex,null,degree),work); }
     /** A-component of the boundary of a zero-on-A lift; only relative cycles necessarily give cycles in A. */
     public IntegerMatrix connectingChainMatrix(BigInteger degree) { requireDegree(degree); return connectingChainMatrix(degree,new Computation()); }
-    private IntegerMatrix connectingChainMatrix(BigInteger degree,Computation work) {
+    IntegerMatrix connectingChainMatrix(BigInteger degree,Computation work) {
         return boundary(basis(subcomplex,null,degree.subtract(BigInteger.ONE)),basis(degree),work);
     }
     private IntegralHomology connectingTarget(BigInteger degree,Computation work) {

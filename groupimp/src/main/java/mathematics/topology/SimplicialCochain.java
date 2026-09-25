@@ -64,7 +64,7 @@ public final class SimplicialCochain implements Serializable {
     }
     private IntegerVector differential(Computation work) { return work.apply(dualBoundary(complex,degree.add(BigInteger.ONE),work),coordinates); }
     public SimplicialCochain coboundary() { return new SimplicialCochain(complex,degree.add(BigInteger.ONE),differential(new Computation())); }
-    private boolean isCocycle(Computation work) { IntegerVector value=differential(work); return value.equals(IntegerVector.zero(value.dimension())); }
+    boolean isCocycle(Computation work) { IntegerVector value=differential(work); return value.equals(IntegerVector.zero(value.dimension())); }
     public boolean isCocycle() { return isCocycle(new Computation()); }
     public boolean isCoboundary() { Computation work=new Computation(); return work.hasSolution(dualBoundary(complex,degree,work),coordinates); }
     /** Coordinates of one primitive in C^(degree-1); at degree zero only the zero cochain has the empty primitive. */
@@ -78,20 +78,28 @@ public final class SimplicialCochain implements Serializable {
     public SimplicialCochain cup(SimplicialCochain other) { return cup(other,new Computation()); }
     private SimplicialCochain cup(SimplicialCochain other,Computation work) {
         sameComplex(other); BigInteger total=degree.add(other.degree); List<FiniteSet<Integer>> resultBasis=basis(complex,total);
-        if(resultBasis.isEmpty()) return zero(complex,total);
-        Map<FiniteSet<Integer>,BigInteger> first=values(),second=other.values(); int split=degree.intValueExact(); BigInteger[] result=new BigInteger[resultBasis.size()];
+        return new SimplicialCochain(complex,total,cupCoordinates(basis(complex,degree),coordinates,basis(complex,other.degree),other.coordinates,resultBasis,degree,work));
+    }
+    /** Missing input faces represent zero, allowing the same formula on relative quotient bases. */
+    static IntegerVector cupCoordinates(List<FiniteSet<Integer>> firstBasis,IntegerVector firstValues,
+                                        List<FiniteSet<Integer>> secondBasis,IntegerVector secondValues,
+                                        List<FiniteSet<Integer>> resultBasis,BigInteger firstDegree,Computation work) {
+        if(resultBasis.isEmpty()) return IntegerVector.zero(0);
+        Map<FiniteSet<Integer>,BigInteger> first=values(firstBasis,firstValues),second=values(secondBasis,secondValues);
+        int split=firstDegree.intValueExact(); BigInteger[] result=new BigInteger[resultBasis.size()];
         for(int i=0;i<result.length;i++) {
             List<Integer> labels=IntegralSimplicialHomology.vertices(resultBasis.get(i)); work.use(labels.size());
-            result[i]=first.get(new FiniteSet<>(labels.subList(0,split+1))).multiply(second.get(new FiniteSet<>(labels.subList(split,labels.size()))));
+            result[i]=first.getOrDefault(new FiniteSet<>(labels.subList(0,split+1)),BigInteger.ZERO)
+                    .multiply(second.getOrDefault(new FiniteSet<>(labels.subList(split,labels.size())),BigInteger.ZERO));
         }
-        return new SimplicialCochain(complex,total,new IntegerVector(result));
+        return new IntegerVector(result);
     }
-    private Map<FiniteSet<Integer>,BigInteger> values() {
-        List<FiniteSet<Integer>> faces=basis(complex,degree); Map<FiniteSet<Integer>,BigInteger> result=new HashMap<>();
+    private static Map<FiniteSet<Integer>,BigInteger> values(List<FiniteSet<Integer>> faces,IntegerVector coordinates) {
+        Map<FiniteSet<Integer>,BigInteger> result=new HashMap<>();
         for(int i=0;i<faces.size();i++) result.put(faces.get(i),coordinates.get(i)); return result;
     }
     public static IntegralHomology cohomology(FiniteSimplicialComplex complex,BigInteger degree) { return cohomology(complex,degree,new Computation()); }
-    private static IntegralHomology cohomology(FiniteSimplicialComplex complex,BigInteger degree,Computation work) {
+    static IntegralHomology cohomology(FiniteSimplicialComplex complex,BigInteger degree,Computation work) {
         check(complex,degree);
         return new IntegralHomology(dualBoundary(complex,degree.add(BigInteger.ONE),work),dualBoundary(complex,degree,work),work);
     }
@@ -119,7 +127,7 @@ public final class SimplicialCochain implements Serializable {
     }
     /** Contravariant H^k(target)->H^k(source), retaining both cohomology presentations. */
     public static AbelianGroupHomomorphism cohomologyMap(FiniteSimplicialMap map,BigInteger degree) { return cohomologyMap(map,degree,new Computation()); }
-    private static AbelianGroupHomomorphism cohomologyMap(FiniteSimplicialMap map,BigInteger degree,Computation work) {
+    static AbelianGroupHomomorphism cohomologyMap(FiniteSimplicialMap map,BigInteger degree,Computation work) {
         IntegralHomology from=cohomology(map.target(),degree,work),to=map.source().equals(map.target())?from:cohomology(map.source(),degree,work);
         return from.inducedMap(to,map.chainMatrix(degree,work).transpose(),work);
     }

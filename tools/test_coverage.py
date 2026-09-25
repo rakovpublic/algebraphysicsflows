@@ -223,6 +223,14 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("empty vector", " ".join(records["SimplicialCochain.cobounding-coordinates"]["required_invariants"]))
         self.assertIn("entire list", " ".join(records["SimplicialCochain.cohomology-degrees"]["required_invariants"]))
         self.assertIn("5000000", " ".join(records["SimplicialCochain.cohomology-maps"]["known_limitations"]))
+        self.assertIn("X,A union B", " ".join(records["RelativeCochain.cup"]["required_invariants"]))
+        self.assertIn("vanish on every A simplex", " ".join(records["RelativeCochain.from-absolute"]["required_invariants"]))
+        self.assertIn("H^(k+1)(X,A)", " ".join(records["RelativeCochain.connecting-cohomology-map"]["required_invariants"]))
+        self.assertIn("entire three-map segment", " ".join(records["RelativeCochain.long-exact-segment"]["required_invariants"]))
+        self.assertIn("all four maps", " ".join(records["RelativeCochain.long-exact-maps"]["required_invariants"]))
+        self.assertIn("H^k(Y,B)->H^k(X,A)", " ".join(records["RelativeCochain.cohomology-map"]["required_invariants"]))
+        self.assertIn("filtered before the limit", " ".join(records["RelativeCochain.cohomology-on"]["known_limitations"]))
+        self.assertIn("5000000", " ".join(records["RelativeCochain.cohomology-degrees"]["known_limitations"]))
 
     def test_domain_links_use_exact_domains(self):
         data = copy.deepcopy(self.data)

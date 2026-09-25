@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1471 |
-| DIRECTLY_SUPPORTED | 1228 |
+| Scoped records | 1513 |
+| DIRECTLY_SUPPORTED | 1270 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1087 |
+| IMPLEMENTED | 1129 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1155 |
+| MACHINE_TESTED | 1197 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1064 | 1064 | 0 | 0 | 0 | 1064 | 0 | 0 |
+| Concrete MathTool algebras | 1106 | 1106 | 0 | 0 | 0 | 1106 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -993,6 +993,47 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | RationalTensorAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction |
 | RationalVectorFamily | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations |
 | RationalVectorSpace | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed-dimensional rational vectors; default dimension two |
+| RelativeCochain.absolute | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.absolute |
+| RelativeCochain.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.add |
+| RelativeCochain.ambient-cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.ambient-cohomology-map |
+| RelativeCochain.basis-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.basis-on |
+| RelativeCochain.class-of | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.class-of |
+| RelativeCochain.coboundary | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.coboundary |
+| RelativeCochain.cobounding-coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.cobounding-coordinates |
+| RelativeCochain.cocycle-generators | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.cocycle-generators |
+| RelativeCochain.cohomologous | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.cohomologous |
+| RelativeCochain.cohomology | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.cohomology |
+| RelativeCochain.cohomology-degrees | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.cohomology-degrees |
+| RelativeCochain.cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.cohomology-map |
+| RelativeCochain.cohomology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.cohomology-maps |
+| RelativeCochain.cohomology-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.cohomology-on |
+| RelativeCochain.connect-cocycle | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.connect-cocycle |
+| RelativeCochain.connecting-cochain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.connecting-cochain-matrix |
+| RelativeCochain.connecting-cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.connecting-cohomology-map |
+| RelativeCochain.coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.coordinates |
+| RelativeCochain.cup | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.cup |
+| RelativeCochain.cup-class | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.cup-class |
+| RelativeCochain.degree | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.degree |
+| RelativeCochain.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.equal |
+| RelativeCochain.evaluate | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.evaluate |
+| RelativeCochain.extend-by-zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.extend-by-zero |
+| RelativeCochain.extension-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.extension-matrix |
+| RelativeCochain.from-absolute | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.from-absolute |
+| RelativeCochain.is-coboundary | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.is-coboundary |
+| RelativeCochain.is-cocycle | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.is-cocycle |
+| RelativeCochain.is-zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.is-zero |
+| RelativeCochain.long-exact-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.long-exact-maps |
+| RelativeCochain.long-exact-segment | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.long-exact-segment |
+| RelativeCochain.negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.negate |
+| RelativeCochain.pair | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.pair |
+| RelativeCochain.pullback | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.pullback |
+| RelativeCochain.representative | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.representative |
+| RelativeCochain.restriction-cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.restriction-cohomology-map |
+| RelativeCochain.restriction-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.restriction-matrix |
+| RelativeCochain.scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.scale |
+| RelativeCochain.subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.subtract |
+| RelativeCochain.with-coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.with-coordinates |
+| RelativeCochain.zero-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences; native operation RelativeCochain.zero-on |
 | RelativeComplex.absolute | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.absolute |
 | RelativeComplex.ambient | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.ambient |
 | RelativeComplex.betti-number | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps; native operation RelativeComplex.betti-number |
@@ -1047,6 +1088,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | RelativeMap.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.target |
 | RelativeMap.target-homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps; native operation RelativeMap.target-homology |
 | RelativeSimplicialAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Labelled simplicial pairs with integral quotient chains, constructive relative homology and long exact sequence maps |
+| RelativeSimplicialCochainAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences |
 | RelativeSimplicialMapAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps |
 | ResidueRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one |
 | S3.apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree; native operation S3.apply |

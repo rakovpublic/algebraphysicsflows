@@ -50,6 +50,7 @@ OWNERS = {
     "SimplicialCoverAlgebra": ("SimplicialCover", "Ordered two-subcomplex covers with constructive integral Mayer-Vietoris sequences, sum homology and simplicial excision maps"),
     "SimplicialCoverMapAlgebra": ("CoverMap", "Maps of ordered two-subcomplex covers with functorial sum homology, natural Mayer-Vietoris sequences and excision diagrams"),
     "SimplicialCochainAlgebra": ("SimplicialCochain", "Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks"),
+    "RelativeSimplicialCochainAlgebra": ("RelativeCochain", "Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences"),
     "FiniteIntegerRelationAlgebra": ("FiniteRelation(Z,Z)", "Finite-support relations on the actual registered integer Algebra"),
     "FiniteIntegerFunctionAlgebra": ("FiniteFunction(Z,Z)", "Total maps between explicit finite integer sets, preserving declared domain and codomain"),
     "FiniteCategoryAlgebra": ("FiniteCategory", "Finite categories with integer object/arrow labels and exhaustively checked composition tables"),
@@ -109,6 +110,7 @@ EXTRA_TESTS = {
     "SimplicialCoverAlgebra": "NativeMayerVietorisTest",
     "SimplicialCoverMapAlgebra": "NativeSimplicialCoverMapTest",
     "SimplicialCochainAlgebra": "NativeSimplicialCochainTest",
+    "RelativeSimplicialCochainAlgebra": "NativeRelativeCochainTest",
     "FiniteIntegerRelationAlgebra": "NativeRelationTest",
     "FiniteIntegerFunctionAlgebra": "NativeFiniteFunctionTest",
     "FiniteCategoryAlgebra": "NativeCategoryTest",
@@ -157,6 +159,49 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "RelativeSimplicialCochainAlgebra": {
+        "zero-on": "Construct the zero cochain on the retained pair (X,A) in a nonnegative degree, using only simplices outside A. Above the ambient dimension retain the requested degree with empty coordinates.",
+        "basis-on": "Emit the coordinate cochains dual to the ordered quotient-chain basis of X outside A. Filter out A before applying the basis-size limit.",
+        "absolute": "Regard a SimplicialCochain on X as a relative cochain on (X,empty), retaining its degree and coordinates.",
+        "from-absolute": "The cochain must retain exactly X and vanish on every A simplex in its degree. Select the coordinates outside A; a nonvanishing restriction is undefined.",
+        "add": "Both full labelled pairs and degrees must agree; add integral coordinates.",
+        "subtract": "Both full labelled pairs and degrees must agree; subtract the second coordinates from the first.",
+        "cup": "Require equal full ambient complexes. The product C^p(X,A) times C^q(X,B) lands in C^(p+q)(X,A union B). Use the increasing-vertex Alexander-Whitney formula with zero on missing input faces; the two subcomplexes may differ.",
+        "negate": "Negate all coordinates and retain the pair and degree.",
+        "scale": "Multiply by the supplied integer and retain the first relative cochain wrapper.",
+        "equal": "Compare the full labelled pair, degree and coordinates, not only ambient complex or cohomology class.",
+        "pair": "Return the retained labelled relative pair (X,A).",
+        "degree": "Return the retained nonnegative degree, including arbitrarily large degrees with zero coordinates.",
+        "coordinates": "Return the vector dual to the lexicographic increasing-vertex simplices of X outside A in the retained degree.",
+        "with-coordinates": "The vector must have exactly the relative basis dimension; replace coordinates in the first relative cochain wrapper.",
+        "coboundary": "Apply the transpose of the relative degree-(k+1) boundary and raise degree. Consecutive relative coboundaries compose to zero.",
+        "is-zero": "Check that all relative coordinates are zero.",
+        "is-cocycle": "Check whether the relative coboundary is zero over the integers.",
+        "is-coboundary": "Test integral solvability against the transpose of the relative degree-k boundary. In degree zero only the zero cochain is a coboundary.",
+        "cohomologous": "Require two cocycles on exactly the same full pair and degree. Their difference must be an integral relative coboundary; noncocycles are undefined.",
+        "cohomology": "Return the existing IntegralHomology kernel/quotient model with transposed relative boundaries in reversed order, retaining integral torsion and the actual relative cochain basis.",
+        "class-of": "Require a relative cocycle and project to its retained presented group. One budget covers the cohomology construction and projection.",
+        "representative": "The element must belong to exactly the retained relative cohomology presentation. Return one representative in the first relative cochain wrapper; the chosen section need not be additive.",
+        "cobounding-coordinates": "Return one integral primitive in degree k-1 when the cochain is a coboundary. In degree zero only zero has a primitive, the empty vector for C^(-1)=0.",
+        "cocycle-generators": "Emit representatives of minimal Smith generators, nontrivial torsion first then free generators. These generate relative cohomology, not the full cocycle lattice. One work budget covers construction and all representatives.",
+        "cup-class": "Require two cocycles with the same full ambient X, possibly vanishing on different A and B. Return their product class on (X,A union B) in degree p+q, independently of representatives. One work budget covers validation, product and projection.",
+        "evaluate": "Pair with relative integer chain coordinates of the matching dimension. A raw vector does not carry or validate another pair's labels.",
+        "pullback": "The cochain's full pair must equal the RelativeMap target. Transpose its relative chain matrix to obtain a cochain on the source. Collapsed simplices and images in the target subcomplex give zero.",
+        "extend-by-zero": "Insert zeros on A to obtain an absolute SimplicialCochain on X. This relative-to-absolute inclusion is a cochain map and requires the full ambient basis to fit.",
+        "connect-cocycle": "Require a cocycle on exactly A. Extend by zero outside A, apply coboundary and retain coordinates outside A, producing a relative cocycle in degree k+1 with no extra sign.",
+        "cohomology-on": "Construct unreduced integral relative cohomology in the supplied nonnegative degree, using the dual quotient bases.",
+        "cohomology-degrees": "Emit relative cohomology models from zero through the ambient dimension. The entire list shares one work budget, including all Smith reductions. The empty ambient complex gives an empty list.",
+        "extension-matrix": "Transpose the quotient chain projection: C^k(X,A)->C^k(X), inserting zeros on A. Both required bases must fit the dimension limit.",
+        "restriction-matrix": "Transpose the chain inclusion: C^k(X)->C^k(A), selecting the subcomplex coordinates.",
+        "connecting-cochain-matrix": "Transpose the degree-(k+1) homology connecting chain matrix to map C^k(A)->C^(k+1)(X,A). It sends cocycles to cocycles; its chosen chain-level formula need not be natural for pair maps.",
+        "ambient-cohomology-map": "Return H^k(X,A)->H^k(X) induced by the extension-by-zero cochain inclusion, retaining both integral presentations.",
+        "restriction-cohomology-map": "Return H^k(X)->H^k(A) induced by restriction to A, retaining both integral presentations.",
+        "connecting-cohomology-map": "Return the degree-raising connecting homomorphism H^k(A)->H^(k+1)(X,A), with one budget across both models and the induced map.",
+        "long-exact-segment": "Emit extension, restriction and connecting in that order: H^k(X,A)->H^k(X)->H^k(A)->H^(k+1)(X,A). Consecutive images equal kernels over Z, including torsion. One work budget covers the entire three-map segment.",
+        "cohomology-map": "Return the contravariant map H^k(Y,B)->H^k(X,A) induced by (X,A)->(Y,B). Full pair equality is retained; equal ambients alone are insufficient.",
+        "cohomology-maps": "Emit contravariant relative cohomology maps from zero through the larger ambient dimension. The entire list shares one work budget and preserves zero presentations.",
+        "long-exact-maps": "Emit all four vertical maps from the target pair's cohomology segment to the source pair's segment, on relative k, ambient k, subcomplex k, relative k+1, in that order. All three squares commute on cohomology. One budget covers all four maps.",
+    },
     "SimplicialCochainAlgebra": {
         "zero-on": "Construct the zero integral cochain on the supplied full labelled complex in the nonnegative degree. Above the dimension, retain the requested degree with an empty coordinate vector.",
         "unit-on": "Construct the degree-zero cochain equal to one at every vertex. It is a two-sided cup unit; on the empty complex it is also zero.",
@@ -1091,6 +1136,14 @@ def record(identifier, owner, concept, paths, operation=None):
                          "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
                          "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
                          "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
+    if owner == "RelativeSimplicialCochainAlgebra":
+        paths = paths + ["groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+                         "groupimp/src/main/java/mathematics/topology/SimplicialCochain.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+                         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+                         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+                         "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
     if owner == "SimplicialCoverMapAlgebra":
         paths = paths + ["groupimp/src/main/java/mathematics/topology/SimplicialCoverMap.java",
                          "groupimp/src/main/java/mathematics/topology/SimplicialCover.java",
@@ -1214,13 +1267,13 @@ def record(identifier, owner, concept, paths, operation=None):
     if owner == "RelativeSimplicialAlgebra":
         value["required_invariants"].append("The retained A is a labelled subcomplex of X. Relative chains are the quotient C(X)/C(A), with increasing-vertex orientations and unreduced integral homology. Inclusion, quotient and connecting maps retain their actual homology presentations.")
         value["known_limitations"] += ["Each complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices; relative bases are filtered before this bound, while ambient/subcomplex matrices require their own full bases. A compound homology or map calculation, whole degree list or long-exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-            "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap supplies simplicial maps between pairs; SimplicialCover supplies excision for a two-subcomplex union. Reduced homology, relative cohomology and its products, persistent homology, general topological excision and homotopy search remain outside scope."]
+            "Finite labelled simplicial pairs over Z only. The zero-on-A lift is a chain-group section, generally not a chain map. The connecting chain matrix need only preserve cycles and boundaries. RelativeMap supplies simplicial maps between pairs; SimplicialCover supplies excision for a two-subcomplex union. RelativeCochain supplies relative cohomology, cup products and natural long exact cohomology sequences. Reduced homology, persistent homology, general topological excision and homotopy search remain outside scope."]
         value["references"] += ["https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
                                 "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex.html"]
     if owner == "RelativeSimplicialMapAlgebra":
         value["required_invariants"].append("The full ambient map is simplicial and carries every A simplex into B. Relative chain matrices commute with boundaries; relative homology preserves composition and commutes with all three long exact sequence squares.")
         value["known_limitations"] += ["Each boundary complex has at most 4096 nonempty simplices. Each required matrix basis has at most 256 simplices. Relative matrices filter both bases before this bound; ambient and subcomplex homology operations require their own full bases. Each compound homology computation, entire degree list or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate or a partial list; integer bit lengths remain unbounded.",
-            "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. SimplicialCover constructs the excision map for a two-subcomplex union separately. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, relative cohomology, persistent homology, subdivision or continuous-map representation is supplied."]
+            "Finite labelled simplicial maps over Z only. Contiguity is a sufficient condition, not a general homotopy decision. SimplicialCover constructs the excision map for a two-subcomplex union separately. RelativeCochain supplies contravariant relative cohomology maps and natural exact sequences. No arbitrary relative chain-map builder, explicit chain-homotopy witness, reduced homology, persistent homology, subdivision or continuous-map representation is supplied."]
         value["references"] += ["https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
                                 "https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_morphism.html"]
     if owner == "SimplicialCoverAlgebra":
@@ -1228,10 +1281,15 @@ def record(identifier, owner, concept, paths, operation=None):
         value["known_limitations"] += ["The union has at most 4096 nonempty simplices. Every required matrix dimension is at most 256, including the sum of both chain ranks for block matrices. Each compound homology/map calculation, whole degree list or three-map exact segment shares a 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a false result or truncated list; coefficient bit lengths remain unbounded.",
             "Two finite labelled subcomplexes only. The splitting is a chain-group section, not generally a chain map or homology splitting. Excision is the explicit simplicial inclusion (A,A intersection B)->(A union B,B), not arbitrary topological excision. CoverMap supplies piece-preserving simplicial maps and Mayer-Vietoris/excision naturality. Many-set covers, reduced/relative Mayer-Vietoris, spectral sequences, cohomological Mayer-Vietoris and continuous covers remain outside scope."]
         value["references"].append("https://pi.math.cornell.edu/~hatcher/AT/AT.pdf")
+    if owner == "RelativeSimplicialCochainAlgebra":
+        value["required_invariants"].append("Relative cochains vanish on the subcomplex and use dual quotient bases. Extension into absolute cochains commutes with coboundary. Cup products vanish on the union of both input subcomplexes. The cohomology connecting map raises degree; pair maps reverse direction and commute with all long exact sequence squares.")
+        value["known_limitations"] += ["Each pair complex has at most 4096 nonempty simplices. Every required vector/matrix basis has at most 256 simplices; relative bases are filtered before the limit, whereas absolute extension, restriction and exact sequences need the required full ambient/subcomplex bases. Each compound cohomology/class/product/map computation, entire degree list, three-map segment or four-map naturality list shares a 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without false predicates or partial lists; integer bit lengths remain unbounded.",
+            "Only homogeneous unreduced integral cochains on labelled simplicial pairs are represented. There is no general unit on a nonempty relative subcomplex; absolute cochains give the two-sided module action. Addition requires the same full pair and degree; cup products may change the pair by taking the union of subcomplexes. Abelian class wrappers retain presentations, while the cochain provides geometric context for representatives. The connecting cochain formula need not commute with pair maps, although its cohomology map does. Mixed-degree ring carriers, other coefficients, cohomological Mayer-Vietoris, explicit cup homotopies, cap products, higher cohomology operations, persistence and continuous maps remain outside scope."]
+        value["references"].append("https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf")
     if owner == "SimplicialCochainAlgebra":
         value["required_invariants"].append("Homogeneous integer cochains retain the full complex and degree. The differential is dual to the oriented boundary; the Alexander-Whitney cup product satisfies the signed Leibniz rule. Pullback commutes with coboundary and reverses composition. Cup commutativity and naturality for arbitrary vertex maps hold on cohomology, not generally on cochains.")
         value["known_limitations"] += ["Each complex has at most 4096 nonempty simplices, and every required vector/matrix basis has at most 256 simplices. Each compound cohomology construction, class projection, representative computation, cup-class or induced map shares a 5000000-unit integer work budget; each entire degree list shares that budget across all outputs. Exhaustion raises IMPLEMENTATION_FAILURE, never false or a truncated list. Integer bit lengths remain unbounded.",
-            "Only homogeneous unreduced integral cochains on finite labelled abstract complexes are represented. Addition requires equal degree and complex; cup adds degrees, so this carrier is a family rather than one additive group across all inputs. Classes retain an abelian presentation, not geometric labels; the cochain supplies the complex and degree for reconstruction. No mixed-degree ring carrier, other coefficient rings, relative/cohomological Mayer-Vietoris operations, explicit cup homotopies, cap products, Steenrod operations, persistence, subdivision or continuous maps are supplied."]
+            "Only homogeneous unreduced integral cochains on finite labelled abstract complexes are represented. Addition requires equal degree and complex; cup adds degrees, so this carrier is a family rather than one additive group across all inputs. Classes retain an abelian presentation, not geometric labels; the cochain supplies the complex and degree for reconstruction. RelativeCochain supplies integral relative cup products and natural long exact cohomology sequences. No mixed-degree ring carrier, other coefficient rings, cohomological Mayer-Vietoris operations, explicit cup homotopies, cap products, Steenrod operations, persistence, subdivision or continuous maps are supplied."]
         value["references"].append("https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf")
     if owner == "SimplicialCoverMapAlgebra":
         value["required_invariants"].append("The union map preserves each ordered piece simplex by simplex. Block-diagonal sum maps commute with boundaries and the signed intersection and union maps. The induced integral homology maps commute with all three Mayer-Vietoris squares, and the two relative maps commute with excision.")
@@ -1370,6 +1428,8 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("RelativeCochain", "Relative integral cochains, cup products and natural exact cohomology sequences", "mathematics.topology.RelativeSimplicialCochain",
+         ["Full labelled simplicial pair, nonnegative degree and integral coordinates dual to the quotient-chain basis", "Relative cup products land on the union of both input subcomplexes", "Degree-raising connecting cohomology and contravariant pair-map naturality", "Actual integral quotient presentations and cocycle representatives"], ["RelativeComplex", "RelativeMap", "SimplicialCochain", "Vec(Z)", "Mat(Z)", "Z", "N", "Boolean", "IntegralHomology", "AbelianGroupElement", "AbelianGroupHomomorphism"]),
         ("SimplicialCochain", "Integral cochains, cup products and contravariant cohomology", "mathematics.topology.SimplicialCochain",
          ["Full labelled finite complex, nonnegative degree and integer coordinates dual to the oriented simplex basis", "Transpose-boundary differential and Alexander-Whitney cup product", "Constructive integral quotient classes, cocycle representatives and contravariant simplicial maps", "Cochain equality distinguished from cohomology equality"], ["FiniteComplex", "SimplicialMap", "Vec(Z)", "Z", "N", "Boolean", "IntegralHomology", "AbelianGroupElement", "AbelianGroupHomomorphism"]),
         ("CoverMap", "Maps of ordered covers with natural Mayer-Vietoris and excision diagrams", "mathematics.topology.SimplicialCoverMap",

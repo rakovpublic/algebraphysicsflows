@@ -30,6 +30,7 @@ import mathematics.topology.RelativeSimplicialMap;
 import mathematics.topology.SimplicialCover;
 import mathematics.topology.SimplicialCoverMap;
 import mathematics.topology.SimplicialCochain;
+import mathematics.topology.RelativeSimplicialCochain;
 import mathematics.linear.RationalVector;
 import mathematics.linear.IntegerVector;
 import mathematics.linear.IntegerMatrix;
@@ -122,6 +123,10 @@ public final class ConcreteAlgebrasExample {
                 .<AbelianGroupHomomorphism,BigInteger>performAlgebraUnsafe("connecting-homology",BigInteger.ONE)
                 .<IntegerMatrix>performAlgebraTransfer("smith-matrix").collect());
         RelativeSimplicialComplex intervalPair=new RelativeSimplicialComplex(interval,endpoints);
+        System.out.println("Connecting endpoint cocycle (2,7) to relative cohomology: "+math.flow(math.cochains,
+                Collections.singletonList(new SimplicialCochain(endpoints,BigInteger.ZERO,new IntegerVector(BigInteger.valueOf(2),BigInteger.valueOf(7)))))
+                .<RelativeSimplicialCochain,RelativeSimplicialComplex>performAlgebraUnsafe("RelativeCochain.connect-cocycle",intervalPair)
+                .<IntegerVector>performAlgebraTransfer("coordinates").collect());
         Map<BigInteger,BigInteger> reverseInterval=new TreeMap<>(); reverseInterval.put(BigInteger.ZERO,BigInteger.ONE); reverseInterval.put(BigInteger.ONE,BigInteger.ZERO);
         System.out.println("Interval reflection acts by -1 on H1(interval,endpoints): "+math.flow(math.simplicialMaps,Collections.singletonList(new FiniteSimplicialMap(interval,interval,reverseInterval)))
                 .<RelativeSimplicialMap,Pair<RelativeSimplicialComplex,RelativeSimplicialComplex>>performAlgebraUnsafe("RelativeMap.from-map",new Pair<>(intervalPair,intervalPair))

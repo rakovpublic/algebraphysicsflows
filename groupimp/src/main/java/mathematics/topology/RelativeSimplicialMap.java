@@ -68,7 +68,7 @@ public final class RelativeSimplicialMap implements Serializable {
     }
     private static void requireDegree(BigInteger degree) { if(degree.signum()<0) throw MathFailure.undefined("Relative map degree must be nonnegative"); }
     public IntegerMatrix chainMatrix(BigInteger degree) { return chainMatrix(degree,new Computation()); }
-    private IntegerMatrix chainMatrix(BigInteger degree,Computation work) {
+    IntegerMatrix chainMatrix(BigInteger degree,Computation work) {
         requireDegree(degree); return ambient.chainMatrix(target.basis(degree),source.basis(degree),work);
     }
     private int topDegree() { return Math.max(source.ambient().dimension(),target.ambient().dimension()); }
