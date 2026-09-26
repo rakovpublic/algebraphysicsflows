@@ -10,6 +10,7 @@ DATABASE = ROOT / "mathematics-coverage.json"
 MANIFEST = ROOT / "groupimp/src/test/resources/mathematics/concrete-catalog.tsv"
 DATE = "2026-09-26"
 OWNERS = {
+    "SimplicialHomotopyAlgebra": ("SimplicialHomotopy", "Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators"),
     "BooleanAlgebra": ("Boolean", "Boolean truth values with Boolean operations"),
     "NaturalSemiring": ("N", "Nonnegative arbitrary precision integers with addition and multiplication"),
     "IntegerRing": ("Z", "Arbitrary precision integers with ring operations and truncated quotient"),
@@ -84,6 +85,7 @@ INTERFACES = {
     "IUnsafeFlatOperation": "flat/MixedFlatOperation",
 }
 EXTRA_TESTS = {
+    "SimplicialHomotopyAlgebra": "NativeSimplicialHomotopyTest",
     "RationalVectorFamily": "NativeRectangularLinearTest",
     "RationalMatrixFamily": "NativeRectangularLinearTest",
     "IntegerVectorFamily": "NativeIntegerLinearTest",
@@ -169,6 +171,24 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "SimplicialHomotopyAlgebra": {
+        "between": "Require two RelativeMaps with the same full source and target pairs, contiguous in both the ambient target and its subcomplex. Retain ordered endpoints from and to. Registered on RelativeMap as SimplicialHomotopy.between.",
+        "between-absolute": "Require two SimplicialMaps with the same full source and target complexes and contiguous simplex images. Retain them as maps of pairs with empty subcomplexes. Registered on SimplicialMap as SimplicialHomotopy.between-absolute.",
+        "from": "Return the retained initial RelativeMap, including the full source and target pairs.",
+        "to": "Return the retained final RelativeMap, including the full source and target pairs.",
+        "source": "Return the full source pair shared by both endpoint maps.",
+        "target": "Return the full target pair shared by both endpoint maps.",
+        "reverse": "Exchange the endpoints and recompute the prism on demand. This is generally not the negative of the original matrix, though both satisfy their respective chain-homotopy identities.",
+        "equal": "Compare both ordered endpoint RelativeMaps with their full labelled pairs and vertex assignments.",
+        "chain-matrix": "In nonnegative degree n, return P_n: C_n(source)->C_(n+1)(target). Sum oriented front-from/back-to simplices, omit repeated vertices and target-subcomplex simplices. Boundary P + P boundary equals to# - from#.",
+        "cochain-matrix": "In nonnegative degree p, return Q^p=transpose(P_(p-1)): C^p(target)->C^(p-1)(source). At p=0 preserve zero rows and the target C^0 column count. Coboundary Q + Q coboundary equals to* - from*.",
+        "chain-matrices": "Emit P_n in ascending degrees zero through the maximum quotient dimension of the source and target pairs. Empty quotient complexes give an empty list. One budget covers the entire list.",
+        "cochain-matrices": "Emit Q^p in ascending degrees zero through one plus the maximum quotient dimension. Include Q^0 with its zero row count; empty quotient complexes give one 0-by-0 matrix. One budget covers the entire list.",
+        "on-chain": "Require the full source pair. Return P applied to the chain on the full target pair, raising degree by one, through ILeftProjectionOperation and the actual second carrier wrapper. Negative-degree zero chains remain valid. For cycles this fills the difference to#c - from#c.",
+        "on-cochain": "Require the full target pair and positive degree. Return Q applied to the cochain on the full source pair, lowering degree by one, through ILeftProjectionOperation. For cocycles its coboundary equals to*phi - from*phi. At degree zero use cochain-matrix because typed cochains exclude degree minus one.",
+        "on-absolute-chain": "Require empty subcomplexes in both endpoint pairs and a chain on the full source ambient complex. Return the target SimplicialChain with degree raised by one through the actual second carrier wrapper.",
+        "on-absolute-cochain": "Require empty subcomplexes in both endpoint pairs and a positive-degree cochain on the full target ambient complex. Return the source SimplicialCochain with degree lowered by one through the actual second carrier wrapper.",
+    },
     "RelativeSimplicialTripleMapAlgebra": {
         "from-map": "Require the ambient simplicial map to have exactly the full X and Y of the supplied ordered source/target triples. Validate A maps into C and B maps into D, retaining three compatible pair maps. Registered on SimplicialMap as TripleMap.from-map.",
         "compose": "Apply the right operand first. All three full labelled components of the middle triple must agree; composition and validation share one work budget.",
@@ -1250,6 +1270,13 @@ OWNER_CONDITIONS["RationalMatrixFamily"]["companion"] = "The polynomial has posi
 
 def record(identifier, owner, concept, paths, operation=None):
     carrier, scope = OWNERS[owner]
+    if owner == "SimplicialHomotopyAlgebra":
+        paths = paths + ["groupimp/src/main/java/mathematics/topology/SimplicialHomotopy.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+                         "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
     tests = ["groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java"]
     if owner in EXTRA_TESTS:
         tests.append("groupimp/src/test/java/operations/" + EXTRA_TESTS[owner] + ".java")
@@ -1529,15 +1556,20 @@ def record(identifier, owner, concept, paths, operation=None):
         value["known_limitations"] += ["Each complex has at most 4096 nonempty simplices; every required matrix/vector basis has at most 256 simplices, including adjacent degrees and cap source/target bases. Each compound homology, class, cap-class, induced-map or generator-list computation shares one 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE without a false predicate or partial list. Integer coefficient bit lengths are unbounded.",
             "Only homogeneous unreduced integral chains on finite labelled abstract complexes are represented. Chain addition requires equal full complexes and degrees. Homology class wrappers retain presentations, while chains supply geometric context. The chosen sorted cap formula is not generally natural on chains under arbitrary vertex relabelling, although it is natural on homology. RelativeChain supplies quotient chains and the two standard relative cap products. A cap cohomology map does not certify manifold status, orientation or a fundamental class. RelativeCap supplies general cap products with explicit A and B. Automatic fundamental-class construction, other coefficients, mixed-degree chains, Poincare-duality certification and explicit cap homotopies remain outside scope."]
         value["references"].append("https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf")
+    if owner == "SimplicialHomotopyAlgebra":
+        value["required_invariants"].append("Ordered contiguous maps retain equal full source/target pairs and contiguity in both target components. The oriented integral prism obeys boundary P + P boundary = to# - from#, and its transpose obeys the dual cochain identity. Typed actions retain complete contexts and use actual second operand wrappers.")
+        value["known_limitations"] += ["At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
+            "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. It does not concatenate witnesses or certify general continuous homotopy equivalence. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."]
+        value["references"].append("https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf")
     if owner == "RelativeSimplicialTripleAlgebra":
         value["required_invariants"].append("The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers.")
         value["known_limitations"] += ["At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-            "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."]
+            "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. SimplicialHomotopy supplies prism witnesses for contiguous endpoint pair maps. Arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."]
         value["references"] += ["https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf", "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"]
     if owner == "RelativeSimplicialTripleMapAlgebra":
         value["required_invariants"].append("The common ambient vertex map preserves both nested subcomplexes and induces compatible outer, total and inner RelativeMaps. Composition is covariant for homology and contravariant for cohomology. Four-map lists retain source/target presentations and make all six exact-sequence naturality squares commute. All results belong to actual registered Algebra instances.")
         value["known_limitations"] += ["At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-            "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."]
+            "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."]
         value["references"] += ["https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf", "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"]
     if owner == "RelativeCapProductAlgebra":
         value["required_invariants"].append("All three labelled pairs are checked: chain on (X,A union B), cochain on (X,A), target (X,B). The signed boundary identity holds on chains. Integral homology products are independent of representatives, natural on classes under maps preserving A and B, and compatible with relative cup products. All wrappers use the original registered algebras.")
@@ -1681,6 +1713,8 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("SimplicialHomotopy", "Integral prism witnesses for contiguous simplicial maps", "mathematics.topology.SimplicialHomotopy",
+         ["Ordered maps of equal full labelled pairs, contiguous in both ambient and subcomplex targets", "Degree-raising integral prism and degree-lowering transpose satisfying the chain and cochain homotopy identities", "Filtered quotient bases, exact orientation signs and actual chain/cochain wrappers"], ["SimplicialMap", "RelativeMap", "RelativeComplex", "SimplicialChain", "SimplicialCochain", "RelativeChain", "RelativeCochain", "Mat(Z)", "N", "Boolean"]),
         ("TripleMap", "Simplicial maps of triples and natural integral exact sequences", "mathematics.topology.RelativeSimplicialTripleMap",
          ["Full ordered source and target triples with one ambient vertex map preserving both nested subcomplexes", "Compatible outer, total and inner pair maps with oriented quotient-chain maps", "Covariant integral homology and contravariant cohomology retaining full presentations", "Four vertical maps commuting with each exact sequence under one shared computation budget"], ["RelativeTriple", "RelativeTriple.pair", "SimplicialMap", "RelativeMap", "N", "Boolean", "AbelianGroupHomomorphism"]),
         ("RelativeTriple.pair", "Ordered source and target triples for a simplicial triple map", "mathematics.foundations.Pair<RelativeSimplicialTriple,RelativeSimplicialTriple>",

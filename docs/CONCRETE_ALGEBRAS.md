@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1215 native operations from 56 algebra builders.
+The default initializer currently installs 1231 native operations from 57 algebra builders.
 
 ## Existing API usage
 
@@ -60,6 +60,7 @@ List<String> values = math.flow(math.naturals,
 | RelativeCapProductAlgebra / RelativeCap | equality of retained chain and target -> Boolean | chain; target pair; boundary | bind a chain to an explicit target pair; replace chain; general relative cap, class, matrices and induced homology/cohomology maps |
 | RelativeSimplicialTripleAlgebra / RelativeTriple | equality of the full nested triple -> Boolean | outer, total and inner pairs; inclusion and quotient pair maps | quotient chain/cochain matrices; homology and cohomology maps; flat exact segments; typed connecting cycles/cocycles |
 | RelativeSimplicialTripleMapAlgebra / TripleMap | compose; equality/contiguity -> Boolean | inverse; source/target triples; ambient and three pair maps; isomorphism; image/corestriction | construct from a vertex map and ordered triples; inclusion/restriction; six induced integral maps; flat four-map naturality lists |
+| SimplicialHomotopyAlgebra / SimplicialHomotopy | ordered endpoint equality -> Boolean | endpoint maps; source/target pairs; reverse; flat chain/cochain matrices | construct between contiguous absolute or relative maps; degreewise prism matrices; typed chain/cochain actions through second operand wrappers |
 | SimplicialChainAlgebra / SimplicialChain | context-checked add/subtract; equality/homology comparison -> Boolean | boundary; negate; complex/degree/coordinates; cycle/boundary predicates; fillings; homology/class; flat cycle generators; augmentation | integer scale; coordinates; pushforward; pairing; cap and cap-class; fixed-chain/cochain cap matrices and induced maps; zero and flat basis constructors |
 | SimplicialCochainAlgebra / SimplicialCochain | same-context add/subtract; cup; equality/cohomologous -> Boolean; cup-class -> AbelianGroupElement | negate; complex/degree/coordinates; coboundary; zero/cocycle/coboundary tests; cohomology model/class; cobounding coordinates; flat cocycle generators | degreewise zero/basis construction and unit; integer scaling; coordinate replacement; representative; evaluation; pullback; scalar/flat cohomology models and contravariant maps |
 | RelativeSimplicialCochainAlgebra / RelativeCochain | same-pair add/subtract; cup on union pairs; equality/cohomologous -> Boolean; cup-class -> AbelianGroupElement | negate; pair/degree/coordinates; coboundary; cocycle/coboundary tests; cohomology model/class; primitives; flat cocycle generators; absolute extension | zero/basis construction; absolute conversion; scaling/coordinates/representative/evaluation; pair-map pullback; connecting cocycle; scalar/flat relative cohomology and natural exact-sequence maps |
@@ -1389,7 +1390,7 @@ List<String> result = math.flow(math.relativeComplexes,
 
 The executable example also runs the flat cohomology sequence. With B empty, positive-degree connecting homology agrees with the existing pair sequence. At degree zero the target is the zero group in degree -1, retaining the same presentation as a typed chain on `(A,B)`; that presentation can differ from the canonical zero presentation in the older pair API. Matrix and exact-sequence operations accept nonnegative degrees. Typed chains permit negative zero groups; connecting cochains always raise a nonnegative degree.
 
-Every required quotient basis is filtered before its 256-simplex limit; each complex has at most 4096 nonempty simplices. A single 5,000,000-unit integer budget covers each compound map, and each entire flat segment shares it across all four quotient models and three induced maps. Exhaustion raises IMPLEMENTATION_FAILURE without a partial list; integer bit lengths remain unbounded. The zero-on-A/B section is generally not a chain map, and the connecting matrices need not be natural on raw representatives. Induced maps are natural under maps preserving A and B. TripleMap supplies maps of triples. Arbitrary chain maps, other coefficients, subdivision, continuous maps and explicit homotopy witnesses remain outside this carrier's scope.
+Every required quotient basis is filtered before its 256-simplex limit; each complex has at most 4096 nonempty simplices. A single 5,000,000-unit integer budget covers each compound map, and each entire flat segment shares it across all four quotient models and three induced maps. Exhaustion raises IMPLEMENTATION_FAILURE without a partial list; integer bit lengths remain unbounded. The zero-on-A/B section is generally not a chain map, and the connecting matrices need not be natural on raw representatives. Induced maps are natural under maps preserving A and B. TripleMap supplies maps of triples. SimplicialHomotopy supplies prism witnesses for contiguous pair maps. Arbitrary chain maps, other coefficients, subdivision and continuous maps remain outside this carrier's scope.
 
 NativeRelativeTripleTest checks 216 graph triples against independent connectivity ranks and integral exactness, chain identities for every nested pair of triangle subcomplexes, disks through dimension four, projective-plane index-two images and cohomological torsion, both pair-sequence specializations, representative independence, all 27 triangle-boundary vertex maps and all six naturality squares, nonnatural connecting matrices, filtered bases, shared segment budgets, invalid inputs, empty/huge degrees, actual second-operand wrappers and serialized flows. All 24 registrations have explicit expected results in ConcreteAlgebrasTest.
 
@@ -1432,6 +1433,49 @@ List<String> result = math.flow(math.simplicialMaps,
 
 `restrict` returns the first TripleMap wrapper through ICustomMemberOperation. Unary transfers return the registered triple, simplicial-map or relative-map wrappers. The flat naturality lists return actual AbelianGroupHomomorphism wrappers through the original flat mixed-result interface; serialized flows preserve their contexts and direction.
 
-Each complex has at most 4096 nonempty simplices, and each required quotient basis at most 256, filtered before its bound. A small quotient can therefore work even when the full ambient chain basis exceeds the limit. Each scalar induced map and each entire four-map list shares one 5,000,000-unit integer work budget across all models and induction. Construction, composition, restriction, image/corestriction and contiguity also share a budget within each call. Exhaustion raises IMPLEMENTATION_FAILURE without partial lists or false predicates; integer bit lengths are unbounded. Connecting matrices themselves need not be natural on raw representatives. Contiguity is sufficient for homotopy, not a complete decision procedure. Arbitrary chain maps, explicit homotopies, other coefficients, subdivision and continuous maps remain outside scope.
+Each complex has at most 4096 nonempty simplices, and each required quotient basis at most 256, filtered before its bound. A small quotient can therefore work even when the full ambient chain basis exceeds the limit. Each scalar induced map and each entire four-map list shares one 5,000,000-unit integer work budget across all models and induction. Construction, composition, restriction, image/corestriction and contiguity also share a budget within each call. Exhaustion raises IMPLEMENTATION_FAILURE without partial lists or false predicates; integer bit lengths are unbounded. Connecting matrices themselves need not be natural on raw representatives. Contiguity is sufficient for homotopy, not a complete decision procedure. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. Arbitrary chain maps, general homotopy search, other coefficients, subdivision and continuous maps remain outside scope.
 
 NativeRelativeTripleMapTest checks 27 circle maps against winding numbers, all 729 compositions, all 256 tetrahedron vertex maps against independent oriented quotient matrices, a degree-two circle covering with index two, interval reflection signs, projective-plane torsion, both exact-sequence diagrams, contiguity in each nested component, image factorization, restrictions, full triple isomorphisms, degree-minus-one presentations, nonnatural connecting matrices, invalid inputs, empty/huge degrees, extreme labels, filtered bases, shared four-map budgets and serialized native flows. All 25 registrations have explicit expected results in ConcreteAlgebrasTest.
+
+## Explicit simplicial prism homotopies
+
+`math.simplicialHomotopies` adds 16 operations on `SimplicialHomotopy`. It retains ordered maps `f,g: (X,A)->(Y,B)` with identical full boundaries, requiring contiguity in Y and separately in B. Absolute construction uses empty subcomplexes. Each witness computes the integral prism on sorted oriented simplices:
+
+```text
+P_n[v0,...,vn] = sum_i (-1)^i [f(v0),...,f(vi),g(vi),...,g(vn)]
+boundary P + P boundary = g# - f#
+Q^p = transpose(P_(p-1))
+coboundary Q + Q coboundary = g* - f*
+```
+
+Repeated vertices make a term zero; distinct image vertices are sorted with the orientation sign. Terms in B are zero in the quotient. Thus P applied to a cycle explicitly fills the difference of its two pushforwards. Q applied to a positive-degree cocycle supplies a primitive for the difference of its pullbacks. See [Hatcher, section 2.1, prism operators and relative homotopy invariance](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf).
+
+| Operations | Contract |
+| --- | --- |
+| `SimplicialHomotopy.between` | Two RelativeMaps -> witness; registered on RelativeMap; checks contiguity in both target components |
+| `SimplicialHomotopy.between-absolute` | Two SimplicialMaps -> witness on their absolute pairs |
+| `from`, `to`, `source`, `target` | Return the retained endpoint RelativeMaps or full RelativeComplex pairs |
+| `reverse`, `equal` | Swap endpoints, or compare their ordered full maps; reversing recomputes the prism and need not negate its matrix |
+| `chain-matrix`, `cochain-matrix` | Return P_n or Q^p in nonnegative degree |
+| flat `chain-matrices`, `cochain-matrices` | Ascending degrees 0 through d for P, 0 through d+1 for Q, where d is the maximum dimension of the two quotient complexes |
+| `on-chain`, `on-cochain` | Apply P to a RelativeChain on the source, or Q to a positive-degree RelativeCochain on the target; return the other pair with changed degree |
+| `on-absolute-chain`, `on-absolute-cochain` | Corresponding SimplicialChain/SimplicialCochain actions; both endpoint subcomplexes must be empty |
+
+The chain and cochain actions use `ILeftProjectionOperation` and return the actual second carrier's wrapper. Construction uses the existing custom-result operation; matrix lists use unary flat transfers. Typed chain inputs allow negative-degree zero chains. Typed cochains have no degree-minus-one values, so their action requires positive input degree; `cochain-matrix(0)` still returns the correctly shaped zero-row matrix. Empty quotient pairs give no chain matrices and one 0-by-0 cochain matrix.
+
+For the two maps of a point to opposite interval endpoints, the prism on three times that point is three times the oriented edge:
+
+```java
+List<String> boundary = math.flow(math.simplicialMaps,
+    Collections.singletonList(endpointStart))
+    .<SimplicialHomotopy>performCustomResultOperation(
+        "SimplicialHomotopy.between-absolute", endpointEnd)
+    .performLeftProjectionOperation("on-absolute-chain", weightedPoint)
+    .performOneOperandOperation("boundary")
+    .<IntegerVector>performAlgebraTransfer("coordinates")
+    .collect(); // ["[-3, 3]"]
+```
+
+The executable example builds all inputs. Each required quotient basis is filtered before the 256-simplex bound; each boundary complex has at most 4096 nonempty simplices. Matrix construction, each typed action and each entire flat list share a 5,000,000-unit computation budget. Resource exhaustion raises IMPLEMENTATION_FAILURE; integer coefficient bit lengths remain unbounded. These witnesses cover a single contiguous pair. They do not search for or concatenate homotopies, represent arbitrary chain homotopies, perform subdivision, or certify continuous homotopy equivalence. Cup/cap homotopies and other coefficients remain outside scope.
+
+NativeSimplicialHomotopyTest checks 729 triangle-map pairs against independent vertex-incidence determinants, 324 relative triangle-map pairs against quotient projection, both homotopy identities, typed cycle/cocycle fillings on distinct pairs, noncycles and adjoint pairings, simplex contractions through dimension six, projective-plane cycles in a cone, circle maps, noncontiguity, non-negating endpoint reversal, extreme labels, negative/huge degrees, filtered basis limits, actual wrappers, flat flows and serialized repeated execution. All 16 registrations have explicit expected results in ConcreteAlgebrasTest.

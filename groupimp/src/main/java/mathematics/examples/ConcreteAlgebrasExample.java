@@ -26,6 +26,7 @@ import mathematics.topology.FiniteSimplicialComplex;
 import mathematics.topology.RelativeCapProduct;
 import mathematics.topology.RelativeSimplicialTriple;
 import mathematics.topology.RelativeSimplicialTripleMap;
+import mathematics.topology.SimplicialHomotopy;
 import mathematics.topology.IntegralHomology;
 import mathematics.topology.FiniteSimplicialMap;
 import mathematics.topology.RelativeSimplicialComplex;
@@ -103,6 +104,13 @@ public final class ConcreteAlgebrasExample {
         RelativeSimplicialTriple oppositeBasedInterval=new RelativeSimplicialTriple(intervalCapPair,new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(1))));
         Map<BigInteger,BigInteger> endpointSwap=new TreeMap<>(); endpointSwap.put(BigInteger.ZERO,BigInteger.ONE); endpointSwap.put(BigInteger.ONE,BigInteger.ZERO);
         FiniteSimplicialMap intervalReflection=new FiniteSimplicialMap(intervalCapPair.ambient(),intervalCapPair.ambient(),endpointSwap);
+        FiniteSimplicialMap endpointStart=FiniteSimplicialMap.inclusion(basedEndpoint,intervalCapPair.ambient());
+        FiniteSimplicialMap endpointEnd=endpointStart.constantAt(BigInteger.ONE);
+        SimplicialChain weightedPoint=new SimplicialChain(basedEndpoint,BigInteger.ZERO,new IntegerVector(BigInteger.valueOf(3)));
+        System.out.println("Prism boundary between interval endpoints: "+math.flow(math.simplicialMaps,Collections.singletonList(endpointStart))
+                .<SimplicialHomotopy>performCustomResultOperation("SimplicialHomotopy.between-absolute",endpointEnd)
+                .performLeftProjectionOperation("on-absolute-chain",weightedPoint).performOneOperandOperation("boundary")
+                .<IntegerVector>performAlgebraTransfer("coordinates").collect());
         System.out.println("Triple reflection acts by minus one on outer homology: "+math.flow(math.simplicialMaps,Collections.singletonList(intervalReflection))
                 .<RelativeSimplicialTripleMap,Pair<RelativeSimplicialTriple,RelativeSimplicialTriple>>performAlgebraUnsafe("TripleMap.from-map",new Pair<>(basedInterval,oppositeBasedInterval))
                 .<AbelianGroupHomomorphism,BigInteger>performAlgebraUnsafe("outer-homology-map",BigInteger.ONE).<IntegerMatrix>performAlgebraTransfer("smith-matrix").collect());

@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1678 |
-| DIRECTLY_SUPPORTED | 1435 |
+| Scoped records | 1695 |
+| DIRECTLY_SUPPORTED | 1452 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1294 |
+| IMPLEMENTED | 1311 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1362 |
+| MACHINE_TESTED | 1379 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1271 | 1271 | 0 | 0 | 0 | 1271 | 0 | 0 |
+| Concrete MathTool algebras | 1288 | 1288 | 0 | 0 | 0 | 1288 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -1316,6 +1316,23 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | SimplicialCover.union-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral homological and cohomological Mayer-Vietoris sequences, direct sums and simplicial excision maps; native operation SimplicialCover.union-matrix |
 | SimplicialCoverAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral homological and cohomological Mayer-Vietoris sequences, direct sums and simplicial excision maps |
 | SimplicialCoverMapAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with covariant homology, contravariant cohomology, natural Mayer-Vietoris sequences and excision diagrams |
+| SimplicialHomotopy.between | DIRECTLY_SUPPORTED | IMPLEMENTED | Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.between |
+| SimplicialHomotopy.between-absolute | DIRECTLY_SUPPORTED | IMPLEMENTED | Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.between-absolute |
+| SimplicialHomotopy.chain-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.chain-matrices |
+| SimplicialHomotopy.chain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.chain-matrix |
+| SimplicialHomotopy.cochain-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.cochain-matrices |
+| SimplicialHomotopy.cochain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.cochain-matrix |
+| SimplicialHomotopy.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.equal |
+| SimplicialHomotopy.from | DIRECTLY_SUPPORTED | IMPLEMENTED | Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.from |
+| SimplicialHomotopy.on-absolute-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.on-absolute-chain |
+| SimplicialHomotopy.on-absolute-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.on-absolute-cochain |
+| SimplicialHomotopy.on-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.on-chain |
+| SimplicialHomotopy.on-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.on-cochain |
+| SimplicialHomotopy.reverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.reverse |
+| SimplicialHomotopy.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.source |
+| SimplicialHomotopy.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.target |
+| SimplicialHomotopy.to | DIRECTLY_SUPPORTED | IMPLEMENTED | Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.to |
+| SimplicialHomotopyAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators |
 | SimplicialMap.chain-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.chain-matrices |
 | SimplicialMap.chain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.chain-matrix |
 | SimplicialMap.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.compose |

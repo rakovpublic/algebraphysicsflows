@@ -28199,7 +28199,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. SimplicialHomotopy supplies prism witnesses for contiguous endpoint pair maps. Arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -28272,7 +28272,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."
+        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."
       ],
       "required_extension": null,
       "references": [
@@ -28636,6 +28636,76 @@
       "provenance": {
         "definition_source": "docs/CONCRETE_ALGEBRAS.md",
         "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialCoverMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
+      "id": "concrete-algebra.SimplicialHomotopyAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyAlgebra",
+      "concept": "SimplicialHomotopyAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "SimplicialHomotopy",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Ordered contiguous maps retain equal full source/target pairs and contiguity in both target components. The oriented integral prism obeys boundary P + P boundary = to# - from#, and its transpose obeys the dual cochain identity. Typed actions retain complete contexts and use actual second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. It does not concatenate witnesses or certify general continuous homotopy equivalence. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
         "implemented_by": "Codex",
         "generated_by_model": "not recorded",
         "reviewed_by": null,
@@ -114227,7 +114297,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. SimplicialHomotopy supplies prism witnesses for contiguous endpoint pair maps. Arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -114307,7 +114377,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. SimplicialHomotopy supplies prism witnesses for contiguous endpoint pair maps. Arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -114387,7 +114457,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. SimplicialHomotopy supplies prism witnesses for contiguous endpoint pair maps. Arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -114467,7 +114537,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. SimplicialHomotopy supplies prism witnesses for contiguous endpoint pair maps. Arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -114547,7 +114617,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. SimplicialHomotopy supplies prism witnesses for contiguous endpoint pair maps. Arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -114627,7 +114697,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. SimplicialHomotopy supplies prism witnesses for contiguous endpoint pair maps. Arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -114707,7 +114777,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. SimplicialHomotopy supplies prism witnesses for contiguous endpoint pair maps. Arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -114787,7 +114857,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. SimplicialHomotopy supplies prism witnesses for contiguous endpoint pair maps. Arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -114867,7 +114937,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. SimplicialHomotopy supplies prism witnesses for contiguous endpoint pair maps. Arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -114947,7 +115017,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. SimplicialHomotopy supplies prism witnesses for contiguous endpoint pair maps. Arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -115027,7 +115097,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. SimplicialHomotopy supplies prism witnesses for contiguous endpoint pair maps. Arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -115107,7 +115177,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. SimplicialHomotopy supplies prism witnesses for contiguous endpoint pair maps. Arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -115187,7 +115257,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. SimplicialHomotopy supplies prism witnesses for contiguous endpoint pair maps. Arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -115267,7 +115337,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. SimplicialHomotopy supplies prism witnesses for contiguous endpoint pair maps. Arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -115348,7 +115418,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. SimplicialHomotopy supplies prism witnesses for contiguous endpoint pair maps. Arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -115428,7 +115498,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. SimplicialHomotopy supplies prism witnesses for contiguous endpoint pair maps. Arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -115508,7 +115578,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. SimplicialHomotopy supplies prism witnesses for contiguous endpoint pair maps. Arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -115588,7 +115658,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. SimplicialHomotopy supplies prism witnesses for contiguous endpoint pair maps. Arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -115668,7 +115738,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. SimplicialHomotopy supplies prism witnesses for contiguous endpoint pair maps. Arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -115748,7 +115818,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. SimplicialHomotopy supplies prism witnesses for contiguous endpoint pair maps. Arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -115828,7 +115898,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. SimplicialHomotopy supplies prism witnesses for contiguous endpoint pair maps. Arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -115908,7 +115978,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. SimplicialHomotopy supplies prism witnesses for contiguous endpoint pair maps. Arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -115989,7 +116059,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. SimplicialHomotopy supplies prism witnesses for contiguous endpoint pair maps. Arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -116069,7 +116139,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
+        "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. SimplicialHomotopy supplies prism witnesses for contiguous endpoint pair maps. Arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -116149,7 +116219,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."
+        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."
       ],
       "required_extension": null,
       "references": [
@@ -116229,7 +116299,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."
+        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."
       ],
       "required_extension": null,
       "references": [
@@ -116309,7 +116379,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."
+        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."
       ],
       "required_extension": null,
       "references": [
@@ -116389,7 +116459,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."
+        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."
       ],
       "required_extension": null,
       "references": [
@@ -116469,7 +116539,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."
+        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."
       ],
       "required_extension": null,
       "references": [
@@ -116549,7 +116619,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."
+        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."
       ],
       "required_extension": null,
       "references": [
@@ -116629,7 +116699,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."
+        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."
       ],
       "required_extension": null,
       "references": [
@@ -116709,7 +116779,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."
+        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."
       ],
       "required_extension": null,
       "references": [
@@ -116789,7 +116859,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."
+        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."
       ],
       "required_extension": null,
       "references": [
@@ -116869,7 +116939,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."
+        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."
       ],
       "required_extension": null,
       "references": [
@@ -116949,7 +117019,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."
+        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."
       ],
       "required_extension": null,
       "references": [
@@ -117029,7 +117099,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."
+        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."
       ],
       "required_extension": null,
       "references": [
@@ -117109,7 +117179,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."
+        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."
       ],
       "required_extension": null,
       "references": [
@@ -117189,7 +117259,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."
+        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."
       ],
       "required_extension": null,
       "references": [
@@ -117269,7 +117339,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."
+        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."
       ],
       "required_extension": null,
       "references": [
@@ -117349,7 +117419,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."
+        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."
       ],
       "required_extension": null,
       "references": [
@@ -117429,7 +117499,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."
+        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."
       ],
       "required_extension": null,
       "references": [
@@ -117509,7 +117579,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."
+        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."
       ],
       "required_extension": null,
       "references": [
@@ -117589,7 +117659,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."
+        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."
       ],
       "required_extension": null,
       "references": [
@@ -117669,7 +117739,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."
+        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."
       ],
       "required_extension": null,
       "references": [
@@ -117750,7 +117820,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."
+        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."
       ],
       "required_extension": null,
       "references": [
@@ -117830,7 +117900,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."
+        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."
       ],
       "required_extension": null,
       "references": [
@@ -117910,7 +117980,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."
+        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."
       ],
       "required_extension": null,
       "references": [
@@ -117990,7 +118060,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."
+        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."
       ],
       "required_extension": null,
       "references": [
@@ -118071,7 +118141,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
-        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."
+        "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. SimplicialHomotopy supplies prism witnesses for the exposed contiguous pair maps. No arbitrary chain maps, general homotopy search, other coefficient rings, subdivision or continuous-map representation is supplied."
       ],
       "required_extension": null,
       "references": [
@@ -118100,6 +118170,1240 @@
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "long-exact-cohomology-maps",
       "legacy_operation_interface": "IUnsafeFlatOperation"
+    },
+    {
+      "id": "concrete-operation.SimplicialHomotopy.between",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyAlgebra",
+      "concept": "SimplicialHomotopy.between",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeMap",
+      "domain_B": "RelativeMap",
+      "domain_C": "SimplicialHomotopy",
+      "operation_signature": "RelativeMap x RelativeMap -> SimplicialHomotopy",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.between",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require two RelativeMaps with the same full source and target pairs, contiguous in both the ambient target and its subcomplex. Retain ordered endpoints from and to. Registered on RelativeMap as SimplicialHomotopy.between.",
+        "Ordered contiguous maps retain equal full source/target pairs and contiguity in both target components. The oriented integral prism obeys boundary P + P boundary = to# - from#, and its transpose obeys the dual cochain identity. Typed actions retain complete contexts and use actual second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. It does not concatenate witnesses or certify general continuous homotopy equivalence. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "SimplicialHomotopy.between",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "SimplicialHomotopy.between",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.SimplicialHomotopy.between-absolute",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyAlgebra",
+      "concept": "SimplicialHomotopy.between-absolute",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "SimplicialMap",
+      "domain_B": "SimplicialMap",
+      "domain_C": "SimplicialHomotopy",
+      "operation_signature": "SimplicialMap x SimplicialMap -> SimplicialHomotopy",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.between-absolute",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require two SimplicialMaps with the same full source and target complexes and contiguous simplex images. Retain them as maps of pairs with empty subcomplexes. Registered on SimplicialMap as SimplicialHomotopy.between-absolute.",
+        "Ordered contiguous maps retain equal full source/target pairs and contiguity in both target components. The oriented integral prism obeys boundary P + P boundary = to# - from#, and its transpose obeys the dual cochain identity. Typed actions retain complete contexts and use actual second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. It does not concatenate witnesses or certify general continuous homotopy equivalence. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "SimplicialHomotopy.between-absolute",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "SimplicialHomotopy.between-absolute",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.SimplicialHomotopy.from",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyAlgebra",
+      "concept": "SimplicialHomotopy.from",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "SimplicialHomotopy",
+      "domain_B": null,
+      "domain_C": "RelativeMap",
+      "operation_signature": "SimplicialHomotopy -> RelativeMap",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.from",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the retained initial RelativeMap, including the full source and target pairs.",
+        "Ordered contiguous maps retain equal full source/target pairs and contiguity in both target components. The oriented integral prism obeys boundary P + P boundary = to# - from#, and its transpose obeys the dual cochain identity. Typed actions retain complete contexts and use actual second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. It does not concatenate witnesses or certify general continuous homotopy equivalence. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "SimplicialHomotopy.from",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "from",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.SimplicialHomotopy.to",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyAlgebra",
+      "concept": "SimplicialHomotopy.to",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "SimplicialHomotopy",
+      "domain_B": null,
+      "domain_C": "RelativeMap",
+      "operation_signature": "SimplicialHomotopy -> RelativeMap",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.to",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the retained final RelativeMap, including the full source and target pairs.",
+        "Ordered contiguous maps retain equal full source/target pairs and contiguity in both target components. The oriented integral prism obeys boundary P + P boundary = to# - from#, and its transpose obeys the dual cochain identity. Typed actions retain complete contexts and use actual second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. It does not concatenate witnesses or certify general continuous homotopy equivalence. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "SimplicialHomotopy.to",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.SimplicialHomotopy.source",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyAlgebra",
+      "concept": "SimplicialHomotopy.source",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "SimplicialHomotopy",
+      "domain_B": null,
+      "domain_C": "RelativeComplex",
+      "operation_signature": "SimplicialHomotopy -> RelativeComplex",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.source",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the full source pair shared by both endpoint maps.",
+        "Ordered contiguous maps retain equal full source/target pairs and contiguity in both target components. The oriented integral prism obeys boundary P + P boundary = to# - from#, and its transpose obeys the dual cochain identity. Typed actions retain complete contexts and use actual second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. It does not concatenate witnesses or certify general continuous homotopy equivalence. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "SimplicialHomotopy.source",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "source",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.SimplicialHomotopy.target",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyAlgebra",
+      "concept": "SimplicialHomotopy.target",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "SimplicialHomotopy",
+      "domain_B": null,
+      "domain_C": "RelativeComplex",
+      "operation_signature": "SimplicialHomotopy -> RelativeComplex",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.target",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the full target pair shared by both endpoint maps.",
+        "Ordered contiguous maps retain equal full source/target pairs and contiguity in both target components. The oriented integral prism obeys boundary P + P boundary = to# - from#, and its transpose obeys the dual cochain identity. Typed actions retain complete contexts and use actual second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. It does not concatenate witnesses or certify general continuous homotopy equivalence. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "SimplicialHomotopy.target",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "target",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.SimplicialHomotopy.reverse",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyAlgebra",
+      "concept": "SimplicialHomotopy.reverse",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "SimplicialHomotopy",
+      "domain_B": null,
+      "domain_C": "SimplicialHomotopy",
+      "operation_signature": "SimplicialHomotopy -> SimplicialHomotopy",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.reverse",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Exchange the endpoints and recompute the prism on demand. This is generally not the negative of the original matrix, though both satisfy their respective chain-homotopy identities.",
+        "Ordered contiguous maps retain equal full source/target pairs and contiguity in both target components. The oriented integral prism obeys boundary P + P boundary = to# - from#, and its transpose obeys the dual cochain identity. Typed actions retain complete contexts and use actual second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. It does not concatenate witnesses or certify general continuous homotopy equivalence. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "SimplicialHomotopy.reverse",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "reverse",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.SimplicialHomotopy.equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyAlgebra",
+      "concept": "SimplicialHomotopy.equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "SimplicialHomotopy",
+      "domain_B": "SimplicialHomotopy",
+      "domain_C": "Boolean",
+      "operation_signature": "SimplicialHomotopy x SimplicialHomotopy -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Compare both ordered endpoint RelativeMaps with their full labelled pairs and vertex assignments.",
+        "Ordered contiguous maps retain equal full source/target pairs and contiguity in both target components. The oriented integral prism obeys boundary P + P boundary = to# - from#, and its transpose obeys the dual cochain identity. Typed actions retain complete contexts and use actual second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. It does not concatenate witnesses or certify general continuous homotopy equivalence. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "SimplicialHomotopy.equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.SimplicialHomotopy.chain-matrix",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyAlgebra",
+      "concept": "SimplicialHomotopy.chain-matrix",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "SimplicialHomotopy",
+      "domain_B": "N",
+      "domain_C": "Mat(Z)",
+      "operation_signature": "SimplicialHomotopy x N -> Mat(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.chain-matrix",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "In nonnegative degree n, return P_n: C_n(source)->C_(n+1)(target). Sum oriented front-from/back-to simplices, omit repeated vertices and target-subcomplex simplices. Boundary P + P boundary equals to# - from#.",
+        "Ordered contiguous maps retain equal full source/target pairs and contiguity in both target components. The oriented integral prism obeys boundary P + P boundary = to# - from#, and its transpose obeys the dual cochain identity. Typed actions retain complete contexts and use actual second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. It does not concatenate witnesses or certify general continuous homotopy equivalence. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "SimplicialHomotopy.chain-matrix",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "chain-matrix",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.SimplicialHomotopy.cochain-matrix",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyAlgebra",
+      "concept": "SimplicialHomotopy.cochain-matrix",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "SimplicialHomotopy",
+      "domain_B": "N",
+      "domain_C": "Mat(Z)",
+      "operation_signature": "SimplicialHomotopy x N -> Mat(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.cochain-matrix",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "In nonnegative degree p, return Q^p=transpose(P_(p-1)): C^p(target)->C^(p-1)(source). At p=0 preserve zero rows and the target C^0 column count. Coboundary Q + Q coboundary equals to* - from*.",
+        "Ordered contiguous maps retain equal full source/target pairs and contiguity in both target components. The oriented integral prism obeys boundary P + P boundary = to# - from#, and its transpose obeys the dual cochain identity. Typed actions retain complete contexts and use actual second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. It does not concatenate witnesses or certify general continuous homotopy equivalence. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "SimplicialHomotopy.cochain-matrix",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "cochain-matrix",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.SimplicialHomotopy.chain-matrices",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyAlgebra",
+      "concept": "SimplicialHomotopy.chain-matrices",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "SimplicialHomotopy",
+      "domain_B": null,
+      "domain_C": "Mat(Z)",
+      "operation_signature": "SimplicialHomotopy -> List(Mat(Z))",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.chain-matrices",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit P_n in ascending degrees zero through the maximum quotient dimension of the source and target pairs. Empty quotient complexes give an empty list. One budget covers the entire list.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Ordered contiguous maps retain equal full source/target pairs and contiguity in both target components. The oriented integral prism obeys boundary P + P boundary = to# - from#, and its transpose obeys the dual cochain identity. Typed actions retain complete contexts and use actual second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. It does not concatenate witnesses or certify general continuous homotopy equivalence. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "SimplicialHomotopy.chain-matrices",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "chain-matrices",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.SimplicialHomotopy.cochain-matrices",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyAlgebra",
+      "concept": "SimplicialHomotopy.cochain-matrices",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "SimplicialHomotopy",
+      "domain_B": null,
+      "domain_C": "Mat(Z)",
+      "operation_signature": "SimplicialHomotopy -> List(Mat(Z))",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.cochain-matrices",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit Q^p in ascending degrees zero through one plus the maximum quotient dimension. Include Q^0 with its zero row count; empty quotient complexes give one 0-by-0 matrix. One budget covers the entire list.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Ordered contiguous maps retain equal full source/target pairs and contiguity in both target components. The oriented integral prism obeys boundary P + P boundary = to# - from#, and its transpose obeys the dual cochain identity. Typed actions retain complete contexts and use actual second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. It does not concatenate witnesses or certify general continuous homotopy equivalence. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "SimplicialHomotopy.cochain-matrices",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "cochain-matrices",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.SimplicialHomotopy.on-chain",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyAlgebra",
+      "concept": "SimplicialHomotopy.on-chain",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "SimplicialHomotopy",
+      "domain_B": "RelativeChain",
+      "domain_C": "RelativeChain",
+      "operation_signature": "SimplicialHomotopy x RelativeChain -> RelativeChain",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.on-chain",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require the full source pair. Return P applied to the chain on the full target pair, raising degree by one, through ILeftProjectionOperation and the actual second carrier wrapper. Negative-degree zero chains remain valid. For cycles this fills the difference to#c - from#c.",
+        "Ordered contiguous maps retain equal full source/target pairs and contiguity in both target components. The oriented integral prism obeys boundary P + P boundary = to# - from#, and its transpose obeys the dual cochain identity. Typed actions retain complete contexts and use actual second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. It does not concatenate witnesses or certify general continuous homotopy equivalence. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "SimplicialHomotopy.on-chain",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "on-chain",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.SimplicialHomotopy.on-cochain",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyAlgebra",
+      "concept": "SimplicialHomotopy.on-cochain",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "SimplicialHomotopy",
+      "domain_B": "RelativeCochain",
+      "domain_C": "RelativeCochain",
+      "operation_signature": "SimplicialHomotopy x RelativeCochain -> RelativeCochain",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.on-cochain",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require the full target pair and positive degree. Return Q applied to the cochain on the full source pair, lowering degree by one, through ILeftProjectionOperation. For cocycles its coboundary equals to*phi - from*phi. At degree zero use cochain-matrix because typed cochains exclude degree minus one.",
+        "Ordered contiguous maps retain equal full source/target pairs and contiguity in both target components. The oriented integral prism obeys boundary P + P boundary = to# - from#, and its transpose obeys the dual cochain identity. Typed actions retain complete contexts and use actual second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. It does not concatenate witnesses or certify general continuous homotopy equivalence. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "SimplicialHomotopy.on-cochain",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "on-cochain",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.SimplicialHomotopy.on-absolute-chain",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyAlgebra",
+      "concept": "SimplicialHomotopy.on-absolute-chain",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "SimplicialHomotopy",
+      "domain_B": "SimplicialChain",
+      "domain_C": "SimplicialChain",
+      "operation_signature": "SimplicialHomotopy x SimplicialChain -> SimplicialChain",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.on-absolute-chain",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require empty subcomplexes in both endpoint pairs and a chain on the full source ambient complex. Return the target SimplicialChain with degree raised by one through the actual second carrier wrapper.",
+        "Ordered contiguous maps retain equal full source/target pairs and contiguity in both target components. The oriented integral prism obeys boundary P + P boundary = to# - from#, and its transpose obeys the dual cochain identity. Typed actions retain complete contexts and use actual second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. It does not concatenate witnesses or certify general continuous homotopy equivalence. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "SimplicialHomotopy.on-absolute-chain",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "on-absolute-chain",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.SimplicialHomotopy.on-absolute-cochain",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyAlgebra",
+      "concept": "SimplicialHomotopy.on-absolute-cochain",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "SimplicialHomotopy",
+      "domain_B": "SimplicialCochain",
+      "domain_C": "SimplicialCochain",
+      "operation_signature": "SimplicialHomotopy x SimplicialCochain -> SimplicialCochain",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.on-absolute-cochain",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require empty subcomplexes in both endpoint pairs and a positive-degree cochain on the full target ambient complex. Return the source SimplicialCochain with degree lowered by one through the actual second carrier wrapper.",
+        "Ordered contiguous maps retain equal full source/target pairs and contiguity in both target components. The oriented integral prism obeys boundary P + P boundary = to# - from#, and its transpose obeys the dual cochain identity. Typed actions retain complete contexts and use actual second operand wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. It does not concatenate witnesses or certify general continuous homotopy equivalence. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "SimplicialHomotopy.on-absolute-cochain",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "on-absolute-cochain",
+      "legacy_operation_interface": "ILeftProjectionOperation"
     },
     {
       "id": "concrete-operation.Z/5Z.add",
@@ -118912,6 +120216,8 @@
         "SimplicialCover.union-homology",
         "SimplicialCover.union-homology-map",
         "SimplicialCover.union-matrix",
+        "SimplicialHomotopy.chain-matrix",
+        "SimplicialHomotopy.cochain-matrix",
         "SimplicialMap.chain-matrix",
         "SimplicialMap.homology-map",
         "SimplicialMap.simplex-basis",
@@ -119527,6 +120833,7 @@
         "SimplicialCochain.is-cocycle",
         "SimplicialCochain.is-zero",
         "SimplicialCover.equal",
+        "SimplicialHomotopy.equal",
         "SimplicialMap.contiguous",
         "SimplicialMap.equal",
         "SimplicialMap.is-injective",
@@ -122403,6 +123710,10 @@
         "SimplicialCover.sum-coboundary-matrices",
         "SimplicialCover.sum-coboundary-matrix",
         "SimplicialCover.union-matrix",
+        "SimplicialHomotopy.chain-matrices",
+        "SimplicialHomotopy.chain-matrix",
+        "SimplicialHomotopy.cochain-matrices",
+        "SimplicialHomotopy.cochain-matrix",
         "SimplicialMap.chain-matrices",
         "SimplicialMap.chain-matrix"
       ],
@@ -122944,6 +124255,7 @@
         "SimplicialCochain.cohomology-map",
         "SimplicialCochain.cohomology-maps",
         "SimplicialCochain.pullback",
+        "SimplicialHomotopy.between-absolute",
         "SimplicialMap.chain-matrices",
         "SimplicialMap.chain-matrix",
         "SimplicialMap.compose",
@@ -123113,7 +124425,9 @@
         "RelativeTriple.from-pair",
         "RelativeTriple.inner-pair",
         "RelativeTriple.outer-pair",
-        "RelativeTriple.total-pair"
+        "RelativeTriple.total-pair",
+        "SimplicialHomotopy.source",
+        "SimplicialHomotopy.target"
       ],
       "invariants": [
         "Retained labelled ambient complex X and subcomplex A",
@@ -123194,6 +124508,9 @@
         "RelativeTriple.inclusion-map",
         "RelativeTriple.quotient-map",
         "SimplicialCover.excision-map",
+        "SimplicialHomotopy.between",
+        "SimplicialHomotopy.from",
+        "SimplicialHomotopy.to",
         "TripleMap.inner-map",
         "TripleMap.outer-map",
         "TripleMap.total-map"
@@ -123540,7 +124857,8 @@
         "SimplicialCochain.subtract",
         "SimplicialCochain.unit-on",
         "SimplicialCochain.with-coordinates",
-        "SimplicialCochain.zero-on"
+        "SimplicialCochain.zero-on",
+        "SimplicialHomotopy.on-absolute-cochain"
       ],
       "invariants": [
         "Full labelled finite complex, nonnegative degree and integer coordinates dual to the oriented simplex basis",
@@ -123629,7 +124947,8 @@
         "RelativeCochain.subtract",
         "RelativeCochain.with-coordinates",
         "RelativeCochain.zero-on",
-        "RelativeTriple.connect-cocycle"
+        "RelativeTriple.connect-cocycle",
+        "SimplicialHomotopy.on-cochain"
       ],
       "invariants": [
         "Full labelled simplicial pair, nonnegative degree and integral coordinates dual to the quotient-chain basis",
@@ -123710,7 +125029,8 @@
         "SimplicialChain.scale",
         "SimplicialChain.subtract",
         "SimplicialChain.with-coordinates",
-        "SimplicialChain.zero-on"
+        "SimplicialChain.zero-on",
+        "SimplicialHomotopy.on-absolute-chain"
       ],
       "invariants": [
         "Full labelled complex, integer degree and oriented integral simplex coordinates",
@@ -123805,7 +125125,8 @@
         "RelativeChain.subtract",
         "RelativeChain.with-coordinates",
         "RelativeChain.zero-on",
-        "RelativeTriple.connect-cycle"
+        "RelativeTriple.connect-cycle",
+        "SimplicialHomotopy.on-chain"
       ],
       "invariants": [
         "Full labelled pair, integer degree and integral coordinates outside the subcomplex",
@@ -124051,6 +125372,67 @@
       "invariants": [
         "Both entries belong to the actual RelativeTriple Algebra",
         "First entry is the full source triple and second the full target triple"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-26"
+      }
+    },
+    {
+      "id": "SimplicialHomotopy",
+      "name": "Integral prism witnesses for contiguous simplicial maps",
+      "description": "Integral prism witnesses for contiguous simplicial maps",
+      "member_representation": "mathematics.topology.SimplicialHomotopy",
+      "membership_rules": [
+        "Ordered maps of equal full labelled pairs, contiguous in both ambient and subcomplex targets",
+        "Degree-raising integral prism and degree-lowering transpose satisfying the chain and cochain homotopy identities",
+        "Filtered quotient bases, exact orientation signs and actual chain/cochain wrappers"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "SimplicialMap",
+        "RelativeMap",
+        "RelativeComplex",
+        "SimplicialChain",
+        "SimplicialCochain",
+        "RelativeChain",
+        "RelativeCochain",
+        "Mat(Z)",
+        "N",
+        "Boolean"
+      ],
+      "supported_operations": [
+        "SimplicialHomotopy.between",
+        "SimplicialHomotopy.between-absolute",
+        "SimplicialHomotopy.chain-matrices",
+        "SimplicialHomotopy.chain-matrix",
+        "SimplicialHomotopy.cochain-matrices",
+        "SimplicialHomotopy.cochain-matrix",
+        "SimplicialHomotopy.equal",
+        "SimplicialHomotopy.from",
+        "SimplicialHomotopy.on-absolute-chain",
+        "SimplicialHomotopy.on-absolute-cochain",
+        "SimplicialHomotopy.on-chain",
+        "SimplicialHomotopy.on-cochain",
+        "SimplicialHomotopy.reverse",
+        "SimplicialHomotopy.source",
+        "SimplicialHomotopy.target",
+        "SimplicialHomotopy.to"
+      ],
+      "invariants": [
+        "Ordered maps of equal full labelled pairs, contiguous in both ambient and subcomplex targets",
+        "Degree-raising integral prism and degree-lowering transpose satisfying the chain and cochain homotopy identities",
+        "Filtered quotient bases, exact orientation signs and actual chain/cochain wrappers"
       ],
       "references": [
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
