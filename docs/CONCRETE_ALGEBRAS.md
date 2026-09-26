@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1254 native operations from 58 algebra builders.
+The default initializer currently installs 1273 native operations from 59 algebra builders.
 
 ## Existing API usage
 
@@ -62,6 +62,7 @@ List<String> values = math.flow(math.naturals,
 | RelativeSimplicialTripleMapAlgebra / TripleMap | compose; equality/contiguity -> Boolean | inverse; source/target triples; ambient and three pair maps; isomorphism; image/corestriction | construct from a vertex map and ordered triples; inclusion/restriction; six induced integral maps; flat four-map naturality lists |
 | SimplicialHomotopyAlgebra / SimplicialHomotopy | ordered endpoint equality -> Boolean | endpoint maps; source/target pairs; reverse; flat chain/cochain matrices | construct between contiguous absolute or relative maps; degreewise prism matrices; typed chain/cochain actions through second operand wrappers |
 | SimplicialHomotopyPathAlgebra / HomotopyPath | chronological concatenation; full stage equality -> Boolean | endpoints/pairs; reverse; step count; flat stages, steps and chain/cochain matrices | stationary and one-step constructors; append a map; precompose/postcompose all stages; accumulated prism matrices and typed actions |
+| SimplicialHomotopyEquivalenceAlgebra / HomotopyEquivalence | composition; full map/witness equality -> Boolean | inverse; maps, pairs and homotopy witnesses | construction from supplied inverse witnesses; scalar and flat inverse integral homology/cohomology maps |
 | SimplicialChainAlgebra / SimplicialChain | context-checked add/subtract; equality/homology comparison -> Boolean | boundary; negate; complex/degree/coordinates; cycle/boundary predicates; fillings; homology/class; flat cycle generators; augmentation | integer scale; coordinates; pushforward; pairing; cap and cap-class; fixed-chain/cochain cap matrices and induced maps; zero and flat basis constructors |
 | SimplicialCochainAlgebra / SimplicialCochain | same-context add/subtract; cup; equality/cohomologous -> Boolean; cup-class -> AbelianGroupElement | negate; complex/degree/coordinates; coboundary; zero/cocycle/coboundary tests; cohomology model/class; cobounding coordinates; flat cocycle generators | degreewise zero/basis construction and unit; integer scaling; coordinate replacement; representative; evaluation; pullback; scalar/flat cohomology models and contravariant maps |
 | RelativeSimplicialCochainAlgebra / RelativeCochain | same-pair add/subtract; cup on union pairs; equality/cohomologous -> Boolean; cup-class -> AbelianGroupElement | negate; pair/degree/coordinates; coboundary; cocycle/coboundary tests; cohomology model/class; primitives; flat cocycle generators; absolute extension | zero/basis construction; absolute conversion; scaling/coordinates/representative/evaluation; pair-map pullback; connecting cocycle; scalar/flat relative cohomology and natural exact-sequence maps |
@@ -1530,3 +1531,52 @@ The executable example constructs the inputs. Appending and composing use ICusto
 There must be 1 through 256 stages, giving at most 255 steps. Each boundary complex has at most 4096 nonempty simplices; every required quotient basis is filtered before its 256-simplex bound. One 5,000,000-unit budget covers all stage validation in a constructor, all compositions and revalidation in pre/postcomposition, each complete matrix sum or typed action, and every degree and step in an entire flat matrix list. Resource exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer bit lengths remain unbounded. Stages must be supplied. Homotopy search, subdivision, arbitrary chain-homotopy carriers, other coefficients and general continuous homotopy-equivalence decisions remain outside scope.
 
 NativeSimplicialHomotopyPathTest checks all 178 five-stage walks on a four-vertex interval against signed edge counts and potential differences, 729 triangle paths, 324 relative triangle paths, both telescoping identities, noncontiguous endpoints, nonzero circle loops, concatenation laws, immutable repeated stages, precomposition distinctions and postcomposition compatibility, relative fillings, exact zero shapes, basis and stage bounds, shared validation/composition/matrix-list budgets, actual wrappers and serialized repeated flows. All 23 registrations have independent expected results in ConcreteAlgebrasTest.
+
+## Supplied simplicial homotopy equivalences
+
+`math.homotopyEquivalences` adds 19 operations on `HomotopyEquivalence`. It retains opposite maps of full labelled pairs, `f: (X,A)->(Y,B)` and `g: (Y,B)->(X,A)`, together with two supplied contiguity paths:
+
+```text
+H_X: Id_(X,A) -> g compose f
+H_Y: Id_(Y,B) -> f compose g
+```
+
+Construction checks both complete endpoint maps, including vertex assignments and subcomplexes. Each path has already checked consecutive contiguity in both target components. The resulting data exhibit a homotopy equivalence of pairs in the sense of [Hatcher, chapter 0](https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf); the [integral prism identities](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf) show that both induced homology maps, and both cohomology pullbacks, are mutual inverses. These maps retain integral presentations and torsion.
+
+| Operations | Contract |
+| --- | --- |
+| `HomotopyEquivalence.maps` | Two RelativeMaps -> ordered product `(f,g)` on the actual `RelativeMap.pair` carrier; boundary compatibility is checked by `from-maps` |
+| `HomotopyEquivalence.from-maps` | `(f,g)` and ordered `HomotopyPath.pair` `(H_X,H_Y)` -> checked equivalence |
+| `HomotopyEquivalence.identity-on` | RelativeComplex -> identity maps and stationary witnesses |
+| `HomotopyEquivalence.from-isomorphism` | RelativeMap -> its strict simplicial inverse and stationary witnesses; requires an isomorphism of the full pair |
+| `compose`, `inverse`, `equal` | Apply the right equivalence first; swap maps and witnesses; or compare both maps and both complete witness stage lists |
+| `forward`, `backward`, `source`, `target` | Inspect the actual RelativeMaps and full RelativeComplex pairs |
+| `source-homotopy`, `target-homotopy` | Inspect the supplied HomotopyPaths, retaining access to their chain/cochain matrices and typed actions |
+| `forward-homology-map`, `backward-homology-map` | Integral `f_*: H_n(X,A)->H_n(Y,B)` and `g_*` in the reverse direction |
+| flat `homology-maps` | Exactly `[f_*,g_*]`, sharing one computation budget |
+| `forward-cohomology-map`, `backward-cohomology-map` | Integral `f^*: H^n(Y,B)->H^n(X,A)` and `g^*` in the reverse direction |
+| flat `cohomology-maps` | Exactly `[f^*,g^*]`; each pullback reverses its geometric map's direction, sharing one computation budget |
+
+For `(f,g,H_X,K_Y)` followed by `(h,k,H_Y,K_Z)`, composition produces forward map `h compose f`, backward map `g compose k`, source witness `H_X then g H_Y f`, and target witness `K_Z then h K_Y k`. Here the surrounding maps precompose/postcompose every stage. The full middle pair must agree. Inversion swaps the two maps and two paths without reversing either path. Equality retains the witnesses, so composing with the homotopy inverse need not equal the strict identity witness.
+
+For an interval retraction onto a point, the executable example constructs a section, a path from the interval identity to section-after-retraction, and a stationary point witness. The complete construction and both induced maps execute through the existing flow:
+
+```java
+List<String> isomorphisms = math.flow(math.relativeMaps,
+    Collections.singletonList(intervalRetraction))
+    .<Pair<RelativeSimplicialMap,RelativeSimplicialMap>>performCustomResultOperation(
+        "HomotopyEquivalence.maps", intervalSection)
+    .<SimplicialHomotopyEquivalence,Pair<SimplicialHomotopyPath,SimplicialHomotopyPath>>
+        performAlgebraUnsafe("HomotopyEquivalence.from-maps",
+            new Pair<>(intervalSourceWitness, intervalTargetWitness))
+    .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe(
+        "homology-maps", BigInteger.ZERO)
+    .<Boolean>performAlgebraTransfer("is-isomorphism")
+    .collect(); // ["true", "true"]
+```
+
+The support product carriers validate both runtime types and membership in the actual component algebras. Map collection uses the existing custom-result interface, witness construction uses the mixed-result interface, and the two-map outputs use its flat counterpart. Transfers return the actual registered wrappers.
+
+Only supplied finite contiguity paths are checked; there is no homotopy search, subdivision or general homotopy-equivalence decision. The data need not be a strict simplicial isomorphism or a deformation retraction; deformation-retraction conditions are not separately certified. Degrees of induced maps are nonnegative. Each witness allows 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Every required quotient basis is filtered before the 256-simplex limit. One 5,000,000-unit budget covers each construction, each complete composition including transported-path revalidation, and each whole two-map list. Resource exhaustion raises IMPLEMENTATION_FAILURE without partial outputs; integer coefficient bit lengths remain unbounded.
+
+NativeSimplicialHomotopyEquivalenceTest checks absolute and based interval contractions with one through eight edges, a circle with an attached edge and a relative rank-two group, projective-plane homology/cohomology torsion, all six circle automorphisms, composition and exact units, inverse witness ordering, invalid endpoints and full-pair mismatches, nontrivial retained loop witnesses, typed fillings, empty and extreme-labelled pairs, shared composition/two-map budgets, stage bounds, product carriers, wrappers and serialized repeated flows. All 19 registrations have independent expected results in ConcreteAlgebrasTest.

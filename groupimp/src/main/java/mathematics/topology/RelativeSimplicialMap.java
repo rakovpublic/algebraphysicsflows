@@ -29,6 +29,11 @@ public final class RelativeSimplicialMap implements Serializable {
     public FiniteSimplicialMap ambientMap() { return ambient; }
     public FiniteSimplicialMap subcomplexMap() { return subcomplex; }
     public static RelativeSimplicialMap identity(RelativeSimplicialComplex pair) { return inclusion(pair,pair); }
+    static RelativeSimplicialMap identity(RelativeSimplicialComplex pair,Computation work) {
+        Map<BigInteger,BigInteger> vertices=new TreeMap<>();
+        for(BigInteger vertex : FiniteSimplicialMap.vertexSet(pair.ambient()).members()) { work.use(1); vertices.put(vertex,vertex); }
+        return new RelativeSimplicialMap(pair,pair,new FiniteSimplicialMap(pair.ambient(),pair.ambient(),vertices,work),work);
+    }
     public static RelativeSimplicialMap inclusion(RelativeSimplicialComplex source,RelativeSimplicialComplex target) {
         if(!source.subcomplex().subcomplexOf(target.subcomplex())) throw MathFailure.undefined("Pair inclusion requires inclusion of both subcomplexes");
         return new RelativeSimplicialMap(source,target,FiniteSimplicialMap.inclusion(source.ambient(),target.ambient()));
@@ -49,8 +54,9 @@ public final class RelativeSimplicialMap implements Serializable {
     }
     public boolean isIsomorphism() { return ambient.isIsomorphism() && subcomplex.isSurjective(); }
     public RelativeSimplicialMap inverse() {
-        Computation work=new Computation(); return new RelativeSimplicialMap(target,source,ambient.inverse(work),work);
+        return inverse(new Computation());
     }
+    RelativeSimplicialMap inverse(Computation work) { return new RelativeSimplicialMap(target,source,ambient.inverse(work),work); }
     /** Pair contiguity also requires each union of images of an A simplex to lie in B. */
     public boolean contiguous(RelativeSimplicialMap other) {
         return contiguous(other,new Computation());

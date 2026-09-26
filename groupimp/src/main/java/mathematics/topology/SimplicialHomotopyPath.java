@@ -15,7 +15,7 @@ public final class SimplicialHomotopyPath implements Serializable {
     private final List<SimplicialHomotopy> steps;
 
     public SimplicialHomotopyPath(List<RelativeSimplicialMap> stages) { this(stages,new Computation()); }
-    private SimplicialHomotopyPath(List<RelativeSimplicialMap> stages,Computation work) {
+    SimplicialHomotopyPath(List<RelativeSimplicialMap> stages,Computation work) {
         Objects.requireNonNull(stages);
         if(stages.isEmpty()) throw MathFailure.undefined("A homotopy path needs at least one retained map");
         if(stages.size()>MAX_STAGES) throw new MathFailure(MathFailure.Kind.IMPLEMENTATION_FAILURE,"A homotopy path allows at most 256 stages");
@@ -39,19 +39,28 @@ public final class SimplicialHomotopyPath implements Serializable {
     }
     /** Chronological concatenation: this path first, then the supplied path. */
     public SimplicialHomotopyPath then(SimplicialHomotopyPath next) {
+        return then(next,new Computation());
+    }
+    SimplicialHomotopyPath then(SimplicialHomotopyPath next,Computation work) {
         if(!to().equals(next.from())) throw MathFailure.undefined("Concatenation requires the same full joining map, not just matching pairs");
-        List<RelativeSimplicialMap> result=new ArrayList<>(stages); result.addAll(next.stages.subList(1,next.stages.size())); return new SimplicialHomotopyPath(result);
+        List<RelativeSimplicialMap> result=new ArrayList<>(stages); result.addAll(next.stages.subList(1,next.stages.size())); return new SimplicialHomotopyPath(result,work);
     }
     /** Reverse the stages and recompute their prisms, rather than negating the accumulated matrix. */
     public SimplicialHomotopyPath reverse() {
         List<RelativeSimplicialMap> result=new ArrayList<>(stages); Collections.reverse(result); return new SimplicialHomotopyPath(result);
     }
     public SimplicialHomotopyPath precompose(RelativeSimplicialMap before) {
-        Computation work=new Computation(); List<RelativeSimplicialMap> result=new ArrayList<>();
+        return precompose(before,new Computation());
+    }
+    SimplicialHomotopyPath precompose(RelativeSimplicialMap before,Computation work) {
+        List<RelativeSimplicialMap> result=new ArrayList<>();
         for(RelativeSimplicialMap stage : stages) result.add(stage.compose(before,work)); return new SimplicialHomotopyPath(result,work);
     }
     public SimplicialHomotopyPath postcompose(RelativeSimplicialMap after) {
-        Computation work=new Computation(); List<RelativeSimplicialMap> result=new ArrayList<>();
+        return postcompose(after,new Computation());
+    }
+    SimplicialHomotopyPath postcompose(RelativeSimplicialMap after,Computation work) {
+        List<RelativeSimplicialMap> result=new ArrayList<>();
         for(RelativeSimplicialMap stage : stages) result.add(after.compose(stage,work)); return new SimplicialHomotopyPath(result,work);
     }
     private static void requireDegree(BigInteger degree) { if(degree.signum()<0) throw MathFailure.undefined("Path matrix degree must be nonnegative"); }

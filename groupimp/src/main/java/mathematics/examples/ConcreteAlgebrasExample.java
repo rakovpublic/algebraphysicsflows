@@ -28,6 +28,7 @@ import mathematics.topology.RelativeSimplicialTriple;
 import mathematics.topology.RelativeSimplicialTripleMap;
 import mathematics.topology.SimplicialHomotopy;
 import mathematics.topology.SimplicialHomotopyPath;
+import mathematics.topology.SimplicialHomotopyEquivalence;
 import mathematics.topology.IntegralHomology;
 import mathematics.topology.FiniteSimplicialMap;
 import mathematics.topology.RelativeSimplicialComplex;
@@ -107,6 +108,15 @@ public final class ConcreteAlgebrasExample {
         FiniteSimplicialMap intervalReflection=new FiniteSimplicialMap(intervalCapPair.ambient(),intervalCapPair.ambient(),endpointSwap);
         FiniteSimplicialMap endpointStart=FiniteSimplicialMap.inclusion(basedEndpoint,intervalCapPair.ambient());
         FiniteSimplicialMap endpointEnd=endpointStart.constantAt(BigInteger.ONE);
+        Map<BigInteger,BigInteger> intervalCollapseVertices=new TreeMap<>(); intervalCollapseVertices.put(BigInteger.ZERO,BigInteger.ZERO); intervalCollapseVertices.put(BigInteger.ONE,BigInteger.ZERO);
+        RelativeSimplicialMap intervalRetraction=RelativeSimplicialMap.absolute(new FiniteSimplicialMap(intervalCapPair.ambient(),basedEndpoint,intervalCollapseVertices)),
+                intervalSection=RelativeSimplicialMap.absolute(endpointStart);
+        SimplicialHomotopyPath intervalSourceWitness=new SimplicialHomotopyPath(Arrays.asList(RelativeSimplicialMap.identity(intervalRetraction.source()),intervalSection.compose(intervalRetraction))),
+                intervalTargetWitness=SimplicialHomotopyPath.stationary(RelativeSimplicialMap.identity(intervalRetraction.target()));
+        System.out.println("Interval contraction gives inverse integral homology maps: "+math.flow(math.relativeMaps,Collections.singletonList(intervalRetraction))
+                .<Pair<RelativeSimplicialMap,RelativeSimplicialMap>>performCustomResultOperation("HomotopyEquivalence.maps",intervalSection)
+                .<SimplicialHomotopyEquivalence,Pair<SimplicialHomotopyPath,SimplicialHomotopyPath>>performAlgebraUnsafe("HomotopyEquivalence.from-maps",new Pair<>(intervalSourceWitness,intervalTargetWitness))
+                .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("homology-maps",BigInteger.ZERO).<Boolean>performAlgebraTransfer("is-isomorphism").collect());
         FiniteSimplicialComplex twoEdgeInterval=new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0,1),FiniteSet.of(1,2)));
         RelativeSimplicialMap pathStart=RelativeSimplicialMap.absolute(FiniteSimplicialMap.inclusion(basedEndpoint,twoEdgeInterval)),
                 pathMiddle=RelativeSimplicialMap.absolute(pathStart.ambientMap().constantAt(BigInteger.ONE)),

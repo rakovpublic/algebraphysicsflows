@@ -10,6 +10,7 @@ DATABASE = ROOT / "mathematics-coverage.json"
 MANIFEST = ROOT / "groupimp/src/test/resources/mathematics/concrete-catalog.tsv"
 DATE = "2026-09-26"
 OWNERS = {
+    "SimplicialHomotopyEquivalenceAlgebra": ("HomotopyEquivalence", "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps"),
     "SimplicialHomotopyPathAlgebra": ("HomotopyPath", "Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms"),
     "SimplicialHomotopyAlgebra": ("SimplicialHomotopy", "Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators"),
     "BooleanAlgebra": ("Boolean", "Boolean truth values with Boolean operations"),
@@ -86,6 +87,7 @@ INTERFACES = {
     "IUnsafeFlatOperation": "flat/MixedFlatOperation",
 }
 EXTRA_TESTS = {
+    "SimplicialHomotopyEquivalenceAlgebra": "NativeSimplicialHomotopyEquivalenceTest",
     "SimplicialHomotopyPathAlgebra": "NativeSimplicialHomotopyPathTest",
     "SimplicialHomotopyAlgebra": "NativeSimplicialHomotopyTest",
     "RationalVectorFamily": "NativeRectangularLinearTest",
@@ -173,6 +175,27 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "SimplicialHomotopyEquivalenceAlgebra": {
+        "maps": "Collect the ordered forward/backward RelativeMaps as (f,g), using the actual registered product carrier. This collection does not yet require opposite boundaries. Registered as HomotopyEquivalence.maps on RelativeMap.",
+        "from-maps": "Consume map pair (f,g) and witness pair (H_X,H_Y). Require opposite full labelled pairs and paths Id_X -> g after f and Id_Y -> f after g, checking exact endpoint vertex maps. Registered as HomotopyEquivalence.from-maps on RelativeMap.pair; output is the actual HomotopyEquivalence wrapper.",
+        "identity-on": "Return identity maps on the supplied full RelativeComplex pair with stationary source and target witnesses. Registered as HomotopyEquivalence.identity-on on RelativeComplex.",
+        "from-isomorphism": "Require a simplicial isomorphism of the full pair, including its subcomplex. Construct its strict inverse and stationary identity witnesses; a homotopy equivalence alone does not satisfy this constructor.",
+        "compose": "Apply the right operand first and require the same full middle pair. For (f,g,H_X,K_Y) followed by (h,k,H_Y,K_Z), return maps h after f and g after k, source path H_X then g H_Y f, and target path K_Z then h K_Y k. One shared budget covers both map compositions, both transported/concatenated paths and final endpoint validation.",
+        "inverse": "Swap forward/backward maps and source/target witnesses. Do not reverse either path. This gives a homotopy inverse, whose composites need not equal the strict identity witness.",
+        "forward": "Return the retained full RelativeMap f from source to target.",
+        "backward": "Return the retained full RelativeMap g from target to source.",
+        "source": "Return the full source pair of f, equal to the target pair of g.",
+        "target": "Return the full target pair of f, equal to the source pair of g.",
+        "source-homotopy": "Return the supplied HomotopyPath from Id_X to g after f; its prism fills composite-minus-identity differences on source cycles.",
+        "target-homotopy": "Return the supplied HomotopyPath from Id_Y to f after g; its prism fills composite-minus-identity differences on target cycles.",
+        "equal": "Compare both full maps and both complete witness stage lists, including repetitions. Equal forward maps or endpoint pairs alone are insufficient.",
+        "forward-homology-map": "For nonnegative n return f_*: H_n(X,A)->H_n(Y,B), retaining integral presentations and torsion; its inverse is the backward homology map.",
+        "backward-homology-map": "For nonnegative n return g_*: H_n(Y,B)->H_n(X,A), retaining integral presentations and torsion; its inverse is the forward homology map.",
+        "homology-maps": "For nonnegative n emit exactly [f_*,g_*] in forward-then-backward order. Both integral maps share one work budget; the list is immutable and never partially emitted.",
+        "forward-cohomology-map": "For nonnegative n return f^*: H^n(Y,B)->H^n(X,A). Pullback reverses geometric direction and retains integral torsion; its inverse is the backward cohomology map.",
+        "backward-cohomology-map": "For nonnegative n return g^*: H^n(X,A)->H^n(Y,B). Pullback reverses geometric direction and retains integral torsion; its inverse is the forward cohomology map.",
+        "cohomology-maps": "For nonnegative n emit exactly [f^*,g^*], each reversing its geometric map direction. Both integral maps share one work budget; the list is immutable and never partially emitted.",
+    },
     "SimplicialHomotopyPathAlgebra": {
         "from-homotopy": "Retain the two ordered endpoint RelativeMaps of a SimplicialHomotopy as a one-step path. Registered as HomotopyPath.from-homotopy on SimplicialHomotopy.",
         "stationary-on": "Retain one supplied RelativeMap as a zero-step path with correctly shaped zero chain/cochain operators. Registered as HomotopyPath.stationary-on on RelativeMap.",
@@ -1297,6 +1320,14 @@ OWNER_CONDITIONS["RationalMatrixFamily"]["companion"] = "The polynomial has posi
 
 def record(identifier, owner, concept, paths, operation=None):
     carrier, scope = OWNERS[owner]
+    if owner == "SimplicialHomotopyEquivalenceAlgebra":
+        paths = paths + ["groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+                         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+                         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+                         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+                         "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
     if owner == "SimplicialHomotopyPathAlgebra":
         paths = paths + ["groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
                          "groupimp/src/main/java/mathematics/topology/SimplicialHomotopy.java",
@@ -1589,6 +1620,11 @@ def record(identifier, owner, concept, paths, operation=None):
         value["known_limitations"] += ["Each complex has at most 4096 nonempty simplices; every required matrix/vector basis has at most 256 simplices, including adjacent degrees and cap source/target bases. Each compound homology, class, cap-class, induced-map or generator-list computation shares one 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE without a false predicate or partial list. Integer coefficient bit lengths are unbounded.",
             "Only homogeneous unreduced integral chains on finite labelled abstract complexes are represented. Chain addition requires equal full complexes and degrees. Homology class wrappers retain presentations, while chains supply geometric context. The chosen sorted cap formula is not generally natural on chains under arbitrary vertex relabelling, although it is natural on homology. RelativeChain supplies quotient chains and the two standard relative cap products. A cap cohomology map does not certify manifold status, orientation or a fundamental class. RelativeCap supplies general cap products with explicit A and B. Automatic fundamental-class construction, other coefficients, mixed-degree chains, Poincare-duality certification and explicit cap homotopies remain outside scope."]
         value["references"].append("https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf")
+    if owner == "SimplicialHomotopyEquivalenceAlgebra":
+        value["required_invariants"].append("Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses.")
+        value["known_limitations"] += ["Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+            "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."]
+        value["references"] += ["https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf", "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"]
     if owner == "SimplicialHomotopyPathAlgebra":
         value["required_invariants"].append("Every stage retains the same full source and target pairs, and every consecutive pair is contiguous in both target components. Accumulated prisms telescope between the first and last maps, with dual cochain identities. Concatenation preserves the full ordered path; stationary paths are its units. Native chain/cochain actions use the actual second operand wrappers.")
         value["known_limitations"] += ["At least one and at most 256 stages, giving at most 255 steps. Each boundary complex has at most 4096 nonempty simplices and every required quotient basis at most 256, filtered before the basis bound. Each constructor, composition including revalidation, matrix sum, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures raise IMPLEMENTATION_FAILURE without partial results; coefficient bit lengths are unbounded.",
@@ -1597,7 +1633,7 @@ def record(identifier, owner, concept, paths, operation=None):
     if owner == "SimplicialHomotopyAlgebra":
         value["required_invariants"].append("Ordered contiguous maps retain equal full source/target pairs and contiguity in both target components. The oriented integral prism obeys boundary P + P boundary = to# - from#, and its transpose obeys the dual cochain identity. Typed actions retain complete contexts and use actual second operand wrappers.")
         value["known_limitations"] += ["At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
-            "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses; no general continuous homotopy equivalence is certified. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."]
+            "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses, and HomotopyEquivalence checks supplied inverse witnesses; no general homotopy-equivalence decision is supplied. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."]
         value["references"].append("https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf")
     if owner == "RelativeSimplicialTripleAlgebra":
         value["required_invariants"].append("The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers.")
@@ -1751,6 +1787,12 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("HomotopyEquivalence", "Supplied simplicial homotopy equivalences and inverse integral maps", "mathematics.topology.SimplicialHomotopyEquivalence",
+         ["Opposite forward/backward maps of the full labelled pairs", "Supplied contiguity paths from each identity to its backward-forward or forward-backward composite", "Mutually inverse integral homology and contravariant cohomology maps retaining torsion", "Composition transports and concatenates the supplied paths under one shared budget", "Equality retains both maps and both full witness stage lists"], ["RelativeMap", "RelativeMap.pair", "RelativeComplex", "HomotopyPath", "HomotopyPath.pair", "AbelianGroupHomomorphism", "N", "Boolean"]),
+        ("RelativeMap.pair", "Ordered forward and backward maps for homotopy equivalence construction", "mathematics.foundations.Pair<RelativeSimplicialMap,RelativeSimplicialMap>",
+         ["Both entries belong to the actual RelativeMap Algebra", "First entry is forward f and second backward g; equivalence construction checks opposite boundaries"], ["RelativeMap", "HomotopyEquivalence"]),
+        ("HomotopyPath.pair", "Ordered source and target inverse witnesses", "mathematics.foundations.Pair<SimplicialHomotopyPath,SimplicialHomotopyPath>",
+         ["Both entries belong to the actual HomotopyPath Algebra", "First entry is the source witness and second the target witness; equivalence construction checks identities and composite endpoints"], ["HomotopyPath", "HomotopyEquivalence"]),
         ("HomotopyPath", "Finite contiguity paths and accumulated integral prisms", "mathematics.topology.SimplicialHomotopyPath",
          ["One to 256 ordered stage maps retaining equal full source/target pairs", "Every consecutive pair is contiguous in both target components", "Accumulated integral prisms and their transposes satisfy telescoping homotopy identities", "Chronological concatenation checks full joining-map equality and retains repetitions", "Matrix sums, flat lists and composed-stage validation each share one computation budget"], ["SimplicialHomotopy", "RelativeMap", "RelativeComplex", "RelativeChain", "RelativeCochain", "SimplicialChain", "SimplicialCochain", "Mat(Z)", "N", "Boolean"]),
         ("SimplicialHomotopy", "Integral prism witnesses for contiguous simplicial maps", "mathematics.topology.SimplicialHomotopy",

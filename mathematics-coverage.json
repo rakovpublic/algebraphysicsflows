@@ -28694,7 +28694,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
-        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses; no general continuous homotopy equivalence is certified. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses, and HomotopyEquivalence checks supplied inverse witnesses; no general homotopy-equivalence decision is supplied. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -28706,6 +28706,78 @@
       "provenance": {
         "definition_source": "docs/CONCRETE_ALGEBRAS.md",
         "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
+      "id": "concrete-algebra.SimplicialHomotopyEquivalenceAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyEquivalenceAlgebra",
+      "concept": "SimplicialHomotopyEquivalenceAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "HomotopyEquivalence",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
         "implemented_by": "Codex",
         "generated_by_model": "not recorded",
         "reviewed_by": null,
@@ -118288,7 +118360,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
-        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses; no general continuous homotopy equivalence is certified. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses, and HomotopyEquivalence checks supplied inverse witnesses; no general homotopy-equivalence decision is supplied. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -118365,7 +118437,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
-        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses; no general continuous homotopy equivalence is certified. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses, and HomotopyEquivalence checks supplied inverse witnesses; no general homotopy-equivalence decision is supplied. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -118442,7 +118514,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
-        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses; no general continuous homotopy equivalence is certified. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses, and HomotopyEquivalence checks supplied inverse witnesses; no general homotopy-equivalence decision is supplied. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -118519,7 +118591,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
-        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses; no general continuous homotopy equivalence is certified. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses, and HomotopyEquivalence checks supplied inverse witnesses; no general homotopy-equivalence decision is supplied. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -118596,7 +118668,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
-        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses; no general continuous homotopy equivalence is certified. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses, and HomotopyEquivalence checks supplied inverse witnesses; no general homotopy-equivalence decision is supplied. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -118673,7 +118745,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
-        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses; no general continuous homotopy equivalence is certified. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses, and HomotopyEquivalence checks supplied inverse witnesses; no general homotopy-equivalence decision is supplied. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -118750,7 +118822,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
-        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses; no general continuous homotopy equivalence is certified. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses, and HomotopyEquivalence checks supplied inverse witnesses; no general homotopy-equivalence decision is supplied. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -118827,7 +118899,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
-        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses; no general continuous homotopy equivalence is certified. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses, and HomotopyEquivalence checks supplied inverse witnesses; no general homotopy-equivalence decision is supplied. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -118904,7 +118976,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
-        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses; no general continuous homotopy equivalence is certified. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses, and HomotopyEquivalence checks supplied inverse witnesses; no general homotopy-equivalence decision is supplied. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -118981,7 +119053,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
-        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses; no general continuous homotopy equivalence is certified. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses, and HomotopyEquivalence checks supplied inverse witnesses; no general homotopy-equivalence decision is supplied. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -119059,7 +119131,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
-        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses; no general continuous homotopy equivalence is certified. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses, and HomotopyEquivalence checks supplied inverse witnesses; no general homotopy-equivalence decision is supplied. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -119137,7 +119209,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
-        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses; no general continuous homotopy equivalence is certified. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses, and HomotopyEquivalence checks supplied inverse witnesses; no general homotopy-equivalence decision is supplied. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -119214,7 +119286,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
-        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses; no general continuous homotopy equivalence is certified. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses, and HomotopyEquivalence checks supplied inverse witnesses; no general homotopy-equivalence decision is supplied. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -119291,7 +119363,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
-        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses; no general continuous homotopy equivalence is certified. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses, and HomotopyEquivalence checks supplied inverse witnesses; no general homotopy-equivalence decision is supplied. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -119368,7 +119440,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
-        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses; no general continuous homotopy equivalence is certified. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses, and HomotopyEquivalence checks supplied inverse witnesses; no general homotopy-equivalence decision is supplied. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -119445,7 +119517,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
-        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses; no general continuous homotopy equivalence is certified. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
+        "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses, and HomotopyEquivalence checks supplied inverse witnesses; no general homotopy-equivalence decision is supplied. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."
       ],
       "required_extension": null,
       "references": [
@@ -121227,6 +121299,1509 @@
       "legacy_operation_interface": "ICustomMemberOperation"
     },
     {
+      "id": "concrete-operation.HomotopyEquivalence.maps",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyEquivalenceAlgebra",
+      "concept": "HomotopyEquivalence.maps",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeMap",
+      "domain_B": "RelativeMap",
+      "domain_C": "RelativeMap.pair",
+      "operation_signature": "RelativeMap x RelativeMap -> RelativeMap.pair",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.maps",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Collect the ordered forward/backward RelativeMaps as (f,g), using the actual registered product carrier. This collection does not yet require opposite boundaries. Registered as HomotopyEquivalence.maps on RelativeMap.",
+        "Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HomotopyEquivalence.maps",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HomotopyEquivalence.maps",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.HomotopyEquivalence.from-maps",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyEquivalenceAlgebra",
+      "concept": "HomotopyEquivalence.from-maps",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeMap.pair",
+      "domain_B": "HomotopyPath.pair",
+      "domain_C": "HomotopyEquivalence",
+      "operation_signature": "RelativeMap.pair x HomotopyPath.pair -> HomotopyEquivalence",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.from-maps",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Consume map pair (f,g) and witness pair (H_X,H_Y). Require opposite full labelled pairs and paths Id_X -> g after f and Id_Y -> f after g, checking exact endpoint vertex maps. Registered as HomotopyEquivalence.from-maps on RelativeMap.pair; output is the actual HomotopyEquivalence wrapper.",
+        "Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "HomotopyEquivalence.from-maps",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HomotopyEquivalence.from-maps",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.HomotopyEquivalence.identity-on",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyEquivalenceAlgebra",
+      "concept": "HomotopyEquivalence.identity-on",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeComplex",
+      "domain_B": null,
+      "domain_C": "HomotopyEquivalence",
+      "operation_signature": "RelativeComplex -> HomotopyEquivalence",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.identity-on",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return identity maps on the supplied full RelativeComplex pair with stationary source and target witnesses. Registered as HomotopyEquivalence.identity-on on RelativeComplex.",
+        "Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HomotopyEquivalence.identity-on",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HomotopyEquivalence.identity-on",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HomotopyEquivalence.from-isomorphism",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyEquivalenceAlgebra",
+      "concept": "HomotopyEquivalence.from-isomorphism",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeMap",
+      "domain_B": null,
+      "domain_C": "HomotopyEquivalence",
+      "operation_signature": "RelativeMap -> HomotopyEquivalence",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.from-isomorphism",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require a simplicial isomorphism of the full pair, including its subcomplex. Construct its strict inverse and stationary identity witnesses; a homotopy equivalence alone does not satisfy this constructor.",
+        "Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "HomotopyEquivalence.from-isomorphism",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HomotopyEquivalence.from-isomorphism",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HomotopyEquivalence.compose",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyEquivalenceAlgebra",
+      "concept": "HomotopyEquivalence.compose",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HomotopyEquivalence",
+      "domain_B": "HomotopyEquivalence",
+      "domain_C": "HomotopyEquivalence",
+      "operation_signature": "HomotopyEquivalence x HomotopyEquivalence -> HomotopyEquivalence",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.compose",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Apply the right operand first and require the same full middle pair. For (f,g,H_X,K_Y) followed by (h,k,H_Y,K_Z), return maps h after f and g after k, source path H_X then g H_Y f, and target path K_Z then h K_Y k. One shared budget covers both map compositions, both transported/concatenated paths and final endpoint validation.",
+        "Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "HomotopyEquivalence.compose",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "compose",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.HomotopyEquivalence.inverse",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyEquivalenceAlgebra",
+      "concept": "HomotopyEquivalence.inverse",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HomotopyEquivalence",
+      "domain_B": null,
+      "domain_C": "HomotopyEquivalence",
+      "operation_signature": "HomotopyEquivalence -> HomotopyEquivalence",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.inverse",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Swap forward/backward maps and source/target witnesses. Do not reverse either path. This gives a homotopy inverse, whose composites need not equal the strict identity witness.",
+        "Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HomotopyEquivalence.inverse",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "inverse",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.HomotopyEquivalence.forward",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyEquivalenceAlgebra",
+      "concept": "HomotopyEquivalence.forward",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HomotopyEquivalence",
+      "domain_B": null,
+      "domain_C": "RelativeMap",
+      "operation_signature": "HomotopyEquivalence -> RelativeMap",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.forward",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the retained full RelativeMap f from source to target.",
+        "Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HomotopyEquivalence.forward",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "forward",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HomotopyEquivalence.backward",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyEquivalenceAlgebra",
+      "concept": "HomotopyEquivalence.backward",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HomotopyEquivalence",
+      "domain_B": null,
+      "domain_C": "RelativeMap",
+      "operation_signature": "HomotopyEquivalence -> RelativeMap",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.backward",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the retained full RelativeMap g from target to source.",
+        "Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HomotopyEquivalence.backward",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "backward",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HomotopyEquivalence.source",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyEquivalenceAlgebra",
+      "concept": "HomotopyEquivalence.source",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HomotopyEquivalence",
+      "domain_B": null,
+      "domain_C": "RelativeComplex",
+      "operation_signature": "HomotopyEquivalence -> RelativeComplex",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.source",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the full source pair of f, equal to the target pair of g.",
+        "Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HomotopyEquivalence.source",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "source",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HomotopyEquivalence.target",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyEquivalenceAlgebra",
+      "concept": "HomotopyEquivalence.target",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HomotopyEquivalence",
+      "domain_B": null,
+      "domain_C": "RelativeComplex",
+      "operation_signature": "HomotopyEquivalence -> RelativeComplex",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.target",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the full target pair of f, equal to the source pair of g.",
+        "Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HomotopyEquivalence.target",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "target",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HomotopyEquivalence.source-homotopy",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyEquivalenceAlgebra",
+      "concept": "HomotopyEquivalence.source-homotopy",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HomotopyEquivalence",
+      "domain_B": null,
+      "domain_C": "HomotopyPath",
+      "operation_signature": "HomotopyEquivalence -> HomotopyPath",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.source-homotopy",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the supplied HomotopyPath from Id_X to g after f; its prism fills composite-minus-identity differences on source cycles.",
+        "Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HomotopyEquivalence.source-homotopy",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "source-homotopy",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HomotopyEquivalence.target-homotopy",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyEquivalenceAlgebra",
+      "concept": "HomotopyEquivalence.target-homotopy",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HomotopyEquivalence",
+      "domain_B": null,
+      "domain_C": "HomotopyPath",
+      "operation_signature": "HomotopyEquivalence -> HomotopyPath",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.target-homotopy",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the supplied HomotopyPath from Id_Y to f after g; its prism fills composite-minus-identity differences on target cycles.",
+        "Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HomotopyEquivalence.target-homotopy",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "target-homotopy",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HomotopyEquivalence.equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyEquivalenceAlgebra",
+      "concept": "HomotopyEquivalence.equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HomotopyEquivalence",
+      "domain_B": "HomotopyEquivalence",
+      "domain_C": "Boolean",
+      "operation_signature": "HomotopyEquivalence x HomotopyEquivalence -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Compare both full maps and both complete witness stage lists, including repetitions. Equal forward maps or endpoint pairs alone are insufficient.",
+        "Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HomotopyEquivalence.equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.HomotopyEquivalence.forward-homology-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyEquivalenceAlgebra",
+      "concept": "HomotopyEquivalence.forward-homology-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HomotopyEquivalence",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "HomotopyEquivalence x N -> AbelianGroupHomomorphism",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.forward-homology-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "For nonnegative n return f_*: H_n(X,A)->H_n(Y,B), retaining integral presentations and torsion; its inverse is the backward homology map.",
+        "Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HomotopyEquivalence.forward-homology-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "forward-homology-map",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.HomotopyEquivalence.backward-homology-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyEquivalenceAlgebra",
+      "concept": "HomotopyEquivalence.backward-homology-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HomotopyEquivalence",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "HomotopyEquivalence x N -> AbelianGroupHomomorphism",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.backward-homology-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "For nonnegative n return g_*: H_n(Y,B)->H_n(X,A), retaining integral presentations and torsion; its inverse is the forward homology map.",
+        "Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HomotopyEquivalence.backward-homology-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "backward-homology-map",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.HomotopyEquivalence.homology-maps",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyEquivalenceAlgebra",
+      "concept": "HomotopyEquivalence.homology-maps",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HomotopyEquivalence",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "HomotopyEquivalence x N -> List(AbelianGroupHomomorphism)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.homology-maps",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "For nonnegative n emit exactly [f_*,g_*] in forward-then-backward order. Both integral maps share one work budget; the list is immutable and never partially emitted.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/flat/MixedFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HomotopyEquivalence.homology-maps",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "homology-maps",
+      "legacy_operation_interface": "IUnsafeFlatOperation"
+    },
+    {
+      "id": "concrete-operation.HomotopyEquivalence.forward-cohomology-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyEquivalenceAlgebra",
+      "concept": "HomotopyEquivalence.forward-cohomology-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HomotopyEquivalence",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "HomotopyEquivalence x N -> AbelianGroupHomomorphism",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.forward-cohomology-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "For nonnegative n return f^*: H^n(Y,B)->H^n(X,A). Pullback reverses geometric direction and retains integral torsion; its inverse is the backward cohomology map.",
+        "Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HomotopyEquivalence.forward-cohomology-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "forward-cohomology-map",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.HomotopyEquivalence.backward-cohomology-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyEquivalenceAlgebra",
+      "concept": "HomotopyEquivalence.backward-cohomology-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HomotopyEquivalence",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "HomotopyEquivalence x N -> AbelianGroupHomomorphism",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.backward-cohomology-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "For nonnegative n return g^*: H^n(X,A)->H^n(Y,B). Pullback reverses geometric direction and retains integral torsion; its inverse is the forward cohomology map.",
+        "Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HomotopyEquivalence.backward-cohomology-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "backward-cohomology-map",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.HomotopyEquivalence.cohomology-maps",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyEquivalenceAlgebra",
+      "concept": "HomotopyEquivalence.cohomology-maps",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HomotopyEquivalence",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "HomotopyEquivalence x N -> List(AbelianGroupHomomorphism)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.cohomology-maps",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "For nonnegative n emit exactly [f^*,g^*], each reversing its geometric map direction. Both integral maps share one work budget; the list is immutable and never partially emitted.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/flat/MixedFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HomotopyEquivalence.cohomology-maps",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "cohomology-maps",
+      "legacy_operation_interface": "IUnsafeFlatOperation"
+    },
+    {
       "id": "concrete-operation.Z/5Z.add",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "PrimeField",
@@ -121883,6 +123458,12 @@
         "FiniteMarkov(Z).power",
         "FiniteRelation(Z,Z).cardinality",
         "FiniteSet(Z).cardinality",
+        "HomotopyEquivalence.backward-cohomology-map",
+        "HomotopyEquivalence.backward-homology-map",
+        "HomotopyEquivalence.cohomology-maps",
+        "HomotopyEquivalence.forward-cohomology-map",
+        "HomotopyEquivalence.forward-homology-map",
+        "HomotopyEquivalence.homology-maps",
         "HomotopyPath.chain-matrix",
         "HomotopyPath.cochain-matrix",
         "HomotopyPath.step-count",
@@ -122605,6 +124186,7 @@
         "FiniteSet(Z).subset",
         "H(Q).equal",
         "H(Q).same-rotation",
+        "HomotopyEquivalence.equal",
         "HomotopyPath.equal",
         "IntegralHomology.equal",
         "IntegralHomology.is-acyclic",
@@ -125783,6 +127365,12 @@
         "CoverMap.sum-homology-maps",
         "CoverMap.union-cohomology-map",
         "CoverMap.union-homology-map",
+        "HomotopyEquivalence.backward-cohomology-map",
+        "HomotopyEquivalence.backward-homology-map",
+        "HomotopyEquivalence.cohomology-maps",
+        "HomotopyEquivalence.forward-cohomology-map",
+        "HomotopyEquivalence.forward-homology-map",
+        "HomotopyEquivalence.homology-maps",
         "IntegralHomology.induced-map",
         "IntegralHomology.projection",
         "RelativeCap.cap-cohomology-map",
@@ -126198,6 +127786,9 @@
         "SimplicialMap"
       ],
       "supported_operations": [
+        "HomotopyEquivalence.identity-on",
+        "HomotopyEquivalence.source",
+        "HomotopyEquivalence.target",
         "HomotopyPath.source",
         "HomotopyPath.target",
         "RelativeCap.on",
@@ -126305,6 +127896,10 @@
         "CoverMap.excision-maps",
         "CoverMap.left-relative-map",
         "CoverMap.union-relative-map",
+        "HomotopyEquivalence.backward",
+        "HomotopyEquivalence.forward",
+        "HomotopyEquivalence.from-isomorphism",
+        "HomotopyEquivalence.maps",
         "HomotopyPath.append",
         "HomotopyPath.from",
         "HomotopyPath.postcompose",
@@ -127319,6 +128914,8 @@
         "Boolean"
       ],
       "supported_operations": [
+        "HomotopyEquivalence.source-homotopy",
+        "HomotopyEquivalence.target-homotopy",
         "HomotopyPath.append",
         "HomotopyPath.chain-matrices",
         "HomotopyPath.chain-matrix",
@@ -127349,6 +128946,144 @@
         "Accumulated integral prisms and their transposes satisfy telescoping homotopy identities",
         "Chronological concatenation checks full joining-map equality and retains repetitions",
         "Matrix sums, flat lists and composed-stage validation each share one computation budget"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-26"
+      }
+    },
+    {
+      "id": "HomotopyEquivalence",
+      "name": "Supplied simplicial homotopy equivalences and inverse integral maps",
+      "description": "Supplied simplicial homotopy equivalences and inverse integral maps",
+      "member_representation": "mathematics.topology.SimplicialHomotopyEquivalence",
+      "membership_rules": [
+        "Opposite forward/backward maps of the full labelled pairs",
+        "Supplied contiguity paths from each identity to its backward-forward or forward-backward composite",
+        "Mutually inverse integral homology and contravariant cohomology maps retaining torsion",
+        "Composition transports and concatenates the supplied paths under one shared budget",
+        "Equality retains both maps and both full witness stage lists"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "RelativeMap",
+        "RelativeMap.pair",
+        "RelativeComplex",
+        "HomotopyPath",
+        "HomotopyPath.pair",
+        "AbelianGroupHomomorphism",
+        "N",
+        "Boolean"
+      ],
+      "supported_operations": [
+        "HomotopyEquivalence.backward",
+        "HomotopyEquivalence.backward-cohomology-map",
+        "HomotopyEquivalence.backward-homology-map",
+        "HomotopyEquivalence.cohomology-maps",
+        "HomotopyEquivalence.compose",
+        "HomotopyEquivalence.equal",
+        "HomotopyEquivalence.forward",
+        "HomotopyEquivalence.forward-cohomology-map",
+        "HomotopyEquivalence.forward-homology-map",
+        "HomotopyEquivalence.from-isomorphism",
+        "HomotopyEquivalence.from-maps",
+        "HomotopyEquivalence.homology-maps",
+        "HomotopyEquivalence.identity-on",
+        "HomotopyEquivalence.inverse",
+        "HomotopyEquivalence.source",
+        "HomotopyEquivalence.source-homotopy",
+        "HomotopyEquivalence.target",
+        "HomotopyEquivalence.target-homotopy"
+      ],
+      "invariants": [
+        "Opposite forward/backward maps of the full labelled pairs",
+        "Supplied contiguity paths from each identity to its backward-forward or forward-backward composite",
+        "Mutually inverse integral homology and contravariant cohomology maps retaining torsion",
+        "Composition transports and concatenates the supplied paths under one shared budget",
+        "Equality retains both maps and both full witness stage lists"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-26"
+      }
+    },
+    {
+      "id": "RelativeMap.pair",
+      "name": "Ordered forward and backward maps for homotopy equivalence construction",
+      "description": "Ordered forward and backward maps for homotopy equivalence construction",
+      "member_representation": "mathematics.foundations.Pair<RelativeSimplicialMap,RelativeSimplicialMap>",
+      "membership_rules": [
+        "Both entries belong to the actual RelativeMap Algebra",
+        "First entry is forward f and second backward g; equivalence construction checks opposite boundaries"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "RelativeMap",
+        "HomotopyEquivalence"
+      ],
+      "supported_operations": [
+        "HomotopyEquivalence.from-maps",
+        "HomotopyEquivalence.maps"
+      ],
+      "invariants": [
+        "Both entries belong to the actual RelativeMap Algebra",
+        "First entry is forward f and second backward g; equivalence construction checks opposite boundaries"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-26"
+      }
+    },
+    {
+      "id": "HomotopyPath.pair",
+      "name": "Ordered source and target inverse witnesses",
+      "description": "Ordered source and target inverse witnesses",
+      "member_representation": "mathematics.foundations.Pair<SimplicialHomotopyPath,SimplicialHomotopyPath>",
+      "membership_rules": [
+        "Both entries belong to the actual HomotopyPath Algebra",
+        "First entry is the source witness and second the target witness; equivalence construction checks identities and composite endpoints"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "HomotopyPath",
+        "HomotopyEquivalence"
+      ],
+      "supported_operations": [
+        "HomotopyEquivalence.from-maps"
+      ],
+      "invariants": [
+        "Both entries belong to the actual HomotopyPath Algebra",
+        "First entry is the source witness and second the target witness; equivalence construction checks identities and composite endpoints"
       ],
       "references": [
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
