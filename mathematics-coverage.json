@@ -28731,7 +28731,7 @@
       "operation_signature": null,
       "arity": null,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps",
+      "representation_scope": "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -28744,6 +28744,7 @@
       "implementation_paths": [
         "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
@@ -28753,7 +28754,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -28764,15 +28766,16 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
-        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
         "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://arxiv.org/abs/0907.2954"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -121311,7 +121314,7 @@
       "operation_signature": "RelativeMap x RelativeMap -> RelativeMap.pair",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.maps",
+      "representation_scope": "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.maps",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -121326,6 +121329,7 @@
         "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
         "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
@@ -121335,7 +121339,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -121346,15 +121351,16 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
-        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
         "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://arxiv.org/abs/0907.2954"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -121390,7 +121396,7 @@
       "operation_signature": "RelativeMap.pair x HomotopyPath.pair -> HomotopyEquivalence",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.from-maps",
+      "representation_scope": "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.from-maps",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -121405,6 +121411,7 @@
         "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
         "groupimp/src/main/java/operations/simple/MixedOperation.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
@@ -121414,7 +121421,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -121425,15 +121433,16 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
-        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
         "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://arxiv.org/abs/0907.2954"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -121469,7 +121478,7 @@
       "operation_signature": "RelativeComplex -> HomotopyEquivalence",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.identity-on",
+      "representation_scope": "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.identity-on",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -121484,6 +121493,7 @@
         "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
         "groupimp/src/main/java/operations/simple/TransferOperation.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
@@ -121493,7 +121503,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -121504,15 +121515,16 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
-        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
         "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://arxiv.org/abs/0907.2954"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -121548,7 +121560,7 @@
       "operation_signature": "RelativeMap -> HomotopyEquivalence",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.from-isomorphism",
+      "representation_scope": "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.from-isomorphism",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -121563,6 +121575,7 @@
         "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
         "groupimp/src/main/java/operations/simple/TransferOperation.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
@@ -121572,7 +121585,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -121583,15 +121597,16 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
-        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
         "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://arxiv.org/abs/0907.2954"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -121627,7 +121642,7 @@
       "operation_signature": "HomotopyEquivalence x HomotopyEquivalence -> HomotopyEquivalence",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.compose",
+      "representation_scope": "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.compose",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -121642,6 +121657,7 @@
         "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
         "groupimp/src/main/java/operations/simple/ClosedOperation.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
@@ -121651,7 +121667,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -121662,15 +121679,16 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
-        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
         "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://arxiv.org/abs/0907.2954"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -121706,7 +121724,7 @@
       "operation_signature": "HomotopyEquivalence -> HomotopyEquivalence",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.inverse",
+      "representation_scope": "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.inverse",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -121721,6 +121739,7 @@
         "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
         "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
@@ -121730,7 +121749,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -121741,15 +121761,16 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
-        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
         "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://arxiv.org/abs/0907.2954"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -121785,7 +121806,7 @@
       "operation_signature": "HomotopyEquivalence -> RelativeMap",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.forward",
+      "representation_scope": "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.forward",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -121800,6 +121821,7 @@
         "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
         "groupimp/src/main/java/operations/simple/TransferOperation.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
@@ -121809,7 +121831,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -121820,15 +121843,16 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
-        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
         "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://arxiv.org/abs/0907.2954"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -121864,7 +121888,7 @@
       "operation_signature": "HomotopyEquivalence -> RelativeMap",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.backward",
+      "representation_scope": "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.backward",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -121879,6 +121903,7 @@
         "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
         "groupimp/src/main/java/operations/simple/TransferOperation.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
@@ -121888,7 +121913,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -121899,15 +121925,16 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
-        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
         "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://arxiv.org/abs/0907.2954"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -121943,7 +121970,7 @@
       "operation_signature": "HomotopyEquivalence -> RelativeComplex",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.source",
+      "representation_scope": "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.source",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -121958,6 +121985,7 @@
         "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
         "groupimp/src/main/java/operations/simple/TransferOperation.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
@@ -121967,7 +121995,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -121978,15 +122007,16 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
-        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
         "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://arxiv.org/abs/0907.2954"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -122022,7 +122052,7 @@
       "operation_signature": "HomotopyEquivalence -> RelativeComplex",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.target",
+      "representation_scope": "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.target",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -122037,6 +122067,7 @@
         "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
         "groupimp/src/main/java/operations/simple/TransferOperation.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
@@ -122046,7 +122077,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -122057,15 +122089,16 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
-        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
         "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://arxiv.org/abs/0907.2954"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -122101,7 +122134,7 @@
       "operation_signature": "HomotopyEquivalence -> HomotopyPath",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.source-homotopy",
+      "representation_scope": "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.source-homotopy",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -122116,6 +122149,7 @@
         "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
         "groupimp/src/main/java/operations/simple/TransferOperation.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
@@ -122125,7 +122159,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -122136,15 +122171,16 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
-        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
         "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://arxiv.org/abs/0907.2954"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -122180,7 +122216,7 @@
       "operation_signature": "HomotopyEquivalence -> HomotopyPath",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.target-homotopy",
+      "representation_scope": "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.target-homotopy",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -122195,6 +122231,7 @@
         "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
         "groupimp/src/main/java/operations/simple/TransferOperation.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
@@ -122204,7 +122241,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -122215,15 +122253,16 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
-        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
         "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://arxiv.org/abs/0907.2954"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -122259,7 +122298,7 @@
       "operation_signature": "HomotopyEquivalence x HomotopyEquivalence -> Boolean",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.equal",
+      "representation_scope": "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.equal",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -122274,6 +122313,7 @@
         "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
         "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
@@ -122283,7 +122323,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -122294,15 +122335,16 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
-        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
         "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://arxiv.org/abs/0907.2954"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -122338,7 +122380,7 @@
       "operation_signature": "HomotopyEquivalence x N -> AbelianGroupHomomorphism",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.forward-homology-map",
+      "representation_scope": "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.forward-homology-map",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -122353,6 +122395,7 @@
         "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
         "groupimp/src/main/java/operations/simple/MixedOperation.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
@@ -122362,7 +122405,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -122373,15 +122417,16 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
-        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
         "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://arxiv.org/abs/0907.2954"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -122417,7 +122462,7 @@
       "operation_signature": "HomotopyEquivalence x N -> AbelianGroupHomomorphism",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.backward-homology-map",
+      "representation_scope": "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.backward-homology-map",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -122432,6 +122477,7 @@
         "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
         "groupimp/src/main/java/operations/simple/MixedOperation.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
@@ -122441,7 +122487,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -122452,15 +122499,16 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
-        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
         "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://arxiv.org/abs/0907.2954"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -122496,7 +122544,7 @@
       "operation_signature": "HomotopyEquivalence x N -> List(AbelianGroupHomomorphism)",
       "arity": 2,
       "scalar_or_flat": "LIST",
-      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.homology-maps",
+      "representation_scope": "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.homology-maps",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -122512,6 +122560,7 @@
         "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
         "groupimp/src/main/java/operations/flat/MixedFlatOperation.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
@@ -122521,7 +122570,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -122532,15 +122582,16 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
-        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
         "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://arxiv.org/abs/0907.2954"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -122576,7 +122627,7 @@
       "operation_signature": "HomotopyEquivalence x N -> AbelianGroupHomomorphism",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.forward-cohomology-map",
+      "representation_scope": "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.forward-cohomology-map",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -122591,6 +122642,7 @@
         "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
         "groupimp/src/main/java/operations/simple/MixedOperation.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
@@ -122600,7 +122652,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -122611,15 +122664,16 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
-        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
         "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://arxiv.org/abs/0907.2954"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -122655,7 +122709,7 @@
       "operation_signature": "HomotopyEquivalence x N -> AbelianGroupHomomorphism",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.backward-cohomology-map",
+      "representation_scope": "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.backward-cohomology-map",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -122670,6 +122724,7 @@
         "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
         "groupimp/src/main/java/operations/simple/MixedOperation.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
@@ -122679,7 +122734,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -122690,15 +122746,16 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
-        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
         "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://arxiv.org/abs/0907.2954"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -122734,7 +122791,7 @@
       "operation_signature": "HomotopyEquivalence x N -> List(AbelianGroupHomomorphism)",
       "arity": 2,
       "scalar_or_flat": "LIST",
-      "representation_scope": "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.cohomology-maps",
+      "representation_scope": "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.cohomology-maps",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -122750,6 +122807,7 @@
         "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
         "groupimp/src/main/java/operations/flat/MixedFlatOperation.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
@@ -122759,7 +122817,8 @@
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
-        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java"
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java"
       ],
       "machine_tested": true,
       "human_review_status": "UNREVIEWED",
@@ -122770,15 +122829,16 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
-        "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
       ],
       "required_extension": null,
       "references": [
         "https://msc2020.org/",
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
         "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
-        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://arxiv.org/abs/0907.2954"
       ],
       "epistemic_status": "DEFINED",
       "provenance": {
@@ -122800,6 +122860,500 @@
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "cohomology-maps",
       "legacy_operation_interface": "IUnsafeFlatOperation"
+    },
+    {
+      "id": "concrete-operation.HomotopyEquivalence.dominators",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyEquivalenceAlgebra",
+      "concept": "HomotopyEquivalence.dominators",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeComplex",
+      "domain_B": "Z",
+      "domain_C": "Z",
+      "operation_signature": "RelativeComplex x Z -> List(Z)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.dominators",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "For an existing ambient vertex v, emit all distinct compatible dominator labels w in ascending order. Every ambient simplex containing v must extend by w; if v lies in the subcomplex, impose the same condition there separately. Use ILeftProjectionFlatOperation and the actual second operand's Z wrappers. Unknown or out-of-int-range labels are undefined.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/flat/SecondResultFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://arxiv.org/abs/0907.2954"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "HomotopyEquivalence.dominators",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HomotopyEquivalence.dominators",
+      "legacy_operation_interface": "ILeftProjectionFlatOperation"
+    },
+    {
+      "id": "concrete-operation.HomotopyEquivalence.dominated-vertices",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyEquivalenceAlgebra",
+      "concept": "HomotopyEquivalence.dominated-vertices",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeComplex",
+      "domain_B": null,
+      "domain_C": "Z",
+      "operation_signature": "RelativeComplex -> List(Z)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.dominated-vertices",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit all ambient labels admitting a compatible dominator, in ascending order, under one search budget. The list is immutable; vertices blocked by the subcomplex are omitted.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://arxiv.org/abs/0907.2954"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HomotopyEquivalence.dominated-vertices",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HomotopyEquivalence.dominated-vertices",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.HomotopyEquivalence.is-strong-core",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyEquivalenceAlgebra",
+      "concept": "HomotopyEquivalence.is-strong-core",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeComplex",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "RelativeComplex -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.is-strong-core",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return true exactly when the pair admits no compatible dominated-vertex deletion. This is pair-relative minimality: its ambient complex alone may still have dominated vertices. Empty pairs return true. Resource exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate.",
+        "Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://arxiv.org/abs/0907.2954"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HomotopyEquivalence.is-strong-core",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HomotopyEquivalence.is-strong-core",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HomotopyEquivalence.collapse-vertex",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyEquivalenceAlgebra",
+      "concept": "HomotopyEquivalence.collapse-vertex",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeComplex",
+      "domain_B": "StrongCollapse.vertices",
+      "domain_C": "HomotopyEquivalence",
+      "operation_signature": "RelativeComplex x StrongCollapse.vertices -> HomotopyEquivalence",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.collapse-vertex",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The ordered integer pair is (removed vertex v, surviving dominator w). Require distinct existing vertices and domination in each component containing v. Delete every simplex containing v, fix all other vertices, and construct forward retraction/backward inclusion with a one-step source path and stationary target path. Construction and witness validation share one budget.",
+        "Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://arxiv.org/abs/0907.2954"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "HomotopyEquivalence.collapse-vertex",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HomotopyEquivalence.collapse-vertex",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.HomotopyEquivalence.strong-core",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyEquivalenceAlgebra",
+      "concept": "HomotopyEquivalence.strong-core",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeComplex",
+      "domain_B": null,
+      "domain_C": "HomotopyEquivalence",
+      "operation_signature": "RelativeComplex -> HomotopyEquivalence",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.strong-core",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Repeatedly choose the least compatible dominated vertex and its least compatible dominator. Return an equivalence from the original full pair to the terminal induced subpair, not only a simplified complex. Retain one source stage per deletion plus the initial identity; every stage fixes the final target vertices. The target witness is stationary. One budget covers all searches, deletions, maps and final witness validation; no partial core is returned.",
+        "Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://arxiv.org/abs/0907.2954"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HomotopyEquivalence.strong-core",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HomotopyEquivalence.strong-core",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HomotopyEquivalence.strong-core-absolute",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialHomotopyEquivalenceAlgebra",
+      "concept": "HomotopyEquivalence.strong-core-absolute",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "FiniteComplex",
+      "domain_B": null,
+      "domain_C": "HomotopyEquivalence",
+      "operation_signature": "FiniteComplex -> HomotopyEquivalence",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.strong-core-absolute",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed the supplied FiniteComplex with empty subcomplex and perform the same deterministic strong-core reduction, returning its full HomotopyEquivalence. This absolute reduction does not merge disconnected components or identify an empty complex with a point.",
+        "Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialHomotopyEquivalenceTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+        "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://arxiv.org/abs/0907.2954"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialHomotopyEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-26",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HomotopyEquivalence.strong-core-absolute",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HomotopyEquivalence.strong-core-absolute",
+      "legacy_operation_interface": "ITransferOperation"
     },
     {
       "id": "concrete-operation.Z/5Z.add",
@@ -123734,6 +124288,8 @@
         "FiniteSet(Z).maximizers",
         "FiniteSet(Z).minimizers",
         "FiniteSet(Z).remove",
+        "HomotopyEquivalence.dominated-vertices",
+        "HomotopyEquivalence.dominators",
         "Mat(Z).scale",
         "N-to-Z",
         "N.to-integer",
@@ -124187,6 +124743,7 @@
         "H(Q).equal",
         "H(Q).same-rotation",
         "HomotopyEquivalence.equal",
+        "HomotopyEquivalence.is-strong-core",
         "HomotopyPath.equal",
         "IntegralHomology.equal",
         "IntegralHomology.is-acyclic",
@@ -124577,6 +125134,7 @@
         "FiniteComplex.subcomplex",
         "FiniteComplex.union",
         "FiniteComplex.vertex-count",
+        "HomotopyEquivalence.strong-core-absolute",
         "IntegralHomology.at-degree",
         "RelativeComplex.absolute",
         "RelativeComplex.ambient",
@@ -127786,8 +128344,13 @@
         "SimplicialMap"
       ],
       "supported_operations": [
+        "HomotopyEquivalence.collapse-vertex",
+        "HomotopyEquivalence.dominated-vertices",
+        "HomotopyEquivalence.dominators",
         "HomotopyEquivalence.identity-on",
+        "HomotopyEquivalence.is-strong-core",
         "HomotopyEquivalence.source",
+        "HomotopyEquivalence.strong-core",
         "HomotopyEquivalence.target",
         "HomotopyPath.source",
         "HomotopyPath.target",
@@ -128990,6 +129553,7 @@
         "HomotopyEquivalence.backward-cohomology-map",
         "HomotopyEquivalence.backward-homology-map",
         "HomotopyEquivalence.cohomology-maps",
+        "HomotopyEquivalence.collapse-vertex",
         "HomotopyEquivalence.compose",
         "HomotopyEquivalence.equal",
         "HomotopyEquivalence.forward",
@@ -129002,6 +129566,8 @@
         "HomotopyEquivalence.inverse",
         "HomotopyEquivalence.source",
         "HomotopyEquivalence.source-homotopy",
+        "HomotopyEquivalence.strong-core",
+        "HomotopyEquivalence.strong-core-absolute",
         "HomotopyEquivalence.target",
         "HomotopyEquivalence.target-homotopy"
       ],
@@ -129084,6 +129650,43 @@
       "invariants": [
         "Both entries belong to the actual HomotopyPath Algebra",
         "First entry is the source witness and second the target witness; equivalence construction checks identities and composite endpoints"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-26"
+      }
+    },
+    {
+      "id": "StrongCollapse.vertices",
+      "name": "Ordered removed vertex and surviving dominator",
+      "description": "Ordered removed vertex and surviving dominator",
+      "member_representation": "mathematics.foundations.Pair<BigInteger,BigInteger>",
+      "membership_rules": [
+        "Both entries belong to the actual Z Algebra",
+        "First label is removed and second survives; collapse checks signed int labels, distinct ambient membership and relative domination"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "RelativeComplex",
+        "HomotopyEquivalence",
+        "Z"
+      ],
+      "supported_operations": [
+        "HomotopyEquivalence.collapse-vertex"
+      ],
+      "invariants": [
+        "Both entries belong to the actual Z Algebra",
+        "First label is removed and second survives; collapse checks signed int labels, distinct ambient membership and relative domination"
       ],
       "references": [
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"

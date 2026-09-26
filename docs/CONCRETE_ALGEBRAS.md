@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1273 native operations from 59 algebra builders.
+The default initializer currently installs 1279 native operations from 59 algebra builders.
 
 ## Existing API usage
 
@@ -62,7 +62,7 @@ List<String> values = math.flow(math.naturals,
 | RelativeSimplicialTripleMapAlgebra / TripleMap | compose; equality/contiguity -> Boolean | inverse; source/target triples; ambient and three pair maps; isomorphism; image/corestriction | construct from a vertex map and ordered triples; inclusion/restriction; six induced integral maps; flat four-map naturality lists |
 | SimplicialHomotopyAlgebra / SimplicialHomotopy | ordered endpoint equality -> Boolean | endpoint maps; source/target pairs; reverse; flat chain/cochain matrices | construct between contiguous absolute or relative maps; degreewise prism matrices; typed chain/cochain actions through second operand wrappers |
 | SimplicialHomotopyPathAlgebra / HomotopyPath | chronological concatenation; full stage equality -> Boolean | endpoints/pairs; reverse; step count; flat stages, steps and chain/cochain matrices | stationary and one-step constructors; append a map; precompose/postcompose all stages; accumulated prism matrices and typed actions |
-| SimplicialHomotopyEquivalenceAlgebra / HomotopyEquivalence | composition; full map/witness equality -> Boolean | inverse; maps, pairs and homotopy witnesses | construction from supplied inverse witnesses; scalar and flat inverse integral homology/cohomology maps |
+| SimplicialHomotopyEquivalenceAlgebra / HomotopyEquivalence | composition; full map/witness equality -> Boolean | inverse; maps, pairs and homotopy witnesses | supplied inverse witnesses; automatic compatible vertex collapses and strong-core reduction; scalar and flat inverse integral homology/cohomology maps |
 | SimplicialChainAlgebra / SimplicialChain | context-checked add/subtract; equality/homology comparison -> Boolean | boundary; negate; complex/degree/coordinates; cycle/boundary predicates; fillings; homology/class; flat cycle generators; augmentation | integer scale; coordinates; pushforward; pairing; cap and cap-class; fixed-chain/cochain cap matrices and induced maps; zero and flat basis constructors |
 | SimplicialCochainAlgebra / SimplicialCochain | same-context add/subtract; cup; equality/cohomologous -> Boolean; cup-class -> AbelianGroupElement | negate; complex/degree/coordinates; coboundary; zero/cocycle/coboundary tests; cohomology model/class; cobounding coordinates; flat cocycle generators | degreewise zero/basis construction and unit; integer scaling; coordinate replacement; representative; evaluation; pullback; scalar/flat cohomology models and contravariant maps |
 | RelativeSimplicialCochainAlgebra / RelativeCochain | same-pair add/subtract; cup on union pairs; equality/cohomologous -> Boolean; cup-class -> AbelianGroupElement | negate; pair/degree/coordinates; coboundary; cocycle/coboundary tests; cohomology model/class; primitives; flat cocycle generators; absolute extension | zero/basis construction; absolute conversion; scaling/coordinates/representative/evaluation; pair-map pullback; connecting cocycle; scalar/flat relative cohomology and natural exact-sequence maps |
@@ -1534,7 +1534,7 @@ NativeSimplicialHomotopyPathTest checks all 178 five-stage walks on a four-verte
 
 ## Supplied simplicial homotopy equivalences
 
-`math.homotopyEquivalences` adds 19 operations on `HomotopyEquivalence`. It retains opposite maps of full labelled pairs, `f: (X,A)->(Y,B)` and `g: (Y,B)->(X,A)`, together with two supplied contiguity paths:
+`math.homotopyEquivalences` adds 25 operations, including six constructive collapse operations described below. The first 19 operations retain opposite maps of full labelled pairs, `f: (X,A)->(Y,B)` and `g: (Y,B)->(X,A)`, together with two supplied contiguity paths:
 
 ```text
 H_X: Id_(X,A) -> g compose f
@@ -1577,6 +1577,44 @@ List<String> isomorphisms = math.flow(math.relativeMaps,
 
 The support product carriers validate both runtime types and membership in the actual component algebras. Map collection uses the existing custom-result interface, witness construction uses the mixed-result interface, and the two-map outputs use its flat counterpart. Transfers return the actual registered wrappers.
 
-Only supplied finite contiguity paths are checked; there is no homotopy search, subdivision or general homotopy-equivalence decision. The data need not be a strict simplicial isomorphism or a deformation retraction; deformation-retraction conditions are not separately certified. Degrees of induced maps are nonnegative. Each witness allows 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Every required quotient basis is filtered before the 256-simplex limit. One 5,000,000-unit budget covers each construction, each complete composition including transported-path revalidation, and each whole two-map list. Resource exhaustion raises IMPLEMENTATION_FAILURE without partial outputs; integer coefficient bit lengths remain unbounded.
+The general constructor checks supplied finite contiguity paths. Dominated-vertex reduction below constructs a restricted family automatically; subdivision and general homotopy-equivalence decisions remain outside scope. General supplied data need not be a strict simplicial isomorphism or a deformation retraction. Degrees of induced maps are nonnegative. Each witness allows 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Every required quotient basis is filtered before the 256-simplex limit. One 5,000,000-unit budget covers each construction, each complete composition including transported-path revalidation, and each whole two-map list. Resource exhaustion raises IMPLEMENTATION_FAILURE without partial outputs; integer coefficient bit lengths remain unbounded.
 
 NativeSimplicialHomotopyEquivalenceTest checks absolute and based interval contractions with one through eight edges, a circle with an attached edge and a relative rank-two group, projective-plane homology/cohomology torsion, all six circle automorphisms, composition and exact units, inverse witness ordering, invalid endpoints and full-pair mismatches, nontrivial retained loop witnesses, typed fillings, empty and extreme-labelled pairs, shared composition/two-map budgets, stage bounds, product carriers, wrappers and serialized repeated flows. All 19 registrations have independent expected results in ConcreteAlgebrasTest.
+
+## Constructive dominated-vertex collapses
+
+The six additional operations construct homotopy witnesses automatically. A vertex `v` is dominated by a distinct vertex `w` when every simplex containing `v` extends to a simplex after adjoining `w`. Equivalently, every maximal simplex containing `v` contains `w`. Deleting all simplices containing `v` admits a retraction sending `v` to `w` and fixing the remaining vertices; composing with inclusion is contiguous to the identity. These are elementary strong collapses, as described by [Barmak and Minian, section 2](https://arxiv.org/abs/0907.2954).
+
+For a pair `(X,A)`, the implementation checks domination in X and, when v belongs to A, separately in A with the same w. The target is the induced pair obtained by deleting v in both components. A vertex outside A leaves A unchanged. This condition can block all reductions even when the ambient complex has dominated vertices: a filled triangle relative to its entire boundary is an example.
+
+| Operation alias | Contract |
+| --- | --- |
+| `HomotopyEquivalence.dominators` | RelativeComplex and existing integer vertex v -> ascending list of all compatible dominators w |
+| `HomotopyEquivalence.dominated-vertices` | RelativeComplex -> ascending list of all vertices admitting a compatible dominator |
+| `HomotopyEquivalence.is-strong-core` | RelativeComplex -> whether no compatible deletion remains; this tests the pair, not its ambient complex alone |
+| `HomotopyEquivalence.collapse-vertex` | RelativeComplex and `StrongCollapse.vertices` ordered pair `(v,w)` -> checked HomotopyEquivalence deleting v in favor of w |
+| `HomotopyEquivalence.strong-core` | RelativeComplex -> HomotopyEquivalence from the original pair to a terminal induced subpair |
+| `HomotopyEquivalence.strong-core-absolute` | FiniteComplex -> the same reduction with empty subcomplex |
+
+An individual collapse supplies a one-step source witness and stationary target witness. Repeated reduction always selects the least removable integer label, then its least compatible dominator. It retains an initial identity stage and one source stage per deletion. All stages fix every final target vertex; the backward map is inclusion, and forward-after-backward is exactly the target identity. Thus the generated witnesses exhibit deformation retractions of pairs. The result exposes the existing `target`, `source-homotopy`, integral maps, typed fillings and inverse operations.
+
+For the interval `0--1--2`, `twoEdgeInterval` in the executable example needs no supplied vertex maps or homotopy paths:
+
+```java
+List<String> isomorphisms = math.flow(math.complexes,
+    Collections.singletonList(twoEdgeInterval))
+    .<SimplicialHomotopyEquivalence>performAlgebraTransfer(
+        "HomotopyEquivalence.strong-core-absolute")
+    .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe(
+        "homology-maps", BigInteger.ZERO)
+    .<Boolean>performAlgebraTransfer("is-isomorphism")
+    .collect(); // ["true", "true"]
+```
+
+Here the final complex is the vertex 2. Adding the subcomplex consisting of vertex 0 forces that basepoint to survive instead. Disconnected components retain separate surviving vertices; the empty complex remains empty. The output lists are immutable. `dominators` uses the existing ILeftProjectionFlatOperation and returns the actual Z wrappers. Unknown labels, labels outside the signed int vertex range, self-collapses and incompatible domination are undefined. The input label-pair carrier validates both entries against the registered Z Algebra.
+
+One 5,000,000-unit budget covers the entire search or reduction, including all component scans, deletions, map construction and final path validation. The retained witness allows at most 255 deletions. Each component has at most 4096 nonempty simplices. Geometric reduction does not require homology matrices, so it can operate on complexes with more than 256 vertices; later homology computations retain their existing basis limits. Exhaustion raises IMPLEMENTATION_FAILURE without a partial core or false predicate.
+
+These operations search only for compatible dominated vertices. They do not decide general contractibility or homotopy equivalence, search for general elementary free-face collapses, perform subdivision, or classify the output up to relabelling. Label choices are deterministic; no uniqueness assertion is made for terminal relative pairs.
+
+NativeSimplicialStrongCollapseTest compares all 167 complexes on four labels with an independent maximal-face bitmask oracle, and all 1,024 graph/vertex-subcomplex pairs with a leaf-deletion oracle. It checks integral homology and cohomology inverse identities, fixed-target witnesses, based intervals, relative edge and disk-boundary restrictions, projective-plane torsion, empty/disconnected complexes, extreme labels, insertion-order independence, typed fillings, immutable lists, shared reduction budgets, the stage bound, larger geometric bases, actual second-result wrappers and serialized repeated flows. All six new registrations have explicit expected results in ConcreteAlgebrasTest.

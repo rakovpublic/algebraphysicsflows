@@ -3,6 +3,7 @@ package algebra.concrete;
 import algebra.imp.Algebra;
 import mathematics.foundations.Pair;
 import mathematics.topology.*;
+import java.math.BigInteger;
 
 /** Supplied homotopy equivalences of simplicial pairs, with inverse integral (co)homology maps. */
 public final class SimplicialHomotopyEquivalenceAlgebra extends ConcreteAlgebra<SimplicialHomotopyEquivalence> {
@@ -41,5 +42,19 @@ public final class SimplicialHomotopyEquivalenceAlgebra extends ConcreteAlgebra<
         Class<Pair<T,T>> type=(Class<Pair<T,T>>)(Class<?>)Pair.class;
         return carrier(name,type,description,p -> component.getParamClass().isInstance(p.first) && component.getParamClass().isInstance(p.second)
                 && component.validate(p.first) && component.validate(p.second));
+    }
+    public SimplicialHomotopyEquivalenceAlgebra(RelativeSimplicialMapAlgebra maps,RelativeSimplicialAlgebra pairs,SimplicialHomotopyPathAlgebra paths,
+                                              AbelianGroupHomomorphismAlgebra homomorphisms,NaturalSemiring naturals,BooleanAlgebra truth,
+                                              FiniteSimplicialAlgebra complexes,IntegerRing integers) {
+        this(maps,pairs,paths,homomorphisms,naturals,truth);
+        Algebra<Pair<BigInteger,BigInteger>> vertices=pairCarrier("StrongCollapse.vertices",integers.algebra(),"Ordered removed vertex and surviving dominator labels");
+        flat("dominators",pairs.algebra(),integers.algebra(),integers.algebra(),true,SimplicialStrongCollapse::dominators);
+        unaryFlat("dominated-vertices",pairs.algebra(),integers.algebra(),false,SimplicialStrongCollapse::dominatedVertices);
+        unary("is-strong-core",pairs.algebra(),truth.algebra(),false,SimplicialStrongCollapse::isStrongCore);
+        binary("collapse-vertex",pairs.algebra(),vertices,algebra(),true,SimplicialStrongCollapse::collapseVertex);
+        unary("strong-core",pairs.algebra(),algebra(),false,SimplicialStrongCollapse::strongCore);
+        unary("strong-core-absolute",complexes.algebra(),algebra(),false,SimplicialStrongCollapse::strongCoreAbsolute);
+        law("A compatible strong collapse deletes v only when every incident simplex extends by its distinct dominator w in each pair component containing v.");
+        law("Strong-core reduction chooses the least removable label and least compatible dominator, retains a stationary target witness, and fixes every final target vertex at every source stage.");
     }
 }

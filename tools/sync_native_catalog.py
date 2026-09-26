@@ -10,7 +10,7 @@ DATABASE = ROOT / "mathematics-coverage.json"
 MANIFEST = ROOT / "groupimp/src/test/resources/mathematics/concrete-catalog.tsv"
 DATE = "2026-09-26"
 OWNERS = {
-    "SimplicialHomotopyEquivalenceAlgebra": ("HomotopyEquivalence", "Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps"),
+    "SimplicialHomotopyEquivalenceAlgebra": ("HomotopyEquivalence", "Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps"),
     "SimplicialHomotopyPathAlgebra": ("HomotopyPath", "Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms"),
     "SimplicialHomotopyAlgebra": ("SimplicialHomotopy", "Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators"),
     "BooleanAlgebra": ("Boolean", "Boolean truth values with Boolean operations"),
@@ -195,6 +195,12 @@ OWNER_CONDITIONS = {
         "forward-cohomology-map": "For nonnegative n return f^*: H^n(Y,B)->H^n(X,A). Pullback reverses geometric direction and retains integral torsion; its inverse is the backward cohomology map.",
         "backward-cohomology-map": "For nonnegative n return g^*: H^n(X,A)->H^n(Y,B). Pullback reverses geometric direction and retains integral torsion; its inverse is the forward cohomology map.",
         "cohomology-maps": "For nonnegative n emit exactly [f^*,g^*], each reversing its geometric map direction. Both integral maps share one work budget; the list is immutable and never partially emitted.",
+        "dominators": "For an existing ambient vertex v, emit all distinct compatible dominator labels w in ascending order. Every ambient simplex containing v must extend by w; if v lies in the subcomplex, impose the same condition there separately. Use ILeftProjectionFlatOperation and the actual second operand's Z wrappers. Unknown or out-of-int-range labels are undefined.",
+        "dominated-vertices": "Emit all ambient labels admitting a compatible dominator, in ascending order, under one search budget. The list is immutable; vertices blocked by the subcomplex are omitted.",
+        "is-strong-core": "Return true exactly when the pair admits no compatible dominated-vertex deletion. This is pair-relative minimality: its ambient complex alone may still have dominated vertices. Empty pairs return true. Resource exhaustion raises IMPLEMENTATION_FAILURE, never a false predicate.",
+        "collapse-vertex": "The ordered integer pair is (removed vertex v, surviving dominator w). Require distinct existing vertices and domination in each component containing v. Delete every simplex containing v, fix all other vertices, and construct forward retraction/backward inclusion with a one-step source path and stationary target path. Construction and witness validation share one budget.",
+        "strong-core": "Repeatedly choose the least compatible dominated vertex and its least compatible dominator. Return an equivalence from the original full pair to the terminal induced subpair, not only a simplified complex. Retain one source stage per deletion plus the initial identity; every stage fixes the final target vertices. The target witness is stationary. One budget covers all searches, deletions, maps and final witness validation; no partial core is returned.",
+        "strong-core-absolute": "Embed the supplied FiniteComplex with empty subcomplex and perform the same deterministic strong-core reduction, returning its full HomotopyEquivalence. This absolute reduction does not merge disconnected components or identify an empty complex with a point.",
     },
     "SimplicialHomotopyPathAlgebra": {
         "from-homotopy": "Retain the two ordered endpoint RelativeMaps of a SimplicialHomotopy as a one-step path. Registered as HomotopyPath.from-homotopy on SimplicialHomotopy.",
@@ -1322,6 +1328,7 @@ def record(identifier, owner, concept, paths, operation=None):
     carrier, scope = OWNERS[owner]
     if owner == "SimplicialHomotopyEquivalenceAlgebra":
         paths = paths + ["groupimp/src/main/java/mathematics/topology/SimplicialHomotopyEquivalence.java",
+                         "groupimp/src/main/java/mathematics/topology/SimplicialStrongCollapse.java",
                          "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
                          "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
                          "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
@@ -1344,6 +1351,8 @@ def record(identifier, owner, concept, paths, operation=None):
     tests = ["groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java"]
     if owner in EXTRA_TESTS:
         tests.append("groupimp/src/test/java/operations/" + EXTRA_TESTS[owner] + ".java")
+    if owner == "SimplicialHomotopyEquivalenceAlgebra":
+        tests.append("groupimp/src/test/java/operations/NativeSimplicialStrongCollapseTest.java")
     if owner == "IntegerSetAlgebra":
         tests.append("groupimp/src/test/java/operations/NativeOptimizationTest.java")
         paths = paths + ["groupimp/src/main/java/algebra/concrete/FiniteSetAlgebra.java"]
@@ -1622,9 +1631,9 @@ def record(identifier, owner, concept, paths, operation=None):
         value["references"].append("https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf")
     if owner == "SimplicialHomotopyEquivalenceAlgebra":
         value["required_invariants"].append("Forward and backward maps have opposite full labelled pairs. The retained source path runs from Id_X to g after f, and the target path from Id_Y to f after g. Their integral prisms show that forward/backward induced homology maps are mutual inverses, as are the contravariant cohomology maps. Equality includes both complete witnesses.")
-        value["known_limitations"] += ["Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required quotient bases are filtered before the 256-simplex bound. Each equivalence construction, entire composition including transported-path revalidation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
-            "Only supplied finite contiguity paths are checked. There is no homotopy search, general homotopy-equivalence decision, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. The data need not be a strict simplicial isomorphism or a deformation retraction, and no deformation-retraction conditions are automatically certified. Composition with the homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."]
-        value["references"] += ["https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf", "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"]
+        value["known_limitations"] += ["Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
+            "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."]
+        value["references"] += ["https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf", "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf", "https://arxiv.org/abs/0907.2954"]
     if owner == "SimplicialHomotopyPathAlgebra":
         value["required_invariants"].append("Every stage retains the same full source and target pairs, and every consecutive pair is contiguous in both target components. Accumulated prisms telescope between the first and last maps, with dual cochain identities. Concatenation preserves the full ordered path; stationary paths are its units. Native chain/cochain actions use the actual second operand wrappers.")
         value["known_limitations"] += ["At least one and at most 256 stages, giving at most 255 steps. Each boundary complex has at most 4096 nonempty simplices and every required quotient basis at most 256, filtered before the basis bound. Each constructor, composition including revalidation, matrix sum, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures raise IMPLEMENTATION_FAILURE without partial results; coefficient bit lengths are unbounded.",
@@ -1787,8 +1796,10 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("StrongCollapse.vertices", "Ordered removed vertex and surviving dominator", "mathematics.foundations.Pair<BigInteger,BigInteger>",
+         ["Both entries belong to the actual Z Algebra", "First label is removed and second survives; collapse checks signed int labels, distinct ambient membership and relative domination"], ["RelativeComplex", "HomotopyEquivalence", "Z"]),
         ("HomotopyEquivalence", "Supplied simplicial homotopy equivalences and inverse integral maps", "mathematics.topology.SimplicialHomotopyEquivalence",
-         ["Opposite forward/backward maps of the full labelled pairs", "Supplied contiguity paths from each identity to its backward-forward or forward-backward composite", "Mutually inverse integral homology and contravariant cohomology maps retaining torsion", "Composition transports and concatenates the supplied paths under one shared budget", "Equality retains both maps and both full witness stage lists"], ["RelativeMap", "RelativeMap.pair", "RelativeComplex", "HomotopyPath", "HomotopyPath.pair", "AbelianGroupHomomorphism", "N", "Boolean"]),
+         ["Opposite forward/backward maps of the full labelled pairs", "Supplied contiguity paths from each identity to its backward-forward or forward-backward composite", "Compatible dominated-vertex reductions construct source witnesses fixing the terminal induced pair and stationary target witnesses", "Mutually inverse integral homology and contravariant cohomology maps retaining torsion", "Composition transports and concatenates the supplied paths under one shared budget", "Equality retains both maps and both full witness stage lists"], ["RelativeMap", "RelativeMap.pair", "RelativeComplex", "FiniteComplex", "StrongCollapse.vertices", "HomotopyPath", "HomotopyPath.pair", "AbelianGroupHomomorphism", "Z", "N", "Boolean"]),
         ("RelativeMap.pair", "Ordered forward and backward maps for homotopy equivalence construction", "mathematics.foundations.Pair<RelativeSimplicialMap,RelativeSimplicialMap>",
          ["Both entries belong to the actual RelativeMap Algebra", "First entry is forward f and second backward g; equivalence construction checks opposite boundaries"], ["RelativeMap", "HomotopyEquivalence"]),
         ("HomotopyPath.pair", "Ordered source and target inverse witnesses", "mathematics.foundations.Pair<SimplicialHomotopyPath,SimplicialHomotopyPath>",

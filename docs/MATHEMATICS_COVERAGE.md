@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1739 |
-| DIRECTLY_SUPPORTED | 1496 |
+| Scoped records | 1745 |
+| DIRECTLY_SUPPORTED | 1502 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1355 |
+| IMPLEMENTED | 1361 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1423 |
+| MACHINE_TESTED | 1429 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1332 | 1332 | 0 | 0 | 0 | 1332 | 0 | 0 |
+| Concrete MathTool algebras | 1338 | 1338 | 0 | 0 | 0 | 1338 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -645,25 +645,31 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | H(Q).to-rotation-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).to-rotation-matrix |
 | H(Q).to-vector | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).to-vector |
 | H(Q).zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).zero |
-| HomotopyEquivalence.backward | DIRECTLY_SUPPORTED | IMPLEMENTED | Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.backward |
-| HomotopyEquivalence.backward-cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.backward-cohomology-map |
-| HomotopyEquivalence.backward-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.backward-homology-map |
-| HomotopyEquivalence.cohomology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.cohomology-maps |
-| HomotopyEquivalence.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.compose |
-| HomotopyEquivalence.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.equal |
-| HomotopyEquivalence.forward | DIRECTLY_SUPPORTED | IMPLEMENTED | Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.forward |
-| HomotopyEquivalence.forward-cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.forward-cohomology-map |
-| HomotopyEquivalence.forward-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.forward-homology-map |
-| HomotopyEquivalence.from-isomorphism | DIRECTLY_SUPPORTED | IMPLEMENTED | Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.from-isomorphism |
-| HomotopyEquivalence.from-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.from-maps |
-| HomotopyEquivalence.homology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.homology-maps |
-| HomotopyEquivalence.identity-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.identity-on |
-| HomotopyEquivalence.inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.inverse |
-| HomotopyEquivalence.maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.maps |
-| HomotopyEquivalence.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.source |
-| HomotopyEquivalence.source-homotopy | DIRECTLY_SUPPORTED | IMPLEMENTED | Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.source-homotopy |
-| HomotopyEquivalence.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.target |
-| HomotopyEquivalence.target-homotopy | DIRECTLY_SUPPORTED | IMPLEMENTED | Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps; native operation HomotopyEquivalence.target-homotopy |
+| HomotopyEquivalence.backward | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.backward |
+| HomotopyEquivalence.backward-cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.backward-cohomology-map |
+| HomotopyEquivalence.backward-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.backward-homology-map |
+| HomotopyEquivalence.cohomology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.cohomology-maps |
+| HomotopyEquivalence.collapse-vertex | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.collapse-vertex |
+| HomotopyEquivalence.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.compose |
+| HomotopyEquivalence.dominated-vertices | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.dominated-vertices |
+| HomotopyEquivalence.dominators | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.dominators |
+| HomotopyEquivalence.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.equal |
+| HomotopyEquivalence.forward | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.forward |
+| HomotopyEquivalence.forward-cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.forward-cohomology-map |
+| HomotopyEquivalence.forward-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.forward-homology-map |
+| HomotopyEquivalence.from-isomorphism | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.from-isomorphism |
+| HomotopyEquivalence.from-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.from-maps |
+| HomotopyEquivalence.homology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.homology-maps |
+| HomotopyEquivalence.identity-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.identity-on |
+| HomotopyEquivalence.inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.inverse |
+| HomotopyEquivalence.is-strong-core | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.is-strong-core |
+| HomotopyEquivalence.maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.maps |
+| HomotopyEquivalence.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.source |
+| HomotopyEquivalence.source-homotopy | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.source-homotopy |
+| HomotopyEquivalence.strong-core | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.strong-core |
+| HomotopyEquivalence.strong-core-absolute | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.strong-core-absolute |
+| HomotopyEquivalence.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.target |
+| HomotopyEquivalence.target-homotopy | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps; native operation HomotopyEquivalence.target-homotopy |
 | HomotopyPath.append | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.append |
 | HomotopyPath.chain-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.chain-matrices |
 | HomotopyPath.chain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.chain-matrix |
@@ -1375,7 +1381,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | SimplicialHomotopy.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.target |
 | SimplicialHomotopy.to | DIRECTLY_SUPPORTED | IMPLEMENTED | Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.to |
 | SimplicialHomotopyAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators |
-| SimplicialHomotopyEquivalenceAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Opposite simplicial pair maps with supplied contiguity-path inverse witnesses and mutually inverse integral homology/cohomology maps |
+| SimplicialHomotopyEquivalenceAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied inverse paths or constructive dominated-vertex collapses, with inverse integral homology/cohomology maps |
 | SimplicialHomotopyPathAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms |
 | SimplicialMap.chain-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.chain-matrices |
 | SimplicialMap.chain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.chain-matrix |

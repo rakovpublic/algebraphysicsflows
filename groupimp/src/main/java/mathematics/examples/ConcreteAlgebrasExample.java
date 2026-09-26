@@ -118,6 +118,9 @@ public final class ConcreteAlgebrasExample {
                 .<SimplicialHomotopyEquivalence,Pair<SimplicialHomotopyPath,SimplicialHomotopyPath>>performAlgebraUnsafe("HomotopyEquivalence.from-maps",new Pair<>(intervalSourceWitness,intervalTargetWitness))
                 .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("homology-maps",BigInteger.ZERO).<Boolean>performAlgebraTransfer("is-isomorphism").collect());
         FiniteSimplicialComplex twoEdgeInterval=new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0,1),FiniteSet.of(1,2)));
+        System.out.println("Automatic strong-core reduction preserves integral homology: "+math.flow(math.complexes,Collections.singletonList(twoEdgeInterval))
+                .<SimplicialHomotopyEquivalence>performAlgebraTransfer("HomotopyEquivalence.strong-core-absolute")
+                .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("homology-maps",BigInteger.ZERO).<Boolean>performAlgebraTransfer("is-isomorphism").collect());
         RelativeSimplicialMap pathStart=RelativeSimplicialMap.absolute(FiniteSimplicialMap.inclusion(basedEndpoint,twoEdgeInterval)),
                 pathMiddle=RelativeSimplicialMap.absolute(pathStart.ambientMap().constantAt(BigInteger.ONE)),
                 pathEnd=RelativeSimplicialMap.absolute(pathStart.ambientMap().constantAt(BigInteger.valueOf(2)));

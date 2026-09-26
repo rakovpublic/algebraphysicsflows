@@ -1264,6 +1264,12 @@ HomotopyEquivalence.homology-maps	SimplicialHomotopyEquivalenceAlgebra	homology-
 HomotopyEquivalence.forward-cohomology-map	SimplicialHomotopyEquivalenceAlgebra	forward-cohomology-map	HomotopyEquivalence	N	AbelianGroupHomomorphism	SCALAR	TOTAL	IUnsafeOperation
 HomotopyEquivalence.backward-cohomology-map	SimplicialHomotopyEquivalenceAlgebra	backward-cohomology-map	HomotopyEquivalence	N	AbelianGroupHomomorphism	SCALAR	TOTAL	IUnsafeOperation
 HomotopyEquivalence.cohomology-maps	SimplicialHomotopyEquivalenceAlgebra	cohomology-maps	HomotopyEquivalence	N	AbelianGroupHomomorphism	LIST	TOTAL	IUnsafeFlatOperation
+HomotopyEquivalence.dominators	SimplicialHomotopyEquivalenceAlgebra	HomotopyEquivalence.dominators	RelativeComplex	Z	Z	LIST	PARTIAL	ILeftProjectionFlatOperation
+HomotopyEquivalence.dominated-vertices	SimplicialHomotopyEquivalenceAlgebra	HomotopyEquivalence.dominated-vertices	RelativeComplex	-	Z	LIST	TOTAL	ITransferFlatOperation
+HomotopyEquivalence.is-strong-core	SimplicialHomotopyEquivalenceAlgebra	HomotopyEquivalence.is-strong-core	RelativeComplex	-	Boolean	SCALAR	TOTAL	ITransferOperation
+HomotopyEquivalence.collapse-vertex	SimplicialHomotopyEquivalenceAlgebra	HomotopyEquivalence.collapse-vertex	RelativeComplex	StrongCollapse.vertices	HomotopyEquivalence	SCALAR	PARTIAL	IUnsafeOperation
+HomotopyEquivalence.strong-core	SimplicialHomotopyEquivalenceAlgebra	HomotopyEquivalence.strong-core	RelativeComplex	-	HomotopyEquivalence	SCALAR	TOTAL	ITransferOperation
+HomotopyEquivalence.strong-core-absolute	SimplicialHomotopyEquivalenceAlgebra	HomotopyEquivalence.strong-core-absolute	FiniteComplex	-	HomotopyEquivalence	SCALAR	TOTAL	ITransferOperation
 Z/5Z.add	PrimeField	add	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL	IOperation
 Z/5Z.subtract	PrimeField	subtract	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL	IOperation
 Z/5Z.multiply	PrimeField	multiply	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL	IOperation

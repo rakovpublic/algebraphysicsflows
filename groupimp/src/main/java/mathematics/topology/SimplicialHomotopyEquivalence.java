@@ -17,7 +17,7 @@ public final class SimplicialHomotopyEquivalence implements Serializable {
                                         SimplicialHomotopyPath sourceHomotopy,SimplicialHomotopyPath targetHomotopy) {
         this(forward,backward,sourceHomotopy,targetHomotopy,new Computation());
     }
-    private SimplicialHomotopyEquivalence(RelativeSimplicialMap forward,RelativeSimplicialMap backward,
+    SimplicialHomotopyEquivalence(RelativeSimplicialMap forward,RelativeSimplicialMap backward,
                                          SimplicialHomotopyPath sourceHomotopy,SimplicialHomotopyPath targetHomotopy,Computation work) {
         this.forward=Objects.requireNonNull(forward); this.backward=Objects.requireNonNull(backward);
         this.sourceHomotopy=Objects.requireNonNull(sourceHomotopy); this.targetHomotopy=Objects.requireNonNull(targetHomotopy);
