@@ -56,6 +56,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final RelativeSimplicialChainAlgebra relativeChains;
     public final RelativeCapProductAlgebra relativeCaps;
     public final RelativeSimplicialTripleAlgebra relativeTriples;
+    public final RelativeSimplicialTripleMapAlgebra tripleMaps;
     public final RationalAffineSpaceAlgebra affineSpaces;
     public final FiniteMarkovAlgebra markovKernels;
     public final RationalTensorAlgebra tensors;
@@ -95,6 +96,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         relativeChains=new RelativeSimplicialChainAlgebra(relativeComplexes,relativeMaps,simplicialChains,cochains,relativeCochains,integerVectors,integerMatrices,integers,naturals,booleans,integralHomology,abelianGroupElements,abelianHomomorphisms);
         relativeCaps=new RelativeCapProductAlgebra(relativeChains,relativeComplexes,relativeCochains,integerMatrices,abelianGroupElements,abelianHomomorphisms,booleans);
         relativeTriples=new RelativeSimplicialTripleAlgebra(relativeComplexes,complexes,relativeMaps,relativeChains,relativeCochains,integerMatrices,abelianHomomorphisms,naturals,booleans);
+        tripleMaps=new RelativeSimplicialTripleMapAlgebra(relativeTriples,simplicialMaps,relativeMaps,naturals,booleans,abelianHomomorphisms);
         affineSpaces=new RationalAffineSpaceAlgebra(rectangularMatrices,finiteVectors,naturals,booleans);
         markovKernels=new FiniteMarkovAlgebra(integers,integerSets,integerProbabilities,integerFunctions,rectangularMatrices,finiteVectors,rationals,naturals,booleans);
         tensors=new RationalTensorAlgebra(rationals,finiteVectors,rectangularMatrices,naturals,booleans);
@@ -133,6 +135,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         values.add(relativeChains);
         values.add(relativeCaps);
         values.add(relativeTriples);
+        values.add(tripleMaps);
         values.addAll(fields); algebras=Collections.unmodifiableList(values);
         for(ConcreteAlgebra<?> algebra : algebras) {
             algebra.register(mathTool);

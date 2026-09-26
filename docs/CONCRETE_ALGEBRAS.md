@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1190 native operations from 55 algebra builders.
+The default initializer currently installs 1215 native operations from 56 algebra builders.
 
 ## Existing API usage
 
@@ -59,6 +59,7 @@ List<String> values = math.flow(math.naturals,
 | RelativeSimplicialChainAlgebra / RelativeChain | pair/degree-checked add/subtract; equality/homology comparison -> Boolean | boundary; negate; pair/degree/coordinates; cycle/boundary predicates; fillings; homology/class; flat cycle generators; absolute lift and connecting cycle | projection from absolute chains; integer scale; pair-map pushforward; relative pairing; both standard relative cap products and their matrices/induced maps; zero and flat basis constructors |
 | RelativeCapProductAlgebra / RelativeCap | equality of retained chain and target -> Boolean | chain; target pair; boundary | bind a chain to an explicit target pair; replace chain; general relative cap, class, matrices and induced homology/cohomology maps |
 | RelativeSimplicialTripleAlgebra / RelativeTriple | equality of the full nested triple -> Boolean | outer, total and inner pairs; inclusion and quotient pair maps | quotient chain/cochain matrices; homology and cohomology maps; flat exact segments; typed connecting cycles/cocycles |
+| RelativeSimplicialTripleMapAlgebra / TripleMap | compose; equality/contiguity -> Boolean | inverse; source/target triples; ambient and three pair maps; isomorphism; image/corestriction | construct from a vertex map and ordered triples; inclusion/restriction; six induced integral maps; flat four-map naturality lists |
 | SimplicialChainAlgebra / SimplicialChain | context-checked add/subtract; equality/homology comparison -> Boolean | boundary; negate; complex/degree/coordinates; cycle/boundary predicates; fillings; homology/class; flat cycle generators; augmentation | integer scale; coordinates; pushforward; pairing; cap and cap-class; fixed-chain/cochain cap matrices and induced maps; zero and flat basis constructors |
 | SimplicialCochainAlgebra / SimplicialCochain | same-context add/subtract; cup; equality/cohomologous -> Boolean; cup-class -> AbelianGroupElement | negate; complex/degree/coordinates; coboundary; zero/cocycle/coboundary tests; cohomology model/class; cobounding coordinates; flat cocycle generators | degreewise zero/basis construction and unit; integer scaling; coordinate replacement; representative; evaluation; pullback; scalar/flat cohomology models and contravariant maps |
 | RelativeSimplicialCochainAlgebra / RelativeCochain | same-pair add/subtract; cup on union pairs; equality/cohomologous -> Boolean; cup-class -> AbelianGroupElement | negate; pair/degree/coordinates; coboundary; cocycle/coboundary tests; cohomology model/class; primitives; flat cocycle generators; absolute extension | zero/basis construction; absolute conversion; scaling/coordinates/representative/evaluation; pair-map pullback; connecting cocycle; scalar/flat relative cohomology and natural exact-sequence maps |
@@ -1388,6 +1389,49 @@ List<String> result = math.flow(math.relativeComplexes,
 
 The executable example also runs the flat cohomology sequence. With B empty, positive-degree connecting homology agrees with the existing pair sequence. At degree zero the target is the zero group in degree -1, retaining the same presentation as a typed chain on `(A,B)`; that presentation can differ from the canonical zero presentation in the older pair API. Matrix and exact-sequence operations accept nonnegative degrees. Typed chains permit negative zero groups; connecting cochains always raise a nonnegative degree.
 
-Every required quotient basis is filtered before its 256-simplex limit; each complex has at most 4096 nonempty simplices. A single 5,000,000-unit integer budget covers each compound map, and each entire flat segment shares it across all four quotient models and three induced maps. Exhaustion raises IMPLEMENTATION_FAILURE without a partial list; integer bit lengths remain unbounded. The zero-on-A/B section is generally not a chain map, and the connecting matrices need not be natural on raw representatives. Induced maps are natural under maps preserving A and B. Standalone maps of triples, arbitrary chain maps, other coefficients, subdivision, continuous maps and explicit homotopy witnesses remain outside this carrier's scope.
+Every required quotient basis is filtered before its 256-simplex limit; each complex has at most 4096 nonempty simplices. A single 5,000,000-unit integer budget covers each compound map, and each entire flat segment shares it across all four quotient models and three induced maps. Exhaustion raises IMPLEMENTATION_FAILURE without a partial list; integer bit lengths remain unbounded. The zero-on-A/B section is generally not a chain map, and the connecting matrices need not be natural on raw representatives. Induced maps are natural under maps preserving A and B. TripleMap supplies maps of triples. Arbitrary chain maps, other coefficients, subdivision, continuous maps and explicit homotopy witnesses remain outside this carrier's scope.
 
 NativeRelativeTripleTest checks 216 graph triples against independent connectivity ranks and integral exactness, chain identities for every nested pair of triangle subcomplexes, disks through dimension four, projective-plane index-two images and cohomological torsion, both pair-sequence specializations, representative independence, all 27 triangle-boundary vertex maps and all six naturality squares, nonnatural connecting matrices, filtered bases, shared segment budgets, invalid inputs, empty/huge degrees, actual second-operand wrappers and serialized flows. All 24 registrations have explicit expected results in ConcreteAlgebrasTest.
+
+## Maps of nested relative triples
+
+`math.tripleMaps` adds 25 native operations on `TripleMap`. A value retains a complete source triple `(X,A,B)`, target triple `(Y,C,D)` and simplicial vertex map `f: X -> Y`. Construction checks both `f(A) subset C` and `f(B) subset D`, including simplex preservation. The support carrier `RelativeTriple.pair` holds the ordered source and target triples and validates both against the actual RelativeTriple algebra.
+
+The three exposed RelativeMaps are `(X,A)->(Y,C)`, `(X,B)->(Y,D)` and `(A,B)->(C,D)`. They work with existing chain matrices, chain pushforward, cochain pullback and induced-map operations. Their homology maps commute with the inclusion, quotient and connecting maps of the triple exact sequence. Cohomology reverses direction and gives the corresponding three naturality squares. See [Hatcher, section 2.1, Naturality](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf).
+
+| Operations | Contract |
+| --- | --- |
+| `TripleMap.from-map` | SimplicialMap and ordered `RelativeTriple.pair` -> validated TripleMap |
+| `compose`, `inverse` | Apply the right operand first; require the full middle triple to agree; inverses must preserve both nested subcomplexes |
+| `source`, `target`, `ambient-map` | Retained full triples and ambient map |
+| `outer-map`, `total-map`, `inner-map` | The three compatible RelativeMaps above |
+| `equal`, `is-isomorphism` | Compare full maps, or check ambient isomorphism and surjectivity on both nested components |
+| `TripleMap.identity-on`, `TripleMap.inclusion` | Construct an identity or a componentwise labelled inclusion |
+| `contiguous` | Check image unions in the target ambient, middle and base complexes separately |
+| `image`, `corestrict-image`, `restrict` | Compute `(f(X),f(A),f(B))`, change the target to that image, or restrict to a componentwise source subtriple |
+| `outer-homology-map`, `total-homology-map`, `inner-homology-map` | Covariant integral maps on the three pairs |
+| flat `long-exact-maps` | Four source-to-target maps on inner `H_k`, total `H_k`, outer `H_k`, inner `H_(k-1)`, in that order |
+| `outer-cohomology-map`, `total-cohomology-map`, `inner-cohomology-map` | Contravariant integral maps on the three pairs |
+| flat `long-exact-cohomology-maps` | Four target-to-source maps on outer `H^k`, total `H^k`, inner `H^k`, outer `H^(k+1)`, in that order |
+
+All degrees supplied to these operations are nonnegative. At degree zero the homology list's fourth map retains the two typed degree-minus-one presentations used by the triple connecting maps. Both groups are zero, but their retained relation matrices may differ. Induced maps preserve full quotient presentations generally, including killed Smith coordinates; matrix size is not necessarily the abstract group's rank.
+
+For an interval reflection interchanging endpoints, let `basedInterval` have B endpoint 0 and `oppositeBasedInterval` have B endpoint 1. The outer relative homology map is multiplication by -1:
+
+```java
+List<String> result = math.flow(math.simplicialMaps,
+    Collections.singletonList(intervalReflection))
+    .<RelativeSimplicialTripleMap,Pair<RelativeSimplicialTriple,RelativeSimplicialTriple>>
+        performAlgebraUnsafe("TripleMap.from-map",
+            new Pair<>(basedInterval, oppositeBasedInterval))
+    .<AbelianGroupHomomorphism,BigInteger>performAlgebraUnsafe(
+        "outer-homology-map", BigInteger.ONE)
+    .<IntegerMatrix>performAlgebraTransfer("smith-matrix")
+    .collect(); // ["ZMatrix(1x1)[[-1]]"]
+```
+
+`restrict` returns the first TripleMap wrapper through ICustomMemberOperation. Unary transfers return the registered triple, simplicial-map or relative-map wrappers. The flat naturality lists return actual AbelianGroupHomomorphism wrappers through the original flat mixed-result interface; serialized flows preserve their contexts and direction.
+
+Each complex has at most 4096 nonempty simplices, and each required quotient basis at most 256, filtered before its bound. A small quotient can therefore work even when the full ambient chain basis exceeds the limit. Each scalar induced map and each entire four-map list shares one 5,000,000-unit integer work budget across all models and induction. Construction, composition, restriction, image/corestriction and contiguity also share a budget within each call. Exhaustion raises IMPLEMENTATION_FAILURE without partial lists or false predicates; integer bit lengths are unbounded. Connecting matrices themselves need not be natural on raw representatives. Contiguity is sufficient for homotopy, not a complete decision procedure. Arbitrary chain maps, explicit homotopies, other coefficients, subdivision and continuous maps remain outside scope.
+
+NativeRelativeTripleMapTest checks 27 circle maps against winding numbers, all 729 compositions, all 256 tetrahedron vertex maps against independent oriented quotient matrices, a degree-two circle covering with index two, interval reflection signs, projective-plane torsion, both exact-sequence diagrams, contiguity in each nested component, image factorization, restrictions, full triple isomorphisms, degree-minus-one presentations, nonnatural connecting matrices, invalid inputs, empty/huge degrees, extreme labels, filtered bases, shared four-map budgets and serialized native flows. All 25 registrations have explicit expected results in ConcreteAlgebrasTest.

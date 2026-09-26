@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DATABASE = ROOT / "mathematics-coverage.json"
 MANIFEST = ROOT / "groupimp/src/test/resources/mathematics/concrete-catalog.tsv"
-DATE = "2026-09-25"
+DATE = "2026-09-26"
 OWNERS = {
     "BooleanAlgebra": ("Boolean", "Boolean truth values with Boolean operations"),
     "NaturalSemiring": ("N", "Nonnegative arbitrary precision integers with addition and multiplication"),
@@ -54,6 +54,7 @@ OWNERS = {
     "RelativeSimplicialChainAlgebra": ("RelativeChain", "Integral quotient chains on labelled pairs with connecting cycles, pairing, absolute-cochain action and relative-cochain cap products into absolute homology"),
     "RelativeCapProductAlgebra": ("RelativeCap", "Integral relative cap products with independently supplied cochain and target subcomplexes, retaining a chain context and inducing homology and cohomology maps"),
     "RelativeSimplicialTripleAlgebra": ("RelativeTriple", "Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives"),
+    "RelativeSimplicialTripleMapAlgebra": ("TripleMap", "Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams"),
     "RelativeSimplicialCochainAlgebra": ("RelativeCochain", "Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences"),
     "FiniteIntegerRelationAlgebra": ("FiniteRelation(Z,Z)", "Finite-support relations on the actual registered integer Algebra"),
     "FiniteIntegerFunctionAlgebra": ("FiniteFunction(Z,Z)", "Total maps between explicit finite integer sets, preserving declared domain and codomain"),
@@ -118,6 +119,7 @@ EXTRA_TESTS = {
     "RelativeSimplicialChainAlgebra": "NativeRelativeChainTest",
     "RelativeCapProductAlgebra": "NativeRelativeCapProductTest",
     "RelativeSimplicialTripleAlgebra": "NativeRelativeTripleTest",
+    "RelativeSimplicialTripleMapAlgebra": "NativeRelativeTripleMapTest",
     "RelativeSimplicialCochainAlgebra": "NativeRelativeCochainTest",
     "FiniteIntegerRelationAlgebra": "NativeRelationTest",
     "FiniteIntegerFunctionAlgebra": "NativeFiniteFunctionTest",
@@ -167,6 +169,33 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "RelativeSimplicialTripleMapAlgebra": {
+        "from-map": "Require the ambient simplicial map to have exactly the full X and Y of the supplied ordered source/target triples. Validate A maps into C and B maps into D, retaining three compatible pair maps. Registered on SimplicialMap as TripleMap.from-map.",
+        "compose": "Apply the right operand first. All three full labelled components of the middle triple must agree; composition and validation share one work budget.",
+        "inverse": "Require an ambient simplicial isomorphism whose inverse also preserves both nested subcomplexes. An ambient bijection alone does not suffice.",
+        "source": "Return the full retained source triple (X,A,B).",
+        "target": "Return the full retained target triple (Y,C,D).",
+        "ambient-map": "Return the validated full ambient simplicial map X->Y.",
+        "outer-map": "Return the actual RelativeMap (X,A)->(Y,C), suitable for native quotient-chain pushforward and relative-cochain pullback.",
+        "total-map": "Return the actual RelativeMap (X,B)->(Y,D), retaining both full labelled pairs.",
+        "inner-map": "Return the actual RelativeMap (A,B)->(C,D), using the restricted ambient vertex map.",
+        "equal": "Compare full source and target triples and all ambient vertex images, not only their induced maps.",
+        "is-isomorphism": "True exactly for an ambient simplicial isomorphism surjective on both middle and base subcomplexes; ambient vertex bijectivity alone is insufficient.",
+        "identity-on": "Construct the identity preserving every component of the supplied full triple.",
+        "inclusion": "Require labelled inclusions of all three source components into the corresponding target components and return their common inclusion map.",
+        "contiguous": "Require the same full source and target triples. Check simplex image unions separately in the target ambient, middle and base complexes with one shared budget. Triple contiguity implies equal induced integral maps but is not a general homotopy decision.",
+        "image": "Return the triple (f(X),f(A),f(B)) of simplex-wise images, retaining the nested inclusions rather than replacing either smaller image by an intersection with the target.",
+        "corestrict-image": "Return the same vertex assignment with target exactly the image triple; its inclusion into the old target composes to the original map.",
+        "restrict": "Require a subtriple included componentwise in the full source triple. Restrict the vertex assignment, retain the original full target and return the first TripleMap wrapper.",
+        "outer-homology-map": "Return the covariant H_k(X,A)->H_k(Y,C) induced map in nonnegative degree, retaining integer presentations and torsion.",
+        "total-homology-map": "Return the covariant H_k(X,B)->H_k(Y,D) induced map in nonnegative degree, retaining integer presentations and torsion.",
+        "inner-homology-map": "Return the covariant H_k(A,B)->H_k(C,D) induced map in nonnegative degree, retaining integer presentations and torsion.",
+        "long-exact-maps": "Emit four source-to-target maps on inner degree k, total degree k, outer degree k and inner degree k-1, in that order. They commute with the three homology exact-sequence arrows. At k=0 retain the typed degree-minus-one presentations at both ends. One shared budget covers the entire list.",
+        "outer-cohomology-map": "Return the contravariant H^k(Y,C)->H^k(X,A) induced map in nonnegative degree. Preserve the full quotient presentations, which may include killed Smith coordinates.",
+        "total-cohomology-map": "Return the contravariant H^k(Y,D)->H^k(X,B) induced map in nonnegative degree, retaining full integral presentations rather than reducing to group rank.",
+        "inner-cohomology-map": "Return the contravariant H^k(C,D)->H^k(A,B) induced map in nonnegative degree, retaining full integral presentations and torsion.",
+        "long-exact-cohomology-maps": "Emit four target-to-source maps on outer degree k, total degree k, inner degree k and outer degree k+1, in that order. They commute with the three cohomology exact-sequence arrows. One shared budget covers the entire list and every quotient model it constructs.",
+    },
     "RelativeSimplicialTripleAlgebra": {
         "from-pair": "Construct a triple from the full outer pair (X,A) and a labelled base subcomplex B. Require B contained in A; retain outer (X,A), total (X,B) and inner (A,B). Registered on RelativeComplex as RelativeTriple.from-pair.",
         "outer-pair": "Return the complete retained outer pair (X,A), including all labelled simplices.",
@@ -1315,6 +1344,15 @@ def record(identifier, owner, concept, paths, operation=None):
                          "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
                          "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
                          "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
+    if owner == "RelativeSimplicialTripleMapAlgebra":
+        paths = paths + ["groupimp/src/main/java/mathematics/topology/RelativeSimplicialTripleMap.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialTriple.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+                         "groupimp/src/main/java/mathematics/topology/FiniteSimplicialMap.java",
+                         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+                         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+                         "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
     if owner == "RelativeSimplicialChainAlgebra":
         paths = paths + ["groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
                          "groupimp/src/main/java/mathematics/topology/SimplicialChain.java",
@@ -1494,7 +1532,12 @@ def record(identifier, owner, concept, paths, operation=None):
     if owner == "RelativeSimplicialTripleAlgebra":
         value["required_invariants"].append("The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers.")
         value["known_limitations"] += ["At most 4096 nonempty simplices per complex and 256 simplices in each required quotient basis, filtered before dimension checks. Adjacent degrees must fit for homology/cohomology. Every compound map and each entire three-map segment shares one 5000000-unit work budget across all models and induction; failure is IMPLEMENTATION_FAILURE, without false predicates or partial lists. Integer bit lengths are unbounded.",
-            "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. No standalone triple-map carrier, explicit homotopy witness, arbitrary chain-map builder, other coefficients, subdivision or continuous-map representation is supplied."]
+            "Only finite labelled simplicial triples and unreduced integral (co)homology are represented. Matrix and exact-sequence operations require nonnegative degrees; typed chain operations allow negative zero groups. Zero-on-A/B sections and connecting matrices need not be natural on arbitrary chains/cochains, although their induced maps are natural. TripleMap supplies maps of triples and both naturality diagrams. Explicit homotopy witnesses, arbitrary chain-map builders, other coefficients, subdivision and continuous-map representations remain outside scope."]
+        value["references"] += ["https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf", "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"]
+    if owner == "RelativeSimplicialTripleMapAlgebra":
+        value["required_invariants"].append("The common ambient vertex map preserves both nested subcomplexes and induces compatible outer, total and inner RelativeMaps. Composition is covariant for homology and contravariant for cohomology. Four-map lists retain source/target presentations and make all six exact-sequence naturality squares commute. All results belong to actual registered Algebra instances.")
+        value["known_limitations"] += ["At most 4096 nonempty simplices per complex and 256 simplices per required quotient basis, filtered before dimension checks. Induced maps require adjacent bases to fit. Every scalar induced map and each entire four-map list shares one 5000000-unit work budget across its quotient models and induction. Construction, composition, restriction, image/corestriction and contiguity also share their own work budget. Exhaustion raises IMPLEMENTATION_FAILURE, without partial lists or false predicates; integer bit lengths are unbounded.",
+            "Only finite labelled simplicial triples and their simplex-preserving vertex maps are represented. Degrees are nonnegative; the degree-zero homology naturality list retains the typed degree-minus-one zero presentations. Connecting chain/cochain matrices need not themselves be natural, although induced maps are. Contiguity is sufficient for homotopy, not a complete homotopy decision. No arbitrary chain maps, explicit homotopies, other coefficient rings, subdivision or continuous-map representation is supplied."]
         value["references"] += ["https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf", "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"]
     if owner == "RelativeCapProductAlgebra":
         value["required_invariants"].append("All three labelled pairs are checked: chain on (X,A union B), cochain on (X,A), target (X,B). The signed boundary identity holds on chains. Integral homology products are independent of representatives, natural on classes under maps preserving A and B, and compatible with relative cup products. All wrappers use the original registered algebras.")
@@ -1638,6 +1681,10 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("TripleMap", "Simplicial maps of triples and natural integral exact sequences", "mathematics.topology.RelativeSimplicialTripleMap",
+         ["Full ordered source and target triples with one ambient vertex map preserving both nested subcomplexes", "Compatible outer, total and inner pair maps with oriented quotient-chain maps", "Covariant integral homology and contravariant cohomology retaining full presentations", "Four vertical maps commuting with each exact sequence under one shared computation budget"], ["RelativeTriple", "RelativeTriple.pair", "SimplicialMap", "RelativeMap", "N", "Boolean", "AbelianGroupHomomorphism"]),
+        ("RelativeTriple.pair", "Ordered source and target triples for a simplicial triple map", "mathematics.foundations.Pair<RelativeSimplicialTriple,RelativeSimplicialTriple>",
+         ["Both entries belong to the actual RelativeTriple Algebra", "First entry is the full source triple and second the full target triple"], ["RelativeTriple", "TripleMap", "SimplicialMap"]),
         ("RelativeTriple", "Integral exact homology and cohomology of nested simplicial triples", "mathematics.topology.RelativeSimplicialTriple",
          ["Retained full labelled inclusions B subset A subset X and outer/total/inner quotient pairs", "Short exact quotient chain sequence and its dual cochain sequence", "Typed degree-lowering connecting cycles and degree-raising connecting cocycles", "Integral long exact sequences with retained quotient presentations and shared whole-segment work budgets"], ["RelativeComplex", "FiniteComplex", "RelativeMap", "RelativeChain", "RelativeCochain", "Mat(Z)", "N", "Boolean", "AbelianGroupHomomorphism"]),
         ("RelativeCap", "General integral relative cap products with explicit targets", "mathematics.topology.RelativeCapProduct",

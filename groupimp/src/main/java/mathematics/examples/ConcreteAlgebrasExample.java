@@ -25,6 +25,7 @@ import mathematics.structures.AbelianGroupHomomorphism;
 import mathematics.topology.FiniteSimplicialComplex;
 import mathematics.topology.RelativeCapProduct;
 import mathematics.topology.RelativeSimplicialTriple;
+import mathematics.topology.RelativeSimplicialTripleMap;
 import mathematics.topology.IntegralHomology;
 import mathematics.topology.FiniteSimplicialMap;
 import mathematics.topology.RelativeSimplicialComplex;
@@ -99,6 +100,12 @@ public final class ConcreteAlgebrasExample {
                 .<RelativeSimplicialTriple,FiniteSimplicialComplex>performAlgebraUnsafe("RelativeTriple.from-pair",basedEndpoint)
                 .performLeftProjectionOperation("connect-cycle",intervalCycle).<IntegerVector>performAlgebraTransfer("coordinates").collect());
         RelativeSimplicialTriple basedInterval=new RelativeSimplicialTriple(intervalCapPair,basedEndpoint);
+        RelativeSimplicialTriple oppositeBasedInterval=new RelativeSimplicialTriple(intervalCapPair,new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(1))));
+        Map<BigInteger,BigInteger> endpointSwap=new TreeMap<>(); endpointSwap.put(BigInteger.ZERO,BigInteger.ONE); endpointSwap.put(BigInteger.ONE,BigInteger.ZERO);
+        FiniteSimplicialMap intervalReflection=new FiniteSimplicialMap(intervalCapPair.ambient(),intervalCapPair.ambient(),endpointSwap);
+        System.out.println("Triple reflection acts by minus one on outer homology: "+math.flow(math.simplicialMaps,Collections.singletonList(intervalReflection))
+                .<RelativeSimplicialTripleMap,Pair<RelativeSimplicialTriple,RelativeSimplicialTriple>>performAlgebraUnsafe("TripleMap.from-map",new Pair<>(basedInterval,oppositeBasedInterval))
+                .<AbelianGroupHomomorphism,BigInteger>performAlgebraUnsafe("outer-homology-map",BigInteger.ONE).<IntegerMatrix>performAlgebraTransfer("smith-matrix").collect());
         System.out.println("Triple cohomology segment isomorphism flags: "+math.flow(math.relativeTriples,Collections.singletonList(basedInterval))
                 .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("long-exact-cohomology-segment",BigInteger.ZERO)
                 .<Boolean>performAlgebraTransfer("is-isomorphism").collect());

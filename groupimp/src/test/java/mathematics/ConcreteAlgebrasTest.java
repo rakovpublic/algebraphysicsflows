@@ -39,6 +39,7 @@ import mathematics.topology.SimplicialChain;
 import mathematics.topology.RelativeSimplicialChain;
 import mathematics.topology.RelativeCapProduct;
 import mathematics.topology.RelativeSimplicialTriple;
+import mathematics.topology.RelativeSimplicialTripleMap;
 import mathematics.topology.RelativeSimplicialCochain;
 import mathematics.examples.ConcreteAlgebrasExample;
 import mathematics.probability.FiniteMarkovKernel;
@@ -50,7 +51,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all1190RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all1215RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String discrete="Complex[[0], [1]]",emptyComplex="Complex[]";
@@ -92,6 +93,11 @@ public class ConcreteAlgebrasTest {
         String relativeNext="RelativeCochain(pair="+absolutePoint+", degree=1, coordinates=[])",zeroNextGroup="PresentedAbelianGroup(ZMatrix(0x1)[])";
         String cohomologyConnecting=homString(emptyGroup,zeroNextGroup,emptyMatrix),emptyIdentity=homString(emptyGroup,emptyGroup,emptyMatrix);
         String pointTriple="RelativeTriple(outer="+diagonalPoint+", base="+emptyComplex+")",tripleExtension=homString(emptyGroup,freeOne,"ZMatrix(1x0)[[]]");
+        String triplePointMap="TripleMap(source="+pointTriple+", target="+pointTriple+", vertices={0=0})",absolutePointMap=relativeMapString(absolutePoint,absolutePoint,"{0=0}");
+        expected.put("RelativeSimplicialTripleMapAlgebra",String.join("|",triplePointMap,triplePointMap,triplePointMap,pointTriple,pointTriple,pointMap,
+                relativePointMap,absolutePointMap,absolutePointMap,"true","true",triplePointMap,triplePointMap,"true",pointTriple,triplePointMap,triplePointMap,
+                emptyIdentity,identityOneMap,identityOneMap,"["+identityOneMap+", "+identityOneMap+", "+emptyIdentity+", "+homString(zeroNextGroup,zeroNextGroup,emptyMatrix)+"]",
+                emptyIdentity,identityOneMap,identityOneMap,"["+emptyIdentity+", "+identityOneMap+", "+identityOneMap+", "+emptyIdentity+"]"));
         expected.put("RelativeSimplicialTripleAlgebra",String.join("|",pointTriple,diagonalPoint,absolutePoint,absolutePoint,"true",
                 relativeMapString(absolutePoint,absolutePoint,"{0=0}"),relativeMapString(absolutePoint,diagonalPoint,"{0=0}"),
                 "ZMatrix(1x1)[[1]]","ZMatrix(0x1)[]","ZMatrix(1x0)[[]]",emptyMatrix,identityOneMap,delta,cohomologyConnecting,
@@ -314,7 +320,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(1190,count);
+        assertEquals(1215,count);
     }
     private static String homString(String source,String target,String matrix) { return "AbelianHom(source="+source+", target="+target+", smith="+matrix+")"; }
     private static String simplicialString(String source,String target,String vertices) { return "SimplicialMap(source="+source+", target="+target+", vertices="+vertices+")"; }
@@ -342,6 +348,7 @@ public class ConcreteAlgebrasTest {
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
         Algebra source=math.mathTool.getAlgebra(entry.first.getAlgebraName());
         IAlgebraItem item=source.buildAlgebraItem(sample(math,source.getAlgebraName(),0));
+        if(owner instanceof RelativeSimplicialTripleMapAlgebra && source==math.simplicialMaps.algebra()) item=source.buildAlgebraItem(FiniteSimplicialMap.identity(coverTestPoint()));
         if(owner instanceof RelativeSimplicialTripleAlgebra && source==math.relativeComplexes.algebra()) item=source.buildAlgebraItem(RelativeSimplicialComplex.diagonal(coverTestPoint()));
         if(owner instanceof RelativeSimplicialCochainAlgebra) {
             if(source==math.relativeComplexes.algebra()) item=source.buildAlgebraItem(relativeCochainTestPair());
@@ -418,6 +425,7 @@ public class ConcreteAlgebrasTest {
         if(operation instanceof IOneOperandOperation) return item.performOneOperandOperation(alias).perform().getResult().toString();
         if(operation instanceof ITransferOperation) return item.performAlgebraTransfer(alias).perform().getResult().toString();
         Object second=entry.second==null?null:sample(math,entry.second.getAlgebraName(),1);
+        if(owner instanceof RelativeSimplicialTripleMapAlgebra && entry.second==math.naturals.algebra()) second=BigInteger.ZERO;
         if(owner instanceof RelativeSimplicialTripleAlgebra) {
             if(entry.second==math.complexes.algebra()) second=new FiniteSimplicialComplex(Collections.emptyList());
             if(entry.second==math.naturals.algebra()) second=BigInteger.ZERO;
@@ -532,6 +540,8 @@ public class ConcreteAlgebrasTest {
             case "RelativeChain": return RelativeSimplicialChain.zero(relativeCochainTestPair(),BigInteger.ZERO);
             case "RelativeCap": return new RelativeCapProduct(RelativeSimplicialChain.zero(relativeCochainTestPair(),BigInteger.ZERO),relativeCochainTestPair());
             case "RelativeTriple": return new RelativeSimplicialTriple(RelativeSimplicialComplex.diagonal(coverTestPoint()),new FiniteSimplicialComplex(Collections.emptyList()));
+            case "RelativeTriple.pair": return new Pair<>(sample(math,"RelativeTriple",0),sample(math,"RelativeTriple",0));
+            case "TripleMap": return RelativeSimplicialTripleMap.identity((RelativeSimplicialTriple)sample(math,"RelativeTriple",0));
             case "CoverMap": return SimplicialCoverMap.identity(coverMapTestCover());
             case "SimplicialCover.pair": return new Pair<>(coverMapTestCover(),coverMapTestCover());
             case "SimplicialCover": return new SimplicialCover(coverTestPoint(),index==0?coverTestPoint():new FiniteSimplicialComplex(Collections.emptyList()));

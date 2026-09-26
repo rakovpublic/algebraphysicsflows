@@ -79,7 +79,7 @@ public final class RelativeSimplicialMap implements Serializable {
     public IntegralHomology sourceHomology(BigInteger degree) { return source.homology(degree); }
     public IntegralHomology targetHomology(BigInteger degree) { return target.homology(degree); }
     public AbelianGroupHomomorphism homologyMap(BigInteger degree) { return homologyMap(degree,new Computation()); }
-    private AbelianGroupHomomorphism homologyMap(BigInteger degree,Computation work) {
+    AbelianGroupHomomorphism homologyMap(BigInteger degree,Computation work) {
         requireDegree(degree); IntegralHomology first=source.homology(degree,work),second=source.equals(target)?first:target.homology(degree,work);
         return first.inducedMap(second,chainMatrix(degree,work),work);
     }

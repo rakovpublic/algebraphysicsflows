@@ -23,7 +23,7 @@ public final class RelativeSimplicialTriple implements Serializable {
     public RelativeSimplicialMap inclusionMap() { return RelativeSimplicialMap.inclusion(inner,total); }
     public RelativeSimplicialMap quotientMap() { return RelativeSimplicialMap.inclusion(total,outer); }
     private static void requireDegree(BigInteger degree) { if(degree.signum()<0) throw MathFailure.undefined("Triple matrix and exact-sequence degrees must be nonnegative"); }
-    private static IntegralHomology homology(RelativeSimplicialComplex pair,BigInteger degree,Computation work) {
+    static IntegralHomology homology(RelativeSimplicialComplex pair,BigInteger degree,Computation work) {
         return new IntegralHomology(pair.boundaryMatrix(degree,work),pair.boundaryMatrix(degree.add(BigInteger.ONE),work),work);
     }
     private IntegerMatrix inclusionMatrix(BigInteger degree,Computation work) {

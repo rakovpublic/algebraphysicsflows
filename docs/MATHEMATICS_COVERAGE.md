@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1652 |
-| DIRECTLY_SUPPORTED | 1409 |
+| Scoped records | 1678 |
+| DIRECTLY_SUPPORTED | 1435 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1268 |
+| IMPLEMENTED | 1294 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1336 |
+| MACHINE_TESTED | 1362 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1245 | 1245 | 0 | 0 | 0 | 1245 | 0 | 0 |
+| Concrete MathTool algebras | 1271 | 1271 | 0 | 0 | 0 | 1271 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -1155,6 +1155,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | RelativeSimplicialCochainAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral cochains on labelled pairs with relative cup products, constructive cohomology and natural long exact sequences |
 | RelativeSimplicialMapAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps of labelled pairs with functorial integral relative homology and natural long exact sequence maps |
 | RelativeSimplicialTripleAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives |
+| RelativeSimplicialTripleMapAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams |
 | RelativeTriple.connect-cocycle | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.connect-cocycle |
 | RelativeTriple.connect-cycle | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.connect-cycle |
 | RelativeTriple.connecting-chain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.connecting-chain-matrix |
@@ -1369,6 +1370,31 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Tensor(Q).to-scalar | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).to-scalar |
 | Tensor(Q).to-vector | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).to-vector |
 | Tensor(Q).zero-like | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).zero-like |
+| TripleMap.ambient-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.ambient-map |
+| TripleMap.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.compose |
+| TripleMap.contiguous | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.contiguous |
+| TripleMap.corestrict-image | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.corestrict-image |
+| TripleMap.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.equal |
+| TripleMap.from-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.from-map |
+| TripleMap.identity-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.identity-on |
+| TripleMap.image | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.image |
+| TripleMap.inclusion | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.inclusion |
+| TripleMap.inner-cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.inner-cohomology-map |
+| TripleMap.inner-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.inner-homology-map |
+| TripleMap.inner-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.inner-map |
+| TripleMap.inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.inverse |
+| TripleMap.is-isomorphism | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.is-isomorphism |
+| TripleMap.long-exact-cohomology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.long-exact-cohomology-maps |
+| TripleMap.long-exact-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.long-exact-maps |
+| TripleMap.outer-cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.outer-cohomology-map |
+| TripleMap.outer-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.outer-homology-map |
+| TripleMap.outer-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.outer-map |
+| TripleMap.restrict | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.restrict |
+| TripleMap.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.source |
+| TripleMap.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.target |
+| TripleMap.total-cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.total-cohomology-map |
+| TripleMap.total-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.total-homology-map |
+| TripleMap.total-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.total-map |
 | Vec(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations; native operation Vec(Q).add |
 | Vec(Q).dimension | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations; native operation Vec(Q).dimension |
 | Vec(Q).dot | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations; native operation Vec(Q).dot |

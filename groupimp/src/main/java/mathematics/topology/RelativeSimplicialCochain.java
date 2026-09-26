@@ -142,7 +142,7 @@ public final class RelativeSimplicialCochain implements Serializable {
                 subcomplex.inducedMap(relativeNext,pair.connectingChainMatrix(next,work).transpose(),work)));
     }
     public static AbelianGroupHomomorphism cohomologyMap(RelativeSimplicialMap map,BigInteger degree) { return cohomologyMap(map,degree,new Computation()); }
-    private static AbelianGroupHomomorphism cohomologyMap(RelativeSimplicialMap map,BigInteger degree,Computation work) {
+    static AbelianGroupHomomorphism cohomologyMap(RelativeSimplicialMap map,BigInteger degree,Computation work) {
         IntegralHomology from=cohomology(map.target(),degree,work),to=map.source().equals(map.target())?from:cohomology(map.source(),degree,work);
         return from.inducedMap(to,map.chainMatrix(degree,work).transpose(),work);
     }
