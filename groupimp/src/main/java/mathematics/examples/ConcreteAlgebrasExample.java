@@ -27,6 +27,7 @@ import mathematics.topology.RelativeCapProduct;
 import mathematics.topology.RelativeSimplicialTriple;
 import mathematics.topology.RelativeSimplicialTripleMap;
 import mathematics.topology.SimplicialHomotopy;
+import mathematics.topology.SimplicialHomotopyPath;
 import mathematics.topology.IntegralHomology;
 import mathematics.topology.FiniteSimplicialMap;
 import mathematics.topology.RelativeSimplicialComplex;
@@ -106,6 +107,15 @@ public final class ConcreteAlgebrasExample {
         FiniteSimplicialMap intervalReflection=new FiniteSimplicialMap(intervalCapPair.ambient(),intervalCapPair.ambient(),endpointSwap);
         FiniteSimplicialMap endpointStart=FiniteSimplicialMap.inclusion(basedEndpoint,intervalCapPair.ambient());
         FiniteSimplicialMap endpointEnd=endpointStart.constantAt(BigInteger.ONE);
+        FiniteSimplicialComplex twoEdgeInterval=new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0,1),FiniteSet.of(1,2)));
+        RelativeSimplicialMap pathStart=RelativeSimplicialMap.absolute(FiniteSimplicialMap.inclusion(basedEndpoint,twoEdgeInterval)),
+                pathMiddle=RelativeSimplicialMap.absolute(pathStart.ambientMap().constantAt(BigInteger.ONE)),
+                pathEnd=RelativeSimplicialMap.absolute(pathStart.ambientMap().constantAt(BigInteger.valueOf(2)));
+        System.out.println("Accumulated prism along two interval edges: "+math.flow(math.relativeMaps,Collections.singletonList(pathStart))
+                .<SimplicialHomotopyPath>performAlgebraTransfer("HomotopyPath.stationary-on")
+                .performCustomMemberOperation("append",pathMiddle).performCustomMemberOperation("append",pathEnd)
+                .performLeftProjectionOperation("on-absolute-chain",new SimplicialChain(basedEndpoint,BigInteger.ZERO,new IntegerVector(BigInteger.valueOf(3))))
+                .performOneOperandOperation("boundary").<IntegerVector>performAlgebraTransfer("coordinates").collect());
         SimplicialChain weightedPoint=new SimplicialChain(basedEndpoint,BigInteger.ZERO,new IntegerVector(BigInteger.valueOf(3)));
         System.out.println("Prism boundary between interval endpoints: "+math.flow(math.simplicialMaps,Collections.singletonList(endpointStart))
                 .<SimplicialHomotopy>performCustomResultOperation("SimplicialHomotopy.between-absolute",endpointEnd)

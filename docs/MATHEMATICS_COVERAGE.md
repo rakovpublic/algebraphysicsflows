@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1695 |
-| DIRECTLY_SUPPORTED | 1452 |
+| Scoped records | 1719 |
+| DIRECTLY_SUPPORTED | 1476 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1311 |
+| IMPLEMENTED | 1335 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1379 |
+| MACHINE_TESTED | 1403 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1288 | 1288 | 0 | 0 | 0 | 1288 | 0 | 0 |
+| Concrete MathTool algebras | 1312 | 1312 | 0 | 0 | 0 | 1312 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -645,6 +645,29 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | H(Q).to-rotation-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).to-rotation-matrix |
 | H(Q).to-vector | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).to-vector |
 | H(Q).zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).zero |
+| HomotopyPath.append | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.append |
+| HomotopyPath.chain-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.chain-matrices |
+| HomotopyPath.chain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.chain-matrix |
+| HomotopyPath.cochain-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.cochain-matrices |
+| HomotopyPath.cochain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.cochain-matrix |
+| HomotopyPath.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.equal |
+| HomotopyPath.from | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.from |
+| HomotopyPath.from-homotopy | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.from-homotopy |
+| HomotopyPath.on-absolute-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.on-absolute-chain |
+| HomotopyPath.on-absolute-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.on-absolute-cochain |
+| HomotopyPath.on-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.on-chain |
+| HomotopyPath.on-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.on-cochain |
+| HomotopyPath.postcompose | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.postcompose |
+| HomotopyPath.precompose | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.precompose |
+| HomotopyPath.reverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.reverse |
+| HomotopyPath.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.source |
+| HomotopyPath.stages | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.stages |
+| HomotopyPath.stationary-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.stationary-on |
+| HomotopyPath.step-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.step-count |
+| HomotopyPath.steps | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.steps |
+| HomotopyPath.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.target |
+| HomotopyPath.then | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.then |
+| HomotopyPath.to | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.to |
 | IntegerMatrixFamily | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses |
 | IntegerRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient |
 | IntegerSetAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets |
@@ -1333,6 +1356,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | SimplicialHomotopy.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.target |
 | SimplicialHomotopy.to | DIRECTLY_SUPPORTED | IMPLEMENTED | Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators; native operation SimplicialHomotopy.to |
 | SimplicialHomotopyAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators |
+| SimplicialHomotopyPathAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms |
 | SimplicialMap.chain-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.chain-matrices |
 | SimplicialMap.chain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.chain-matrix |
 | SimplicialMap.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.compose |

@@ -41,8 +41,11 @@ public final class RelativeSimplicialMap implements Serializable {
     }
     /** Apply the right operand first; the whole labelled middle pairs must be equal. */
     public RelativeSimplicialMap compose(RelativeSimplicialMap before) {
+        return compose(before,new Computation());
+    }
+    RelativeSimplicialMap compose(RelativeSimplicialMap before,Computation work) {
         if(!source.equals(before.target)) throw MathFailure.undefined("Composition of pair maps requires equal middle pairs");
-        Computation work=new Computation(); return new RelativeSimplicialMap(before.source,target,ambient.compose(before.ambient,work),work);
+        return new RelativeSimplicialMap(before.source,target,ambient.compose(before.ambient,work),work);
     }
     public boolean isIsomorphism() { return ambient.isIsomorphism() && subcomplex.isSurjective(); }
     public RelativeSimplicialMap inverse() {
@@ -50,8 +53,11 @@ public final class RelativeSimplicialMap implements Serializable {
     }
     /** Pair contiguity also requires each union of images of an A simplex to lie in B. */
     public boolean contiguous(RelativeSimplicialMap other) {
+        return contiguous(other,new Computation());
+    }
+    boolean contiguous(RelativeSimplicialMap other,Computation work) {
         if(!source.equals(other.source) || !target.equals(other.target)) throw MathFailure.undefined("Pair contiguity requires equal source and target pairs");
-        Computation work=new Computation(); return ambient.contiguous(other.ambient,work) && subcomplex.contiguous(other.subcomplex,work);
+        return ambient.contiguous(other.ambient,work) && subcomplex.contiguous(other.subcomplex,work);
     }
     private RelativeSimplicialComplex image(Computation work) { return new RelativeSimplicialComplex(ambient.image(work),subcomplex.image(work)); }
     public RelativeSimplicialComplex image() { return image(new Computation()); }

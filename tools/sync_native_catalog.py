@@ -10,6 +10,7 @@ DATABASE = ROOT / "mathematics-coverage.json"
 MANIFEST = ROOT / "groupimp/src/test/resources/mathematics/concrete-catalog.tsv"
 DATE = "2026-09-26"
 OWNERS = {
+    "SimplicialHomotopyPathAlgebra": ("HomotopyPath", "Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms"),
     "SimplicialHomotopyAlgebra": ("SimplicialHomotopy", "Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators"),
     "BooleanAlgebra": ("Boolean", "Boolean truth values with Boolean operations"),
     "NaturalSemiring": ("N", "Nonnegative arbitrary precision integers with addition and multiplication"),
@@ -85,6 +86,7 @@ INTERFACES = {
     "IUnsafeFlatOperation": "flat/MixedFlatOperation",
 }
 EXTRA_TESTS = {
+    "SimplicialHomotopyPathAlgebra": "NativeSimplicialHomotopyPathTest",
     "SimplicialHomotopyAlgebra": "NativeSimplicialHomotopyTest",
     "RationalVectorFamily": "NativeRectangularLinearTest",
     "RationalMatrixFamily": "NativeRectangularLinearTest",
@@ -171,6 +173,31 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "SimplicialHomotopyPathAlgebra": {
+        "from-homotopy": "Retain the two ordered endpoint RelativeMaps of a SimplicialHomotopy as a one-step path. Registered as HomotopyPath.from-homotopy on SimplicialHomotopy.",
+        "stationary-on": "Retain one supplied RelativeMap as a zero-step path with correctly shaped zero chain/cochain operators. Registered as HomotopyPath.stationary-on on RelativeMap.",
+        "append": "Append the next RelativeMap after the current final stage. Require equal full source/target pairs and contiguity in both target components. Keep repeated stages and return the first carrier wrapper.",
+        "then": "Chronological concatenation: run the first path, then the second. Require equal full joining maps, including vertex assignments and both pairs; include the shared joining stage once. Endpoint contiguity is not required.",
+        "reverse": "Reverse the complete stage list and recompute consecutive prisms. Reversing twice restores the path; the recomputed matrix need not negate the original prism.",
+        "from": "Return the first retained RelativeMap.",
+        "to": "Return the last retained RelativeMap; it need not be directly contiguous to the first map.",
+        "source": "Return the full source pair common to every stage.",
+        "target": "Return the full target pair common to every stage.",
+        "step-count": "Return the nonnegative number of steps, equal to the number of stages minus one. A stationary path has zero steps.",
+        "stages": "Emit all retained RelativeMaps in chronological order, including repeated stages. A stationary path emits one map.",
+        "steps": "Emit the consecutive SimplicialHomotopy witnesses in chronological order. A stationary path emits an empty list.",
+        "equal": "Compare the complete ordered stage lists, including repetitions, vertex assignments and full pairs. Equal endpoint maps alone do not make paths equal.",
+        "chain-matrix": "For nonnegative n, sum every step prism D_n: C_n(source)->C_(n+1)(target). The telescoping identity is boundary D + D boundary = to# - from#. The whole sum uses one work budget.",
+        "cochain-matrix": "For nonnegative p, return transpose(D_(p-1)): C^p(target)->C^(p-1)(source). At degree zero retain zero rows and the target C^0 columns. One work budget covers every step.",
+        "chain-matrices": "Emit accumulated D_n in ascending degrees zero through the maximum quotient dimension d. Share one budget across every degree and every step, without partial lists.",
+        "cochain-matrices": "Emit transpose(D_(p-1)) in ascending degrees zero through d+1, where d is the maximum quotient dimension. Include the degree-zero zero-row matrix and share one budget across every degree and every step.",
+        "on-chain": "Require a RelativeChain on the full source pair. Apply D, raise degree by one and return the full target pair through ILeftProjectionOperation. Negative-degree zero chains are allowed; cycles give explicit fillings of to#c - from#c.",
+        "on-cochain": "Require a positive-degree RelativeCochain on the full target pair. Apply the transpose of D, lower degree by one and return the full source pair through ILeftProjectionOperation. Cocycles give primitives of to*phi - from*phi; for degree zero use cochain-matrix.",
+        "on-absolute-chain": "Require empty subcomplexes at both boundaries and a SimplicialChain on the full source ambient complex. Apply D and return the target SimplicialChain wrapper with degree raised by one.",
+        "on-absolute-cochain": "Require empty subcomplexes at both boundaries and a positive-degree SimplicialCochain on the full target ambient complex. Return the source SimplicialCochain wrapper with degree lowered by one.",
+        "precompose": "Compose each stage after the supplied RelativeMap, checking the full middle pair. Revalidate the path with one shared composition/validation budget. Recompute prisms from the resulting vertex maps; these need not equal the old prism multiplied by the supplied chain matrix.",
+        "postcompose": "Compose the supplied RelativeMap after every stage, checking the full middle pair. Revalidate the path with one shared composition/validation budget. The recomputed prism agrees with postcomposition by the target chain map.",
+    },
     "SimplicialHomotopyAlgebra": {
         "between": "Require two RelativeMaps with the same full source and target pairs, contiguous in both the ambient target and its subcomplex. Retain ordered endpoints from and to. Registered on RelativeMap as SimplicialHomotopy.between.",
         "between-absolute": "Require two SimplicialMaps with the same full source and target complexes and contiguous simplex images. Retain them as maps of pairs with empty subcomplexes. Registered on SimplicialMap as SimplicialHomotopy.between-absolute.",
@@ -1270,6 +1297,12 @@ OWNER_CONDITIONS["RationalMatrixFamily"]["companion"] = "The polynomial has posi
 
 def record(identifier, owner, concept, paths, operation=None):
     carrier, scope = OWNERS[owner]
+    if owner == "SimplicialHomotopyPathAlgebra":
+        paths = paths + ["groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+                         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopy.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+                         "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
     if owner == "SimplicialHomotopyAlgebra":
         paths = paths + ["groupimp/src/main/java/mathematics/topology/SimplicialHomotopy.java",
                          "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
@@ -1556,10 +1589,15 @@ def record(identifier, owner, concept, paths, operation=None):
         value["known_limitations"] += ["Each complex has at most 4096 nonempty simplices; every required matrix/vector basis has at most 256 simplices, including adjacent degrees and cap source/target bases. Each compound homology, class, cap-class, induced-map or generator-list computation shares one 5000000-unit integer work budget. Exhaustion raises IMPLEMENTATION_FAILURE without a false predicate or partial list. Integer coefficient bit lengths are unbounded.",
             "Only homogeneous unreduced integral chains on finite labelled abstract complexes are represented. Chain addition requires equal full complexes and degrees. Homology class wrappers retain presentations, while chains supply geometric context. The chosen sorted cap formula is not generally natural on chains under arbitrary vertex relabelling, although it is natural on homology. RelativeChain supplies quotient chains and the two standard relative cap products. A cap cohomology map does not certify manifold status, orientation or a fundamental class. RelativeCap supplies general cap products with explicit A and B. Automatic fundamental-class construction, other coefficients, mixed-degree chains, Poincare-duality certification and explicit cap homotopies remain outside scope."]
         value["references"].append("https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf")
+    if owner == "SimplicialHomotopyPathAlgebra":
+        value["required_invariants"].append("Every stage retains the same full source and target pairs, and every consecutive pair is contiguous in both target components. Accumulated prisms telescope between the first and last maps, with dual cochain identities. Concatenation preserves the full ordered path; stationary paths are its units. Native chain/cochain actions use the actual second operand wrappers.")
+        value["known_limitations"] += ["At least one and at most 256 stages, giving at most 255 steps. Each boundary complex has at most 4096 nonempty simplices and every required quotient basis at most 256, filtered before the basis bound. Each constructor, composition including revalidation, matrix sum, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures raise IMPLEMENTATION_FAILURE without partial results; coefficient bit lengths are unbounded.",
+            "Stages must be supplied; there is no homotopy search, subdivision, arbitrary chain-homotopy carrier, other coefficient ring or general continuous homotopy-equivalence decision. Endpoint equality does not identify paths; loops can produce nonzero cycles. Reversal recomputes prisms and need not negate them. Precomposition recomputes the sorted prism and need not equal right multiplication by the source chain map. Typed cochain actions require positive degree; matrix APIs retain the degree-zero zero-row shape. Absolute actions require empty subcomplexes."]
+        value["references"].append("https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf")
     if owner == "SimplicialHomotopyAlgebra":
         value["required_invariants"].append("Ordered contiguous maps retain equal full source/target pairs and contiguity in both target components. The oriented integral prism obeys boundary P + P boundary = to# - from#, and its transpose obeys the dual cochain identity. Typed actions retain complete contexts and use actual second operand wrappers.")
         value["known_limitations"] += ["At most 4096 nonempty simplices per boundary complex and 256 simplices per required quotient basis, filtered before the dimension check. Each matrix, typed action and entire flat degree list shares one 5000000-unit work budget. Resource failures are IMPLEMENTATION_FAILURE without partial results. Integer bit lengths are unbounded.",
-            "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. It does not concatenate witnesses or certify general continuous homotopy equivalence. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."]
+            "This is a specific prism for a single contiguous pair, not a search for homotopies or an arbitrary chain-homotopy carrier. HomotopyPath concatenates supplied witnesses; no general continuous homotopy equivalence is certified. Endpoint reversal need not negate the prism. Matrix degrees are nonnegative; typed chain actions allow negative zero groups and typed cochain actions require positive degree. Absolute actions require empty subcomplexes. Other coefficients, subdivision and higher cup/cap homotopies remain outside scope."]
         value["references"].append("https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf")
     if owner == "RelativeSimplicialTripleAlgebra":
         value["required_invariants"].append("The full labelled inclusions B subset A subset X are enforced. Filtered quotient chains give a short exact sequence, and the dual cochains give the reversed short exact sequence. The induced long exact sequences retain integral presentations and torsion; they are natural under maps preserving both subcomplexes. Typed connecting outputs use the actual registered second operand wrappers.")
@@ -1713,6 +1751,8 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("HomotopyPath", "Finite contiguity paths and accumulated integral prisms", "mathematics.topology.SimplicialHomotopyPath",
+         ["One to 256 ordered stage maps retaining equal full source/target pairs", "Every consecutive pair is contiguous in both target components", "Accumulated integral prisms and their transposes satisfy telescoping homotopy identities", "Chronological concatenation checks full joining-map equality and retains repetitions", "Matrix sums, flat lists and composed-stage validation each share one computation budget"], ["SimplicialHomotopy", "RelativeMap", "RelativeComplex", "RelativeChain", "RelativeCochain", "SimplicialChain", "SimplicialCochain", "Mat(Z)", "N", "Boolean"]),
         ("SimplicialHomotopy", "Integral prism witnesses for contiguous simplicial maps", "mathematics.topology.SimplicialHomotopy",
          ["Ordered maps of equal full labelled pairs, contiguous in both ambient and subcomplex targets", "Degree-raising integral prism and degree-lowering transpose satisfying the chain and cochain homotopy identities", "Filtered quotient bases, exact orientation signs and actual chain/cochain wrappers"], ["SimplicialMap", "RelativeMap", "RelativeComplex", "SimplicialChain", "SimplicialCochain", "RelativeChain", "RelativeCochain", "Mat(Z)", "N", "Boolean"]),
         ("TripleMap", "Simplicial maps of triples and natural integral exact sequences", "mathematics.topology.RelativeSimplicialTripleMap",

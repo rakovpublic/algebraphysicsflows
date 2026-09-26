@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1231 native operations from 57 algebra builders.
+The default initializer currently installs 1254 native operations from 58 algebra builders.
 
 ## Existing API usage
 
@@ -61,6 +61,7 @@ List<String> values = math.flow(math.naturals,
 | RelativeSimplicialTripleAlgebra / RelativeTriple | equality of the full nested triple -> Boolean | outer, total and inner pairs; inclusion and quotient pair maps | quotient chain/cochain matrices; homology and cohomology maps; flat exact segments; typed connecting cycles/cocycles |
 | RelativeSimplicialTripleMapAlgebra / TripleMap | compose; equality/contiguity -> Boolean | inverse; source/target triples; ambient and three pair maps; isomorphism; image/corestriction | construct from a vertex map and ordered triples; inclusion/restriction; six induced integral maps; flat four-map naturality lists |
 | SimplicialHomotopyAlgebra / SimplicialHomotopy | ordered endpoint equality -> Boolean | endpoint maps; source/target pairs; reverse; flat chain/cochain matrices | construct between contiguous absolute or relative maps; degreewise prism matrices; typed chain/cochain actions through second operand wrappers |
+| SimplicialHomotopyPathAlgebra / HomotopyPath | chronological concatenation; full stage equality -> Boolean | endpoints/pairs; reverse; step count; flat stages, steps and chain/cochain matrices | stationary and one-step constructors; append a map; precompose/postcompose all stages; accumulated prism matrices and typed actions |
 | SimplicialChainAlgebra / SimplicialChain | context-checked add/subtract; equality/homology comparison -> Boolean | boundary; negate; complex/degree/coordinates; cycle/boundary predicates; fillings; homology/class; flat cycle generators; augmentation | integer scale; coordinates; pushforward; pairing; cap and cap-class; fixed-chain/cochain cap matrices and induced maps; zero and flat basis constructors |
 | SimplicialCochainAlgebra / SimplicialCochain | same-context add/subtract; cup; equality/cohomologous -> Boolean; cup-class -> AbelianGroupElement | negate; complex/degree/coordinates; coboundary; zero/cocycle/coboundary tests; cohomology model/class; cobounding coordinates; flat cocycle generators | degreewise zero/basis construction and unit; integer scaling; coordinate replacement; representative; evaluation; pullback; scalar/flat cohomology models and contravariant maps |
 | RelativeSimplicialCochainAlgebra / RelativeCochain | same-pair add/subtract; cup on union pairs; equality/cohomologous -> Boolean; cup-class -> AbelianGroupElement | negate; pair/degree/coordinates; coboundary; cocycle/coboundary tests; cohomology model/class; primitives; flat cocycle generators; absolute extension | zero/basis construction; absolute conversion; scaling/coordinates/representative/evaluation; pair-map pullback; connecting cocycle; scalar/flat relative cohomology and natural exact-sequence maps |
@@ -1476,6 +1477,56 @@ List<String> boundary = math.flow(math.simplicialMaps,
     .collect(); // ["[-3, 3]"]
 ```
 
-The executable example builds all inputs. Each required quotient basis is filtered before the 256-simplex bound; each boundary complex has at most 4096 nonempty simplices. Matrix construction, each typed action and each entire flat list share a 5,000,000-unit computation budget. Resource exhaustion raises IMPLEMENTATION_FAILURE; integer coefficient bit lengths remain unbounded. These witnesses cover a single contiguous pair. They do not search for or concatenate homotopies, represent arbitrary chain homotopies, perform subdivision, or certify continuous homotopy equivalence. Cup/cap homotopies and other coefficients remain outside scope.
+The executable example builds all inputs. Each required quotient basis is filtered before the 256-simplex bound; each boundary complex has at most 4096 nonempty simplices. Matrix construction, each typed action and each entire flat list share a 5,000,000-unit computation budget. Resource exhaustion raises IMPLEMENTATION_FAILURE; integer coefficient bit lengths remain unbounded. These witnesses cover a single contiguous pair; HomotopyPath concatenates supplied witnesses. They do not search for homotopies, represent arbitrary chain homotopies, perform subdivision, or certify continuous homotopy equivalence. Cup/cap homotopies and other coefficients remain outside scope.
 
 NativeSimplicialHomotopyTest checks 729 triangle-map pairs against independent vertex-incidence determinants, 324 relative triangle-map pairs against quotient projection, both homotopy identities, typed cycle/cocycle fillings on distinct pairs, noncycles and adjoint pairings, simplex contractions through dimension six, projective-plane cycles in a cone, circle maps, noncontiguity, non-negating endpoint reversal, extreme labels, negative/huge degrees, filtered basis limits, actual wrappers, flat flows and serialized repeated execution. All 16 registrations have explicit expected results in ConcreteAlgebrasTest.
+
+## Finite contiguity paths
+
+`math.homotopyPaths` adds 23 operations on `HomotopyPath`. A path retains stages `f_0,...,f_m: (X,A)->(Y,B)`, with each consecutive pair contiguous in both Y and B. The endpoints need not be directly contiguous. Summing the existing step prisms gives an explicit witness:
+
+```text
+D_n = P(f_0,f_1)_n + ... + P(f_(m-1),f_m)_n
+boundary D + D boundary = (f_m)# - (f_0)#
+Q^p = transpose(D_(p-1))
+coboundary Q + Q coboundary = (f_m)* - (f_0)*
+```
+
+The identities telescope by summing the [prism identities](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf). Consequently the first and last maps induce equal integral homology and cohomology maps. Supplied cycles and positive-degree cocycles produce explicit fillings and primitives of their image differences.
+
+| Operations | Contract |
+| --- | --- |
+| `HomotopyPath.from-homotopy` | SimplicialHomotopy -> one-step path retaining its two endpoints |
+| `HomotopyPath.stationary-on` | RelativeMap -> zero-step path retaining one stage |
+| `append` | Append a RelativeMap after the final stage; check full pairs and contiguity |
+| `then` | Chronological concatenation: this path followed by the second path; full joining maps must agree, including vertex assignments |
+| `reverse`, `equal` | Reverse every stage, or compare complete ordered stage lists, retaining repetitions |
+| `from`, `to`, `source`, `target`, `step-count` | Inspect endpoint maps, common pairs or the number of steps |
+| flat `stages`, `steps` | Emit all stage RelativeMaps or all consecutive SimplicialHomotopy witnesses in order |
+| `chain-matrix`, `cochain-matrix` | Accumulated D_n or its transpose Q^p, in nonnegative degree |
+| flat `chain-matrices`, `cochain-matrices` | Ascending degrees 0 through d for D, 0 through d+1 for Q, where d is the maximum quotient dimension |
+| `on-chain`, `on-cochain` | Typed RelativeChain/RelativeCochain actions, with full input pair checks and changed output pair/degree |
+| `on-absolute-chain`, `on-absolute-cochain` | Corresponding absolute actions when both endpoint subcomplexes are empty |
+| `precompose`, `postcompose` | Compose every stage with a supplied RelativeMap on the appropriate side; check the full middle pair and recompute each resulting prism |
+
+`then` is associative where defined, with stationary paths as units. It includes the joining stage once. This is a carrier of supplied paths: equal endpoint maps do not identify two paths. For example, a point walking around a three-edge circle gives a nonzero integral cycle even though the initial and final maps agree. Reversal recomputes the step prisms and need not negate the accumulated matrix. Precomposition also recomputes the sorted prism, which can differ from multiplying the old matrix by the source chain map; postcomposition agrees with the target chain map action.
+
+For the two-edge interval `0--1--2`, let `pathStart`, `pathMiddle`, and `pathEnd` send a point to its three vertices. The endpoint maps are not directly contiguous:
+
+```java
+List<String> boundary = math.flow(math.relativeMaps,
+    Collections.singletonList(pathStart))
+    .<SimplicialHomotopyPath>performAlgebraTransfer("HomotopyPath.stationary-on")
+    .performCustomMemberOperation("append", pathMiddle)
+    .performCustomMemberOperation("append", pathEnd)
+    .performLeftProjectionOperation("on-absolute-chain", weightedPoint)
+    .performOneOperandOperation("boundary")
+    .<IntegerVector>performAlgebraTransfer("coordinates")
+    .collect(); // ["[-3, 0, 3]"]
+```
+
+The executable example constructs the inputs. Appending and composing use ICustomMemberOperation; typed actions return the actual second carrier wrapper through ILeftProjectionOperation. Path construction and inspection use existing unary transfers, and stage/step/matrix lists use unary flat transfers. Negative-degree zero chains are valid. Typed cochain actions require positive degree; degree-zero cochain matrices retain their zero-row shapes. Stationary paths return zero matrices with the correct source and target dimensions.
+
+There must be 1 through 256 stages, giving at most 255 steps. Each boundary complex has at most 4096 nonempty simplices; every required quotient basis is filtered before its 256-simplex bound. One 5,000,000-unit budget covers all stage validation in a constructor, all compositions and revalidation in pre/postcomposition, each complete matrix sum or typed action, and every degree and step in an entire flat matrix list. Resource exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer bit lengths remain unbounded. Stages must be supplied. Homotopy search, subdivision, arbitrary chain-homotopy carriers, other coefficients and general continuous homotopy-equivalence decisions remain outside scope.
+
+NativeSimplicialHomotopyPathTest checks all 178 five-stage walks on a four-vertex interval against signed edge counts and potential differences, 729 triangle paths, 324 relative triangle paths, both telescoping identities, noncontiguous endpoints, nonzero circle loops, concatenation laws, immutable repeated stages, precomposition distinctions and postcomposition compatibility, relative fillings, exact zero shapes, basis and stage bounds, shared validation/composition/matrix-list budgets, actual wrappers and serialized repeated flows. All 23 registrations have independent expected results in ConcreteAlgebrasTest.

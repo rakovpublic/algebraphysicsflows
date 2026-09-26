@@ -14,8 +14,11 @@ public final class SimplicialHomotopy implements Serializable {
     private final RelativeSimplicialMap from,to;
 
     public SimplicialHomotopy(RelativeSimplicialMap from,RelativeSimplicialMap to) {
+        this(from,to,new Computation());
+    }
+    SimplicialHomotopy(RelativeSimplicialMap from,RelativeSimplicialMap to,Computation work) {
         this.from=Objects.requireNonNull(from); this.to=Objects.requireNonNull(to);
-        if(!from.contiguous(to)) throw MathFailure.undefined("A prism homotopy requires contiguity in both the ambient and subcomplex targets");
+        if(!from.contiguous(to,work)) throw MathFailure.undefined("A prism homotopy requires contiguity in both the ambient and subcomplex targets");
     }
     public static SimplicialHomotopy absolute(FiniteSimplicialMap from,FiniteSimplicialMap to) {
         return new SimplicialHomotopy(RelativeSimplicialMap.absolute(from),RelativeSimplicialMap.absolute(to));
@@ -30,7 +33,7 @@ public final class SimplicialHomotopy implements Serializable {
         if(degree.signum()<0) throw MathFailure.undefined("Prism matrix degree must be nonnegative");
     }
     /** P_n[v0,...,vn] = sum_i (-1)^i [f(v0),...,f(vi),g(vi),...,g(vn)]. */
-    private IntegerMatrix prism(BigInteger degree,Computation work) {
+    IntegerMatrix prism(BigInteger degree,Computation work) {
         List<FiniteSet<Integer>> rows=target().basis(degree.add(BigInteger.ONE)),columns=source().basis(degree);
         work.use((long)rows.size()*columns.size());
         BigInteger[][] entries=new BigInteger[rows.size()][columns.size()];
