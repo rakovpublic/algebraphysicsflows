@@ -4,6 +4,7 @@ import algebra.imp.Algebra;
 import mathematics.foundations.Pair;
 import mathematics.topology.RelativeSimplicialComplex;
 import mathematics.topology.RelativeSimplicialMap;
+import mathematics.topology.SimplicialIsomorphismSearch;
 
 /** Native maps of pairs, relative homology functoriality and natural long exact sequences. */
 public final class RelativeSimplicialMapAlgebra extends ConcreteAlgebra<RelativeSimplicialMap> {
@@ -39,10 +40,14 @@ public final class RelativeSimplicialMapAlgebra extends ConcreteAlgebra<Relative
         unary("image",algebra(),pairs.algebra(),false,RelativeSimplicialMap::image);
         unary("corestrict-image",algebra(),algebra(),false,RelativeSimplicialMap::corestrictImage);
         binary("restrict",algebra(),pairs.algebra(),algebra(),true,RelativeSimplicialMap::restrict);
+        binary("is-isomorphic-to",pairs.algebra(),pairs.algebra(),truth.algebra(),false,SimplicialIsomorphismSearch::isIsomorphicTo);
+        binary("isomorphism-to",pairs.algebra(),pairs.algebra(),algebra(),true,SimplicialIsomorphismSearch::isomorphismTo);
+        flat("isomorphisms-to",pairs.algebra(),pairs.algebra(),algebra(),false,SimplicialIsomorphismSearch::isomorphismsTo);
         law("A pair map preserves both full ambient complexes and the subcomplexes. Composition requires equality of the whole middle pair.");
         law("Relative chain matrices discard collapsed simplices and images in the target subcomplex; they preserve boundaries, identity and composition.");
         law("Relative homology maps commute with inclusion, quotient and connecting homomorphisms in the long exact sequence of a pair.");
         law("Pair contiguity requires simplex unions inside both the target ambient complex and its subcomplex, and implies equal relative homology maps.");
+        law("Isomorphism search exhausts vertex bijections preserving both full pair components, in lexicographic image order; resource exhaustion is never a false decision or partial enumeration.");
     }
     @SuppressWarnings("unchecked")
     private static Algebra<Pair<RelativeSimplicialComplex,RelativeSimplicialComplex>> boundaryCarrier(Algebra<RelativeSimplicialComplex> pairs) {

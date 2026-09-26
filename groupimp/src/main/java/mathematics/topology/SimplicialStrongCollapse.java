@@ -99,7 +99,10 @@ public final class SimplicialStrongCollapse {
     }
     /** Repeatedly remove the least compatible dominated vertex using its least dominator. */
     public static SimplicialHomotopyEquivalence strongCore(RelativeSimplicialComplex pair) {
-        Computation work=new Computation(); RelativeSimplicialMap forward=RelativeSimplicialMap.identity(pair,work);
+        return strongCore(pair,new Computation());
+    }
+    static SimplicialHomotopyEquivalence strongCore(RelativeSimplicialComplex pair,Computation work) {
+        RelativeSimplicialMap forward=RelativeSimplicialMap.identity(pair,work);
         List<RelativeSimplicialMap> stages=new ArrayList<>(); stages.add(forward);
         while(true) {
             Pair<Integer,Integer> move=new Index(forward.target(),work).first(work);
@@ -110,4 +113,20 @@ public final class SimplicialStrongCollapse {
         }
     }
     public static SimplicialHomotopyEquivalence strongCoreAbsolute(FiniteSimplicialComplex complex) { return strongCore(RelativeSimplicialComplex.absolute(complex)); }
+    private static SimplicialHomotopyEquivalence strongEquivalence(FiniteSimplicialComplex source,FiniteSimplicialComplex target,Computation work) {
+        SimplicialHomotopyEquivalence left=strongCore(RelativeSimplicialComplex.absolute(source),work),right=strongCore(RelativeSimplicialComplex.absolute(target),work);
+        RelativeSimplicialMap middle=SimplicialIsomorphismSearch.first(left.target(),right.target(),work);
+        if(middle==null) return null;
+        RelativeSimplicialMap forward=right.backward().compose(middle.compose(left.forward(),work),work);
+        RelativeSimplicialMap backward=left.backward().compose(middle.inverse(work).compose(right.forward(),work),work);
+        // Core retractions split their inclusions strictly, so the original source witnesses have exactly these composite endpoints.
+        return new SimplicialHomotopyEquivalence(forward,backward,left.sourceHomotopy(),right.sourceHomotopy(),work);
+    }
+    public static boolean stronglyEquivalent(FiniteSimplicialComplex source,FiniteSimplicialComplex target) {
+        return strongEquivalence(source,target,new Computation())!=null;
+    }
+    public static SimplicialHomotopyEquivalence strongEquivalenceTo(FiniteSimplicialComplex source,FiniteSimplicialComplex target) {
+        SimplicialHomotopyEquivalence result=strongEquivalence(source,target,new Computation());
+        if(result==null) throw MathFailure.undefined("The absolute complexes have nonisomorphic strong cores"); return result;
+    }
 }

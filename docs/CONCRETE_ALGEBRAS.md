@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1279 native operations from 59 algebra builders.
+The default initializer currently installs 1284 native operations from 59 algebra builders.
 
 ## Existing API usage
 
@@ -53,7 +53,7 @@ List<String> values = math.flow(math.naturals,
 | IntegralHomologyAlgebra / IntegralHomology | retained-boundary equality -> Boolean | boundary/cycle matrices; presented group/type; ranks; flat cycle/boundary bases and class representatives; cycle-to-homology projection | consecutive-boundary and simplicial-degree construction; cycle/boundary tests; class-of and representative; bounding chains; maps induced by degree matrices |
 | FiniteSimplicialMapAlgebra / SimplicialMap | compose; equality/contiguity -> Boolean | inverse; source/target/image; vertex function; injectivity and simplex/vertex surjectivity; flat vertex images, chain matrices and homology maps | construction from finite functions and complex pairs; inclusions; restrictions; simplex images/fibers; degreewise chain/homology maps; ordered simplex bases |
 | RelativeSimplicialAlgebra / RelativeComplex | labelled-pair equality -> Boolean | ambient/subcomplex; dimension and Euler characteristic; flat boundaries and constructive homology by degree; inclusion simplicial map | pair construction; quotient chains and bases; homology and torsion types; inclusion, quotient, lift and connecting matrices; scalar/flat long exact sequence maps |
-| RelativeSimplicialMapAlgebra / RelativeMap | compose; equality/pair contiguity -> Boolean | inverse; source/target pairs; ambient/subcomplex maps; image/corestriction; flat relative chain and homology maps | construction from an ambient map and pair boundaries; identities/inclusions; absolute/diagonal extensions; restriction; degreewise relative maps and four-map naturality lists |
+| RelativeSimplicialMapAlgebra / RelativeMap | compose; equality/pair contiguity -> Boolean | inverse; source/target pairs; ambient/subcomplex maps; image/corestriction; flat relative chain and homology maps | construction from an ambient map and pair boundaries; bounded pair-isomorphism decisions, witnesses and enumeration; identities/inclusions; extensions/restriction; integral maps and naturality lists |
 | SimplicialCoverAlgebra / SimplicialCover | ordered-cover equality -> Boolean | left/right/union/intersection; swap; Euler characteristic; flat sum boundaries/coboundaries and homology/cohomology; excision RelativeMap | cover construction; direct-sum homology/cohomology and component maps; signed intersection/addition/splitting and restriction/difference matrices; scalar/flat homological and cohomological Mayer-Vietoris maps |
 | SimplicialCoverMapAlgebra / CoverMap | compose; equality/piecewise contiguity -> Boolean | inverse; source/target covers; union/left/right/intersection maps; swap both covers; image/corestriction; flat sum matrices/maps; two excision RelativeMaps | construction from a union map and paired covers; identity/inclusion; restriction; degreewise sum/component homology and contravariant cohomology maps; four-map Mayer-Vietoris naturality lists for each theory |
 | RelativeSimplicialChainAlgebra / RelativeChain | pair/degree-checked add/subtract; equality/homology comparison -> Boolean | boundary; negate; pair/degree/coordinates; cycle/boundary predicates; fillings; homology/class; flat cycle generators; absolute lift and connecting cycle | projection from absolute chains; integer scale; pair-map pushforward; relative pairing; both standard relative cap products and their matrices/induced maps; zero and flat basis constructors |
@@ -62,7 +62,7 @@ List<String> values = math.flow(math.naturals,
 | RelativeSimplicialTripleMapAlgebra / TripleMap | compose; equality/contiguity -> Boolean | inverse; source/target triples; ambient and three pair maps; isomorphism; image/corestriction | construct from a vertex map and ordered triples; inclusion/restriction; six induced integral maps; flat four-map naturality lists |
 | SimplicialHomotopyAlgebra / SimplicialHomotopy | ordered endpoint equality -> Boolean | endpoint maps; source/target pairs; reverse; flat chain/cochain matrices | construct between contiguous absolute or relative maps; degreewise prism matrices; typed chain/cochain actions through second operand wrappers |
 | SimplicialHomotopyPathAlgebra / HomotopyPath | chronological concatenation; full stage equality -> Boolean | endpoints/pairs; reverse; step count; flat stages, steps and chain/cochain matrices | stationary and one-step constructors; append a map; precompose/postcompose all stages; accumulated prism matrices and typed actions |
-| SimplicialHomotopyEquivalenceAlgebra / HomotopyEquivalence | composition; full map/witness equality -> Boolean | inverse; maps, pairs and homotopy witnesses | supplied inverse witnesses; automatic compatible vertex collapses and strong-core reduction; scalar and flat inverse integral homology/cohomology maps |
+| SimplicialHomotopyEquivalenceAlgebra / HomotopyEquivalence | composition; full map/witness equality -> Boolean | inverse; maps, pairs and homotopy witnesses | supplied inverse witnesses; compatible vertex collapses and strong-core reduction; absolute strong-type decisions and constructed equivalences; inverse integral maps |
 | SimplicialChainAlgebra / SimplicialChain | context-checked add/subtract; equality/homology comparison -> Boolean | boundary; negate; complex/degree/coordinates; cycle/boundary predicates; fillings; homology/class; flat cycle generators; augmentation | integer scale; coordinates; pushforward; pairing; cap and cap-class; fixed-chain/cochain cap matrices and induced maps; zero and flat basis constructors |
 | SimplicialCochainAlgebra / SimplicialCochain | same-context add/subtract; cup; equality/cohomologous -> Boolean; cup-class -> AbelianGroupElement | negate; complex/degree/coordinates; coboundary; zero/cocycle/coboundary tests; cohomology model/class; cobounding coordinates; flat cocycle generators | degreewise zero/basis construction and unit; integer scaling; coordinate replacement; representative; evaluation; pullback; scalar/flat cohomology models and contravariant maps |
 | RelativeSimplicialCochainAlgebra / RelativeCochain | same-pair add/subtract; cup on union pairs; equality/cohomologous -> Boolean; cup-class -> AbelianGroupElement | negate; pair/degree/coordinates; coboundary; cocycle/coboundary tests; cohomology model/class; primitives; flat cocycle generators; absolute extension | zero/basis construction; absolute conversion; scaling/coordinates/representative/evaluation; pair-map pullback; connecting cocycle; scalar/flat relative cohomology and natural exact-sequence maps |
@@ -1534,7 +1534,7 @@ NativeSimplicialHomotopyPathTest checks all 178 five-stage walks on a four-verte
 
 ## Supplied simplicial homotopy equivalences
 
-`math.homotopyEquivalences` adds 25 operations, including six constructive collapse operations described below. The first 19 operations retain opposite maps of full labelled pairs, `f: (X,A)->(Y,B)` and `g: (Y,B)->(X,A)`, together with two supplied contiguity paths:
+`math.homotopyEquivalences` adds 27 operations, including six constructive collapse operations and two absolute strong-type operations described below. The first 19 operations retain opposite maps of full labelled pairs, `f: (X,A)->(Y,B)` and `g: (Y,B)->(X,A)`, together with two supplied contiguity paths:
 
 ```text
 H_X: Id_(X,A) -> g compose f
@@ -1618,3 +1618,45 @@ One 5,000,000-unit budget covers the entire search or reduction, including all c
 These operations search only for compatible dominated vertices. They do not decide general contractibility or homotopy equivalence, search for general elementary free-face collapses, perform subdivision, or classify the output up to relabelling. Label choices are deterministic; no uniqueness assertion is made for terminal relative pairs.
 
 NativeSimplicialStrongCollapseTest compares all 167 complexes on four labels with an independent maximal-face bitmask oracle, and all 1,024 graph/vertex-subcomplex pairs with a leaf-deletion oracle. It checks integral homology and cohomology inverse identities, fixed-target witnesses, based intervals, relative edge and disk-boundary restrictions, projective-plane torsion, empty/disconnected complexes, extreme labels, insertion-order independence, typed fillings, immutable lists, shared reduction budgets, the stage bound, larger geometric bases, actual second-result wrappers and serialized repeated flows. All six new registrations have explicit expected results in ConcreteAlgebrasTest.
+
+## Isomorphism search and absolute strong homotopy type
+
+Three further operations on `math.relativeMaps` search for simplicial isomorphisms of full labelled pairs. Two operations on `math.homotopyEquivalences` use this search to compare absolute strong cores and construct complete equivalence witnesses.
+
+| Operation alias | Inputs and result |
+| --- | --- |
+| `RelativeMap.is-isomorphic-to` | Two RelativeComplex values -> whether a simplicial isomorphism preserves both components |
+| `RelativeMap.isomorphism-to` | Two RelativeComplex values -> first isomorphism in lexicographic image order; undefined if none exists |
+| flat `RelativeMap.isomorphisms-to` | Two RelativeComplex values -> immutable list of all isomorphisms in that order; empty when none exists |
+| `HomotopyEquivalence.strongly-equivalent` | Two FiniteComplex values -> whether their absolute strong cores are simplicially isomorphic |
+| `HomotopyEquivalence.strong-equivalence-to` | Two FiniteComplex values -> constructed HomotopyEquivalence; undefined for nonisomorphic cores |
+
+The isomorphism search enumerates vertex bijections with source labels in increasing order and candidate target labels in increasing order. It prunes candidates using incident simplex counts by dimension in each component, and by checking the partially assigned image of every affected simplex. Every completed assignment preserves all simplices. Matching face counts in each dimension, together with bijectivity, ensures preservation by the inverse as well. Subcomplexes must map onto the entire target subcomplex. Matching skeletons, face counts or homology alone is insufficient. Empty pairs have one empty isomorphism. Output wrappers are the registered RelativeMap algebra; enumeration uses ICustomResultFlatOperation and scalar results use the existing custom-result interface.
+
+Finite absolute complexes have the same strong homotopy type exactly when their strong cores are isomorphic ([Barmak and Minian, theorem 2.11 and corollary 2.12](https://arxiv.org/abs/0907.2954)). Write the two computed retractions as `r_X: X->X0`, `r_Y: Y->Y0`, their inclusions as `i_X,i_Y`, and the selected core isomorphism as `p: X0->Y0`. The constructed maps are:
+
+```text
+forward  = i_Y compose p compose r_X
+backward = i_X compose inverse(p) compose r_Y
+```
+
+The original source paths for the two reductions are already witnesses from the respective identities to these inverse composites: each core retraction composed with its inclusion is strictly the core identity. The constructor checks these endpoint equations again. Both maps expose the existing integral homology/cohomology operations and typed chain/cochain fillings, retaining torsion and full geometric boundaries.
+
+The executable example compares a two-edge interval with a one-edge interval without supplied maps or paths:
+
+```java
+List<String> isomorphisms = math.flow(math.complexes,
+    Collections.singletonList(twoEdgeInterval))
+    .<SimplicialHomotopyEquivalence>performCustomResultOperation(
+        "HomotopyEquivalence.strong-equivalence-to", intervalCapPair.ambient())
+    .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe(
+        "homology-maps", BigInteger.ZERO)
+    .<Boolean>performAlgebraTransfer("is-isomorphism")
+    .collect(); // ["true", "true"]
+```
+
+The decision concerns **strong simplicial homotopy type**. A three-edge circle and a four-edge circle return false despite having the same ordinary homotopy type and integral homology. This does not decide ordinary homotopy equivalence or general contractibility. The comparison accepts absolute complexes only; no classification theorem for the terminal relative pairs is assumed. The chosen witnesses depend deterministically on labels and are not canonical up to relabelling.
+
+Isomorphism search accepts at most 64 vertices in each ambient complex. Enumeration permits at most 1024 maps; exceeding that bound fails without returning a prefix. First-witness and predicate searches stop at the first match and do not enumerate the remaining automorphisms. One 5,000,000-unit budget covers the entire search and all output map validation. Absolute strong-type comparison shares one such budget across both reductions, core search, map composition and final endpoint validation. The original complexes may exceed 64 vertices if their computed cores satisfy the search limit; the existing 4096-simplex and 256-stage reduction bounds still apply. Limits raise IMPLEMENTATION_FAILURE, never false or an empty list standing for an incomplete search. Search can require factorial work.
+
+NativeSimplicialIsomorphismSearchTest compares all 27,889 pairs of four-label complexes and all 21,904 comparisons among the 148 three-label pairs with independent unpruned permutation/face-bitset oracles. It checks all 4,096 four-vertex graph pairs against leaf-core/permutation decisions, integer inverse maps, relative restrictions, higher-dimensional faces, lexicographic order, empty and extreme labels, 720 automorphisms, enumeration/vertex/work limits, circle subdivision distinctions, unequal-size trees, projective-plane torsion, typed fillings, shared two-reduction budgets, actual wrappers and serialized scalar/flat flows. All five new registrations have independent expected results in ConcreteAlgebrasTest.

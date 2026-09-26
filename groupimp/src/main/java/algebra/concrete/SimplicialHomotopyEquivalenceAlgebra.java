@@ -54,7 +54,10 @@ public final class SimplicialHomotopyEquivalenceAlgebra extends ConcreteAlgebra<
         binary("collapse-vertex",pairs.algebra(),vertices,algebra(),true,SimplicialStrongCollapse::collapseVertex);
         unary("strong-core",pairs.algebra(),algebra(),false,SimplicialStrongCollapse::strongCore);
         unary("strong-core-absolute",complexes.algebra(),algebra(),false,SimplicialStrongCollapse::strongCoreAbsolute);
+        binary("strongly-equivalent",complexes.algebra(),complexes.algebra(),truth.algebra(),false,SimplicialStrongCollapse::stronglyEquivalent);
+        binary("strong-equivalence-to",complexes.algebra(),complexes.algebra(),algebra(),true,SimplicialStrongCollapse::strongEquivalenceTo);
         law("A compatible strong collapse deletes v only when every incident simplex extends by its distinct dominator w in each pair component containing v.");
         law("Strong-core reduction chooses the least removable label and least compatible dominator, retains a stationary target witness, and fixes every final target vertex at every source stage.");
+        law("Two absolute complexes have the same strong homotopy type exactly when their cores are isomorphic. Core reductions, isomorphism search and the constructed inverse witnesses share one work budget.");
     }
 }

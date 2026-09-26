@@ -54,7 +54,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all1279RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all1284RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String discrete="Complex[[0], [1]]",emptyComplex="Complex[]";
@@ -106,7 +106,7 @@ public class ConcreteAlgebrasTest {
         expected.put("SimplicialHomotopyEquivalenceAlgebra",String.join("|","("+absolutePointMap+","+absolutePointMap+")",pointEquivalence,pointEquivalence,pointEquivalence,
                 pointEquivalence,pointEquivalence,absolutePointMap,absolutePointMap,absolutePoint,absolutePoint,stationaryPoint,stationaryPoint,"true",
                 identityOneMap,identityOneMap,"["+identityOneMap+", "+identityOneMap+"]",identityOneMap,identityOneMap,"["+identityOneMap+", "+identityOneMap+"]",
-                "[]","[]","true",edgeCollapse,pointEquivalence,pointEquivalence));
+                "[]","[]","true",edgeCollapse,pointEquivalence,pointEquivalence,"true",pointEquivalence));
         expected.put("SimplicialHomotopyPathAlgebra",String.join("|",pointStep,stationaryPoint,pointStep,stationaryPoint,stationaryPoint,absolutePointMap,absolutePointMap,
                 absolutePoint,absolutePoint,"0","["+absolutePointMap+"]","[]","true","ZMatrix(0x1)[]","ZMatrix(0x1)[]",
                 "[ZMatrix(0x1)[]]","[ZMatrix(0x1)[], ZMatrix(1x0)[[]]]","RelativeChain(pair="+absolutePoint+", degree=1, coordinates=[])",relativeZeroCochain,
@@ -164,7 +164,7 @@ public class ConcreteAlgebrasTest {
                 relativeMapString(absolutePair,absolutePair,"{0=1, 1=0}"),relativeMapString(diagonalPair,diagonalPair,"{0=1, 1=0}"),
                 "ZMatrix(1x1)[[-1]]","[ZMatrix(0x0)[], ZMatrix(1x1)[[-1]]]",reflectedH1,"["+homString(relativeZero,relativeZero,emptyMatrix)+", "+reflectedH1+"]",
                 relativeH1,relativeH1,inclusionH1,inclusionH1,"["+inclusionH1+", "+inclusionH1+", "+reflectedH1+", "+homString(freeTwo,freeTwo,swapMatrix)+"]",
-                "false",intervalPair,relativeReflection,relativeReflection));
+                "false",intervalPair,relativeReflection,relativeReflection,"true",relativeIdentity,"["+relativeIdentity+", "+relativeReflection+"]"));
         expected.put("RelativeSimplicialAlgebra",String.join("|",intervalPair,edge,discrete,"false","1","-1","1","[[0, 1]]","ZMatrix(0x1)[]",
                 "[ZMatrix(0x0)[], ZMatrix(0x1)[]]",relativeH1,"["+relativeH0+", "+relativeH1+"]","AbelianGroup(rank=1, torsion=[])",
                 "[AbelianGroup(rank=0, torsion=[]), AbelianGroup(rank=1, torsion=[])]","1","false","ZMatrix(1x1)[[1]]","ZMatrix(1x1)[[1]]","ZMatrix(1x0)[[]]",
@@ -341,7 +341,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(1279,count);
+        assertEquals(1284,count);
     }
     private static String homString(String source,String target,String matrix) { return "AbelianHom(source="+source+", target="+target+", smith="+matrix+")"; }
     private static String simplicialString(String source,String target,String vertices) { return "SimplicialMap(source="+source+", target="+target+", vertices="+vertices+")"; }
@@ -454,6 +454,7 @@ public class ConcreteAlgebrasTest {
         if(operation instanceof ITransferOperation) return item.performAlgebraTransfer(alias).perform().getResult().toString();
         Object second=entry.second==null?null:sample(math,entry.second.getAlgebraName(),1);
         if(entry.id.equals("HomotopyEquivalence.dominators")) second=BigInteger.ZERO;
+        if(owner instanceof SimplicialHomotopyEquivalenceAlgebra && entry.second==math.complexes.algebra()) second=coverTestPoint();
         if(owner instanceof SimplicialHomotopyAlgebra || owner instanceof SimplicialHomotopyPathAlgebra || owner instanceof SimplicialHomotopyEquivalenceAlgebra) {
             if(entry.second==math.naturals.algebra()) second=BigInteger.ZERO;
             if(entry.second==math.simplicialMaps.algebra()) second=FiniteSimplicialMap.identity(coverTestPoint());
