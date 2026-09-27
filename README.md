@@ -7,3 +7,5 @@ See [concrete algebras and usage](docs/CONCRETE_ALGEBRAS.md). Same-algebra unary
 Run the tests with `mvn -f groupimp/pom.xml test`.
 
 See [implementation status](docs/IMPLEMENTATION_STATUS.md), [the operation model](docs/MATHEMATICAL_OPERATION_MODEL.md), [coverage](docs/MATHEMATICS_COVERAGE.md), and [maintenance instructions](docs/ADDING_MATHEMATICS.md).
+
+Signed subdivision now acts on integral chains and cochains, with explicit chain/cochain homotopies witnessing the inverse comparison with the last-vertex map. Typed actions retain full absolute or relative contexts and use the existing second-operand wrappers.

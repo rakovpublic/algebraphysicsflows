@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1302 native operations from 60 algebra builders.
+The default initializer currently installs 1318 native operations from 60 algebra builders.
 
 ## Existing API usage
 
@@ -62,7 +62,7 @@ List<String> values = math.flow(math.naturals,
 | RelativeSimplicialTripleMapAlgebra / TripleMap | compose; equality/contiguity -> Boolean | inverse; source/target triples; ambient and three pair maps; isomorphism; image/corestriction | construct from a vertex map and ordered triples; inclusion/restriction; six induced integral maps; flat four-map naturality lists |
 | SimplicialHomotopyAlgebra / SimplicialHomotopy | ordered endpoint equality -> Boolean | endpoint maps; source/target pairs; reverse; flat chain/cochain matrices | construct between contiguous absolute or relative maps; degreewise prism matrices; typed chain/cochain actions through second operand wrappers |
 | SimplicialHomotopyPathAlgebra / HomotopyPath | chronological concatenation; full stage equality -> Boolean | endpoints/pairs; reverse; step count; flat stages, steps and chain/cochain matrices | stationary and one-step constructors; append a map; precompose/postcompose all stages; accumulated prism matrices and typed actions |
-| SimplicialSubdivisionAlgebra / SimplicialSubdivision | equality of full original pairs -> Boolean | original/subdivided pairs; vertex count; flat face dictionary; last-vertex map | pair/complex constructors; dictionary lookups; induced subdivision maps; naturality witnesses; scalar/flat inverse integral homology/cohomology maps |
+| SimplicialSubdivisionAlgebra / SimplicialSubdivision | equality of full original pairs -> Boolean | original/subdivided pairs; vertex count; flat face dictionary; last-vertex map | pair/complex constructors; dictionary lookups; induced subdivision maps; naturality witnesses; scalar/flat inverse integral maps; signed subdivision chain/cochain actions and explicit inverse homotopies |
 | SimplicialHomotopyEquivalenceAlgebra / HomotopyEquivalence | composition; full map/witness equality -> Boolean | inverse; maps, pairs and homotopy witnesses | supplied inverse witnesses; compatible vertex collapses and strong-core reduction; absolute strong-type decisions and constructed equivalences; inverse integral maps |
 | SimplicialChainAlgebra / SimplicialChain | context-checked add/subtract; equality/homology comparison -> Boolean | boundary; negate; complex/degree/coordinates; cycle/boundary predicates; fillings; homology/class; flat cycle generators; augmentation | integer scale; coordinates; pushforward; pairing; cap and cap-class; fixed-chain/cochain cap matrices and induced maps; zero and flat basis constructors |
 | SimplicialCochainAlgebra / SimplicialCochain | same-context add/subtract; cup; equality/cohomologous -> Boolean; cup-class -> AbelianGroupElement | negate; complex/degree/coordinates; coboundary; zero/cocycle/coboundary tests; cohomology model/class; cobounding coordinates; flat cocycle generators | degreewise zero/basis construction and unit; integer scaling; coordinate replacement; representative; evaluation; pullback; scalar/flat cohomology models and contravariant maps |
@@ -1664,7 +1664,7 @@ NativeSimplicialIsomorphismSearchTest compares all 27,889 pairs of four-label co
 
 ## Barycentric subdivision and integral comparison maps
 
-`math.subdivisions` supplies 18 native operations on `SimplicialSubdivision`. A context retains its original pair `(X,A)`, the subdivided pair `(sd X,sd A)`, and a shared face-to-vertex dictionary. This makes subdivision executable through the existing `MathTool`, `IAlgebraItem` and `AlgebraFlow` interfaces.
+`math.subdivisions` supplies 34 native operations on `SimplicialSubdivision`. A context retains its original pair `(X,A)`, the subdivided pair `(sd X,sd A)`, and a shared face-to-vertex dictionary. This makes subdivision executable through the existing `MathTool`, `IAlgebraItem` and `AlgebraFlow` interfaces.
 
 A subdivision vertex represents one nonempty face of X. Faces are ordered by cardinality, then lexicographically by their sorted original integer labels, and receive indices starting at zero. A simplex in sd X is a strict inclusion chain of those faces. The subcomplex sd A uses the same ambient indices. For example, the edge `{1,2}` inside the triangle `{0,1,2}` uses subdivision vertices `{1,2,5}`; subdividing that edge alone would instead use `{0,1,2}`. Dictionary access preserves this distinction.
 
@@ -1712,6 +1712,65 @@ Empty complexes, empty subcomplexes and repeated subdivisions are supported. Inv
 
 Each input and output complex has at most 4096 nonempty simplices. Construction fails before emitting a simplex beyond this output bound. A 5-simplex exceeds it after subdivision, while 4096 isolated points remain constructible. Each constructor, induced map including target construction, naturality witness including map compositions, and integral map with its inverse shares one 5,000,000-unit budget. Flat map pairs also share one budget. Integral computations retain the existing 256-simplex bound on each required quotient basis, applied after removing subcomplex faces. Limits raise IMPLEMENTATION_FAILURE without partial results; integer coefficient sizes remain unbounded.
 
-This carrier represents abstract barycentric subdivision. It does not retain geometric barycenter coordinates, construct arbitrary subdivisions or simplicial approximations, or expose an explicit subdivision chain inverse. The returned inverse maps act on presented integral groups. Subdivision need not preserve strong simplicial homotopy type: the three-edge circle and its six-edge subdivision illustrate the distinction in [Barmak and Minian](https://arxiv.org/abs/0907.2954). No HomotopyEquivalence between those complexes is asserted.
+This carrier represents abstract barycentric subdivision. It does not retain geometric barycenter coordinates, construct arbitrary subdivisions or simplicial approximations, or construct general chain homotopies. Signed subdivision and its specific inverse chain-homotopy witnesses are described below; the integral inverse maps retain presented groups. Subdivision need not preserve strong simplicial homotopy type: the three-edge circle and its six-edge subdivision illustrate the distinction in [Barmak and Minian](https://arxiv.org/abs/0907.2954). No HomotopyEquivalence between those complexes is asserted.
 
 NativeSimplicialSubdivisionTest compares all 167 four-label complexes and all 148 three-label pairs with an independent comparable-subset oracle. It checks simplex face counts through dimension four, all 256 tetrahedron vertex maps, 729 circle map compositions, last-vertex naturality, relative disks, projective-plane torsion, repeated subdivision, dictionary ordering, invalid inputs, geometric versus filtered basis bounds, shared inverse budgets, actual wrappers and serialized flat flows. ConcreteAlgebrasTest checks all 18 registrations against independent expected values.
+
+## Signed subdivision chains and inverse homotopies
+
+Sixteen further operations on `math.subdivisions` expose a subdivision chain map `S: C_n(X,A) -> C_n(sd X,sd A)` and its transpose on cochains. An oriented simplex maps to the sum of its complete face flags, with the sign of each vertex permutation. In the implementation, `S([v])=[{v}]` and higher simplices are constructed by coning the subdivided boundary to the vertex encoding the entire simplex. Orientation signs are retained over Z. The recursive cone identity is the same chain-level tool used for subdivision in [Hatcher, chapter 2, pages 121-122](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf).
+
+Write `L` for the last-vertex chain map. The operators satisfy:
+
+```text
+boundary S = S boundary
+L S = identity on C_*(X,A)
+boundary P + P boundary = identity - S L on C_*(sd X,sd A)
+```
+
+For a subdivided simplex sigma, its vertices form a chain of original faces. Let b encode the largest original face. The implementation constructs
+`P(sigma) = cone_b(sigma - S L(sigma) - P(boundary sigma))`.
+The expression being coned is a cycle supported inside that face's subdivision. Recursion retains absolute sparse chains until the final quotient projection. Dropping subcomplex terms before coning can give an incorrect relative result, since the later cone vertex may lie outside the subcomplex. All input and output bases are filtered before their dimension limits are checked.
+
+The transpose `S*` preserves cochain degree and maps from the subdivision to the original pair. The homotopy transpose `Q^p = transpose(P_(p-1))` lowers degree and satisfies `coboundary Q + Q coboundary = identity - L* S*`. Thus S induces the existing inverse homology comparison, and S* induces the existing inverse cohomology comparison. The tests check these equalities on retained integral presentations, including projective-plane torsion.
+
+| Operation alias | Inputs and result |
+| --- | --- |
+| `chain-matrix` | Context and nonnegative n -> S_n, rows in the subdivision and columns in the original pair |
+| `cochain-matrix` | Context and nonnegative n -> transpose(S_n) |
+| flat `chain-matrices` | Context -> S_0 through S_d in ascending degree |
+| flat `cochain-matrices` | Context -> transpose(S_0) through transpose(S_d) |
+| `on-chain` | Context and RelativeChain on the original pair -> subdivided chain of the same degree |
+| `on-cochain` | Context and RelativeCochain on the subdivided pair -> original cochain of the same degree |
+| `on-absolute-chain` | Context with empty subcomplex and SimplicialChain on X -> chain on sd X |
+| `on-absolute-cochain` | Context with empty subcomplex and SimplicialCochain on sd X -> cochain on X |
+| `chain-homotopy-matrix` | Context and nonnegative n -> P_n on the subdivided pair, raising degree by one |
+| `cochain-homotopy-matrix` | Context and nonnegative p -> Q^p on the subdivided pair, lowering degree by one |
+| flat `chain-homotopy-matrices` | Context -> P_0 through P_d in ascending degree |
+| flat `cochain-homotopy-matrices` | Context -> Q^0 through Q^(d+1), including endpoint zero shapes |
+| `homotopy-on-chain` | Context and RelativeChain on the subdivided pair -> P applied to the chain |
+| `homotopy-on-cochain` | Context and positive-degree RelativeCochain on the subdivided pair -> Q applied to the cochain |
+| `homotopy-on-absolute-chain` | Context with empty subcomplex and SimplicialChain on sd X -> its P image |
+| `homotopy-on-absolute-cochain` | Context with empty subcomplex and positive-degree SimplicialCochain on sd X -> its Q image |
+
+All eight typed actions use `ILeftProjectionOperation` and return the actual second operand's `IAlgebraItem`. They check the full labelled pair or complex. For a subdivided cycle c, `homotopy-on-chain` gives a chain bounding `c - S(L(c))`. For a subdivided cocycle a, `homotopy-on-cochain` gives a cochain whose coboundary is `a - L*(S*(a))`. Actions also accept noncycles and noncocycles, where the full two-term homotopy identities apply.
+
+The executable example subdivides the oriented circle cycle:
+
+```java
+List<String> cycles = math.flow(math.complexes,
+    Collections.singletonList(circle))
+    .<SimplicialSubdivision>performAlgebraTransfer(
+        "SimplicialSubdivision.from-complex")
+    .performLeftProjectionOperation("on-absolute-chain", orientedCircle)
+    .<Boolean>performAlgebraTransfer("is-cycle")
+    .collect(); // ["true"]
+```
+
+Here d is the original ambient dimension. Empty complexes give empty lists except for `cochain-homotopy-matrices`, which emits its single degree-zero 0-by-0 matrix. Q^0 has zero rows and retains the subdivided degree-zero column count. Typed cochain homotopies require positive degree because the existing cochain carriers exclude negative degrees; typed chain actions allow negative zero groups. Degrees above dimension retain the appropriate zero shapes.
+
+Each matrix, typed action and entire flat matrix list shares one 5,000,000-unit work budget. Sparse caches are local to that computation. The existing 256-simplex limit applies to every required quotient basis, independently of the geometric subdivision limit. For example, a subdivided 4-simplex has 120 top-dimensional simplices, so its top S matrix is available, while intermediate bases can exceed 256. An operation requiring one of those larger bases fails with IMPLEMENTATION_FAILURE. No partial flat list is returned.
+
+S is natural under arbitrary simplicial pair maps, including collapsed faces. The chosen homotopy P depends on the original vertex order and need not be natural under relabelling. These are chain and cochain witnesses, with no claim of a simplicial vertex-map inverse, strong simplicial homotopy equivalence or multiplicativity of the raw cochain operator.
+
+NativeSimplicialSubdivisionChainsTest checks all 167 four-label complexes against an independent signed-permutation formula, all 148 three-label pairs against absolute construction followed by quotient projection, top-dimensional factorial coefficients through dimension four, and all 256 tetrahedron vertex maps for strict naturality. It checks 729 ternary circle chains and cochains, higher-dimensional relative fillings, induced integral inverses and torsion, repeated subdivision, order-dependent homotopies, empty and extreme degrees, filtered basis limits, all eight typed wrappers and serialized scalar/flat flows. ConcreteAlgebrasTest checks the 16 new registrations against explicit expected values.

@@ -104,7 +104,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         simplicialHomotopies=new SimplicialHomotopyAlgebra(simplicialMaps,relativeMaps,relativeComplexes,simplicialChains,cochains,relativeChains,relativeCochains,integerMatrices,naturals,booleans);
         homotopyPaths=new SimplicialHomotopyPathAlgebra(simplicialHomotopies,relativeMaps,relativeComplexes,simplicialChains,cochains,relativeChains,relativeCochains,integerMatrices,naturals,booleans);
         homotopyEquivalences=new SimplicialHomotopyEquivalenceAlgebra(relativeMaps,relativeComplexes,homotopyPaths,abelianHomomorphisms,naturals,booleans,complexes,integers);
-        subdivisions=new SimplicialSubdivisionAlgebra(relativeComplexes,complexes,relativeMaps,simplicialHomotopies,abelianHomomorphisms,integerSets,integers,naturals,booleans);
+        subdivisions=new SimplicialSubdivisionAlgebra(relativeComplexes,complexes,relativeMaps,simplicialHomotopies,abelianHomomorphisms,integerSets,integers,naturals,booleans,integerMatrices,relativeChains,relativeCochains,simplicialChains,cochains);
         affineSpaces=new RationalAffineSpaceAlgebra(rectangularMatrices,finiteVectors,naturals,booleans);
         markovKernels=new FiniteMarkovAlgebra(integers,integerSets,integerProbabilities,integerFunctions,rectangularMatrices,finiteVectors,rationals,naturals,booleans);
         tensors=new RationalTensorAlgebra(rationals,finiteVectors,rectangularMatrices,naturals,booleans);

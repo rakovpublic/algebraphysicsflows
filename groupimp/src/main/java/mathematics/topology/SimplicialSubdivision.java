@@ -3,6 +3,7 @@ package mathematics.topology;
 import mathematics.core.MathFailure;
 import mathematics.foundations.FiniteSet;
 import mathematics.linear.IntegerSmithNormalForm.Computation;
+import mathematics.linear.IntegerMatrix;
 import mathematics.structures.AbelianGroupHomomorphism;
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -46,6 +47,8 @@ public final class SimplicialSubdivision implements Serializable {
     public static SimplicialSubdivision absolute(FiniteSimplicialComplex complex) { return new SimplicialSubdivision(RelativeSimplicialComplex.absolute(complex)); }
     public RelativeSimplicialComplex original() { return original; }
     public RelativeSimplicialComplex subdivided() { return subdivided; }
+    FiniteSet<Integer> originalFace(int vertex) { return faces.get(vertex); }
+    int faceLabel(FiniteSet<Integer> face) { return labels.get(face); }
     public BigInteger vertexCount() { return BigInteger.valueOf(faces.size()); }
     public FiniteSet<BigInteger> vertexFace(BigInteger vertex) {
         if(vertex.signum()<0 || vertex.compareTo(vertexCount())>=0) throw MathFailure.undefined("Subdivision vertex outside the retained face dictionary");
@@ -98,6 +101,52 @@ public final class SimplicialSubdivision implements Serializable {
     public List<AbelianGroupHomomorphism> cohomologyMaps(BigInteger degree) {
         Computation work=new Computation(); AbelianGroupHomomorphism pullback=cohomologyMap(degree,work); return Collections.unmodifiableList(Arrays.asList(pullback,pullback.inverse(work)));
     }
+    private static void requireDegree(BigInteger degree) { if(degree.signum()<0) throw MathFailure.undefined("Subdivision matrix degree must be nonnegative"); }
+    public IntegerMatrix chainMatrix(BigInteger degree) { requireDegree(degree); return new SimplicialSubdivisionChains(this,new Computation()).subdivisionMatrix(degree); }
+    public IntegerMatrix cochainMatrix(BigInteger degree) { return chainMatrix(degree).transpose(); }
+    public IntegerMatrix chainHomotopyMatrix(BigInteger degree) { requireDegree(degree); return new SimplicialSubdivisionChains(this,new Computation()).homotopyMatrix(degree); }
+    public IntegerMatrix cochainHomotopyMatrix(BigInteger degree) { requireDegree(degree); return new SimplicialSubdivisionChains(this,new Computation()).homotopyMatrix(degree.subtract(BigInteger.ONE)).transpose(); }
+    private List<IntegerMatrix> matrices(boolean homotopy,boolean dual) {
+        SimplicialSubdivisionChains chains=new SimplicialSubdivisionChains(this,new Computation()); List<IntegerMatrix> result=new ArrayList<>();
+        int shift=homotopy && dual?1:0;
+        for(int k=0;k<=original.ambient().dimension()+shift;k++) {
+            BigInteger degree=BigInteger.valueOf(k-shift); IntegerMatrix matrix=homotopy?chains.homotopyMatrix(degree):chains.subdivisionMatrix(degree);
+            result.add(dual?matrix.transpose():matrix);
+        }
+        return Collections.unmodifiableList(result);
+    }
+    public List<IntegerMatrix> chainMatrices() { return matrices(false,false); }
+    public List<IntegerMatrix> cochainMatrices() { return matrices(false,true); }
+    public List<IntegerMatrix> chainHomotopyMatrices() { return matrices(true,false); }
+    public List<IntegerMatrix> cochainHomotopyMatrices() { return matrices(true,true); }
+    public RelativeSimplicialChain onChain(RelativeSimplicialChain chain) {
+        if(!original.equals(chain.pair())) throw MathFailure.undefined("Subdivision requires a chain on the full original pair");
+        Computation work=new Computation();
+        return new RelativeSimplicialChain(subdivided,chain.degree(),work.apply(new SimplicialSubdivisionChains(this,work).subdivisionMatrix(chain.degree()),chain.coordinates()));
+    }
+    public RelativeSimplicialCochain onCochain(RelativeSimplicialCochain cochain) {
+        if(!subdivided.equals(cochain.pair())) throw MathFailure.undefined("Subdivision pullback requires a cochain on the full subdivided pair");
+        Computation work=new Computation();
+        return new RelativeSimplicialCochain(original,cochain.degree(),work.apply(new SimplicialSubdivisionChains(this,work).subdivisionMatrix(cochain.degree()).transpose(),cochain.coordinates()));
+    }
+    public RelativeSimplicialChain homotopyOnChain(RelativeSimplicialChain chain) {
+        if(!subdivided.equals(chain.pair())) throw MathFailure.undefined("Subdivision homotopy requires a chain on the full subdivided pair");
+        Computation work=new Computation();
+        return new RelativeSimplicialChain(subdivided,chain.degree().add(BigInteger.ONE),work.apply(new SimplicialSubdivisionChains(this,work).homotopyMatrix(chain.degree()),chain.coordinates()));
+    }
+    public RelativeSimplicialCochain homotopyOnCochain(RelativeSimplicialCochain cochain) {
+        if(!subdivided.equals(cochain.pair())) throw MathFailure.undefined("Subdivision cochain homotopy requires the full subdivided pair");
+        if(cochain.degree().signum()==0) throw MathFailure.undefined("Typed cochain homotopies require positive degree; use cochain-homotopy-matrix for degree zero");
+        Computation work=new Computation(); BigInteger degree=cochain.degree().subtract(BigInteger.ONE);
+        return new RelativeSimplicialCochain(subdivided,degree,work.apply(new SimplicialSubdivisionChains(this,work).homotopyMatrix(degree).transpose(),cochain.coordinates()));
+    }
+    private void requireAbsolute() { if(!original.subcomplex().faces().isEmpty()) throw MathFailure.undefined("Absolute subdivision actions require an empty subcomplex"); }
+    private static SimplicialChain absolute(RelativeSimplicialChain chain) { return new SimplicialChain(chain.pair().ambient(),chain.degree(),chain.coordinates()); }
+    private static SimplicialCochain absolute(RelativeSimplicialCochain cochain) { return new SimplicialCochain(cochain.pair().ambient(),cochain.degree(),cochain.coordinates()); }
+    public SimplicialChain onAbsoluteChain(SimplicialChain chain) { requireAbsolute(); return absolute(onChain(RelativeSimplicialChain.absolute(chain))); }
+    public SimplicialCochain onAbsoluteCochain(SimplicialCochain cochain) { requireAbsolute(); return absolute(onCochain(RelativeSimplicialCochain.absolute(cochain))); }
+    public SimplicialChain homotopyOnAbsoluteChain(SimplicialChain chain) { requireAbsolute(); return absolute(homotopyOnChain(RelativeSimplicialChain.absolute(chain))); }
+    public SimplicialCochain homotopyOnAbsoluteCochain(SimplicialCochain cochain) { requireAbsolute(); return absolute(homotopyOnCochain(RelativeSimplicialCochain.absolute(cochain))); }
     @Override public boolean equals(Object other) { return other instanceof SimplicialSubdivision && original.equals(((SimplicialSubdivision)other).original); }
     @Override public int hashCode() { return original.hashCode(); }
     @Override public String toString() { return "Subdivision(original="+original+", subdivided="+subdivided+")"; }

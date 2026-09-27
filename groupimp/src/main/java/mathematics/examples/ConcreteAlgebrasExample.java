@@ -100,6 +100,9 @@ public final class ConcreteAlgebrasExample {
                 .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("homology-maps",BigInteger.ONE)
                 .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
         SimplicialChain orientedCircle=new SimplicialChain(circle,BigInteger.ONE,new IntegerVector(BigInteger.ONE,BigInteger.ONE.negate(),BigInteger.ONE));
+        System.out.println("Subdividing the oriented circle retains an integral cycle: "+math.flow(math.complexes,Collections.singletonList(circle))
+                .<SimplicialSubdivision>performAlgebraTransfer("SimplicialSubdivision.from-complex")
+                .performLeftProjectionOperation("on-absolute-chain",orientedCircle).<Boolean>performAlgebraTransfer("is-cycle").collect());
         RelativeSimplicialComplex intervalCapPair=new RelativeSimplicialComplex(new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0,1))),
                 new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0),FiniteSet.of(1))));
         RelativeSimplicialChain intervalCycle=new RelativeSimplicialChain(intervalCapPair,BigInteger.ONE,new IntegerVector(BigInteger.ONE));

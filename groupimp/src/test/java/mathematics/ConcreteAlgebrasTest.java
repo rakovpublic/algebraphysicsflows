@@ -55,7 +55,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all1302RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all1318RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String discrete="Complex[[0], [1]]",emptyComplex="Complex[]";
@@ -102,7 +102,12 @@ public class ConcreteAlgebrasTest {
         String pointSubdivision="Subdivision(original="+absolutePoint+", subdivided="+absolutePoint+")";
         expected.put("SimplicialSubdivisionAlgebra",String.join("|",pointSubdivision,pointSubdivision,absolutePoint,absolutePoint,"1","[0]","[[0]]","0",
                 absolutePointMap,absolutePointMap,pointHomotopy,identityOneMap,identityOneMap,"["+identityOneMap+", "+identityOneMap+"]",
-                identityOneMap,identityOneMap,"["+identityOneMap+", "+identityOneMap+"]","true"));
+                identityOneMap,identityOneMap,"["+identityOneMap+", "+identityOneMap+"]","true",
+                "ZMatrix(1x1)[[1]]","ZMatrix(1x1)[[1]]","[ZMatrix(1x1)[[1]]]","[ZMatrix(1x1)[[1]]]",
+                relativeZeroChain,relativeZeroCochain,"SimplicialChain(complex="+point+", degree=0, coordinates=[0])",zeroCochain,
+                "ZMatrix(0x1)[]","ZMatrix(0x1)[]","[ZMatrix(0x1)[]]","[ZMatrix(0x1)[], ZMatrix(1x0)[[]]]",
+                "RelativeChain(pair="+absolutePoint+", degree=1, coordinates=[])",relativeZeroCochain,
+                "SimplicialChain(complex="+point+", degree=1, coordinates=[])",zeroCochain));
         String stationaryPoint="HomotopyPath(stages=["+absolutePointMap+"])",pointStep="HomotopyPath(stages=["+absolutePointMap+", "+absolutePointMap+"])";
         String pointEquivalence="HomotopyEquivalence(forward="+absolutePointMap+", backward="+absolutePointMap+", source-homotopy="+stationaryPoint+", target-homotopy="+stationaryPoint+")";
         String collapsePair="RelativeComplex(ambient=Complex[[0], [1], [0, 1]], subcomplex=Complex[])",collapseForward=relativeMapString(collapsePair,absolutePoint,"{0=0, 1=0}"),collapseBackward=relativeMapString(absolutePoint,collapsePair,"{0=0}");
@@ -346,7 +351,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(1302,count);
+        assertEquals(1318,count);
     }
     private static String homString(String source,String target,String matrix) { return "AbelianHom(source="+source+", target="+target+", smith="+matrix+")"; }
     private static String simplicialString(String source,String target,String vertices) { return "SimplicialMap(source="+source+", target="+target+", vertices="+vertices+")"; }
@@ -466,6 +471,11 @@ public class ConcreteAlgebrasTest {
             if(entry.second==math.integers.algebra() || entry.second==math.naturals.algebra()) second=BigInteger.ZERO;
             if(entry.second==math.integerSets.algebra()) second=FiniteSet.of(BigInteger.ZERO);
             if(entry.second==math.relativeMaps.algebra()) second=RelativeSimplicialMap.identity(relativeCochainTestPair());
+            if(entry.second==math.relativeChains.algebra()) second=RelativeSimplicialChain.zero(relativeCochainTestPair(),BigInteger.ZERO);
+            if(entry.second==math.simplicialChains.algebra()) second=SimplicialChain.zero(coverTestPoint(),BigInteger.ZERO);
+            BigInteger degree=alias.startsWith("homotopy-")?BigInteger.ONE:BigInteger.ZERO;
+            if(entry.second==math.relativeCochains.algebra()) second=RelativeSimplicialCochain.zero(relativeCochainTestPair(),degree);
+            if(entry.second==math.cochains.algebra()) second=SimplicialCochain.zero(coverTestPoint(),degree);
         }
         if(entry.id.equals("HomotopyEquivalence.dominators")) second=BigInteger.ZERO;
         if(owner instanceof SimplicialHomotopyEquivalenceAlgebra && entry.second==math.complexes.algebra()) second=coverTestPoint();
