@@ -32,6 +32,7 @@ import mathematics.topology.SimplicialHomotopyEquivalence;
 import mathematics.topology.SimplicialSubdivision;
 import mathematics.topology.SimplicialCollapse;
 import mathematics.topology.SimplicialCollapseSequence;
+import mathematics.topology.SimplicialChainMap;
 import mathematics.topology.IntegralHomology;
 import mathematics.topology.FiniteSimplicialMap;
 import mathematics.topology.RelativeSimplicialComplex;
@@ -112,6 +113,14 @@ public final class ConcreteAlgebrasExample {
         System.out.println("All triangle collapses to vertex zero retain three steps each: "+math.flow(math.complexes,Collections.singletonList(filledTriangle))
                 .<SimplicialCollapseSequence>performFlatCustomResultOperation("CollapseSequence.absolute-collapses-to",new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))))
                 .<BigInteger>performAlgebraTransfer("step-count").collect());
+        System.out.println("Twice the identity on triangle chains is a chain isomorphism: "+math.flow(math.relativeComplexes,Collections.singletonList(RelativeSimplicialComplex.absolute(filledTriangle)))
+                .<SimplicialChainMap>performAlgebraTransfer("ChainMap.identity-on").performCustomMemberOperation("scale",BigInteger.valueOf(2))
+                .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
+        RelativeSimplicialComplex circlePair=RelativeSimplicialComplex.absolute(circle);
+        SimplicialChainMap degreeThree=new SimplicialChainMap(circlePair,circlePair,Arrays.asList(IntegerMatrix.identity(3),new IntegerMatrix(new BigInteger[][]{
+                {BigInteger.valueOf(3),BigInteger.ZERO,BigInteger.ZERO},{BigInteger.valueOf(-2),BigInteger.ONE,BigInteger.ZERO},{BigInteger.valueOf(2),BigInteger.ZERO,BigInteger.ONE}})));
+        System.out.println("An arbitrary circle chain map induces multiplication by three on H1: "+math.flow(math.chainMaps,Collections.singletonList(degreeThree))
+                .<AbelianGroupHomomorphism,BigInteger>performAlgebraUnsafe("homology-map",BigInteger.ONE).<IntegerMatrix>performAlgebraTransfer("smith-matrix").collect());
         System.out.println("Subdividing the oriented circle retains an integral cycle: "+math.flow(math.complexes,Collections.singletonList(circle))
                 .<SimplicialSubdivision>performAlgebraTransfer("SimplicialSubdivision.from-complex")
                 .performLeftProjectionOperation("on-absolute-chain",orientedCircle).<Boolean>performAlgebraTransfer("is-cycle").collect());

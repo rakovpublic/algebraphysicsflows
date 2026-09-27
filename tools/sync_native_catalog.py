@@ -10,6 +10,7 @@ DATABASE = ROOT / "mathematics-coverage.json"
 MANIFEST = ROOT / "groupimp/src/test/resources/mathematics/concrete-catalog.tsv"
 DATE = "2026-09-27"
 OWNERS = {
+    "SimplicialChainMapAlgebra": ("ChainMap", "Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps"),
     "SimplicialCollapseSequenceAlgebra": ("CollapseSequence", "Ordered compatible elementary-collapse sequences, greedy reduction, exhaustive bounded collapse search and composite integral chain/cochain witnesses"),
     "SimplicialCollapseAlgebra": ("SimplicialCollapse", "Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps"),
     "SimplicialSubdivisionAlgebra": ("SimplicialSubdivision", "Barycentric subdivisions of labelled pairs with face dictionaries, functorial maps, signed chain operators, chain/cochain inverse witnesses and integral comparison maps"),
@@ -90,6 +91,7 @@ INTERFACES = {
     "IUnsafeFlatOperation": "flat/MixedFlatOperation",
 }
 EXTRA_TESTS = {
+    "SimplicialChainMapAlgebra": "NativeSimplicialChainMapTest",
     "SimplicialCollapseSequenceAlgebra": "NativeSimplicialCollapseSequenceTest",
     "SimplicialCollapseAlgebra": "NativeSimplicialCollapseTest",
     "SimplicialSubdivisionAlgebra": "NativeSimplicialSubdivisionTest",
@@ -181,6 +183,41 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "SimplicialChainMapAlgebra": {
+        "identity-on": "Return identity matrices on every quotient basis of the supplied full pair; an empty chain complex has its zero identity map.",
+        "zero": "First pair is source and second pair is target. Return all zero matrices with retained rectangular dimensions; no geometric vertex map is required.",
+        "from-data": "Supplied ChainMap.data retains two full pairs and exactly one matrix per degree from zero through the largest ambient dimension. Check every target-row/source-column shape and every equation d_target F = F d_source, including the top degree, under one budget.",
+        "from-simplicial": "Convert a RelativeMap to its full family of oriented quotient chain matrices, then validate all chain equations under the same budget.",
+        "from-absolute-simplicial": "Convert a SimplicialMap using empty subcomplexes at both endpoints; orientation and collapsed simplex zero columns are retained.",
+        "from-collapse": "Return the elementary collapse retraction from original to reduced quotient chains. It splits inclusion but need not be a vertex map or a chain isomorphism.",
+        "from-collapse-sequence": "Return the composite retraction of the full sequence; every step and final chain-map validation share one budget.",
+        "from-subdivision": "Return signed subdivision from original to subdivided quotient chains, with the retained face dictionary. Last-vertex after this map is strictly identity.",
+        "source": "Return the full source labelled pair, including its subcomplex.",
+        "target": "Return the full target labelled pair, including its subcomplex.",
+        "data": "Return immutable supplied-data form with the exact endpoints and complete matrix list; reconstructing it checks the chain equations again.",
+        "equal": "Equality compares both full labelled pairs and all exact degree matrices, rather than just induced homology maps.",
+        "is-zero": "Return whether every coefficient is zero, including the unique map between zero chain complexes.",
+        "is-identity": "Require equal full endpoints and identity matrices in every degree; a relabelled chain isomorphism is not an identity.",
+        "add": "Both full source and target pairs must match. Add degree matrices; addition preserves chain equations and induced homology/cohomology maps.",
+        "negate": "Negate all degree matrices while retaining full endpoints.",
+        "subtract": "Both full source and target pairs must match; subtract the second map from the first.",
+        "scale": "Multiply each matrix by the integer second operand, using ICustomMemberOperation and the actual first ChainMap wrapper.",
+        "compose": "Apply the right operand first and require identical full labelled joining pairs. All degree products and final validation share one budget; source and target dimensions can differ.",
+        "is-isomorphism": "Require every degree matrix to be square and unimodular over Z. An isomorphism on homology alone is insufficient; resource exhaustion never returns false.",
+        "inverse": "Every degree matrix must be unimodular over Z; return the reversed chain map. All inversions and final chain equations share one budget.",
+        "chain-matrix": "Return F_k with target quotient basis rows and source quotient basis columns. Degree is nonnegative; beyond both ambient dimensions the shape is 0 by 0.",
+        "cochain-matrix": "Return F_k transpose, acting contravariantly from target to source cochains, in a nonnegative degree.",
+        "chain-matrices": "Emit the complete retained immutable matrix list in degrees zero through the largest ambient dimension; both empty complexes give an empty list.",
+        "cochain-matrices": "Emit transposes in the same degree order; the entire list shares one work budget.",
+        "on-chain": "The second RelativeChain must retain the full source pair. Preserve degree, including negative zero groups; return the actual second carrier wrapper through ILeftProjectionOperation.",
+        "on-cochain": "The second RelativeCochain must retain the full target pair. Pull back without changing degree and return the actual second carrier wrapper through ILeftProjectionOperation.",
+        "on-absolute-chain": "Both endpoint subcomplexes must be empty and the chain must have the full source complex. Return the actual second SimplicialChain wrapper.",
+        "on-absolute-cochain": "Both endpoint subcomplexes must be empty and the cochain must have the full target complex. Return the actual second SimplicialCochain wrapper.",
+        "homology-map": "Return the covariant integral map H_k(source) to H_k(target), retaining presentations and torsion. Degree is nonnegative and the full calculation shares one budget.",
+        "cohomology-map": "Return the contravariant integral map H^k(target) to H^k(source), retaining presentations and torsion; composition reverses order.",
+        "homology-maps": "Emit integral homology maps in degrees zero through the largest ambient dimension. The entire list shares one budget and fails atomically if exhausted.",
+        "cohomology-maps": "Emit integral cohomology maps in the same degree order, each from target to source. The entire list shares one budget and fails atomically if exhausted.",
+    },
     "SimplicialCollapseSequenceAlgebra": {
         "can-collapse-to": "Decide whether the original RelativeComplex admits a compatible elementary collapse sequence to the exact labelled target pair. Target ambient faces must be retained and its subcomplex must equal the original subcomplex intersected with the target ambient complex. False requires a necessary obstruction or complete exhaustive search; resource exhaustion raises IMPLEMENTATION_FAILURE. Registered as CollapseSequence.can-collapse-to.",
         "collapse-to": "Return the first compatible CollapseSequence to the exact full target pair in depth-first order, with choices ordered by face size then lexicographic labels. Matching pairs return an empty identity sequence. Exhaustive absence is OPERATION_UNDEFINED, independently of resource failure. Registered as CollapseSequence.collapse-to.",
@@ -1454,6 +1491,18 @@ OWNER_CONDITIONS["RationalMatrixFamily"]["companion"] = "The polynomial has posi
 
 def record(identifier, owner, concept, paths, operation=None):
     carrier, scope = OWNERS[owner]
+    if owner == "SimplicialChainMapAlgebra":
+        paths = paths + ["groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+                         "groupimp/src/main/java/mathematics/topology/SimplicialCollapse.java",
+                         "groupimp/src/main/java/mathematics/topology/SimplicialCollapseSequence.java",
+                         "groupimp/src/main/java/mathematics/topology/SimplicialSubdivisionChains.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+                         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+                         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+                         "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
     if owner == "SimplicialCollapseSequenceAlgebra":
         paths = paths + ["groupimp/src/main/java/mathematics/topology/SimplicialCollapseSequence.java",
                          "groupimp/src/main/java/mathematics/topology/SimplicialCollapseSearch.java"]
@@ -1714,6 +1763,11 @@ def record(identifier, owner, concept, paths, operation=None):
             value["known_limitations"].append("Iteration is capped at 10000 steps; exceeding it is IMPLEMENTATION_FAILURE. Exact values can still grow rapidly within this limit.")
         if operation_name in ("argmin", "argmax", "minimum", "maximum", "minimizers", "maximizers"):
             value["known_limitations"].append("Optimality is relative only to the explicit finite feasible set, not all integers or reals.")
+    if owner == "SimplicialChainMapAlgebra":
+        value["required_invariants"].append("Full labelled pairs and all integral degree matrices are retained. Quotient boundary equations are checked in every degree. Composition applies the right operand first; parallel addition and integer scaling induce additive integral homology and contravariant cohomology maps. Strict inverses require unimodular matrices in every degree, independently of induced homology isomorphisms.")
+        value["known_limitations"] += ["At most 4096 nonempty simplices per pair component and at most 256 simplices in each quotient basis, filtered before the bound. One 5000000-unit budget covers each construction, conversion, composite or inverse including final validation, and each complete integral map list. Resource exhaustion raises IMPLEMENTATION_FAILURE without partial results or false predicates. Integer coefficient bit lengths are unbounded.",
+            "Degree-zero maps over Z on finite simplicial quotient chains only. Raw ChainMap.data is immutable supplied data, not a validated map. Matrix and integral map degrees are nonnegative; typed chains allow negative zero groups. Absolute actions require both subcomplexes empty. Arbitrary chain maps need not preserve augmentation or cup products, come from continuous or simplicial vertex maps, extend to compatible ambient/subcomplex maps, or give a homotopy equivalence. General chain-homotopy data, other coefficients and persistent homology remain outside scope."]
+        value["references"].append("https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf")
     if owner == "SimplicialCollapseSequenceAlgebra":
         value["required_invariants"].append("Exhaustive collapse search preserves every requested target face, checks the full target subcomplex and both component Euler characteristics, and explores free faces in depth-first size/lexicographic order. It caches only unsuccessful suffix states, preserving all distinct successful prefixes during enumeration. Returned witnesses retain the same validated sequence and integral operators as supplied or greedy sequences. Collapse to a point is distinct from contractibility.")
         value["known_limitations"].append("Exhaustive searches allow at most 4096 distinct intermediate pairs and 1024 returned sequences. The required number of steps is half the difference in ambient nonempty face counts; more than 256 steps is an implementation failure after structural obstruction checks. A single 5000000-unit budget covers all branches, free-face discovery, collapse construction and validation of every returned witness. No resource limit is reported as false, undefinedness or a truncated list. Only compatible codimension-one collapses are searched: no expansions, relabellings, subdivisions, general discrete Morse matchings or contractibility decisions.")
@@ -1977,6 +2031,10 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("ChainMap", "Integral chain maps of labelled simplicial pairs", "mathematics.topology.SimplicialChainMap",
+         ["Retained full source and target pairs and exact integral degree matrices", "Every degree commutes with quotient differentials, including the top source boundary", "Parallel addition, integer scaling and composition with strict full-pair checks", "Strict inverse exists exactly for degreewise unimodular matrices", "Covariant homology and contravariant cohomology retain presentations and torsion", "Whole constructions and integral map lists share bounded arithmetic work"], ["ChainMap.data", "RelativeComplex", "RelativeMap", "SimplicialMap", "SimplicialCollapse", "CollapseSequence", "SimplicialSubdivision", "Mat(Z)", "Z", "N", "Boolean", "RelativeChain", "RelativeCochain", "SimplicialChain", "SimplicialCochain", "AbelianGroupHomomorphism"]),
+        ("ChainMap.data", "Supplied endpoints and complete degree matrices for a chain map", "mathematics.topology.SimplicialChainMap.Data",
+         ["Two nonnull full labelled pairs and immutable integer matrices", "Exactly one entry in each degree from zero through the maximum ambient dimension", "Data membership does not assert matrix shapes or boundary equations; ChainMap.from-data validates them"], ["ChainMap", "RelativeComplex", "Mat(Z)"]),
         ("CollapseSequence", "Elementary collapse sequences, exhaustive search and integral witnesses", "mathematics.topology.SimplicialCollapseSequence",
          ["Full original and final labelled pairs joined by zero through 256 compatible elementary collapses", "Checked chronological concatenation with empty units and retained step order", "Greedy reduction by size and lexicographic free-face order, without claiming a canonical core", "Composite integral retraction and transported chain/cochain homotopies", "Inverse integral homology and cohomology maps retaining presentations and torsion", "Shared reduction and whole-list budgets with filtered intermediate quotient bases", "Exhaustive target and point search with separate decisions, first witnesses and complete ordered enumerations, subject to state, result, step and work limits"], ["SimplicialCollapse", "RelativeComplex", "FiniteComplex", "RelativeMap", "Mat(Z)", "N", "Boolean", "RelativeChain", "RelativeCochain", "SimplicialChain", "SimplicialCochain", "AbelianGroupHomomorphism"]),
         ("SimplicialCollapse", "Elementary simplicial pair collapses and integral chain witnesses", "mathematics.topology.SimplicialCollapse",

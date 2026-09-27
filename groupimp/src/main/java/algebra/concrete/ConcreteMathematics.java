@@ -63,6 +63,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final SimplicialSubdivisionAlgebra subdivisions;
     public final SimplicialCollapseAlgebra collapses;
     public final SimplicialCollapseSequenceAlgebra collapseSequences;
+    public final SimplicialChainMapAlgebra chainMaps;
     public final RationalAffineSpaceAlgebra affineSpaces;
     public final FiniteMarkovAlgebra markovKernels;
     public final RationalTensorAlgebra tensors;
@@ -109,6 +110,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         subdivisions=new SimplicialSubdivisionAlgebra(relativeComplexes,complexes,relativeMaps,simplicialHomotopies,abelianHomomorphisms,integerSets,integers,naturals,booleans,integerMatrices,relativeChains,relativeCochains,simplicialChains,cochains);
         collapses=new SimplicialCollapseAlgebra(relativeComplexes,complexes,relativeMaps,integerSets,naturals,booleans,integerMatrices,relativeChains,relativeCochains,simplicialChains,cochains,abelianHomomorphisms);
         collapseSequences=new SimplicialCollapseSequenceAlgebra(collapses,relativeComplexes,complexes,relativeMaps,naturals,booleans,integerMatrices,relativeChains,relativeCochains,simplicialChains,cochains,abelianHomomorphisms);
+        chainMaps=new SimplicialChainMapAlgebra(relativeComplexes,relativeMaps,simplicialMaps,collapses,collapseSequences,subdivisions,integers,naturals,booleans,integerMatrices,relativeChains,relativeCochains,simplicialChains,cochains,abelianHomomorphisms);
         affineSpaces=new RationalAffineSpaceAlgebra(rectangularMatrices,finiteVectors,naturals,booleans);
         markovKernels=new FiniteMarkovAlgebra(integers,integerSets,integerProbabilities,integerFunctions,rectangularMatrices,finiteVectors,rationals,naturals,booleans);
         tensors=new RationalTensorAlgebra(rationals,finiteVectors,rectangularMatrices,naturals,booleans);
@@ -154,6 +156,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         values.add(subdivisions);
         values.add(collapses);
         values.add(collapseSequences);
+        values.add(chainMaps);
         values.addAll(fields); algebras=Collections.unmodifiableList(values);
         for(ConcreteAlgebra<?> algebra : algebras) {
             algebra.register(mathTool);

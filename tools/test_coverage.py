@@ -71,6 +71,15 @@ class CoverageTest(unittest.TestCase):
 
     def test_operation_conditions_are_scoped_to_the_algebra(self):
         records = {r.get("runtime_operation_id"): r for r in self.data["concepts"] if r.get("runtime_operation_id")}
+        self.assertIn("including the top degree", " ".join(records["ChainMap.from-data"]["required_invariants"]))
+        self.assertIn("right operand first", " ".join(records["ChainMap.compose"]["required_invariants"]))
+        self.assertIn("unimodular over Z", " ".join(records["ChainMap.inverse"]["required_invariants"]))
+        self.assertIn("ILeftProjectionOperation", " ".join(records["ChainMap.on-chain"]["required_invariants"]))
+        self.assertIn("Both endpoint subcomplexes", " ".join(records["ChainMap.on-absolute-cochain"]["required_invariants"]))
+        self.assertIn("composition reverses order", " ".join(records["ChainMap.cohomology-map"]["required_invariants"]))
+        self.assertIn("entire list", " ".join(records["ChainMap.homology-maps"]["required_invariants"]))
+        self.assertIn("5000000", " ".join(records["ChainMap.from-collapse-sequence"]["known_limitations"]))
+        self.assertIn("need not preserve augmentation or cup products", " ".join(records["ChainMap.on-cochain"]["known_limitations"]))
         polynomial = " ".join(records["Q[x].quotient"]["required_invariants"])
         self.assertIn("Euclidean", polynomial)
         self.assertNotIn("truncates", polynomial)

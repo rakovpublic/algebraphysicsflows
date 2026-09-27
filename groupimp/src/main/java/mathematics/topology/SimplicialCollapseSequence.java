@@ -68,7 +68,7 @@ public final class SimplicialCollapseSequence implements Serializable {
     public RelativeSimplicialMap inclusion() { return RelativeSimplicialMap.inclusion(target,source); }
     private static void requireDegree(BigInteger degree) { if(degree.signum()<0) throw MathFailure.undefined("Collapse-sequence matrix and integral map degrees must be nonnegative"); }
     private static IntegerMatrix identity(int size,Computation work) { work.use((long)size*size); return IntegerMatrix.identity(size); }
-    private IntegerMatrix retraction(BigInteger degree,Computation work) {
+    IntegerMatrix retraction(BigInteger degree,Computation work) {
         if(steps.isEmpty()) return identity(source.basis(degree).size(),work);
         IntegerMatrix result=steps.get(0).retraction(degree,work);
         for(int k=1;k<steps.size();k++) result=work.multiply(steps.get(k).retraction(degree,work),result); return result;

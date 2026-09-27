@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1864 |
-| DIRECTLY_SUPPORTED | 1621 |
+| Scoped records | 1898 |
+| DIRECTLY_SUPPORTED | 1655 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1480 |
+| IMPLEMENTED | 1514 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1548 |
+| MACHINE_TESTED | 1582 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1457 | 1457 | 0 | 0 | 0 | 1457 | 0 | 0 |
+| Concrete MathTool algebras | 1491 | 1491 | 0 | 0 | 0 | 1491 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -287,6 +287,39 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Boolean.xor | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.xor |
 | Boolean.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.zero |
 | BooleanAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations |
+| ChainMap.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.add |
+| ChainMap.chain-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.chain-matrices |
+| ChainMap.chain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.chain-matrix |
+| ChainMap.cochain-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.cochain-matrices |
+| ChainMap.cochain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.cochain-matrix |
+| ChainMap.cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.cohomology-map |
+| ChainMap.cohomology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.cohomology-maps |
+| ChainMap.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.compose |
+| ChainMap.data | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.data |
+| ChainMap.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.equal |
+| ChainMap.from-absolute-simplicial | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.from-absolute-simplicial |
+| ChainMap.from-collapse | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.from-collapse |
+| ChainMap.from-collapse-sequence | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.from-collapse-sequence |
+| ChainMap.from-data | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.from-data |
+| ChainMap.from-simplicial | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.from-simplicial |
+| ChainMap.from-subdivision | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.from-subdivision |
+| ChainMap.homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.homology-map |
+| ChainMap.homology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.homology-maps |
+| ChainMap.identity-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.identity-on |
+| ChainMap.inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.inverse |
+| ChainMap.is-identity | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.is-identity |
+| ChainMap.is-isomorphism | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.is-isomorphism |
+| ChainMap.is-zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.is-zero |
+| ChainMap.negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.negate |
+| ChainMap.on-absolute-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.on-absolute-chain |
+| ChainMap.on-absolute-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.on-absolute-cochain |
+| ChainMap.on-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.on-chain |
+| ChainMap.on-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.on-cochain |
+| ChainMap.scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.scale |
+| ChainMap.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.source |
+| ChainMap.subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.subtract |
+| ChainMap.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.target |
+| ChainMap.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.zero |
 | CollapseSequence.absolute-can-collapse-to | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, greedy reduction, exhaustive bounded collapse search and composite integral chain/cochain witnesses; native operation CollapseSequence.absolute-can-collapse-to |
 | CollapseSequence.absolute-collapse-to | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, greedy reduction, exhaustive bounded collapse search and composite integral chain/cochain witnesses; native operation CollapseSequence.absolute-collapse-to |
 | CollapseSequence.absolute-collapses-to | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, greedy reduction, exhaustive bounded collapse search and composite integral chain/cochain witnesses; native operation CollapseSequence.absolute-collapses-to |
@@ -1333,6 +1366,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | SimplicialChain.with-coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.with-coordinates |
 | SimplicialChain.zero-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.zero-on |
 | SimplicialChainAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps |
+| SimplicialChainMapAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps |
 | SimplicialCochain.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.add |
 | SimplicialCochain.basis-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.basis-on |
 | SimplicialCochain.class-of | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.class-of |

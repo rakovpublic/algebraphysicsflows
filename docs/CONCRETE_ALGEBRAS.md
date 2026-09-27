@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1395 native operations from 62 algebra builders.
+The default initializer currently installs 1428 native operations from 63 algebra builders.
 
 ## Existing API usage
 
@@ -1935,3 +1935,64 @@ To preserve edge `{0,1}`, target search instead first deletes edge `{0,2}` with 
 Every call shares one 5,000,000-unit budget across all branches, free-face discovery, collapse construction and validation of every returned sequence. Inputs allow at most 4096 nonempty faces per component, searches at most 4096 distinct intermediate pairs, each witness at most 256 steps, and enumerations at most 1024 sequences. Structural obstructions are checked before the required-step bound. Resource exhaustion raises IMPLEMENTATION_FAILURE; it never returns false, an undefined witness or a truncated list. The geometric search does not impose a matrix-basis limit, but subsequent integral operators retain their 256-simplex filtered-basis bound. Searches do not use expansions, relabellings, subdivisions or general discrete Morse matchings, and do not decide contractibility.
 
 NativeSimplicialCollapseSearchTest has 14 tests. Independent face-bitset breadth-first traversal checks all 27,889 comparisons among four-label complexes and all 21,904 comparisons among three-label relative pairs. Independent path enumeration checks every ordered relative witness on three labels and all 480 tetrahedron collapses to a specified vertex. Further tests cover all 64 four-vertex graph decisions, target protection, 720 star-collapse orders, enumeration and work exhaustion, failed-state caching, step limits, the dunce hat, projective-plane torsion, full relative contexts, empty and extreme-label inputs, geometry versus quotient-basis limits, and serialized decision/witness/flat flows. ConcreteAlgebrasTest checks the nine new registrations against explicit expected values.
+
+## Arbitrary integral chain maps
+
+`math.chainMaps` installs 33 operations for `SimplicialChainMap`. A value retains the full labelled pairs `(X,A)` and `(Y,B)` and integral matrices `F_k: C_k(X,A) -> C_k(Y,B)`. Rows use the target quotient basis, columns use the source quotient basis, and each basis uses ascending vertex orientation and lexicographic simplex order. Construction checks `d_Y F_k = F_(k-1) d_X` in every positive degree, including the highest source degree. Chains are unreduced: there is no augmentation equation in degree zero.
+
+The supporting `ChainMap.data` carrier holds a `SimplicialChainMap.Data` value with both endpoints and exactly one matrix per degree from zero through the maximum ambient dimension. Supply zero matrices with their actual rectangular shapes when either group vanishes. Two empty ambient complexes require an empty list. Data is immutable but may fail the shape or chain equations; `ChainMap.from-data` checks both. The public `SimplicialChainMap(source,target,matrices)` constructor performs the same validation.
+
+| Operation | Native signature and behavior |
+| --- | --- |
+| `identity-on` | `RelativeComplex -> ChainMap`; identity on quotient chains |
+| `zero` | `RelativeComplex x RelativeComplex -> ChainMap`; source first, target second |
+| `from-data` | `ChainMap.data -> ChainMap`; validate all supplied matrices |
+| `from-simplicial` | `RelativeMap -> ChainMap`; oriented quotient chain map |
+| `from-absolute-simplicial` | `SimplicialMap -> ChainMap`; both subcomplexes empty |
+| `from-collapse` | `SimplicialCollapse -> ChainMap`; elementary retraction |
+| `from-collapse-sequence` | `CollapseSequence -> ChainMap`; composite retraction |
+| `from-subdivision` | `SimplicialSubdivision -> ChainMap`; original to subdivision |
+| `source`, `target` | `ChainMap -> RelativeComplex`; full labelled endpoints |
+| `data` | `ChainMap -> ChainMap.data`; retained endpoints and matrix list |
+| `equal` | `ChainMap x ChainMap -> Boolean`; equality of full data |
+| `is-zero`, `is-identity` | `ChainMap -> Boolean`; coefficient tests, with equal endpoints for identity |
+| `add`, `subtract` | `ChainMap x ChainMap -> ChainMap`; require parallel full endpoints |
+| `negate` | `ChainMap -> ChainMap` |
+| `scale` | `ChainMap x Z -> ChainMap`; actual first carrier wrapper |
+| `compose` | `ChainMap x ChainMap -> ChainMap`; right operand first, exact joining pair |
+| `is-isomorphism`, `inverse` | Require every matrix to be square and unimodular over Z |
+| `chain-matrix`, `cochain-matrix` | `ChainMap x N -> Mat(Z)`; `F_k` and its transpose |
+| `chain-matrices`, `cochain-matrices` | `ChainMap -> List<Mat(Z)>`; complete ascending degree lists |
+| `on-chain`, `on-cochain` | Push source relative chains forward or pull target relative cochains back; preserve degree and use the actual second wrapper |
+| `on-absolute-chain`, `on-absolute-cochain` | Corresponding absolute actions; both endpoint subcomplexes must be empty |
+| `homology-map`, `cohomology-map` | `ChainMap x N -> AbelianGroupHomomorphism`; integral induced maps retaining presentations and torsion |
+| `homology-maps`, `cohomology-maps` | Complete ascending degree lists through the maximum ambient dimension |
+
+Construction aliases are prefixed `ChainMap.` when their input belongs to another carrier. Once a flow contains chain maps, use the short aliases in the table. For example, this map fixes the vertices of a triangle boundary and sends its oriented cycle to three times itself:
+
+```java
+ConcreteMathematics math = new ConcreteMathematics();
+FiniteSimplicialComplex circle = new FiniteSimplicialComplex(Arrays.asList(
+        FiniteSet.of(0, 1), FiniteSet.of(0, 2), FiniteSet.of(1, 2)));
+RelativeSimplicialComplex pair = RelativeSimplicialComplex.absolute(circle);
+BigInteger zero = BigInteger.ZERO, one = BigInteger.ONE;
+SimplicialChainMap.Data input = new SimplicialChainMap.Data(pair, pair,
+        Arrays.asList(IntegerMatrix.identity(3), new IntegerMatrix(new BigInteger[][] {
+            {BigInteger.valueOf(3), zero, zero},
+            {BigInteger.valueOf(-2), one, zero},
+            {BigInteger.valueOf(2), zero, one}
+        })));
+SimplicialChainMap map = math.chainMaps.inputs.buildAlgebraItem(input)
+        .<SimplicialChainMap>performAlgebraTransfer("ChainMap.from-data")
+        .perform().getResult();
+List<String> induced = math.flow(math.chainMaps, Collections.singletonList(map))
+        .<AbelianGroupHomomorphism, BigInteger>performAlgebraUnsafe("homology-map", one)
+        .<IntegerMatrix>performAlgebraTransfer("smith-matrix").collect();
+// [ZMatrix(1x1)[[3]]]
+```
+
+Composition and addition induce the corresponding operations on homology. Transpose pullback reverses composition on cohomology. A strict inverse requires degreewise unimodularity; a collapse retraction can induce homology isomorphisms without having a strict chain inverse. These are arbitrary integral chain maps: they need not arise from vertex maps, preserve augmentation or cup products, extend to compatible maps of ambient and subcomplex chain complexes, or represent a homotopy equivalence. The underlying algebraic conventions follow [Hatcher, Chapter 2](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf).
+
+Each pair component permits at most 4096 nonempty simplices, and each required quotient basis permits 256 simplices after filtering out the subcomplex. One 5000000-unit work budget covers all degree calculations in construction, conversion, composition or inversion, including final validation. Each entire homology/cohomology list shares one budget. Exhaustion raises `IMPLEMENTATION_FAILURE` without a partial result. Nonnegative matrix/map degrees above both ambient dimensions return zero groups; typed chain actions also preserve negative-degree zero groups. Integer coefficient bit lengths remain unbounded.
+
+`NativeSimplicialChainMapTest` supplies 17 tests: independent endpoint equations for all 243 ternary interval matrix families and relative quotient variants, determinant-oracle inversion for 625 two-by-two matrices, arbitrary circle degrees and noncommuting contravariant composition, 729 typed coordinate checks and 729 simplicial compositions, relative disk and projective-plane torsion, collapse/subdivision comparisons, invalid full contexts and top differentials, immutable data, empty shapes, filtered basis bounds, aggregate computation limits and serialized native scalar/flat flows.
