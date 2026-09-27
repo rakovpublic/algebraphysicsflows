@@ -61,6 +61,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final SimplicialHomotopyPathAlgebra homotopyPaths;
     public final SimplicialHomotopyEquivalenceAlgebra homotopyEquivalences;
     public final SimplicialSubdivisionAlgebra subdivisions;
+    public final SimplicialCollapseAlgebra collapses;
     public final RationalAffineSpaceAlgebra affineSpaces;
     public final FiniteMarkovAlgebra markovKernels;
     public final RationalTensorAlgebra tensors;
@@ -105,6 +106,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         homotopyPaths=new SimplicialHomotopyPathAlgebra(simplicialHomotopies,relativeMaps,relativeComplexes,simplicialChains,cochains,relativeChains,relativeCochains,integerMatrices,naturals,booleans);
         homotopyEquivalences=new SimplicialHomotopyEquivalenceAlgebra(relativeMaps,relativeComplexes,homotopyPaths,abelianHomomorphisms,naturals,booleans,complexes,integers);
         subdivisions=new SimplicialSubdivisionAlgebra(relativeComplexes,complexes,relativeMaps,simplicialHomotopies,abelianHomomorphisms,integerSets,integers,naturals,booleans,integerMatrices,relativeChains,relativeCochains,simplicialChains,cochains);
+        collapses=new SimplicialCollapseAlgebra(relativeComplexes,complexes,relativeMaps,integerSets,naturals,booleans,integerMatrices,relativeChains,relativeCochains,simplicialChains,cochains,abelianHomomorphisms);
         affineSpaces=new RationalAffineSpaceAlgebra(rectangularMatrices,finiteVectors,naturals,booleans);
         markovKernels=new FiniteMarkovAlgebra(integers,integerSets,integerProbabilities,integerFunctions,rectangularMatrices,finiteVectors,rationals,naturals,booleans);
         tensors=new RationalTensorAlgebra(rationals,finiteVectors,rectangularMatrices,naturals,booleans);
@@ -148,6 +150,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         values.add(homotopyPaths);
         values.add(homotopyEquivalences);
         values.add(subdivisions);
+        values.add(collapses);
         values.addAll(fields); algebras=Collections.unmodifiableList(values);
         for(ConcreteAlgebra<?> algebra : algebras) {
             algebra.register(mathTool);

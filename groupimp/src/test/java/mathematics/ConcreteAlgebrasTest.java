@@ -44,6 +44,7 @@ import mathematics.topology.SimplicialHomotopy;
 import mathematics.topology.SimplicialHomotopyPath;
 import mathematics.topology.SimplicialHomotopyEquivalence;
 import mathematics.topology.SimplicialSubdivision;
+import mathematics.topology.SimplicialCollapse;
 import mathematics.topology.RelativeSimplicialCochain;
 import mathematics.examples.ConcreteAlgebrasExample;
 import mathematics.probability.FiniteMarkovKernel;
@@ -55,7 +56,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all1318RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all1350RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String discrete="Complex[[0], [1]]",emptyComplex="Complex[]";
@@ -111,6 +112,15 @@ public class ConcreteAlgebrasTest {
         String stationaryPoint="HomotopyPath(stages=["+absolutePointMap+"])",pointStep="HomotopyPath(stages=["+absolutePointMap+", "+absolutePointMap+"])";
         String pointEquivalence="HomotopyEquivalence(forward="+absolutePointMap+", backward="+absolutePointMap+", source-homotopy="+stationaryPoint+", target-homotopy="+stationaryPoint+")";
         String collapsePair="RelativeComplex(ambient=Complex[[0], [1], [0, 1]], subcomplex=Complex[])",collapseForward=relativeMapString(collapsePair,absolutePoint,"{0=0, 1=0}"),collapseBackward=relativeMapString(absolutePoint,collapsePair,"{0=0}");
+        String elementary="SimplicialCollapse(source="+collapsePair+", free-face=[1], coface=[0, 1], target="+absolutePoint+")";
+        String edgeH0="PresentedAbelianGroup(ZMatrix(2x1)[[-1], [1]])",retractH0=homString(edgeH0,freeOne,"ZMatrix(1x2)[[0, 1]]"),includeH0=homString(freeOne,edgeH0,"ZMatrix(2x1)[[0], [1]]");
+        String edgeZeroCochain="RelativeCochain(pair="+collapsePair+", degree=0, coordinates=[0, 0])",absoluteEdgeZeroCochain="SimplicialCochain(complex="+edge+", degree=0, coordinates=[0, 0])";
+        expected.put("SimplicialCollapseAlgebra",String.join("|","[[0], [1]]","true",elementary,elementary,collapsePair,absolutePoint,"[1]","[0, 1]",collapseBackward,"true",
+                "ZMatrix(1x2)[[1, 1]]","ZMatrix(2x1)[[1], [1]]","[ZMatrix(1x2)[[1, 1]], ZMatrix(0x1)[]]","[ZMatrix(2x1)[[1], [1]], ZMatrix(1x0)[[]]]",
+                "ZMatrix(1x2)[[0, 1]]","ZMatrix(0x2)[]","[ZMatrix(1x2)[[0, 1]], ZMatrix(0x1)[]]","[ZMatrix(0x2)[], ZMatrix(2x1)[[0], [1]], ZMatrix(1x0)[[]]]",
+                relativeZeroChain,edgeZeroCochain,"SimplicialChain(complex="+point+", degree=0, coordinates=[0])",absoluteEdgeZeroCochain,
+                "RelativeChain(pair="+collapsePair+", degree=1, coordinates=[0])",edgeZeroCochain,"SimplicialChain(complex="+edge+", degree=1, coordinates=[0])",absoluteEdgeZeroCochain,
+                retractH0,includeH0,"["+retractH0+", "+includeH0+"]",identityOneMap,identityOneMap,"["+identityOneMap+", "+identityOneMap+"]"));
         String collapseIdentity=relativeMapString(collapsePair,collapsePair,"{0=0, 1=1}"),collapseConstant=relativeMapString(collapsePair,collapsePair,"{0=0, 1=0}");
         String edgeCollapse="HomotopyEquivalence(forward="+collapseForward+", backward="+collapseBackward+", source-homotopy=HomotopyPath(stages=["+collapseIdentity+", "+collapseConstant+"]), target-homotopy="+stationaryPoint+")";
         expected.put("SimplicialHomotopyEquivalenceAlgebra",String.join("|","("+absolutePointMap+","+absolutePointMap+")",pointEquivalence,pointEquivalence,pointEquivalence,
@@ -351,7 +361,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(1318,count);
+        assertEquals(1350,count);
     }
     private static String homString(String source,String target,String matrix) { return "AbelianHom(source="+source+", target="+target+", smith="+matrix+")"; }
     private static String simplicialString(String source,String target,String vertices) { return "SimplicialMap(source="+source+", target="+target+", vertices="+vertices+")"; }
@@ -379,6 +389,10 @@ public class ConcreteAlgebrasTest {
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
         Algebra source=math.mathTool.getAlgebra(entry.first.getAlgebraName());
         IAlgebraItem item=source.buildAlgebraItem(sample(math,source.getAlgebraName(),0));
+        if(owner instanceof SimplicialCollapseAlgebra) {
+            if(source==math.relativeComplexes.algebra()) item=source.buildAlgebraItem(elementaryCollapse().source());
+            if(source==math.complexes.algebra()) item=source.buildAlgebraItem(elementaryCollapse().source().ambient());
+        }
         if(owner instanceof SimplicialSubdivisionAlgebra) {
             if(source==math.relativeComplexes.algebra()) item=source.buildAlgebraItem(relativeCochainTestPair());
             if(source==math.complexes.algebra()) item=source.buildAlgebraItem(coverTestPoint());
@@ -467,6 +481,17 @@ public class ConcreteAlgebrasTest {
         if(operation instanceof IOneOperandOperation) return item.performOneOperandOperation(alias).perform().getResult().toString();
         if(operation instanceof ITransferOperation) return item.performAlgebraTransfer(alias).perform().getResult().toString();
         Object second=entry.second==null?null:sample(math,entry.second.getAlgebraName(),1);
+        if(owner instanceof SimplicialCollapseAlgebra) {
+            SimplicialCollapse collapse=elementaryCollapse();
+            if(entry.second==math.naturals.algebra()) second=BigInteger.ZERO;
+            if(entry.second==math.integerSets.algebra()) second=FiniteSet.of(BigInteger.ONE);
+            if(entry.second==math.relativeChains.algebra()) second=RelativeSimplicialChain.zero(collapse.source(),BigInteger.ZERO);
+            if(entry.second==math.simplicialChains.algebra()) second=SimplicialChain.zero(collapse.source().ambient(),BigInteger.ZERO);
+            boolean homotopy=alias.startsWith("homotopy-"); BigInteger degree=homotopy?BigInteger.ONE:BigInteger.ZERO;
+            RelativeSimplicialComplex pair=homotopy?collapse.source():collapse.target();
+            if(entry.second==math.relativeCochains.algebra()) second=RelativeSimplicialCochain.zero(pair,degree);
+            if(entry.second==math.cochains.algebra()) second=SimplicialCochain.zero(pair.ambient(),degree);
+        }
         if(owner instanceof SimplicialSubdivisionAlgebra) {
             if(entry.second==math.integers.algebra() || entry.second==math.naturals.algebra()) second=BigInteger.ZERO;
             if(entry.second==math.integerSets.algebra()) second=FiniteSet.of(BigInteger.ZERO);
@@ -593,6 +618,7 @@ public class ConcreteAlgebrasTest {
         else result=item.performUnsafeOperation(alias,second);
         return result.perform().getResult().toString();
     }
+    private static SimplicialCollapse elementaryCollapse() { return SimplicialCollapse.absolute(new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0,1))),FiniteSet.of(BigInteger.ONE)); }
     private Object sample(ConcreteMathematics math,String domain,int index) {
         switch(domain) {
             case "RelativeCochain": return RelativeSimplicialCochain.zero(relativeCochainTestPair(),BigInteger.ZERO);
@@ -609,6 +635,7 @@ public class ConcreteAlgebrasTest {
             case "HomotopyPath.pair": return new Pair<>(sample(math,"HomotopyPath",0),sample(math,"HomotopyPath",0));
             case "HomotopyEquivalence": return SimplicialHomotopyEquivalence.identity(relativeCochainTestPair());
             case "SimplicialSubdivision": return new SimplicialSubdivision(relativeCochainTestPair());
+            case "SimplicialCollapse": return elementaryCollapse();
             case "StrongCollapse.vertices": return new Pair<>(BigInteger.ONE,BigInteger.ZERO);
             case "CoverMap": return SimplicialCoverMap.identity(coverMapTestCover());
             case "SimplicialCover.pair": return new Pair<>(coverMapTestCover(),coverMapTestCover());

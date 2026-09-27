@@ -10,6 +10,7 @@ DATABASE = ROOT / "mathematics-coverage.json"
 MANIFEST = ROOT / "groupimp/src/test/resources/mathematics/concrete-catalog.tsv"
 DATE = "2026-09-27"
 OWNERS = {
+    "SimplicialCollapseAlgebra": ("SimplicialCollapse", "Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps"),
     "SimplicialSubdivisionAlgebra": ("SimplicialSubdivision", "Barycentric subdivisions of labelled pairs with face dictionaries, functorial maps, signed chain operators, chain/cochain inverse witnesses and integral comparison maps"),
     "SimplicialHomotopyEquivalenceAlgebra": ("HomotopyEquivalence", "Simplicial pair homotopy equivalences from supplied paths or strong collapses, with absolute strong-type decisions through core isomorphisms and inverse integral maps"),
     "SimplicialHomotopyPathAlgebra": ("HomotopyPath", "Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms"),
@@ -88,6 +89,7 @@ INTERFACES = {
     "IUnsafeFlatOperation": "flat/MixedFlatOperation",
 }
 EXTRA_TESTS = {
+    "SimplicialCollapseAlgebra": "NativeSimplicialCollapseTest",
     "SimplicialSubdivisionAlgebra": "NativeSimplicialSubdivisionTest",
     "SimplicialHomotopyEquivalenceAlgebra": "NativeSimplicialHomotopyEquivalenceTest",
     "SimplicialHomotopyPathAlgebra": "NativeSimplicialHomotopyPathTest",
@@ -177,6 +179,40 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "SimplicialCollapseAlgebra": {
+        "free-faces": "For a RelativeComplex emit all compatible nonempty codimension-one free faces, ordered by size then lexicographic integer labels. Each has a unique maximal coface; both removed simplices must lie inside the subcomplex or both outside it. Registered as SimplicialCollapse.free-faces; the whole immutable list shares one search budget.",
+        "has-free-face": "Return whether the full pair admits a compatible codimension-one free-face collapse. Empty and discrete complexes return false. This is not a contractibility or collapsibility decision. Resource exhaustion raises IMPLEMENTATION_FAILURE, never false.",
+        "from-face": "Consume a RelativeComplex and a finite set of signed int labels. Require a nonempty original face tau whose only strict coface sigma has one more vertex. Require tau and sigma to lie both inside or both outside the subcomplex. Remove exactly these two simplices from each component containing them. Registered as SimplicialCollapse.from-face; invalid faces and incompatible relative data are undefined.",
+        "from-absolute-face": "Embed the supplied FiniteComplex with empty subcomplex and perform the same single codimension-one collapse at the supplied nonempty free face. Registered as SimplicialCollapse.from-absolute-face.",
+        "source": "Return the full retained original pair (X,A).",
+        "target": "Return the full reduced pair (Y,B), with both free face and coface removed and all remaining labels fixed.",
+        "free-face": "Return the nonempty removed face tau as a finite set of integer labels.",
+        "coface": "Return the removed unique maximal coface sigma, containing tau with codimension one.",
+        "inclusion": "Return the actual RelativeMap i: (Y,B)->(X,A), fixing every retained vertex. A simplicial map representing the opposite chain retraction is not asserted.",
+        "equal": "Compare the full source pair and removed free face. The unique coface, target and signed witnesses are determined by that data; equal reduced targets alone are insufficient.",
+        "chain-matrix": "For nonnegative n return R_n: C_n(X,A)->C_n(Y,B). If epsilon is the coefficient of tau in boundary sigma, replace tau by -epsilon times the surviving boundary of sigma, send sigma to zero and fix all other basis simplices. R commutes with boundary and R i# = identity.",
+        "cochain-matrix": "For nonnegative n return transpose(R_n): C^n(Y,B)->C^n(X,A). This preserves degree and commutes with coboundary.",
+        "chain-matrices": "Emit R_0 through R_d in ascending degree, where d is the source ambient dimension, retaining zero shapes. The entire immutable list shares one work budget.",
+        "cochain-matrices": "Emit transpose(R_0) through transpose(R_d) in ascending degree, with d the source ambient dimension. The entire immutable list shares one work budget.",
+        "chain-homotopy-matrix": "For nonnegative n return H_n: C_n(X,A)->C_(n+1)(X,A). Set H(tau)=epsilon*sigma and H=0 on every other basis simplex. Then boundary H + H boundary = identity - i# R. If both removed simplices lie in A, the quotient homotopy is zero.",
+        "cochain-homotopy-matrix": "For nonnegative p return Q^p = transpose(H_(p-1)), satisfying coboundary Q + Q coboundary = identity - R^* i^*. Q^0 has zero rows and retains all source C^0 columns.",
+        "chain-homotopy-matrices": "Emit H_0 through H_d in ascending degree, with d the source ambient dimension. The entire immutable list shares one work budget.",
+        "cochain-homotopy-matrices": "Emit Q^0 through Q^(d+1) in ascending degree, including both endpoint zero shapes. The entire immutable list shares one work budget.",
+        "on-chain": "Require a RelativeChain on the full source pair. Apply R at its degree and return a chain on the reduced pair through ILeftProjectionOperation and the actual second operand's IAlgebraItem wrapper. Negative-degree zero chains are supported; input need not be a cycle.",
+        "on-cochain": "Require a RelativeCochain on the full reduced target pair. Apply transpose(R) at the same degree, returning a cochain on the source pair through the actual second operand wrapper. Degree zero and noncocycles are allowed.",
+        "on-absolute-chain": "Require an empty source subcomplex and a SimplicialChain on the full source ambient complex. Apply R to obtain a chain on the reduced complex through the actual second operand wrapper.",
+        "on-absolute-cochain": "Require an empty source subcomplex and a SimplicialCochain on the full reduced ambient complex. Apply transpose(R) to obtain a source cochain through the actual second operand wrapper.",
+        "homotopy-on-chain": "Require a RelativeChain on the full source pair. Apply H, raise degree by one and retain that pair through the actual second operand wrapper. For a cycle c the output bounds c - i# R(c). Negative-degree zero inputs are supported.",
+        "homotopy-on-cochain": "Require a RelativeCochain on the full source pair with positive degree. Apply Q, lower degree by one and retain that pair through the actual second operand wrapper. For a cocycle a its coboundary is a - R^* i^*(a). Use the matrix API for the degree-zero zero-row operator.",
+        "homotopy-on-absolute-chain": "Require an empty source subcomplex and a SimplicialChain on the full source ambient complex. Apply H and raise degree by one through the actual second operand wrapper.",
+        "homotopy-on-absolute-cochain": "Require an empty source subcomplex and a positive-degree SimplicialCochain on the full source ambient complex. Apply Q and lower degree by one through the actual second operand wrapper.",
+        "homology-map": "For nonnegative n return R_*: H_n(X,A)->H_n(Y,B), retaining integral presentations and torsion. It is inverse to the inclusion homology map.",
+        "inverse-homology-map": "For nonnegative n return i_*: H_n(Y,B)->H_n(X,A), induced by the retained simplicial inclusion and inverse to R_*.",
+        "homology-maps": "For nonnegative n emit exactly [R_*,i_*], retraction then inclusion. Both group models and both induced maps share one computation budget; the immutable list is never partially emitted.",
+        "cohomology-map": "For nonnegative n return R^*: H^n(Y,B)->H^n(X,A), retaining integral presentations and torsion and reversing chain direction.",
+        "inverse-cohomology-map": "For nonnegative n return i^*: H^n(X,A)->H^n(Y,B), inverse to R^* and induced contravariantly by inclusion.",
+        "cohomology-maps": "For nonnegative n emit exactly [R^*,i^*], retraction pullback then inclusion pullback. Both group models and both induced maps share one computation budget; the immutable list is never partially emitted.",
+    },
     "SimplicialSubdivisionAlgebra": {
         "from-pair": "Construct sd(X,A) and retain (X,A). Vertices encode nonempty ambient faces ordered by size then lexicographic original labels; the subcomplex uses the same ambient dictionary. Registered as SimplicialSubdivision.from-pair on RelativeComplex.",
         "from-complex": "Embed the supplied FiniteComplex with empty subcomplex, then construct its barycentric subdivision context. Registered as SimplicialSubdivision.from-complex on FiniteComplex.",
@@ -1369,6 +1405,15 @@ OWNER_CONDITIONS["RationalMatrixFamily"]["companion"] = "The polynomial has posi
 
 def record(identifier, owner, concept, paths, operation=None):
     carrier, scope = OWNERS[owner]
+    if owner == "SimplicialCollapseAlgebra":
+        paths = paths + ["groupimp/src/main/java/mathematics/topology/SimplicialCollapse.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+                         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+                         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+                         "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
     if owner == "SimplicialSubdivisionAlgebra":
         paths = paths + ["groupimp/src/main/java/mathematics/topology/SimplicialSubdivision.java",
                          "groupimp/src/main/java/mathematics/topology/SimplicialSubdivisionChains.java",
@@ -1615,6 +1660,11 @@ def record(identifier, owner, concept, paths, operation=None):
             value["known_limitations"].append("Iteration is capped at 10000 steps; exceeding it is IMPLEMENTATION_FAILURE. Exact values can still grow rapidly within this limit.")
         if operation_name in ("argmin", "argmax", "minimum", "maximum", "minimizers", "maximizers"):
             value["known_limitations"].append("Optimality is relative only to the explicit finite feasible set, not all integers or reals.")
+    if owner == "SimplicialCollapseAlgebra":
+        value["required_invariants"].append("The removed nonempty face tau has exactly one strict coface sigma of dimension one greater. Both lie inside the subcomplex or both outside it, so the full labelled pair is preserved. With epsilon the boundary incidence, the chain retraction replaces tau by -epsilon times the other faces of boundary sigma, kills sigma and fixes all other simplices. The homotopy H(tau)=epsilon*sigma satisfies boundary H + H boundary = identity - i# R; R i# = identity. Transposes give the dual identities, and all four induced integral comparison maps retain full presentations and torsion.")
+        value["known_limitations"] += ["At most 4096 nonempty simplices per input component, with signed int vertex labels. Geometric free-face search and construction do not require small chain groups; every matrix and integral computation uses quotient bases filtered before the 256-simplex bound. Each search, constructor, matrix, typed action, complete flat matrix list, integral map and complete two-map list has a shared 5000000-unit computation budget. Exhaustion raises IMPLEMENTATION_FAILURE, never a partial list or false predicate. Integer coefficient bit lengths remain unbounded.",
+            "Only one compatible codimension-one elementary collapse is retained. There is no automatic collapse sequence, expansion search, discrete Morse matching, general collapsibility or contractibility decision. The empty face is excluded, so an isolated point cannot collapse to the empty complex in this unreduced theory. The chain retraction need not come from a simplicial vertex map and does not supply a HomotopyEquivalence value in the existing contiguity-path carrier. Matrix and integral map degrees are nonnegative; typed chains admit negative zero groups and typed cochain homotopies require positive degree. Absolute actions require an empty subcomplex. General coefficient rings and raw cochain-product compatibility are outside scope."]
+        value["references"] += ["https://macaulay2.com/doc/Macaulay2-1.21/share/doc/Macaulay2/SimplicialComplexes/html/_elementary__Collapse_lp__Simplicial__Complex_cm__Ring__Element_rp.html", "https://e.math.cornell.edu/people/Kimball_Strong/notes/evasiveness.pdf"]
     if owner == "SimplicialSubdivisionAlgebra":
         value["required_invariants"].append("Subdivision simplices are strict inclusion chains of nonempty original faces. Original faces are ordered by size then lexicographic integer labels, and the subcomplex shares the ambient vertex dictionary. Face images define functorial subdivision maps even when vertices collapse. Last-vertex maps induce integral isomorphisms; their naturality under arbitrary vertex maps is witnessed by an explicit contiguous pair, not necessarily equality of raw maps.")
         value["required_invariants"].append("The signed subdivision chain map S has strict left inverse l#, with boundary P + P boundary = identity - S l# on subdivided quotient chains. Transposes give the dual cochain identity. Sparse absolute carrier-cone calculations precede quotient projection; filtering intermediate subcomplex terms can change the result. S is natural for arbitrary simplicial maps; the chosen P need not be natural under vertex relabelling.")
@@ -1701,7 +1751,7 @@ def record(identifier, owner, concept, paths, operation=None):
         value["required_invariants"].append("Absolute complexes have the same strong homotopy type exactly when their strong cores are isomorphic. The generated maps pass through the two core retractions and the selected core isomorphism, with the original two reduction paths providing exact inverse witnesses.")
         value["known_limitations"].append("Automatic strong-type comparison accepts absolute FiniteComplex operands only. Each reduced core may have at most 64 vertices for isomorphism search; the original complexes may have more if they reduce within the existing stage and work limits. Both reductions, search, generated maps and endpoint checks share one 5000000-unit budget. False excludes strong equivalence, not ordinary homotopy equivalence; differently subdivided circles illustrate the distinction. Relative core classification is not supplied.")
         value["known_limitations"] += ["Each witness has 1 through 256 stages, and each boundary complex at most 4096 nonempty simplices. Required homology/cohomology quotient bases are filtered before the 256-simplex bound; geometric reduction itself has no 256-vertex basis limit. Each equivalence construction, entire composition including transported-path revalidation, entire search/reduction including final witness validation, and entire two-map homology/cohomology list shares one 5000000-unit work budget. Exhaustion raises IMPLEMENTATION_FAILURE without partial results; integer coefficient bit lengths are unbounded.",
-            "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. There is no general homotopy-equivalence or contractibility decision, elementary free-face collapse search, arbitrary subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."]
+            "Supplied finite contiguity paths are checked; dominated-vertex reductions construct a restricted family automatically. SimplicialCollapse separately constructs compatible elementary face cancellations with chain/cochain witnesses. There is no general homotopy-equivalence or contractibility decision, general collapse-sequence search, arbitrary subdivision, arbitrary chain-homotopy carrier or other coefficient ring. General supplied data need not be a strict simplicial isomorphism or deformation retraction. Generated strong collapses have an inclusion inverse and paths fixing the final target. Label-based choices are deterministic, not invariant under relabelling; no uniqueness claim is made for relative terminal pairs. At most 255 deletions fit the retained witness. Composition with a homotopy inverse need not equal the strict identity witness. Induced map degrees are nonnegative."]
         value["references"] += ["https://pi.math.cornell.edu/~hatcher/AT/ATch0.pdf", "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf", "https://arxiv.org/abs/0907.2954"]
     if owner == "SimplicialHomotopyPathAlgebra":
         value["required_invariants"].append("Every stage retains the same full source and target pairs, and every consecutive pair is contiguous in both target components. Accumulated prisms telescope between the first and last maps, with dual cochain identities. Concatenation preserves the full ordered path; stationary paths are its units. Native chain/cochain actions use the actual second operand wrappers.")
@@ -1865,6 +1915,8 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("SimplicialCollapse", "Elementary simplicial pair collapses and integral chain witnesses", "mathematics.topology.SimplicialCollapse",
+         ["Retained full source pair and reduced target pair", "Nonempty free face with a unique maximal codimension-one coface, both inside or both outside the subcomplex", "Signed integral chain retraction splitting inclusion strictly, with explicit chain/cochain homotopies", "Inverse integral homology and contravariant cohomology maps retaining presentations and torsion", "Actual typed second operand wrappers with checked geometric contexts and degree conventions", "Shared whole-list computation budgets and filtered quotient basis limits"], ["RelativeComplex", "FiniteComplex", "RelativeMap", "FiniteSet(Z)", "Mat(Z)", "N", "Boolean", "RelativeChain", "RelativeCochain", "SimplicialChain", "SimplicialCochain", "AbelianGroupHomomorphism"]),
         ("SimplicialSubdivision", "Barycentric subdivision contexts and integral comparison maps", "mathematics.topology.SimplicialSubdivision",
          ["Retained full original pair and deterministic strict face-chain subdivision", "Nonempty ambient faces indexed by size then lexicographic original labels; subcomplex shares those indices", "Subdivision preserves identity and composition including collapsed face images", "Last-vertex map induces inverse integral homology and cohomology maps, retaining torsion", "Naturality for arbitrary vertex maps is witnessed by contiguity, not necessarily equality of raw maps", "Compound maps and inverse lists share a computation budget", "Signed subdivision S has strict last-vertex left inverse and an explicit cone homotopy from S last# to identity on subdivided quotient chains", "Transpose operators give typed cochain comparisons and degree-lowering homotopies"], ["RelativeComplex", "FiniteComplex", "RelativeMap", "SimplicialHomotopy", "FiniteSet(Z)", "Z", "N", "Boolean", "AbelianGroupHomomorphism", "Mat(Z)", "RelativeChain", "RelativeCochain", "SimplicialChain", "SimplicialCochain"]),
         ("StrongCollapse.vertices", "Ordered removed vertex and surviving dominator", "mathematics.foundations.Pair<BigInteger,BigInteger>",

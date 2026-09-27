@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1785 |
-| DIRECTLY_SUPPORTED | 1542 |
+| Scoped records | 1818 |
+| DIRECTLY_SUPPORTED | 1575 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1401 |
+| IMPLEMENTED | 1434 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1469 |
+| MACHINE_TESTED | 1502 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1378 | 1378 | 0 | 0 | 0 | 1378 | 0 | 0 |
+| Concrete MathTool algebras | 1411 | 1411 | 0 | 0 | 0 | 1411 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -1319,6 +1319,39 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | SimplicialCochain.with-coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.with-coordinates |
 | SimplicialCochain.zero-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.zero-on |
 | SimplicialCochainAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks |
+| SimplicialCollapse.chain-homotopy-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.chain-homotopy-matrices |
+| SimplicialCollapse.chain-homotopy-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.chain-homotopy-matrix |
+| SimplicialCollapse.chain-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.chain-matrices |
+| SimplicialCollapse.chain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.chain-matrix |
+| SimplicialCollapse.cochain-homotopy-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.cochain-homotopy-matrices |
+| SimplicialCollapse.cochain-homotopy-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.cochain-homotopy-matrix |
+| SimplicialCollapse.cochain-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.cochain-matrices |
+| SimplicialCollapse.cochain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.cochain-matrix |
+| SimplicialCollapse.coface | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.coface |
+| SimplicialCollapse.cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.cohomology-map |
+| SimplicialCollapse.cohomology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.cohomology-maps |
+| SimplicialCollapse.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.equal |
+| SimplicialCollapse.free-face | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.free-face |
+| SimplicialCollapse.free-faces | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.free-faces |
+| SimplicialCollapse.from-absolute-face | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.from-absolute-face |
+| SimplicialCollapse.from-face | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.from-face |
+| SimplicialCollapse.has-free-face | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.has-free-face |
+| SimplicialCollapse.homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.homology-map |
+| SimplicialCollapse.homology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.homology-maps |
+| SimplicialCollapse.homotopy-on-absolute-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.homotopy-on-absolute-chain |
+| SimplicialCollapse.homotopy-on-absolute-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.homotopy-on-absolute-cochain |
+| SimplicialCollapse.homotopy-on-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.homotopy-on-chain |
+| SimplicialCollapse.homotopy-on-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.homotopy-on-cochain |
+| SimplicialCollapse.inclusion | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.inclusion |
+| SimplicialCollapse.inverse-cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.inverse-cohomology-map |
+| SimplicialCollapse.inverse-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.inverse-homology-map |
+| SimplicialCollapse.on-absolute-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.on-absolute-chain |
+| SimplicialCollapse.on-absolute-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.on-absolute-cochain |
+| SimplicialCollapse.on-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.on-chain |
+| SimplicialCollapse.on-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.on-cochain |
+| SimplicialCollapse.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.source |
+| SimplicialCollapse.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.target |
+| SimplicialCollapseAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps |
 | SimplicialCover.connecting-chain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral homological and cohomological Mayer-Vietoris sequences, direct sums and simplicial excision maps; native operation SimplicialCover.connecting-chain-matrix |
 | SimplicialCover.connecting-cochain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral homological and cohomological Mayer-Vietoris sequences, direct sums and simplicial excision maps; native operation SimplicialCover.connecting-cochain-matrix |
 | SimplicialCover.connecting-cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral homological and cohomological Mayer-Vietoris sequences, direct sums and simplicial excision maps; native operation SimplicialCover.connecting-cohomology-map |

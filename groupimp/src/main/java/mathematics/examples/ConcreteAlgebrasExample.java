@@ -30,6 +30,7 @@ import mathematics.topology.SimplicialHomotopy;
 import mathematics.topology.SimplicialHomotopyPath;
 import mathematics.topology.SimplicialHomotopyEquivalence;
 import mathematics.topology.SimplicialSubdivision;
+import mathematics.topology.SimplicialCollapse;
 import mathematics.topology.IntegralHomology;
 import mathematics.topology.FiniteSimplicialMap;
 import mathematics.topology.RelativeSimplicialComplex;
@@ -100,6 +101,11 @@ public final class ConcreteAlgebrasExample {
                 .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("homology-maps",BigInteger.ONE)
                 .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
         SimplicialChain orientedCircle=new SimplicialChain(circle,BigInteger.ONE,new IntegerVector(BigInteger.ONE,BigInteger.ONE.negate(),BigInteger.ONE));
+        FiniteSimplicialComplex filledTriangle=new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0,1,2)));
+        SimplicialChain triangleEdge=new SimplicialChain(filledTriangle,BigInteger.ONE,new IntegerVector(BigInteger.ZERO,BigInteger.ONE,BigInteger.ZERO));
+        System.out.println("Free-edge collapse retracts a triangle edge to its other two edges: "+math.flow(math.complexes,Collections.singletonList(filledTriangle))
+                .<SimplicialCollapse,FiniteSet<BigInteger>>performAlgebraUnsafe("SimplicialCollapse.from-absolute-face",FiniteSet.of(BigInteger.ZERO,BigInteger.valueOf(2)))
+                .performLeftProjectionOperation("on-absolute-chain",triangleEdge).<IntegerVector>performAlgebraTransfer("coordinates").collect());
         System.out.println("Subdividing the oriented circle retains an integral cycle: "+math.flow(math.complexes,Collections.singletonList(circle))
                 .<SimplicialSubdivision>performAlgebraTransfer("SimplicialSubdivision.from-complex")
                 .performLeftProjectionOperation("on-absolute-chain",orientedCircle).<Boolean>performAlgebraTransfer("is-cycle").collect());

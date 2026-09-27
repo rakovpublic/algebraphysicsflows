@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1318 native operations from 60 algebra builders.
+The default initializer currently installs 1350 native operations from 61 algebra builders.
 
 ## Existing API usage
 
@@ -63,6 +63,7 @@ List<String> values = math.flow(math.naturals,
 | SimplicialHomotopyAlgebra / SimplicialHomotopy | ordered endpoint equality -> Boolean | endpoint maps; source/target pairs; reverse; flat chain/cochain matrices | construct between contiguous absolute or relative maps; degreewise prism matrices; typed chain/cochain actions through second operand wrappers |
 | SimplicialHomotopyPathAlgebra / HomotopyPath | chronological concatenation; full stage equality -> Boolean | endpoints/pairs; reverse; step count; flat stages, steps and chain/cochain matrices | stationary and one-step constructors; append a map; precompose/postcompose all stages; accumulated prism matrices and typed actions |
 | SimplicialSubdivisionAlgebra / SimplicialSubdivision | equality of full original pairs -> Boolean | original/subdivided pairs; vertex count; flat face dictionary; last-vertex map | pair/complex constructors; dictionary lookups; induced subdivision maps; naturality witnesses; scalar/flat inverse integral maps; signed subdivision chain/cochain actions and explicit inverse homotopies |
+| SimplicialCollapseAlgebra / SimplicialCollapse | equality of source pair and free face -> Boolean | source/reduced pairs; free face/coface; inclusion; flat chain/cochain matrices and homotopies | compatible free-face search and constructors; signed chain retraction and dual cochain actions; typed homotopies; scalar/flat inverse integral maps |
 | SimplicialHomotopyEquivalenceAlgebra / HomotopyEquivalence | composition; full map/witness equality -> Boolean | inverse; maps, pairs and homotopy witnesses | supplied inverse witnesses; compatible vertex collapses and strong-core reduction; absolute strong-type decisions and constructed equivalences; inverse integral maps |
 | SimplicialChainAlgebra / SimplicialChain | context-checked add/subtract; equality/homology comparison -> Boolean | boundary; negate; complex/degree/coordinates; cycle/boundary predicates; fillings; homology/class; flat cycle generators; augmentation | integer scale; coordinates; pushforward; pairing; cap and cap-class; fixed-chain/cochain cap matrices and induced maps; zero and flat basis constructors |
 | SimplicialCochainAlgebra / SimplicialCochain | same-context add/subtract; cup; equality/cohomologous -> Boolean; cup-class -> AbelianGroupElement | negate; complex/degree/coordinates; coboundary; zero/cocycle/coboundary tests; cohomology model/class; cobounding coordinates; flat cocycle generators | degreewise zero/basis construction and unit; integer scaling; coordinate replacement; representative; evaluation; pullback; scalar/flat cohomology models and contravariant maps |
@@ -1774,3 +1775,62 @@ Each matrix, typed action and entire flat matrix list shares one 5,000,000-unit 
 S is natural under arbitrary simplicial pair maps, including collapsed faces. The chosen homotopy P depends on the original vertex order and need not be natural under relabelling. These are chain and cochain witnesses, with no claim of a simplicial vertex-map inverse, strong simplicial homotopy equivalence or multiplicativity of the raw cochain operator.
 
 NativeSimplicialSubdivisionChainsTest checks all 167 four-label complexes against an independent signed-permutation formula, all 148 three-label pairs against absolute construction followed by quotient projection, top-dimensional factorial coefficients through dimension four, and all 256 tetrahedron vertex maps for strict naturality. It checks 729 ternary circle chains and cochains, higher-dimensional relative fillings, induced integral inverses and torsion, repeated subdivision, order-dependent homotopies, empty and extreme degrees, filtered basis limits, all eight typed wrappers and serialized scalar/flat flows. ConcreteAlgebrasTest checks the 16 new registrations against explicit expected values.
+
+## Elementary free-face collapses and integral witnesses
+
+`math.collapses` supplies 32 native operations on `SimplicialCollapse`. A context retains the original pair `(X,A)`, a nonempty free face `tau`, its unique codimension-one maximal coface `sigma`, and the reduced pair `(Y,B)`. The construction deletes exactly those two simplices. This is the elementary collapse documented in the [Macaulay2 simplicial-complex reference](https://macaulay2.com/doc/Macaulay2-1.21/share/doc/Macaulay2/SimplicialComplexes/html/_elementary__Collapse_lp__Simplicial__Complex_cm__Ring__Element_rp.html); the preservation of homology under such collapses is discussed in [Strong's notes, proposition 2.7 and lemma 2.8](https://e.math.cornell.edu/people/Kimball_Strong/notes/evasiveness.pdf).
+
+For relative pairs, both removed simplices must belong to A or both must lie outside A. In the first case both are removed from X and A; in the second, A is unchanged. A free face lying in A with its coface outside A is rejected. An isolated vertex cannot collapse to the empty complex. Free-face lists are ordered by cardinality and then lexicographically by the original signed integer labels. `has-free-face` checks for one eligible move; it does not decide collapsibility.
+
+Let `epsilon` be the coefficient of tau in the oriented boundary of sigma, with vertices in increasing order. Write `boundary(sigma) = epsilon*tau + a`. The chain retraction and homotopy are
+
+```text
+R(tau) = -epsilon*a,   R(sigma) = 0,   R(other simplex) = that simplex
+H(tau) = epsilon*sigma,   H(other simplex) = 0
+R i# = identity on C(Y,B)
+boundary H + H boundary = identity on C(X,A) - i# R
+```
+
+Here `i` is the actual simplicial inclusion `(Y,B) -> (X,A)`. All matrices use the existing ordered quotient bases. When both removed simplices belong to A, R is the identity on the quotient and H is zero. The cochain operators are `R* = transpose(R)` and `Q^p = transpose(H_(p-1))`, satisfying `coboundary Q + Q coboundary = identity - R* i*` on the original pair. These are specific integral chain and cochain witnesses retained by the collapse context.
+
+| Native operation | Input and result |
+| --- | --- |
+| `SimplicialCollapse.free-faces`, `SimplicialCollapse.has-free-face` | RelativeComplex -> flat eligible FiniteSet(Z) faces, or Boolean |
+| `SimplicialCollapse.from-face` | RelativeComplex and FiniteSet(Z) -> checked collapse context |
+| `SimplicialCollapse.from-absolute-face` | FiniteComplex and FiniteSet(Z) -> context with empty subcomplex |
+| `source`, `target` | Context -> original or reduced RelativeComplex |
+| `free-face`, `coface` | Context -> retained FiniteSet(Z) |
+| `inclusion` | Context -> RelativeMap from reduced to original pair |
+| `equal` | Two contexts -> equality of full source pair and selected face |
+| `chain-matrix`, `cochain-matrix` | Context and nonnegative degree -> R or its transpose |
+| `chain-matrices`, `cochain-matrices` | Context -> flat matrices in degrees 0 through original ambient dimension d |
+| `chain-homotopy-matrix`, `cochain-homotopy-matrix` | Context and nonnegative degree -> H or Q |
+| `chain-homotopy-matrices`, `cochain-homotopy-matrices` | Context -> flat H in degrees 0 through d, or Q in degrees 0 through d+1 |
+| `on-chain`, `on-absolute-chain` | Context and original chain -> reduced chain of the same degree |
+| `on-cochain`, `on-absolute-cochain` | Context and reduced cochain -> original cochain of the same degree |
+| `homotopy-on-chain`, `homotopy-on-absolute-chain` | Context and original chain -> original chain one degree higher |
+| `homotopy-on-cochain`, `homotopy-on-absolute-cochain` | Context and positive-degree original cochain -> original cochain one degree lower |
+| `homology-map`, `inverse-homology-map`, `homology-maps` | Context and nonnegative degree -> R_*, i_*, or flat pair [R_*, i_*] |
+| `cohomology-map`, `inverse-cohomology-map`, `cohomology-maps` | Context and nonnegative degree -> R*, i*, or flat pair [R*, i*] on cohomology |
+
+The four absolute typed actions require an empty source subcomplex. All eight typed actions check full geometric contexts and return the actual second operand's `IAlgebraItem` wrapper through `ILeftProjectionOperation`. Cochain homotopy matrices retain the degree-zero zero-row shape; typed cochain homotopies require positive degree. Typed chains support the existing negative-degree zero groups. Integral maps retain presented groups and torsion, with the cohomology direction reversed: R* goes from the reduced pair to the original pair.
+
+For example, removing edge `{0,2}` and the filled triangle `{0,1,2}` retains all three vertices and the two other edges. Its retraction sends `[0,2]` to `[0,1]+[1,2]`:
+
+```java
+FiniteSimplicialComplex triangle = new FiniteSimplicialComplex(
+        Collections.singletonList(FiniteSet.of(0, 1, 2)));
+SimplicialChain edge = new SimplicialChain(triangle, BigInteger.ONE,
+        new IntegerVector(BigInteger.ZERO, BigInteger.ONE, BigInteger.ZERO));
+List<String> coordinates = math.flow(math.complexes, Collections.singletonList(triangle))
+        .<SimplicialCollapse, FiniteSet<BigInteger>>performAlgebraUnsafe(
+                "SimplicialCollapse.from-absolute-face", FiniteSet.of(BigInteger.ZERO, BigInteger.valueOf(2)))
+        .performLeftProjectionOperation("on-absolute-chain", edge)
+        .<IntegerVector>performAlgebraTransfer("coordinates").collect(); // ["[1, 1]"]
+```
+
+This chain retraction cannot be a vertex map fixing the reduced complex: its vertices are unchanged, but its removed edge is absent from the target. The collapse context therefore exposes inclusion and chain witnesses without claiming a `HomotopyEquivalence` value in the existing contiguity-path carrier. Compatible dominated-vertex reductions remain available separately.
+
+Each complex has at most 4096 nonempty simplices. Free-face discovery and geometric construction do not impose a chain-basis bound. Each required quotient basis is filtered before the 256-simplex limit for matrix, typed and integral operations. One 5,000,000-unit computation budget covers each search, constructor, matrix, typed action, complete flat matrix list, integral map or complete two-map list. Exhaustion raises IMPLEMENTATION_FAILURE without a partial result or false predicate. Integer coefficient bit lengths remain unbounded. The carrier represents one collapse; automatic collapse sequences, expansions, general discrete Morse matchings and contractibility decisions remain outside its scope.
+
+NativeSimplicialCollapseTest checks all 167 four-label complexes against an independent strict-coface oracle, all 148 three-label relative pairs, and all 1,024 graph/vertex-subcomplex pairs. Its 16 tests also cover signed simplex facets through dimension seven, 729 ternary chain/cochain actions, both homotopy identities, projective-plane torsion, inverse integral maps, pair compatibility, empty/disconnected and extreme-label inputs, filtered basis limits, shared flat-map budgets, all eight actual wrappers and serialized scalar/flat flows. ConcreteAlgebrasTest checks all 32 registrations against explicit expected values.
