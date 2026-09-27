@@ -109,6 +109,9 @@ public final class ConcreteAlgebrasExample {
                 .performLeftProjectionOperation("on-absolute-chain",triangleEdge).<IntegerVector>performAlgebraTransfer("coordinates").collect());
         System.out.println("Greedy triangle reduction retains three elementary collapse steps: "+math.flow(math.complexes,Collections.singletonList(filledTriangle))
                 .<SimplicialCollapseSequence>performAlgebraTransfer("CollapseSequence.reduce-absolute").<BigInteger>performAlgebraTransfer("step-count").collect());
+        System.out.println("All triangle collapses to vertex zero retain three steps each: "+math.flow(math.complexes,Collections.singletonList(filledTriangle))
+                .<SimplicialCollapseSequence>performFlatCustomResultOperation("CollapseSequence.absolute-collapses-to",new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))))
+                .<BigInteger>performAlgebraTransfer("step-count").collect());
         System.out.println("Subdividing the oriented circle retains an integral cycle: "+math.flow(math.complexes,Collections.singletonList(circle))
                 .<SimplicialSubdivision>performAlgebraTransfer("SimplicialSubdivision.from-complex")
                 .performLeftProjectionOperation("on-absolute-chain",orientedCircle).<Boolean>performAlgebraTransfer("is-cycle").collect());

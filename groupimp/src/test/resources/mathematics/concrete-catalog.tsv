@@ -1377,6 +1377,15 @@ CollapseSequence.homology-maps	SimplicialCollapseSequenceAlgebra	homology-maps	C
 CollapseSequence.cohomology-map	SimplicialCollapseSequenceAlgebra	cohomology-map	CollapseSequence	N	AbelianGroupHomomorphism	SCALAR	TOTAL	IUnsafeOperation
 CollapseSequence.inverse-cohomology-map	SimplicialCollapseSequenceAlgebra	inverse-cohomology-map	CollapseSequence	N	AbelianGroupHomomorphism	SCALAR	TOTAL	IUnsafeOperation
 CollapseSequence.cohomology-maps	SimplicialCollapseSequenceAlgebra	cohomology-maps	CollapseSequence	N	AbelianGroupHomomorphism	LIST	TOTAL	IUnsafeFlatOperation
+CollapseSequence.can-collapse-to	SimplicialCollapseSequenceAlgebra	CollapseSequence.can-collapse-to	RelativeComplex	RelativeComplex	Boolean	SCALAR	TOTAL	ICustomResultOperation
+CollapseSequence.collapse-to	SimplicialCollapseSequenceAlgebra	CollapseSequence.collapse-to	RelativeComplex	RelativeComplex	CollapseSequence	SCALAR	PARTIAL	ICustomResultOperation
+CollapseSequence.collapses-to	SimplicialCollapseSequenceAlgebra	CollapseSequence.collapses-to	RelativeComplex	RelativeComplex	CollapseSequence	LIST	TOTAL	ICustomResultFlatOperation
+CollapseSequence.absolute-can-collapse-to	SimplicialCollapseSequenceAlgebra	CollapseSequence.absolute-can-collapse-to	FiniteComplex	FiniteComplex	Boolean	SCALAR	TOTAL	ICustomResultOperation
+CollapseSequence.absolute-collapse-to	SimplicialCollapseSequenceAlgebra	CollapseSequence.absolute-collapse-to	FiniteComplex	FiniteComplex	CollapseSequence	SCALAR	PARTIAL	ICustomResultOperation
+CollapseSequence.absolute-collapses-to	SimplicialCollapseSequenceAlgebra	CollapseSequence.absolute-collapses-to	FiniteComplex	FiniteComplex	CollapseSequence	LIST	TOTAL	ICustomResultFlatOperation
+CollapseSequence.is-collapsible	SimplicialCollapseSequenceAlgebra	CollapseSequence.is-collapsible	FiniteComplex	-	Boolean	SCALAR	TOTAL	ITransferOperation
+CollapseSequence.collapse-to-point	SimplicialCollapseSequenceAlgebra	CollapseSequence.collapse-to-point	FiniteComplex	-	CollapseSequence	SCALAR	PARTIAL	ITransferOperation
+CollapseSequence.collapses-to-point	SimplicialCollapseSequenceAlgebra	CollapseSequence.collapses-to-point	FiniteComplex	-	CollapseSequence	LIST	TOTAL	ITransferFlatOperation
 Z/5Z.add	PrimeField	add	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL	IOperation
 Z/5Z.subtract	PrimeField	subtract	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL	IOperation
 Z/5Z.multiply	PrimeField	multiply	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL	IOperation

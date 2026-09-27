@@ -19,7 +19,7 @@ public final class SimplicialCollapseSequence implements Serializable {
     public SimplicialCollapseSequence(RelativeSimplicialComplex source,List<SimplicialCollapse> steps) {
         this(source,steps,new Computation());
     }
-    private SimplicialCollapseSequence(RelativeSimplicialComplex source,List<SimplicialCollapse> steps,Computation work) {
+    SimplicialCollapseSequence(RelativeSimplicialComplex source,List<SimplicialCollapse> steps,Computation work) {
         this.source=Objects.requireNonNull(source); Objects.requireNonNull(steps); requireSize(steps.size());
         List<SimplicialCollapse> copy=new ArrayList<>(steps); RelativeSimplicialComplex current=source;
         for(SimplicialCollapse step : copy) {

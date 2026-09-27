@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1386 native operations from 62 algebra builders.
+The default initializer currently installs 1395 native operations from 62 algebra builders.
 
 ## Existing API usage
 
@@ -64,7 +64,7 @@ List<String> values = math.flow(math.naturals,
 | SimplicialHomotopyPathAlgebra / HomotopyPath | chronological concatenation; full stage equality -> Boolean | endpoints/pairs; reverse; step count; flat stages, steps and chain/cochain matrices | stationary and one-step constructors; append a map; precompose/postcompose all stages; accumulated prism matrices and typed actions |
 | SimplicialSubdivisionAlgebra / SimplicialSubdivision | equality of full original pairs -> Boolean | original/subdivided pairs; vertex count; flat face dictionary; last-vertex map | pair/complex constructors; dictionary lookups; induced subdivision maps; naturality witnesses; scalar/flat inverse integral maps; signed subdivision chain/cochain actions and explicit inverse homotopies |
 | SimplicialCollapseAlgebra / SimplicialCollapse | equality of source pair and free face -> Boolean | source/reduced pairs; free face/coface; inclusion; flat chain/cochain matrices and homotopies | compatible free-face search and constructors; signed chain retraction and dual cochain actions; typed homotopies; scalar/flat inverse integral maps |
-| SimplicialCollapseSequenceAlgebra / CollapseSequence | chronological then; full step equality -> Boolean | original/final pairs; flat steps/stages; step count; terminal check; inclusion; flat matrices | identity and one-step constructors; greedy pair/absolute reduction; append; composite chain/cochain actions and homotopies; scalar/flat inverse integral maps |
+| SimplicialCollapseSequenceAlgebra / CollapseSequence | chronological then; full step equality -> Boolean | original/final pairs; flat steps/stages; step count; terminal check; inclusion; flat matrices | identity and one-step constructors; greedy reduction; exhaustive collapse decisions/witnesses/enumeration; append; composite chain/cochain actions and homotopies; scalar/flat inverse integral maps |
 | SimplicialHomotopyEquivalenceAlgebra / HomotopyEquivalence | composition; full map/witness equality -> Boolean | inverse; maps, pairs and homotopy witnesses | supplied inverse witnesses; compatible vertex collapses and strong-core reduction; absolute strong-type decisions and constructed equivalences; inverse integral maps |
 | SimplicialChainAlgebra / SimplicialChain | context-checked add/subtract; equality/homology comparison -> Boolean | boundary; negate; complex/degree/coordinates; cycle/boundary predicates; fillings; homology/class; flat cycle generators; augmentation | integer scale; coordinates; pushforward; pairing; cap and cap-class; fixed-chain/cochain cap matrices and induced maps; zero and flat basis constructors |
 | SimplicialCochainAlgebra / SimplicialCochain | same-context add/subtract; cup; equality/cohomologous -> Boolean; cup-class -> AbelianGroupElement | negate; complex/degree/coordinates; coboundary; zero/cocycle/coboundary tests; cohomology model/class; cobounding coordinates; flat cocycle generators | degreewise zero/basis construction and unit; integer scaling; coordinate replacement; representative; evaluation; pullback; scalar/flat cohomology models and contravariant maps |
@@ -1838,7 +1838,7 @@ NativeSimplicialCollapseTest checks all 167 four-label complexes against an inde
 
 ## Collapse sequences and deterministic reduction
 
-`math.collapseSequences` supplies 36 operations on `CollapseSequence`, represented by `SimplicialCollapseSequence`. It retains a full original pair and an ordered list of compatible elementary collapses, including every intermediate pair. Empty sequences provide identity retractions. A sequence can be constructed from one collapse, extended with another collapse, or concatenated chronologically with a sequence whose full source pair equals its final pair. Equal endpoints alone do not identify sequences: different choices can produce different chain homotopies.
+`math.collapseSequences` supplies 45 operations on `CollapseSequence`, represented by `SimplicialCollapseSequence`: 36 sequence/reduction operations below and nine exhaustive search operations in the next section. It retains a full original pair and an ordered list of compatible elementary collapses, including every intermediate pair. Empty sequences provide identity retractions. A sequence can be constructed from one collapse, extended with another collapse, or concatenated chronologically with a sequence whose full source pair equals its final pair. Equal endpoints alone do not identify sequences: different choices can produce different chain homotopies.
 
 The greedy reducer repeatedly chooses the eligible nonempty face of smallest cardinality, breaking ties lexicographically by original integer labels. It updates the geometric pair and searches again until no compatible face remains. Pair compatibility is checked at every step, so protected boundary faces stay protected, while face/coface pairs inside the subcomplex can be cancelled in both components. The result records the actual elementary collapses, consistent with the notion of a collapse sequence in [Strong and Vogeli's topology notes, section 2.1](https://e.math.cornell.edu/people/Kimball_Strong/notes/evasiveness.pdf).
 
@@ -1896,3 +1896,42 @@ For the filled triangle on `{0,1,2}`, the reducer removes edge `{0,1}`, then ver
 Sequences allow zero through 256 steps and at most 4096 nonempty simplices per component. Geometry does not require small chain bases. Every required matrix basis is filtered before its 256-simplex bound, including intermediate quotient bases. Each entire reduction shares one 5,000,000-unit budget across all searches, constructions and final validation. Each append/concatenation, composite matrix, typed action, complete flat matrix list, integral map and complete two-map list also shares one budget. Step or work exhaustion raises IMPLEMENTATION_FAILURE without partial sequences, partial lists or false mathematical conclusions. Coefficient bit lengths remain unbounded.
 
 NativeSimplicialCollapseSequenceTest has 16 tests covering independent greedy deletion oracles for all 167 four-label complexes, 148 three-label pairs and 1,024 graph/vertex-subcomplex pairs. It checks chronological composition, identity units, retained choices, 729 ternary chain/cochain actions, signed simplex reductions through dimension four, projective-plane torsion, typed fillings, relative restrictions, empty and extreme labels, step and shared-work limits, filtered bases, actual wrappers and serialized scalar/flat/append flows. ConcreteAlgebrasTest checks all 36 registrations against explicit expected values.
+
+## Exhaustive elementary-collapse search
+
+Nine further operations on `math.collapseSequences` search all compatible elementary collapse choices within explicit resource bounds. They return the existing sequence carrier, so every found witness immediately supports the chain/cochain, homology and flow operations above. Greedy `reduce` remains available as a separate operation.
+
+| Native operation | Input and result |
+| --- | --- |
+| `CollapseSequence.can-collapse-to` | Two RelativeComplex values -> whether a compatible sequence reaches the exact target pair |
+| `CollapseSequence.collapse-to` | Two RelativeComplex values -> first sequence to that target; undefined if none exists |
+| `CollapseSequence.collapses-to` | Two RelativeComplex values -> complete flat list of ordered sequences to that target |
+| `CollapseSequence.absolute-can-collapse-to` | Two FiniteComplex values -> existence of a collapse to the exact target complex |
+| `CollapseSequence.absolute-collapse-to` | Two FiniteComplex values -> first sequence with empty subcomplexes |
+| `CollapseSequence.absolute-collapses-to` | Two FiniteComplex values -> complete flat list of sequences with empty subcomplexes |
+| `CollapseSequence.is-collapsible` | FiniteComplex -> whether a sequence reaches any single vertex |
+| `CollapseSequence.collapse-to-point` | FiniteComplex -> first sequence to a single vertex; undefined if none exists |
+| `CollapseSequence.collapses-to-point` | FiniteComplex -> complete flat list of sequences ending at any single vertex |
+
+For an exact target `(Y,B)` from `(X,A)`, Y must be a labelled subcomplex of X and `B = A intersection Y`. Every move removes both simplices from A or neither, so this intersection condition is necessary. Both component Euler characteristics must also agree. The search checks these obstructions, then explores eligible faces in depth-first order, with choices ordered by face cardinality and lexicographic labels. Faces of the requested target are protected from deletion. Every sequence to that target has `(number of faces of X - number of faces of Y)/2` steps.
+
+Unsuccessful intermediate pairs are cached. Successful intermediate pairs are revisited for each distinct prefix when enumerating: two orders of independent collapses remain different witnesses. First-witness search stops at the first solution in the same order used by the complete list. Matching source and target give an empty identity sequence and a singleton enumeration. Absence gives false, an undefined scalar witness, or an empty flat list, according to the operation. A single vertex is collapsible with an empty sequence; the empty complex is not collapsible to a point in this unreduced convention.
+
+Collapsibility does not mean contractibility or trivial positive-degree homology. The [dunce-hat example documented by SageMath](https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex_examples.html#sage.topology.simplicial_complex_examples.DunceHat) is contractible but not collapsible. Our fixture has no eligible first move, and the search returns false even though its positive-degree integral homology vanishes. Choosing a greedy sequence also differs from searching all choices; the limitations of local collapse choices are studied by [Adiprasito, Benedetti and Lutz](https://arxiv.org/abs/1404.4239).
+
+For the filled triangle `triangle` on `{0,1,2}`, there are four ordered collapse sequences ending at vertex `{0}`, and twelve ending at any vertex:
+
+```java
+FiniteSimplicialComplex point = new FiniteSimplicialComplex(
+        Collections.singletonList(FiniteSet.of(0)));
+List<String> counts = math.flow(math.complexes, Collections.singletonList(triangle))
+        .<SimplicialCollapseSequence>performFlatCustomResultOperation(
+                "CollapseSequence.absolute-collapses-to", point)
+        .<BigInteger>performAlgebraTransfer("step-count").collect(); // ["3", "3", "3", "3"]
+```
+
+To preserve edge `{0,1}`, target search instead first deletes edge `{0,2}` with the triangle, then deletes vertex `{2}` with its remaining incident edge. Its witness has two steps and retains that exact labelled edge. This also shows why an unconstrained greedy result cannot answer a specified-target query.
+
+Every call shares one 5,000,000-unit budget across all branches, free-face discovery, collapse construction and validation of every returned sequence. Inputs allow at most 4096 nonempty faces per component, searches at most 4096 distinct intermediate pairs, each witness at most 256 steps, and enumerations at most 1024 sequences. Structural obstructions are checked before the required-step bound. Resource exhaustion raises IMPLEMENTATION_FAILURE; it never returns false, an undefined witness or a truncated list. The geometric search does not impose a matrix-basis limit, but subsequent integral operators retain their 256-simplex filtered-basis bound. Searches do not use expansions, relabellings, subdivisions or general discrete Morse matchings, and do not decide contractibility.
+
+NativeSimplicialCollapseSearchTest has 14 tests. Independent face-bitset breadth-first traversal checks all 27,889 comparisons among four-label complexes and all 21,904 comparisons among three-label relative pairs. Independent path enumeration checks every ordered relative witness on three labels and all 480 tetrahedron collapses to a specified vertex. Further tests cover all 64 four-vertex graph decisions, target protection, 720 star-collapse orders, enumeration and work exhaustion, failed-state caching, step limits, the dunce hat, projective-plane torsion, full relative contexts, empty and extreme-label inputs, geometry versus quotient-basis limits, and serialized decision/witness/flat flows. ConcreteAlgebrasTest checks the nine new registrations against explicit expected values.

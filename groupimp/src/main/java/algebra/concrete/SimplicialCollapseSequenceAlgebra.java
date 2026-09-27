@@ -1,6 +1,7 @@
 package algebra.concrete;
 
 import mathematics.topology.SimplicialCollapseSequence;
+import mathematics.topology.SimplicialCollapseSearch;
 
 /** Checked collapse sequences and deterministic reduction in the original algebra/flow interfaces. */
 public final class SimplicialCollapseSequenceAlgebra extends ConcreteAlgebra<SimplicialCollapseSequence> {
@@ -45,8 +46,18 @@ public final class SimplicialCollapseSequenceAlgebra extends ConcreteAlgebra<Sim
         binary("cohomology-map",algebra(),naturals.algebra(),homomorphisms.algebra(),false,SimplicialCollapseSequence::cohomologyMap);
         binary("inverse-cohomology-map",algebra(),naturals.algebra(),homomorphisms.algebra(),false,SimplicialCollapseSequence::inverseCohomologyMap);
         flat("cohomology-maps",algebra(),naturals.algebra(),homomorphisms.algebra(),false,SimplicialCollapseSequence::cohomologyMaps);
+        binary("can-collapse-to",pairs.algebra(),pairs.algebra(),truth.algebra(),false,SimplicialCollapseSearch::canCollapseTo);
+        binary("collapse-to",pairs.algebra(),pairs.algebra(),algebra(),true,SimplicialCollapseSearch::collapseTo);
+        flat("collapses-to",pairs.algebra(),pairs.algebra(),algebra(),false,SimplicialCollapseSearch::collapsesTo);
+        binary("absolute-can-collapse-to",complexes.algebra(),complexes.algebra(),truth.algebra(),false,SimplicialCollapseSearch::absoluteCanCollapseTo);
+        binary("absolute-collapse-to",complexes.algebra(),complexes.algebra(),algebra(),true,SimplicialCollapseSearch::absoluteCollapseTo);
+        flat("absolute-collapses-to",complexes.algebra(),complexes.algebra(),algebra(),false,SimplicialCollapseSearch::absoluteCollapsesTo);
+        unary("is-collapsible",complexes.algebra(),truth.algebra(),false,SimplicialCollapseSearch::isCollapsible);
+        unary("collapse-to-point",complexes.algebra(),algebra(),true,SimplicialCollapseSearch::collapseToPoint);
+        unaryFlat("collapses-to-point",complexes.algebra(),algebra(),false,SimplicialCollapseSearch::collapsesToPoint);
         law("An empty sequence is a chronological concatenation unit; steps retain full matching labelled pairs and order.");
         law("Composite retraction R splits inclusion strictly; boundary H + H boundary = identity - i R, with dual cochain witnesses and inverse integral maps.");
         law("Greedy reduction chooses the first compatible free face by size and lexicographic labels. Its terminal pair is not a canonical homotopy invariant or a decision of collapsibility.");
+        law("Exhaustive search returns false only after a necessary obstruction or complete search. Resource limits raise implementation failures; enumeration retains every ordered sequence or fails atomically.");
     }
 }
