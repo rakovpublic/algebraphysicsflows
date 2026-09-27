@@ -150,7 +150,9 @@ public final class AbelianGroupHomomorphism implements Serializable {
         return source.fromSmith(firstRows(solved,source.generatorCount(),work).column(0));
     }
     public AbelianGroupHomomorphism inverse() {
-        Computation work=new Computation();
+        return inverse(new Computation());
+    }
+    public AbelianGroupHomomorphism inverse(Computation work) {
         IntegerMatrix solved=work.solve(liftingSystem(work),IntegerMatrix.identity(target.generatorCount()));
         AbelianGroupHomomorphism candidate=new AbelianGroupHomomorphism(target,source,firstRows(solved,source.generatorCount(),work),work);
         AbelianGroupHomomorphism identity=new AbelianGroupHomomorphism(source,source,IntegerMatrix.identity(source.generatorCount()),work);

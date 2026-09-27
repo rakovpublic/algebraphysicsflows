@@ -29,6 +29,7 @@ import mathematics.topology.RelativeSimplicialTripleMap;
 import mathematics.topology.SimplicialHomotopy;
 import mathematics.topology.SimplicialHomotopyPath;
 import mathematics.topology.SimplicialHomotopyEquivalence;
+import mathematics.topology.SimplicialSubdivision;
 import mathematics.topology.IntegralHomology;
 import mathematics.topology.FiniteSimplicialMap;
 import mathematics.topology.RelativeSimplicialComplex;
@@ -94,6 +95,10 @@ public final class ConcreteAlgebrasExample {
                 .<IntegralHomology,BigInteger>performAlgebraUnsafe("IntegralHomology.at-degree",BigInteger.ONE)
                 .<IntegerVector>performFlatAlgebraTransfer("generators").collect());
         FiniteSimplicialComplex circle=new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0,1),FiniteSet.of(0,2),FiniteSet.of(1,2)));
+        System.out.println("Barycentric subdivision gives inverse integral circle homology maps: "+math.flow(math.complexes,Collections.singletonList(circle))
+                .<SimplicialSubdivision>performAlgebraTransfer("SimplicialSubdivision.from-complex")
+                .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("homology-maps",BigInteger.ONE)
+                .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
         SimplicialChain orientedCircle=new SimplicialChain(circle,BigInteger.ONE,new IntegerVector(BigInteger.ONE,BigInteger.ONE.negate(),BigInteger.ONE));
         RelativeSimplicialComplex intervalCapPair=new RelativeSimplicialComplex(new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0,1))),
                 new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0),FiniteSet.of(1))));

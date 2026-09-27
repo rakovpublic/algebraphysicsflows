@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1750 |
-| DIRECTLY_SUPPORTED | 1507 |
+| Scoped records | 1769 |
+| DIRECTLY_SUPPORTED | 1526 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1366 |
+| IMPLEMENTED | 1385 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1434 |
+| MACHINE_TESTED | 1453 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1343 | 1343 | 0 | 0 | 0 | 1343 | 0 | 0 |
+| Concrete MathTool algebras | 1362 | 1362 | 0 | 0 | 0 | 1362 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -1418,6 +1418,25 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | SimplicialMap.vertex-fiber | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.vertex-fiber |
 | SimplicialMap.vertex-images | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.vertex-images |
 | SimplicialMap.vertex-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps; native operation SimplicialMap.vertex-map |
+| SimplicialSubdivision.cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Barycentric subdivisions of labelled simplicial pairs with retained face dictionaries, induced maps, last-vertex naturality witnesses and inverse integral comparison maps; native operation SimplicialSubdivision.cohomology-map |
+| SimplicialSubdivision.cohomology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Barycentric subdivisions of labelled simplicial pairs with retained face dictionaries, induced maps, last-vertex naturality witnesses and inverse integral comparison maps; native operation SimplicialSubdivision.cohomology-maps |
+| SimplicialSubdivision.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Barycentric subdivisions of labelled simplicial pairs with retained face dictionaries, induced maps, last-vertex naturality witnesses and inverse integral comparison maps; native operation SimplicialSubdivision.equal |
+| SimplicialSubdivision.face-vertex | DIRECTLY_SUPPORTED | IMPLEMENTED | Barycentric subdivisions of labelled simplicial pairs with retained face dictionaries, induced maps, last-vertex naturality witnesses and inverse integral comparison maps; native operation SimplicialSubdivision.face-vertex |
+| SimplicialSubdivision.from-complex | DIRECTLY_SUPPORTED | IMPLEMENTED | Barycentric subdivisions of labelled simplicial pairs with retained face dictionaries, induced maps, last-vertex naturality witnesses and inverse integral comparison maps; native operation SimplicialSubdivision.from-complex |
+| SimplicialSubdivision.from-pair | DIRECTLY_SUPPORTED | IMPLEMENTED | Barycentric subdivisions of labelled simplicial pairs with retained face dictionaries, induced maps, last-vertex naturality witnesses and inverse integral comparison maps; native operation SimplicialSubdivision.from-pair |
+| SimplicialSubdivision.homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Barycentric subdivisions of labelled simplicial pairs with retained face dictionaries, induced maps, last-vertex naturality witnesses and inverse integral comparison maps; native operation SimplicialSubdivision.homology-map |
+| SimplicialSubdivision.homology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Barycentric subdivisions of labelled simplicial pairs with retained face dictionaries, induced maps, last-vertex naturality witnesses and inverse integral comparison maps; native operation SimplicialSubdivision.homology-maps |
+| SimplicialSubdivision.inverse-cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Barycentric subdivisions of labelled simplicial pairs with retained face dictionaries, induced maps, last-vertex naturality witnesses and inverse integral comparison maps; native operation SimplicialSubdivision.inverse-cohomology-map |
+| SimplicialSubdivision.inverse-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Barycentric subdivisions of labelled simplicial pairs with retained face dictionaries, induced maps, last-vertex naturality witnesses and inverse integral comparison maps; native operation SimplicialSubdivision.inverse-homology-map |
+| SimplicialSubdivision.last-vertex-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Barycentric subdivisions of labelled simplicial pairs with retained face dictionaries, induced maps, last-vertex naturality witnesses and inverse integral comparison maps; native operation SimplicialSubdivision.last-vertex-map |
+| SimplicialSubdivision.map | DIRECTLY_SUPPORTED | IMPLEMENTED | Barycentric subdivisions of labelled simplicial pairs with retained face dictionaries, induced maps, last-vertex naturality witnesses and inverse integral comparison maps; native operation SimplicialSubdivision.map |
+| SimplicialSubdivision.naturality-homotopy | DIRECTLY_SUPPORTED | IMPLEMENTED | Barycentric subdivisions of labelled simplicial pairs with retained face dictionaries, induced maps, last-vertex naturality witnesses and inverse integral comparison maps; native operation SimplicialSubdivision.naturality-homotopy |
+| SimplicialSubdivision.original | DIRECTLY_SUPPORTED | IMPLEMENTED | Barycentric subdivisions of labelled simplicial pairs with retained face dictionaries, induced maps, last-vertex naturality witnesses and inverse integral comparison maps; native operation SimplicialSubdivision.original |
+| SimplicialSubdivision.subdivided | DIRECTLY_SUPPORTED | IMPLEMENTED | Barycentric subdivisions of labelled simplicial pairs with retained face dictionaries, induced maps, last-vertex naturality witnesses and inverse integral comparison maps; native operation SimplicialSubdivision.subdivided |
+| SimplicialSubdivision.vertex-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Barycentric subdivisions of labelled simplicial pairs with retained face dictionaries, induced maps, last-vertex naturality witnesses and inverse integral comparison maps; native operation SimplicialSubdivision.vertex-count |
+| SimplicialSubdivision.vertex-face | DIRECTLY_SUPPORTED | IMPLEMENTED | Barycentric subdivisions of labelled simplicial pairs with retained face dictionaries, induced maps, last-vertex naturality witnesses and inverse integral comparison maps; native operation SimplicialSubdivision.vertex-face |
+| SimplicialSubdivision.vertex-faces | DIRECTLY_SUPPORTED | IMPLEMENTED | Barycentric subdivisions of labelled simplicial pairs with retained face dictionaries, induced maps, last-vertex naturality witnesses and inverse integral comparison maps; native operation SimplicialSubdivision.vertex-faces |
+| SimplicialSubdivisionAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Barycentric subdivisions of labelled simplicial pairs with retained face dictionaries, induced maps, last-vertex naturality witnesses and inverse integral comparison maps |
 | SymmetricGroup | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree |
 | Tensor(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).add |
 | Tensor(Q).contract | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).contract |

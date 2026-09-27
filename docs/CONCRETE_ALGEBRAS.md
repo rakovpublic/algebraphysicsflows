@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1284 native operations from 59 algebra builders.
+The default initializer currently installs 1302 native operations from 60 algebra builders.
 
 ## Existing API usage
 
@@ -62,6 +62,7 @@ List<String> values = math.flow(math.naturals,
 | RelativeSimplicialTripleMapAlgebra / TripleMap | compose; equality/contiguity -> Boolean | inverse; source/target triples; ambient and three pair maps; isomorphism; image/corestriction | construct from a vertex map and ordered triples; inclusion/restriction; six induced integral maps; flat four-map naturality lists |
 | SimplicialHomotopyAlgebra / SimplicialHomotopy | ordered endpoint equality -> Boolean | endpoint maps; source/target pairs; reverse; flat chain/cochain matrices | construct between contiguous absolute or relative maps; degreewise prism matrices; typed chain/cochain actions through second operand wrappers |
 | SimplicialHomotopyPathAlgebra / HomotopyPath | chronological concatenation; full stage equality -> Boolean | endpoints/pairs; reverse; step count; flat stages, steps and chain/cochain matrices | stationary and one-step constructors; append a map; precompose/postcompose all stages; accumulated prism matrices and typed actions |
+| SimplicialSubdivisionAlgebra / SimplicialSubdivision | equality of full original pairs -> Boolean | original/subdivided pairs; vertex count; flat face dictionary; last-vertex map | pair/complex constructors; dictionary lookups; induced subdivision maps; naturality witnesses; scalar/flat inverse integral homology/cohomology maps |
 | SimplicialHomotopyEquivalenceAlgebra / HomotopyEquivalence | composition; full map/witness equality -> Boolean | inverse; maps, pairs and homotopy witnesses | supplied inverse witnesses; compatible vertex collapses and strong-core reduction; absolute strong-type decisions and constructed equivalences; inverse integral maps |
 | SimplicialChainAlgebra / SimplicialChain | context-checked add/subtract; equality/homology comparison -> Boolean | boundary; negate; complex/degree/coordinates; cycle/boundary predicates; fillings; homology/class; flat cycle generators; augmentation | integer scale; coordinates; pushforward; pairing; cap and cap-class; fixed-chain/cochain cap matrices and induced maps; zero and flat basis constructors |
 | SimplicialCochainAlgebra / SimplicialCochain | same-context add/subtract; cup; equality/cohomologous -> Boolean; cup-class -> AbelianGroupElement | negate; complex/degree/coordinates; coboundary; zero/cocycle/coboundary tests; cohomology model/class; cobounding coordinates; flat cocycle generators | degreewise zero/basis construction and unit; integer scaling; coordinate replacement; representative; evaluation; pullback; scalar/flat cohomology models and contravariant maps |
@@ -1660,3 +1661,57 @@ The decision concerns **strong simplicial homotopy type**. A three-edge circle a
 Isomorphism search accepts at most 64 vertices in each ambient complex. Enumeration permits at most 1024 maps; exceeding that bound fails without returning a prefix. First-witness and predicate searches stop at the first match and do not enumerate the remaining automorphisms. One 5,000,000-unit budget covers the entire search and all output map validation. Absolute strong-type comparison shares one such budget across both reductions, core search, map composition and final endpoint validation. The original complexes may exceed 64 vertices if their computed cores satisfy the search limit; the existing 4096-simplex and 256-stage reduction bounds still apply. Limits raise IMPLEMENTATION_FAILURE, never false or an empty list standing for an incomplete search. Search can require factorial work.
 
 NativeSimplicialIsomorphismSearchTest compares all 27,889 pairs of four-label complexes and all 21,904 comparisons among the 148 three-label pairs with independent unpruned permutation/face-bitset oracles. It checks all 4,096 four-vertex graph pairs against leaf-core/permutation decisions, integer inverse maps, relative restrictions, higher-dimensional faces, lexicographic order, empty and extreme labels, 720 automorphisms, enumeration/vertex/work limits, circle subdivision distinctions, unequal-size trees, projective-plane torsion, typed fillings, shared two-reduction budgets, actual wrappers and serialized scalar/flat flows. All five new registrations have independent expected results in ConcreteAlgebrasTest.
+
+## Barycentric subdivision and integral comparison maps
+
+`math.subdivisions` supplies 18 native operations on `SimplicialSubdivision`. A context retains its original pair `(X,A)`, the subdivided pair `(sd X,sd A)`, and a shared face-to-vertex dictionary. This makes subdivision executable through the existing `MathTool`, `IAlgebraItem` and `AlgebraFlow` interfaces.
+
+A subdivision vertex represents one nonempty face of X. Faces are ordered by cardinality, then lexicographically by their sorted original integer labels, and receive indices starting at zero. A simplex in sd X is a strict inclusion chain of those faces. The subcomplex sd A uses the same ambient indices. For example, the edge `{1,2}` inside the triangle `{0,1,2}` uses subdivision vertices `{1,2,5}`; subdividing that edge alone would instead use `{0,1,2}`. Dictionary access preserves this distinction.
+
+| Operation alias | Inputs and result |
+| --- | --- |
+| `SimplicialSubdivision.from-pair` | RelativeComplex -> subdivision context |
+| `SimplicialSubdivision.from-complex` | FiniteComplex -> context with empty subcomplex |
+| `original` | Context -> original RelativeComplex |
+| `subdivided` | Context -> subdivided RelativeComplex |
+| `vertex-count` | Context -> number of nonempty original ambient faces |
+| `vertex-face` | Context and integer index -> original face as FiniteSet(Z) |
+| flat `vertex-faces` | Context -> all original faces in dictionary-index order |
+| `face-vertex` | Context and original nonempty face -> its dictionary index |
+| `last-vertex-map` | Context -> RelativeMap `l_X: (sd X,sd A) -> (X,A)` |
+| `map` | Context and RelativeMap f with matching full original source -> sd(f) |
+| `naturality-homotopy` | Context and matching f -> SimplicialHomotopy from `l_Y compose sd(f)` to `f compose l_X` |
+| `homology-map` | Context and degree n -> `l_*: H_n(sd X,sd A) -> H_n(X,A)` |
+| `inverse-homology-map` | Context and degree n -> inverse of l_* |
+| flat `homology-maps` | Context and degree n -> `[l_*, inverse(l_*)]` |
+| `cohomology-map` | Context and degree n -> `l^*: H^n(X,A) -> H^n(sd X,sd A)` |
+| `inverse-cohomology-map` | Context and degree n -> inverse of l^* |
+| flat `cohomology-maps` | Context and degree n -> `[l^*, inverse(l^*)]` |
+| `equal` | Two contexts -> equality of full original labelled pairs |
+
+For a map f, each face-index vertex maps to the target dictionary index of its face image. Images may have fewer vertices; repeated target faces are allowed. The full target pair is retained, including simplices outside the image. This construction preserves identities and composition. The `map` operation uses `ILeftProjectionOperation` and returns the actual second operand's RelativeMap wrapper.
+
+The last-vertex map sends each face to its largest original vertex. On a chain of faces, the resulting vertices lie in its largest face, so this is a simplicial map of pairs. Its realization is homotopic to the barycentric subdivision identification within each original simplex. Consequently it induces integral homology and cohomology isomorphisms, including torsion. The subdivision construction and its chain-homotopy foundation are described in [Hatcher, chapter 2](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf); [Sage's simplicial-complex reference](https://doc.sagemath.org/html/en/reference/topology/sage/topology/simplicial_complex.html) also documents barycentric subdivisions and a subdivided-circle example.
+
+For arbitrary vertex maps, the two last-vertex composites need not be equal: an order-reversing interval or circle map can distinguish them. They are contiguous because their images over each face chain lie in the image of its largest face, including within the target subcomplex. `naturality-homotopy` exposes this witness through the existing prism algebra, whose typed chain/cochain actions give explicit fillings. The resulting induced homology and cohomology squares commute.
+
+The executable example uses the three-edge `circle` already defined there:
+
+```java
+List<String> isomorphisms = math.flow(math.complexes,
+    Collections.singletonList(circle))
+    .<SimplicialSubdivision>performAlgebraTransfer(
+        "SimplicialSubdivision.from-complex")
+    .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe(
+        "homology-maps", BigInteger.ONE)
+    .<Boolean>performAlgebraTransfer("is-isomorphism")
+    .collect(); // ["true", "true"]
+```
+
+Empty complexes, empty subcomplexes and repeated subdivisions are supported. Invalid dictionary indices, nonfaces and mismatched full source pairs are undefined. Degrees are nonnegative; arbitrarily large degrees above dimension give correctly shaped zero maps. Equality is deterministic under facet insertion order, but depends on the full original labels. Returned face and map lists are immutable.
+
+Each input and output complex has at most 4096 nonempty simplices. Construction fails before emitting a simplex beyond this output bound. A 5-simplex exceeds it after subdivision, while 4096 isolated points remain constructible. Each constructor, induced map including target construction, naturality witness including map compositions, and integral map with its inverse shares one 5,000,000-unit budget. Flat map pairs also share one budget. Integral computations retain the existing 256-simplex bound on each required quotient basis, applied after removing subcomplex faces. Limits raise IMPLEMENTATION_FAILURE without partial results; integer coefficient sizes remain unbounded.
+
+This carrier represents abstract barycentric subdivision. It does not retain geometric barycenter coordinates, construct arbitrary subdivisions or simplicial approximations, or expose an explicit subdivision chain inverse. The returned inverse maps act on presented integral groups. Subdivision need not preserve strong simplicial homotopy type: the three-edge circle and its six-edge subdivision illustrate the distinction in [Barmak and Minian](https://arxiv.org/abs/0907.2954). No HomotopyEquivalence between those complexes is asserted.
+
+NativeSimplicialSubdivisionTest compares all 167 four-label complexes and all 148 three-label pairs with an independent comparable-subset oracle. It checks simplex face counts through dimension four, all 256 tetrahedron vertex maps, 729 circle map compositions, last-vertex naturality, relative disks, projective-plane torsion, repeated subdivision, dictionary ordering, invalid inputs, geometric versus filtered basis bounds, shared inverse budgets, actual wrappers and serialized flat flows. ConcreteAlgebrasTest checks all 18 registrations against independent expected values.
