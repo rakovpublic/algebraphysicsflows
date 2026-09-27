@@ -8,8 +8,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DATABASE = ROOT / "mathematics-coverage.json"
 MANIFEST = ROOT / "groupimp/src/test/resources/mathematics/concrete-catalog.tsv"
-DATE = "2026-09-27"
+DATE = "2026-09-28"
 OWNERS = {
+    "SimplicialChainHomotopyAlgebra": ("ChainHomotopy", "Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps"),
     "SimplicialChainMapAlgebra": ("ChainMap", "Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps"),
     "SimplicialCollapseSequenceAlgebra": ("CollapseSequence", "Ordered compatible elementary-collapse sequences, greedy reduction, exhaustive bounded collapse search and composite integral chain/cochain witnesses"),
     "SimplicialCollapseAlgebra": ("SimplicialCollapse", "Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps"),
@@ -91,6 +92,7 @@ INTERFACES = {
     "IUnsafeFlatOperation": "flat/MixedFlatOperation",
 }
 EXTRA_TESTS = {
+    "SimplicialChainHomotopyAlgebra": "NativeSimplicialChainHomotopyTest",
     "SimplicialChainMapAlgebra": "NativeSimplicialChainMapTest",
     "SimplicialCollapseSequenceAlgebra": "NativeSimplicialCollapseSequenceTest",
     "SimplicialCollapseAlgebra": "NativeSimplicialCollapseTest",
@@ -183,6 +185,37 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "SimplicialChainHomotopyAlgebra": {
+        "from-data": "Require parallel full chain maps and one H_k in every degree through the largest ambient dimension. Check target degree k+1 rows and source degree k columns, then every equation dH + Hd = to - from including degree zero and the top degree.",
+        "stationary": "Retain the same chain map at both endpoints and zero degree-raising matrices. Equal endpoints may also admit nonzero witnesses.",
+        "from-prism": "Convert the actual oriented prism between contiguous maps, including both endpoint chain maps, with one shared construction and validation budget.",
+        "from-path": "Convert the accumulated prism of the complete supplied contiguity path; nonzero loop witnesses remain even when endpoints agree.",
+        "from-collapse": "Retain the elementary collapse homotopy from inclusion after retraction to the identity on the original pair; dH + Hd = identity - iR.",
+        "from-collapse-sequence": "Retain the composite collapse homotopy from inclusion after retraction to identity. All steps, endpoint constructions and final witness validation share one budget.",
+        "from-subdivision": "Retain the subdivision homotopy from signed subdivision after last-vertex to identity on the subdivided pair, with full endpoint chain maps.",
+        "from": "Return the full initial chain map F.",
+        "to": "Return the full terminal chain map G; the witness satisfies dH + Hd = G - F.",
+        "source": "Return the common full labelled source pair of both chain maps.",
+        "target": "Return the common full labelled target pair of both chain maps.",
+        "data": "Return immutable supplied-data form, retaining both complete chain maps and the actual homotopy matrices.",
+        "reverse": "Exchange endpoints and negate the actual witness matrices. This is an involution and need not equal a newly recomputed prism with reversed vertex maps.",
+        "then": "Chronological concatenation requires the exact full joining chain map, not just matching geometric endpoints. Add the actual witnesses; the result runs from the first initial map to the second terminal map.",
+        "add": "Require identical full source and target pairs. Add both initial maps, both terminal maps and the homotopy matrices; this differs from chronological concatenation.",
+        "scale": "Scale both endpoints and every witness matrix by the integer second operand. Return the actual first ChainHomotopy wrapper through ICustomMemberOperation.",
+        "precompose": "The supplied chain map B must end at the full source pair. Compose both endpoints on the right and use H_k B_k; all products and endpoint/witness validation share one budget.",
+        "postcompose": "The supplied chain map A must start at the full target pair. Compose both endpoints on the left and use A_(k+1) H_k, including the degree shift; share one budget.",
+        "equal": "Compare both full endpoint maps and all actual witness matrices. Equal endpoints alone do not identify homotopies.",
+        "chain-matrix": "Return H_k: source C_k to target C_(k+1) for nonnegative k, retaining rectangular empty shapes.",
+        "cochain-matrix": "Return Q^p = H_(p-1) transpose. Q^0 has zero rows and retains target C^0 columns; dQ + Qd = to* - from*.",
+        "chain-matrices": "Emit H_0 through H_d, with d the maximum ambient dimension; both empty complexes give an empty list.",
+        "cochain-matrices": "Emit Q^0 through Q^(d+1), including the degree-zero zero-row matrix. The entire transpose list shares one work budget; both empty complexes emit a singleton 0 by 0 matrix.",
+        "on-chain": "Require the second RelativeChain on the full source pair. Raise degree by one and return the actual second wrapper through ILeftProjectionOperation. A negative-one input gives the zero chain in target degree zero.",
+        "on-cochain": "Require the second RelativeCochain on the full target pair and positive degree. Lower degree by one using the shifted transpose and the actual second wrapper through ILeftProjectionOperation.",
+        "on-absolute-chain": "Both endpoint subcomplexes must be empty and the input chain must retain the full source complex. Raise degree and return the actual second SimplicialChain wrapper.",
+        "on-absolute-cochain": "Both endpoint subcomplexes must be empty and the input cochain must retain the full target complex with positive degree. Lower degree and return the actual second SimplicialCochain wrapper.",
+        "homology-maps": "Emit exactly [from_*,to_*] in the supplied nonnegative degree. They are equal presented integral maps, including torsion. Both complete computations share one budget and fail atomically on exhaustion.",
+        "cohomology-maps": "Emit exactly [from^*,to^*] in the supplied nonnegative degree, each from target to source. They agree including torsion; both complete computations share one budget.",
+    },
     "SimplicialChainMapAlgebra": {
         "identity-on": "Return identity matrices on every quotient basis of the supplied full pair; an empty chain complex has its zero identity map.",
         "zero": "First pair is source and second pair is target. Return all zero matrices with retained rectangular dimensions; no geometric vertex map is required.",
@@ -1491,6 +1524,19 @@ OWNER_CONDITIONS["RationalMatrixFamily"]["companion"] = "The polynomial has posi
 
 def record(identifier, owner, concept, paths, operation=None):
     carrier, scope = OWNERS[owner]
+    if owner == "SimplicialChainHomotopyAlgebra":
+        paths = paths + ["groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+                         "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+                         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopy.java",
+                         "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+                         "groupimp/src/main/java/mathematics/topology/SimplicialCollapse.java",
+                         "groupimp/src/main/java/mathematics/topology/SimplicialCollapseSequence.java",
+                         "groupimp/src/main/java/mathematics/topology/SimplicialSubdivision.java",
+                         "groupimp/src/main/java/mathematics/topology/SimplicialSubdivisionChains.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+                         "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
     if owner == "SimplicialChainMapAlgebra":
         paths = paths + ["groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
                          "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
@@ -1763,10 +1809,15 @@ def record(identifier, owner, concept, paths, operation=None):
             value["known_limitations"].append("Iteration is capped at 10000 steps; exceeding it is IMPLEMENTATION_FAILURE. Exact values can still grow rapidly within this limit.")
         if operation_name in ("argmin", "argmax", "minimum", "maximum", "minimizers", "maximizers"):
             value["known_limitations"].append("Optimality is relative only to the explicit finite feasible set, not all integers or reals.")
+    if owner == "SimplicialChainHomotopyAlgebra":
+        value["required_invariants"].append("Both endpoint chain maps retain identical full labelled pairs. Every supplied degree-raising matrix satisfies dH + Hd = to - from, and Q^p = transpose(H_(p-1)) satisfies the dual cochain identity. Chronological concatenation adds witnesses, reversal negates them, and composition uses the required degree shift. Actual matrices remain part of equality, including nonzero loops. Both induced homology and cohomology maps agree with presentations and torsion retained.")
+        value["known_limitations"] += ["At most 4096 simplices per pair component and 256 per required quotient basis after filtering. One 5000000-unit budget covers every conversion or compound operation, including all endpoint constructions and final homotopy validation, and every complete two-map integral list. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Integer coefficient bit lengths are unbounded.",
+            "Supplied degree-one integral witnesses on finite simplicial quotient chain complexes only. Raw ChainHomotopy.data membership does not assert homotopy equations. No arbitrary homotopy search, geometric realization, higher homotopy coherence, cup-product compatibility or coefficient-ring generalization is provided. Matrix and integral degrees are nonnegative; typed chains may be negative, while typed cochain actions require positive degree. Absolute actions require both subcomplexes empty. Algebraic reversal need not coincide with recomputing a geometric prism."]
+        value["references"].append("https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf")
     if owner == "SimplicialChainMapAlgebra":
         value["required_invariants"].append("Full labelled pairs and all integral degree matrices are retained. Quotient boundary equations are checked in every degree. Composition applies the right operand first; parallel addition and integer scaling induce additive integral homology and contravariant cohomology maps. Strict inverses require unimodular matrices in every degree, independently of induced homology isomorphisms.")
         value["known_limitations"] += ["At most 4096 nonempty simplices per pair component and at most 256 simplices in each quotient basis, filtered before the bound. One 5000000-unit budget covers each construction, conversion, composite or inverse including final validation, and each complete integral map list. Resource exhaustion raises IMPLEMENTATION_FAILURE without partial results or false predicates. Integer coefficient bit lengths are unbounded.",
-            "Degree-zero maps over Z on finite simplicial quotient chains only. Raw ChainMap.data is immutable supplied data, not a validated map. Matrix and integral map degrees are nonnegative; typed chains allow negative zero groups. Absolute actions require both subcomplexes empty. Arbitrary chain maps need not preserve augmentation or cup products, come from continuous or simplicial vertex maps, extend to compatible ambient/subcomplex maps, or give a homotopy equivalence. General chain-homotopy data, other coefficients and persistent homology remain outside scope."]
+            "Degree-zero maps over Z on finite simplicial quotient chains only. Raw ChainMap.data is immutable supplied data, not a validated map. Matrix and integral map degrees are nonnegative; typed chains allow negative zero groups. Absolute actions require both subcomplexes empty. Arbitrary chain maps need not preserve augmentation or cup products, come from continuous or simplicial vertex maps, extend to compatible ambient/subcomplex maps, or give a homotopy equivalence. ChainHomotopy separately represents supplied integral homotopy data. Homotopy search, other coefficients and persistent homology remain outside scope."]
         value["references"].append("https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf")
     if owner == "SimplicialCollapseSequenceAlgebra":
         value["required_invariants"].append("Exhaustive collapse search preserves every requested target face, checks the full target subcomplex and both component Euler characteristics, and explores free faces in depth-first size/lexicographic order. It caches only unsuccessful suffix states, preserving all distinct successful prefixes during enumeration. Returned witnesses retain the same validated sequence and integral operators as supplied or greedy sequences. Collapse to a point is distinct from contractibility.")
@@ -2031,6 +2082,10 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("ChainHomotopy", "Supplied integral homotopy witnesses between simplicial chain maps", "mathematics.topology.SimplicialChainHomotopy",
+         ["Parallel full integral chain maps and retained degree-raising matrices", "Every degree satisfies dH + Hd = to - from; shifted transposes give the dual identity", "Chronological concatenation checks the exact joining map and adds witnesses; reversal negates matrices", "Precomposition uses H_k B_k and postcomposition A_(k+1) H_k", "Typed fillings and equal induced integral maps retain contexts, presentations and torsion", "Endpoint construction, witness validation and whole two-map lists share bounded computation budgets"], ["ChainHomotopy.data", "ChainMap", "SimplicialHomotopy", "HomotopyPath", "SimplicialCollapse", "CollapseSequence", "SimplicialSubdivision", "RelativeComplex", "Mat(Z)", "Z", "N", "Boolean", "RelativeChain", "RelativeCochain", "SimplicialChain", "SimplicialCochain", "AbelianGroupHomomorphism"]),
+        ("ChainHomotopy.data", "Supplied endpoint chain maps and complete homotopy matrices", "mathematics.topology.SimplicialChainHomotopy.Data",
+         ["Two nonnull full chain maps and immutable integer matrices", "One matrix per degree from zero through the first map's maximum ambient dimension", "Data membership does not assert parallel endpoints, shifted shapes or homotopy equations; ChainHomotopy.from-data validates them"], ["ChainHomotopy", "ChainMap", "Mat(Z)"]),
         ("ChainMap", "Integral chain maps of labelled simplicial pairs", "mathematics.topology.SimplicialChainMap",
          ["Retained full source and target pairs and exact integral degree matrices", "Every degree commutes with quotient differentials, including the top source boundary", "Parallel addition, integer scaling and composition with strict full-pair checks", "Strict inverse exists exactly for degreewise unimodular matrices", "Covariant homology and contravariant cohomology retain presentations and torsion", "Whole constructions and integral map lists share bounded arithmetic work"], ["ChainMap.data", "RelativeComplex", "RelativeMap", "SimplicialMap", "SimplicialCollapse", "CollapseSequence", "SimplicialSubdivision", "Mat(Z)", "Z", "N", "Boolean", "RelativeChain", "RelativeCochain", "SimplicialChain", "SimplicialCochain", "AbelianGroupHomomorphism"]),
         ("ChainMap.data", "Supplied endpoints and complete degree matrices for a chain map", "mathematics.topology.SimplicialChainMap.Data",

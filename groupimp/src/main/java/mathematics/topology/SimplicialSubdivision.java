@@ -65,7 +65,7 @@ public final class SimplicialSubdivision implements Serializable {
         }
         Integer result=labels.get(new FiniteSet<>(vertices)); if(result==null) throw MathFailure.undefined("The supplied set is not an original simplex"); return BigInteger.valueOf(result);
     }
-    private RelativeSimplicialMap lastVertexMap(Computation work) {
+    RelativeSimplicialMap lastVertexMap(Computation work) {
         Map<BigInteger,BigInteger> vertices=new TreeMap<>();
         for(int i=0;i<faces.size();i++) { work.use(1L+faces.get(i).size()); vertices.put(BigInteger.valueOf(i),BigInteger.valueOf(Collections.max(faces.get(i).members()))); }
         return new RelativeSimplicialMap(subdivided,original,new FiniteSimplicialMap(subdivided.ambient(),original.ambient(),vertices,work),work);

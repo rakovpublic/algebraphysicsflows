@@ -64,7 +64,7 @@ public final class SimplicialHomotopyPath implements Serializable {
         for(RelativeSimplicialMap stage : stages) result.add(after.compose(stage,work)); return new SimplicialHomotopyPath(result,work);
     }
     private static void requireDegree(BigInteger degree) { if(degree.signum()<0) throw MathFailure.undefined("Path matrix degree must be nonnegative"); }
-    private IntegerMatrix prism(BigInteger degree,Computation work) {
+    IntegerMatrix prism(BigInteger degree,Computation work) {
         int rows=target().basis(degree.add(BigInteger.ONE)).size(),columns=source().basis(degree).size();
         long size=(long)rows*columns; work.use(size); IntegerMatrix result=IntegerMatrix.zero(rows,columns);
         for(SimplicialHomotopy step : steps) {

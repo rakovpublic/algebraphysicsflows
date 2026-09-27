@@ -38,6 +38,11 @@ public final class RelativeSimplicialMap implements Serializable {
         if(!source.subcomplex().subcomplexOf(target.subcomplex())) throw MathFailure.undefined("Pair inclusion requires inclusion of both subcomplexes");
         return new RelativeSimplicialMap(source,target,FiniteSimplicialMap.inclusion(source.ambient(),target.ambient()));
     }
+    static RelativeSimplicialMap inclusion(RelativeSimplicialComplex source,RelativeSimplicialComplex target,Computation work) {
+        Map<BigInteger,BigInteger> vertices=new TreeMap<>();
+        for(BigInteger vertex : FiniteSimplicialMap.vertexSet(source.ambient()).members()) { work.use(1); vertices.put(vertex,vertex); }
+        return new RelativeSimplicialMap(source,target,new FiniteSimplicialMap(source.ambient(),target.ambient(),vertices,work),work);
+    }
     public static RelativeSimplicialMap absolute(FiniteSimplicialMap map) {
         return new RelativeSimplicialMap(RelativeSimplicialComplex.absolute(map.source()),RelativeSimplicialComplex.absolute(map.target()),map);
     }

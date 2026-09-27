@@ -33,6 +33,7 @@ import mathematics.topology.SimplicialSubdivision;
 import mathematics.topology.SimplicialCollapse;
 import mathematics.topology.SimplicialCollapseSequence;
 import mathematics.topology.SimplicialChainMap;
+import mathematics.topology.SimplicialChainHomotopy;
 import mathematics.topology.IntegralHomology;
 import mathematics.topology.FiniteSimplicialMap;
 import mathematics.topology.RelativeSimplicialComplex;
@@ -121,6 +122,11 @@ public final class ConcreteAlgebrasExample {
                 {BigInteger.valueOf(3),BigInteger.ZERO,BigInteger.ZERO},{BigInteger.valueOf(-2),BigInteger.ONE,BigInteger.ZERO},{BigInteger.valueOf(2),BigInteger.ZERO,BigInteger.ONE}})));
         System.out.println("An arbitrary circle chain map induces multiplication by three on H1: "+math.flow(math.chainMaps,Collections.singletonList(degreeThree))
                 .<AbelianGroupHomomorphism,BigInteger>performAlgebraUnsafe("homology-map",BigInteger.ONE).<IntegerMatrix>performAlgebraTransfer("smith-matrix").collect());
+        SimplicialChain vertexOne=new SimplicialChain(filledTriangle,BigInteger.ZERO,new IntegerVector(BigInteger.ZERO,BigInteger.ONE,BigInteger.ZERO));
+        System.out.println("An integral homotopy fills vertex one minus the collapse endpoint: "+math.flow(math.complexes,Collections.singletonList(filledTriangle))
+                .<SimplicialCollapseSequence>performAlgebraTransfer("CollapseSequence.reduce-absolute")
+                .<SimplicialChainHomotopy>performAlgebraTransfer("ChainHomotopy.from-collapse-sequence")
+                .performLeftProjectionOperation("on-absolute-chain",vertexOne).<IntegerVector>performAlgebraTransfer("coordinates").collect());
         System.out.println("Subdividing the oriented circle retains an integral cycle: "+math.flow(math.complexes,Collections.singletonList(circle))
                 .<SimplicialSubdivision>performAlgebraTransfer("SimplicialSubdivision.from-complex")
                 .performLeftProjectionOperation("on-absolute-chain",orientedCircle).<Boolean>performAlgebraTransfer("is-cycle").collect());

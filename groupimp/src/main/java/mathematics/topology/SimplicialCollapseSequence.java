@@ -75,7 +75,7 @@ public final class SimplicialCollapseSequence implements Serializable {
     }
     private IntegerMatrix inclusion(BigInteger degree,Computation work) { return RelativeSimplicialComplex.selector(source.basis(degree),target.basis(degree),work); }
     /** H_total = H_1 + i_1 H_2 R_1 + i_1 i_2 H_3 R_2 R_1 + ... . */
-    private IntegerMatrix homotopy(BigInteger degree,Computation work) {
+    IntegerMatrix homotopy(BigInteger degree,Computation work) {
         List<FiniteSet<Integer>> rows=source.basis(degree.add(BigInteger.ONE)); int columns=source.basis(degree).size();
         if(steps.isEmpty()) { work.use((long)rows.size()*columns); return IntegerMatrix.zero(rows.size(),columns); }
         IntegerMatrix result=steps.get(0).homotopy(degree,work),prefix=null;

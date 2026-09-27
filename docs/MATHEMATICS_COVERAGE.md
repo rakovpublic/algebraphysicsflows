@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1898 |
-| DIRECTLY_SUPPORTED | 1655 |
+| Scoped records | 1928 |
+| DIRECTLY_SUPPORTED | 1685 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1514 |
+| IMPLEMENTED | 1544 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1582 |
+| MACHINE_TESTED | 1612 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1491 | 1491 | 0 | 0 | 0 | 1491 | 0 | 0 |
+| Concrete MathTool algebras | 1521 | 1521 | 0 | 0 | 0 | 1521 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -287,6 +287,35 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Boolean.xor | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.xor |
 | Boolean.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.zero |
 | BooleanAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations |
+| ChainHomotopy.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.add |
+| ChainHomotopy.chain-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.chain-matrices |
+| ChainHomotopy.chain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.chain-matrix |
+| ChainHomotopy.cochain-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.cochain-matrices |
+| ChainHomotopy.cochain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.cochain-matrix |
+| ChainHomotopy.cohomology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.cohomology-maps |
+| ChainHomotopy.data | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.data |
+| ChainHomotopy.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.equal |
+| ChainHomotopy.from | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.from |
+| ChainHomotopy.from-collapse | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.from-collapse |
+| ChainHomotopy.from-collapse-sequence | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.from-collapse-sequence |
+| ChainHomotopy.from-data | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.from-data |
+| ChainHomotopy.from-path | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.from-path |
+| ChainHomotopy.from-prism | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.from-prism |
+| ChainHomotopy.from-subdivision | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.from-subdivision |
+| ChainHomotopy.homology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.homology-maps |
+| ChainHomotopy.on-absolute-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.on-absolute-chain |
+| ChainHomotopy.on-absolute-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.on-absolute-cochain |
+| ChainHomotopy.on-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.on-chain |
+| ChainHomotopy.on-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.on-cochain |
+| ChainHomotopy.postcompose | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.postcompose |
+| ChainHomotopy.precompose | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.precompose |
+| ChainHomotopy.reverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.reverse |
+| ChainHomotopy.scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.scale |
+| ChainHomotopy.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.source |
+| ChainHomotopy.stationary | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.stationary |
+| ChainHomotopy.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.target |
+| ChainHomotopy.then | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.then |
+| ChainHomotopy.to | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps; native operation ChainHomotopy.to |
 | ChainMap.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.add |
 | ChainMap.chain-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.chain-matrices |
 | ChainMap.chain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.chain-matrix |
@@ -1366,6 +1395,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | SimplicialChain.with-coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.with-coordinates |
 | SimplicialChain.zero-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.zero-on |
 | SimplicialChainAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps |
+| SimplicialChainHomotopyAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between full simplicial chain maps, with checked degree-raising matrices, composition, typed fillings and equal induced integral maps |
 | SimplicialChainMapAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps |
 | SimplicialCochain.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.add |
 | SimplicialCochain.basis-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.basis-on |

@@ -47,6 +47,7 @@ import mathematics.topology.SimplicialSubdivision;
 import mathematics.topology.SimplicialCollapse;
 import mathematics.topology.SimplicialCollapseSequence;
 import mathematics.topology.SimplicialChainMap;
+import mathematics.topology.SimplicialChainHomotopy;
 import mathematics.topology.RelativeSimplicialCochain;
 import mathematics.examples.ConcreteAlgebrasExample;
 import mathematics.probability.FiniteMarkovKernel;
@@ -58,7 +59,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all1428RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all1457RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String discrete="Complex[[0], [1]]",emptyComplex="Complex[]";
@@ -123,6 +124,17 @@ public class ConcreteAlgebrasTest {
                 chainDouble,chainMapPrefix+"-1]]])",chainZero,chainDouble,chainIdentity,"true",chainIdentity,"ZMatrix(1x1)[[1]]","ZMatrix(1x1)[[1]]",
                 "[ZMatrix(1x1)[[1]]]","[ZMatrix(1x1)[[1]]]",relativeZeroChain,relativeZeroCochain,zeroChain,zeroCochain,
                 identityOneMap,identityOneMap,"["+identityOneMap+"]","["+identityOneMap+"]"));
+        String chainHomotopy="ChainHomotopy(from="+chainIdentity+", to="+chainIdentity+", matrices=[ZMatrix(0x1)[]])",
+                doubledHomotopy="ChainHomotopy(from="+chainDouble+", to="+chainDouble+", matrices=[ZMatrix(0x1)[]])",
+                edgeMapPrefix="ChainMap(source="+collapsePair+", target="+collapsePair+", matrices=",
+                edgeIdentityMap=edgeMapPrefix+"[ZMatrix(2x2)[[1, 0], [0, 1]], ZMatrix(1x1)[[1]]])",
+                edgeConstantMap=edgeMapPrefix+"[ZMatrix(2x2)[[1, 1], [0, 0]], ZMatrix(1x1)[[0]]])",
+                contraction="ChainHomotopy(from="+edgeConstantMap+", to="+edgeIdentityMap+", matrices=[ZMatrix(1x2)[[0, 1]], ZMatrix(0x1)[]])";
+        expected.put("SimplicialChainHomotopyAlgebra",String.join("|",chainHomotopy,chainHomotopy,chainHomotopy,chainHomotopy,contraction,contraction,chainHomotopy,
+                chainIdentity,chainIdentity,absolutePoint,absolutePoint,"ChainHomotopyData(from="+chainIdentity+", to="+chainIdentity+", matrices=[ZMatrix(0x1)[]])",
+                chainHomotopy,chainHomotopy,doubledHomotopy,doubledHomotopy,chainHomotopy,chainHomotopy,"true","ZMatrix(0x1)[]","ZMatrix(0x1)[]",
+                "[ZMatrix(0x1)[]]","[ZMatrix(0x1)[], ZMatrix(1x0)[[]]]","RelativeChain(pair="+absolutePoint+", degree=1, coordinates=[])",relativeZeroCochain,
+                "SimplicialChain(complex="+point+", degree=1, coordinates=[])",zeroCochain,"["+identityOneMap+", "+identityOneMap+"]","["+identityOneMap+", "+identityOneMap+"]"));
         String edgeH0="PresentedAbelianGroup(ZMatrix(2x1)[[-1], [1]])",retractH0=homString(edgeH0,freeOne,"ZMatrix(1x2)[[0, 1]]"),includeH0=homString(freeOne,edgeH0,"ZMatrix(2x1)[[0], [1]]");
         String edgeZeroCochain="RelativeCochain(pair="+collapsePair+", degree=0, coordinates=[0, 0])",absoluteEdgeZeroCochain="SimplicialCochain(complex="+edge+", degree=0, coordinates=[0, 0])";
         expected.put("SimplicialCollapseAlgebra",String.join("|","[[0], [1]]","true",elementary,elementary,collapsePair,absolutePoint,"[1]","[0, 1]",collapseBackward,"true",
@@ -379,7 +391,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(1428,count);
+        assertEquals(1457,count);
     }
     private static String homString(String source,String target,String matrix) { return "AbelianHom(source="+source+", target="+target+", smith="+matrix+")"; }
     private static String simplicialString(String source,String target,String vertices) { return "SimplicialMap(source="+source+", target="+target+", vertices="+vertices+")"; }
@@ -509,6 +521,11 @@ public class ConcreteAlgebrasTest {
         if(operation instanceof IOneOperandOperation) return item.performOneOperandOperation(alias).perform().getResult().toString();
         if(operation instanceof ITransferOperation) return item.performAlgebraTransfer(alias).perform().getResult().toString();
         Object second=entry.second==null?null:sample(math,entry.second.getAlgebraName(),1);
+        if(owner instanceof SimplicialChainHomotopyAlgebra) {
+            if(entry.second==math.naturals.algebra()) second=BigInteger.ZERO;
+            if(entry.second==math.relativeCochains.algebra()) second=RelativeSimplicialCochain.zero(relativeCochainTestPair(),BigInteger.ONE);
+            if(entry.second==math.cochains.algebra()) second=SimplicialCochain.zero(coverTestPoint(),BigInteger.ONE);
+        }
         if(owner instanceof SimplicialChainMapAlgebra) {
             if(entry.second==math.naturals.algebra()) second=BigInteger.ZERO;
             if(entry.second==math.relativeComplexes.algebra()) second=relativeCochainTestPair();
@@ -676,6 +693,8 @@ public class ConcreteAlgebrasTest {
             case "CollapseSequence": return SimplicialCollapseSequence.fromCollapse(elementaryCollapse());
             case "ChainMap": return SimplicialChainMap.identity(relativeCochainTestPair());
             case "ChainMap.data": return SimplicialChainMap.identity(relativeCochainTestPair()).data();
+            case "ChainHomotopy": return SimplicialChainHomotopy.stationary(SimplicialChainMap.identity(relativeCochainTestPair()));
+            case "ChainHomotopy.data": return SimplicialChainHomotopy.stationary(SimplicialChainMap.identity(relativeCochainTestPair())).data();
             case "StrongCollapse.vertices": return new Pair<>(BigInteger.ONE,BigInteger.ZERO);
             case "CoverMap": return SimplicialCoverMap.identity(coverMapTestCover());
             case "SimplicialCover.pair": return new Pair<>(coverMapTestCover(),coverMapTestCover());

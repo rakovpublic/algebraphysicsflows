@@ -34,7 +34,7 @@ public final class SimplicialChainMap implements Serializable {
     }
     public SimplicialChainMap(RelativeSimplicialComplex source,RelativeSimplicialComplex target,List<IntegerMatrix> matrices) { this(new Data(source,target,matrices)); }
     public SimplicialChainMap(Data data) { this(data,new Computation()); }
-    private SimplicialChainMap(Data data,Computation work) {
+    SimplicialChainMap(Data data,Computation work) {
         source=data.source; target=data.target; matrices=data.matrices;
         for(int k=0;k<matrices.size();k++) {
             BigInteger degree=BigInteger.valueOf(k); IntegerMatrix matrix=matrices.get(k);
@@ -57,8 +57,9 @@ public final class SimplicialChainMap implements Serializable {
         for(int k=0;k<=topDegree(source,target);k++) result.add(factory.at(BigInteger.valueOf(k)));
         return new SimplicialChainMap(new Data(source,target,result),work);
     }
-    public static SimplicialChainMap identity(RelativeSimplicialComplex pair) {
-        Computation work=new Computation(); return build(pair,pair,work,d -> {
+    public static SimplicialChainMap identity(RelativeSimplicialComplex pair) { return identity(pair,new Computation()); }
+    static SimplicialChainMap identity(RelativeSimplicialComplex pair,Computation work) {
+        return build(pair,pair,work,d -> {
             int size=pair.basis(d).size(); work.use((long)size*size); return IntegerMatrix.identity(size);
         });
     }
@@ -67,20 +68,24 @@ public final class SimplicialChainMap implements Serializable {
             int rows=target.basis(d).size(),columns=source.basis(d).size(); work.use((long)rows*columns); return IntegerMatrix.zero(rows,columns);
         });
     }
-    public static SimplicialChainMap fromSimplicial(RelativeSimplicialMap map) {
-        Computation work=new Computation(); return build(map.source(),map.target(),work,d -> map.chainMatrix(d,work));
+    public static SimplicialChainMap fromSimplicial(RelativeSimplicialMap map) { return fromSimplicial(map,new Computation()); }
+    static SimplicialChainMap fromSimplicial(RelativeSimplicialMap map,Computation work) {
+        return build(map.source(),map.target(),work,d -> map.chainMatrix(d,work));
     }
     public static SimplicialChainMap fromAbsoluteSimplicial(FiniteSimplicialMap map) {
         Computation work=new Computation(); return build(RelativeSimplicialComplex.absolute(map.source()),RelativeSimplicialComplex.absolute(map.target()),work,d -> map.chainMatrix(d,work));
     }
-    public static SimplicialChainMap fromCollapse(SimplicialCollapse collapse) {
-        Computation work=new Computation(); return build(collapse.source(),collapse.target(),work,d -> collapse.retraction(d,work));
+    public static SimplicialChainMap fromCollapse(SimplicialCollapse collapse) { return fromCollapse(collapse,new Computation()); }
+    static SimplicialChainMap fromCollapse(SimplicialCollapse collapse,Computation work) {
+        return build(collapse.source(),collapse.target(),work,d -> collapse.retraction(d,work));
     }
-    public static SimplicialChainMap fromCollapseSequence(SimplicialCollapseSequence sequence) {
-        Computation work=new Computation(); return build(sequence.source(),sequence.target(),work,d -> sequence.retraction(d,work));
+    public static SimplicialChainMap fromCollapseSequence(SimplicialCollapseSequence sequence) { return fromCollapseSequence(sequence,new Computation()); }
+    static SimplicialChainMap fromCollapseSequence(SimplicialCollapseSequence sequence,Computation work) {
+        return build(sequence.source(),sequence.target(),work,d -> sequence.retraction(d,work));
     }
-    public static SimplicialChainMap fromSubdivision(SimplicialSubdivision subdivision) {
-        Computation work=new Computation(); SimplicialSubdivisionChains chains=new SimplicialSubdivisionChains(subdivision,work);
+    public static SimplicialChainMap fromSubdivision(SimplicialSubdivision subdivision) { return fromSubdivision(subdivision,new Computation()); }
+    static SimplicialChainMap fromSubdivision(SimplicialSubdivision subdivision,Computation work) {
+        SimplicialSubdivisionChains chains=new SimplicialSubdivisionChains(subdivision,work);
         return build(subdivision.original(),subdivision.subdivided(),work,chains::subdivisionMatrix);
     }
     public RelativeSimplicialComplex source() { return source; }
@@ -108,23 +113,26 @@ public final class SimplicialChainMap implements Serializable {
     private void requireParallel(SimplicialChainMap other) {
         if(!source.equals(other.source) || !target.equals(other.target)) throw MathFailure.undefined("Chain-map addition requires identical full labelled source and target pairs");
     }
-    private SimplicialChainMap combine(SimplicialChainMap other,boolean subtract) {
-        requireParallel(other); Computation work=new Computation(); return build(source,target,work,d -> {
+    private SimplicialChainMap combine(SimplicialChainMap other,boolean subtract,Computation work) {
+        requireParallel(other); return build(source,target,work,d -> {
             IntegerMatrix a=matrixAt(d),b=other.matrixAt(d); work.use((subtract?2L:1L)*a.rows()*a.columns()); return a.add(subtract?b.scale(BigInteger.ONE.negate()):b);
         });
     }
-    public SimplicialChainMap add(SimplicialChainMap other) { return combine(other,false); }
-    public SimplicialChainMap subtract(SimplicialChainMap other) { return combine(other,true); }
-    public SimplicialChainMap scale(BigInteger scalar) {
-        Objects.requireNonNull(scalar); Computation work=new Computation(); return build(source,target,work,d -> {
+    public SimplicialChainMap add(SimplicialChainMap other) { return add(other,new Computation()); }
+    SimplicialChainMap add(SimplicialChainMap other,Computation work) { return combine(other,false,work); }
+    public SimplicialChainMap subtract(SimplicialChainMap other) { return combine(other,true,new Computation()); }
+    public SimplicialChainMap scale(BigInteger scalar) { return scale(scalar,new Computation()); }
+    SimplicialChainMap scale(BigInteger scalar,Computation work) {
+        Objects.requireNonNull(scalar); return build(source,target,work,d -> {
             IntegerMatrix matrix=matrixAt(d); work.use((long)matrix.rows()*matrix.columns()); return matrix.scale(scalar);
         });
     }
     public SimplicialChainMap negate() { return scale(BigInteger.ONE.negate()); }
     /** This after before, requiring equality of the entire joining pair. */
-    public SimplicialChainMap compose(SimplicialChainMap before) {
+    public SimplicialChainMap compose(SimplicialChainMap before) { return compose(before,new Computation()); }
+    SimplicialChainMap compose(SimplicialChainMap before,Computation work) {
         if(!source.equals(before.target)) throw MathFailure.undefined("Chain-map composition requires identical full labelled joining pairs");
-        Computation work=new Computation(); return build(before.source,target,work,d -> work.multiply(matrixAt(d),before.matrixAt(d)));
+        return build(before.source,target,work,d -> work.multiply(matrixAt(d),before.matrixAt(d)));
     }
     public boolean isIsomorphism() {
         Computation work=new Computation();
@@ -156,7 +164,7 @@ public final class SimplicialChainMap implements Serializable {
     public SimplicialCochain onAbsoluteCochain(SimplicialCochain cochain) {
         requireAbsolute(); RelativeSimplicialCochain result=onCochain(RelativeSimplicialCochain.absolute(cochain)); return new SimplicialCochain(source.ambient(),result.degree(),result.coordinates());
     }
-    private AbelianGroupHomomorphism induced(BigInteger degree,boolean dual,Computation work) {
+    AbelianGroupHomomorphism induced(BigInteger degree,boolean dual,Computation work) {
         requireDegree(degree);
         IntegralHomology a=dual?RelativeSimplicialCochain.cohomology(source,degree,work):source.homology(degree,work);
         IntegralHomology b=source.equals(target)?a:dual?RelativeSimplicialCochain.cohomology(target,degree,work):target.homology(degree,work);

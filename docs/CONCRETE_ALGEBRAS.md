@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1428 native operations from 63 algebra builders.
+The default initializer currently installs 1457 native operations from 64 algebra builders.
 
 ## Existing API usage
 
@@ -1996,3 +1996,67 @@ Composition and addition induce the corresponding operations on homology. Transp
 Each pair component permits at most 4096 nonempty simplices, and each required quotient basis permits 256 simplices after filtering out the subcomplex. One 5000000-unit work budget covers all degree calculations in construction, conversion, composition or inversion, including final validation. Each entire homology/cohomology list shares one budget. Exhaustion raises `IMPLEMENTATION_FAILURE` without a partial result. Nonnegative matrix/map degrees above both ambient dimensions return zero groups; typed chain actions also preserve negative-degree zero groups. Integer coefficient bit lengths remain unbounded.
 
 `NativeSimplicialChainMapTest` supplies 17 tests: independent endpoint equations for all 243 ternary interval matrix families and relative quotient variants, determinant-oracle inversion for 625 two-by-two matrices, arbitrary circle degrees and noncommuting contravariant composition, 729 typed coordinate checks and 729 simplicial compositions, relative disk and projective-plane torsion, collapse/subdivision comparisons, invalid full contexts and top differentials, immutable data, empty shapes, filtered basis bounds, aggregate computation limits and serialized native scalar/flat flows.
+
+## Supplied integral chain homotopies
+
+`math.chainHomotopies` installs 29 operations for `SimplicialChainHomotopy`. A value retains parallel integral chain maps `F` and `G` and specific matrices `H_k: C_k(source) -> C_(k+1)(target)` satisfying `dH + Hd = G - F`. Construction checks the full labelled pairs, every shifted matrix shape, and every equation, including degree zero and the top degree. The dual operator is `Q^p = transpose(H_(p-1))`, with `dQ + Qd = G* - F*`.
+
+The supporting `ChainHomotopy.data` carrier stores two validated chain maps and an immutable supplied matrix list. Membership in this data carrier does not assert parallel endpoints or the homotopy equations. `ChainHomotopy.from-data` performs those checks. As with ChainMap, the list has one entry in every degree from zero through the largest ambient dimension. This uses ambient dimensions even when a relative quotient vanishes in every degree. Matrix equality retains the witness: distinct homotopies between equal endpoints remain distinct.
+
+| Operation | Native behavior |
+| --- | --- |
+| `from-data` | `ChainHomotopy.data -> ChainHomotopy`; check all shapes and equations |
+| `stationary` | `ChainMap -> ChainHomotopy`; zero witness from a map to itself |
+| `from-prism` | `SimplicialHomotopy -> ChainHomotopy`; retain the actual prism |
+| `from-path` | `HomotopyPath -> ChainHomotopy`; retain the accumulated prism, including loops |
+| `from-collapse`, `from-collapse-sequence` | Convert the witness from inclusion after retraction to identity on the original pair |
+| `from-subdivision` | Convert the witness from subdivision after last-vertex to identity on the subdivided pair |
+| `from`, `to` | `ChainHomotopy -> ChainMap`; full endpoint maps |
+| `source`, `target` | `ChainHomotopy -> RelativeComplex`; common full pairs |
+| `data` | `ChainHomotopy -> ChainHomotopy.data`; retain endpoints and matrices |
+| `reverse` | Exchange endpoints and negate the actual matrices |
+| `then` | Chronological concatenation; require the exact joining chain map and add witnesses |
+| `add` | Add initial maps, terminal maps and witness matrices; require parallel full pairs |
+| `scale` | `ChainHomotopy x Z -> ChainHomotopy`; scale both endpoints and the witness |
+| `precompose` | `ChainHomotopy x ChainMap -> ChainHomotopy`; compose endpoints with `B` and use `H_k B_k` |
+| `postcompose` | `ChainHomotopy x ChainMap -> ChainHomotopy`; compose endpoints with `A` and use `A_(k+1) H_k` |
+| `equal` | Compare both endpoint maps and every witness matrix |
+| `chain-matrix`, `cochain-matrix` | `ChainHomotopy x N -> Mat(Z)`; `H_k` and shifted transpose `Q^k` |
+| `chain-matrices`, `cochain-matrices` | Complete lists `H_0,...,H_d` and `Q^0,...,Q^(d+1)` |
+| `on-chain`, `on-absolute-chain` | Raise source-chain degree by one, using the actual second carrier wrapper |
+| `on-cochain`, `on-absolute-cochain` | Lower positive target-cochain degree by one, using the actual second carrier wrapper |
+| `homology-maps`, `cohomology-maps` | Emit exactly the two equal endpoint maps in the requested nonnegative degree, retaining presentations and torsion |
+
+Construction aliases use the `ChainHomotopy.` prefix on other carriers. This example constructs a nonzero homotopy from a point-to-circle map to itself. Its action sends the point generator to the oriented circle cycle:
+
+```java
+ConcreteMathematics math = new ConcreteMathematics();
+RelativeSimplicialComplex point = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))));
+RelativeSimplicialComplex circle = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Arrays.asList(
+                FiniteSet.of(0, 1), FiniteSet.of(0, 2), FiniteSet.of(1, 2))));
+BigInteger zero = BigInteger.ZERO, one = BigInteger.ONE;
+SimplicialChainMap f = new SimplicialChainMap(point, circle, Arrays.asList(
+        new IntegerMatrix(new BigInteger[][] {{one}, {zero}, {zero}}),
+        IntegerMatrix.zero(3, 0)));
+SimplicialChainHomotopy.Data data = new SimplicialChainHomotopy.Data(f, f,
+        Arrays.asList(new IntegerMatrix(new BigInteger[][] {{one}, {one.negate()}, {one}}),
+                IntegerMatrix.zero(0, 0)));
+SimplicialChainHomotopy h = math.chainHomotopies.inputs.buildAlgebraItem(data)
+        .<SimplicialChainHomotopy>performAlgebraTransfer("ChainHomotopy.from-data")
+        .perform().getResult();
+RelativeSimplicialChain vertex = new RelativeSimplicialChain(point, zero, new IntegerVector(one));
+List<String> cycle = math.flow(math.chainHomotopies, Collections.singletonList(h))
+        .performLeftProjectionOperation("on-chain", vertex)
+        .<IntegerVector>performAlgebraTransfer("coordinates").collect();
+// [[1, -1, 1]]
+```
+
+For a cycle `c`, `H(c)` fills `G(c)-F(c)`; for a cocycle `a`, `Q(a)` fills `G*(a)-F*(a)`. On arbitrary chains and cochains, both terms in the homotopy identity are retained. Algebraic reversal negates the chosen witness and is an involution; the existing geometric prism reversal recomputes a prism and can give different matrices. Addition also differs from concatenation: it adds both endpoint maps. These conventions use the standard [chain-homotopy identity](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf).
+
+`Q^0` has zero rows and retains the number of target vertices outside the subcomplex as its column count. Typed cochain actions require positive degree because their carrier excludes negative degrees. Typed chain actions accept negative degrees; degree -1 maps to the correctly sized zero chain in target degree zero. Both empty complexes give an empty chain-matrix list and one 0 by 0 cochain matrix. Absolute actions require empty subcomplexes at both endpoints.
+
+One 5000000-unit budget covers each whole conversion or compound operation, including endpoint construction and final witness validation. Each two-map homology/cohomology list shares its budget. Every required quotient basis is filtered before its 256-simplex bound, within the existing 4096-simplex pair-component bound. Resource exhaustion is `IMPLEMENTATION_FAILURE`, never a partial result. This implements supplied integral witnesses and conversions from existing constructions; arbitrary homotopy search, geometric realization, higher coherence and other coefficient rings remain outside scope.
+
+`NativeSimplicialChainHomotopyTest` has 15 tests. They check all 2,601 ternary interval candidates against independent endpoint equations, 729 two-degree triangle witnesses using explicit oriented boundary matrices, relative quotient witnesses, nonzero loops, shifted pre/postcomposition, 729 prism conversions, 729 typed chain/cochain identities, path/collapse/subdivision conversions, projective-plane torsion, invalid full contexts and top-degree equations, empty and negative-degree shapes, filtered bases, aggregate endpoint/validation/two-map budgets, actual wrappers and serialized native flows.

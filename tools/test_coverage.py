@@ -71,6 +71,16 @@ class CoverageTest(unittest.TestCase):
 
     def test_operation_conditions_are_scoped_to_the_algebra(self):
         records = {r.get("runtime_operation_id"): r for r in self.data["concepts"] if r.get("runtime_operation_id")}
+        self.assertIn("including degree zero and the top degree", " ".join(records["ChainHomotopy.from-data"]["required_invariants"]))
+        self.assertIn("negate the actual witness matrices", " ".join(records["ChainHomotopy.reverse"]["required_invariants"]))
+        self.assertIn("exact full joining chain map", " ".join(records["ChainHomotopy.then"]["required_invariants"]))
+        self.assertIn("A_(k+1) H_k", " ".join(records["ChainHomotopy.postcompose"]["required_invariants"]))
+        self.assertIn("Q^0 has zero rows", " ".join(records["ChainHomotopy.cochain-matrix"]["required_invariants"]))
+        self.assertIn("positive degree", " ".join(records["ChainHomotopy.on-cochain"]["required_invariants"]))
+        self.assertIn("ILeftProjectionOperation", " ".join(records["ChainHomotopy.on-chain"]["required_invariants"]))
+        self.assertIn("exactly [from_*,to_*]", " ".join(records["ChainHomotopy.homology-maps"]["required_invariants"]))
+        self.assertIn("5000000", " ".join(records["ChainHomotopy.from-subdivision"]["known_limitations"]))
+        self.assertIn("No arbitrary homotopy search", " ".join(records["ChainHomotopy.stationary"]["known_limitations"]))
         self.assertIn("including the top degree", " ".join(records["ChainMap.from-data"]["required_invariants"]))
         self.assertIn("right operand first", " ".join(records["ChainMap.compose"]["required_invariants"]))
         self.assertIn("unimodular over Z", " ".join(records["ChainMap.inverse"]["required_invariants"]))
