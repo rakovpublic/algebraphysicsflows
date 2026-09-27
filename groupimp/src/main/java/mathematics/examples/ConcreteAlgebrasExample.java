@@ -31,6 +31,7 @@ import mathematics.topology.SimplicialHomotopyPath;
 import mathematics.topology.SimplicialHomotopyEquivalence;
 import mathematics.topology.SimplicialSubdivision;
 import mathematics.topology.SimplicialCollapse;
+import mathematics.topology.SimplicialCollapseSequence;
 import mathematics.topology.IntegralHomology;
 import mathematics.topology.FiniteSimplicialMap;
 import mathematics.topology.RelativeSimplicialComplex;
@@ -106,6 +107,8 @@ public final class ConcreteAlgebrasExample {
         System.out.println("Free-edge collapse retracts a triangle edge to its other two edges: "+math.flow(math.complexes,Collections.singletonList(filledTriangle))
                 .<SimplicialCollapse,FiniteSet<BigInteger>>performAlgebraUnsafe("SimplicialCollapse.from-absolute-face",FiniteSet.of(BigInteger.ZERO,BigInteger.valueOf(2)))
                 .performLeftProjectionOperation("on-absolute-chain",triangleEdge).<IntegerVector>performAlgebraTransfer("coordinates").collect());
+        System.out.println("Greedy triangle reduction retains three elementary collapse steps: "+math.flow(math.complexes,Collections.singletonList(filledTriangle))
+                .<SimplicialCollapseSequence>performAlgebraTransfer("CollapseSequence.reduce-absolute").<BigInteger>performAlgebraTransfer("step-count").collect());
         System.out.println("Subdividing the oriented circle retains an integral cycle: "+math.flow(math.complexes,Collections.singletonList(circle))
                 .<SimplicialSubdivision>performAlgebraTransfer("SimplicialSubdivision.from-complex")
                 .performLeftProjectionOperation("on-absolute-chain",orientedCircle).<Boolean>performAlgebraTransfer("is-cycle").collect());

@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1350 native operations from 61 algebra builders.
+The default initializer currently installs 1386 native operations from 62 algebra builders.
 
 ## Existing API usage
 
@@ -64,6 +64,7 @@ List<String> values = math.flow(math.naturals,
 | SimplicialHomotopyPathAlgebra / HomotopyPath | chronological concatenation; full stage equality -> Boolean | endpoints/pairs; reverse; step count; flat stages, steps and chain/cochain matrices | stationary and one-step constructors; append a map; precompose/postcompose all stages; accumulated prism matrices and typed actions |
 | SimplicialSubdivisionAlgebra / SimplicialSubdivision | equality of full original pairs -> Boolean | original/subdivided pairs; vertex count; flat face dictionary; last-vertex map | pair/complex constructors; dictionary lookups; induced subdivision maps; naturality witnesses; scalar/flat inverse integral maps; signed subdivision chain/cochain actions and explicit inverse homotopies |
 | SimplicialCollapseAlgebra / SimplicialCollapse | equality of source pair and free face -> Boolean | source/reduced pairs; free face/coface; inclusion; flat chain/cochain matrices and homotopies | compatible free-face search and constructors; signed chain retraction and dual cochain actions; typed homotopies; scalar/flat inverse integral maps |
+| SimplicialCollapseSequenceAlgebra / CollapseSequence | chronological then; full step equality -> Boolean | original/final pairs; flat steps/stages; step count; terminal check; inclusion; flat matrices | identity and one-step constructors; greedy pair/absolute reduction; append; composite chain/cochain actions and homotopies; scalar/flat inverse integral maps |
 | SimplicialHomotopyEquivalenceAlgebra / HomotopyEquivalence | composition; full map/witness equality -> Boolean | inverse; maps, pairs and homotopy witnesses | supplied inverse witnesses; compatible vertex collapses and strong-core reduction; absolute strong-type decisions and constructed equivalences; inverse integral maps |
 | SimplicialChainAlgebra / SimplicialChain | context-checked add/subtract; equality/homology comparison -> Boolean | boundary; negate; complex/degree/coordinates; cycle/boundary predicates; fillings; homology/class; flat cycle generators; augmentation | integer scale; coordinates; pushforward; pairing; cap and cap-class; fixed-chain/cochain cap matrices and induced maps; zero and flat basis constructors |
 | SimplicialCochainAlgebra / SimplicialCochain | same-context add/subtract; cup; equality/cohomologous -> Boolean; cup-class -> AbelianGroupElement | negate; complex/degree/coordinates; coboundary; zero/cocycle/coboundary tests; cohomology model/class; cobounding coordinates; flat cocycle generators | degreewise zero/basis construction and unit; integer scaling; coordinate replacement; representative; evaluation; pullback; scalar/flat cohomology models and contravariant maps |
@@ -1831,6 +1832,67 @@ List<String> coordinates = math.flow(math.complexes, Collections.singletonList(t
 
 This chain retraction cannot be a vertex map fixing the reduced complex: its vertices are unchanged, but its removed edge is absent from the target. The collapse context therefore exposes inclusion and chain witnesses without claiming a `HomotopyEquivalence` value in the existing contiguity-path carrier. Compatible dominated-vertex reductions remain available separately.
 
-Each complex has at most 4096 nonempty simplices. Free-face discovery and geometric construction do not impose a chain-basis bound. Each required quotient basis is filtered before the 256-simplex limit for matrix, typed and integral operations. One 5,000,000-unit computation budget covers each search, constructor, matrix, typed action, complete flat matrix list, integral map or complete two-map list. Exhaustion raises IMPLEMENTATION_FAILURE without a partial result or false predicate. Integer coefficient bit lengths remain unbounded. The carrier represents one collapse; automatic collapse sequences, expansions, general discrete Morse matchings and contractibility decisions remain outside its scope.
+Each complex has at most 4096 nonempty simplices. Free-face discovery and geometric construction do not impose a chain-basis bound. Each required quotient basis is filtered before the 256-simplex limit for matrix, typed and integral operations. One 5,000,000-unit computation budget covers each search, constructor, matrix, typed action, complete flat matrix list, integral map or complete two-map list. Exhaustion raises IMPLEMENTATION_FAILURE without a partial result or false predicate. Integer coefficient bit lengths remain unbounded. This carrier represents one collapse; CollapseSequence below supplies checked composition and deterministic greedy sequences. Expansions, general discrete Morse matchings and contractibility decisions remain outside scope.
 
 NativeSimplicialCollapseTest checks all 167 four-label complexes against an independent strict-coface oracle, all 148 three-label relative pairs, and all 1,024 graph/vertex-subcomplex pairs. Its 16 tests also cover signed simplex facets through dimension seven, 729 ternary chain/cochain actions, both homotopy identities, projective-plane torsion, inverse integral maps, pair compatibility, empty/disconnected and extreme-label inputs, filtered basis limits, shared flat-map budgets, all eight actual wrappers and serialized scalar/flat flows. ConcreteAlgebrasTest checks all 32 registrations against explicit expected values.
+
+## Collapse sequences and deterministic reduction
+
+`math.collapseSequences` supplies 36 operations on `CollapseSequence`, represented by `SimplicialCollapseSequence`. It retains a full original pair and an ordered list of compatible elementary collapses, including every intermediate pair. Empty sequences provide identity retractions. A sequence can be constructed from one collapse, extended with another collapse, or concatenated chronologically with a sequence whose full source pair equals its final pair. Equal endpoints alone do not identify sequences: different choices can produce different chain homotopies.
+
+The greedy reducer repeatedly chooses the eligible nonempty face of smallest cardinality, breaking ties lexicographically by original integer labels. It updates the geometric pair and searches again until no compatible face remains. Pair compatibility is checked at every step, so protected boundary faces stay protected, while face/coface pairs inside the subcomplex can be cancelled in both components. The result records the actual elementary collapses, consistent with the notion of a collapse sequence in [Strong and Vogeli's topology notes, section 2.1](https://e.math.cornell.edu/people/Kimball_Strong/notes/evasiveness.pdf).
+
+If the step retractions are `R_1, ..., R_m`, inclusions `i_1, ..., i_m` and homotopies `H_1, ..., H_m`, the composite witnesses are
+
+```text
+R = R_m ... R_2 R_1
+i = i_1 i_2 ... i_m
+H = H_1 + i_1 H_2 R_1 + i_1 i_2 H_3 R_2 R_1 + ...
+R i = identity on the final quotient chains
+boundary H + H boundary = identity on the original quotient chains - i R
+```
+
+Matrices retain sorted integral quotient bases at every stage. Prefix retractions transport each H term from the original chains; inclusions place it back into the original complex. The cochain operators are the transposes of R and degree-shifted H, satisfying `coboundary Q + Q coboundary = identity - R* i*`. Integral maps retain presented groups and torsion. R induces the map from original to final homology, while its cohomology map goes from final to original; inclusion induces their inverses.
+
+| Native operation | Input and result |
+| --- | --- |
+| `CollapseSequence.identity-on` | RelativeComplex -> empty sequence on that full pair |
+| `CollapseSequence.from-collapse` | SimplicialCollapse -> one-step sequence |
+| `CollapseSequence.reduce`, `CollapseSequence.reduce-absolute` | RelativeComplex or FiniteComplex -> complete deterministic greedy sequence |
+| `append` | Sequence and SimplicialCollapse -> extended sequence, requiring the same joining pair |
+| `then` | Two sequences -> first followed by second, requiring the same joining pair |
+| `equal` | Two sequences -> equality of full original pair and ordered steps |
+| `source`, `target` | Sequence -> original or final RelativeComplex |
+| `steps`, `stages` | Sequence -> flat ordered collapses, or all full pairs including the original |
+| `step-count`, `is-terminal` | Sequence -> N count, or whether its final pair has no eligible free face |
+| `inclusion` | Sequence -> actual RelativeMap from final to original pair |
+| `chain-matrix`, `cochain-matrix` | Sequence and nonnegative degree -> composite R or its transpose |
+| `chain-matrices`, `cochain-matrices` | Sequence -> flat matrices in degrees 0 through original ambient dimension d |
+| `chain-homotopy-matrix`, `cochain-homotopy-matrix` | Sequence and nonnegative degree -> composite H or degree-shifted transpose Q |
+| `chain-homotopy-matrices`, `cochain-homotopy-matrices` | Sequence -> flat H in degrees 0 through d, or Q in degrees 0 through d+1 |
+| `on-chain`, `on-absolute-chain` | Sequence and original chain -> final chain of the same degree |
+| `on-cochain`, `on-absolute-cochain` | Sequence and final cochain -> original cochain of the same degree |
+| `homotopy-on-chain`, `homotopy-on-absolute-chain` | Sequence and original chain -> original chain one degree higher |
+| `homotopy-on-cochain`, `homotopy-on-absolute-cochain` | Sequence and positive-degree original cochain -> original cochain one degree lower |
+| `homology-map`, `inverse-homology-map`, `homology-maps` | Sequence and nonnegative degree -> R_*, i_*, or flat pair [R_*, i_*] |
+| `cohomology-map`, `inverse-cohomology-map`, `cohomology-maps` | Sequence and nonnegative degree -> R*, i*, or flat pair [R*, i*] on cohomology |
+
+`append` uses the existing `ICustomMemberOperation` and returns the first operand carrier. The eight typed actions use `ILeftProjectionOperation` and return the actual second operand's `IAlgebraItem` wrapper. Absolute actions require an empty original subcomplex, and all typed actions check full contexts. Typed chains retain negative-degree zero groups. Cochain homotopy matrices support degree zero with zero rows; typed cochain homotopies require positive degree.
+
+```java
+List<String> counts = math.flow(math.complexes, Collections.singletonList(triangle))
+        .<SimplicialCollapseSequence>performAlgebraTransfer("CollapseSequence.reduce-absolute")
+        .<BigInteger>performAlgebraTransfer("step-count").collect(); // ["3"]
+
+List<String> faceSizes = math.flow(math.complexes, Collections.singletonList(triangle))
+        .<SimplicialCollapseSequence>performAlgebraTransfer("CollapseSequence.reduce-absolute")
+        .<SimplicialCollapse>performFlatAlgebraTransfer("steps")
+        .<FiniteSet<BigInteger>>performAlgebraTransfer("free-face")
+        .<BigInteger>performAlgebraTransfer("cardinality").collect(); // ["2", "1", "1"]
+```
+
+For the filled triangle on `{0,1,2}`, the reducer removes edge `{0,1}`, then vertex `{0}`, then vertex `{1}`, retaining vertex `{2}`. An empty sequence need not be terminal, and a terminal pair need not be a point. Greedy choices depend on labels and do not backtrack: they do not decide collapsibility or contractibility, produce a canonical core, or search through expansions. General discrete Morse matchings remain outside scope. A composite chain retraction need not come from a simplicial vertex map, so it does not assert a contiguity-path `HomotopyEquivalence`.
+
+Sequences allow zero through 256 steps and at most 4096 nonempty simplices per component. Geometry does not require small chain bases. Every required matrix basis is filtered before its 256-simplex bound, including intermediate quotient bases. Each entire reduction shares one 5,000,000-unit budget across all searches, constructions and final validation. Each append/concatenation, composite matrix, typed action, complete flat matrix list, integral map and complete two-map list also shares one budget. Step or work exhaustion raises IMPLEMENTATION_FAILURE without partial sequences, partial lists or false mathematical conclusions. Coefficient bit lengths remain unbounded.
+
+NativeSimplicialCollapseSequenceTest has 16 tests covering independent greedy deletion oracles for all 167 four-label complexes, 148 three-label pairs and 1,024 graph/vertex-subcomplex pairs. It checks chronological composition, identity units, retained choices, 729 ternary chain/cochain actions, signed simplex reductions through dimension four, projective-plane torsion, typed fillings, relative restrictions, empty and extreme labels, step and shared-work limits, filtered bases, actual wrappers and serialized scalar/flat/append flows. ConcreteAlgebrasTest checks all 36 registrations against explicit expected values.

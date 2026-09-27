@@ -36,7 +36,10 @@ public final class SimplicialCollapse implements Serializable {
         }
     }
     public SimplicialCollapse(RelativeSimplicialComplex source,FiniteSet<BigInteger> face) {
-        this.source=Objects.requireNonNull(source); Objects.requireNonNull(face); Computation work=new Computation();
+        this(source,face,new Computation());
+    }
+    SimplicialCollapse(RelativeSimplicialComplex source,FiniteSet<BigInteger> face,Computation work) {
+        this.source=Objects.requireNonNull(source); Objects.requireNonNull(face);
         if(face.size()==0 || face.size()>source.ambient().dimension()+1) throw MathFailure.undefined("A collapse requires a nonempty original free face");
         List<Integer> labels=new ArrayList<>(); for(BigInteger vertex : face.members()) {
             try { labels.add(vertex.intValueExact()); } catch(ArithmeticException e) { throw MathFailure.undefined("Free-face labels must fit signed ints"); }
@@ -57,7 +60,10 @@ public final class SimplicialCollapse implements Serializable {
         List<BigInteger> result=new ArrayList<>(); for(int label : IntegralSimplicialHomology.vertices(simplex)) result.add(BigInteger.valueOf(label)); return new FiniteSet<>(result);
     }
     public static List<FiniteSet<BigInteger>> freeFaces(RelativeSimplicialComplex pair) {
-        Computation work=new Computation(); Index index=new Index(pair,work); List<FiniteSet<Integer>> faces=new ArrayList<>();
+        return freeFaces(pair,new Computation());
+    }
+    static List<FiniteSet<BigInteger>> freeFaces(RelativeSimplicialComplex pair,Computation work) {
+        Index index=new Index(pair,work); List<FiniteSet<Integer>> faces=new ArrayList<>();
         for(FiniteSet<Integer> face : pair.ambient().faces()) if(index.compatibleCoface(face,work)!=null) faces.add(face);
         faces.sort((a,b) -> {
             work.use(1L+a.size()+b.size()); int compare=Integer.compare(a.size(),b.size()); if(compare!=0) return compare;
@@ -80,7 +86,7 @@ public final class SimplicialCollapse implements Serializable {
         work.use((long)rows*columns); BigInteger[][] result=new BigInteger[rows][columns]; for(BigInteger[] row : result) Arrays.fill(row,BigInteger.ZERO); return result;
     }
     /** R(tau) = -epsilon*(boundary sigma - epsilon*tau), R(sigma)=0; all other basis simplices are fixed. */
-    private IntegerMatrix retraction(BigInteger degree,Computation work) {
+    IntegerMatrix retraction(BigInteger degree,Computation work) {
         List<FiniteSet<Integer>> rows=target.basis(degree),columns=source.basis(degree); BigInteger[][] entries=zeros(rows.size(),columns.size(),work);
         Map<FiniteSet<Integer>,Integer> positions=new HashMap<>(); for(int r=0;r<rows.size();r++) { work.use(1L+rows.get(r).size()); positions.put(rows.get(r),r); }
         for(int c=0;c<columns.size();c++) {
@@ -94,7 +100,7 @@ public final class SimplicialCollapse implements Serializable {
     }
     private IntegerMatrix inclusion(BigInteger degree,Computation work) { return RelativeSimplicialComplex.selector(source.basis(degree),target.basis(degree),work); }
     /** H(tau)=epsilon*sigma; boundary H + H boundary = identity - inclusion R. */
-    private IntegerMatrix homotopy(BigInteger degree,Computation work) {
+    IntegerMatrix homotopy(BigInteger degree,Computation work) {
         List<FiniteSet<Integer>> rows=source.basis(degree.add(BigInteger.ONE)),columns=source.basis(degree); BigInteger[][] entries=zeros(rows.size(),columns.size(),work);
         work.use((long)(rows.size()+columns.size())*(coface.size()+1)); int row=rows.indexOf(coface),column=columns.indexOf(face);
         if(row>=0 && column>=0) entries[row][column]=BigInteger.valueOf(incidence); return new IntegerMatrix(rows.size(),columns.size(),entries);

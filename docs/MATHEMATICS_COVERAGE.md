@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1818 |
-| DIRECTLY_SUPPORTED | 1575 |
+| Scoped records | 1855 |
+| DIRECTLY_SUPPORTED | 1612 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1434 |
+| IMPLEMENTED | 1471 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1502 |
+| MACHINE_TESTED | 1539 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1411 | 1411 | 0 | 0 | 0 | 1411 | 0 | 0 |
+| Concrete MathTool algebras | 1448 | 1448 | 0 | 0 | 0 | 1448 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -287,6 +287,42 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Boolean.xor | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.xor |
 | Boolean.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.zero |
 | BooleanAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations |
+| CollapseSequence.append | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.append |
+| CollapseSequence.chain-homotopy-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.chain-homotopy-matrices |
+| CollapseSequence.chain-homotopy-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.chain-homotopy-matrix |
+| CollapseSequence.chain-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.chain-matrices |
+| CollapseSequence.chain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.chain-matrix |
+| CollapseSequence.cochain-homotopy-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.cochain-homotopy-matrices |
+| CollapseSequence.cochain-homotopy-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.cochain-homotopy-matrix |
+| CollapseSequence.cochain-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.cochain-matrices |
+| CollapseSequence.cochain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.cochain-matrix |
+| CollapseSequence.cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.cohomology-map |
+| CollapseSequence.cohomology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.cohomology-maps |
+| CollapseSequence.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.equal |
+| CollapseSequence.from-collapse | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.from-collapse |
+| CollapseSequence.homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.homology-map |
+| CollapseSequence.homology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.homology-maps |
+| CollapseSequence.homotopy-on-absolute-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.homotopy-on-absolute-chain |
+| CollapseSequence.homotopy-on-absolute-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.homotopy-on-absolute-cochain |
+| CollapseSequence.homotopy-on-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.homotopy-on-chain |
+| CollapseSequence.homotopy-on-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.homotopy-on-cochain |
+| CollapseSequence.identity-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.identity-on |
+| CollapseSequence.inclusion | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.inclusion |
+| CollapseSequence.inverse-cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.inverse-cohomology-map |
+| CollapseSequence.inverse-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.inverse-homology-map |
+| CollapseSequence.is-terminal | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.is-terminal |
+| CollapseSequence.on-absolute-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.on-absolute-chain |
+| CollapseSequence.on-absolute-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.on-absolute-cochain |
+| CollapseSequence.on-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.on-chain |
+| CollapseSequence.on-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.on-cochain |
+| CollapseSequence.reduce | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.reduce |
+| CollapseSequence.reduce-absolute | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.reduce-absolute |
+| CollapseSequence.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.source |
+| CollapseSequence.stages | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.stages |
+| CollapseSequence.step-count | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.step-count |
+| CollapseSequence.steps | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.steps |
+| CollapseSequence.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.target |
+| CollapseSequence.then | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses; native operation CollapseSequence.then |
 | CoverMap.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with covariant homology, contravariant cohomology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.compose |
 | CoverMap.contiguous | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with covariant homology, contravariant cohomology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.contiguous |
 | CoverMap.corestrict-image | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with covariant homology, contravariant cohomology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.corestrict-image |
@@ -1352,6 +1388,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | SimplicialCollapse.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.source |
 | SimplicialCollapse.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps; native operation SimplicialCollapse.target |
 | SimplicialCollapseAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Compatible elementary free-face collapses of labelled pairs, with integral chain retractions, explicit chain/cochain homotopies and inverse homology/cohomology maps |
+| SimplicialCollapseSequenceAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, deterministic greedy pair reduction and composite integral chain/cochain witnesses |
 | SimplicialCover.connecting-chain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral homological and cohomological Mayer-Vietoris sequences, direct sums and simplicial excision maps; native operation SimplicialCover.connecting-chain-matrix |
 | SimplicialCover.connecting-cochain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral homological and cohomological Mayer-Vietoris sequences, direct sums and simplicial excision maps; native operation SimplicialCover.connecting-cochain-matrix |
 | SimplicialCover.connecting-cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered two-subcomplex covers with constructive integral homological and cohomological Mayer-Vietoris sequences, direct sums and simplicial excision maps; native operation SimplicialCover.connecting-cohomology-map |

@@ -11,3 +11,5 @@ See [implementation status](docs/IMPLEMENTATION_STATUS.md), [the operation model
 Signed subdivision now acts on integral chains and cochains, with explicit chain/cochain homotopies witnessing the inverse comparison with the last-vertex map. Typed actions retain full absolute or relative contexts and use the existing second-operand wrappers.
 
 Elementary free-face collapses now remove a compatible face/coface pair from an absolute complex or relative pair. Their 32 native operations expose the reduced pair, inclusion, signed integral chain retraction, chain/cochain homotopies, and inverse homology/cohomology maps through the same item and flow APIs.
+
+Checked collapse sequences now compose those steps and perform deterministic greedy reduction. Their 36 operations retain intermediate pairs, composite chain/cochain witnesses and inverse integral maps, with native append, concatenation and flat step/stage flows.
