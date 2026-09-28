@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1472 native operations from 65 algebra builders.
+The default initializer currently installs 1478 native operations from 65 algebra builders.
 
 ## Existing API usage
 
@@ -2106,7 +2106,7 @@ The solver permits at most **256 total equations** `sum_k rank(target C_k) * ran
 
 ## Chain maps modulo integral homotopy
 
-`math.chainMapSpaces` adds 12 native operations for the full additive space of integral chain maps between two labelled simplicial pairs. `SimplicialChainMapSpace` retains both pairs; its algebraic queries compute the free group of chain maps and its quotient by null-homotopic maps. These are additive groups of chain-map classes, not the geometric homotopy groups of a space.
+`math.chainMapSpaces` adds 18 native operations for the full additive space of integral chain maps between two labelled simplicial pairs, including composition actions described below. `SimplicialChainMapSpace` retains both pairs; its algebraic queries compute the free group of chain maps and its quotient by null-homotopic maps. These are additive groups of chain-map classes, not the geometric homotopy groups of a space.
 
 The computation uses degree zero of the integral Hom complex. Its outgoing differential is `delta_0(F) = d_target F - F d_source`, and its incoming differential is `delta_1(H) = d_target H + H d_source`. Thus cycles are chain maps, boundaries are null-homotopic maps, and the quotient is `H_0(Hom)`. The implementation builds both matrices and passes them to the existing constructive `IntegralHomology`, which checks their composite, computes the full integral kernel and retains the resulting abelian presentation. This is the standard [Hom-complex construction](https://stacks.math.columbia.edu/tag/0A8H), in [homological grading](https://math.mit.edu/~larsh/teaching/S2006/l9/).
 
@@ -2154,6 +2154,48 @@ Class projection is additive, and two maps have equal classes exactly when they 
 
 `representative` checks the exact presentation and Smith coordinate map. Generic `AbelianGroupElement` values retain that algebraic context, without geometric endpoint provenance; the same retained presentation may be used across different spaces. Returned chain maps always use the receiving space's full endpoints. Labelled pairs determine deterministic bases, but neither the presentation nor the chosen representatives are asserted to be invariant under relabelling.
 
-Each component of a pair has the existing 4096-simplex bound. Algebraic queries filter out subcomplex simplices before applying the 256-element quotient-basis bound. They also cap each of the three Hom ranks `sum_k rank(target C_(k+j)) * rank(source C_k)` at **256**, separately for `j = -1, 0, 1`. One **5000000-unit budget** covers matrix construction, all kernel and quotient reductions, projection or lifting, and validation of every map in a complete flat list. Exhaustion raises `IMPLEMENTATION_FAILURE`, never an empty basis, a trivial group, or a truncated list. Context creation and endpoint access do not run reductions; `zero` uses only the existing chain-map limits. Integer coefficients remain unbounded. Higher Hom degrees, composition on class carriers, geometric-map classification and other coefficient rings remain outside this scope.
+Each component of a pair has the existing 4096-simplex bound. Algebraic queries filter out subcomplex simplices before applying the 256-element quotient-basis bound. They also cap each of the three Hom ranks `sum_k rank(target C_(k+j)) * rank(source C_k)` at **256**, separately for `j = -1, 0, 1`. One **5000000-unit budget** covers matrix construction, all kernel and quotient reductions, projection or lifting, and validation of every map in a complete flat list. Exhaustion raises `IMPLEMENTATION_FAILURE`, never an empty basis, a trivial group, or a truncated list. Context creation and endpoint access do not run reductions; `zero` uses only the existing chain-map limits. Integer coefficients remain unbounded. Higher Hom homology, direct binary composition on generic class elements, geometric-map classification and other coefficient rings remain outside this scope. Fixed chain maps act on classes through the operations below.
 
 `NativeSimplicialChainMapSpaceTest` adds 13 tests. Independent checks cover all 625 small two-point matrices, integral basis saturation and 289 interval class comparisons, all 25 relative interval contexts, 81 independent circle actions, projective-plane parity including large coefficients, mixed free/torsion groups and nonadditive representatives, explicit signed Hom matrices, exact endpoints and presentations, empty and filtered large diagonal pairs, all three aggregate bounds, shared reduction/flat-list limits, actual wrappers and serialized native flows.
+
+## Composition actions on chain-map classes
+
+For a space `Hom(S,T)`, precomposition by `B:R -> S` sends `F` to `F B` and changes the space to `Hom(R,T)`. Postcomposition by `A:T -> U` sends `F` to `A F` and changes the space to `Hom(S,U)`. Each action induces a homomorphism of the retained integral homotopy-class groups. It depends only on the homotopy class of the fixed map, including torsion classes, and commutes with the action on the other side. This is [composition in the Hom complex](https://stacks.math.columbia.edu/tag/0A8H).
+
+| Operation | Native result |
+| --- | --- |
+| `precompose-space`, `postcompose-space` | Changed `ChainMapSpace` through `ICustomMemberOperation` |
+| `precompose-map`, `postcompose-map` | `AbelianGroupHomomorphism` on classes through `IUnsafeOperation` |
+| `precompose-matrices`, `postcompose-matrices` | Exactly three `Mat(Z)` values through `IUnsafeFlatOperation` |
+
+All six operations require the exact full labelled middle pair and reject incompatible inputs with `OPERATION_UNDEFINED`. The flat lists are ordered by Hom degree **[-1, 0, 1]**. In degree `j`, precomposition uses `T_k B_k` and postcomposition uses `A_(k+j) T_k`; the shifted target degree matters. Matrix rows follow the changed space and columns the original space, each flattened by source degree, target row and source column. Rectangular empty blocks are retained. Both differential squares commute. Homotopic fixed maps may produce different raw action matrices while inducing equal homomorphisms on classes.
+
+Precomposition reverses composition order in the source argument: applying `B` and then `C` gives the action of `B C`. Postcomposition by `A` and then `D` gives the action of `D A`. Both preserve identity and addition. Their images of a class are the classes of the composed chain maps, independently of the representative chosen.
+
+```java
+ConcreteMathematics math = new ConcreteMathematics();
+RelativeSimplicialComplex circle = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Arrays.asList(
+                FiniteSet.of(0, 1), FiniteSet.of(0, 2), FiniteSet.of(1, 2))));
+SimplicialChainMapSpace space = new SimplicialChainMapSpace(circle, circle);
+BigInteger zero = BigInteger.ZERO, one = BigInteger.ONE;
+SimplicialChainMap degreeThree = new SimplicialChainMap(circle, circle, Arrays.asList(
+        IntegerMatrix.identity(3), new IntegerMatrix(new BigInteger[][] {
+                {BigInteger.valueOf(3), zero, zero},
+                {BigInteger.valueOf(-2), one, zero},
+                {BigInteger.valueOf(2), zero, one}})));
+AbelianGroupElement identityClass = space.classOf(SimplicialChainMap.identity(circle));
+List<String> agrees = math.flow(math.chainMapSpaces, Collections.singletonList(space))
+        .<AbelianGroupHomomorphism, SimplicialChainMap>performAlgebraUnsafe("postcompose-map", degreeThree)
+        .performLeftProjectionOperation("apply", identityClass)
+        .<Boolean>performCustomResultOperation("equal", space.classOf(degreeThree)).collect();
+// [true]: composing the identity class with degreeThree gives its class.
+List<String> matrices = math.flow(math.chainMapSpaces, Collections.singletonList(space))
+        .<IntegerMatrix, SimplicialChainMap>performFlatAlgebraUnsafe("postcompose-matrices", degreeThree)
+        .collect();
+// Three action matrices, in Hom degrees -1, 0 and 1.
+```
+
+Context changes check endpoints without running reductions. Matrix lists check all three Hom-rank bounds on both spaces and share one budget, without computing quotient groups. Induced homomorphisms use one **5000000-unit budget** for both complete Hom reductions, the action matrix, cycle-coordinate solving and relation validation. Two successful standalone group calculations do not imply that the combined action fits. Exhaustion remains `IMPLEMENTATION_FAILURE`, never a zero action or partial list.
+
+`NativeSimplicialChainMapCompositionTest` adds 13 tests: independent coordinate sums for 6,561 ternary point-map pairs, rectangular row-major matrices, noncommuting variance and commuting left/right actions, circle winding multiplication and signed differential squares, homotopy invariance, a nonzero Z-to-Z/2 action invisible on homology, torsion scaling with large coefficients, changing ambient dimensions, empty shapes, exact middle pairs, aggregate bounds, shared two-reduction budgets, actual wrappers and serialized native scalar/flat flows.

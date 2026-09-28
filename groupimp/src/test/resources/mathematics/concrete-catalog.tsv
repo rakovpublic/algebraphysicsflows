@@ -1463,6 +1463,12 @@ ChainMapSpace.map-generators	SimplicialChainMapSpaceAlgebra	map-generators	Chain
 ChainMapSpace.class-of	SimplicialChainMapSpaceAlgebra	class-of	ChainMapSpace	ChainMap	AbelianGroupElement	SCALAR	PARTIAL	IUnsafeOperation
 ChainMapSpace.representative	SimplicialChainMapSpaceAlgebra	representative	ChainMapSpace	AbelianGroupElement	ChainMap	SCALAR	PARTIAL	IUnsafeOperation
 ChainMapSpace.representatives	SimplicialChainMapSpaceAlgebra	representatives	ChainMapSpace	-	ChainMap	LIST	TOTAL	ITransferFlatOperation
+ChainMapSpace.precompose-space	SimplicialChainMapSpaceAlgebra	precompose-space	ChainMapSpace	ChainMap	ChainMapSpace	SCALAR	PARTIAL	ICustomMemberOperation
+ChainMapSpace.postcompose-space	SimplicialChainMapSpaceAlgebra	postcompose-space	ChainMapSpace	ChainMap	ChainMapSpace	SCALAR	PARTIAL	ICustomMemberOperation
+ChainMapSpace.precompose-map	SimplicialChainMapSpaceAlgebra	precompose-map	ChainMapSpace	ChainMap	AbelianGroupHomomorphism	SCALAR	PARTIAL	IUnsafeOperation
+ChainMapSpace.postcompose-map	SimplicialChainMapSpaceAlgebra	postcompose-map	ChainMapSpace	ChainMap	AbelianGroupHomomorphism	SCALAR	PARTIAL	IUnsafeOperation
+ChainMapSpace.precompose-matrices	SimplicialChainMapSpaceAlgebra	precompose-matrices	ChainMapSpace	ChainMap	Mat(Z)	LIST	PARTIAL	IUnsafeFlatOperation
+ChainMapSpace.postcompose-matrices	SimplicialChainMapSpaceAlgebra	postcompose-matrices	ChainMapSpace	ChainMap	Mat(Z)	LIST	PARTIAL	IUnsafeFlatOperation
 Z/5Z.add	PrimeField	add	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL	IOperation
 Z/5Z.subtract	PrimeField	subtract	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL	IOperation
 Z/5Z.multiply	PrimeField	multiply	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL	IOperation

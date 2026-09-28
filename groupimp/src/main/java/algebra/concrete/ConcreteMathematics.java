@@ -114,7 +114,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         collapseSequences=new SimplicialCollapseSequenceAlgebra(collapses,relativeComplexes,complexes,relativeMaps,naturals,booleans,integerMatrices,relativeChains,relativeCochains,simplicialChains,cochains,abelianHomomorphisms);
         chainMaps=new SimplicialChainMapAlgebra(relativeComplexes,relativeMaps,simplicialMaps,collapses,collapseSequences,subdivisions,integers,naturals,booleans,integerMatrices,relativeChains,relativeCochains,simplicialChains,cochains,abelianHomomorphisms);
         chainHomotopies=new SimplicialChainHomotopyAlgebra(chainMaps,simplicialHomotopies,homotopyPaths,collapses,collapseSequences,subdivisions,relativeComplexes,integerMatrices,integers,naturals,booleans,relativeChains,relativeCochains,simplicialChains,cochains,abelianHomomorphisms);
-        chainMapSpaces=new SimplicialChainMapSpaceAlgebra(relativeComplexes,chainMaps,integralHomology,presentedAbelianGroups,abelianGroups,abelianGroupElements,booleans);
+        chainMapSpaces=new SimplicialChainMapSpaceAlgebra(relativeComplexes,chainMaps,integralHomology,presentedAbelianGroups,abelianGroups,abelianGroupElements,booleans,abelianHomomorphisms,integerMatrices);
         affineSpaces=new RationalAffineSpaceAlgebra(rectangularMatrices,finiteVectors,naturals,booleans);
         markovKernels=new FiniteMarkovAlgebra(integers,integerSets,integerProbabilities,integerFunctions,rectangularMatrices,finiteVectors,rationals,naturals,booleans);
         tensors=new RationalTensorAlgebra(rationals,finiteVectors,rectangularMatrices,naturals,booleans);

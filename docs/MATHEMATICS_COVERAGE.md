@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1944 |
-| DIRECTLY_SUPPORTED | 1701 |
+| Scoped records | 1950 |
+| DIRECTLY_SUPPORTED | 1707 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1560 |
+| IMPLEMENTED | 1566 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1628 |
+| MACHINE_TESTED | 1634 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1537 | 1537 | 0 | 0 | 0 | 1537 | 0 | 0 |
+| Concrete MathTool algebras | 1543 | 1543 | 0 | 0 | 0 | 1543 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -352,18 +352,24 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | ChainMap.subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.subtract |
 | ChainMap.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.target |
 | ChainMap.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.zero |
-| ChainMapSpace.class-of | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs and their additive homotopy quotient, with full map lattices, torsion classes and representative maps; native operation ChainMapSpace.class-of |
-| ChainMapSpace.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs and their additive homotopy quotient, with full map lattices, torsion classes and representative maps; native operation ChainMapSpace.equal |
-| ChainMapSpace.from-pairs | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs and their additive homotopy quotient, with full map lattices, torsion classes and representative maps; native operation ChainMapSpace.from-pairs |
-| ChainMapSpace.homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs and their additive homotopy quotient, with full map lattices, torsion classes and representative maps; native operation ChainMapSpace.homology |
-| ChainMapSpace.homotopy-group | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs and their additive homotopy quotient, with full map lattices, torsion classes and representative maps; native operation ChainMapSpace.homotopy-group |
-| ChainMapSpace.homotopy-type | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs and their additive homotopy quotient, with full map lattices, torsion classes and representative maps; native operation ChainMapSpace.homotopy-type |
-| ChainMapSpace.map-generators | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs and their additive homotopy quotient, with full map lattices, torsion classes and representative maps; native operation ChainMapSpace.map-generators |
-| ChainMapSpace.representative | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs and their additive homotopy quotient, with full map lattices, torsion classes and representative maps; native operation ChainMapSpace.representative |
-| ChainMapSpace.representatives | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs and their additive homotopy quotient, with full map lattices, torsion classes and representative maps; native operation ChainMapSpace.representatives |
-| ChainMapSpace.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs and their additive homotopy quotient, with full map lattices, torsion classes and representative maps; native operation ChainMapSpace.source |
-| ChainMapSpace.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs and their additive homotopy quotient, with full map lattices, torsion classes and representative maps; native operation ChainMapSpace.target |
-| ChainMapSpace.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs and their additive homotopy quotient, with full map lattices, torsion classes and representative maps; native operation ChainMapSpace.zero |
+| ChainMapSpace.class-of | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs, additive homotopy classes with torsion, representative maps, and functorial precomposition/postcomposition actions; native operation ChainMapSpace.class-of |
+| ChainMapSpace.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs, additive homotopy classes with torsion, representative maps, and functorial precomposition/postcomposition actions; native operation ChainMapSpace.equal |
+| ChainMapSpace.from-pairs | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs, additive homotopy classes with torsion, representative maps, and functorial precomposition/postcomposition actions; native operation ChainMapSpace.from-pairs |
+| ChainMapSpace.homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs, additive homotopy classes with torsion, representative maps, and functorial precomposition/postcomposition actions; native operation ChainMapSpace.homology |
+| ChainMapSpace.homotopy-group | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs, additive homotopy classes with torsion, representative maps, and functorial precomposition/postcomposition actions; native operation ChainMapSpace.homotopy-group |
+| ChainMapSpace.homotopy-type | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs, additive homotopy classes with torsion, representative maps, and functorial precomposition/postcomposition actions; native operation ChainMapSpace.homotopy-type |
+| ChainMapSpace.map-generators | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs, additive homotopy classes with torsion, representative maps, and functorial precomposition/postcomposition actions; native operation ChainMapSpace.map-generators |
+| ChainMapSpace.postcompose-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs, additive homotopy classes with torsion, representative maps, and functorial precomposition/postcomposition actions; native operation ChainMapSpace.postcompose-map |
+| ChainMapSpace.postcompose-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs, additive homotopy classes with torsion, representative maps, and functorial precomposition/postcomposition actions; native operation ChainMapSpace.postcompose-matrices |
+| ChainMapSpace.postcompose-space | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs, additive homotopy classes with torsion, representative maps, and functorial precomposition/postcomposition actions; native operation ChainMapSpace.postcompose-space |
+| ChainMapSpace.precompose-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs, additive homotopy classes with torsion, representative maps, and functorial precomposition/postcomposition actions; native operation ChainMapSpace.precompose-map |
+| ChainMapSpace.precompose-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs, additive homotopy classes with torsion, representative maps, and functorial precomposition/postcomposition actions; native operation ChainMapSpace.precompose-matrices |
+| ChainMapSpace.precompose-space | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs, additive homotopy classes with torsion, representative maps, and functorial precomposition/postcomposition actions; native operation ChainMapSpace.precompose-space |
+| ChainMapSpace.representative | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs, additive homotopy classes with torsion, representative maps, and functorial precomposition/postcomposition actions; native operation ChainMapSpace.representative |
+| ChainMapSpace.representatives | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs, additive homotopy classes with torsion, representative maps, and functorial precomposition/postcomposition actions; native operation ChainMapSpace.representatives |
+| ChainMapSpace.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs, additive homotopy classes with torsion, representative maps, and functorial precomposition/postcomposition actions; native operation ChainMapSpace.source |
+| ChainMapSpace.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs, additive homotopy classes with torsion, representative maps, and functorial precomposition/postcomposition actions; native operation ChainMapSpace.target |
+| ChainMapSpace.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs, additive homotopy classes with torsion, representative maps, and functorial precomposition/postcomposition actions; native operation ChainMapSpace.zero |
 | CollapseSequence.absolute-can-collapse-to | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, greedy reduction, exhaustive bounded collapse search and composite integral chain/cochain witnesses; native operation CollapseSequence.absolute-can-collapse-to |
 | CollapseSequence.absolute-collapse-to | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, greedy reduction, exhaustive bounded collapse search and composite integral chain/cochain witnesses; native operation CollapseSequence.absolute-collapse-to |
 | CollapseSequence.absolute-collapses-to | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, greedy reduction, exhaustive bounded collapse search and composite integral chain/cochain witnesses; native operation CollapseSequence.absolute-collapses-to |
@@ -1412,7 +1418,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | SimplicialChainAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps |
 | SimplicialChainHomotopyAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral homotopies between full simplicial chain maps, with checked witnesses, bounded Smith solving, complete affine solution generators, composition and typed fillings |
 | SimplicialChainMapAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps |
-| SimplicialChainMapSpaceAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs and their additive homotopy quotient, with full map lattices, torsion classes and representative maps |
+| SimplicialChainMapSpaceAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain maps between full labelled simplicial pairs, additive homotopy classes with torsion, representative maps, and functorial precomposition/postcomposition actions |
 | SimplicialCochain.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.add |
 | SimplicialCochain.basis-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.basis-on |
 | SimplicialCochain.class-of | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial cochains with coboundary, cup products, constructive cohomology and contravariant pullbacks; native operation SimplicialCochain.class-of |

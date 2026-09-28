@@ -142,6 +142,13 @@ public final class ConcreteAlgebrasExample {
                 .<AbelianGroupType>performAlgebraTransfer("homotopy-type").collect());
         System.out.println("Circle chain-map classes have two independent representative maps: "+math.flow(math.chainMapSpaces,Collections.singletonList(new SimplicialChainMapSpace(circlePair,circlePair)))
                 .<SimplicialChainMap>performFlatAlgebraTransfer("representatives").collect().size());
+        SimplicialChainMapSpace circleMapSpace=new SimplicialChainMapSpace(circlePair,circlePair);
+        AbelianGroupElement circleIdentityClass=circleMapSpace.classOf(SimplicialChainMap.identity(circlePair));
+        System.out.println("Postcomposition sends the identity class to the degree-three circle map class: "+math.flow(math.chainMapSpaces,Collections.singletonList(circleMapSpace))
+                .<AbelianGroupHomomorphism,SimplicialChainMap>performAlgebraUnsafe("postcompose-map",degreeThree)
+                .performLeftProjectionOperation("apply",circleIdentityClass).<Boolean>performCustomResultOperation("equal",circleMapSpace.classOf(degreeThree)).collect());
+        System.out.println("Postcomposition exposes all three Hom action matrices: "+math.flow(math.chainMapSpaces,Collections.singletonList(circleMapSpace))
+                .<IntegerMatrix,SimplicialChainMap>performFlatAlgebraUnsafe("postcompose-matrices",degreeThree).collect().size());
         System.out.println("Subdividing the oriented circle retains an integral cycle: "+math.flow(math.complexes,Collections.singletonList(circle))
                 .<SimplicialSubdivision>performAlgebraTransfer("SimplicialSubdivision.from-complex")
                 .performLeftProjectionOperation("on-absolute-chain",orientedCircle).<Boolean>performAlgebraTransfer("is-cycle").collect());
