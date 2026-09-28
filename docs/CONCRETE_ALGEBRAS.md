@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1460 native operations from 64 algebra builders.
+The default initializer currently installs 1472 native operations from 65 algebra builders.
 
 ## Existing API usage
 
@@ -2103,3 +2103,57 @@ List<String> generators = math.flow(math.chainMaps, Collections.singletonList(f)
 The solver permits at most **256 total equations** `sum_k rank(target C_k) * rank(source C_k)` and **256 total unknown coefficients** `sum_k rank(target C_(k+1)) * rank(source C_k)`. It counts zero equations and equal endpoints; these aggregate limits are stronger than the carrier's per-basis limits. The largest successful generator list has 257 entries. One **5000000-unit budget** covers system construction, Smith reduction, decoding and validation of every returned witness. Producing a full generator list can exceed the budget even when constructing one witness succeeds. Shape or work exhaustion raises `IMPLEMENTATION_FAILURE`, never mathematical absence or a truncated list. Mismatched full pairs raise `OPERATION_UNDEFINED`. Integer coefficient bit lengths remain unbounded.
 
 `NativeSimplicialChainHomotopySolverTest` adds 14 tests: independent augmentation and endpoint formulas for all 289 interval map comparisons; all 25 relative interval contexts; independent winding-number decisions for 729 circle map comparisons; complete integral affine path families; projective-plane parity obstructions including 1025-bit coefficients and equal homology maps; coupled two-degree equations; geometric endpoints; empty shapes; full-context rejection; exact equation and unknown bounds; all 257 maximal-kernel generators; shared solve/whole-list work limits; actual wrappers and serialized scalar/flat flows.
+
+## Chain maps modulo integral homotopy
+
+`math.chainMapSpaces` adds 12 native operations for the full additive space of integral chain maps between two labelled simplicial pairs. `SimplicialChainMapSpace` retains both pairs; its algebraic queries compute the free group of chain maps and its quotient by null-homotopic maps. These are additive groups of chain-map classes, not the geometric homotopy groups of a space.
+
+The computation uses degree zero of the integral Hom complex. Its outgoing differential is `delta_0(F) = d_target F - F d_source`, and its incoming differential is `delta_1(H) = d_target H + H d_source`. Thus cycles are chain maps, boundaries are null-homotopic maps, and the quotient is `H_0(Hom)`. The implementation builds both matrices and passes them to the existing constructive `IntegralHomology`, which checks their composite, computes the full integral kernel and retains the resulting abelian presentation. This is the standard [Hom-complex construction](https://stacks.math.columbia.edu/tag/0A8H), in [homological grading](https://math.mit.edu/~larsh/teaching/S2006/l9/).
+
+| Operation | Native behavior |
+| --- | --- |
+| `ChainMapSpace.from-pairs` | `RelativeComplex x RelativeComplex -> ChainMapSpace`; first pair is source, second is target |
+| `source`, `target` | Return the full labelled endpoint pairs |
+| `equal` | Compare both full pairs |
+| `zero` | Return the zero `ChainMap` with all retained degree shapes |
+| `homology` | Return constructive `IntegralHomology` for degree zero of Hom |
+| `homotopy-group` | Return the retained `PresentedAbelianGroup` of chain-map classes |
+| `homotopy-type` | Return its free rank and torsion invariant factors |
+| `map-generators` | Flat `ChainMap` list giving a full integral basis before taking homotopy classes |
+| `class-of` | `ChainMapSpace x ChainMap -> AbelianGroupElement`; require exact endpoint pairs |
+| `representative` | `ChainMapSpace x AbelianGroupElement -> ChainMap`; require the retained presentation |
+| `representatives` | Flat `ChainMap` list lifting the nonzero minimal Smith generators of the quotient |
+
+Map entries are flattened in ascending source degree, target row, then source column. `homology` exposes those coordinates and both signed differentials, so existing integer-matrix and integral-homology operations remain usable. `map-generators` and `representatives` have different meanings: interval endomaps have three independent integer parameters, but their homotopy classes form one copy of Z. Circle endomaps have ten map generators, while their classes form Z squared, recording independent actions on H0 and H1.
+
+```java
+ConcreteMathematics math = new ConcreteMathematics();
+RelativeSimplicialComplex circle = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Arrays.asList(
+                FiniteSet.of(0, 1), FiniteSet.of(0, 2), FiniteSet.of(1, 2))));
+SimplicialChainMapSpace space = math.relativeComplexes.algebra().buildAlgebraItem(circle)
+        .<SimplicialChainMapSpace>performCustomResultOperation("ChainMapSpace.from-pairs", circle)
+        .perform().getResult();
+List<String> type = math.flow(math.chainMapSpaces, Collections.singletonList(space))
+        .<AbelianGroupType>performAlgebraTransfer("homotopy-type").collect();
+// [AbelianGroup(rank=2, torsion=[])]
+List<String> representatives = math.flow(math.chainMapSpaces, Collections.singletonList(space))
+        .<SimplicialChainMap>performFlatAlgebraTransfer("representatives").collect();
+// Two maps: one representative for each independent class generator.
+SimplicialChainMap identity = SimplicialChainMap.identity(circle);
+AbelianGroupElement identityClass = math.chainMapSpaces.algebra().buildAlgebraItem(space)
+        .<AbelianGroupElement, SimplicialChainMap>performUnsafeOperation("class-of", identity)
+        .perform().getResult();
+SimplicialChainMap chosen = math.chainMapSpaces.algebra().buildAlgebraItem(space)
+        .<SimplicialChainMap, AbelianGroupElement>performUnsafeOperation("representative", identityClass)
+        .perform().getResult();
+// chosen is integrally chain-homotopic to identity; equality of their matrices is not required.
+```
+
+Class projection is additive, and two maps have equal classes exactly when they are integrally chain-homotopic. In particular, the maps from projective-plane chains to the relative chains of a triangle modulo its boundary have a Z/2 homotopy quotient, although all their induced homology maps are zero. A chosen representative is a section on sets and need not preserve addition. The flat quotient representatives put torsion generators first and free generators next, omitting killed Smith coordinates. They generate all classes without enumerating infinitely many maps.
+
+`representative` checks the exact presentation and Smith coordinate map. Generic `AbelianGroupElement` values retain that algebraic context, without geometric endpoint provenance; the same retained presentation may be used across different spaces. Returned chain maps always use the receiving space's full endpoints. Labelled pairs determine deterministic bases, but neither the presentation nor the chosen representatives are asserted to be invariant under relabelling.
+
+Each component of a pair has the existing 4096-simplex bound. Algebraic queries filter out subcomplex simplices before applying the 256-element quotient-basis bound. They also cap each of the three Hom ranks `sum_k rank(target C_(k+j)) * rank(source C_k)` at **256**, separately for `j = -1, 0, 1`. One **5000000-unit budget** covers matrix construction, all kernel and quotient reductions, projection or lifting, and validation of every map in a complete flat list. Exhaustion raises `IMPLEMENTATION_FAILURE`, never an empty basis, a trivial group, or a truncated list. Context creation and endpoint access do not run reductions; `zero` uses only the existing chain-map limits. Integer coefficients remain unbounded. Higher Hom degrees, composition on class carriers, geometric-map classification and other coefficient rings remain outside this scope.
+
+`NativeSimplicialChainMapSpaceTest` adds 13 tests. Independent checks cover all 625 small two-point matrices, integral basis saturation and 289 interval class comparisons, all 25 relative interval contexts, 81 independent circle actions, projective-plane parity including large coefficients, mixed free/torsion groups and nonadditive representatives, explicit signed Hom matrices, exact endpoints and presentations, empty and filtered large diagonal pairs, all three aggregate bounds, shared reduction/flat-list limits, actual wrappers and serialized native flows.

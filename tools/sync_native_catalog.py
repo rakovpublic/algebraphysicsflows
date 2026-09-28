@@ -10,6 +10,7 @@ DATABASE = ROOT / "mathematics-coverage.json"
 MANIFEST = ROOT / "groupimp/src/test/resources/mathematics/concrete-catalog.tsv"
 DATE = "2026-09-28"
 OWNERS = {
+    "SimplicialChainMapSpaceAlgebra": ("ChainMapSpace", "Integral chain maps between full labelled simplicial pairs and their additive homotopy quotient, with full map lattices, torsion classes and representative maps"),
     "SimplicialChainHomotopyAlgebra": ("ChainHomotopy", "Integral homotopies between full simplicial chain maps, with checked witnesses, bounded Smith solving, complete affine solution generators, composition and typed fillings"),
     "SimplicialChainMapAlgebra": ("ChainMap", "Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps"),
     "SimplicialCollapseSequenceAlgebra": ("CollapseSequence", "Ordered compatible elementary-collapse sequences, greedy reduction, exhaustive bounded collapse search and composite integral chain/cochain witnesses"),
@@ -92,6 +93,7 @@ INTERFACES = {
     "IUnsafeFlatOperation": "flat/MixedFlatOperation",
 }
 EXTRA_TESTS = {
+    "SimplicialChainMapSpaceAlgebra": "NativeSimplicialChainMapSpaceTest",
     "SimplicialChainHomotopyAlgebra": "NativeSimplicialChainHomotopyTest",
     "SimplicialChainMapAlgebra": "NativeSimplicialChainMapTest",
     "SimplicialCollapseSequenceAlgebra": "NativeSimplicialCollapseSequenceTest",
@@ -185,6 +187,20 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "SimplicialChainMapSpaceAlgebra": {
+        "from-pairs": "Retain the first full labelled pair as source and the second as target. Context construction does not run Smith reduction or assert that later bounded computations will fit their budgets.",
+        "source": "Return the complete labelled source pair, including its subcomplex.",
+        "target": "Return the complete labelled target pair, including its subcomplex.",
+        "equal": "Compare both full labelled endpoint pairs; matching ranks or abstract homotopy-group types do not identify spaces.",
+        "zero": "Return the zero ChainMap on the retained endpoints, with all degree shapes. This uses chain-map basis/work limits without computing the Hom quotient.",
+        "homology": "Return constructive H_0(Hom) using delta_0(F) = d_target F - F d_source and delta_1(H) = d_target H + H d_source. Flatten entries by ascending source degree, target row, then source column. Cycles are all integral chain maps; boundaries are exactly null-homotopic maps.",
+        "homotopy-group": "Return the retained PresentedAbelianGroup ker(delta_0)/im(delta_1), with its full integral cycle lattice, relation matrix and Smith coordinates. This computes actual chain-homotopy classes, including torsion invisible to induced homology maps.",
+        "homotopy-type": "Return the free rank and torsion invariant factors of the additive group of integral chain maps modulo chain homotopy, not a classification of geometric maps or homotopy equivalences.",
+        "map-generators": "Emit a full integral basis for every chain map on the retained endpoints. Each output is a validated ChainMap. This is the free cycle lattice before quotienting by null-homotopic maps, not a minimal basis of homotopy classes or an enumeration of all maps.",
+        "class-of": "The second ChainMap must retain the exact full labelled source and target pairs. Return its class in the retained Hom-homology presentation. Projection is additive and equal classes are precisely integral chain-homotopic maps; equality of induced homology maps is insufficient.",
+        "representative": "Require the exact retained abelian presentation and Smith coordinate map, not merely an isomorphic group type. Lift the class to a validated ChainMap on this space's endpoints. This is a set-theoretic section of class-of and is not generally additive; group elements retain a presentation, not geometric endpoint provenance.",
+        "representatives": "Emit one validated ChainMap for each nonzero minimal Smith generator of the homotopy quotient, with torsion generators first and free generators after them. Skip killed coordinates; a trivial quotient emits an empty list even when nonzero null-homotopic maps exist. All reductions, lifts and final map validations share one budget.",
+    },
     "SimplicialChainHomotopyAlgebra": {
         "from-data": "Require parallel full chain maps and one H_k in every degree through the largest ambient dimension. Check target degree k+1 rows and source degree k columns, then every equation dH + Hd = to - from including degree zero and the top degree.",
         "stationary": "Retain the same chain map at both endpoints and zero degree-raising matrices. Equal endpoints may also admit nonzero witnesses.",
@@ -1527,6 +1543,14 @@ OWNER_CONDITIONS["RationalMatrixFamily"]["companion"] = "The polynomial has posi
 
 def record(identifier, owner, concept, paths, operation=None):
     carrier, scope = OWNERS[owner]
+    if owner == "SimplicialChainMapSpaceAlgebra":
+        paths = paths + ["groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+                         "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+                         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+                         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+                         "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+                         "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+                         "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
     if owner == "SimplicialChainHomotopyAlgebra":
         paths = paths + ["groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
                          "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopySolver.java",
@@ -1815,6 +1839,11 @@ def record(identifier, owner, concept, paths, operation=None):
             value["known_limitations"].append("Iteration is capped at 10000 steps; exceeding it is IMPLEMENTATION_FAILURE. Exact values can still grow rapidly within this limit.")
         if operation_name in ("argmin", "argmax", "minimum", "maximum", "minimizers", "maximizers"):
             value["known_limitations"].append("Optimality is relative only to the explicit finite feasible set, not all integers or reals.")
+    if owner == "SimplicialChainMapSpaceAlgebra":
+        value["required_invariants"].append("The full labelled source and target pairs determine all quotient bases. The degree-zero Hom differential has a minus source term; its degree-one differential has a plus source term and their composite is zero. Constructive integral homology retains the entire cycle lattice and its boundary sublattice, so class equality is exactly chain homotopy, with torsion retained.")
+        value["known_limitations"] += ["Geometric pair contexts have at most 4096 nonempty simplices per component. Algebraic queries filter quotient bases before their 256-simplex bound and require at most 256 total Hom coefficients separately in degrees -1, 0 and 1: sum_k targetRank(k+j)*sourceRank(k) for j=-1,0,1. Context/source/target/equality do not reduce matrices; zero uses only chain-map limits. One 5000000-unit budget covers both Hom differentials, all kernel/quotient reductions, class projection or lifting, and validation of every map in a whole flat list. Exhaustion is IMPLEMENTATION_FAILURE, never an empty basis, a trivial quotient or partial output. Coefficient bit lengths are unbounded.",
+            "Only additive degree-zero integral chain maps modulo chain homotopy on finite simplicial quotient chains are represented. No geometric-map classification, homotopy-equivalence decision, higher Hom degree, composition law on class carriers or general coefficient ring is supplied. Generic AbelianGroupElement values retain the exact presentation and Smith coordinates, not geometric provenance; matching retained presentations may be used across contexts. Representative choices depend on the labelled bases and are not generally additive."]
+        value["references"] += ["https://stacks.math.columbia.edu/tag/0A8H", "https://math.mit.edu/~larsh/teaching/S2006/l9/"]
     if owner == "SimplicialChainHomotopyAlgebra":
         value["required_invariants"].append("Both endpoint chain maps retain identical full labelled pairs. Every supplied degree-raising matrix satisfies dH + Hd = to - from, and Q^p = transpose(H_(p-1)) satisfies the dual cochain identity. Chronological concatenation adds witnesses, reversal negates them, and composition uses the required degree shift. Actual matrices remain part of equality, including nonzero loops. Both induced homology and cohomology maps agree with presentations and torsion retained.")
         value["known_limitations"] += ["At most 4096 simplices per pair component and 256 per required quotient basis after filtering. One 5000000-unit budget covers every conversion or compound operation, including all endpoint constructions and final homotopy validation, and every complete two-map integral list. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Integer coefficient bit lengths are unbounded.",
@@ -2090,6 +2119,8 @@ def synchronize(data, rows):
         data["concepts"].append(record("concrete-operation." + row["id"], row["class"], row["id"],
                                        [path, implementation], row))
     descriptors = [
+        ("ChainMapSpace", "Integral chain-map spaces and additive chain-homotopy classes", "mathematics.topology.SimplicialChainMapSpace",
+         ["Two full labelled simplicial pairs retained as source and target", "Context membership does not assert that bounded Hom reductions will succeed", "Degree-zero Hom cycles are all chain maps and boundaries are dH + Hd", "Integral homotopy classes retain a presented abelian group, including torsion", "Flat map bases and minimal class representatives have different meanings"], ["RelativeComplex", "ChainMap", "IntegralHomology", "PresentedAbelianGroup", "AbelianGroupType", "AbelianGroupElement", "Boolean"]),
         ("ChainHomotopy", "Integral homotopy witnesses between simplicial chain maps with bounded solving", "mathematics.topology.SimplicialChainHomotopy",
          ["Parallel full integral chain maps and retained degree-raising matrices", "Every degree satisfies dH + Hd = to - from; shifted transposes give the dual identity", "Chronological concatenation checks the exact joining map and adds witnesses; reversal negates matrices", "Precomposition uses H_k B_k and postcomposition A_(k+1) H_k", "Typed fillings and equal induced integral maps retain contexts, presentations and torsion", "Endpoint construction, witness validation and whole two-map lists share bounded computation budgets"], ["ChainHomotopy.data", "ChainMap", "SimplicialHomotopy", "HomotopyPath", "SimplicialCollapse", "CollapseSequence", "SimplicialSubdivision", "RelativeComplex", "Mat(Z)", "Z", "N", "Boolean", "RelativeChain", "RelativeCochain", "SimplicialChain", "SimplicialCochain", "AbelianGroupHomomorphism"]),
         ("ChainHomotopy.data", "Supplied endpoint chain maps and complete homotopy matrices", "mathematics.topology.SimplicialChainHomotopy.Data",

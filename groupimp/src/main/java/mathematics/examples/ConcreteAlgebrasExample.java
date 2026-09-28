@@ -34,6 +34,7 @@ import mathematics.topology.SimplicialCollapse;
 import mathematics.topology.SimplicialCollapseSequence;
 import mathematics.topology.SimplicialChainMap;
 import mathematics.topology.SimplicialChainHomotopy;
+import mathematics.topology.SimplicialChainMapSpace;
 import mathematics.topology.IntegralHomology;
 import mathematics.topology.FiniteSimplicialMap;
 import mathematics.topology.RelativeSimplicialComplex;
@@ -136,6 +137,11 @@ public final class ConcreteAlgebrasExample {
                 .performLeftProjectionOperation("on-chain",homotopyVertex).performOneOperandOperation("boundary").<IntegerVector>performAlgebraTransfer("coordinates").collect());
         System.out.println("All point-to-circle homotopies have one particular witness and one free integral generator: "+math.flow(math.chainMaps,Collections.singletonList(homotopyStart))
                 .<SimplicialChainHomotopy>performFlatCustomResultOperation("ChainHomotopy.solution-generators",homotopyEnd).collect().size());
+        System.out.println("Circle chain maps modulo integral homotopy form Z squared: "+math.flow(math.relativeComplexes,Collections.singletonList(circlePair))
+                .<SimplicialChainMapSpace>performCustomResultOperation("ChainMapSpace.from-pairs",circlePair)
+                .<AbelianGroupType>performAlgebraTransfer("homotopy-type").collect());
+        System.out.println("Circle chain-map classes have two independent representative maps: "+math.flow(math.chainMapSpaces,Collections.singletonList(new SimplicialChainMapSpace(circlePair,circlePair)))
+                .<SimplicialChainMap>performFlatAlgebraTransfer("representatives").collect().size());
         System.out.println("Subdividing the oriented circle retains an integral cycle: "+math.flow(math.complexes,Collections.singletonList(circle))
                 .<SimplicialSubdivision>performAlgebraTransfer("SimplicialSubdivision.from-complex")
                 .performLeftProjectionOperation("on-absolute-chain",orientedCircle).<Boolean>performAlgebraTransfer("is-cycle").collect());
