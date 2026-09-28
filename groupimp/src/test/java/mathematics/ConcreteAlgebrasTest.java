@@ -59,7 +59,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all1457RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all1460RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String discrete="Complex[[0], [1]]",emptyComplex="Complex[]";
@@ -134,7 +134,8 @@ public class ConcreteAlgebrasTest {
                 chainIdentity,chainIdentity,absolutePoint,absolutePoint,"ChainHomotopyData(from="+chainIdentity+", to="+chainIdentity+", matrices=[ZMatrix(0x1)[]])",
                 chainHomotopy,chainHomotopy,doubledHomotopy,doubledHomotopy,chainHomotopy,chainHomotopy,"true","ZMatrix(0x1)[]","ZMatrix(0x1)[]",
                 "[ZMatrix(0x1)[]]","[ZMatrix(0x1)[], ZMatrix(1x0)[[]]]","RelativeChain(pair="+absolutePoint+", degree=1, coordinates=[])",relativeZeroCochain,
-                "SimplicialChain(complex="+point+", degree=1, coordinates=[])",zeroCochain,"["+identityOneMap+", "+identityOneMap+"]","["+identityOneMap+", "+identityOneMap+"]"));
+                "SimplicialChain(complex="+point+", degree=1, coordinates=[])",zeroCochain,"["+identityOneMap+", "+identityOneMap+"]","["+identityOneMap+", "+identityOneMap+"]",
+                "true",chainHomotopy,"["+chainHomotopy+"]"));
         String edgeH0="PresentedAbelianGroup(ZMatrix(2x1)[[-1], [1]])",retractH0=homString(edgeH0,freeOne,"ZMatrix(1x2)[[0, 1]]"),includeH0=homString(freeOne,edgeH0,"ZMatrix(2x1)[[0], [1]]");
         String edgeZeroCochain="RelativeCochain(pair="+collapsePair+", degree=0, coordinates=[0, 0])",absoluteEdgeZeroCochain="SimplicialCochain(complex="+edge+", degree=0, coordinates=[0, 0])";
         expected.put("SimplicialCollapseAlgebra",String.join("|","[[0], [1]]","true",elementary,elementary,collapsePair,absolutePoint,"[1]","[0, 1]",collapseBackward,"true",
@@ -391,7 +392,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(1457,count);
+        assertEquals(1460,count);
     }
     private static String homString(String source,String target,String matrix) { return "AbelianHom(source="+source+", target="+target+", smith="+matrix+")"; }
     private static String simplicialString(String source,String target,String vertices) { return "SimplicialMap(source="+source+", target="+target+", vertices="+vertices+")"; }

@@ -127,6 +127,15 @@ public final class ConcreteAlgebrasExample {
                 .<SimplicialCollapseSequence>performAlgebraTransfer("CollapseSequence.reduce-absolute")
                 .<SimplicialChainHomotopy>performAlgebraTransfer("ChainHomotopy.from-collapse-sequence")
                 .performLeftProjectionOperation("on-absolute-chain",vertexOne).<IntegerVector>performAlgebraTransfer("coordinates").collect());
+        RelativeSimplicialComplex homotopyPoint=RelativeSimplicialComplex.absolute(new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))));
+        SimplicialChainMap homotopyStart=new SimplicialChainMap(homotopyPoint,circlePair,Arrays.asList(new IntegerMatrix(new BigInteger[][]{{BigInteger.ONE},{BigInteger.ZERO},{BigInteger.ZERO}}),IntegerMatrix.zero(3,0))),
+                homotopyEnd=new SimplicialChainMap(homotopyPoint,circlePair,Arrays.asList(new IntegerMatrix(new BigInteger[][]{{BigInteger.ZERO},{BigInteger.ZERO},{BigInteger.ONE}}),IntegerMatrix.zero(3,0)));
+        RelativeSimplicialChain homotopyVertex=new RelativeSimplicialChain(homotopyPoint,BigInteger.ZERO,new IntegerVector(BigInteger.ONE));
+        System.out.println("A solved integral homotopy has boundary vertex two minus vertex zero: "+math.flow(math.chainMaps,Collections.singletonList(homotopyStart))
+                .<SimplicialChainHomotopy>performCustomResultOperation("ChainHomotopy.between",homotopyEnd)
+                .performLeftProjectionOperation("on-chain",homotopyVertex).performOneOperandOperation("boundary").<IntegerVector>performAlgebraTransfer("coordinates").collect());
+        System.out.println("All point-to-circle homotopies have one particular witness and one free integral generator: "+math.flow(math.chainMaps,Collections.singletonList(homotopyStart))
+                .<SimplicialChainHomotopy>performFlatCustomResultOperation("ChainHomotopy.solution-generators",homotopyEnd).collect().size());
         System.out.println("Subdividing the oriented circle retains an integral cycle: "+math.flow(math.complexes,Collections.singletonList(circle))
                 .<SimplicialSubdivision>performAlgebraTransfer("SimplicialSubdivision.from-complex")
                 .performLeftProjectionOperation("on-absolute-chain",orientedCircle).<Boolean>performAlgebraTransfer("is-cycle").collect());

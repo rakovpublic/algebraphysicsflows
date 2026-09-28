@@ -34,7 +34,7 @@ public final class SimplicialChainHomotopy implements Serializable {
     }
     public SimplicialChainHomotopy(SimplicialChainMap from,SimplicialChainMap to,List<IntegerMatrix> matrices) { this(new Data(from,to,matrices)); }
     public SimplicialChainHomotopy(Data data) { this(data,new Computation()); }
-    private SimplicialChainHomotopy(Data data,Computation work) {
+    SimplicialChainHomotopy(Data data,Computation work) {
         from=data.from; to=data.to; matrices=data.matrices; requireParallel(from,to);
         for(int k=0;k<matrices.size();k++) {
             BigInteger degree=BigInteger.valueOf(k); IntegerMatrix h=matrices.get(k);

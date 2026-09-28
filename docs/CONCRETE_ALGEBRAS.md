@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1457 native operations from 64 algebra builders.
+The default initializer currently installs 1460 native operations from 64 algebra builders.
 
 ## Existing API usage
 
@@ -1997,9 +1997,9 @@ Each pair component permits at most 4096 nonempty simplices, and each required q
 
 `NativeSimplicialChainMapTest` supplies 17 tests: independent endpoint equations for all 243 ternary interval matrix families and relative quotient variants, determinant-oracle inversion for 625 two-by-two matrices, arbitrary circle degrees and noncommuting contravariant composition, 729 typed coordinate checks and 729 simplicial compositions, relative disk and projective-plane torsion, collapse/subdivision comparisons, invalid full contexts and top differentials, immutable data, empty shapes, filtered basis bounds, aggregate computation limits and serialized native scalar/flat flows.
 
-## Supplied integral chain homotopies
+## Integral chain homotopies
 
-`math.chainHomotopies` installs 29 operations for `SimplicialChainHomotopy`. A value retains parallel integral chain maps `F` and `G` and specific matrices `H_k: C_k(source) -> C_(k+1)(target)` satisfying `dH + Hd = G - F`. Construction checks the full labelled pairs, every shifted matrix shape, and every equation, including degree zero and the top degree. The dual operator is `Q^p = transpose(H_(p-1))`, with `dQ + Qd = G* - F*`.
+`math.chainHomotopies` installs 32 operations for `SimplicialChainHomotopy`, including three bounded integral solving operations described below. A value retains parallel integral chain maps `F` and `G` and specific matrices `H_k: C_k(source) -> C_(k+1)(target)` satisfying `dH + Hd = G - F`. Construction checks the full labelled pairs, every shifted matrix shape, and every equation, including degree zero and the top degree. The dual operator is `Q^p = transpose(H_(p-1))`, with `dQ + Qd = G* - F*`.
 
 The supporting `ChainHomotopy.data` carrier stores two validated chain maps and an immutable supplied matrix list. Membership in this data carrier does not assert parallel endpoints or the homotopy equations. `ChainHomotopy.from-data` performs those checks. As with ChainMap, the list has one entry in every degree from zero through the largest ambient dimension. This uses ambient dimensions even when a relative quotient vanishes in every degree. Matrix equality retains the witness: distinct homotopies between equal endpoints remain distinct.
 
@@ -2057,6 +2057,49 @@ For a cycle `c`, `H(c)` fills `G(c)-F(c)`; for a cocycle `a`, `Q(a)` fills `G*(a
 
 `Q^0` has zero rows and retains the number of target vertices outside the subcomplex as its column count. Typed cochain actions require positive degree because their carrier excludes negative degrees. Typed chain actions accept negative degrees; degree -1 maps to the correctly sized zero chain in target degree zero. Both empty complexes give an empty chain-matrix list and one 0 by 0 cochain matrix. Absolute actions require empty subcomplexes at both endpoints.
 
-One 5000000-unit budget covers each whole conversion or compound operation, including endpoint construction and final witness validation. Each two-map homology/cohomology list shares its budget. Every required quotient basis is filtered before its 256-simplex bound, within the existing 4096-simplex pair-component bound. Resource exhaustion is `IMPLEMENTATION_FAILURE`, never a partial result. This implements supplied integral witnesses and conversions from existing constructions; arbitrary homotopy search, geometric realization, higher coherence and other coefficient rings remain outside scope.
+One 5000000-unit budget covers each whole conversion or compound operation, including endpoint construction and final witness validation. Each two-map homology/cohomology list shares its budget. Every required quotient basis is filtered before its 256-simplex bound, within the existing 4096-simplex pair-component bound. Resource exhaustion is `IMPLEMENTATION_FAILURE`, never a partial result. Geometric homotopy search, geometric realization, higher coherence and other coefficient rings remain outside scope; the following operations solve bounded integral chain-homotopy systems.
 
 `NativeSimplicialChainHomotopyTest` has 15 tests. They check all 2,601 ternary interval candidates against independent endpoint equations, 729 two-degree triangle witnesses using explicit oriented boundary matrices, relative quotient witnesses, nonzero loops, shifted pre/postcomposition, 729 prism conversions, 729 typed chain/cochain identities, path/collapse/subdivision conversions, projective-plane torsion, invalid full contexts and top-degree equations, empty and negative-degree shapes, filtered bases, aggregate endpoint/validation/two-map budgets, actual wrappers and serialized native flows.
+
+## Solving integral chain homotopies
+
+Three further operations take two `ChainMap` operands with identical full labelled source and target pairs. They assemble every equation `dH + Hd = G - F` into one integer linear system and use a Smith decomposition. All degree matrices are solved together, including degree zero, the top degree and relative quotient groups. Equal induced homology maps alone are insufficient: a map from the integral chains of the projective plane to the relative chains of a disk can have zero induced homology maps and still have a nonzero integral homotopy obstruction.
+
+| Operation | Native result | Completed solve with no integral solution |
+| --- | --- | --- |
+| `ChainHomotopy.are-homotopic` | `Boolean` through `ICustomResultOperation` | `false` |
+| `ChainHomotopy.between` | A validated `ChainHomotopy` through `ICustomResultOperation` | `OPERATION_UNDEFINED` |
+| `ChainHomotopy.solution-generators` | Flat `ChainHomotopy` list through `ICustomResultFlatOperation` | Empty list |
+
+The flat result is `[H, L_1, ..., L_r]`: one particular witness `H: F -> G`, followed by a full integral kernel basis whose members have zero chain maps at both endpoints. Every homotopy is uniquely `H + n_1 L_1 + ... + n_r L_r` for integers `n_i`. Existing `add` and `scale` operations construct these witnesses while retaining `F` and `G`. The list parametrizes an affine lattice; it does not enumerate infinitely many homotopies. A unique solution gives a singleton list, and equal endpoints may still have nonzero homogeneous generators. The particular solution sets free Smith coordinates to zero, making it deterministic for the retained bases without claiming a shortest or geometric witness.
+
+```java
+ConcreteMathematics math = new ConcreteMathematics();
+RelativeSimplicialComplex point = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))));
+RelativeSimplicialComplex circle = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Arrays.asList(
+                FiniteSet.of(0, 1), FiniteSet.of(0, 2), FiniteSet.of(1, 2))));
+BigInteger zero = BigInteger.ZERO, one = BigInteger.ONE;
+SimplicialChainMap f = new SimplicialChainMap(point, circle, Arrays.asList(
+        new IntegerMatrix(new BigInteger[][] {{one}, {zero}, {zero}}),
+        IntegerMatrix.zero(3, 0)));
+SimplicialChainMap g = new SimplicialChainMap(point, circle, Arrays.asList(
+        new IntegerMatrix(new BigInteger[][] {{zero}, {zero}, {one}}),
+        IntegerMatrix.zero(3, 0)));
+RelativeSimplicialChain vertex = new RelativeSimplicialChain(point, zero, new IntegerVector(one));
+List<String> boundary = math.flow(math.chainMaps, Collections.singletonList(f))
+        .<SimplicialChainHomotopy>performCustomResultOperation("ChainHomotopy.between", g)
+        .performLeftProjectionOperation("on-chain", vertex)
+        .performOneOperandOperation("boundary")
+        .<IntegerVector>performAlgebraTransfer("coordinates").collect();
+// [[-1, 0, 1]]: vertex two minus vertex zero.
+List<String> generators = math.flow(math.chainMaps, Collections.singletonList(f))
+        .<SimplicialChainHomotopy>performFlatCustomResultOperation("ChainHomotopy.solution-generators", g)
+        .collect();
+// Two entries: a path from vertex zero to vertex two, and a primitive oriented circle loop.
+```
+
+The solver permits at most **256 total equations** `sum_k rank(target C_k) * rank(source C_k)` and **256 total unknown coefficients** `sum_k rank(target C_(k+1)) * rank(source C_k)`. It counts zero equations and equal endpoints; these aggregate limits are stronger than the carrier's per-basis limits. The largest successful generator list has 257 entries. One **5000000-unit budget** covers system construction, Smith reduction, decoding and validation of every returned witness. Producing a full generator list can exceed the budget even when constructing one witness succeeds. Shape or work exhaustion raises `IMPLEMENTATION_FAILURE`, never mathematical absence or a truncated list. Mismatched full pairs raise `OPERATION_UNDEFINED`. Integer coefficient bit lengths remain unbounded.
+
+`NativeSimplicialChainHomotopySolverTest` adds 14 tests: independent augmentation and endpoint formulas for all 289 interval map comparisons; all 25 relative interval contexts; independent winding-number decisions for 729 circle map comparisons; complete integral affine path families; projective-plane parity obstructions including 1025-bit coefficients and equal homology maps; coupled two-degree equations; geometric endpoints; empty shapes; full-context rejection; exact equation and unknown bounds; all 257 maximal-kernel generators; shared solve/whole-list work limits; actual wrappers and serialized scalar/flat flows.

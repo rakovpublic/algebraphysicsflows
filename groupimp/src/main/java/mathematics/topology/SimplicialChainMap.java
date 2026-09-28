@@ -63,8 +63,9 @@ public final class SimplicialChainMap implements Serializable {
             int size=pair.basis(d).size(); work.use((long)size*size); return IntegerMatrix.identity(size);
         });
     }
-    public static SimplicialChainMap zero(RelativeSimplicialComplex source,RelativeSimplicialComplex target) {
-        Computation work=new Computation(); return build(source,target,work,d -> {
+    public static SimplicialChainMap zero(RelativeSimplicialComplex source,RelativeSimplicialComplex target) { return zero(source,target,new Computation()); }
+    static SimplicialChainMap zero(RelativeSimplicialComplex source,RelativeSimplicialComplex target,Computation work) {
+        return build(source,target,work,d -> {
             int rows=target.basis(d).size(),columns=source.basis(d).size(); work.use((long)rows*columns); return IntegerMatrix.zero(rows,columns);
         });
     }

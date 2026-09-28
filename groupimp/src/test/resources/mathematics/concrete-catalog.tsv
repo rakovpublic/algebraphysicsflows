@@ -1448,6 +1448,9 @@ ChainHomotopy.on-absolute-chain	SimplicialChainHomotopyAlgebra	on-absolute-chain
 ChainHomotopy.on-absolute-cochain	SimplicialChainHomotopyAlgebra	on-absolute-cochain	ChainHomotopy	SimplicialCochain	SimplicialCochain	SCALAR	PARTIAL	ILeftProjectionOperation
 ChainHomotopy.homology-maps	SimplicialChainHomotopyAlgebra	homology-maps	ChainHomotopy	N	AbelianGroupHomomorphism	LIST	TOTAL	IUnsafeFlatOperation
 ChainHomotopy.cohomology-maps	SimplicialChainHomotopyAlgebra	cohomology-maps	ChainHomotopy	N	AbelianGroupHomomorphism	LIST	TOTAL	IUnsafeFlatOperation
+ChainHomotopy.are-homotopic	SimplicialChainHomotopyAlgebra	ChainHomotopy.are-homotopic	ChainMap	ChainMap	Boolean	SCALAR	PARTIAL	ICustomResultOperation
+ChainHomotopy.between	SimplicialChainHomotopyAlgebra	ChainHomotopy.between	ChainMap	ChainMap	ChainHomotopy	SCALAR	PARTIAL	ICustomResultOperation
+ChainHomotopy.solution-generators	SimplicialChainHomotopyAlgebra	ChainHomotopy.solution-generators	ChainMap	ChainMap	ChainHomotopy	LIST	PARTIAL	ICustomResultFlatOperation
 Z/5Z.add	PrimeField	add	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL	IOperation
 Z/5Z.subtract	PrimeField	subtract	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL	IOperation
 Z/5Z.multiply	PrimeField	multiply	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL	IOperation

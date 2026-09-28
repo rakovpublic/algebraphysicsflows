@@ -2,6 +2,7 @@ package algebra.concrete;
 
 import algebra.imp.Algebra;
 import mathematics.topology.SimplicialChainHomotopy;
+import mathematics.topology.SimplicialChainHomotopySolver;
 
 /** Integral homotopy witnesses using the original scalar and flat operation interfaces. */
 public final class SimplicialChainHomotopyAlgebra extends ConcreteAlgebra<SimplicialChainHomotopy> {
@@ -42,8 +43,12 @@ public final class SimplicialChainHomotopyAlgebra extends ConcreteAlgebra<Simpli
         binary("on-absolute-cochain",algebra(),cochains.algebra(),cochains.algebra(),true,SimplicialChainHomotopy::onAbsoluteCochain);
         flat("homology-maps",algebra(),naturals.algebra(),homomorphisms.algebra(),false,SimplicialChainHomotopy::homologyMaps);
         flat("cohomology-maps",algebra(),naturals.algebra(),homomorphisms.algebra(),false,SimplicialChainHomotopy::cohomologyMaps);
+        binary("are-homotopic",maps.algebra(),maps.algebra(),truth.algebra(),true,SimplicialChainHomotopySolver::areHomotopic);
+        binary("between",maps.algebra(),maps.algebra(),algebra(),true,SimplicialChainHomotopySolver::between);
+        flat("solution-generators",maps.algebra(),maps.algebra(),algebra(),true,SimplicialChainHomotopySolver::solutionGenerators);
         law("The retained integral matrices satisfy dH + Hd = to - from. Their shifted transposes satisfy the dual cochain identity.");
         law("Chronological concatenation adds witnesses; reversal negates the actual matrices. Endpoint equality alone does not identify homotopies.");
         law("Precomposition uses H_k B_k and postcomposition A_(k+1) H_k; induced integral homology and cohomology maps of both endpoints agree.");
+        law("Bounded Smith solving treats all homotopy equations simultaneously over Z. A solution family is one particular witness plus integer combinations of zero-to-zero kernel witnesses, not an enumeration of all homotopies.");
     }
 }
