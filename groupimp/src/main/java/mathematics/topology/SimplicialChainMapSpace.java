@@ -103,6 +103,27 @@ public final class SimplicialChainMapSpace implements Serializable {
         for(IntegerVector vector : calculation.homology.generators(calculation.work)) result.add(calculation.layout.decode(vector));
         return Collections.unmodifiableList(result);
     }
+    private SimplicialChainMapClass typedClass(Calculation calculation,AbelianGroupElement element) {
+        return new SimplicialChainMapClass(this,element,calculation.layout.decode(calculation.homology.representative(element,calculation.work)));
+    }
+    SimplicialChainMapClass typedClassOf(SimplicialChainMap map,Computation work) {
+        if(!source.equals(map.source()) || !target.equals(map.target())) throw MathFailure.undefined("The chain map must retain this space's full labelled source and target pairs");
+        Calculation calculation=new Calculation(work);
+        return typedClass(calculation,calculation.homology.classOf(calculation.layout.flatten(map),work));
+    }
+    SimplicialChainMapClass typedElement(AbelianGroupElement element,Computation work) {
+        return typedClass(new Calculation(work),element);
+    }
+    SimplicialChainMapClass typedZero(Computation work) {
+        Calculation calculation=new Calculation(work); return typedClass(calculation,calculation.homology.group().zero());
+    }
+    List<SimplicialChainMapClass> typedGenerators(Computation work) {
+        Calculation calculation=new Calculation(work); List<SimplicialChainMapClass> result=new ArrayList<>();
+        List<AbelianGroupElement> elements=calculation.homology.group().smithGenerators();
+        List<IntegerVector> representatives=calculation.homology.generators(work);
+        for(int i=0;i<elements.size();i++) result.add(new SimplicialChainMapClass(this,elements.get(i),calculation.layout.decode(representatives.get(i))));
+        return Collections.unmodifiableList(result);
+    }
     /** B: R -> source gives Hom(R,target). */
     public SimplicialChainMapSpace precomposeSpace(SimplicialChainMap before) {
         if(!source.equals(before.target())) throw MathFailure.undefined("Precomposition requires the chain map's full target pair to equal the map-space source");

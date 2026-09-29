@@ -2,7 +2,7 @@
   "schema_version": 1,
   "title": "AlgebraPhysicsFlows mathematical coverage",
   "baseline_commit": "ef1a9a548aea4ea75fc98d6798952f373de48da9",
-  "survey_date": "2026-09-28",
+  "survey_date": "2026-09-29",
   "scope": "An initial, explicitly scoped survey and tested implementation. Not a census of all mathematics and not a proof of universality.",
   "classification_basis": "Representation status applies only to each record's explicit scope. Catalog-only rows are initial triage, not established minimality results. Native registrations use Algebra and the existing operations interfaces; the optional Domain/Structure prototype does not execute those registrations. Implementation, empirical testing and mathematical proof are independent axes.",
   "sources": [
@@ -28580,6 +28580,78 @@
         "reviewed_by": null,
         "version": "2",
         "date": "2026-09-28",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
+      "id": "concrete-algebra.SimplicialChainMapClassAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "SimplicialChainMapClassAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "ChainMapClass",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-29",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -140695,6 +140767,1905 @@
       "legacy_operation_interface": "IUnsafeFlatOperation"
     },
     {
+      "id": "concrete-operation.ChainMapClass.from-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "ChainMapClass.from-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMap",
+      "domain_B": null,
+      "domain_C": "ChainMapClass",
+      "operation_signature": "ChainMap -> ChainMapClass",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.from-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Project a validated integral ChainMap to its homotopy class and retain its full labelled endpoints. Compute and store a deterministic representative using one shared Hom reduction, projection and lift budget; the original map need not equal the chosen representative.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-29",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainMapClass.from-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ChainMapClass.from-map",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMapClass.from-element",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "ChainMapClass.from-element",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMapSpace",
+      "domain_B": "AbelianGroupElement",
+      "domain_C": "ChainMapClass",
+      "operation_signature": "ChainMapSpace x AbelianGroupElement -> ChainMapClass",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.from-element",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Supply a ChainMapSpace and an AbelianGroupElement in its exact retained Hom presentation and Smith coordinate map. Explicitly attach this space's geometric context and compute the deterministic representative. An abstractly isomorphic presentation is insufficient; generic elements do not assert provenance.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-29",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ChainMapClass.from-element",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ChainMapClass.from-element",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMapClass.zero-in",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "ChainMapClass.zero-in",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMapSpace",
+      "domain_B": null,
+      "domain_C": "ChainMapClass",
+      "operation_signature": "ChainMapSpace -> ChainMapClass",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.zero-in",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the zero class on both exact labelled endpoints of the supplied space, with a validated zero representative. This computes the Hom quotient and obeys its limits even for a zero class.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-29",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainMapClass.zero-in",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ChainMapClass.zero-in",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMapClass.identity-on",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "ChainMapClass.identity-on",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeComplex",
+      "domain_B": null,
+      "domain_C": "ChainMapClass",
+      "operation_signature": "RelativeComplex -> ChainMapClass",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.identity-on",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the class of the integral identity on the full supplied pair. Its chosen representative need not be the identity matrix; in an acyclic context this class equals zero.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-29",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainMapClass.identity-on",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ChainMapClass.identity-on",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMapClass.source",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "ChainMapClass.source",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMapClass",
+      "domain_B": null,
+      "domain_C": "RelativeComplex",
+      "operation_signature": "ChainMapClass -> RelativeComplex",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.source",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the complete labelled source pair of the class, including its subcomplex.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-29",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainMapClass.source",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "source",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMapClass.target",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "ChainMapClass.target",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMapClass",
+      "domain_B": null,
+      "domain_C": "RelativeComplex",
+      "operation_signature": "ChainMapClass -> RelativeComplex",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.target",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the complete labelled target pair of the class, including its subcomplex.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-29",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainMapClass.target",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "target",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMapClass.space",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "ChainMapClass.space",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMapClass",
+      "domain_B": null,
+      "domain_C": "ChainMapSpace",
+      "operation_signature": "ChainMapClass -> ChainMapSpace",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.space",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the retained ChainMapSpace context without recomputing reductions.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-29",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainMapClass.space",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "space",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMapClass.element",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "ChainMapClass.element",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMapClass",
+      "domain_B": null,
+      "domain_C": "AbelianGroupElement",
+      "operation_signature": "ChainMapClass -> AbelianGroupElement",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.element",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the canonical AbelianGroupElement in the retained Hom-homology presentation. This forgets geometric endpoint provenance; the contextual class retains it separately.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-29",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainMapClass.element",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "element",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMapClass.representative",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "ChainMapClass.representative",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMapClass",
+      "domain_B": null,
+      "domain_C": "ChainMap",
+      "operation_signature": "ChainMapClass -> ChainMap",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.representative",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the stored validated deterministic ChainMap representative. This is a set-theoretic section, not generally additive or functorial; raw matrix or noncycle actions are not homotopy-class invariants.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-29",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainMapClass.representative",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "representative",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMapClass.equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "ChainMapClass.equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMapClass",
+      "domain_B": "ChainMapClass",
+      "domain_C": "Boolean",
+      "operation_signature": "ChainMapClass x ChainMapClass -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Compare both full labelled endpoint pairs and the exact presented class, including torsion invisible to induced homology maps. Equal abstract groups or equal homology maps are insufficient; distinct contexts remain unequal even when both classes are zero.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-29",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainMapClass.equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMapClass.is-zero",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "ChainMapClass.is-zero",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMapClass",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "ChainMapClass -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.is-zero",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Test zero in the retained integral homotopy quotient, not whether the originally supplied map had zero matrices.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-29",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainMapClass.is-zero",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "is-zero",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMapClass.is-identity",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "ChainMapClass.is-identity",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMapClass",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "ChainMapClass -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.is-identity",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return false for different source/target pairs. Otherwise compare with the class of the full identity map; zero is also the identity class on an acyclic quotient chain complex.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-29",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainMapClass.is-identity",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "is-identity",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMapClass.add",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "ChainMapClass.add",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMapClass",
+      "domain_B": "ChainMapClass",
+      "domain_C": "ChainMapClass",
+      "operation_signature": "ChainMapClass x ChainMapClass -> ChainMapClass",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.add",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require identical full labelled source and target pairs before computation, add canonical presented elements, and return a contextual class with its deterministic representative.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-29",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ChainMapClass.add",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "add",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMapClass.subtract",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "ChainMapClass.subtract",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMapClass",
+      "domain_B": "ChainMapClass",
+      "domain_C": "ChainMapClass",
+      "operation_signature": "ChainMapClass x ChainMapClass -> ChainMapClass",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.subtract",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require identical full labelled source and target pairs before computation and subtract their integral homotopy classes.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-29",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ChainMapClass.subtract",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "subtract",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMapClass.negate",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "ChainMapClass.negate",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMapClass",
+      "domain_B": null,
+      "domain_C": "ChainMapClass",
+      "operation_signature": "ChainMapClass -> ChainMapClass",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.negate",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Take the additive inverse in the same full map-space context and normalize the representative.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-29",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainMapClass.negate",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "negate",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMapClass.scale",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "ChainMapClass.scale",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMapClass",
+      "domain_B": "Z",
+      "domain_C": "ChainMapClass",
+      "operation_signature": "ChainMapClass x Z -> ChainMapClass",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.scale",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Multiply the class by an arbitrary precision signed integer, retaining torsion and both full endpoints through ICustomMemberOperation.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-29",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainMapClass.scale",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "scale",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMapClass.compose",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "ChainMapClass.compose",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMapClass",
+      "domain_B": "ChainMapClass",
+      "domain_C": "ChainMapClass",
+      "operation_signature": "ChainMapClass x ChainMapClass -> ChainMapClass",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.compose",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Apply the right operand first: [A] compose [B] = [A B]. Require the full source pair of A to equal the full target pair of B before any computation. Composition is well-defined on classes, associative, additive in both arguments and unital; chain multiplication, validation, final Hom reduction, projection and lift share one budget.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-29",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ChainMapClass.compose",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "compose",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMapClass.has-finite-order",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "ChainMapClass.has-finite-order",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMapClass",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "ChainMapClass -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.has-finite-order",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Test whether the additive class has zero free Smith coordinates, including the zero element. This does not test multiplicative or composition order.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-29",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainMapClass.has-finite-order",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "has-finite-order",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMapClass.order",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "ChainMapClass.order",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMapClass",
+      "domain_B": null,
+      "domain_C": "N",
+      "operation_signature": "ChainMapClass -> N",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.order",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the finite additive order; zero has order one. A nonzero free coordinate makes this operation mathematically undefined, independently of composition order.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-29",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ChainMapClass.order",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "order",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMapClass.homology-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "ChainMapClass.homology-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMapClass",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "ChainMapClass x N -> AbelianGroupHomomorphism",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.homology-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "For nonnegative degree return the covariant homomorphism induced by this class. Homotopic representatives give the same presented homomorphism; equality of all homology maps does not imply class equality.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-29",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainMapClass.homology-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "homology-map",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMapClass.cohomology-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "ChainMapClass.cohomology-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMapClass",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "ChainMapClass x N -> AbelianGroupHomomorphism",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.cohomology-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "For nonnegative degree return the contravariant homomorphism induced by the transposed representative. It reverses composition order and is independent of the representative.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-29",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainMapClass.cohomology-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "cohomology-map",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMapClass.homology-maps",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "ChainMapClass.homology-maps",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMapClass",
+      "domain_B": null,
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "ChainMapClass -> List(AbelianGroupHomomorphism)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.homology-maps",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit covariant presented homology maps in all degrees from zero through the largest endpoint ambient dimension. Keep zero maps and empty groups; the entire flat list shares one budget.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-29",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainMapClass.homology-maps",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "homology-maps",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMapClass.cohomology-maps",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "ChainMapClass.cohomology-maps",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMapClass",
+      "domain_B": null,
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "ChainMapClass -> List(AbelianGroupHomomorphism)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.cohomology-maps",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit contravariant presented cohomology maps in all degrees from zero through the largest endpoint ambient dimension. Keep zero maps and empty groups; the entire flat list shares one budget.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-29",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainMapClass.cohomology-maps",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "cohomology-maps",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMapClass.generators-in",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "ChainMapClass.generators-in",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMapSpace",
+      "domain_B": null,
+      "domain_C": "ChainMapClass",
+      "operation_signature": "ChainMapSpace -> List(ChainMapClass)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.generators-in",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Emit nonzero minimal Smith generators as contextual classes on the supplied space, torsion first and then free. Skip killed coordinates; a zero quotient emits an empty list. Compute one Hom reduction and shared Smith lift matrix; all returned map validations share the same budget.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-09-29",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainMapClass.generators-in",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ChainMapClass.generators-in",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
       "id": "concrete-operation.Z/5Z.add",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "PrimeField",
@@ -141314,6 +143285,9 @@
         "ChainMap.cochain-matrix",
         "ChainMap.cohomology-map",
         "ChainMap.homology-map",
+        "ChainMapClass.cohomology-map",
+        "ChainMapClass.homology-map",
+        "ChainMapClass.order",
         "CollapseSequence.chain-homotopy-matrix",
         "CollapseSequence.chain-matrix",
         "CollapseSequence.cochain-homotopy-matrix",
@@ -141617,6 +143591,7 @@
         "AbelianGroupHomomorphism.scaling-on",
         "ChainHomotopy.scale",
         "ChainMap.scale",
+        "ChainMapClass.scale",
         "FiniteAdjunction.transpose",
         "FiniteAdjunction.untranspose",
         "FiniteCategory.compose",
@@ -142085,6 +144060,10 @@
         "ChainMap.is-identity",
         "ChainMap.is-isomorphism",
         "ChainMap.is-zero",
+        "ChainMapClass.equal",
+        "ChainMapClass.has-finite-order",
+        "ChainMapClass.is-identity",
+        "ChainMapClass.is-zero",
         "ChainMapSpace.equal",
         "CollapseSequence.absolute-can-collapse-to",
         "CollapseSequence.can-collapse-to",
@@ -145274,6 +147253,8 @@
         "AbelianGroupHomomorphism.generator-images",
         "AbelianGroupHomomorphism.has-preimage",
         "AbelianGroupHomomorphism.preimage",
+        "ChainMapClass.element",
+        "ChainMapClass.from-element",
         "ChainMapSpace.class-of",
         "ChainMapSpace.representative",
         "IntegralHomology.class-of",
@@ -145372,6 +147353,10 @@
         "ChainMap.cohomology-maps",
         "ChainMap.homology-map",
         "ChainMap.homology-maps",
+        "ChainMapClass.cohomology-map",
+        "ChainMapClass.cohomology-maps",
+        "ChainMapClass.homology-map",
+        "ChainMapClass.homology-maps",
         "ChainMapSpace.postcompose-map",
         "ChainMapSpace.precompose-map",
         "CollapseSequence.cohomology-map",
@@ -145835,6 +147820,9 @@
         "ChainMap.source",
         "ChainMap.target",
         "ChainMap.zero",
+        "ChainMapClass.identity-on",
+        "ChainMapClass.source",
+        "ChainMapClass.target",
         "ChainMapSpace.from-pairs",
         "ChainMapSpace.source",
         "ChainMapSpace.target",
@@ -147618,6 +149606,8 @@
         "ChainMap.subtract",
         "ChainMap.target",
         "ChainMap.zero",
+        "ChainMapClass.from-map",
+        "ChainMapClass.representative",
         "ChainMapSpace.class-of",
         "ChainMapSpace.map-generators",
         "ChainMapSpace.postcompose-map",
@@ -147847,6 +149837,10 @@
         "Mat(Z)"
       ],
       "supported_operations": [
+        "ChainMapClass.from-element",
+        "ChainMapClass.generators-in",
+        "ChainMapClass.space",
+        "ChainMapClass.zero-in",
         "ChainMapSpace.class-of",
         "ChainMapSpace.equal",
         "ChainMapSpace.from-pairs",
@@ -147885,6 +149879,77 @@
         "review_date": null,
         "review_notes": "No human review performed",
         "date": "2026-09-28"
+      }
+    },
+    {
+      "id": "ChainMapClass",
+      "name": "Contextual integral chain-homotopy classes",
+      "description": "Contextual integral chain-homotopy classes",
+      "member_representation": "mathematics.topology.SimplicialChainMapClass",
+      "membership_rules": [
+        "Full labelled source and target pairs, canonical presented element and validated deterministic representative",
+        "Equality retains endpoints and integral torsion; homology maps alone do not classify classes",
+        "Parallel addition and right-first composition check complete pairs before computation",
+        "Stored representatives form a set-theoretic section, not generally an additive or functorial choice",
+        "Whole constructions and flat lists share bounded computation budgets"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "ChainMapSpace",
+        "ChainMap",
+        "RelativeComplex",
+        "AbelianGroupElement",
+        "AbelianGroupHomomorphism",
+        "Z",
+        "N",
+        "Boolean"
+      ],
+      "supported_operations": [
+        "ChainMapClass.add",
+        "ChainMapClass.cohomology-map",
+        "ChainMapClass.cohomology-maps",
+        "ChainMapClass.compose",
+        "ChainMapClass.element",
+        "ChainMapClass.equal",
+        "ChainMapClass.from-element",
+        "ChainMapClass.from-map",
+        "ChainMapClass.generators-in",
+        "ChainMapClass.has-finite-order",
+        "ChainMapClass.homology-map",
+        "ChainMapClass.homology-maps",
+        "ChainMapClass.identity-on",
+        "ChainMapClass.is-identity",
+        "ChainMapClass.is-zero",
+        "ChainMapClass.negate",
+        "ChainMapClass.order",
+        "ChainMapClass.representative",
+        "ChainMapClass.scale",
+        "ChainMapClass.source",
+        "ChainMapClass.space",
+        "ChainMapClass.subtract",
+        "ChainMapClass.target",
+        "ChainMapClass.zero-in"
+      ],
+      "invariants": [
+        "Full labelled source and target pairs, canonical presented element and validated deterministic representative",
+        "Equality retains endpoints and integral torsion; homology maps alone do not classify classes",
+        "Parallel addition and right-first composition check complete pairs before computation",
+        "Stored representatives form a set-theoretic section, not generally an additive or functorial choice",
+        "Whole constructions and flat lists share bounded computation budgets"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-09-29"
       }
     }
   ]

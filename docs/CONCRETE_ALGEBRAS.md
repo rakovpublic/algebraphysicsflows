@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1478 native operations from 65 algebra builders.
+The default initializer currently installs 1502 native operations from 66 algebra builders.
 
 ## Existing API usage
 
@@ -2199,3 +2199,49 @@ List<String> matrices = math.flow(math.chainMapSpaces, Collections.singletonList
 Context changes check endpoints without running reductions. Matrix lists check all three Hom-rank bounds on both spaces and share one budget, without computing quotient groups. Induced homomorphisms use one **5000000-unit budget** for both complete Hom reductions, the action matrix, cycle-coordinate solving and relation validation. Two successful standalone group calculations do not imply that the combined action fits. Exhaustion remains `IMPLEMENTATION_FAILURE`, never a zero action or partial list.
 
 `NativeSimplicialChainMapCompositionTest` adds 13 tests: independent coordinate sums for 6,561 ternary point-map pairs, rectangular row-major matrices, noncommuting variance and commuting left/right actions, circle winding multiplication and signed differential squares, homotopy invariance, a nonzero Z-to-Z/2 action invisible on homology, torsion scaling with large coefficients, changing ambient dimensions, empty shapes, exact middle pairs, aggregate bounds, shared two-reduction budgets, actual wrappers and serialized native scalar/flat flows.
+
+## Contextual chain-homotopy classes
+
+`math.chainMapClasses` installs 24 native operations on `SimplicialChainMapClass`. A value retains its full labelled source and target pairs, its canonical element of `H_0(Hom)`, and a validated deterministic representative chain map. This makes direct composition of classes available through the existing closed operation interface. The definition and well-definedness of composition follow the [chain-complex conventions](https://stacks.math.columbia.edu/tag/010V) and [Hom-complex construction](https://stacks.math.columbia.edu/tag/0A8H).
+
+| Operations | Behavior |
+| --- | --- |
+| `ChainMapClass.from-map` | `ChainMap -> ChainMapClass`; project and retain endpoints |
+| `ChainMapClass.from-element` | `ChainMapSpace x AbelianGroupElement -> ChainMapClass`; require the exact Hom presentation and Smith coordinate map |
+| `ChainMapClass.zero-in`, `ChainMapClass.identity-on` | Construct zero on a map space or the identity class on a full pair |
+| `source`, `target`, `space`, `element`, `representative` | Return retained components through their actual registered carrier wrappers |
+| `equal`, `is-zero`, `is-identity` | Compare full contexts and integral classes, including torsion |
+| `add`, `subtract`, `negate`, `scale` | Additive arithmetic; binary addition/subtraction require identical full endpoint pairs |
+| `compose` | `[A] compose [B] = [A B]`, applying the right operand first; require the complete joining pair |
+| `has-finite-order`, `order` | Finite **additive** order; zero has order one, and infinite order makes `order` undefined |
+| `homology-map`, `cohomology-map` | Degreewise covariant homology and contravariant cohomology homomorphisms for nonnegative degrees |
+| `homology-maps`, `cohomology-maps` | Flat lists from degree zero through the largest endpoint ambient dimension, retaining zero groups and maps |
+| `ChainMapClass.generators-in` | Flat minimal Smith generators as contextual classes, torsion first and then free; empty for a zero quotient |
+
+Construction from a generic element explicitly attaches the supplied context; it cannot recover that element's original geometric provenance. Once attached, class equality and arithmetic retain both complete pairs. Abstractly isomorphic groups, matching matrix sizes, or identical induced homology maps do not identify contextual classes.
+
+```java
+ConcreteMathematics math = new ConcreteMathematics();
+RelativeSimplicialComplex point = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))));
+SimplicialChainMap twice = SimplicialChainMap.identity(point).scale(BigInteger.valueOf(2));
+SimplicialChainMapClass three = SimplicialChainMapClass.fromMap(
+        SimplicialChainMap.identity(point).scale(BigInteger.valueOf(3)));
+List<String> product = math.flow(math.chainMaps, Collections.singletonList(twice))
+        .<SimplicialChainMapClass>performAlgebraTransfer("ChainMapClass.from-map")
+        .performOperation("compose", three)
+        .<AbelianGroupHomomorphism, BigInteger>performAlgebraUnsafe("homology-map", BigInteger.ZERO)
+        .<IntegerMatrix>performAlgebraTransfer("smith-matrix").collect();
+// [ZMatrix(1x1)[[6]]]
+SimplicialChainMapSpace space = new SimplicialChainMapSpace(point, point);
+List<String> generators = math.flow(math.chainMapSpaces, Collections.singletonList(space))
+        .<SimplicialChainMapClass>performFlatAlgebraTransfer("ChainMapClass.generators-in")
+        .<Boolean>performAlgebraTransfer("is-identity").collect();
+// [true]
+```
+
+Composition is associative, unital and additive in both arguments. A representative is a deterministic **set-theoretic section**: it need not preserve addition, composition or identity matrices. For example, the identity class of an interval may have a constant-map representative. In a relative acyclic complex the identity class equals zero. Induced homology and cohomology maps are independent of the representative; arbitrary raw chain or cochain actions are not supplied as class operations.
+
+Hom reductions retain the existing bound of **256 total coefficients in each Hom degree -1, 0 and 1**, after quotient-basis filtering. One **5000000-unit budget** covers a whole construction or arithmetic/composition operation, including representative multiplication, matrix validation, Hom reduction, projection and lifting. Flat generator lists use one reduction and one Smith lift matrix and validate every output under the shared budget. Degreewise integral-map lists likewise share one budget. Shape/work exhaustion is `IMPLEMENTATION_FAILURE`, never a false equality, mathematical nonexistence or partial list. Integer coefficient bit lengths remain unbounded. No inverse-class solver or general geometric homotopy classification is added.
+
+`NativeSimplicialChainMapClassTest` covers 6,561 independent point-matrix compositions, noncommuting composition and contravariance, associative and distributive laws, 125 interval maps classified independently by augmentation, circle degree actions, torsion invisible on homology, mixed free/torsion generators, nonadditive lifts, exact full-pair and presentation checks, changing ambient dimensions, empty shapes, aggregate and shared-list limits, actual native wrappers, and serialized repeatable scalar/flat flows.

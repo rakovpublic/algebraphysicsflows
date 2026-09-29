@@ -71,6 +71,14 @@ class CoverageTest(unittest.TestCase):
 
     def test_operation_conditions_are_scoped_to_the_algebra(self):
         records = {r.get("runtime_operation_id"): r for r in self.data["concepts"] if r.get("runtime_operation_id")}
+        self.assertIn("full labelled endpoint pairs", " ".join(records["ChainMapClass.equal"]["required_invariants"]))
+        self.assertIn("right operand first", " ".join(records["ChainMapClass.compose"]["required_invariants"]))
+        self.assertIn("set-theoretic section", " ".join(records["ChainMapClass.representative"]["required_invariants"]))
+        self.assertIn("zero has order one", " ".join(records["ChainMapClass.order"]["required_invariants"]))
+        self.assertIn("exact retained Hom presentation", " ".join(records["ChainMapClass.from-element"]["required_invariants"]))
+        self.assertIn("ICustomMemberOperation", " ".join(records["ChainMapClass.scale"]["required_invariants"]))
+        self.assertIn("torsion first", " ".join(records["ChainMapClass.generators-in"]["required_invariants"]))
+        self.assertIn("5000000", " ".join(records["ChainMapClass.compose"]["known_limitations"]))
         self.assertIn("including degree zero and the top degree", " ".join(records["ChainHomotopy.from-data"]["required_invariants"]))
         self.assertIn("negate the actual witness matrices", " ".join(records["ChainHomotopy.reverse"]["required_invariants"]))
         self.assertIn("exact full joining chain map", " ".join(records["ChainHomotopy.then"]["required_invariants"]))
@@ -434,6 +442,16 @@ class CoverageTest(unittest.TestCase):
         result = sync_native_catalog.synchronize(self.data, rows)
         self.assertEqual(self.data, result)
         self.assertEqual(result, sync_native_catalog.synchronize(result, rows))
+        historical = copy.deepcopy(self.data)
+        old = next(r for r in historical["concepts"] if r.get("runtime_operation_id") == "Z.add")
+        old["provenance"]["date"] = "2020-01-01"
+        result = sync_native_catalog.synchronize(historical, rows)
+        self.assertEqual(old, next(r for r in result["concepts"] if r["id"] == old["id"]))
+        old["representation_scope"] = "obsolete scope"
+        result = sync_native_catalog.synchronize(historical, rows)
+        updated = next(r for r in result["concepts"] if r["id"] == old["id"])
+        self.assertEqual(sync_native_catalog.DATE, updated["provenance"]["date"])
+        self.assertNotEqual("obsolete scope", updated["representation_scope"])
         reviewed = copy.deepcopy(self.data)
         next(r for r in reviewed["concepts"] if r["id"].startswith("concrete-operation."))["human_review_status"] = "HUMAN_REVIEWED"
         with self.assertRaisesRegex(ValueError, "manual evidence-preserving"):

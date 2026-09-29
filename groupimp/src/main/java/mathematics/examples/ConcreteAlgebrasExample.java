@@ -35,6 +35,7 @@ import mathematics.topology.SimplicialCollapseSequence;
 import mathematics.topology.SimplicialChainMap;
 import mathematics.topology.SimplicialChainHomotopy;
 import mathematics.topology.SimplicialChainMapSpace;
+import mathematics.topology.SimplicialChainMapClass;
 import mathematics.topology.IntegralHomology;
 import mathematics.topology.FiniteSimplicialMap;
 import mathematics.topology.RelativeSimplicialComplex;
@@ -149,6 +150,13 @@ public final class ConcreteAlgebrasExample {
                 .performLeftProjectionOperation("apply",circleIdentityClass).<Boolean>performCustomResultOperation("equal",circleMapSpace.classOf(degreeThree)).collect());
         System.out.println("Postcomposition exposes all three Hom action matrices: "+math.flow(math.chainMapSpaces,Collections.singletonList(circleMapSpace))
                 .<IntegerMatrix,SimplicialChainMap>performFlatAlgebraUnsafe("postcompose-matrices",degreeThree).collect().size());
+        SimplicialChainMapClass degreeThreeClass=SimplicialChainMapClass.fromMap(degreeThree);
+        System.out.println("Composing two degree-three homotopy classes acts by nine on H1: "+math.flow(math.chainMaps,Collections.singletonList(degreeThree))
+                .<SimplicialChainMapClass>performAlgebraTransfer("ChainMapClass.from-map").performOperation("compose",degreeThreeClass)
+                .<AbelianGroupHomomorphism,BigInteger>performAlgebraUnsafe("homology-map",BigInteger.ONE)
+                .<IntegerMatrix>performAlgebraTransfer("smith-matrix").collect());
+        System.out.println("Circle map space has two contextual homotopy-class generators: "+math.flow(math.chainMapSpaces,Collections.singletonList(circleMapSpace))
+                .<SimplicialChainMapClass>performFlatAlgebraTransfer("ChainMapClass.generators-in").collect().size());
         System.out.println("Subdividing the oriented circle retains an integral cycle: "+math.flow(math.complexes,Collections.singletonList(circle))
                 .<SimplicialSubdivision>performAlgebraTransfer("SimplicialSubdivision.from-complex")
                 .performLeftProjectionOperation("on-absolute-chain",orientedCircle).<Boolean>performAlgebraTransfer("is-cycle").collect());
