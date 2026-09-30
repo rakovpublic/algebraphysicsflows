@@ -1,0 +1,409 @@
+package mathematics.examples;
+
+import algebra.concrete.ConcreteMathematics;
+import algebra.concrete.ConcreteAlgebra;
+import algebra.concrete.OperationRegistration;
+import mathematics.calculus.Polynomial;
+import mathematics.calculus.MultivariatePolynomial;
+import mathematics.calculus.PolynomialMap;
+import mathematics.calculus.PolynomialDifferentialForm;
+import mathematics.calculus.PolynomialCell;
+import mathematics.calculus.PolynomialChain;
+import mathematics.foundations.Pair;
+import mathematics.foundations.FiniteSet;
+import mathematics.structures.FiniteCategory;
+import mathematics.structures.FiniteFunctor;
+import mathematics.structures.FiniteNaturalTransformation;
+import mathematics.structures.FiniteEquivalence;
+import mathematics.structures.FiniteAdjunction;
+import mathematics.structures.FiniteCone;
+import mathematics.structures.FiniteCocone;
+import mathematics.structures.AbelianGroupType;
+import mathematics.structures.PresentedAbelianGroup;
+import mathematics.structures.AbelianGroupElement;
+import mathematics.structures.AbelianGroupHomomorphism;
+import mathematics.topology.FiniteSimplicialComplex;
+import mathematics.topology.RelativeCapProduct;
+import mathematics.topology.RelativeSimplicialTriple;
+import mathematics.topology.RelativeSimplicialTripleMap;
+import mathematics.topology.SimplicialHomotopy;
+import mathematics.topology.SimplicialHomotopyPath;
+import mathematics.topology.SimplicialHomotopyEquivalence;
+import mathematics.topology.SimplicialSubdivision;
+import mathematics.topology.SimplicialCollapse;
+import mathematics.topology.SimplicialCollapseSequence;
+import mathematics.topology.SimplicialChainMap;
+import mathematics.topology.SimplicialChainHomotopy;
+import mathematics.topology.SimplicialChainMapSpace;
+import mathematics.topology.SimplicialChainMapClass;
+import mathematics.topology.IntegralHomology;
+import mathematics.topology.FiniteSimplicialMap;
+import mathematics.topology.RelativeSimplicialComplex;
+import mathematics.topology.RelativeSimplicialMap;
+import mathematics.topology.SimplicialCover;
+import mathematics.topology.SimplicialCoverMap;
+import mathematics.topology.SimplicialCochain;
+import mathematics.topology.SimplicialChain;
+import mathematics.topology.RelativeSimplicialChain;
+import mathematics.topology.RelativeSimplicialCochain;
+import mathematics.linear.RationalVector;
+import mathematics.linear.IntegerVector;
+import mathematics.linear.IntegerMatrix;
+import mathematics.linear.RationalMatrix;
+import mathematics.linear.RationalAffineSpace;
+import mathematics.linear.RationalTensor;
+import mathematics.linear.RationalExterior;
+import mathematics.numbers.Rational;
+import mathematics.numbers.RationalQuaternion;
+import mathematics.probability.FiniteMarkovKernel;
+import mathematics.probability.FiniteDistribution;
+import java.math.BigInteger;
+import java.util.*;
+
+/** Runnable examples using the actual MathTool-registered algebras and legacy flow API. */
+public final class ConcreteAlgebrasExample {
+    private ConcreteAlgebrasExample() { }
+    public static void main(String[] args) {
+        ConcreteMathematics math=new ConcreteMathematics();
+        if(args.length==1 && args[0].equals("--catalog")) {
+            System.out.print(catalogManifest(math));
+            return;
+        }
+        System.out.println("MathTool: "+math.mathTool.getName()+", concrete algebras: "+math.algebras().size()+", operations: "+math.operations().size());
+        IntegerMatrix equation=new IntegerMatrix(new BigInteger[][]{{BigInteger.valueOf(2),BigInteger.valueOf(3)}});
+        System.out.println("Integer solutions of 2*x+3*y=1: particular then kernel basis: "+math.flow(math.integerMatrices,Collections.singletonList(equation))
+                .performLeftProjectionFlatOperation("solve-generators",new IntegerVector(BigInteger.ONE)).collect());
+        IntegerMatrix presentation=new IntegerMatrix(new BigInteger[][]{{BigInteger.valueOf(2),BigInteger.ZERO},
+                {BigInteger.ZERO,BigInteger.valueOf(3)},{BigInteger.ZERO,BigInteger.ZERO}});
+        System.out.println("Group presented by columns (2,0,0), (0,3,0): "+math.flow(math.integerMatrices,Collections.singletonList(presentation))
+                .<AbelianGroupType>performAlgebraTransfer("cokernel").collect());
+        IntegerMatrix finitePresentation=new IntegerMatrix(new BigInteger[][]{{BigInteger.valueOf(2),BigInteger.ZERO},{BigInteger.ZERO,BigInteger.valueOf(3)}});
+        System.out.println("Kernel type of doubling on Z/2 + Z/3: "+math.flow(math.integerMatrices,Collections.singletonList(finitePresentation))
+                .<PresentedAbelianGroup>performAlgebraTransfer("PresentedAbelianGroup.from-matrix")
+                .<AbelianGroupHomomorphism,BigInteger>performAlgebraUnsafe("AbelianGroupHomomorphism.scaling-on",BigInteger.valueOf(2))
+                .<PresentedAbelianGroup>performAlgebraTransfer("kernel")
+                .<AbelianGroupType>performAlgebraTransfer("as-type").collect());
+        System.out.println("Orders of all elements in Z/2 + Z/3: "+math.flow(math.integerMatrices,Collections.singletonList(finitePresentation))
+                .<PresentedAbelianGroup>performAlgebraTransfer("PresentedAbelianGroup.from-matrix")
+                .<AbelianGroupElement>performFlatAlgebraTransfer("AbelianGroupElement.elements")
+                .<BigInteger>performAlgebraTransfer("order").collect());
+        System.out.println("Smith coordinates of solutions of 2*x=(0,2) in that quotient: "+math.flow(math.integerMatrices,Collections.singletonList(finitePresentation))
+                .<PresentedAbelianGroup>performAlgebraTransfer("PresentedAbelianGroup.from-matrix")
+                .<AbelianGroupElement,IntegerVector>performAlgebraUnsafe("AbelianGroupElement.from-smith",new IntegerVector(BigInteger.ZERO,BigInteger.valueOf(2)))
+                .performFlatCustomMemberOperation("multiplication-preimages",BigInteger.valueOf(2))
+                .<IntegerVector>performAlgebraTransfer("smith-coordinates").collect());
+        FiniteSimplicialComplex projectivePlane=new FiniteSimplicialComplex(Arrays.asList(
+                FiniteSet.of(0,1,2),FiniteSet.of(0,1,3),FiniteSet.of(0,2,4),FiniteSet.of(0,3,5),FiniteSet.of(0,4,5),
+                FiniteSet.of(1,2,5),FiniteSet.of(1,3,4),FiniteSet.of(1,4,5),FiniteSet.of(2,3,4),FiniteSet.of(2,3,5)));
+        System.out.println("Integral H1 of the projective plane: "+math.flow(math.complexes,Collections.singletonList(projectivePlane))
+                .<AbelianGroupType,BigInteger>performAlgebraUnsafe("integral-homology",BigInteger.ONE).collect());
+        System.out.println("An integral cycle representing its order-two class: "+math.flow(math.complexes,Collections.singletonList(projectivePlane))
+                .<IntegralHomology,BigInteger>performAlgebraUnsafe("IntegralHomology.at-degree",BigInteger.ONE)
+                .<IntegerVector>performFlatAlgebraTransfer("generators").collect());
+        FiniteSimplicialComplex circle=new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0,1),FiniteSet.of(0,2),FiniteSet.of(1,2)));
+        System.out.println("Barycentric subdivision gives inverse integral circle homology maps: "+math.flow(math.complexes,Collections.singletonList(circle))
+                .<SimplicialSubdivision>performAlgebraTransfer("SimplicialSubdivision.from-complex")
+                .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("homology-maps",BigInteger.ONE)
+                .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
+        SimplicialChain orientedCircle=new SimplicialChain(circle,BigInteger.ONE,new IntegerVector(BigInteger.ONE,BigInteger.ONE.negate(),BigInteger.ONE));
+        FiniteSimplicialComplex filledTriangle=new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0,1,2)));
+        SimplicialChain triangleEdge=new SimplicialChain(filledTriangle,BigInteger.ONE,new IntegerVector(BigInteger.ZERO,BigInteger.ONE,BigInteger.ZERO));
+        System.out.println("Free-edge collapse retracts a triangle edge to its other two edges: "+math.flow(math.complexes,Collections.singletonList(filledTriangle))
+                .<SimplicialCollapse,FiniteSet<BigInteger>>performAlgebraUnsafe("SimplicialCollapse.from-absolute-face",FiniteSet.of(BigInteger.ZERO,BigInteger.valueOf(2)))
+                .performLeftProjectionOperation("on-absolute-chain",triangleEdge).<IntegerVector>performAlgebraTransfer("coordinates").collect());
+        System.out.println("Greedy triangle reduction retains three elementary collapse steps: "+math.flow(math.complexes,Collections.singletonList(filledTriangle))
+                .<SimplicialCollapseSequence>performAlgebraTransfer("CollapseSequence.reduce-absolute").<BigInteger>performAlgebraTransfer("step-count").collect());
+        System.out.println("All triangle collapses to vertex zero retain three steps each: "+math.flow(math.complexes,Collections.singletonList(filledTriangle))
+                .<SimplicialCollapseSequence>performFlatCustomResultOperation("CollapseSequence.absolute-collapses-to",new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))))
+                .<BigInteger>performAlgebraTransfer("step-count").collect());
+        System.out.println("Twice the identity on triangle chains is a chain isomorphism: "+math.flow(math.relativeComplexes,Collections.singletonList(RelativeSimplicialComplex.absolute(filledTriangle)))
+                .<SimplicialChainMap>performAlgebraTransfer("ChainMap.identity-on").performCustomMemberOperation("scale",BigInteger.valueOf(2))
+                .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
+        RelativeSimplicialComplex circlePair=RelativeSimplicialComplex.absolute(circle);
+        SimplicialChainMap degreeThree=new SimplicialChainMap(circlePair,circlePair,Arrays.asList(IntegerMatrix.identity(3),new IntegerMatrix(new BigInteger[][]{
+                {BigInteger.valueOf(3),BigInteger.ZERO,BigInteger.ZERO},{BigInteger.valueOf(-2),BigInteger.ONE,BigInteger.ZERO},{BigInteger.valueOf(2),BigInteger.ZERO,BigInteger.ONE}})));
+        System.out.println("An arbitrary circle chain map induces multiplication by three on H1: "+math.flow(math.chainMaps,Collections.singletonList(degreeThree))
+                .<AbelianGroupHomomorphism,BigInteger>performAlgebraUnsafe("homology-map",BigInteger.ONE).<IntegerMatrix>performAlgebraTransfer("smith-matrix").collect());
+        SimplicialChain vertexOne=new SimplicialChain(filledTriangle,BigInteger.ZERO,new IntegerVector(BigInteger.ZERO,BigInteger.ONE,BigInteger.ZERO));
+        System.out.println("An integral homotopy fills vertex one minus the collapse endpoint: "+math.flow(math.complexes,Collections.singletonList(filledTriangle))
+                .<SimplicialCollapseSequence>performAlgebraTransfer("CollapseSequence.reduce-absolute")
+                .<SimplicialChainHomotopy>performAlgebraTransfer("ChainHomotopy.from-collapse-sequence")
+                .performLeftProjectionOperation("on-absolute-chain",vertexOne).<IntegerVector>performAlgebraTransfer("coordinates").collect());
+        RelativeSimplicialComplex homotopyPoint=RelativeSimplicialComplex.absolute(new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))));
+        SimplicialChainMap homotopyStart=new SimplicialChainMap(homotopyPoint,circlePair,Arrays.asList(new IntegerMatrix(new BigInteger[][]{{BigInteger.ONE},{BigInteger.ZERO},{BigInteger.ZERO}}),IntegerMatrix.zero(3,0))),
+                homotopyEnd=new SimplicialChainMap(homotopyPoint,circlePair,Arrays.asList(new IntegerMatrix(new BigInteger[][]{{BigInteger.ZERO},{BigInteger.ZERO},{BigInteger.ONE}}),IntegerMatrix.zero(3,0)));
+        RelativeSimplicialChain homotopyVertex=new RelativeSimplicialChain(homotopyPoint,BigInteger.ZERO,new IntegerVector(BigInteger.ONE));
+        System.out.println("A solved integral homotopy has boundary vertex two minus vertex zero: "+math.flow(math.chainMaps,Collections.singletonList(homotopyStart))
+                .<SimplicialChainHomotopy>performCustomResultOperation("ChainHomotopy.between",homotopyEnd)
+                .performLeftProjectionOperation("on-chain",homotopyVertex).performOneOperandOperation("boundary").<IntegerVector>performAlgebraTransfer("coordinates").collect());
+        System.out.println("All point-to-circle homotopies have one particular witness and one free integral generator: "+math.flow(math.chainMaps,Collections.singletonList(homotopyStart))
+                .<SimplicialChainHomotopy>performFlatCustomResultOperation("ChainHomotopy.solution-generators",homotopyEnd).collect().size());
+        System.out.println("Circle chain maps modulo integral homotopy form Z squared: "+math.flow(math.relativeComplexes,Collections.singletonList(circlePair))
+                .<SimplicialChainMapSpace>performCustomResultOperation("ChainMapSpace.from-pairs",circlePair)
+                .<AbelianGroupType>performAlgebraTransfer("homotopy-type").collect());
+        System.out.println("Circle chain-map classes have two independent representative maps: "+math.flow(math.chainMapSpaces,Collections.singletonList(new SimplicialChainMapSpace(circlePair,circlePair)))
+                .<SimplicialChainMap>performFlatAlgebraTransfer("representatives").collect().size());
+        SimplicialChainMapSpace circleMapSpace=new SimplicialChainMapSpace(circlePair,circlePair);
+        AbelianGroupElement circleIdentityClass=circleMapSpace.classOf(SimplicialChainMap.identity(circlePair));
+        System.out.println("Postcomposition sends the identity class to the degree-three circle map class: "+math.flow(math.chainMapSpaces,Collections.singletonList(circleMapSpace))
+                .<AbelianGroupHomomorphism,SimplicialChainMap>performAlgebraUnsafe("postcompose-map",degreeThree)
+                .performLeftProjectionOperation("apply",circleIdentityClass).<Boolean>performCustomResultOperation("equal",circleMapSpace.classOf(degreeThree)).collect());
+        System.out.println("Postcomposition exposes all three Hom action matrices: "+math.flow(math.chainMapSpaces,Collections.singletonList(circleMapSpace))
+                .<IntegerMatrix,SimplicialChainMap>performFlatAlgebraUnsafe("postcompose-matrices",degreeThree).collect().size());
+        SimplicialChainMapClass degreeThreeClass=SimplicialChainMapClass.fromMap(degreeThree);
+        System.out.println("Composing two degree-three homotopy classes acts by nine on H1: "+math.flow(math.chainMaps,Collections.singletonList(degreeThree))
+                .<SimplicialChainMapClass>performAlgebraTransfer("ChainMapClass.from-map").performOperation("compose",degreeThreeClass)
+                .<AbelianGroupHomomorphism,BigInteger>performAlgebraUnsafe("homology-map",BigInteger.ONE)
+                .<IntegerMatrix>performAlgebraTransfer("smith-matrix").collect());
+        System.out.println("Circle map space has two contextual homotopy-class generators: "+math.flow(math.chainMapSpaces,Collections.singletonList(circleMapSpace))
+                .<SimplicialChainMapClass>performFlatAlgebraTransfer("ChainMapClass.generators-in").collect().size());
+        System.out.println("Subdividing the oriented circle retains an integral cycle: "+math.flow(math.complexes,Collections.singletonList(circle))
+                .<SimplicialSubdivision>performAlgebraTransfer("SimplicialSubdivision.from-complex")
+                .performLeftProjectionOperation("on-absolute-chain",orientedCircle).<Boolean>performAlgebraTransfer("is-cycle").collect());
+        RelativeSimplicialComplex intervalCapPair=new RelativeSimplicialComplex(new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0,1))),
+                new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0),FiniteSet.of(1))));
+        RelativeSimplicialChain intervalCycle=new RelativeSimplicialChain(intervalCapPair,BigInteger.ONE,new IntegerVector(BigInteger.ONE));
+        FiniteSimplicialComplex basedEndpoint=new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0)));
+        System.out.println("Triple connecting cycle relative to endpoint zero: "+math.flow(math.relativeComplexes,Collections.singletonList(intervalCapPair))
+                .<RelativeSimplicialTriple,FiniteSimplicialComplex>performAlgebraUnsafe("RelativeTriple.from-pair",basedEndpoint)
+                .performLeftProjectionOperation("connect-cycle",intervalCycle).<IntegerVector>performAlgebraTransfer("coordinates").collect());
+        RelativeSimplicialTriple basedInterval=new RelativeSimplicialTriple(intervalCapPair,basedEndpoint);
+        RelativeSimplicialTriple oppositeBasedInterval=new RelativeSimplicialTriple(intervalCapPair,new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(1))));
+        Map<BigInteger,BigInteger> endpointSwap=new TreeMap<>(); endpointSwap.put(BigInteger.ZERO,BigInteger.ONE); endpointSwap.put(BigInteger.ONE,BigInteger.ZERO);
+        FiniteSimplicialMap intervalReflection=new FiniteSimplicialMap(intervalCapPair.ambient(),intervalCapPair.ambient(),endpointSwap);
+        FiniteSimplicialMap endpointStart=FiniteSimplicialMap.inclusion(basedEndpoint,intervalCapPair.ambient());
+        FiniteSimplicialMap endpointEnd=endpointStart.constantAt(BigInteger.ONE);
+        Map<BigInteger,BigInteger> intervalCollapseVertices=new TreeMap<>(); intervalCollapseVertices.put(BigInteger.ZERO,BigInteger.ZERO); intervalCollapseVertices.put(BigInteger.ONE,BigInteger.ZERO);
+        RelativeSimplicialMap intervalRetraction=RelativeSimplicialMap.absolute(new FiniteSimplicialMap(intervalCapPair.ambient(),basedEndpoint,intervalCollapseVertices)),
+                intervalSection=RelativeSimplicialMap.absolute(endpointStart);
+        SimplicialHomotopyPath intervalSourceWitness=new SimplicialHomotopyPath(Arrays.asList(RelativeSimplicialMap.identity(intervalRetraction.source()),intervalSection.compose(intervalRetraction))),
+                intervalTargetWitness=SimplicialHomotopyPath.stationary(RelativeSimplicialMap.identity(intervalRetraction.target()));
+        System.out.println("Interval contraction gives inverse integral homology maps: "+math.flow(math.relativeMaps,Collections.singletonList(intervalRetraction))
+                .<Pair<RelativeSimplicialMap,RelativeSimplicialMap>>performCustomResultOperation("HomotopyEquivalence.maps",intervalSection)
+                .<SimplicialHomotopyEquivalence,Pair<SimplicialHomotopyPath,SimplicialHomotopyPath>>performAlgebraUnsafe("HomotopyEquivalence.from-maps",new Pair<>(intervalSourceWitness,intervalTargetWitness))
+                .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("homology-maps",BigInteger.ZERO).<Boolean>performAlgebraTransfer("is-isomorphism").collect());
+        FiniteSimplicialComplex twoEdgeInterval=new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0,1),FiniteSet.of(1,2)));
+        System.out.println("Automatic strong-core reduction preserves integral homology: "+math.flow(math.complexes,Collections.singletonList(twoEdgeInterval))
+                .<SimplicialHomotopyEquivalence>performAlgebraTransfer("HomotopyEquivalence.strong-core-absolute")
+                .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("homology-maps",BigInteger.ZERO).<Boolean>performAlgebraTransfer("is-isomorphism").collect());
+        System.out.println("Automatic equivalence of different intervals: "+math.flow(math.complexes,Collections.singletonList(twoEdgeInterval))
+                .<SimplicialHomotopyEquivalence>performCustomResultOperation("HomotopyEquivalence.strong-equivalence-to",intervalCapPair.ambient())
+                .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("homology-maps",BigInteger.ZERO).<Boolean>performAlgebraTransfer("is-isomorphism").collect());
+        RelativeSimplicialMap pathStart=RelativeSimplicialMap.absolute(FiniteSimplicialMap.inclusion(basedEndpoint,twoEdgeInterval)),
+                pathMiddle=RelativeSimplicialMap.absolute(pathStart.ambientMap().constantAt(BigInteger.ONE)),
+                pathEnd=RelativeSimplicialMap.absolute(pathStart.ambientMap().constantAt(BigInteger.valueOf(2)));
+        System.out.println("Accumulated prism along two interval edges: "+math.flow(math.relativeMaps,Collections.singletonList(pathStart))
+                .<SimplicialHomotopyPath>performAlgebraTransfer("HomotopyPath.stationary-on")
+                .performCustomMemberOperation("append",pathMiddle).performCustomMemberOperation("append",pathEnd)
+                .performLeftProjectionOperation("on-absolute-chain",new SimplicialChain(basedEndpoint,BigInteger.ZERO,new IntegerVector(BigInteger.valueOf(3))))
+                .performOneOperandOperation("boundary").<IntegerVector>performAlgebraTransfer("coordinates").collect());
+        SimplicialChain weightedPoint=new SimplicialChain(basedEndpoint,BigInteger.ZERO,new IntegerVector(BigInteger.valueOf(3)));
+        System.out.println("Prism boundary between interval endpoints: "+math.flow(math.simplicialMaps,Collections.singletonList(endpointStart))
+                .<SimplicialHomotopy>performCustomResultOperation("SimplicialHomotopy.between-absolute",endpointEnd)
+                .performLeftProjectionOperation("on-absolute-chain",weightedPoint).performOneOperandOperation("boundary")
+                .<IntegerVector>performAlgebraTransfer("coordinates").collect());
+        System.out.println("Triple reflection acts by minus one on outer homology: "+math.flow(math.simplicialMaps,Collections.singletonList(intervalReflection))
+                .<RelativeSimplicialTripleMap,Pair<RelativeSimplicialTriple,RelativeSimplicialTriple>>performAlgebraUnsafe("TripleMap.from-map",new Pair<>(basedInterval,oppositeBasedInterval))
+                .<AbelianGroupHomomorphism,BigInteger>performAlgebraUnsafe("outer-homology-map",BigInteger.ONE).<IntegerMatrix>performAlgebraTransfer("smith-matrix").collect());
+        System.out.println("Triple cohomology segment isomorphism flags: "+math.flow(math.relativeTriples,Collections.singletonList(basedInterval))
+                .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("long-exact-cohomology-segment",BigInteger.ZERO)
+                .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
+        RelativeSimplicialCochain intervalCocycle=new RelativeSimplicialCochain(intervalCapPair,BigInteger.ONE,new IntegerVector(BigInteger.valueOf(3)));
+        FiniteSimplicialComplex squareCapComplex=new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0,1,2),FiniteSet.of(0,2,3)));
+        FiniteSimplicialComplex horizontalEdges=new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0,1),FiniteSet.of(2,3))),
+                verticalEdges=new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0,3),FiniteSet.of(1,2)));
+        RelativeSimplicialChain squareFundamental=new RelativeSimplicialChain(new RelativeSimplicialComplex(squareCapComplex,horizontalEdges.union(verticalEdges)),
+                BigInteger.valueOf(2),new IntegerVector(BigInteger.ONE,BigInteger.ONE));
+        RelativeSimplicialCochain verticalDifference=new RelativeSimplicialCochain(new RelativeSimplicialComplex(squareCapComplex,horizontalEdges),
+                BigInteger.ONE,new IntegerVector(BigInteger.ONE,BigInteger.ONE,BigInteger.ONE));
+        System.out.println("Square cap from horizontal to vertical relative data: "+math.flow(math.relativeChains,Collections.singletonList(squareFundamental))
+                .<RelativeCapProduct,RelativeSimplicialComplex>performAlgebraUnsafe("RelativeCap.on",new RelativeSimplicialComplex(squareCapComplex,verticalEdges))
+                .<RelativeSimplicialChain,RelativeSimplicialCochain>performAlgebraUnsafe("cap",verticalDifference).<IntegerVector>performAlgebraTransfer("coordinates").collect());
+        System.out.println("Relative interval cap gives an absolute zero-chain of augmentation: "+math.flow(math.relativeChains,Collections.singletonList(intervalCycle))
+                .<SimplicialChain,RelativeSimplicialCochain>performAlgebraUnsafe("relative-cap",intervalCocycle).<BigInteger>performAlgebraTransfer("augmentation").collect());
+        System.out.println("Relative interval connecting cycle on its endpoints: "+math.flow(math.relativeChains,Collections.singletonList(intervalCycle))
+                .<SimplicialChain>performAlgebraTransfer("connect-cycle").<IntegerVector>performAlgebraTransfer("coordinates").collect());
+        SimplicialCochain circleCocycle=new SimplicialCochain(circle,BigInteger.ONE,new IntegerVector(BigInteger.ONE,BigInteger.ZERO,BigInteger.ZERO));
+        System.out.println("Circle cycle capped with its unit-period cocycle has augmentation: "+math.flow(math.simplicialChains,Collections.singletonList(orientedCircle))
+                .performCustomMemberOperation("cap",circleCocycle).<BigInteger>performAlgebraTransfer("augmentation").collect());
+        System.out.println("Capping the circle fundamental cycle gives H^1 -> H_0 isomorphism: "+math.flow(math.simplicialChains,Collections.singletonList(orientedCircle))
+                .<AbelianGroupHomomorphism,BigInteger>performAlgebraUnsafe("cap-cohomology-map",BigInteger.ONE)
+                .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
+        FiniteSimplicialComplex arc=new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0,1),FiniteSet.of(1,2)));
+        FiniteSimplicialComplex closingEdge=new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0,2)));
+        System.out.println("Mayer-Vietoris connecting map for two arcs covering the circle: "+math.flow(math.complexes,Collections.singletonList(arc))
+                .<SimplicialCover>performCustomResultOperation("SimplicialCover.from-complexes",closingEdge)
+                .<AbelianGroupHomomorphism,BigInteger>performAlgebraUnsafe("connecting-homology-map",BigInteger.ONE)
+                .<IntegerMatrix>performAlgebraTransfer("smith-matrix").collect());
+        System.out.println("Integral cohomology of the projective plane, by degree: "+math.flow(math.complexes,Collections.singletonList(projectivePlane))
+                .<IntegralHomology>performFlatAlgebraTransfer("SimplicialCochain.cohomology-degrees")
+                .<AbelianGroupType>performAlgebraTransfer("as-type").collect());
+        System.out.println("Coboundary of vertex values 0, 1, 3 on the circle: "+math.flow(math.complexes,Collections.singletonList(circle))
+                .<SimplicialCochain,BigInteger>performAlgebraUnsafe("SimplicialCochain.zero-on",BigInteger.ZERO)
+                .performCustomMemberOperation("with-coordinates",new IntegerVector(BigInteger.ZERO,BigInteger.ONE,BigInteger.valueOf(3)))
+                .performOneOperandOperation("coboundary").<IntegerVector>performAlgebraTransfer("coordinates").collect());
+        SimplicialCover circleCover=new SimplicialCover(arc,closingEdge);
+        System.out.println("The cohomological Mayer-Vietoris map onto H^1(circle) is surjective: "+math.flow(math.simplicialCovers,Collections.singletonList(circleCover))
+                .<AbelianGroupHomomorphism,BigInteger>performAlgebraUnsafe("connecting-cohomology-map",BigInteger.ZERO)
+                .<Boolean>performAlgebraTransfer("is-surjective").collect());
+        Map<BigInteger,BigInteger> reverseCoverVertices=new TreeMap<>();
+        reverseCoverVertices.put(BigInteger.ZERO,BigInteger.valueOf(2)); reverseCoverVertices.put(BigInteger.ONE,BigInteger.ONE); reverseCoverVertices.put(BigInteger.valueOf(2),BigInteger.ZERO);
+        System.out.println("The four Mayer-Vietoris reflection maps are isomorphisms: "+math.flow(math.simplicialMaps,Collections.singletonList(new FiniteSimplicialMap(circle,circle,reverseCoverVertices)))
+                .<SimplicialCoverMap,Pair<SimplicialCover,SimplicialCover>>performAlgebraUnsafe("CoverMap.from-map",new Pair<>(circleCover,circleCover))
+                .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("long-exact-maps",BigInteger.ONE)
+                .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
+        System.out.println("The four contravariant Mayer-Vietoris reflection maps are isomorphisms: "+math.flow(math.simplicialMaps,Collections.singletonList(new FiniteSimplicialMap(circle,circle,reverseCoverVertices)))
+                .<SimplicialCoverMap,Pair<SimplicialCover,SimplicialCover>>performAlgebraUnsafe("CoverMap.from-map",new Pair<>(circleCover,circleCover))
+                .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("long-exact-cohomology-maps",BigInteger.ZERO)
+                .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
+        Map<BigInteger,BigInteger> reflectionVertices=new TreeMap<>();
+        reflectionVertices.put(BigInteger.ZERO,BigInteger.ONE); reflectionVertices.put(BigInteger.ONE,BigInteger.ZERO); reflectionVertices.put(BigInteger.valueOf(2),BigInteger.valueOf(2));
+        System.out.println("Circle reflection acts by -1 on integral H1: "+math.flow(math.integerFunctions,Collections.singletonList(math.integerFunctions.member(
+                FiniteSimplicialMap.vertexSet(circle),FiniteSimplicialMap.vertexSet(circle),reflectionVertices)))
+                .<FiniteSimplicialMap,Pair<FiniteSimplicialComplex,FiniteSimplicialComplex>>performAlgebraUnsafe("SimplicialMap.from-function",new Pair<>(circle,circle))
+                .<AbelianGroupHomomorphism,BigInteger>performAlgebraUnsafe("homology-map",BigInteger.ONE)
+                .<IntegerMatrix>performAlgebraTransfer("smith-matrix").collect());
+        System.out.println("Projective-plane torsion factors by degree: "+math.flow(math.complexes,Collections.singletonList(projectivePlane))
+                .<AbelianGroupType>performFlatAlgebraTransfer("integral-homology-groups")
+                .<BigInteger>performFlatAlgebraTransfer("invariant-factors").collect());
+        FiniteSimplicialComplex interval=new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0,1)));
+        FiniteSimplicialComplex endpoints=new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0),FiniteSet.of(1)));
+        System.out.println("Connecting map H1(interval,endpoints) -> H0(endpoints): "+math.flow(math.complexes,Collections.singletonList(interval))
+                .<RelativeSimplicialComplex>performCustomResultOperation("RelativeComplex.from-complexes",endpoints)
+                .<AbelianGroupHomomorphism,BigInteger>performAlgebraUnsafe("connecting-homology",BigInteger.ONE)
+                .<IntegerMatrix>performAlgebraTransfer("smith-matrix").collect());
+        RelativeSimplicialComplex intervalPair=new RelativeSimplicialComplex(interval,endpoints);
+        System.out.println("Connecting endpoint cocycle (2,7) to relative cohomology: "+math.flow(math.cochains,
+                Collections.singletonList(new SimplicialCochain(endpoints,BigInteger.ZERO,new IntegerVector(BigInteger.valueOf(2),BigInteger.valueOf(7)))))
+                .<RelativeSimplicialCochain,RelativeSimplicialComplex>performAlgebraUnsafe("RelativeCochain.connect-cocycle",intervalPair)
+                .<IntegerVector>performAlgebraTransfer("coordinates").collect());
+        Map<BigInteger,BigInteger> reverseInterval=new TreeMap<>(); reverseInterval.put(BigInteger.ZERO,BigInteger.ONE); reverseInterval.put(BigInteger.ONE,BigInteger.ZERO);
+        System.out.println("Interval reflection acts by -1 on H1(interval,endpoints): "+math.flow(math.simplicialMaps,Collections.singletonList(new FiniteSimplicialMap(interval,interval,reverseInterval)))
+                .<RelativeSimplicialMap,Pair<RelativeSimplicialComplex,RelativeSimplicialComplex>>performAlgebraUnsafe("RelativeMap.from-map",new Pair<>(intervalPair,intervalPair))
+                .<AbelianGroupHomomorphism,BigInteger>performAlgebraUnsafe("homology-map",BigInteger.ONE)
+                .<IntegerMatrix>performAlgebraTransfer("smith-matrix").collect());
+        System.out.println("Projective-plane rational Betti numbers: "+math.flow(math.complexes,Collections.singletonList(projectivePlane))
+                .<BigInteger>performFlatAlgebraTransfer("rational-betti-numbers").collect());
+        FiniteSet<BigInteger> markovStates=FiniteSet.of(BigInteger.ZERO,BigInteger.ONE);
+        FiniteMarkovKernel markov=math.markovKernels.fromMatrix(new RationalMatrix(new Rational[][]{
+                {Rational.of(1,2),Rational.of(1,2)},{Rational.of(1,4),Rational.of(3,4)}}),markovStates,markovStates);
+        System.out.println("Unique exact stationary distribution: "+math.flow(math.markovKernels,Collections.singletonList(markov))
+                .<FiniteDistribution<BigInteger>>performAlgebraTransfer("stationary").collect());
+        System.out.println("Mean first hitting times of state 1: "+math.flow(math.markovKernels,Collections.singletonList(markov))
+                .<RationalVector,FiniteSet<BigInteger>>performAlgebraUnsafe("mean-hitting-times",FiniteSet.of(BigInteger.ONE)).collect());
+        RationalMatrix spectralMatrix=new RationalMatrix(new Rational[][]{{Rational.of(2),Rational.ONE},{Rational.ZERO,Rational.of(3)}});
+        System.out.println("Rational roots of the characteristic polynomial of [[2,1],[0,3]]: "+math.flow(math.rectangularMatrices,Collections.singletonList(spectralMatrix))
+                .<Polynomial>performAlgebraTransfer("characteristic-polynomial").<Rational>performFlatAlgebraTransfer("rational-roots").collect());
+        System.out.println("Rational diagonalization [P,D], A*P=P*D: "+math.flow(math.rectangularMatrices,Collections.singletonList(spectralMatrix))
+                .performOneOperandFlatOperation("diagonalize-over-q").collect());
+        System.out.println("1/2 + 1/3 = "+math.rationals.algebra().buildAlgebraItem(Rational.of(1,2))
+                .performOperation("add",Rational.of(1,3)).perform().getResult());
+        System.out.println("N -> Z -> Q: "+math.flow(math.naturals,Arrays.asList(BigInteger.ONE,BigInteger.valueOf(2)))
+                .performOperation("add",BigInteger.ONE)
+                .<BigInteger>performAlgebraTransfer("to-integer")
+                .<Rational>performAlgebraTransfer("to-rational")
+                .performOperation("divide",Rational.of(2)).collect());
+        System.out.println("Vector x scalar -> vector (flat): "+math.flow(math.vectors,Collections.singletonList(new RationalVector(Rational.ONE,Rational.of(2))))
+                .performFlatCustomMemberOperation("scale-flat",Rational.of(3)).collect());
+        RationalMatrix rectangular=new RationalMatrix(new Rational[][] {
+                {Rational.ONE,Rational.of(2),Rational.of(3)},
+                {Rational.of(2),Rational.of(4),Rational.of(6)}});
+        System.out.println("Rectangular system solution at parameters [-1, 2]: "+math.flow(math.rectangularMatrices,Collections.singletonList(rectangular))
+                .<RationalAffineSpace,RationalVector>performAlgebraUnsafe("Affine(Q).solve",new RationalVector(Rational.ONE,Rational.of(2)))
+                .performLeftProjectionOperation("at",new RationalVector(Rational.of(-1),Rational.of(2))).collect());
+        System.out.println("Minimum-norm least-squares fit for inconsistent right-hand side [1, 3]: "+math.flow(math.rectangularMatrices,Collections.singletonList(rectangular))
+                .<RationalAffineSpace,RationalVector>performAlgebraUnsafe("Affine(Q).least-squares",new RationalVector(Rational.ONE,Rational.of(3)))
+                .<RationalVector>performAlgebraTransfer("minimum-norm").collect());
+        System.out.println("Tensor product and contraction recover trace(A*A^T): "+math.flow(math.rectangularMatrices,Collections.singletonList(rectangular))
+                .<RationalTensor>performAlgebraTransfer("Tensor(Q).from-matrix")
+                .performOperation("tensor-product",RationalTensor.fromMatrix(rectangular.transpose()))
+                .performCustomMemberOperation("contract",new Pair<>(BigInteger.ONE,BigInteger.valueOf(2)))
+                .<RationalMatrix>performAlgebraTransfer("to-matrix").<Rational>performAlgebraTransfer("trace").collect());
+        System.out.println("Exterior wedge and Hodge star recover the cross product: "+math.flow(math.finiteVectors,
+                Collections.singletonList(new RationalVector(Rational.ONE,Rational.of(2),Rational.of(3))))
+                .<RationalExterior>performAlgebraTransfer("Exterior(Q).from-vector")
+                .performOperation("wedge",RationalExterior.fromVector(new RationalVector(Rational.of(4),Rational.of(5),Rational.of(6))))
+                .performOneOperandOperation("hodge-star").<RationalVector>performAlgebraTransfer("to-vector").collect());
+        System.out.println("Exact quaternion quarter-turn around z: "+math.flow(math.quaternions,
+                Collections.singletonList(new RationalQuaternion(Rational.ONE,Rational.ZERO,Rational.ZERO,Rational.ONE)))
+                .<RationalMatrix>performAlgebraTransfer("to-rotation-matrix")
+                .<RationalQuaternion>performAlgebraTransfer("H(Q).from-rotation-matrix")
+                .performLeftProjectionOperation("rotate",new RationalVector(Rational.ONE,Rational.of(2),Rational.of(3))).collect());
+        MultivariatePolynomial multivariate=MultivariatePolynomial.monomial(Rational.ONE,2,1,0)
+                .add(MultivariatePolynomial.monomial(Rational.of(3),0,1,2));
+        System.out.println("Polynomial gradient at [2, 3, -1]: "+math.flow(math.multivariatePolynomials,Collections.singletonList(multivariate))
+                .<PolynomialMap>performAlgebraTransfer("PolynomialMap(Q).gradient")
+                .performLeftProjectionOperation("evaluate",new RationalVector(Rational.of(2),Rational.of(3),Rational.of(-1))).collect());
+        System.out.println("Jacobian of that gradient is the Hessian: "+math.flow(math.multivariatePolynomials,Collections.singletonList(multivariate))
+                .<PolynomialMap>performAlgebraTransfer("PolynomialMap(Q).gradient")
+                .<RationalMatrix,RationalVector>performAlgebraUnsafe("jacobian-at",new RationalVector(Rational.of(2),Rational.of(3),Rational.of(-1))).collect());
+        PolynomialMap rotationField=new PolynomialMap(MultivariatePolynomial.variable(3,1).negate(),
+                MultivariatePolynomial.variable(3,0),MultivariatePolynomial.constant(3,Rational.ZERO));
+        System.out.println("Curl via differential forms, d and Hodge star: "+math.flow(math.polynomialMaps,Collections.singletonList(rotationField))
+                .<PolynomialDifferentialForm>performAlgebraTransfer("PolynomialForm(Q).from-vector-field")
+                .performOneOperandOperation("exterior-derivative").performOneOperandOperation("hodge-star")
+                .<PolynomialMap>performAlgebraTransfer("to-vector-field")
+                .performLeftProjectionOperation("evaluate",new RationalVector(Rational.of(2),Rational.of(3),Rational.of(4))).collect());
+        PolynomialCell rectangle=PolynomialCell.parameterized(new PolynomialMap(MultivariatePolynomial.variable(2,0).scale(Rational.of(2)),
+                MultivariatePolynomial.variable(2,1).scale(Rational.of(3))));
+        Map<Integer,MultivariatePolynomial> formCoefficients=new TreeMap<>();
+        formCoefficients.put(1,MultivariatePolynomial.monomial(Rational.ONE,2,1));
+        formCoefficients.put(2,MultivariatePolynomial.monomial(Rational.ONE,1,2));
+        PolynomialDifferentialForm omega=new PolynomialDifferentialForm(2,formCoefficients);
+        System.out.println("Oriented boundary integral on a 2 by 3 rectangle: "+math.flow(math.polynomialCells,Collections.singletonList(rectangle))
+                .<PolynomialChain>performAlgebraTransfer("PolynomialChain(Q).from-cell").performOneOperandOperation("boundary")
+                .<Rational,PolynomialDifferentialForm>performAlgebraUnsafe("integrate",omega).collect());
+        System.out.println("Integral of its exterior derivative over the rectangle: "+math.flow(math.polynomialCells,Collections.singletonList(rectangle))
+                .<Rational,PolynomialDifferentialForm>performAlgebraUnsafe("integrate",omega.exteriorDerivative()).collect());
+        System.out.println("Integral of x^2 from 0 to 1: "+math.flow(math.polynomials,Collections.singletonList(new Polynomial(Rational.ZERO,Rational.ZERO,Rational.ONE)))
+                .<Rational,Pair<Rational,Rational>>performAlgebraUnsafe("integrate",new Pair<>(Rational.ZERO,Rational.ONE)).collect());
+        System.out.println("F5: 3 / 2 = "+math.primeFields.get(0).algebra().buildAlgebraItem(math.primeFields.get(0).member(3))
+                .performOperation("divide",math.primeFields.get(0).member(2)).perform().getResult());
+        System.out.println("Solutions of 2*x=4 modulo 6: "+math.flow(math.residues,Collections.singletonList(math.residues.member(2)))
+                .performFlatOperation("solve-multiply",math.residues.member(4)).<BigInteger>performAlgebraTransfer("lift").collect());
+        System.out.println("Finite identity evaluated at 2: "+math.flow(math.integerSets,Collections.singletonList(FiniteSet.of(BigInteger.ONE,BigInteger.valueOf(2))))
+                .<mathematics.foundations.FiniteFunction<BigInteger,BigInteger>>performAlgebraTransfer("FiniteFunction(Z,Z).identity-on")
+                .performLeftProjectionOperation("apply",BigInteger.valueOf(2)).collect());
+        System.out.println("Initial objects of a one-object discrete category: "+math.flow(math.integerSets,Collections.singletonList(FiniteSet.of(BigInteger.TEN)))
+                .<FiniteCategory>performAlgebraTransfer("FiniteCategory.discrete-on")
+                .<BigInteger>performFlatAlgebraTransfer("initial-objects").collect());
+        System.out.println("Identity natural transformation component: "+math.flow(math.categories,
+                Collections.singletonList(FiniteCategory.discrete(FiniteSet.of(BigInteger.TEN))))
+                .<FiniteFunctor>performAlgebraTransfer("FiniteFunctor.identity-on")
+                .<FiniteNaturalTransformation>performAlgebraTransfer("FiniteNaturalTransformation.identity-on")
+                .performLeftProjectionOperation("component",BigInteger.TEN).collect());
+        System.out.println("Constructed equivalence unit component: "+math.flow(math.categories,
+                Collections.singletonList(FiniteCategory.discrete(FiniteSet.of(BigInteger.TEN))))
+                .<FiniteFunctor>performAlgebraTransfer("FiniteFunctor.identity-on")
+                .<FiniteEquivalence>performAlgebraTransfer("FiniteEquivalence.from-functor")
+                .<FiniteNaturalTransformation>performAlgebraTransfer("unit")
+                .performLeftProjectionOperation("component",BigInteger.TEN).collect());
+        System.out.println("Constructed right adjoint hom correspondence: "+math.flow(math.categories,
+                Collections.singletonList(FiniteCategory.discrete(FiniteSet.of(BigInteger.TEN))))
+                .<FiniteFunctor>performAlgebraTransfer("FiniteFunctor.identity-on")
+                .<FiniteAdjunction>performAlgebraTransfer("FiniteAdjunction.from-left")
+                .<BigInteger,Pair<BigInteger,BigInteger>>performAlgebraUnsafe("transpose",new Pair<>(BigInteger.TEN,BigInteger.TEN)).collect());
+        System.out.println("Limit vertex of an empty diagram: "+math.flow(math.categories,
+                Collections.singletonList(FiniteCategory.discrete(FiniteSet.of(BigInteger.TEN))))
+                .<FiniteFunctor>performAlgebraTransfer("FiniteFunctor.empty-diagram")
+                .<FiniteCone>performAlgebraTransfer("FiniteCone.limit")
+                .<BigInteger>performAlgebraTransfer("vertex").collect());
+        System.out.println("Colimit vertex of an empty diagram: "+math.flow(math.categories,
+                Collections.singletonList(FiniteCategory.discrete(FiniteSet.of(BigInteger.TEN))))
+                .<FiniteFunctor>performAlgebraTransfer("FiniteFunctor.empty-diagram")
+                .<FiniteCocone>performAlgebraTransfer("FiniteCocone.colimit")
+                .<BigInteger>performAlgebraTransfer("vertex").collect());
+    }
+    /** Stable manifest used to keep the human/JSON coverage registry aligned with real registrations. */
+    public static String catalogManifest(ConcreteMathematics math) {
+        StringBuilder result=new StringBuilder("id\tclass\talias\tfirst\tsecond\tresult\tsemantics\tpartiality\tinterface\n");
+        for(ConcreteAlgebra<?> algebra : math.algebras()) for(OperationRegistration operation : algebra.operations().values()) {
+            result.append(operation.id).append('\t').append(algebra.getClass().getSimpleName()).append('\t').append(operation.alias).append('\t')
+                    .append(operation.first.getAlgebraName()).append('\t')
+                    .append(operation.second==null?"-":operation.second.getAlgebraName()).append('\t')
+                    .append(operation.result.getAlgebraName()).append('\t').append(operation.flat?"LIST":"SCALAR").append('\t')
+                    .append(operation.partial?"PARTIAL":"TOTAL").append('\t').append(operation.operation.getClass().getInterfaces()[0].getSimpleName()).append('\n');
+        }
+        return result.toString();
+    }
+}

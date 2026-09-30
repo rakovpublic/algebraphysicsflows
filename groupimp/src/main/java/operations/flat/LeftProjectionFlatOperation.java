@@ -8,27 +8,27 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Flat left projection between potentially different operand types: A op B = [A].
+ * Projection A x B -> [B] returning the second operand as one result.
  */
 public final class LeftProjectionFlatOperation<T, V> implements ILeftProjectionFlatOperation<T, V> {
     private static final long serialVersionUID = 1L;
 
-    private final Algebra<T> algebra;
+    private final Algebra<V> algebra;
     private final Class<V> secondElementClass;
 
-    public LeftProjectionFlatOperation(Algebra<T> algebra, Class<V> secondElementClass) {
+    public LeftProjectionFlatOperation(Algebra<V> algebra, Class<V> secondElementClass) {
         this.algebra = Objects.requireNonNull(algebra, "algebra");
         this.secondElementClass = Objects.requireNonNull(secondElementClass, "secondElementClass");
     }
 
     @Override
-    public List<IAlgebraItem<T>> performOperation(T first, V second) {
-        return Collections.singletonList(algebra.buildAlgebraItem(first));
+    public List<IAlgebraItem<V>> performOperation(T first, V second) {
+        return Collections.singletonList(algebra.buildAlgebraItem(operations.OperationMembers.require(algebra,second)));
     }
 
     @Override
     public String getDescription() {
-        return "Flat left projection operation: A op B = [A]";
+        return "Flat left projection operation: A op B = [B]";
     }
 
     @Override

@@ -4,6 +4,7 @@ import algebra.IAlgebraItem;
 import operations.IAbsOperation;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Rakovskyi Dmytro on 02.04.2017.
@@ -16,6 +17,6 @@ public interface ITransferFlatOperation<K> extends Serializable, IAbsOperation {
      * @return collection of IAlgebraItems parametrized K
      * @see IAlgebraItem
      */
-    <V> IAlgebraItem<V> performOperation(K input);
+    <V> List<IAlgebraItem<V>> performOperation(K input);
 
 }

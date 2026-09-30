@@ -7,12 +7,11 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Flat operation between independent operand types that returns the first
- * operand as a single item in its algebra.
+ * Flat operation A x B -> List(B). The historical interface name is retained.
  *
- * @param <T> first operand and result type
- * @param <V> second operand type
+ * @param <T> first operand type
+ * @param <V> second operand and result type
  */
 public interface ILeftProjectionFlatOperation<T, V> extends Serializable, IAbsOperation {
-    List<IAlgebraItem<T>> performOperation(T first, V second);
+    List<IAlgebraItem<V>> performOperation(T first, V second);
 }

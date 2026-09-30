@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Rakovskyi Dmytro on 02.04.2017.
  */
-public interface IFlowInvoke<T> {
+public interface IFlowInvoke<T> extends java.io.Serializable {
     /**
      * encapsulate operation invoke in flow
      *

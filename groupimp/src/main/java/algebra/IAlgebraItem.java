@@ -19,11 +19,50 @@ public interface IAlgebraItem<T> extends Serializable {
      */
     public IAlgebraItem<T> performOperation(String operationName, T sElement);
 
-    /** Retain this item's value after an operation with an independently typed operand. */
-    <V> IAlgebraItem<T> performLeftProjectionOperation(String operationName, V second);
+    /** Evaluate a registered A -> A operation after any pending binary operations. */
+    default IAlgebraItem<T> performOneOperandOperation(String operationName) {
+        Algebra<T> algebra=getAlgebra();
+        operations.simple.IOneOperandOperation<T> operation=algebra.getOneOperandOperation(operationName);
+        if(operation==null) throw new exceptions.UnsupportedOperationException("No one-operand operation " + operationName + " in " + algebra.getAlgebraName());
+        T value=operation.performOperation(perform().getResult());
+        if(!algebra.getParamClass().isInstance(value)) throw new exceptions.NotMemberException("Invalid unary result representation in " + algebra.getAlgebraName());
+        IAlgebraItem<T> result=algebra.buildAlgebraItem(value);
+        if(result==null) throw new exceptions.NotMemberException("One-operand operation " + operationName + " returned a nonmember of " + algebra.getAlgebraName());
+        return result;
+    }
 
-    /** Retain this item's value as a single-item flat result. */
-    <V> List<IAlgebraItem<T>> performLeftProjectionFlatOperation(String operationName, V second);
+    /** Unary overload of the existing operation entry point. */
+    default IAlgebraItem<T> performOperation(String operationName) {
+        return performOneOperandOperation(operationName);
+    }
+
+    default List<IAlgebraItem<T>> performOneOperandFlatOperation(String operationName) {
+        Algebra<T> algebra=getAlgebra();
+        operations.flat.IOneOperandFlatOperation<T> operation=algebra.getOneOperandFlatOperation(operationName);
+        if(operation==null) throw new exceptions.UnsupportedOperationException("No flat one-operand operation " + operationName);
+        List<IAlgebraItem<T>> results=operation.performOperation(perform().getResult());
+        if(results==null) throw new exceptions.NotMemberException("Flat unary result list is null");
+        List<IAlgebraItem<T>> evaluated=new java.util.ArrayList<>();
+        for(IAlgebraItem<T> item : results) {
+            if(item==null || item.getAlgebra()!=algebra)
+                throw new exceptions.NotMemberException("Flat unary result is outside " + algebra.getAlgebraName());
+            IAlgebraItem<T> member=item.perform();
+            if(member==null || !algebra.getParamClass().isInstance(member.getResult()) || !algebra.validate(member.getResult()))
+                throw new exceptions.NotMemberException("Flat unary result is outside " + algebra.getAlgebraName());
+            evaluated.add(member);
+        }
+        return evaluated;
+    }
+
+    default List<IAlgebraItem<T>> performFlatOperation(String operationName) {
+        return performOneOperandFlatOperation(operationName);
+    }
+
+    /** A x B -> B, with the result in the second operand's algebra. */
+    <V> IAlgebraItem<V> performLeftProjectionOperation(String operationName, V second);
+
+    /** A x B -> List(B), preserving ordered duplicates. */
+    <V> List<IAlgebraItem<V>> performLeftProjectionFlatOperation(String operationName, V second);
 
     /**
      * perform custom result operation with two elements of type T and return IAlgebraItem  K
