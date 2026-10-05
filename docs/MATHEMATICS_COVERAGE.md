@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1980 |
-| DIRECTLY_SUPPORTED | 1737 |
+| Scoped records | 2008 |
+| DIRECTLY_SUPPORTED | 1765 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1596 |
+| IMPLEMENTED | 1624 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1664 |
+| MACHINE_TESTED | 1692 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1573 | 1573 | 0 | 0 | 0 | 1573 | 0 | 0 |
+| Concrete MathTool algebras | 1601 | 1601 | 0 | 0 | 0 | 1601 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -287,6 +287,33 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Boolean.xor | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.xor |
 | Boolean.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.zero |
 | BooleanAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations |
+| ChainEquivalence.backward | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.backward |
+| ChainEquivalence.backward-class | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.backward-class |
+| ChainEquivalence.cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.cohomology-map |
+| ChainEquivalence.cohomology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.cohomology-maps |
+| ChainEquivalence.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.compose |
+| ChainEquivalence.data | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.data |
+| ChainEquivalence.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.equal |
+| ChainEquivalence.forward | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.forward |
+| ChainEquivalence.forward-class | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.forward-class |
+| ChainEquivalence.from-data | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.from-data |
+| ChainEquivalence.from-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.from-map |
+| ChainEquivalence.homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.homology-map |
+| ChainEquivalence.homology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.homology-maps |
+| ChainEquivalence.homotopies | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.homotopies |
+| ChainEquivalence.identity-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.identity-on |
+| ChainEquivalence.inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.inverse |
+| ChainEquivalence.inverse-cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.inverse-cohomology-map |
+| ChainEquivalence.inverse-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.inverse-homology-map |
+| ChainEquivalence.inverse-on-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.inverse-on-chain |
+| ChainEquivalence.inverse-on-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.inverse-on-cochain |
+| ChainEquivalence.maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.maps |
+| ChainEquivalence.on-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.on-chain |
+| ChainEquivalence.on-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.on-cochain |
+| ChainEquivalence.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.source |
+| ChainEquivalence.source-homotopy | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.source-homotopy |
+| ChainEquivalence.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.target |
+| ChainEquivalence.target-homotopy | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.target-homotopy |
 | ChainHomotopy.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral homotopies between full simplicial chain maps, with checked witnesses, bounded Smith solving, complete affine solution generators, composition and typed fillings; native operation ChainHomotopy.add |
 | ChainHomotopy.are-homotopic | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral homotopies between full simplicial chain maps, with checked witnesses, bounded Smith solving, complete affine solution generators, composition and typed fillings; native operation ChainHomotopy.are-homotopic |
 | ChainHomotopy.between | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral homotopies between full simplicial chain maps, with checked witnesses, bounded Smith solving, complete affine solution generators, composition and typed fillings; native operation ChainHomotopy.between |
@@ -1445,6 +1472,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | SimplicialChain.with-coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.with-coordinates |
 | SimplicialChain.zero-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps; native operation SimplicialChain.zero-on |
 | SimplicialChainAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Homogeneous integral simplicial chains with boundary, pushforward, Kronecker pairing and cap products inducing homology maps |
+| SimplicialChainEquivalenceAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions |
 | SimplicialChainHomotopyAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral homotopies between full simplicial chain maps, with checked witnesses, bounded Smith solving, complete affine solution generators, composition and typed fillings |
 | SimplicialChainMapAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps |
 | SimplicialChainMapClassAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps |

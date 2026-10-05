@@ -60,8 +60,9 @@ public final class SimplicialChainHomotopy implements Serializable {
         for(int k=0;k<from.chainMatrices().size();k++) result.add(factory.at(BigInteger.valueOf(k)));
         return new SimplicialChainHomotopy(new Data(from,to,result),work);
     }
-    public static SimplicialChainHomotopy stationary(SimplicialChainMap map) {
-        Computation work=new Computation(); return build(map,map,work,d -> {
+    public static SimplicialChainHomotopy stationary(SimplicialChainMap map) { return stationary(map,new Computation()); }
+    static SimplicialChainHomotopy stationary(SimplicialChainMap map,Computation work) {
+        return build(map,map,work,d -> {
             int rows=map.target().basis(d.add(BigInteger.ONE)).size(),columns=map.source().basis(d).size(); work.use((long)rows*columns); return IntegerMatrix.zero(rows,columns);
         });
     }
@@ -108,9 +109,10 @@ public final class SimplicialChainHomotopy implements Serializable {
         Computation work=new Computation(); return build(to,from,work,d -> { IntegerMatrix h=matrixAt(d); work.use((long)h.rows()*h.columns()); return h.scale(BigInteger.ONE.negate()); });
     }
     /** Chronological concatenation with equality of the full joining chain map. */
-    public SimplicialChainHomotopy then(SimplicialChainHomotopy next) {
+    public SimplicialChainHomotopy then(SimplicialChainHomotopy next) { return then(next,new Computation()); }
+    SimplicialChainHomotopy then(SimplicialChainHomotopy next,Computation work) {
         if(!to.equals(next.from)) throw MathFailure.undefined("Homotopy concatenation requires the exact full joining chain map");
-        Computation work=new Computation(); return build(from,next.to,work,d -> sum(matrixAt(d),next.matrixAt(d),work));
+        return build(from,next.to,work,d -> sum(matrixAt(d),next.matrixAt(d),work));
     }
     private static IntegerMatrix sum(IntegerMatrix a,IntegerMatrix b,Computation work) { work.use((long)a.rows()*a.columns()); return a.add(b); }
     public SimplicialChainHomotopy add(SimplicialChainHomotopy other) {
@@ -122,11 +124,13 @@ public final class SimplicialChainHomotopy implements Serializable {
             IntegerMatrix h=matrixAt(d); work.use((long)h.rows()*h.columns()); return h.scale(scalar);
         });
     }
-    public SimplicialChainHomotopy precompose(SimplicialChainMap before) {
-        Computation work=new Computation(); return build(from.compose(before,work),to.compose(before,work),work,d -> work.multiply(matrixAt(d),before.chainMatrix(d)));
+    public SimplicialChainHomotopy precompose(SimplicialChainMap before) { return precompose(before,new Computation()); }
+    SimplicialChainHomotopy precompose(SimplicialChainMap before,Computation work) {
+        return build(from.compose(before,work),to.compose(before,work),work,d -> work.multiply(matrixAt(d),before.chainMatrix(d)));
     }
-    public SimplicialChainHomotopy postcompose(SimplicialChainMap after) {
-        Computation work=new Computation(); return build(after.compose(from,work),after.compose(to,work),work,d -> work.multiply(after.chainMatrix(d.add(BigInteger.ONE)),matrixAt(d)));
+    public SimplicialChainHomotopy postcompose(SimplicialChainMap after) { return postcompose(after,new Computation()); }
+    SimplicialChainHomotopy postcompose(SimplicialChainMap after,Computation work) {
+        return build(after.compose(from,work),after.compose(to,work),work,d -> work.multiply(after.chainMatrix(d.add(BigInteger.ONE)),matrixAt(d)));
     }
     public RelativeSimplicialChain onChain(RelativeSimplicialChain chain) {
         if(!source().equals(chain.pair())) throw MathFailure.undefined("Chain homotopy requires the full source pair");

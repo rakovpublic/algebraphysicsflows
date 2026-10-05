@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1507 native operations from 66 algebra builders.
+The default initializer currently installs 1534 native operations from 67 algebra builders.
 
 ## Existing API usage
 
@@ -2296,3 +2296,56 @@ With quotient ranks `s_k` and `t_k`, the whole system permits at most **256 equa
 One **5000000-unit budget** covers matrix assembly, Smith solving, reverse-map validation, composite and identity construction, and both witness validations. Class inversion also shares this budget with the reverse Hom reduction, projection and canonical lift, which keep their existing Hom-rank bounds. Successful standalone stages need not fit when combined. Exhaustion raises `IMPLEMENTATION_FAILURE`, never a false decision, mathematical nonexistence or partial list. Coefficients have no bit-length cap. Representative choices need not be involutive or geometric; inverse **classes** are unique, involutive, and reverse composition order. This does not decide geometric homotopy equivalence of spaces.
 
 `NativeSimplicialChainInverseTest` adds 13 tests covering independent determinants and adjugates for 625 point maps, 125 interval maps, all 25 relative interval contexts, one-sided inverses, 49 independent circle degree pairs, relative `Z/2` units and 1025-bit coefficients, direct boundary checks for both homotopies, different labels and dimensions, empty/acyclic contexts, inverse-class laws, aggregate bounds, shared normalization budgets and serialized native scalar/flat flows.
+
+## Retained integral chain equivalences
+
+`math.chainEquivalences` installs 27 operations on `ChainEquivalence`. A value retains `F:S -> T`, `G:T -> S`, and the actual homotopies `H:GF -> id_S` and `K:FG -> id_T`. Their equations use the existing `dH + Hd = to - from` convention. The carrier implements integral chain-homotopy equivalence as [defined for chain complexes](https://stacks.math.columbia.edu/tag/010V), with explicit witnesses and full labelled relative pairs.
+
+`ChainEquivalence.from-map` solves once and retains the complete bundle. `ChainEquivalence.from-data` validates a `SimplicialChainEquivalence.Data` containing four individually valid inputs: both maps must have opposite full endpoints and each witness must join the exact composite to the exact identity. Homotopic but unequal endpoint maps are rejected. Data-carrier membership alone does not assert these joins. Identity construction and supplied-data validation do not search for an inverse.
+
+| Operations | Native behavior |
+| --- | --- |
+| `from-map`, `from-data`, `identity-on` | Unary transfers from `ChainMap`, `ChainEquivalence.data`, and `RelativeComplex` |
+| `source`, `target`, `forward`, `backward`, `source-homotopy`, `target-homotopy`, `data` | Unary transfers exposing the retained values |
+| `inverse`, `compose`, `equal` | Unary swap of maps and witnesses, binary right-first composition, and equality including witness choices |
+| `maps`, `homotopies` | Unary flat transfers returning exactly `[F,G]` and `[H,K]`, even for empty complexes |
+| `homology-map`, `inverse-homology-map`, `homology-maps` | Scalar and flat mixed operations with a nonnegative degree; the flat result is exactly `[H(F),H(G)]` |
+| `cohomology-map`, `inverse-cohomology-map`, `cohomology-maps` | Contravariant integral maps; the flat result is exactly `[H*(F),H*(G)]` |
+| `on-chain`, `inverse-on-chain`, `on-cochain`, `inverse-on-cochain` | `ILeftProjectionOperation` returning the actual second carrier's `IAlgebraItem` wrapper |
+| `forward-class`, `backward-class` | Unary transfers to mutually inverse contextual `ChainMapClass` values |
+
+For `before=(F,G,H,K)` and `after=(A,B,J,L)`, `after.compose(before)` retains maps `AF`, `GB` and witnesses `GJF+H`, `AKB+L`. In degree `k`, the transported terms are `G_(k+1) J_k F_k` and `A_(k+1) K_k B_k`; the shifted degree matters. Every intermediate map and the final bundle are validated under one budget. This transports the supplied witnesses without running the inverse solver.
+
+Composition is associative and unital on the retained data. Inversion swaps both maps and both witnesses, without negation; it is involutive and reverses composition. Nonzero stationary loops remain distinguishable. Composing with the inverse need not give literal identity witness data or fix raw chains/cochains. The projected homotopy classes and induced integral maps are mutual inverses, including torsion and exact presentations.
+
+```java
+ConcreteMathematics math = new ConcreteMathematics();
+RelativeSimplicialComplex interval = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0, 1))));
+BigInteger zero = BigInteger.ZERO, one = BigInteger.ONE;
+SimplicialChainMap constant = new SimplicialChainMap(interval, interval, Arrays.asList(
+        new IntegerMatrix(new BigInteger[][] {{one, one}, {zero, zero}}),
+        IntegerMatrix.zero(1, 1)));
+SimplicialChainEquivalence value = math.chainMaps.algebra().buildAlgebraItem(constant)
+        .<SimplicialChainEquivalence>performAlgebraTransfer("ChainEquivalence.from-map")
+        .perform().getResult();
+List<String> inverseMaps = math.flow(math.chainEquivalences, Collections.singletonList(value))
+        .<AbelianGroupHomomorphism, BigInteger>performFlatAlgebraUnsafe("homology-maps", zero)
+        .<Boolean>performAlgebraTransfer("is-isomorphism").collect();
+// [true, true]
+List<String> witnesses = math.flow(math.chainEquivalences, Collections.singletonList(value))
+        .performOneOperandOperation("inverse").performOperation("compose", value)
+        .<SimplicialChainHomotopy>performFlatAlgebraTransfer("homotopies").collect();
+// Exactly two retained transported witnesses.
+RelativeSimplicialChain edge = new RelativeSimplicialChain(interval, one, new IntegerVector(one));
+List<String> image = math.flow(math.chainEquivalences, Collections.singletonList(value))
+        .performLeftProjectionOperation("on-chain", edge)
+        .<IntegerVector>performAlgebraTransfer("coordinates").collect();
+// [[0]]: the forward map contracts the edge.
+```
+
+Every required quotient basis is limited to **256 simplices** after filtering. Construction, composition (including all transports and validation), and whole two-map integral lists each share a **5000000-unit budget**. `from-map` additionally retains the inverse solver's aggregate **256-equation/256-unknown** limits, including final bundle validation in the solve budget. Supplied data, identities, swapping and composition do not invoke this search; an identity on twelve points can be supplied and composed even though its inverse-search system exceeds the equation bound. Class projections use the existing Hom-rank limits. Exhaustion raises `IMPLEMENTATION_FAILURE`, never a partial list or a claim of nonexistence. Coefficient bit lengths are unbounded.
+
+Typed chains may have negative degree with zero coordinates. Cochains and integral-map degrees are nonnegative. Actions require exact full pairs. This represents finite integral chain equivalences; no geometric homotopy equivalence, higher coherence or preservation of cochain products is asserted.
+
+`NativeSimplicialChainEquivalenceTest` adds 17 tests: 25 solved interval bundles, 1,296 independent signed circle-witness compositions, retained loops and inverse laws, noncommuting point maps and dual variance, changing dimensions with both boundary identities, exact endpoint rejection, relative torsion with 1025-bit coefficients, typed actions, empty and diagonal pairs, construction beyond solver bounds, shared composition and two-map budgets, actual native wrappers, and serialized repeatable scalar/flat flows.

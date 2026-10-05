@@ -114,4 +114,9 @@ public final class SimplicialChainInverseSolver {
         SimplicialChainMap inverse=system.inverse(solution);
         return Collections.unmodifiableList(Arrays.asList(system.witness(solution,inverse.compose(map,work),true),system.witness(solution,map.compose(inverse,work),false)));
     }
+    static SimplicialChainEquivalence equivalence(SimplicialChainMap map,Computation work) {
+        System system=new System(map,work); IntegerVector solution=system.requireSolution(); SimplicialChainMap inverse=system.inverse(solution);
+        SimplicialChainHomotopy source=system.witness(solution,inverse.compose(map,work),true),target=system.witness(solution,map.compose(inverse,work),false);
+        return new SimplicialChainEquivalence(new SimplicialChainEquivalence.Data(map,inverse,source,target),work);
+    }
 }

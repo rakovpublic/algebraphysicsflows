@@ -10,6 +10,7 @@ DATABASE = ROOT / "mathematics-coverage.json"
 MANIFEST = ROOT / "groupimp/src/test/resources/mathematics/concrete-catalog.tsv"
 DATE = "2026-10-05"
 OWNERS = {
+    "SimplicialChainEquivalenceAlgebra": ("ChainEquivalence", "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions"),
     "SimplicialChainMapClassAlgebra": ("ChainMapClass", "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps"),
     "SimplicialChainMapSpaceAlgebra": ("ChainMapSpace", "Integral chain maps between full labelled simplicial pairs, additive homotopy classes with torsion, representative maps, and functorial precomposition/postcomposition actions"),
     "SimplicialChainHomotopyAlgebra": ("ChainHomotopy", "Integral homotopies between full simplicial chain maps, with checked witnesses, bounded Smith solving, complete affine solution generators, composition and typed fillings"),
@@ -94,6 +95,7 @@ INTERFACES = {
     "IUnsafeFlatOperation": "flat/MixedFlatOperation",
 }
 EXTRA_TESTS = {
+    "SimplicialChainEquivalenceAlgebra": "NativeSimplicialChainEquivalenceTest",
     "SimplicialChainMapClassAlgebra": "NativeSimplicialChainMapClassTest",
     "SimplicialChainMapSpaceAlgebra": "NativeSimplicialChainMapSpaceTest",
     "SimplicialChainHomotopyAlgebra": "NativeSimplicialChainHomotopyTest",
@@ -189,6 +191,35 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "SimplicialChainEquivalenceAlgebra": {
+        "from-data": "Validate opposite maps F:S->T and G:T->S on full labelled pairs and exact witness endpoints H:GF->id_S, K:FG->id_T. Supplied homotopies already satisfy dH+Hd=to-from. Homotopic but unequal endpoint maps are rejected. Preserve all supplied witness matrices, including nonzero loops.",
+        "from-map": "Solve once for a reverse integral map and both inverse homotopies and retain the complete validated bundle. Nonexistence is OPERATION_UNDEFINED; limits are IMPLEMENTATION_FAILURE. The solver and final bundle validation share one budget.",
+        "identity-on": "Retain both full identity chain maps and stationary zero homotopies on the supplied pair. No inverse search is performed.",
+        "source": "Return the full labelled source pair of the forward map.",
+        "target": "Return the full labelled target pair of the forward map.",
+        "forward": "Return the retained integral forward ChainMap F:S->T.",
+        "backward": "Return the retained integral backward ChainMap G:T->S.",
+        "source-homotopy": "Return the retained witness GF -> id_source with its exact degree-raising matrices.",
+        "target-homotopy": "Return the retained witness FG -> id_target with its exact degree-raising matrices.",
+        "data": "Return immutable supplied data containing exactly the retained forward and backward maps and both homotopies.",
+        "inverse": "Swap forward with backward and source with target homotopy; do not negate witnesses or solve again. Applying inverse twice restores the exact data. Composition with the inverse need not be literal identity data.",
+        "compose": "Apply the right operand first and require the same full labelled middle pair. For before=(F,G,H,K), after=(A,B,J,L), retain maps AF, GB and source/target witnesses GJF+H, AKB+L. Degree-k transport uses G_(k+1) J_k F_k and A_(k+1) K_k B_k. Compose supplied witnesses without inverse search; all transports and final validation share one budget.",
+        "equal": "Compare full labelled endpoint pairs, both maps and both retained witness matrices. Nonzero stationary loops distinguish otherwise identical equivalences.",
+        "homotopies": "Return exactly [GF -> id_source, FG -> id_target], preserving the retained witnesses and their different degree ranges. An empty complex still produces two wrapped witnesses.",
+        "maps": "Return exactly [forward, backward] as wrapped ChainMap values, including two entries for empty complexes.",
+        "homology-map": "For a nonnegative degree return the integral forward induced map H(F):H(S)->H(T), retaining presentations and torsion.",
+        "inverse-homology-map": "For a nonnegative degree return the backward induced map H(G):H(T)->H(S), inverse to H(F) on the exact retained presentations.",
+        "homology-maps": "For a nonnegative degree return exactly [H(F), H(G)] under one shared two-map budget. These are inverse maps between retained integral presentations.",
+        "cohomology-map": "For a nonnegative degree return the contravariant integral map H*(F):H*(T)->H*(S).",
+        "inverse-cohomology-map": "For a nonnegative degree return the contravariant integral map H*(G):H*(S)->H*(T), inverse to H*(F).",
+        "cohomology-maps": "For a nonnegative degree return exactly [H*(F), H*(G)] under one shared two-map budget; their directions reverse those of the chain maps.",
+        "on-chain": "Apply F to a RelativeChain on the full source pair; return a chain of the same degree on the target through ILeftProjectionOperation and the actual second-carrier wrapper. Negative-degree zero chains are allowed.",
+        "inverse-on-chain": "Apply G to a RelativeChain on the full target pair through ILeftProjectionOperation and the actual second-carrier wrapper. Inverse composition need not fix raw chains.",
+        "on-cochain": "Pull a RelativeCochain on the full target pair back along F, including degree zero, through ILeftProjectionOperation and the actual second-carrier wrapper.",
+        "inverse-on-cochain": "Pull a RelativeCochain on the full source pair back along G through ILeftProjectionOperation and the actual second-carrier wrapper. Inverse composition need not fix raw cochains.",
+        "forward-class": "Project the retained forward map to its contextual integral ChainMapClass; it is inverse to backward-class. Normalization retains full labelled endpoints and torsion.",
+        "backward-class": "Project the retained backward map to its contextual integral ChainMapClass with endpoints reversed; it is inverse to forward-class.",
+    },
     "SimplicialChainMapClassAlgebra": {
         "is-isomorphism": "Decide whether the retained representative admits an integral inverse up to chain homotopy, by simultaneously solving for a reverse chain map and both homotopies. This is invertibility in the homotopy category, not strict degreewise invertibility or finite additive order. An integral obstruction returns false; computation limits raise IMPLEMENTATION_FAILURE.",
         "inverse": "Return the unique inverse homotopy class with full labelled endpoints reversed. Solve for an integral inverse of the stored representative and normalize its class under one shared solve-and-normalization budget. Nonexistence is OPERATION_UNDEFINED; resource exhaustion is IMPLEMENTATION_FAILURE.",
@@ -1582,6 +1613,16 @@ OWNER_CONDITIONS["RationalMatrixFamily"]["companion"] = "The polynomial has posi
 
 def record(identifier, owner, concept, paths, operation=None):
     carrier, scope = OWNERS[owner]
+    if owner == "SimplicialChainEquivalenceAlgebra":
+        paths = paths + ["groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+                         "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+                         "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+                         "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+                         "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+                         "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+                         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+                         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+                         "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
     if owner == "SimplicialChainMapClassAlgebra":
         paths = paths + ["groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
                          "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
@@ -1892,6 +1933,12 @@ def record(identifier, owner, concept, paths, operation=None):
             value["known_limitations"].append("Iteration is capped at 10000 steps; exceeding it is IMPLEMENTATION_FAILURE. Exact values can still grow rapidly within this limit.")
         if operation_name in ("argmin", "argmax", "minimum", "maximum", "minimizers", "maximizers"):
             value["known_limitations"].append("Optimality is relative only to the explicit finite feasible set, not all integers or reals.")
+    if owner == "SimplicialChainEquivalenceAlgebra":
+        value["required_invariants"].append("Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers.")
+        value["known_limitations"] += ["Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+            "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+            "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."]
+        value["references"].append("https://stacks.math.columbia.edu/tag/010V")
     if owner == "SimplicialChainMapClassAlgebra":
         value["required_invariants"].append("Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers.")
         value["known_limitations"] += ["Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
@@ -2193,6 +2240,8 @@ def synchronize(data, rows):
             if unchanged == old:
                 value["provenance"]["date"] = old["provenance"]["date"]
     descriptors = [
+        ('ChainEquivalence', 'Retained integral chain-equivalence witnesses', 'mathematics.topology.SimplicialChainEquivalence', ['Opposite maps between full labelled pairs with exact inverse witnesses', 'Both witnesses satisfy dH+Hd=identity-composite', 'Composition transports retained witnesses with shifted degrees and no inverse search', 'Inversion swaps both maps and both homotopies without negation', 'Equality includes nonzero loop choices; only classes and induced maps are strict inverses', 'Compound operations and complete integral-map lists share bounded work'], ['ChainEquivalence.data', 'ChainMap', 'ChainHomotopy', 'ChainMapClass', 'RelativeComplex', 'RelativeChain', 'RelativeCochain', 'AbelianGroupHomomorphism', 'N', 'Boolean']),
+        ('ChainEquivalence.data', 'Supplied chain-equivalence maps and witnesses', 'mathematics.topology.SimplicialChainEquivalence.Data', ['Four nonnull individually validated immutable values', 'Data membership does not assert opposite endpoints or exact composite/identity witness joins', 'ChainEquivalence.from-data performs full mutual compatibility validation'], ['ChainEquivalence', 'ChainMap', 'ChainHomotopy']),
         ("ChainMapClass", "Contextual integral chain-homotopy classes", "mathematics.topology.SimplicialChainMapClass",
          ["Full labelled source and target pairs, canonical presented element and validated deterministic representative", "Equality retains endpoints and integral torsion; homology maps alone do not classify classes", "Parallel addition and right-first composition check complete pairs before computation", "Stored representatives form a set-theoretic section, not generally an additive or functorial choice", "Whole constructions and flat lists share bounded computation budgets"], ["ChainMapSpace", "ChainMap", "RelativeComplex", "AbelianGroupElement", "AbelianGroupHomomorphism", "Z", "N", "Boolean"]),
         ("ChainMapSpace", "Integral chain-map spaces and additive chain-homotopy classes", "mathematics.topology.SimplicialChainMapSpace",

@@ -67,6 +67,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final SimplicialChainHomotopyAlgebra chainHomotopies;
     public final SimplicialChainMapSpaceAlgebra chainMapSpaces;
     public final SimplicialChainMapClassAlgebra chainMapClasses;
+    public final SimplicialChainEquivalenceAlgebra chainEquivalences;
     public final RationalAffineSpaceAlgebra affineSpaces;
     public final FiniteMarkovAlgebra markovKernels;
     public final RationalTensorAlgebra tensors;
@@ -117,6 +118,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         chainHomotopies=new SimplicialChainHomotopyAlgebra(chainMaps,simplicialHomotopies,homotopyPaths,collapses,collapseSequences,subdivisions,relativeComplexes,integerMatrices,integers,naturals,booleans,relativeChains,relativeCochains,simplicialChains,cochains,abelianHomomorphisms);
         chainMapSpaces=new SimplicialChainMapSpaceAlgebra(relativeComplexes,chainMaps,integralHomology,presentedAbelianGroups,abelianGroups,abelianGroupElements,booleans,abelianHomomorphisms,integerMatrices);
         chainMapClasses=new SimplicialChainMapClassAlgebra(chainMapSpaces,chainMaps,relativeComplexes,abelianGroupElements,integers,naturals,booleans,abelianHomomorphisms);
+        chainEquivalences=new SimplicialChainEquivalenceAlgebra(chainMaps,chainHomotopies,chainMapClasses,relativeComplexes,relativeChains,relativeCochains,abelianHomomorphisms,naturals,booleans);
         affineSpaces=new RationalAffineSpaceAlgebra(rectangularMatrices,finiteVectors,naturals,booleans);
         markovKernels=new FiniteMarkovAlgebra(integers,integerSets,integerProbabilities,integerFunctions,rectangularMatrices,finiteVectors,rationals,naturals,booleans);
         tensors=new RationalTensorAlgebra(rationals,finiteVectors,rectangularMatrices,naturals,booleans);
@@ -166,6 +168,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         values.add(chainHomotopies);
         values.add(chainMapSpaces);
         values.add(chainMapClasses);
+        values.add(chainEquivalences);
         values.addAll(fields); algebras=Collections.unmodifiableList(values);
         for(ConcreteAlgebra<?> algebra : algebras) {
             algebra.register(mathTool);

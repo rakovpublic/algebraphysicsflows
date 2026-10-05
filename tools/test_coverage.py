@@ -71,6 +71,15 @@ class CoverageTest(unittest.TestCase):
 
     def test_operation_conditions_are_scoped_to_the_algebra(self):
         records = {r.get("runtime_operation_id"): r for r in self.data["concepts"] if r.get("runtime_operation_id")}
+        self.assertIn("GJF+H, AKB+L", " ".join(records["ChainEquivalence.compose"]["required_invariants"]))
+        self.assertIn("without inverse search", " ".join(records["ChainEquivalence.compose"]["required_invariants"]))
+        self.assertIn("do not negate witnesses", " ".join(records["ChainEquivalence.inverse"]["required_invariants"]))
+        self.assertIn("including degree zero", " ".join(records["ChainEquivalence.on-cochain"]["required_invariants"]))
+        self.assertIn("ILeftProjectionOperation", " ".join(records["ChainEquivalence.on-chain"]["required_invariants"]))
+        self.assertIn("shared two-map budget", " ".join(records["ChainEquivalence.homology-maps"]["required_invariants"]))
+        self.assertIn("Homotopic but unequal", " ".join(records["ChainEquivalence.from-data"]["required_invariants"]))
+        self.assertIn("256 total equations", " ".join(records["ChainEquivalence.from-map"]["known_limitations"]))
+        self.assertIn("5000000", " ".join(records["ChainEquivalence.compose"]["known_limitations"]))
         self.assertIn("full labelled endpoint pairs", " ".join(records["ChainMapClass.equal"]["required_invariants"]))
         self.assertIn("right operand first", " ".join(records["ChainMapClass.compose"]["required_invariants"]))
         self.assertIn("set-theoretic section", " ".join(records["ChainMapClass.representative"]["required_invariants"]))

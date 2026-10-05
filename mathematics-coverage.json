@@ -28435,6 +28435,80 @@
       "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
     },
     {
+      "id": "concrete-algebra.SimplicialChainEquivalenceAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "SimplicialChainEquivalenceAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "ChainEquivalence",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
       "id": "concrete-algebra.SimplicialChainHomotopyAlgebra",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "SimplicialChainHomotopyAlgebra",
@@ -143278,6 +143352,2197 @@
       "legacy_operation_interface": "IOneOperandOperation"
     },
     {
+      "id": "concrete-operation.ChainEquivalence.from-data",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.from-data",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainEquivalence.data",
+      "domain_B": null,
+      "domain_C": "ChainEquivalence",
+      "operation_signature": "ChainEquivalence.data -> ChainEquivalence",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.from-data",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Validate opposite maps F:S->T and G:T->S on full labelled pairs and exact witness endpoints H:GF->id_S, K:FG->id_T. Supplied homotopies already satisfy dH+Hd=to-from. Homotopic but unequal endpoint maps are rejected. Preserve all supplied witness matrices, including nonzero loops.",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ChainEquivalence.from-data",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ChainEquivalence.from-data",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainEquivalence.from-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.from-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMap",
+      "domain_B": null,
+      "domain_C": "ChainEquivalence",
+      "operation_signature": "ChainMap -> ChainEquivalence",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.from-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Solve once for a reverse integral map and both inverse homotopies and retain the complete validated bundle. Nonexistence is OPERATION_UNDEFINED; limits are IMPLEMENTATION_FAILURE. The solver and final bundle validation share one budget.",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ChainEquivalence.from-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ChainEquivalence.from-map",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainEquivalence.identity-on",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.identity-on",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "RelativeComplex",
+      "domain_B": null,
+      "domain_C": "ChainEquivalence",
+      "operation_signature": "RelativeComplex -> ChainEquivalence",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.identity-on",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Retain both full identity chain maps and stationary zero homotopies on the supplied pair. No inverse search is performed.",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainEquivalence.identity-on",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ChainEquivalence.identity-on",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainEquivalence.source",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.source",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainEquivalence",
+      "domain_B": null,
+      "domain_C": "RelativeComplex",
+      "operation_signature": "ChainEquivalence -> RelativeComplex",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.source",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the full labelled source pair of the forward map.",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainEquivalence.source",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "source",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainEquivalence.target",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.target",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainEquivalence",
+      "domain_B": null,
+      "domain_C": "RelativeComplex",
+      "operation_signature": "ChainEquivalence -> RelativeComplex",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.target",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the full labelled target pair of the forward map.",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainEquivalence.target",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "target",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainEquivalence.forward",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.forward",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainEquivalence",
+      "domain_B": null,
+      "domain_C": "ChainMap",
+      "operation_signature": "ChainEquivalence -> ChainMap",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.forward",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the retained integral forward ChainMap F:S->T.",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainEquivalence.forward",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "forward",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainEquivalence.backward",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.backward",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainEquivalence",
+      "domain_B": null,
+      "domain_C": "ChainMap",
+      "operation_signature": "ChainEquivalence -> ChainMap",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.backward",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the retained integral backward ChainMap G:T->S.",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainEquivalence.backward",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "backward",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainEquivalence.source-homotopy",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.source-homotopy",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainEquivalence",
+      "domain_B": null,
+      "domain_C": "ChainHomotopy",
+      "operation_signature": "ChainEquivalence -> ChainHomotopy",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.source-homotopy",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the retained witness GF -> id_source with its exact degree-raising matrices.",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainEquivalence.source-homotopy",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "source-homotopy",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainEquivalence.target-homotopy",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.target-homotopy",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainEquivalence",
+      "domain_B": null,
+      "domain_C": "ChainHomotopy",
+      "operation_signature": "ChainEquivalence -> ChainHomotopy",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.target-homotopy",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the retained witness FG -> id_target with its exact degree-raising matrices.",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainEquivalence.target-homotopy",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "target-homotopy",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainEquivalence.data",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.data",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainEquivalence",
+      "domain_B": null,
+      "domain_C": "ChainEquivalence.data",
+      "operation_signature": "ChainEquivalence -> ChainEquivalence.data",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.data",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return immutable supplied data containing exactly the retained forward and backward maps and both homotopies.",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainEquivalence.data",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "data",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainEquivalence.inverse",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.inverse",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainEquivalence",
+      "domain_B": null,
+      "domain_C": "ChainEquivalence",
+      "operation_signature": "ChainEquivalence -> ChainEquivalence",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.inverse",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Swap forward with backward and source with target homotopy; do not negate witnesses or solve again. Applying inverse twice restores the exact data. Composition with the inverse need not be literal identity data.",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainEquivalence.inverse",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "inverse",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.ChainEquivalence.compose",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.compose",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainEquivalence",
+      "domain_B": "ChainEquivalence",
+      "domain_C": "ChainEquivalence",
+      "operation_signature": "ChainEquivalence x ChainEquivalence -> ChainEquivalence",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.compose",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Apply the right operand first and require the same full labelled middle pair. For before=(F,G,H,K), after=(A,B,J,L), retain maps AF, GB and source/target witnesses GJF+H, AKB+L. Degree-k transport uses G_(k+1) J_k F_k and A_(k+1) K_k B_k. Compose supplied witnesses without inverse search; all transports and final validation share one budget.",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ChainEquivalence.compose",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "compose",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.ChainEquivalence.equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainEquivalence",
+      "domain_B": "ChainEquivalence",
+      "domain_C": "Boolean",
+      "operation_signature": "ChainEquivalence x ChainEquivalence -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Compare full labelled endpoint pairs, both maps and both retained witness matrices. Nonzero stationary loops distinguish otherwise identical equivalences.",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainEquivalence.equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.ChainEquivalence.homotopies",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.homotopies",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainEquivalence",
+      "domain_B": null,
+      "domain_C": "ChainHomotopy",
+      "operation_signature": "ChainEquivalence -> List(ChainHomotopy)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.homotopies",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return exactly [GF -> id_source, FG -> id_target], preserving the retained witnesses and their different degree ranges. An empty complex still produces two wrapped witnesses.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainEquivalence.homotopies",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "homotopies",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.ChainEquivalence.maps",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.maps",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainEquivalence",
+      "domain_B": null,
+      "domain_C": "ChainMap",
+      "operation_signature": "ChainEquivalence -> List(ChainMap)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.maps",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return exactly [forward, backward] as wrapped ChainMap values, including two entries for empty complexes.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainEquivalence.maps",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "maps",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.ChainEquivalence.homology-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.homology-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainEquivalence",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "ChainEquivalence x N -> AbelianGroupHomomorphism",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.homology-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "For a nonnegative degree return the integral forward induced map H(F):H(S)->H(T), retaining presentations and torsion.",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainEquivalence.homology-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "homology-map",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.ChainEquivalence.inverse-homology-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.inverse-homology-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainEquivalence",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "ChainEquivalence x N -> AbelianGroupHomomorphism",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.inverse-homology-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "For a nonnegative degree return the backward induced map H(G):H(T)->H(S), inverse to H(F) on the exact retained presentations.",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainEquivalence.inverse-homology-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "inverse-homology-map",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.ChainEquivalence.homology-maps",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.homology-maps",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainEquivalence",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "ChainEquivalence x N -> List(AbelianGroupHomomorphism)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.homology-maps",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "For a nonnegative degree return exactly [H(F), H(G)] under one shared two-map budget. These are inverse maps between retained integral presentations.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/flat/MixedFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainEquivalence.homology-maps",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "homology-maps",
+      "legacy_operation_interface": "IUnsafeFlatOperation"
+    },
+    {
+      "id": "concrete-operation.ChainEquivalence.cohomology-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.cohomology-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainEquivalence",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "ChainEquivalence x N -> AbelianGroupHomomorphism",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.cohomology-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "For a nonnegative degree return the contravariant integral map H*(F):H*(T)->H*(S).",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainEquivalence.cohomology-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "cohomology-map",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.ChainEquivalence.inverse-cohomology-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.inverse-cohomology-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainEquivalence",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "ChainEquivalence x N -> AbelianGroupHomomorphism",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.inverse-cohomology-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "For a nonnegative degree return the contravariant integral map H*(G):H*(S)->H*(T), inverse to H*(F).",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainEquivalence.inverse-cohomology-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "inverse-cohomology-map",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.ChainEquivalence.cohomology-maps",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.cohomology-maps",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainEquivalence",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "ChainEquivalence x N -> List(AbelianGroupHomomorphism)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.cohomology-maps",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "For a nonnegative degree return exactly [H*(F), H*(G)] under one shared two-map budget; their directions reverse those of the chain maps.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/flat/MixedFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainEquivalence.cohomology-maps",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "cohomology-maps",
+      "legacy_operation_interface": "IUnsafeFlatOperation"
+    },
+    {
+      "id": "concrete-operation.ChainEquivalence.on-chain",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.on-chain",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainEquivalence",
+      "domain_B": "RelativeChain",
+      "domain_C": "RelativeChain",
+      "operation_signature": "ChainEquivalence x RelativeChain -> RelativeChain",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.on-chain",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Apply F to a RelativeChain on the full source pair; return a chain of the same degree on the target through ILeftProjectionOperation and the actual second-carrier wrapper. Negative-degree zero chains are allowed.",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ChainEquivalence.on-chain",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "on-chain",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.ChainEquivalence.inverse-on-chain",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.inverse-on-chain",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainEquivalence",
+      "domain_B": "RelativeChain",
+      "domain_C": "RelativeChain",
+      "operation_signature": "ChainEquivalence x RelativeChain -> RelativeChain",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.inverse-on-chain",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Apply G to a RelativeChain on the full target pair through ILeftProjectionOperation and the actual second-carrier wrapper. Inverse composition need not fix raw chains.",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ChainEquivalence.inverse-on-chain",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "inverse-on-chain",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.ChainEquivalence.on-cochain",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.on-cochain",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainEquivalence",
+      "domain_B": "RelativeCochain",
+      "domain_C": "RelativeCochain",
+      "operation_signature": "ChainEquivalence x RelativeCochain -> RelativeCochain",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.on-cochain",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Pull a RelativeCochain on the full target pair back along F, including degree zero, through ILeftProjectionOperation and the actual second-carrier wrapper.",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ChainEquivalence.on-cochain",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "on-cochain",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.ChainEquivalence.inverse-on-cochain",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.inverse-on-cochain",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainEquivalence",
+      "domain_B": "RelativeCochain",
+      "domain_C": "RelativeCochain",
+      "operation_signature": "ChainEquivalence x RelativeCochain -> RelativeCochain",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.inverse-on-cochain",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Pull a RelativeCochain on the full source pair back along G through ILeftProjectionOperation and the actual second-carrier wrapper. Inverse composition need not fix raw cochains.",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ChainEquivalence.inverse-on-cochain",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "inverse-on-cochain",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.ChainEquivalence.forward-class",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.forward-class",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainEquivalence",
+      "domain_B": null,
+      "domain_C": "ChainMapClass",
+      "operation_signature": "ChainEquivalence -> ChainMapClass",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.forward-class",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Project the retained forward map to its contextual integral ChainMapClass; it is inverse to backward-class. Normalization retains full labelled endpoints and torsion.",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainEquivalence.forward-class",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "forward-class",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainEquivalence.backward-class",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainEquivalenceAlgebra",
+      "concept": "ChainEquivalence.backward-class",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainEquivalence",
+      "domain_B": null,
+      "domain_C": "ChainMapClass",
+      "operation_signature": "ChainEquivalence -> ChainMapClass",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.backward-class",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Project the retained backward map to its contextual integral ChainMapClass with endpoints reversed; it is inverse to forward-class.",
+        "Both opposite chain maps and witnesses GF -> id_source and FG -> id_target retain full labelled pairs. Composition transports actual witnesses, is associative and unital, and swaps under inversion; raw witness data and raw chain actions need not be strictly inverse. Forward/backward classes and induced integral maps are inverse. Four mixed actions use actual second-carrier wrappers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required quotient basis has at most 256 simplices after filtering. A single 5000000-unit budget covers construction, identity, inverse, each complete composition including all transported homotopies and final validation, and each whole two-map integral list. Resource exhaustion is IMPLEMENTATION_FAILURE without partial lists. Coefficient bit lengths are unbounded. Class projections additionally use the existing Hom-rank bounds.",
+        "Only from-map invokes the simultaneous inverse solver: it allows 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k) and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero equations. Solve, both witnesses and bundle validation share one budget. Supplied data, identities, inverse and composition do not invoke this search and can succeed beyond its aggregate bounds.",
+        "Finite integral quotient chains only; no geometric homotopy equivalence, higher coherence, cup-product compatibility or other coefficient rings are asserted. Equality includes supplied homotopy choices. Typed chain degrees may be negative; cochain and integral-map degrees are nonnegative. Data membership checks nonnull individually valid inputs; from-data checks their joins."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainEquivalence.backward-class",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "backward-class",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
       "id": "concrete-operation.Z/5Z.add",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "PrimeField",
@@ -143889,6 +146154,12 @@
         "AbelianGroupType.torsion-factor-count",
         "Affine(Q).ambient-dimension",
         "Affine(Q).dimension",
+        "ChainEquivalence.cohomology-map",
+        "ChainEquivalence.cohomology-maps",
+        "ChainEquivalence.homology-map",
+        "ChainEquivalence.homology-maps",
+        "ChainEquivalence.inverse-cohomology-map",
+        "ChainEquivalence.inverse-homology-map",
         "ChainHomotopy.chain-matrix",
         "ChainHomotopy.cochain-matrix",
         "ChainHomotopy.cohomology-maps",
@@ -144666,6 +146937,7 @@
         "Boolean.or",
         "Boolean.xor",
         "Boolean.zero",
+        "ChainEquivalence.equal",
         "ChainHomotopy.are-homotopic",
         "ChainHomotopy.equal",
         "ChainMap.equal",
@@ -147961,6 +150233,12 @@
         "AbelianGroupHomomorphism.target",
         "AbelianGroupHomomorphism.zero-between",
         "AbelianGroupHomomorphism.zero-like",
+        "ChainEquivalence.cohomology-map",
+        "ChainEquivalence.cohomology-maps",
+        "ChainEquivalence.homology-map",
+        "ChainEquivalence.homology-maps",
+        "ChainEquivalence.inverse-cohomology-map",
+        "ChainEquivalence.inverse-homology-map",
         "ChainHomotopy.cohomology-maps",
         "ChainHomotopy.homology-maps",
         "ChainMap.cohomology-map",
@@ -148428,6 +150706,9 @@
         "SimplicialMap"
       ],
       "supported_operations": [
+        "ChainEquivalence.identity-on",
+        "ChainEquivalence.source",
+        "ChainEquivalence.target",
         "ChainHomotopy.source",
         "ChainHomotopy.target",
         "ChainMap.identity-on",
@@ -149035,6 +151316,8 @@
         "AbelianGroupHomomorphism"
       ],
       "supported_operations": [
+        "ChainEquivalence.inverse-on-cochain",
+        "ChainEquivalence.on-cochain",
         "ChainHomotopy.on-cochain",
         "ChainMap.on-cochain",
         "CollapseSequence.homotopy-on-cochain",
@@ -149228,6 +151511,8 @@
         "AbelianGroupHomomorphism"
       ],
       "supported_operations": [
+        "ChainEquivalence.inverse-on-chain",
+        "ChainEquivalence.on-chain",
         "ChainHomotopy.on-chain",
         "ChainMap.on-chain",
         "CollapseSequence.homotopy-on-chain",
@@ -150179,6 +152464,10 @@
         "AbelianGroupHomomorphism"
       ],
       "supported_operations": [
+        "ChainEquivalence.backward",
+        "ChainEquivalence.forward",
+        "ChainEquivalence.from-map",
+        "ChainEquivalence.maps",
         "ChainHomotopy.are-homotopic",
         "ChainHomotopy.between",
         "ChainHomotopy.from",
@@ -150334,6 +152623,9 @@
         "AbelianGroupHomomorphism"
       ],
       "supported_operations": [
+        "ChainEquivalence.homotopies",
+        "ChainEquivalence.source-homotopy",
+        "ChainEquivalence.target-homotopy",
         "ChainHomotopy.add",
         "ChainHomotopy.between",
         "ChainHomotopy.chain-matrices",
@@ -150524,6 +152816,8 @@
         "Boolean"
       ],
       "supported_operations": [
+        "ChainEquivalence.backward-class",
+        "ChainEquivalence.forward-class",
         "ChainMapClass.add",
         "ChainMapClass.cohomology-map",
         "ChainMapClass.cohomology-maps",
@@ -150570,6 +152864,124 @@
         "review_date": null,
         "review_notes": "No human review performed",
         "date": "2026-09-29"
+      }
+    },
+    {
+      "id": "ChainEquivalence",
+      "name": "Retained integral chain-equivalence witnesses",
+      "description": "Retained integral chain-equivalence witnesses",
+      "member_representation": "mathematics.topology.SimplicialChainEquivalence",
+      "membership_rules": [
+        "Opposite maps between full labelled pairs with exact inverse witnesses",
+        "Both witnesses satisfy dH+Hd=identity-composite",
+        "Composition transports retained witnesses with shifted degrees and no inverse search",
+        "Inversion swaps both maps and both homotopies without negation",
+        "Equality includes nonzero loop choices; only classes and induced maps are strict inverses",
+        "Compound operations and complete integral-map lists share bounded work"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "ChainEquivalence.data",
+        "ChainMap",
+        "ChainHomotopy",
+        "ChainMapClass",
+        "RelativeComplex",
+        "RelativeChain",
+        "RelativeCochain",
+        "AbelianGroupHomomorphism",
+        "N",
+        "Boolean"
+      ],
+      "supported_operations": [
+        "ChainEquivalence.backward",
+        "ChainEquivalence.backward-class",
+        "ChainEquivalence.cohomology-map",
+        "ChainEquivalence.cohomology-maps",
+        "ChainEquivalence.compose",
+        "ChainEquivalence.data",
+        "ChainEquivalence.equal",
+        "ChainEquivalence.forward",
+        "ChainEquivalence.forward-class",
+        "ChainEquivalence.from-data",
+        "ChainEquivalence.from-map",
+        "ChainEquivalence.homology-map",
+        "ChainEquivalence.homology-maps",
+        "ChainEquivalence.homotopies",
+        "ChainEquivalence.identity-on",
+        "ChainEquivalence.inverse",
+        "ChainEquivalence.inverse-cohomology-map",
+        "ChainEquivalence.inverse-homology-map",
+        "ChainEquivalence.inverse-on-chain",
+        "ChainEquivalence.inverse-on-cochain",
+        "ChainEquivalence.maps",
+        "ChainEquivalence.on-chain",
+        "ChainEquivalence.on-cochain",
+        "ChainEquivalence.source",
+        "ChainEquivalence.source-homotopy",
+        "ChainEquivalence.target",
+        "ChainEquivalence.target-homotopy"
+      ],
+      "invariants": [
+        "Opposite maps between full labelled pairs with exact inverse witnesses",
+        "Both witnesses satisfy dH+Hd=identity-composite",
+        "Composition transports retained witnesses with shifted degrees and no inverse search",
+        "Inversion swaps both maps and both homotopies without negation",
+        "Equality includes nonzero loop choices; only classes and induced maps are strict inverses",
+        "Compound operations and complete integral-map lists share bounded work"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-10-05"
+      }
+    },
+    {
+      "id": "ChainEquivalence.data",
+      "name": "Supplied chain-equivalence maps and witnesses",
+      "description": "Supplied chain-equivalence maps and witnesses",
+      "member_representation": "mathematics.topology.SimplicialChainEquivalence.Data",
+      "membership_rules": [
+        "Four nonnull individually validated immutable values",
+        "Data membership does not assert opposite endpoints or exact composite/identity witness joins",
+        "ChainEquivalence.from-data performs full mutual compatibility validation"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "ChainEquivalence",
+        "ChainMap",
+        "ChainHomotopy"
+      ],
+      "supported_operations": [
+        "ChainEquivalence.data",
+        "ChainEquivalence.from-data"
+      ],
+      "invariants": [
+        "Four nonnull individually validated immutable values",
+        "Data membership does not assert opposite endpoints or exact composite/identity witness joins",
+        "ChainEquivalence.from-data performs full mutual compatibility validation"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-10-05"
       }
     }
   ]

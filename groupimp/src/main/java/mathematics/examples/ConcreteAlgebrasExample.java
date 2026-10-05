@@ -36,6 +36,7 @@ import mathematics.topology.SimplicialChainMap;
 import mathematics.topology.SimplicialChainHomotopy;
 import mathematics.topology.SimplicialChainMapSpace;
 import mathematics.topology.SimplicialChainMapClass;
+import mathematics.topology.SimplicialChainEquivalence;
 import mathematics.topology.IntegralHomology;
 import mathematics.topology.FiniteSimplicialMap;
 import mathematics.topology.RelativeSimplicialComplex;
@@ -165,6 +166,14 @@ public final class ConcreteAlgebrasExample {
                 .performOneOperandOperation("inverse").performOperation("compose",intervalIdentityClass).<Boolean>performAlgebraTransfer("is-identity").collect());
         System.out.println("Both inverse homotopies for its singular representative: "+math.flow(math.chainMaps,Collections.singletonList(intervalIdentityClass.representative()))
                 .<SimplicialChainHomotopy>performFlatAlgebraTransfer("ChainHomotopy.inverse-homotopies").collect().size());
+        SimplicialChainEquivalence retainedInverse=SimplicialChainEquivalence.fromMap(intervalIdentityClass.representative());
+        System.out.println("A retained equivalence exposes two inverse integral maps: "+math.flow(math.chainMaps,Collections.singletonList(intervalIdentityClass.representative()))
+                .<SimplicialChainEquivalence>performAlgebraTransfer("ChainEquivalence.from-map")
+                .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("homology-maps",BigInteger.ZERO)
+                .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
+        System.out.println("Composed equivalences retain both transported inverse homotopies: "+math.flow(math.chainEquivalences,Collections.singletonList(retainedInverse))
+                .performOneOperandOperation("inverse").performOperation("compose",retainedInverse)
+                .<SimplicialChainHomotopy>performFlatAlgebraTransfer("homotopies").collect().size());
         System.out.println("Subdividing the oriented circle retains an integral cycle: "+math.flow(math.complexes,Collections.singletonList(circle))
                 .<SimplicialSubdivision>performAlgebraTransfer("SimplicialSubdivision.from-complex")
                 .performLeftProjectionOperation("on-absolute-chain",orientedCircle).<Boolean>performAlgebraTransfer("is-cycle").collect());
