@@ -174,6 +174,15 @@ public final class ConcreteAlgebrasExample {
         System.out.println("Composed equivalences retain both transported inverse homotopies: "+math.flow(math.chainEquivalences,Collections.singletonList(retainedInverse))
                 .performOneOperandOperation("inverse").performOperation("compose",retainedInverse)
                 .<SimplicialChainHomotopy>performFlatAlgebraTransfer("homotopies").collect().size());
+        System.out.println("Subdivision converts directly to inverse integral circle maps: "+math.flow(math.subdivisions,Collections.singletonList(new SimplicialSubdivision(circlePair)))
+                .<SimplicialChainEquivalence>performAlgebraTransfer("ChainEquivalence.from-subdivision")
+                .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("homology-maps",BigInteger.ONE)
+                .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
+        System.out.println("A converted collapse witness fills vertex one minus vertex two: "+math.flow(math.complexes,Collections.singletonList(filledTriangle))
+                .<SimplicialCollapseSequence>performAlgebraTransfer("CollapseSequence.reduce-absolute")
+                .<SimplicialChainEquivalence>performAlgebraTransfer("ChainEquivalence.from-collapse-sequence")
+                .performLeftProjectionOperation("source-homotopy-on-chain",RelativeSimplicialChain.absolute(vertexOne))
+                .performOneOperandOperation("boundary").<IntegerVector>performAlgebraTransfer("coordinates").collect());
         System.out.println("Subdividing the oriented circle retains an integral cycle: "+math.flow(math.complexes,Collections.singletonList(circle))
                 .<SimplicialSubdivision>performAlgebraTransfer("SimplicialSubdivision.from-complex")
                 .performLeftProjectionOperation("on-absolute-chain",orientedCircle).<Boolean>performAlgebraTransfer("is-cycle").collect());

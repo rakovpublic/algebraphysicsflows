@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 2008 |
-| DIRECTLY_SUPPORTED | 1765 |
+| Scoped records | 2017 |
+| DIRECTLY_SUPPORTED | 1774 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1624 |
+| IMPLEMENTED | 1633 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1692 |
+| MACHINE_TESTED | 1701 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1601 | 1601 | 0 | 0 | 0 | 1601 | 0 | 0 |
+| Concrete MathTool algebras | 1610 | 1610 | 0 | 0 | 0 | 1610 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -296,8 +296,13 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | ChainEquivalence.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.equal |
 | ChainEquivalence.forward | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.forward |
 | ChainEquivalence.forward-class | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.forward-class |
+| ChainEquivalence.from-collapse | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.from-collapse |
+| ChainEquivalence.from-collapse-sequence | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.from-collapse-sequence |
 | ChainEquivalence.from-data | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.from-data |
+| ChainEquivalence.from-homotopy-equivalence | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.from-homotopy-equivalence |
+| ChainEquivalence.from-isomorphism | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.from-isomorphism |
 | ChainEquivalence.from-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.from-map |
+| ChainEquivalence.from-subdivision | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.from-subdivision |
 | ChainEquivalence.homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.homology-map |
 | ChainEquivalence.homology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.homology-maps |
 | ChainEquivalence.homotopies | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.homotopies |
@@ -312,8 +317,12 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | ChainEquivalence.on-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.on-cochain |
 | ChainEquivalence.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.source |
 | ChainEquivalence.source-homotopy | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.source-homotopy |
+| ChainEquivalence.source-homotopy-on-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.source-homotopy-on-chain |
+| ChainEquivalence.source-homotopy-on-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.source-homotopy-on-cochain |
 | ChainEquivalence.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.target |
 | ChainEquivalence.target-homotopy | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.target-homotopy |
+| ChainEquivalence.target-homotopy-on-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.target-homotopy-on-chain |
+| ChainEquivalence.target-homotopy-on-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.target-homotopy-on-cochain |
 | ChainHomotopy.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral homotopies between full simplicial chain maps, with checked witnesses, bounded Smith solving, complete affine solution generators, composition and typed fillings; native operation ChainHomotopy.add |
 | ChainHomotopy.are-homotopic | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral homotopies between full simplicial chain maps, with checked witnesses, bounded Smith solving, complete affine solution generators, composition and typed fillings; native operation ChainHomotopy.are-homotopic |
 | ChainHomotopy.between | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral homotopies between full simplicial chain maps, with checked witnesses, bounded Smith solving, complete affine solution generators, composition and typed fillings; native operation ChainHomotopy.between |

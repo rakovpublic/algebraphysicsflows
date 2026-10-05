@@ -39,8 +39,26 @@ public final class SimplicialChainEquivalenceAlgebra extends ConcreteAlgebra<Sim
         binary("inverse-on-cochain",algebra(),cochains.algebra(),cochains.algebra(),true,SimplicialChainEquivalence::inverseOnCochain);
         unary("forward-class",algebra(),classes.algebra(),false,SimplicialChainEquivalence::forwardClass);
         unary("backward-class",algebra(),classes.algebra(),false,SimplicialChainEquivalence::backwardClass);
+        unary("from-isomorphism",maps.algebra(),algebra(),true,SimplicialChainEquivalence::fromIsomorphism);
+        binary("source-homotopy-on-chain",algebra(),chains.algebra(),chains.algebra(),true,SimplicialChainEquivalence::sourceHomotopyOnChain);
+        binary("target-homotopy-on-chain",algebra(),chains.algebra(),chains.algebra(),true,SimplicialChainEquivalence::targetHomotopyOnChain);
+        binary("source-homotopy-on-cochain",algebra(),cochains.algebra(),cochains.algebra(),true,SimplicialChainEquivalence::sourceHomotopyOnCochain);
+        binary("target-homotopy-on-cochain",algebra(),cochains.algebra(),cochains.algebra(),true,SimplicialChainEquivalence::targetHomotopyOnCochain);
         law("Both full labelled endpoints, both chain maps and both homotopies are retained. Equality includes witness matrices, even nonzero loops.");
         law("For before=(F,G,H,K) and after=(A,B,J,L), composition has maps AF, GB and witnesses GJF+H, AKB+L. Composition is associative and unital on the retained data; inversion swaps maps and witnesses.");
         law("Forward and backward classes and induced integral maps are mutual inverses. Composing an equivalence with its inverse need not equal the identity witness data or act identically on raw chains.");
+    }
+    public SimplicialChainEquivalenceAlgebra(SimplicialChainMapAlgebra maps,SimplicialChainHomotopyAlgebra homotopies,
+                                             SimplicialChainMapClassAlgebra classes,RelativeSimplicialAlgebra pairs,
+                                             RelativeSimplicialChainAlgebra chains,RelativeSimplicialCochainAlgebra cochains,
+                                             AbelianGroupHomomorphismAlgebra homomorphisms,NaturalSemiring naturals,BooleanAlgebra truth,
+                                             SimplicialHomotopyEquivalenceAlgebra equivalences,SimplicialCollapseAlgebra collapses,
+                                             SimplicialCollapseSequenceAlgebra sequences,SimplicialSubdivisionAlgebra subdivisions) {
+        this(maps,homotopies,classes,pairs,chains,cochains,homomorphisms,naturals,truth);
+        unary("from-homotopy-equivalence",equivalences.algebra(),algebra(),false,SimplicialChainEquivalence::fromHomotopyEquivalence);
+        unary("from-collapse",collapses.algebra(),algebra(),false,SimplicialChainEquivalence::fromCollapse);
+        unary("from-collapse-sequence",sequences.algebra(),algebra(),false,SimplicialChainEquivalence::fromCollapseSequence);
+        unary("from-subdivision",subdivisions.algebra(),algebra(),false,SimplicialChainEquivalence::fromSubdivision);
+        law("Constructive conversions preserve supplied witnesses under one complete budget and never search for a homotopy inverse. Geometric paths have the opposite orientation, so their actual prisms are negated.");
     }
 }

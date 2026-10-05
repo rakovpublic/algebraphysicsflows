@@ -71,6 +71,13 @@ class CoverageTest(unittest.TestCase):
 
     def test_operation_conditions_are_scoped_to_the_algebra(self):
         records = {r.get("runtime_operation_id"): r for r in self.data["concepts"] if r.get("runtime_operation_id")}
+        self.assertIn("negate the actual accumulated prism matrices", " ".join(records["ChainEquivalence.from-homotopy-equivalence"]["required_invariants"]))
+        self.assertIn("square and unimodular", " ".join(records["ChainEquivalence.from-isomorphism"]["required_invariants"]))
+        self.assertIn("zero target homotopy", " ".join(records["ChainEquivalence.from-collapse"]["required_invariants"]))
+        self.assertIn("source witness is zero", " ".join(records["ChainEquivalence.from-subdivision"]["required_invariants"]))
+        self.assertIn("dH(c)+H(dc)=c-GF(c)", " ".join(records["ChainEquivalence.source-homotopy-on-chain"]["required_invariants"]))
+        self.assertIn("positive degree", " ".join(records["ChainEquivalence.target-homotopy-on-cochain"]["required_invariants"]))
+        self.assertIn("complete conversion", " ".join(records["ChainEquivalence.from-collapse-sequence"]["known_limitations"]))
         self.assertIn("GJF+H, AKB+L", " ".join(records["ChainEquivalence.compose"]["required_invariants"]))
         self.assertIn("without inverse search", " ".join(records["ChainEquivalence.compose"]["required_invariants"]))
         self.assertIn("do not negate witnesses", " ".join(records["ChainEquivalence.inverse"]["required_invariants"]))

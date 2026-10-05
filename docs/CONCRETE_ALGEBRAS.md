@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1534 native operations from 67 algebra builders.
+The default initializer currently installs 1543 native operations from 67 algebra builders.
 
 ## Existing API usage
 
@@ -2299,7 +2299,7 @@ One **5000000-unit budget** covers matrix assembly, Smith solving, reverse-map v
 
 ## Retained integral chain equivalences
 
-`math.chainEquivalences` installs 27 operations on `ChainEquivalence`. A value retains `F:S -> T`, `G:T -> S`, and the actual homotopies `H:GF -> id_S` and `K:FG -> id_T`. Their equations use the existing `dH + Hd = to - from` convention. The carrier implements integral chain-homotopy equivalence as [defined for chain complexes](https://stacks.math.columbia.edu/tag/010V), with explicit witnesses and full labelled relative pairs.
+`math.chainEquivalences` installs 36 operations on `ChainEquivalence`. A value retains `F:S -> T`, `G:T -> S`, and the actual homotopies `H:GF -> id_S` and `K:FG -> id_T`. Their equations use the existing `dH + Hd = to - from` convention. The carrier implements integral chain-homotopy equivalence as [defined for chain complexes](https://stacks.math.columbia.edu/tag/010V), with explicit witnesses and full labelled relative pairs.
 
 `ChainEquivalence.from-map` solves once and retains the complete bundle. `ChainEquivalence.from-data` validates a `SimplicialChainEquivalence.Data` containing four individually valid inputs: both maps must have opposite full endpoints and each witness must join the exact composite to the exact identity. Homotopic but unequal endpoint maps are rejected. Data-carrier membership alone does not assert these joins. Identity construction and supplied-data validation do not search for an inverse.
 
@@ -2349,3 +2349,45 @@ Every required quotient basis is limited to **256 simplices** after filtering. C
 Typed chains may have negative degree with zero coordinates. Cochains and integral-map degrees are nonnegative. Actions require exact full pairs. This represents finite integral chain equivalences; no geometric homotopy equivalence, higher coherence or preservation of cochain products is asserted.
 
 `NativeSimplicialChainEquivalenceTest` adds 17 tests: 25 solved interval bundles, 1,296 independent signed circle-witness compositions, retained loops and inverse laws, noncommuting point maps and dual variance, changing dimensions with both boundary identities, exact endpoint rejection, relative torsion with 1025-bit coefficients, typed actions, empty and diagonal pairs, construction beyond solver bounds, shared composition and two-map budgets, actual native wrappers, and serialized repeatable scalar/flat flows.
+
+## Constructive conversions to chain equivalences
+
+Five unary transfers now reuse the witnesses constructed by existing algebras. Their aliases on the input carrier begin with `ChainEquivalence.`. They return the registered `ChainEquivalence` wrapper and can feed the existing scalar or flat operations immediately.
+
+| Conversion | Retained maps and witnesses |
+| --- | --- |
+| `from-isomorphism` on `ChainMap` | The supplied map, its strict integral inverse, and two zero homotopies. Every degree matrix must be square and unimodular. |
+| `from-homotopy-equivalence` on `HomotopyEquivalence` | Both supplied simplicial maps and the negatives of both actual accumulated prism matrices. |
+| `from-collapse` on `SimplicialCollapse` | Retraction `R`, inclusion `i`, the constructed source witness `iR -> id`, and a zero target witness since `Ri=id`. |
+| `from-collapse-sequence` on `CollapseSequence` | Chronological composite retraction, final inclusion, accumulated source homotopy, and a zero target witness. |
+| `from-subdivision` on `SimplicialSubdivision` | Signed subdivision `S`, last-vertex map `L`, a zero source witness since `LS=id`, and the constructed target witness `SL -> id`. |
+
+The geometric `HomotopyEquivalence` convention runs from identity to composite. Conversion negates the actual prism matrices to obtain the opposite orientation required by `ChainEquivalence`; it does not recompute prisms along reversed geometric paths. Nonzero loops and supplied choices remain visible in equality. Conversions retain full labelled relative pairs, quotient projection and integral coefficients. A singular chain map may admit `from-map` but fail `from-isomorphism`, because the latter specifically requires a strict inverse.
+
+Four binary witness actions use `ILeftProjectionOperation` and return the actual second carrier's wrapper: `source-homotopy-on-chain`, `target-homotopy-on-chain`, `source-homotopy-on-cochain`, and `target-homotopy-on-cochain`. For chains they raise degree by one and satisfy the full identities `dH + Hd = id - GF` and `dK + Kd = id - FG`. For cycles the first term alone fills the difference from inverse composition. Shifted transposes lower cochain degree and satisfy the dual identities. Typed cochain homotopy actions require positive degree; degree-zero matrices remain available by transferring to the retained homotopy and using its `cochain-matrix` operation. Typed chain actions allow negative-degree zero chains. All actions require the exact full source or target pair.
+
+```java
+ConcreteMathematics math = new ConcreteMathematics();
+RelativeSimplicialComplex interval = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0, 1))));
+SimplicialCollapse collapse = new SimplicialCollapse(interval, FiniteSet.of(BigInteger.ONE));
+SimplicialChainEquivalence value = math.collapses.algebra().buildAlgebraItem(collapse)
+        .<SimplicialChainEquivalence>performAlgebraTransfer("ChainEquivalence.from-collapse")
+        .perform().getResult();
+RelativeSimplicialChain vertex = new RelativeSimplicialChain(interval, BigInteger.ZERO,
+        new IntegerVector(BigInteger.ZERO, BigInteger.ONE));
+List<String> boundary = math.flow(math.chainEquivalences, Collections.singletonList(value))
+        .performLeftProjectionOperation("source-homotopy-on-chain", vertex)
+        .performOneOperandOperation("boundary")
+        .<IntegerVector>performAlgebraTransfer("coordinates").collect();
+// [[-1, 1]]: vertex one minus its image under inclusion after retraction.
+List<String> inverseMaps = math.flow(math.collapses, Collections.singletonList(collapse))
+        .<SimplicialChainEquivalence>performAlgebraTransfer("ChainEquivalence.from-collapse")
+        .<AbelianGroupHomomorphism, BigInteger>performFlatAlgebraUnsafe("homology-maps", BigInteger.ZERO)
+        .<Boolean>performAlgebraTransfer("is-isomorphism").collect();
+// [true, true]
+```
+
+None of these five conversions invokes the simultaneous inverse solver or its aggregate equation/unknown limits. For example, a strict identity on twelve points and a supplied contraction of a twelve-edge interval convert successfully beyond those search bounds. Each conversion still shares **one 5000000-unit budget** across both map constructions, both witnesses, and final bundle validation; strict conversion also includes integral matrix inversion. Individually successful components can exceed this budget when combined. Every required quotient basis remains bounded by **256 simplices**, after filtering. Exhaustion raises `IMPLEMENTATION_FAILURE`, with no replacement witnesses or partial bundle. The original geometric objects retain their own construction limits. Exact chain witnesses do not assert new geometric homotopy equivalences or higher coherence.
+
+`NativeChainEquivalenceConversionsTest` adds 15 tests: 625 independent strict inverse decisions, signed interval fillings and relative projection, preserved nonzero geometric loops, all simplex facets through dimension five, chronological collapse composition, all 148 three-label relative subdivisions, extreme labels and 1025-bit coefficients, projective-plane torsion, both typed differential identities, exact-context and degree failures, empty and filtered diagonal pairs, conversion beyond solver bounds, shared-budget failures for all five converters, actual wrappers, and serialized repeatable flows.

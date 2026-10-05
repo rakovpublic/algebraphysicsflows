@@ -1525,6 +1525,15 @@ ChainEquivalence.on-cochain	SimplicialChainEquivalenceAlgebra	on-cochain	ChainEq
 ChainEquivalence.inverse-on-cochain	SimplicialChainEquivalenceAlgebra	inverse-on-cochain	ChainEquivalence	RelativeCochain	RelativeCochain	SCALAR	PARTIAL	ILeftProjectionOperation
 ChainEquivalence.forward-class	SimplicialChainEquivalenceAlgebra	forward-class	ChainEquivalence	-	ChainMapClass	SCALAR	TOTAL	ITransferOperation
 ChainEquivalence.backward-class	SimplicialChainEquivalenceAlgebra	backward-class	ChainEquivalence	-	ChainMapClass	SCALAR	TOTAL	ITransferOperation
+ChainEquivalence.from-isomorphism	SimplicialChainEquivalenceAlgebra	ChainEquivalence.from-isomorphism	ChainMap	-	ChainEquivalence	SCALAR	PARTIAL	ITransferOperation
+ChainEquivalence.source-homotopy-on-chain	SimplicialChainEquivalenceAlgebra	source-homotopy-on-chain	ChainEquivalence	RelativeChain	RelativeChain	SCALAR	PARTIAL	ILeftProjectionOperation
+ChainEquivalence.target-homotopy-on-chain	SimplicialChainEquivalenceAlgebra	target-homotopy-on-chain	ChainEquivalence	RelativeChain	RelativeChain	SCALAR	PARTIAL	ILeftProjectionOperation
+ChainEquivalence.source-homotopy-on-cochain	SimplicialChainEquivalenceAlgebra	source-homotopy-on-cochain	ChainEquivalence	RelativeCochain	RelativeCochain	SCALAR	PARTIAL	ILeftProjectionOperation
+ChainEquivalence.target-homotopy-on-cochain	SimplicialChainEquivalenceAlgebra	target-homotopy-on-cochain	ChainEquivalence	RelativeCochain	RelativeCochain	SCALAR	PARTIAL	ILeftProjectionOperation
+ChainEquivalence.from-homotopy-equivalence	SimplicialChainEquivalenceAlgebra	ChainEquivalence.from-homotopy-equivalence	HomotopyEquivalence	-	ChainEquivalence	SCALAR	TOTAL	ITransferOperation
+ChainEquivalence.from-collapse	SimplicialChainEquivalenceAlgebra	ChainEquivalence.from-collapse	SimplicialCollapse	-	ChainEquivalence	SCALAR	TOTAL	ITransferOperation
+ChainEquivalence.from-collapse-sequence	SimplicialChainEquivalenceAlgebra	ChainEquivalence.from-collapse-sequence	CollapseSequence	-	ChainEquivalence	SCALAR	TOTAL	ITransferOperation
+ChainEquivalence.from-subdivision	SimplicialChainEquivalenceAlgebra	ChainEquivalence.from-subdivision	SimplicialSubdivision	-	ChainEquivalence	SCALAR	TOTAL	ITransferOperation
 Z/5Z.add	PrimeField	add	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL	IOperation
 Z/5Z.subtract	PrimeField	subtract	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL	IOperation
 Z/5Z.multiply	PrimeField	multiply	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL	IOperation

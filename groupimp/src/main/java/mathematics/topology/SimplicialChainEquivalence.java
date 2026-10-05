@@ -1,6 +1,7 @@
 package mathematics.topology;
 
 import mathematics.core.MathFailure;
+import mathematics.linear.IntegerMatrix;
 import mathematics.linear.IntegerSmithNormalForm.Computation;
 import mathematics.structures.AbelianGroupHomomorphism;
 import java.io.Serializable;
@@ -54,6 +55,49 @@ public final class SimplicialChainEquivalence implements Serializable {
         Computation work=new Computation(); SimplicialChainMap id=SimplicialChainMap.identity(pair,work); SimplicialChainHomotopy h=SimplicialChainHomotopy.stationary(id,work);
         return new SimplicialChainEquivalence(new Data(id,id,h,h),work);
     }
+    private interface WitnessMatrix { IntegerMatrix at(BigInteger degree); }
+    private static SimplicialChainHomotopy witness(SimplicialChainMap composite,WitnessMatrix factory,Computation work) {
+        List<IntegerMatrix> matrices=new ArrayList<>();
+        for(int k=0;k<composite.chainMatrices().size();k++) matrices.add(factory.at(BigInteger.valueOf(k)));
+        return new SimplicialChainHomotopy(new SimplicialChainHomotopy.Data(composite,SimplicialChainMap.identity(composite.source(),work),matrices),work);
+    }
+    private static IntegerMatrix zeroWitness(RelativeSimplicialComplex pair,BigInteger degree,Computation work) {
+        int rows=pair.basis(degree.add(BigInteger.ONE)).size(),columns=pair.basis(degree).size();
+        work.use((long)rows*columns); return IntegerMatrix.zero(rows,columns);
+    }
+    private static SimplicialChainEquivalence witnessed(SimplicialChainMap f,SimplicialChainMap g,WitnessMatrix source,WitnessMatrix target,Computation work) {
+        SimplicialChainHomotopy h=witness(g.compose(f,work),source,work),k=witness(f.compose(g,work),target,work);
+        return new SimplicialChainEquivalence(new Data(f,g,h,k),work);
+    }
+    /** Strict degreewise unimodular inversion, without the simultaneous homotopy-inverse search. */
+    public static SimplicialChainEquivalence fromIsomorphism(SimplicialChainMap map) {
+        Computation work=new Computation(); SimplicialChainMap inverse=map.inverse(work);
+        return witnessed(map,inverse,d -> zeroWitness(map.source(),d,work),d -> zeroWitness(map.target(),d,work),work);
+    }
+    private static IntegerMatrix negatePrism(SimplicialHomotopyPath path,BigInteger degree,Computation work) {
+        IntegerMatrix matrix=path.prism(degree,work); work.use((long)matrix.rows()*matrix.columns()); return matrix.scale(BigInteger.ONE.negate());
+    }
+    /** Geometric paths run identity -> composite: negate their actual prisms, preserving their choices. */
+    public static SimplicialChainEquivalence fromHomotopyEquivalence(SimplicialHomotopyEquivalence equivalence) {
+        Computation work=new Computation(); SimplicialChainMap f=SimplicialChainMap.fromSimplicial(equivalence.forward(),work),g=SimplicialChainMap.fromSimplicial(equivalence.backward(),work);
+        return witnessed(f,g,d -> negatePrism(equivalence.sourceHomotopy(),d,work),d -> negatePrism(equivalence.targetHomotopy(),d,work),work);
+    }
+    public static SimplicialChainEquivalence fromCollapse(SimplicialCollapse collapse) {
+        Computation work=new Computation(); SimplicialChainMap f=SimplicialChainMap.fromCollapse(collapse,work),
+                g=SimplicialChainMap.fromSimplicial(RelativeSimplicialMap.inclusion(collapse.target(),collapse.source(),work),work);
+        return witnessed(f,g,d -> collapse.homotopy(d,work),d -> zeroWitness(collapse.target(),d,work),work);
+    }
+    public static SimplicialChainEquivalence fromCollapseSequence(SimplicialCollapseSequence sequence) {
+        Computation work=new Computation(); SimplicialChainMap f=SimplicialChainMap.fromCollapseSequence(sequence,work),
+                g=SimplicialChainMap.fromSimplicial(RelativeSimplicialMap.inclusion(sequence.target(),sequence.source(),work),work);
+        return witnessed(f,g,d -> sequence.homotopy(d,work),d -> zeroWitness(sequence.target(),d,work),work);
+    }
+    public static SimplicialChainEquivalence fromSubdivision(SimplicialSubdivision subdivision) {
+        Computation work=new Computation(); SimplicialChainMap f=SimplicialChainMap.fromSubdivision(subdivision,work),
+                g=SimplicialChainMap.fromSimplicial(subdivision.lastVertexMap(work),work);
+        SimplicialSubdivisionChains chains=new SimplicialSubdivisionChains(subdivision,work);
+        return witnessed(f,g,d -> zeroWitness(subdivision.original(),d,work),chains::homotopyMatrix,work);
+    }
     public Data data() { return data; }
     public RelativeSimplicialComplex source() { return forward().source(); }
     public RelativeSimplicialComplex target() { return forward().target(); }
@@ -86,6 +130,10 @@ public final class SimplicialChainEquivalence implements Serializable {
     public RelativeSimplicialChain inverseOnChain(RelativeSimplicialChain chain) { return backward().onChain(chain); }
     public RelativeSimplicialCochain onCochain(RelativeSimplicialCochain cochain) { return forward().onCochain(cochain); }
     public RelativeSimplicialCochain inverseOnCochain(RelativeSimplicialCochain cochain) { return backward().onCochain(cochain); }
+    public RelativeSimplicialChain sourceHomotopyOnChain(RelativeSimplicialChain chain) { return sourceHomotopy().onChain(chain); }
+    public RelativeSimplicialChain targetHomotopyOnChain(RelativeSimplicialChain chain) { return targetHomotopy().onChain(chain); }
+    public RelativeSimplicialCochain sourceHomotopyOnCochain(RelativeSimplicialCochain cochain) { return sourceHomotopy().onCochain(cochain); }
+    public RelativeSimplicialCochain targetHomotopyOnCochain(RelativeSimplicialCochain cochain) { return targetHomotopy().onCochain(cochain); }
     public SimplicialChainMapClass forwardClass() { return SimplicialChainMapClass.fromMap(forward()); }
     public SimplicialChainMapClass backwardClass() { return SimplicialChainMapClass.fromMap(backward()); }
     @Override public boolean equals(Object other) { return other instanceof SimplicialChainEquivalence && data.equals(((SimplicialChainEquivalence)other).data); }

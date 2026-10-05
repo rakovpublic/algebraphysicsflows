@@ -145,8 +145,9 @@ public final class SimplicialChainMap implements Serializable {
         }
         return true;
     }
-    public SimplicialChainMap inverse() {
-        Computation work=new Computation(); return build(target,source,work,d -> work.inverseUnimodular(matrixAt(d)));
+    public SimplicialChainMap inverse() { return inverse(new Computation()); }
+    SimplicialChainMap inverse(Computation work) {
+        return build(target,source,work,d -> work.inverseUnimodular(matrixAt(d)));
     }
     public RelativeSimplicialChain onChain(RelativeSimplicialChain chain) {
         if(!source.equals(chain.pair())) throw MathFailure.undefined("Chain-map pushforward requires the full source pair");

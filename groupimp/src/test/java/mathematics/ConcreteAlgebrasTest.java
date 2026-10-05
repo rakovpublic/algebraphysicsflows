@@ -62,7 +62,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all1534RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all1543RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String discrete="Complex[[0], [1]]",emptyComplex="Complex[]";
@@ -148,11 +148,15 @@ public class ConcreteAlgebrasTest {
                 identityOneMap,identityOneMap,"["+identityOneMap+"]","["+identityOneMap+"]","["+identityClass+"]","true",identityClass));
         String equivalenceContents="forward="+chainIdentity+", backward="+chainIdentity+", source-homotopy="+chainHomotopy+", target-homotopy="+chainHomotopy,
                 chainEquivalence="ChainEquivalence("+equivalenceContents+")";
+        String collapseInclusion="ChainMap(source="+absolutePoint+", target="+collapsePair+", matrices=[ZMatrix(2x1)[[1], [0]], ZMatrix(1x0)[[]]])",
+                collapseEquivalence="ChainEquivalence(forward="+collapseChainMap+", backward="+collapseInclusion+", source-homotopy="+contraction+", target-homotopy="+chainHomotopy+")",
+                pointZeroOneChain="RelativeChain(pair="+absolutePoint+", degree=1, coordinates=[])";
         expected.put("SimplicialChainEquivalenceAlgebra",String.join("|",chainEquivalence,chainEquivalence,chainEquivalence,absolutePoint,absolutePoint,
                 chainIdentity,chainIdentity,chainHomotopy,chainHomotopy,"ChainEquivalenceData("+equivalenceContents+")",chainEquivalence,chainEquivalence,"true",
                 "["+chainHomotopy+", "+chainHomotopy+"]","["+chainIdentity+", "+chainIdentity+"]",
                 identityOneMap,identityOneMap,"["+identityOneMap+", "+identityOneMap+"]",identityOneMap,identityOneMap,"["+identityOneMap+", "+identityOneMap+"]",
-                relativeZeroChain,relativeZeroChain,relativeZeroCochain,relativeZeroCochain,identityClass,identityClass));
+                relativeZeroChain,relativeZeroChain,relativeZeroCochain,relativeZeroCochain,identityClass,identityClass,
+                chainEquivalence,pointZeroOneChain,pointZeroOneChain,relativeZeroCochain,relativeZeroCochain,chainEquivalence,collapseEquivalence,collapseEquivalence,chainEquivalence));
         expected.put("SimplicialChainMapSpaceAlgebra",String.join("|",chainMapSpace,absolutePoint,absolutePoint,"true",chainZero,pointHomology,freeOne,
                 "AbelianGroup(rank=1, torsion=[])","["+chainIdentity+"]","AbelianElement(group="+freeOne+", smith=[1])",chainIdentity,"["+chainIdentity+"]",
                 chainMapSpace,chainMapSpace,identityOneMap,identityOneMap,"[ZMatrix(0x0)[], ZMatrix(1x1)[[1]], ZMatrix(0x0)[]]","[ZMatrix(0x0)[], ZMatrix(1x1)[[1]], ZMatrix(0x0)[]]"));
@@ -412,7 +416,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(1534,count);
+        assertEquals(1543,count);
     }
     private static String homString(String source,String target,String matrix) { return "AbelianHom(source="+source+", target="+target+", smith="+matrix+")"; }
     private static String simplicialString(String source,String target,String vertices) { return "SimplicialMap(source="+source+", target="+target+", vertices="+vertices+")"; }
@@ -548,6 +552,7 @@ public class ConcreteAlgebrasTest {
             if(entry.second==math.abelianGroupElements.algebra()) second=new PresentedAbelianGroup(IntegerMatrix.zero(1,0)).project(new IntegerVector(BigInteger.ONE));
             if(entry.second==math.naturals.algebra()) second=BigInteger.ZERO;
         }
+        if(owner instanceof SimplicialChainEquivalenceAlgebra && name.endsWith("homotopy-on-cochain")) second=RelativeSimplicialCochain.zero(relativeCochainTestPair(),BigInteger.ONE);
         if(owner instanceof SimplicialChainHomotopyAlgebra) {
             if(entry.second==math.naturals.algebra()) second=BigInteger.ZERO;
             if(entry.second==math.relativeCochains.algebra()) second=RelativeSimplicialCochain.zero(relativeCochainTestPair(),BigInteger.ONE);
