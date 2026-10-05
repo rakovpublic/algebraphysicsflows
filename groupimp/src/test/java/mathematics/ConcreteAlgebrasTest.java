@@ -61,7 +61,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all1502RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all1507RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String discrete="Complex[[0], [1]]",emptyComplex="Complex[]";
@@ -125,7 +125,7 @@ public class ConcreteAlgebrasTest {
                 absolutePoint,absolutePoint,"ChainMapData(source="+absolutePoint+", target="+absolutePoint+", matrices=[ZMatrix(1x1)[[1]]])","true","false","true",
                 chainDouble,chainMapPrefix+"-1]]])",chainZero,chainDouble,chainIdentity,"true",chainIdentity,"ZMatrix(1x1)[[1]]","ZMatrix(1x1)[[1]]",
                 "[ZMatrix(1x1)[[1]]]","[ZMatrix(1x1)[[1]]]",relativeZeroChain,relativeZeroCochain,zeroChain,zeroCochain,
-                identityOneMap,identityOneMap,"["+identityOneMap+"]","["+identityOneMap+"]"));
+                identityOneMap,identityOneMap,"["+identityOneMap+"]","["+identityOneMap+"]","true",chainIdentity));
         String chainHomotopy="ChainHomotopy(from="+chainIdentity+", to="+chainIdentity+", matrices=[ZMatrix(0x1)[]])",
                 doubledHomotopy="ChainHomotopy(from="+chainDouble+", to="+chainDouble+", matrices=[ZMatrix(0x1)[]])",
                 edgeMapPrefix="ChainMap(source="+collapsePair+", target="+collapsePair+", matrices=",
@@ -137,14 +137,14 @@ public class ConcreteAlgebrasTest {
                 chainHomotopy,chainHomotopy,doubledHomotopy,doubledHomotopy,chainHomotopy,chainHomotopy,"true","ZMatrix(0x1)[]","ZMatrix(0x1)[]",
                 "[ZMatrix(0x1)[]]","[ZMatrix(0x1)[], ZMatrix(1x0)[[]]]","RelativeChain(pair="+absolutePoint+", degree=1, coordinates=[])",relativeZeroCochain,
                 "SimplicialChain(complex="+point+", degree=1, coordinates=[])",zeroCochain,"["+identityOneMap+", "+identityOneMap+"]","["+identityOneMap+", "+identityOneMap+"]",
-                "true",chainHomotopy,"["+chainHomotopy+"]"));
+                "true",chainHomotopy,"["+chainHomotopy+"]","["+chainHomotopy+", "+chainHomotopy+"]"));
         String chainMapSpace="ChainMapSpace(source="+absolutePoint+", target="+absolutePoint+")";
         String classPrefix="ChainMapClass(space="+chainMapSpace+", element=AbelianElement(group="+freeOne+", smith=[",
                 identityClass=classPrefix+"1]))",zeroChainClass=classPrefix+"0]))";
         expected.put("SimplicialChainMapClassAlgebra",String.join("|",identityClass,identityClass,zeroChainClass,identityClass,
                 absolutePoint,absolutePoint,chainMapSpace,"AbelianElement(group="+freeOne+", smith=[1])",chainIdentity,"true","false","true",
                 classPrefix+"2]))",zeroChainClass,classPrefix+"-1]))",classPrefix+"2]))",identityClass,"false","1",
-                identityOneMap,identityOneMap,"["+identityOneMap+"]","["+identityOneMap+"]","["+identityClass+"]"));
+                identityOneMap,identityOneMap,"["+identityOneMap+"]","["+identityOneMap+"]","["+identityClass+"]","true",identityClass));
         expected.put("SimplicialChainMapSpaceAlgebra",String.join("|",chainMapSpace,absolutePoint,absolutePoint,"true",chainZero,pointHomology,freeOne,
                 "AbelianGroup(rank=1, torsion=[])","["+chainIdentity+"]","AbelianElement(group="+freeOne+", smith=[1])",chainIdentity,"["+chainIdentity+"]",
                 chainMapSpace,chainMapSpace,identityOneMap,identityOneMap,"[ZMatrix(0x0)[], ZMatrix(1x1)[[1]], ZMatrix(0x0)[]]","[ZMatrix(0x0)[], ZMatrix(1x1)[[1]], ZMatrix(0x0)[]]"));
@@ -404,7 +404,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(1502,count);
+        assertEquals(1507,count);
     }
     private static String homString(String source,String target,String matrix) { return "AbelianHom(source="+source+", target="+target+", smith="+matrix+")"; }
     private static String simplicialString(String source,String target,String vertices) { return "SimplicialMap(source="+source+", target="+target+", vertices="+vertices+")"; }

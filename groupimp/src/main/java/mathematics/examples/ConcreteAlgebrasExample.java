@@ -157,6 +157,14 @@ public final class ConcreteAlgebrasExample {
                 .<IntegerMatrix>performAlgebraTransfer("smith-matrix").collect());
         System.out.println("Circle map space has two contextual homotopy-class generators: "+math.flow(math.chainMapSpaces,Collections.singletonList(circleMapSpace))
                 .<SimplicialChainMapClass>performFlatAlgebraTransfer("ChainMapClass.generators-in").collect().size());
+        System.out.println("A degree-three circle map has an integral homotopy inverse: "+math.flow(math.chainMaps,Collections.singletonList(degreeThree))
+                .<Boolean>performAlgebraTransfer("is-homotopy-equivalence").collect());
+        SimplicialChainMapClass intervalIdentityClass=SimplicialChainMapClass.identityOn(RelativeSimplicialComplex.absolute(
+                new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0,1)))));
+        System.out.println("The inverse interval class composes to the identity: "+math.flow(math.chainMapClasses,Collections.singletonList(intervalIdentityClass))
+                .performOneOperandOperation("inverse").performOperation("compose",intervalIdentityClass).<Boolean>performAlgebraTransfer("is-identity").collect());
+        System.out.println("Both inverse homotopies for its singular representative: "+math.flow(math.chainMaps,Collections.singletonList(intervalIdentityClass.representative()))
+                .<SimplicialChainHomotopy>performFlatAlgebraTransfer("ChainHomotopy.inverse-homotopies").collect().size());
         System.out.println("Subdividing the oriented circle retains an integral cycle: "+math.flow(math.complexes,Collections.singletonList(circle))
                 .<SimplicialSubdivision>performAlgebraTransfer("SimplicialSubdivision.from-complex")
                 .performLeftProjectionOperation("on-absolute-chain",orientedCircle).<Boolean>performAlgebraTransfer("is-cycle").collect());

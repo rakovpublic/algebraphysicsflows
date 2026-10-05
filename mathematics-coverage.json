@@ -2,7 +2,7 @@
   "schema_version": 1,
   "title": "AlgebraPhysicsFlows mathematical coverage",
   "baseline_commit": "ef1a9a548aea4ea75fc98d6798952f373de48da9",
-  "survey_date": "2026-09-29",
+  "survey_date": "2026-10-05",
   "scope": "An initial, explicitly scoped survey and tested implementation. Not a census of all mathematics and not a proof of universality.",
   "classification_basis": "Representation status applies only to each record's explicit scope. Catalog-only rows are initial triage, not established minimality results. Native registrations use Algebra and the existing operations interfaces; the optional Domain/Structure prototype does not execute those registrations. Implementation, empirical testing and mathematical proof are independent axes.",
   "sources": [
@@ -28471,10 +28471,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -28504,7 +28506,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -28547,10 +28549,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -28579,7 +28583,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -28618,10 +28622,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
       ],
       "machine_tested": true,
@@ -28634,7 +28640,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
-        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
       ],
       "required_extension": null,
       "references": [
@@ -28651,7 +28657,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-29",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -133897,10 +133903,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -133929,7 +133937,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -133979,10 +133987,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -134011,7 +134021,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -134061,10 +134071,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -134093,7 +134105,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -134143,10 +134155,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -134175,7 +134189,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -134225,10 +134239,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -134257,7 +134273,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -134307,10 +134323,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -134339,7 +134357,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -134389,10 +134407,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -134421,7 +134441,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -134471,10 +134491,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -134503,7 +134525,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -134553,10 +134575,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -134585,7 +134609,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -134635,10 +134659,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -134667,7 +134693,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -134717,10 +134743,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -134749,7 +134777,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -134799,10 +134827,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -134831,7 +134861,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -134881,10 +134911,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -134913,7 +134945,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -134963,10 +134995,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -134995,7 +135029,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -135045,10 +135079,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -135077,7 +135113,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -135127,10 +135163,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -135159,7 +135197,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -135209,10 +135247,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -135241,7 +135281,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -135291,10 +135331,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -135323,7 +135365,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -135373,10 +135415,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -135405,7 +135449,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -135455,10 +135499,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -135487,7 +135533,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -135537,10 +135583,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -135569,7 +135617,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -135619,10 +135667,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -135651,7 +135701,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -135701,10 +135751,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -135733,7 +135785,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -135784,10 +135836,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -135816,7 +135870,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -135867,10 +135921,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -135899,7 +135955,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -135949,10 +136005,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -135981,7 +136039,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -136031,10 +136089,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -136063,7 +136123,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -136113,10 +136173,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -136145,7 +136207,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -136195,10 +136257,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -136227,7 +136291,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -136277,10 +136341,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -136309,7 +136375,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -136359,10 +136425,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -136391,7 +136459,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -136442,10 +136510,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -136474,7 +136544,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -136525,10 +136595,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
       ],
       "machine_tested": true,
@@ -136557,7 +136629,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -136569,6 +136641,178 @@
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "cohomology-maps",
       "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMap.is-homotopy-equivalence",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapAlgebra",
+      "concept": "ChainMap.is-homotopy-equivalence",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMap",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "ChainMap -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.is-homotopy-equivalence",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Solve simultaneously for d_source G=G d_target, GF+dH+Hd=id_source and FG+dK+Kd=id_target over integers. Both inverse identities are required, including for rectangular chain maps. Exact Smith divisibility distinguishes integral obstructions from rational solutions. Return false only for nonexistence, never for shape or work exhaustion.",
+        "Full labelled pairs and all integral degree matrices are retained. Quotient boundary equations are checked in every degree. Composition applies the right operand first; parallel addition and integer scaling induce additive integral homology and contravariant cohomology maps. Strict inverses require unimodular matrices in every degree, independently of induced homology isomorphisms."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialCollapse.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialCollapseSequence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialSubdivisionChains.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per pair component and at most 256 simplices in each quotient basis, filtered before the bound. One 5000000-unit budget covers each construction, conversion, composite or inverse including final validation, and each complete integral map list. Resource exhaustion raises IMPLEMENTATION_FAILURE without partial results or false predicates. Integer coefficient bit lengths are unbounded.",
+        "Degree-zero maps over Z on finite simplicial quotient chains only. Raw ChainMap.data is immutable supplied data, not a validated map. Matrix and integral map degrees are nonnegative; typed chains allow negative zero groups. Absolute actions require both subcomplexes empty. Arbitrary chain maps need not preserve augmentation or cup products, come from continuous or simplicial vertex maps, extend to compatible ambient/subcomplex maps, or give a homotopy equivalence. ChainHomotopy separately represents supplied integral homotopy data and solves bounded integral homotopy systems between parallel maps. Geometric homotopy search, other coefficients and persistent homology remain outside scope.",
+        "The simultaneous inverse system allows at most 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k), with s_-1=0, and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero rows and obvious identities. One 5000000-unit budget covers system construction, Smith solving, all reverse-map/composite/identity constructions and both witness validations. Class inversion also includes the reverse Hom reduction, projection and canonical lift in the same budget; separately successful stages may fail when combined. Exhaustion raises IMPLEMENTATION_FAILURE, not false, undefinedness or partial output. Coefficient bit lengths are unbounded. Decisions and representative choices concern finite integral quotient chains, not geometric homotopy equivalence."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainMap.is-homotopy-equivalence",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "is-homotopy-equivalence",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMap.homotopy-inverse",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapAlgebra",
+      "concept": "ChainMap.homotopy-inverse",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMap",
+      "domain_B": null,
+      "domain_C": "ChainMap",
+      "operation_signature": "ChainMap -> ChainMap",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.homotopy-inverse",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return one deterministic validated reverse ChainMap G solving both inverse identities up to integral homotopy. Nonexistence is OPERATION_UNDEFINED. Free Smith coordinates of the simultaneous system are set to zero; this need not be a strict matrix inverse, a geometric map, or an involutive choice on raw maps. Construction and validation share the solve budget.",
+        "Full labelled pairs and all integral degree matrices are retained. Quotient boundary equations are checked in every degree. Composition applies the right operand first; parallel addition and integer scaling induce additive integral homology and contravariant cohomology maps. Strict inverses require unimodular matrices in every degree, independently of induced homology isomorphisms."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialCollapse.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialCollapseSequence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialSubdivisionChains.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 nonempty simplices per pair component and at most 256 simplices in each quotient basis, filtered before the bound. One 5000000-unit budget covers each construction, conversion, composite or inverse including final validation, and each complete integral map list. Resource exhaustion raises IMPLEMENTATION_FAILURE without partial results or false predicates. Integer coefficient bit lengths are unbounded.",
+        "Degree-zero maps over Z on finite simplicial quotient chains only. Raw ChainMap.data is immutable supplied data, not a validated map. Matrix and integral map degrees are nonnegative; typed chains allow negative zero groups. Absolute actions require both subcomplexes empty. Arbitrary chain maps need not preserve augmentation or cup products, come from continuous or simplicial vertex maps, extend to compatible ambient/subcomplex maps, or give a homotopy equivalence. ChainHomotopy separately represents supplied integral homotopy data and solves bounded integral homotopy systems between parallel maps. Geometric homotopy search, other coefficients and persistent homology remain outside scope.",
+        "The simultaneous inverse system allows at most 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k), with s_-1=0, and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero rows and obvious identities. One 5000000-unit budget covers system construction, Smith solving, all reverse-map/composite/identity constructions and both witness validations. Class inversion also includes the reverse Hom reduction, projection and canonical lift in the same budget; separately successful stages may fail when combined. Exhaustion raises IMPLEMENTATION_FAILURE, not false, undefinedness or partial output. Coefficient bit lengths are unbounded. Decisions and representative choices concern finite integral quotient chains, not geometric homotopy equivalence."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ChainMap.homotopy-inverse",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "homotopy-inverse",
+      "legacy_operation_interface": "IOneOperandOperation"
     },
     {
       "id": "concrete-operation.ChainHomotopy.from-data",
@@ -136609,10 +136853,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -136642,7 +136888,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -136694,10 +136940,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -136727,7 +136975,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -136779,10 +137027,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -136812,7 +137062,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -136864,10 +137114,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -136897,7 +137149,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -136949,10 +137201,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -136982,7 +137236,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -137034,10 +137288,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -137067,7 +137323,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -137119,10 +137375,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -137152,7 +137410,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -137204,10 +137462,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -137237,7 +137497,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -137289,10 +137549,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -137322,7 +137584,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -137374,10 +137636,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -137407,7 +137671,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -137459,10 +137723,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -137492,7 +137758,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -137544,10 +137810,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -137577,7 +137845,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -137629,10 +137897,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -137662,7 +137932,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -137714,10 +137984,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -137747,7 +138019,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -137799,10 +138071,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -137832,7 +138106,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -137884,10 +138158,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -137917,7 +138193,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -137969,10 +138245,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -138002,7 +138280,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -138054,10 +138332,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -138087,7 +138367,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -138139,10 +138419,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -138172,7 +138454,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -138224,10 +138506,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -138257,7 +138541,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -138309,10 +138593,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -138342,7 +138628,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -138395,10 +138681,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -138428,7 +138716,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -138481,10 +138769,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -138514,7 +138804,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -138566,10 +138856,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -138599,7 +138891,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -138651,10 +138943,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -138684,7 +138978,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -138736,10 +139030,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -138769,7 +139065,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -138821,10 +139117,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -138854,7 +139152,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -138907,10 +139205,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -138940,7 +139240,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -138993,10 +139293,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -139026,7 +139328,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -139078,10 +139380,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -139112,7 +139416,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -139164,10 +139468,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -139198,7 +139504,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -139251,10 +139557,12 @@
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
       ],
@@ -139285,7 +139593,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-28",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -139297,6 +139605,96 @@
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "ChainHomotopy.solution-generators",
       "legacy_operation_interface": "ICustomResultFlatOperation"
+    },
+    {
+      "id": "concrete-operation.ChainHomotopy.inverse-homotopies",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainHomotopyAlgebra",
+      "concept": "ChainHomotopy.inverse-homotopies",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMap",
+      "domain_B": null,
+      "domain_C": "ChainHomotopy",
+      "operation_signature": "ChainMap -> List(ChainHomotopy)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Integral homotopies between full simplicial chain maps, with checked witnesses, bounded Smith solving, complete affine solution generators, composition and typed fillings; native operation ChainHomotopy.inverse-homotopies",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Given a ChainMap F:S->T, solve simultaneously for G:T->S and emit exactly [GF -> id_source, FG -> id_target]. Both retained witnesses use the same deterministic G returned by homotopy-inverse, with dH+Hd=id_source-GF and dK+Kd=id_target-FG. Preserve each endpoint's own degree range, empty shapes and full labels. An integral obstruction is OPERATION_UNDEFINED; no partial list is returned.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Both endpoint chain maps retain identical full labelled pairs. Every supplied degree-raising matrix satisfies dH + Hd = to - from, and Q^p = transpose(H_(p-1)) satisfies the dual cochain identity. Chronological concatenation adds witnesses, reversal negates them, and composition uses the required degree shift. Actual matrices remain part of equality, including nonzero loops. Both induced homology and cohomology maps agree with presentations and torsion retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopySolver.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialHomotopyPath.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialCollapse.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialCollapseSequence.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialSubdivision.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialSubdivisionChains.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialMap.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialChain.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainHomotopySolverTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "At most 4096 simplices per pair component and 256 per required quotient basis after filtering. One 5000000-unit budget covers every conversion or compound operation, including all endpoint constructions and final homotopy validation, and every complete two-map integral list. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Integer coefficient bit lengths are unbounded.",
+        "Degree-one integral witnesses on finite simplicial quotient chain complexes only. Raw ChainHomotopy.data membership does not assert homotopy equations. No geometric homotopy search, geometric realization, higher homotopy coherence, cup-product compatibility or coefficient-ring generalization is provided. Matrix and integral degrees are nonnegative; typed chains may be negative, while typed cochain actions require positive degree. Absolute actions require both subcomplexes empty. Algebraic reversal need not coincide with recomputing a geometric prism.",
+        "The simultaneous inverse system allows at most 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k), with s_-1=0, and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero rows and obvious identities. One 5000000-unit budget covers system construction, Smith solving, all reverse-map/composite/identity constructions and both witness validations. Class inversion also includes the reverse Hom reduction, projection and canonical lift in the same budget; separately successful stages may fail when combined. Exhaustion raises IMPLEMENTATION_FAILURE, not false, undefinedness or partial output. Coefficient bit lengths are unbounded. Decisions and representative choices concern finite integral quotient chains, not geometric homotopy equivalence."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ChainHomotopy.inverse-homotopies",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ChainHomotopy.inverse-homotopies",
+      "legacy_operation_interface": "ITransferFlatOperation"
     },
     {
       "id": "concrete-operation.ChainMapSpace.from-pairs",
@@ -140799,10 +141197,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
       ],
       "machine_tested": true,
@@ -140815,7 +141215,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
-        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
       ],
       "required_extension": null,
       "references": [
@@ -140832,7 +141232,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-29",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -140878,10 +141278,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
       ],
       "machine_tested": true,
@@ -140894,7 +141296,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
-        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
       ],
       "required_extension": null,
       "references": [
@@ -140911,7 +141313,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-29",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -140957,10 +141359,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
       ],
       "machine_tested": true,
@@ -140973,7 +141377,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
-        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
       ],
       "required_extension": null,
       "references": [
@@ -140990,7 +141394,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-29",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -141036,10 +141440,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
       ],
       "machine_tested": true,
@@ -141052,7 +141458,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
-        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
       ],
       "required_extension": null,
       "references": [
@@ -141069,7 +141475,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-29",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -141115,10 +141521,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
       ],
       "machine_tested": true,
@@ -141131,7 +141539,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
-        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
       ],
       "required_extension": null,
       "references": [
@@ -141148,7 +141556,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-29",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -141194,10 +141602,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
       ],
       "machine_tested": true,
@@ -141210,7 +141620,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
-        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
       ],
       "required_extension": null,
       "references": [
@@ -141227,7 +141637,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-29",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -141273,10 +141683,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
       ],
       "machine_tested": true,
@@ -141289,7 +141701,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
-        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
       ],
       "required_extension": null,
       "references": [
@@ -141306,7 +141718,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-29",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -141352,10 +141764,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
       ],
       "machine_tested": true,
@@ -141368,7 +141782,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
-        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
       ],
       "required_extension": null,
       "references": [
@@ -141385,7 +141799,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-29",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -141431,10 +141845,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
       ],
       "machine_tested": true,
@@ -141447,7 +141863,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
-        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
       ],
       "required_extension": null,
       "references": [
@@ -141464,7 +141880,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-29",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -141510,10 +141926,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
       ],
       "machine_tested": true,
@@ -141526,7 +141944,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
-        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
       ],
       "required_extension": null,
       "references": [
@@ -141543,7 +141961,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-29",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -141589,10 +142007,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
       ],
       "machine_tested": true,
@@ -141605,7 +142025,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
-        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
       ],
       "required_extension": null,
       "references": [
@@ -141622,7 +142042,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-29",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -141668,10 +142088,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
       ],
       "machine_tested": true,
@@ -141684,7 +142106,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
-        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
       ],
       "required_extension": null,
       "references": [
@@ -141701,7 +142123,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-29",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -141747,10 +142169,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
       ],
       "machine_tested": true,
@@ -141763,7 +142187,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
-        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
       ],
       "required_extension": null,
       "references": [
@@ -141780,7 +142204,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-29",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -141826,10 +142250,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
       ],
       "machine_tested": true,
@@ -141842,7 +142268,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
-        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
       ],
       "required_extension": null,
       "references": [
@@ -141859,7 +142285,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-29",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -141905,10 +142331,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
       ],
       "machine_tested": true,
@@ -141921,7 +142349,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
-        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
       ],
       "required_extension": null,
       "references": [
@@ -141938,7 +142366,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-29",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -141984,10 +142412,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
       ],
       "machine_tested": true,
@@ -142000,7 +142430,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
-        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
       ],
       "required_extension": null,
       "references": [
@@ -142017,7 +142447,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-29",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -142063,10 +142493,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
       ],
       "machine_tested": true,
@@ -142079,7 +142511,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
-        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
       ],
       "required_extension": null,
       "references": [
@@ -142096,7 +142528,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-29",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -142142,10 +142574,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
       ],
       "machine_tested": true,
@@ -142158,7 +142592,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
-        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
       ],
       "required_extension": null,
       "references": [
@@ -142175,7 +142609,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-29",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -142221,10 +142655,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
       ],
       "machine_tested": true,
@@ -142237,7 +142673,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
-        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
       ],
       "required_extension": null,
       "references": [
@@ -142254,7 +142690,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-29",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -142300,10 +142736,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
       ],
       "machine_tested": true,
@@ -142316,7 +142754,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
-        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
       ],
       "required_extension": null,
       "references": [
@@ -142333,7 +142771,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-29",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -142379,10 +142817,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
       ],
       "machine_tested": true,
@@ -142395,7 +142835,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
-        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
       ],
       "required_extension": null,
       "references": [
@@ -142412,7 +142852,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-29",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -142459,10 +142899,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
       ],
       "machine_tested": true,
@@ -142475,7 +142917,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
-        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
       ],
       "required_extension": null,
       "references": [
@@ -142492,7 +142934,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-29",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -142539,10 +142981,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
       ],
       "machine_tested": true,
@@ -142555,7 +142999,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
-        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
       ],
       "required_extension": null,
       "references": [
@@ -142572,7 +143016,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-29",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -142619,10 +143063,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
         "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
       ],
       "machine_tested": true,
@@ -142635,7 +143081,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
-        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. No inverse-class construction, homotopy-equivalence decision, higher Hom homology or general coefficient ring is supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes."
       ],
       "required_extension": null,
       "references": [
@@ -142652,7 +143098,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-09-29",
+        "date": "2026-10-05",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -142664,6 +143110,172 @@
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "ChainMapClass.generators-in",
       "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMapClass.is-isomorphism",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "ChainMapClass.is-isomorphism",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMapClass",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "ChainMapClass -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.is-isomorphism",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Decide whether the retained representative admits an integral inverse up to chain homotopy, by simultaneously solving for a reverse chain map and both homotopies. This is invertibility in the homotopy category, not strict degreewise invertibility or finite additive order. An integral obstruction returns false; computation limits raise IMPLEMENTATION_FAILURE.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes.",
+        "The simultaneous inverse system allows at most 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k), with s_-1=0, and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero rows and obvious identities. One 5000000-unit budget covers system construction, Smith solving, all reverse-map/composite/identity constructions and both witness validations. Class inversion also includes the reverse Hom reduction, projection and canonical lift in the same budget; separately successful stages may fail when combined. Exhaustion raises IMPLEMENTATION_FAILURE, not false, undefinedness or partial output. Coefficient bit lengths are unbounded. Decisions and representative choices concern finite integral quotient chains, not geometric homotopy equivalence."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainMapClass.is-isomorphism",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "is-isomorphism",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainMapClass.inverse",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "SimplicialChainMapClassAlgebra",
+      "concept": "ChainMapClass.inverse",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainMapClass",
+      "domain_B": null,
+      "domain_C": "ChainMapClass",
+      "operation_signature": "ChainMapClass -> ChainMapClass",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.inverse",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the unique inverse homotopy class with full labelled endpoints reversed. Solve for an integral inverse of the stored representative and normalize its class under one shared solve-and-normalization budget. Nonexistence is OPERATION_UNDEFINED; resource exhaustion is IMPLEMENTATION_FAILURE.",
+        "Class equality retains both full labelled endpoint pairs and the exact Hom-homology presentation with canonical Smith coordinates. Composition applies the right operand first and is additive in each argument; representative lifts need not preserve these operations. Native Algebra, IAlgebraItem and scalar/flat AlgebraFlow use the actual registered result carriers."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapClass.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainInverseSolver.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainInverseTest.java",
+        "groupimp/src/test/java/operations/NativeSimplicialChainMapClassTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each geometric component has at most 4096 nonempty simplices. Hom reductions require at most 256 total Hom coefficients separately in degrees -1,0,1 after filtering quotient bases. Every construction, arithmetic/composition operation and complete flat list uses one 5000000-unit budget across all reductions, products, projections, lifts and map validations. Shape or work exhaustion is IMPLEMENTATION_FAILURE, never mathematical nonexistence, a false equality or a partial list. Exact integer bit lengths are unbounded.",
+        "Integral degree-zero maps of finite simplicial quotient chain complexes only. These are additive chain-homotopy classes, not geometric homotopy groups or a classification of spaces. Inversion decides equivalence of the supplied chain map, not geometric homotopy equivalence of spaces. Higher Hom homology and general coefficient rings are not supplied. Arbitrary chain maps need not preserve augmentation or cup products. Generic elements can be explicitly attached to a context only when the retained presentation matches; their original geometric provenance is not inferred. No raw chain/cochain action is claimed to descend to classes.",
+        "The simultaneous inverse system allows at most 256 total equations sum_k(s_k^2+t_k^2+s_(k-1)*t_k), with s_-1=0, and 256 total unknown coefficients sum_k(s_k*t_k+s_(k+1)*s_k+t_(k+1)*t_k), including zero rows and obvious identities. One 5000000-unit budget covers system construction, Smith solving, all reverse-map/composite/identity constructions and both witness validations. Class inversion also includes the reverse Hom reduction, projection and canonical lift in the same budget; separately successful stages may fail when combined. Exhaustion raises IMPLEMENTATION_FAILURE, not false, undefinedness or partial output. Coefficient bit lengths are unbounded. Decisions and representative choices concern finite integral quotient chains, not geometric homotopy equivalence."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/010V",
+        "https://stacks.math.columbia.edu/tag/0A8H",
+        "https://stacks.math.columbia.edu/tag/010V"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/SimplicialChainMapClassAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-05",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ChainMapClass.inverse",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "inverse",
+      "legacy_operation_interface": "IOneOperandOperation"
     },
     {
       "id": "concrete-operation.Z/5Z.add",
@@ -144057,12 +144669,14 @@
         "ChainHomotopy.are-homotopic",
         "ChainHomotopy.equal",
         "ChainMap.equal",
+        "ChainMap.is-homotopy-equivalence",
         "ChainMap.is-identity",
         "ChainMap.is-isomorphism",
         "ChainMap.is-zero",
         "ChainMapClass.equal",
         "ChainMapClass.has-finite-order",
         "ChainMapClass.is-identity",
+        "ChainMapClass.is-isomorphism",
         "ChainMapClass.is-zero",
         "ChainMapSpace.equal",
         "CollapseSequence.absolute-can-collapse-to",
@@ -149568,6 +150182,7 @@
         "ChainHomotopy.are-homotopic",
         "ChainHomotopy.between",
         "ChainHomotopy.from",
+        "ChainHomotopy.inverse-homotopies",
         "ChainHomotopy.postcompose",
         "ChainHomotopy.precompose",
         "ChainHomotopy.solution-generators",
@@ -149591,8 +150206,10 @@
         "ChainMap.from-subdivision",
         "ChainMap.homology-map",
         "ChainMap.homology-maps",
+        "ChainMap.homotopy-inverse",
         "ChainMap.identity-on",
         "ChainMap.inverse",
+        "ChainMap.is-homotopy-equivalence",
         "ChainMap.is-identity",
         "ChainMap.is-isomorphism",
         "ChainMap.is-zero",
@@ -149734,6 +150351,7 @@
         "ChainHomotopy.from-prism",
         "ChainHomotopy.from-subdivision",
         "ChainHomotopy.homology-maps",
+        "ChainHomotopy.inverse-homotopies",
         "ChainHomotopy.on-absolute-chain",
         "ChainHomotopy.on-absolute-cochain",
         "ChainHomotopy.on-chain",
@@ -149919,7 +150537,9 @@
         "ChainMapClass.homology-map",
         "ChainMapClass.homology-maps",
         "ChainMapClass.identity-on",
+        "ChainMapClass.inverse",
         "ChainMapClass.is-identity",
+        "ChainMapClass.is-isomorphism",
         "ChainMapClass.is-zero",
         "ChainMapClass.negate",
         "ChainMapClass.order",

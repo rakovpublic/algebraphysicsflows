@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1502 native operations from 66 algebra builders.
+The default initializer currently installs 1507 native operations from 66 algebra builders.
 
 ## Existing API usage
 
@@ -2202,7 +2202,7 @@ Context changes check endpoints without running reductions. Matrix lists check a
 
 ## Contextual chain-homotopy classes
 
-`math.chainMapClasses` installs 24 native operations on `SimplicialChainMapClass`. A value retains its full labelled source and target pairs, its canonical element of `H_0(Hom)`, and a validated deterministic representative chain map. This makes direct composition of classes available through the existing closed operation interface. The definition and well-definedness of composition follow the [chain-complex conventions](https://stacks.math.columbia.edu/tag/010V) and [Hom-complex construction](https://stacks.math.columbia.edu/tag/0A8H).
+`math.chainMapClasses` installs 26 native operations on `SimplicialChainMapClass`. A value retains its full labelled source and target pairs, its canonical element of `H_0(Hom)`, and a validated deterministic representative chain map. This makes direct composition of classes available through the existing closed operation interface. The definition and well-definedness of composition follow the [chain-complex conventions](https://stacks.math.columbia.edu/tag/010V) and [Hom-complex construction](https://stacks.math.columbia.edu/tag/0A8H).
 
 | Operations | Behavior |
 | --- | --- |
@@ -2217,6 +2217,7 @@ Context changes check endpoints without running reductions. Matrix lists check a
 | `homology-map`, `cohomology-map` | Degreewise covariant homology and contravariant cohomology homomorphisms for nonnegative degrees |
 | `homology-maps`, `cohomology-maps` | Flat lists from degree zero through the largest endpoint ambient dimension, retaining zero groups and maps |
 | `ChainMapClass.generators-in` | Flat minimal Smith generators as contextual classes, torsion first and then free; empty for a zero quotient |
+| `is-isomorphism`, `inverse` | Decide and construct an inverse in the chain-homotopy category; see bounded solving below |
 
 Construction from a generic element explicitly attaches the supplied context; it cannot recover that element's original geometric provenance. Once attached, class equality and arithmetic retain both complete pairs. Abstractly isomorphic groups, matching matrix sizes, or identical induced homology maps do not identify contextual classes.
 
@@ -2242,6 +2243,56 @@ List<String> generators = math.flow(math.chainMapSpaces, Collections.singletonLi
 
 Composition is associative, unital and additive in both arguments. A representative is a deterministic **set-theoretic section**: it need not preserve addition, composition or identity matrices. For example, the identity class of an interval may have a constant-map representative. In a relative acyclic complex the identity class equals zero. Induced homology and cohomology maps are independent of the representative; arbitrary raw chain or cochain actions are not supplied as class operations.
 
-Hom reductions retain the existing bound of **256 total coefficients in each Hom degree -1, 0 and 1**, after quotient-basis filtering. One **5000000-unit budget** covers a whole construction or arithmetic/composition operation, including representative multiplication, matrix validation, Hom reduction, projection and lifting. Flat generator lists use one reduction and one Smith lift matrix and validate every output under the shared budget. Degreewise integral-map lists likewise share one budget. Shape/work exhaustion is `IMPLEMENTATION_FAILURE`, never a false equality, mathematical nonexistence or partial list. Integer coefficient bit lengths remain unbounded. No inverse-class solver or general geometric homotopy classification is added.
+Hom reductions retain the existing bound of **256 total coefficients in each Hom degree -1, 0 and 1**, after quotient-basis filtering. One **5000000-unit budget** covers a whole construction or arithmetic/composition operation, including representative multiplication, matrix validation, Hom reduction, projection and lifting. Flat generator lists use one reduction and one Smith lift matrix and validate every output under the shared budget. Degreewise integral-map lists likewise share one budget. Shape/work exhaustion is `IMPLEMENTATION_FAILURE`, never a false equality, mathematical nonexistence or partial list. Integer coefficient bit lengths remain unbounded. Bounded inverse solving is described below; general geometric homotopy classification remains outside scope.
 
 `NativeSimplicialChainMapClassTest` covers 6,561 independent point-matrix compositions, noncommuting composition and contravariance, associative and distributive laws, 125 interval maps classified independently by augmentation, circle degree actions, torsion invisible on homology, mixed free/torsion generators, nonadditive lifts, exact full-pair and presentation checks, changing ambient dimensions, empty shapes, aggregate and shared-list limits, actual native wrappers, and serialized repeatable scalar/flat flows.
+
+## Constructive integral homotopy inverses
+
+Five operations now decide and construct inverses up to integral chain homotopy. For a supplied `F:S -> T`, the solver finds a reverse chain map `G:T -> S` and degree-raising operators `H` on `S` and `K` on `T` satisfying
+
+```text
+d_S G = G d_T
+GF + d_S H + H d_S = id_S
+FG + d_T K + K d_T = id_T
+```
+
+These equations are linear in the unknown coefficients of `G`, `H` and `K`, because `F` is fixed. A single Smith decomposition solves them over the integers and sets free Smith coordinates to zero for a deterministic choice. Both inverse identities are required; a left or right inverse alone is insufficient. The witness orientation follows the existing `to - from` convention. This implements the [definition of chain-homotopy equivalence](https://stacks.math.columbia.edu/tag/010V) for the retained finite integral quotient chains.
+
+| Operation | Native result |
+| --- | --- |
+| `ChainMap.is-homotopy-equivalence` | Unary Boolean transfer; `false` precisely for an integral obstruction within the computation bounds |
+| `ChainMap.homotopy-inverse` | Unary closed operation returning one validated `G` with full endpoints reversed |
+| `ChainHomotopy.inverse-homotopies` | Unary flat transfer on a `ChainMap`; exactly `[GF -> id_S, FG -> id_T]` for the same solved `G` |
+| `ChainMapClass.is-isomorphism` | Unary Boolean transfer testing invertibility in the homotopy category |
+| `ChainMapClass.inverse` | Unary closed operation returning the unique inverse class with its canonical representative |
+
+Nonexistence makes the two inverse operations and the flat witness operation `OPERATION_UNDEFINED`. The flat operation never returns an empty or partial list to signal failure. Decisions propagate computation failures. Existing `ChainMap.is-isomorphism` and `ChainMap.inverse` retain their strict degreewise meaning. A constant map of an interval is a homotopy equivalence despite its singular matrices. On a relative complex with only `Z/2` homology, multiplication by any odd integer is a homotopy equivalence. Multiplication by three on the circle is not: rational invertibility does not satisfy the integral equations.
+
+```java
+ConcreteMathematics math = new ConcreteMathematics();
+RelativeSimplicialComplex interval = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0, 1))));
+BigInteger zero = BigInteger.ZERO, one = BigInteger.ONE;
+SimplicialChainMap constant = new SimplicialChainMap(interval, interval, Arrays.asList(
+        new IntegerMatrix(new BigInteger[][] {{one, one}, {zero, zero}}),
+        IntegerMatrix.zero(1, 1)));
+List<String> decision = math.flow(math.chainMaps, Collections.singletonList(constant))
+        .<Boolean>performAlgebraTransfer("is-homotopy-equivalence").collect();
+// [true]
+List<String> witnesses = math.flow(math.chainMaps, Collections.singletonList(constant))
+        .<SimplicialChainHomotopy>performFlatAlgebraTransfer("ChainHomotopy.inverse-homotopies")
+        .collect();
+// Exactly two explicit witnesses, source first and target second.
+SimplicialChainMapClass value = SimplicialChainMapClass.fromMap(constant);
+List<String> identity = math.flow(math.chainMapClasses, Collections.singletonList(value))
+        .performOneOperandOperation("inverse").performOperation("compose", value)
+        .<Boolean>performAlgebraTransfer("is-identity").collect();
+// [true]
+```
+
+With quotient ranks `s_k` and `t_k`, the whole system permits at most **256 equations**, counted as `sum_k(s_k^2 + t_k^2 + s_(k-1)*t_k)`, and **256 unknown coefficients**, counted as `sum_k(s_k*t_k + s_(k+1)*s_k + t_(k+1)*t_k)`. Missing degrees have rank zero. The counts include zero equations and obvious identity maps. Quotient filtering precedes these bounds. The two returned homotopies retain their respective endpoint degree ranges, which can differ.
+
+One **5000000-unit budget** covers matrix assembly, Smith solving, reverse-map validation, composite and identity construction, and both witness validations. Class inversion also shares this budget with the reverse Hom reduction, projection and canonical lift, which keep their existing Hom-rank bounds. Successful standalone stages need not fit when combined. Exhaustion raises `IMPLEMENTATION_FAILURE`, never a false decision, mathematical nonexistence or partial list. Coefficients have no bit-length cap. Representative choices need not be involutive or geometric; inverse **classes** are unique, involutive, and reverse composition order. This does not decide geometric homotopy equivalence of spaces.
+
+`NativeSimplicialChainInverseTest` adds 13 tests covering independent determinants and adjugates for 625 point maps, 125 interval maps, all 25 relative interval contexts, one-sided inverses, 49 independent circle degree pairs, relative `Z/2` units and 1025-bit coefficients, direct boundary checks for both homotopies, different labels and dimensions, empty/acyclic contexts, inverse-class laws, aggregate bounds, shared normalization budgets and serialized native scalar/flat flows.

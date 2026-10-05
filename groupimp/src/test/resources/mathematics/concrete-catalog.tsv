@@ -1419,6 +1419,8 @@ ChainMap.homology-map	SimplicialChainMapAlgebra	homology-map	ChainMap	N	AbelianG
 ChainMap.cohomology-map	SimplicialChainMapAlgebra	cohomology-map	ChainMap	N	AbelianGroupHomomorphism	SCALAR	TOTAL	IUnsafeOperation
 ChainMap.homology-maps	SimplicialChainMapAlgebra	homology-maps	ChainMap	-	AbelianGroupHomomorphism	LIST	TOTAL	ITransferFlatOperation
 ChainMap.cohomology-maps	SimplicialChainMapAlgebra	cohomology-maps	ChainMap	-	AbelianGroupHomomorphism	LIST	TOTAL	ITransferFlatOperation
+ChainMap.is-homotopy-equivalence	SimplicialChainMapAlgebra	is-homotopy-equivalence	ChainMap	-	Boolean	SCALAR	TOTAL	ITransferOperation
+ChainMap.homotopy-inverse	SimplicialChainMapAlgebra	homotopy-inverse	ChainMap	-	ChainMap	SCALAR	PARTIAL	IOneOperandOperation
 ChainHomotopy.from-data	SimplicialChainHomotopyAlgebra	ChainHomotopy.from-data	ChainHomotopy.data	-	ChainHomotopy	SCALAR	PARTIAL	ITransferOperation
 ChainHomotopy.stationary	SimplicialChainHomotopyAlgebra	ChainHomotopy.stationary	ChainMap	-	ChainHomotopy	SCALAR	TOTAL	ITransferOperation
 ChainHomotopy.from-prism	SimplicialChainHomotopyAlgebra	ChainHomotopy.from-prism	SimplicialHomotopy	-	ChainHomotopy	SCALAR	TOTAL	ITransferOperation
@@ -1451,6 +1453,7 @@ ChainHomotopy.cohomology-maps	SimplicialChainHomotopyAlgebra	cohomology-maps	Cha
 ChainHomotopy.are-homotopic	SimplicialChainHomotopyAlgebra	ChainHomotopy.are-homotopic	ChainMap	ChainMap	Boolean	SCALAR	PARTIAL	ICustomResultOperation
 ChainHomotopy.between	SimplicialChainHomotopyAlgebra	ChainHomotopy.between	ChainMap	ChainMap	ChainHomotopy	SCALAR	PARTIAL	ICustomResultOperation
 ChainHomotopy.solution-generators	SimplicialChainHomotopyAlgebra	ChainHomotopy.solution-generators	ChainMap	ChainMap	ChainHomotopy	LIST	PARTIAL	ICustomResultFlatOperation
+ChainHomotopy.inverse-homotopies	SimplicialChainHomotopyAlgebra	ChainHomotopy.inverse-homotopies	ChainMap	-	ChainHomotopy	LIST	PARTIAL	ITransferFlatOperation
 ChainMapSpace.from-pairs	SimplicialChainMapSpaceAlgebra	ChainMapSpace.from-pairs	RelativeComplex	RelativeComplex	ChainMapSpace	SCALAR	TOTAL	ICustomResultOperation
 ChainMapSpace.source	SimplicialChainMapSpaceAlgebra	source	ChainMapSpace	-	RelativeComplex	SCALAR	TOTAL	ITransferOperation
 ChainMapSpace.target	SimplicialChainMapSpaceAlgebra	target	ChainMapSpace	-	RelativeComplex	SCALAR	TOTAL	ITransferOperation
@@ -1493,6 +1496,8 @@ ChainMapClass.cohomology-map	SimplicialChainMapClassAlgebra	cohomology-map	Chain
 ChainMapClass.homology-maps	SimplicialChainMapClassAlgebra	homology-maps	ChainMapClass	-	AbelianGroupHomomorphism	LIST	TOTAL	ITransferFlatOperation
 ChainMapClass.cohomology-maps	SimplicialChainMapClassAlgebra	cohomology-maps	ChainMapClass	-	AbelianGroupHomomorphism	LIST	TOTAL	ITransferFlatOperation
 ChainMapClass.generators-in	SimplicialChainMapClassAlgebra	ChainMapClass.generators-in	ChainMapSpace	-	ChainMapClass	LIST	TOTAL	ITransferFlatOperation
+ChainMapClass.is-isomorphism	SimplicialChainMapClassAlgebra	is-isomorphism	ChainMapClass	-	Boolean	SCALAR	TOTAL	ITransferOperation
+ChainMapClass.inverse	SimplicialChainMapClassAlgebra	inverse	ChainMapClass	-	ChainMapClass	SCALAR	PARTIAL	IOneOperandOperation
 Z/5Z.add	PrimeField	add	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL	IOperation
 Z/5Z.subtract	PrimeField	subtract	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL	IOperation
 Z/5Z.multiply	PrimeField	multiply	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL	IOperation

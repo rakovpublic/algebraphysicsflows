@@ -33,6 +33,8 @@ public final class SimplicialChainMapClassAlgebra extends ConcreteAlgebra<Simpli
         unaryFlat("homology-maps",algebra(),homomorphisms.algebra(),false,SimplicialChainMapClass::homologyMaps);
         unaryFlat("cohomology-maps",algebra(),homomorphisms.algebra(),false,SimplicialChainMapClass::cohomologyMaps);
         unaryFlat("generators-in",spaces.algebra(),algebra(),false,SimplicialChainMapClass::generatorsIn);
+        unary("is-isomorphism",algebra(),truth.algebra(),false,SimplicialChainMapClass::isIsomorphism);
+        unary("inverse",algebra(),algebra(),true,SimplicialChainMapClass::inverse);
         law("Each full source/target context is an abelian group of integral chain-homotopy classes. Equality retains the full context and detects torsion invisible on homology.");
         law("Composition is associative, additive in each argument and unital on matching full pairs; homology is covariant and cohomology contravariant.");
         law("The representative is a deterministic section on sets, not generally additive or functorial. Its exact matrices and actions on noncycles are not invariants of the class.");

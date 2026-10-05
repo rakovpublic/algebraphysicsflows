@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 1975 |
-| DIRECTLY_SUPPORTED | 1732 |
+| Scoped records | 1980 |
+| DIRECTLY_SUPPORTED | 1737 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1591 |
+| IMPLEMENTED | 1596 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1659 |
+| MACHINE_TESTED | 1664 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1568 | 1568 | 0 | 0 | 0 | 1568 | 0 | 0 |
+| Concrete MathTool algebras | 1573 | 1573 | 0 | 0 | 0 | 1573 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -305,6 +305,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | ChainHomotopy.from-prism | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral homotopies between full simplicial chain maps, with checked witnesses, bounded Smith solving, complete affine solution generators, composition and typed fillings; native operation ChainHomotopy.from-prism |
 | ChainHomotopy.from-subdivision | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral homotopies between full simplicial chain maps, with checked witnesses, bounded Smith solving, complete affine solution generators, composition and typed fillings; native operation ChainHomotopy.from-subdivision |
 | ChainHomotopy.homology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral homotopies between full simplicial chain maps, with checked witnesses, bounded Smith solving, complete affine solution generators, composition and typed fillings; native operation ChainHomotopy.homology-maps |
+| ChainHomotopy.inverse-homotopies | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral homotopies between full simplicial chain maps, with checked witnesses, bounded Smith solving, complete affine solution generators, composition and typed fillings; native operation ChainHomotopy.inverse-homotopies |
 | ChainHomotopy.on-absolute-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral homotopies between full simplicial chain maps, with checked witnesses, bounded Smith solving, complete affine solution generators, composition and typed fillings; native operation ChainHomotopy.on-absolute-chain |
 | ChainHomotopy.on-absolute-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral homotopies between full simplicial chain maps, with checked witnesses, bounded Smith solving, complete affine solution generators, composition and typed fillings; native operation ChainHomotopy.on-absolute-cochain |
 | ChainHomotopy.on-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral homotopies between full simplicial chain maps, with checked witnesses, bounded Smith solving, complete affine solution generators, composition and typed fillings; native operation ChainHomotopy.on-chain |
@@ -337,8 +338,10 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | ChainMap.from-subdivision | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.from-subdivision |
 | ChainMap.homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.homology-map |
 | ChainMap.homology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.homology-maps |
+| ChainMap.homotopy-inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.homotopy-inverse |
 | ChainMap.identity-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.identity-on |
 | ChainMap.inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.inverse |
+| ChainMap.is-homotopy-equivalence | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.is-homotopy-equivalence |
 | ChainMap.is-identity | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.is-identity |
 | ChainMap.is-isomorphism | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.is-isomorphism |
 | ChainMap.is-zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.is-zero |
@@ -365,7 +368,9 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | ChainMapClass.homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.homology-map |
 | ChainMapClass.homology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.homology-maps |
 | ChainMapClass.identity-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.identity-on |
+| ChainMapClass.inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.inverse |
 | ChainMapClass.is-identity | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.is-identity |
+| ChainMapClass.is-isomorphism | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.is-isomorphism |
 | ChainMapClass.is-zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.is-zero |
 | ChainMapClass.negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.negate |
 | ChainMapClass.order | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps; native operation ChainMapClass.order |
