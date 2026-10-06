@@ -34,7 +34,7 @@ public final class IntegralChainMappingCone implements Serializable {
         work.use((long)matrix.rows()*matrix.columns());
         for(int r=0;r<matrix.rows();r++) for(int c=0;c<matrix.columns();c++) into[row+r][column+c]=negate?matrix.get(r,c).negate():matrix.get(r,c);
     }
-    private IntegerMatrix boundary(BigInteger degree,Computation work) {
+    IntegerMatrix boundary(BigInteger degree,Computation work) {
         BigInteger previous=degree.subtract(BigInteger.ONE); int rows=rank(previous),columns=rank(degree),t=target().basis(degree).size(),previousT=target().basis(previous).size();
         BigInteger[][] entries=zeros(rows,columns,work);
         block(entries,target().boundaryMatrix(degree,work),0,0,false,work);

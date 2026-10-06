@@ -10,6 +10,8 @@ DATABASE = ROOT / "mathematics-coverage.json"
 MANIFEST = ROOT / "groupimp/src/test/resources/mathematics/concrete-catalog.tsv"
 DATE = "2026-10-06"
 OWNERS = {
+    "IntegralConeChainAlgebra": ("ConeChain", "Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps"),
+    "IntegralConeCochainAlgebra": ("ConeCochain", "Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing"),
     "IntegralChainConeMapAlgebra": ("ChainConeMap", "Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps"),
     "IntegralChainMappingConeAlgebra": ("ChainCone", "Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences"),
     "SimplicialChainEquivalenceAlgebra": ("ChainEquivalence", "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions"),
@@ -97,6 +99,8 @@ INTERFACES = {
     "IUnsafeFlatOperation": "flat/MixedFlatOperation",
 }
 EXTRA_TESTS = {
+    "IntegralConeChainAlgebra": "NativeIntegralConeElementsTest",
+    "IntegralConeCochainAlgebra": "NativeIntegralConeElementsTest",
     "IntegralChainConeMapAlgebra": "NativeIntegralChainConeMapTest",
     "IntegralChainMappingConeAlgebra": "NativeIntegralChainConeTest",
     "SimplicialChainEquivalenceAlgebra": "NativeSimplicialChainEquivalenceTest",
@@ -195,7 +199,66 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "IntegralConeChainAlgebra": {
+        "zero-on": "Construct zero coordinates in the requested homogeneous degree of the exact retained cone. Chain degrees are arbitrary integers; every negative group is zero.",
+        "basis-on": "Return the ordered coordinate unit basis, with target coordinates before shifted source coordinates. Each output retains the exact cone and degree; a rank-zero group yields an empty list.",
+        "add": "Require the exact same defining cone and degree, then add integral coordinates. Equal dimensions or abstract homology types are insufficient.",
+        "subtract": "Require the exact same cone and degree and subtract coordinates without changing the retained context.",
+        "negate": "Negate all coordinates, retaining the defining cone and homogeneous degree.",
+        "scale": "Multiply all coordinates by the supplied integer. No coefficient bit-length cap; retain the exact cone and degree.",
+        "equal": "Compare the exact defining cone map, homogeneous degree and all integral coordinates, not classes modulo boundaries.",
+        "cone": "Return the exact retained cone and defining chain map.",
+        "degree": "Return the homogeneous degree in the registered degree carrier.",
+        "coordinates": "Return immutable target-first and shifted-source integral coordinates.",
+        "with-coordinates": "Replace coordinates only when their length matches the full cone group in the retained degree. Return the first carrier wrapper through ICustomMemberOperation.",
+        "is-zero": "Whether every coordinate is zero; no quotient by boundaries is taken.",
+        "class-of": "Require a cycle or cocycle as appropriate and project to its retained integral quotient presentation, including torsion. The reduction and class projection share one computation budget.",
+        "representative": "Use the typed value only for its cone and degree. Require equality with its exact integral group presentation and return a representative with that cone and degree. Anonymous abelian elements carry presentation equality, not independent geometric provenance; reduction and lifting share one budget.",
+        "boundary": "Apply the signed cone boundary D_n and return a ConeChain in degree n-1, allowing negative zero degrees. D squared is zero.",
+        "is-cycle": "Check D_n c=0 on the retained cone; negative zero chains are cycles.",
+        "is-boundary": "Decide integral solvability of D_(n+1) b=c. Exact divisibility is required; resource exhaustion is IMPLEMENTATION_FAILURE, never false.",
+        "bounding-coordinates": "Solve D_(n+1) b=c over integers and return one deterministic coordinate solution. Non-boundaries raise OPERATION_UNDEFINED; the kernel parametrizes the other solutions.",
+        "bounding-chain": "Return one typed primitive b on the same cone in degree n+1 with boundary b=c. All integer degrees, including negative zero groups, are retained; non-boundaries are OPERATION_UNDEFINED.",
+        "homologous": "Require the exact same cone and degree and require both operands to be cycles. Decide whether their difference bounds, sharing one budget for both cycle checks and the integer solve.",
+        "homology": "Return the constructive integral homology in the retained degree, including adjacent zero presentation shapes at negative degrees.",
+        "cycle-generators": "Return typed representative cycles for the full integral homology generating set, including torsion. Reduction and complete generator extraction share one budget; no partial list is returned.",
+        "target-part": "Extract the relative target chain t in degree n from (t,s). This coordinate projection generally does not commute with boundary.",
+        "source-part": "Extract the relative source chain s in degree n-1, retaining negative zero groups. Projection anticommutes with the unshifted source boundary.",
+        "include-target": "Require the exact full target pair of the cone map and insert a relative chain t as (t,0) in the same degree. This commutes with boundary.",
+        "lift-source": "Require the exact full source pair and insert a relative degree k chain s as (0,s) in cone degree k+1. This coordinate section is not generally a chain map: D lift(s)=include(Fs)-lift(ds).",
+    },
+    "IntegralConeCochainAlgebra": {
+        "zero-on": "Construct zero coordinates in the requested homogeneous degree of the exact retained cone. Cochain degrees are nonnegative.",
+        "basis-on": "Return the ordered coordinate unit basis, with target coordinates before shifted source coordinates. Each output retains the exact cone and degree; a rank-zero group yields an empty list.",
+        "add": "Require the exact same defining cone and degree, then add integral coordinates. Equal dimensions or abstract homology types are insufficient.",
+        "subtract": "Require the exact same cone and degree and subtract coordinates without changing the retained context.",
+        "negate": "Negate all coordinates, retaining the defining cone and homogeneous degree.",
+        "scale": "Multiply all coordinates by the supplied integer. No coefficient bit-length cap; retain the exact cone and degree.",
+        "equal": "Compare the exact defining cone map, homogeneous degree and all integral coordinates, not classes modulo boundaries.",
+        "cone": "Return the exact retained cone and defining chain map.",
+        "degree": "Return the homogeneous degree in the registered degree carrier.",
+        "coordinates": "Return immutable target-first and shifted-source integral coordinates.",
+        "with-coordinates": "Replace coordinates only when their length matches the full cone group in the retained degree. Return the first carrier wrapper through ICustomMemberOperation.",
+        "is-zero": "Whether every coordinate is zero; no quotient by boundaries is taken.",
+        "class-of": "Require a cycle or cocycle as appropriate and project to its retained integral quotient presentation, including torsion. The reduction and class projection share one computation budget.",
+        "representative": "Use the typed value only for its cone and degree. Require equality with its exact integral group presentation and return a representative with that cone and degree. Anonymous abelian elements carry presentation equality, not independent geometric provenance; reduction and lifting share one budget.",
+        "coboundary": "Apply transpose(D_(n+1)) and return a ConeCochain in degree n+1. Coboundary squares to zero.",
+        "is-cocycle": "Check transpose(D_(n+1)) u=0 in integral coordinates.",
+        "is-coboundary": "Decide whether transpose(D_n) v=u has an integer solution. At degree zero this holds exactly for the zero cochain, even though negative typed cochains are absent.",
+        "cobounding-coordinates": "Solve transpose(D_n) v=u integrally. At degree zero the zero cochain returns empty primitive coordinates; a non-coboundary is OPERATION_UNDEFINED.",
+        "cobounding-cochain": "Require positive degree and integral solvability, then return a typed primitive in degree n-1 on the exact cone. At degree zero use cobounding-coordinates because this carrier excludes negative cochains.",
+        "cohomologous": "Require the same exact cone and degree and two cocycles; decide whether their difference is an integral coboundary. Both checks and the solve share one budget.",
+        "cohomology": "Return constructive integral cohomology in the retained natural degree, preserving cocycle bases, presentations and torsion.",
+        "cocycle-generators": "Return typed integral cocycle representatives for the full cohomology generating set, including torsion. One budget covers reduction and complete extraction.",
+        "target-part": "Restrict a cone cochain (u,v) to its relative target component u in degree n. This pullback along inclusion commutes with coboundary.",
+        "source-part": "Require positive cone degree and extract the relative source cochain v in degree n-1. This coordinate projection generally does not commute with coboundary; degree zero cannot produce a negative typed relative cochain.",
+        "include-source": "Require the exact full source pair and insert a degree k relative cochain v as (0,v) in cone degree k+1. This is the shifted projection pullback and anticommutes with source coboundary.",
+        "lift-target": "Require the exact full target pair and insert a relative cochain u as (u,0) in the same cone degree. The coordinate lift is generally not a cochain map: delta lift(u)=lift(delta u)+include(F* u).",
+        "evaluate": "Pair with a ConeChain only when the exact defining cone and degrees coincide. Return the integer dot product; pairing satisfies <delta u,c>=<u,Dc> and is preserved by cone-map pushforward and pullback.",
+    },
     "IntegralChainConeMapAlgebra": {
+        "on-chain": "Require the exact source cone, including its defining map. Apply the signed cone-map matrix to a typed chain and return the actual ConeChain second-carrier wrapper via ILeftProjectionOperation. Preserve degree; negative zero chains map to negative zero chains on the target cone.",
+        "on-cochain": "Require the exact target cone and pull back using the transposed signed matrix. Return the actual ConeCochain second-carrier wrapper via ILeftProjectionOperation, on the source cone in the same natural degree. Matrix assembly, transpose and application share one budget.",
         "from-data": "Validate all four full labelled endpoints and the exact supplied witness H:bF->Ga. Data membership only asserts individually valid nonnull components. Construction shares the two composite calculations and rejects incompatible maps or reversed witnesses as OPERATION_UNDEFINED; it does not eagerly reduce cone homology.",
         "data": "Return immutable source and target cones, both vertical chain maps a and b, and the exact chosen integral homotopy H. No witness normalization or replacement is performed.",
         "identity-on": "Construct the identity of the supplied exact cone with identity vertical maps and the stationary zero homotopy on its defining map. Construction and validation share one budget.",
@@ -1676,6 +1739,10 @@ OWNER_CONDITIONS["RationalMatrixFamily"]["companion"] = "The polynomial has posi
 
 def record(identifier, owner, concept, paths, operation=None):
     carrier, scope = OWNERS[owner]
+    if owner in ("IntegralConeChainAlgebra", "IntegralConeCochainAlgebra"):
+        paths = paths + ["groupimp/src/main/java/mathematics/topology/" + name + ".java" for name in
+                         ("IntegralConeChain", "IntegralConeCochain", "IntegralChainMappingCone", "IntegralHomology", "RelativeSimplicialChain", "RelativeSimplicialCochain")]
+        paths += ["groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java", "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java"]
     if owner == "IntegralChainConeMapAlgebra":
         paths = paths + ["groupimp/src/main/java/mathematics/topology/" + name + ".java" for name in
                          ("IntegralChainConeMap", "IntegralChainMappingCone", "SimplicialChainMap", "SimplicialChainHomotopy", "IntegralHomology", "RelativeSimplicialComplex")]
@@ -1794,6 +1861,9 @@ def record(identifier, owner, concept, paths, operation=None):
                          "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
                          "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
     tests = ["groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java"]
+    if operation and operation["id"] in ("ChainConeMap.on-chain", "ChainConeMap.on-cochain"):
+        paths += ["groupimp/src/main/java/mathematics/topology/IntegralConeChain.java", "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java"]
+        tests.append("groupimp/src/test/java/operations/NativeIntegralConeElementsTest.java")
     if operation and operation["id"] == "ChainMap.is-quasi-isomorphism":
         paths = paths + ["groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java"]
         tests.append("groupimp/src/test/java/operations/NativeIntegralChainConeTest.java")
@@ -2020,9 +2090,14 @@ def record(identifier, owner, concept, paths, operation=None):
             value["known_limitations"].append("Iteration is capped at 10000 steps; exceeding it is IMPLEMENTATION_FAILURE. Exact values can still grow rapidly within this limit.")
         if operation_name in ("argmin", "argmax", "minimum", "maximum", "minimizers", "maximizers"):
             value["known_limitations"].append("Optimality is relative only to the explicit finite feasible set, not all integers or reals.")
+    if owner in ("IntegralConeChainAlgebra", "IntegralConeCochainAlgebra"):
+        value["required_invariants"].append("Retain the exact defining cone map, homogeneous degree and integral coordinates ordered target first and shifted source second. Additive operations and pairing require matching full contexts and degrees. Signed boundary and transposed coboundary square to zero. Structural inclusions and coordinate lifts retain their explicit degree shifts and signs. Integral classes and representatives retain torsion and actual presentations.")
+        value["known_limitations"] += ["Finite typed integral coordinates on the existing ChainCone carrier only. Each required quotient basis and combined cone rank is bounded by 256 after filtering. Valid typed membership checks the current degree; later adjacent differentials or reductions may exceed resource bounds. Integer bit lengths are unbounded. One 5000000-unit budget covers each compound differential/solve, each complete homology or cohomology calculation with class projection or representative lifting, and each complete generator list. Exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists.",
+            "Chain degrees are arbitrary integers with negative groups zero; cochain degrees are nonnegative. Degree-zero cobounding-coordinates can return the empty primitive, but cobounding-cochain and source-part require positive cochain degree because negative typed cochains are absent. Coordinate sections are generally not differential-preserving maps. No canonical cup product, cap product, geometric cone realization, general chain-complex carrier or independent geometric provenance for anonymous abelian classes is asserted."]
+        value["references"].append("https://stacks.math.columbia.edu/tag/014D")
     if owner == "IntegralChainConeMapAlgebra":
         value["required_invariants"].append("Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations.")
-        value["known_limitations"] += ["Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. No arbitrary cone-map matrices, typed cone chains, geometric realization or general chain-complex carrier are added.",
+        value["known_limitations"] += ["Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. Typed actions use ConeChain and ConeCochain with exact cone checks and second-carrier wrappers. No arbitrary cone-map matrices, geometric realization or general chain-complex carrier are added.",
             "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."]
         value["references"].append("https://stacks.math.columbia.edu/tag/014D")
     if owner == "IntegralChainMappingConeAlgebra" or (operation and operation["id"] == "ChainMap.is-quasi-isomorphism"):
@@ -2338,6 +2413,12 @@ def synchronize(data, rows):
             if unchanged == old:
                 value["provenance"]["date"] = old["provenance"]["date"]
     descriptors = [
+        ("ConeChain", "Typed integral mapping-cone chains", "mathematics.topology.IntegralConeChain",
+         ["Exact defining cone map and integer homogeneous degree", "Target-first plus shifted-source coordinates of the required combined rank", "Negative groups contain only zero", "Signed boundary, integral classes and typed primitives", "Membership does not imply every adjacent bounded reduction will fit"],
+         ["ChainCone", "ChainConeMap", "ConeCochain", "RelativeChain", "Vec(Z)", "IntegralHomology", "AbelianGroupElement", "Z", "Boolean"]),
+        ("ConeCochain", "Typed integral mapping-cone cochains", "mathematics.topology.IntegralConeCochain",
+         ["Exact defining cone map and natural homogeneous degree", "Target-first plus shifted-source coordinates with transposed differential", "Typed source extraction and primitive require positive degree", "Integral pairing requires matching cone and degree", "Membership does not imply every adjacent bounded reduction will fit"],
+         ["ChainCone", "ChainConeMap", "ConeChain", "RelativeCochain", "Vec(Z)", "IntegralHomology", "AbelianGroupElement", "N", "Z", "Boolean"]),
         ("ChainConeMap", "Integral maps between retained mapping cones", "mathematics.topology.IntegralChainConeMap",
          ["Exact source and target defining maps and four labelled pairs retained", "Vertical maps and chosen homotopy H:bF->Ga checked", "Signed matrices [[b,-H],[0,a]] preserve cone differentials", "Composition retains transported witnesses", "Chosen homotopies can change integral homology maps", "Compound reductions, lists and composition share resource budgets"],
          ["ChainConeMap.data", "ChainCone", "ChainMap", "ChainHomotopy", "Mat(Z)", "AbelianGroupHomomorphism", "N", "Boolean"]),

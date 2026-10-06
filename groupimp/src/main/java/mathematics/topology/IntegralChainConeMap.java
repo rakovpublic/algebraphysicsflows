@@ -123,6 +123,15 @@ public final class IntegralChainConeMap implements Serializable {
         AbelianGroupHomomorphism c=induced(degree,true,work),next=induced(degree.add(BigInteger.ONE),true,work);
         return Collections.unmodifiableList(Arrays.asList(c,endpointMap(targetMap(),degree,true,work),endpointMap(sourceMap(),degree,true,work),next));
     }
+    public IntegralConeChain onChain(IntegralConeChain chain) {
+        if(!source().equals(chain.cone())) throw MathFailure.undefined("Cone pushforward requires the exact source defining map");
+        if(chain.degree().signum()<0) return IntegralConeChain.zero(target(),chain.degree());
+        Computation work=new Computation(); return new IntegralConeChain(target(),chain.degree(),work.apply(matrix(chain.degree(),work),chain.coordinates()));
+    }
+    public IntegralConeCochain onCochain(IntegralConeCochain cochain) {
+        if(!target().equals(cochain.cone())) throw MathFailure.undefined("Cone pullback requires the exact target defining map");
+        Computation work=new Computation(); return new IntegralConeCochain(source(),cochain.degree(),work.apply(transpose(matrix(cochain.degree(),work),work),cochain.coordinates()));
+    }
     @Override public boolean equals(Object other) { return other instanceof IntegralChainConeMap && data.equals(((IntegralChainConeMap)other).data); }
     @Override public int hashCode() { return data.hashCode(); }
     @Override public String toString() { return "ChainConeMap("+data.contents()+")"; }

@@ -26,4 +26,6 @@ Checked collapse sequences now compose those steps and perform deterministic gre
 
 `ChainCone` adds 24 native operations for integral mapping cones of retained chain maps, including signed boundaries, constructive homology/cohomology, inclusion and shifted projection maps, and both long exact sequences. Scalar and flat MathTool flows preserve integral torsion and exact presentations. `ChainMap.is-quasi-isomorphism` decides whether the cone is acyclic without invoking the simultaneous inverse solver.
 
-`ChainConeMap` adds 21 native operations for maps between cones from supplied homotopy-commutative squares. It retains the chosen homotopy, composes the resulting maps, and exposes both integral homology/cohomology maps and all four vertical maps between their exact sequences through scalar and flat MathTool flows.
+`ChainConeMap` provides 23 native operations for maps between cones from supplied homotopy-commutative squares. It retains the chosen homotopy, composes the resulting maps, and exposes both integral homology/cohomology maps and all four vertical maps between their exact sequences through scalar and flat MathTool flows.
+
+`ConeChain` and `ConeCochain` add 53 operations for typed cone coordinates, boundaries/coboundaries, integral classes and generators, typed primitives, structural components and pairing. Cone-map pushforward and pullback use `ILeftProjectionOperation` and return the actual second carrier wrapper. Unary and flat operations compose directly in AlgebraFlow.

@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1589 native operations from 69 algebra builders.
+The default initializer currently installs 1644 native operations from 71 algebra builders.
 
 ## Existing API usage
 
@@ -2462,8 +2462,9 @@ The chosen homotopy is part of the value. Even a stationary square can have nonz
 | `chain-matrix`, `cochain-matrix`, `chain-matrices`, `cochain-matrices` | One degree matrix or the complete list; cochain pullback uses transposes. |
 | `homology-map`, `cohomology-map`, `homology-maps`, `cohomology-maps` | Induced integral maps in one degree or every formal degree. |
 | `homology-naturality-maps`, `cohomology-naturality-maps` | The four vertical maps between the corresponding exact sequence segments. |
+| `on-chain`, `on-cochain` | Typed pushforward and contravariant pullback, returning the actual second carrier wrapper. |
 
-These 21 operations use the existing `operations/simple` and `operations/flat` interfaces. The homology naturality list is `[H_n(a), H_n(b), H_n(cone map), H_(n-1)(a)]`. The cohomology list is `[H^n(cone map), H^n(b), H^n(a), H^(n+1)(cone map)]`, running from the target segment back to the source segment. All three squares commute in each diagram, with equality of the actual presentations at their joins.
+These 23 operations use the existing `operations/simple` and `operations/flat` interfaces. The homology naturality list is `[H_n(a), H_n(b), H_n(cone map), H_(n-1)(a)]`. The cohomology list is `[H^n(cone map), H^n(b), H^n(a), H^(n+1)(cone map)]`, running from the target segment back to the source segment. All three squares commute in each diagram, with equality of the actual presentations at their joins.
 
 The example below retains a nonzero loop from a point into the circle. Its cone map changes homology even though both vertical chain maps are identities:
 
@@ -2494,6 +2495,57 @@ List<String> isomorphisms = math.flow(math.chainConeMaps, Collections.singletonL
 
 Converting the reverse homotopy gives a strict inverse to `from-homotopy`, including its retained witness data. General squares need a `Data` value and `ChainConeMap.from-data`; this validates all four full labelled endpoint pairs and both witness composites. Merely equal homology groups, matching dimensions or an oppositely oriented witness are insufficient. Supplied component objects are immutable and individually valid, while `Data` membership does not assert their mutual compatibility.
 
-Public degrees are nonnegative. Lists run through the larger formal cone dimension, retaining zero slots and rectangular zero shapes; both empty cones give empty lists. The degree-zero homology naturality list retains the adjacent negative endpoint presentations. Each required quotient basis and combined cone rank is at most **256**. A single **5000000-unit budget** covers each full constructor, composition with both witness transports and validation, induced map with both cone reductions, whole-degree list, or four-map naturality list. Valid data may exceed later evaluation limits; exhaustion raises `IMPLEMENTATION_FAILURE`. Integer coefficients have no bit-length cap. This carrier does not add arbitrary cone-map matrix input, typed cone chains, a geometric realization, or a homotopy-independent choice of cone morphism.
+Public degrees are nonnegative. Lists run through the larger formal cone dimension, retaining zero slots and rectangular zero shapes; both empty cones give empty lists. The degree-zero homology naturality list retains the adjacent negative endpoint presentations. Each required quotient basis and combined cone rank is at most **256**. A single **5000000-unit budget** covers each full constructor, composition with both witness transports and validation, induced map with both cone reductions, whole-degree list, or four-map naturality list. Valid data may exceed later evaluation limits; exhaustion raises `IMPLEMENTATION_FAILURE`. Integer coefficients have no bit-length cap. Typed actions on `ConeChain` and `ConeCochain` are described below. This carrier does not add arbitrary cone-map matrix input, a geometric realization, or a homotopy-independent choice of cone morphism.
 
 `NativeIntegralChainConeMapTest` adds 17 tests covering 125 signed interval homotopies, 729 independent witness compositions and 6,561 point-matrix compositions. Further cases check associativity, both variances, all six naturality squares, projective-plane torsion, relative degree shifts, empty and filtered pairs, negative endpoint presentations, 1025-bit coefficients, shared composition/list/naturality budgets, actual wrappers and serialized repeatable flows.
+
+## Typed chains and cochains on integral cones
+
+`IntegralConeChainAlgebra` and `IntegralConeCochainAlgebra` register `ConeChain` and `ConeCochain`, with 26 and 27 operations. Each immutable value retains the exact defining cone map, a homogeneous degree, and integer coordinates ordered target first and shifted source second. Chain degrees are integers; negative groups contain only zero. Cochain degrees are nonnegative. Context checks use the full defining map and labelled pairs, even when two cones have equal homology groups or equal coordinate ranks.
+
+| Operations on both carriers | Result |
+| --- | --- |
+| `zero-on`, `basis-on` on `ChainCone` | A zero value or the ordered coordinate unit basis at the requested degree. |
+| `add`, `subtract`, `negate`, `scale`, `equal`, `is-zero` | Integral arithmetic or equality on exact contexts and degrees. |
+| `cone`, `degree`, `coordinates`, `with-coordinates` | Context inspection or replacement of correctly sized coordinates. |
+| `class-of`, `representative` | Projection to an integral quotient class, or a typed representative in the chosen cone and degree. |
+| `target-part`, `source-part` | Components on the actual relative target in degree `n` and source in degree `n-1`. |
+
+`ConeChain` additionally supplies `boundary`, `is-cycle`, `is-boundary`, `bounding-coordinates`, `bounding-chain`, `homologous`, `homology`, `cycle-generators`, `include-target`, and `lift-source`. `ConeCochain` supplies `coboundary`, `is-cocycle`, `is-coboundary`, `cobounding-coordinates`, `cobounding-cochain`, `cohomologous`, `cohomology`, `cocycle-generators`, `include-source`, `lift-target`, and `evaluate`. The two generator operations are native unary flat operations and return typed values with the original cone and degree.
+
+For a cone chain `(t,s)`, boundary is `(d_T t + F s, -d_S s)`. Target inclusion `t -> (t,0)` commutes with boundary. The source coordinate lift raises degree and satisfies `D lift(s) = include(Fs) - lift(ds)`; it is generally not a chain map. Dually, coboundary on `(u,v)` is `(delta_T u, F* u - delta_S v)`. Source inclusion raises degree and anticommutes with coboundary, while target lift satisfies `delta lift(u) = lift(delta u) + include(F* u)`. Component extraction preserves these exact relative contexts. Pairing is the integer dot product and satisfies `<delta u,c> = <u,Dc>`.
+
+`ChainConeMap.on-chain` and `on-cochain` use `ILeftProjectionOperation`: the map is the first operand, and the returned `IAlgebraItem` belongs to the second operand's actual `ConeChain` or `ConeCochain` algebra. Pushforward requires the exact source cone; pullback requires the exact target cone. Both preserve degree and commute with differentials, and pairing is preserved under pushforward/pullback. `with-coordinates` and `scale` use `ICustomMemberOperation` and retain the first carrier.
+
+```java
+ConcreteMathematics math = new ConcreteMathematics();
+RelativeSimplicialComplex point = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))));
+IntegralChainMappingCone cone = new IntegralChainMappingCone(
+        SimplicialChainMap.identity(point).scale(BigInteger.valueOf(2)));
+List<String> orders = math.flow(math.chainCones, Collections.singletonList(cone))
+        .<IntegralConeChain, BigInteger>performAlgebraUnsafe("ConeChain.zero-on", BigInteger.ZERO)
+        .performOneOperandFlatOperation("cycle-generators")
+        .<AbelianGroupElement>performAlgebraTransfer("class-of")
+        .<BigInteger>performAlgebraTransfer("order").collect();
+// [2]
+List<String> primitive = math.flow(math.chainCones, Collections.singletonList(cone))
+        .<IntegralConeChain, BigInteger>performAlgebraUnsafe("ConeChain.zero-on", BigInteger.ZERO)
+        .performCustomMemberOperation("with-coordinates", new IntegerVector(BigInteger.valueOf(2)))
+        .performOneOperandOperation("bounding-chain")
+        .<IntegerVector>performAlgebraTransfer("coordinates").collect();
+// [[1]]: the returned chain has degree one, and its boundary is [2].
+IntegralChainConeMap identity = IntegralChainConeMap.identity(cone);
+IntegralConeCochain unit = new IntegralConeCochain(cone, BigInteger.ONE, new IntegerVector(BigInteger.ONE));
+List<String> pulledOrder = math.flow(math.chainConeMaps, Collections.singletonList(identity))
+        .performLeftProjectionOperation("on-cochain", unit)
+        .<AbelianGroupElement>performAlgebraTransfer("class-of")
+        .<BigInteger>performAlgebraTransfer("order").collect();
+// [2], now in cohomological degree one.
+```
+
+A typed primitive is one integer solution, not the complete affine family. `class-of` and (co)homology comparison require (co)cycles; primitives require integral divisibility. `representative` checks the exact abelian presentation and uses its receiver only for the cone and degree. Anonymous abelian classes retain a presentation, not independent geometric provenance. At cochain degree zero, only the zero cochain is a coboundary and its `cobounding-coordinates` are empty. `cobounding-cochain` and cochain `source-part` require positive degree because their results would otherwise need negative typed cochains. Negative chain classes retain adjacent zero presentation shapes.
+
+The combined cone coordinate rank is bounded by **256** after relative filtering. Membership checks the current degree; an adjacent boundary or reduction can still exceed its bounds. Each complete class projection, representative lift or generator list shares **one 5000000-unit budget** with its homology/cohomology reduction. The two cycle checks and solve for (co)homology comparison likewise share one budget. Coefficients have no bit-length cap. Resource exhaustion is `IMPLEMENTATION_FAILURE`, without partial generator lists or false mathematical decisions. No cup or cap product on arbitrary algebraic cones is assumed.
+
+`NativeIntegralConeElementsTest` adds 17 tests: 3,375 independent signed differential cases, 729 independent shear/transpose actions, 243 adjoint pairings, structural inclusion and section signs, integer divisibility and typed primitives, free and torsion class actions, projective-plane generators, negative and relative degrees, full-context rejection, 1025-bit arithmetic, combined-rank and shared class/generator budgets, actual wrappers and serialized repeatable flows.

@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 2065 |
-| DIRECTLY_SUPPORTED | 1822 |
+| Scoped records | 2122 |
+| DIRECTLY_SUPPORTED | 1879 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1681 |
+| IMPLEMENTED | 1738 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1749 |
+| MACHINE_TESTED | 1806 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1658 | 1658 | 0 | 0 | 0 | 1658 | 0 | 0 |
+| Concrete MathTool algebras | 1715 | 1715 | 0 | 0 | 0 | 1715 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -328,6 +328,8 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | ChainConeMap.homology-naturality-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.homology-naturality-maps |
 | ChainConeMap.homotopy | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.homotopy |
 | ChainConeMap.identity-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.identity-on |
+| ChainConeMap.on-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.on-chain |
+| ChainConeMap.on-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.on-cochain |
 | ChainConeMap.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.source |
 | ChainConeMap.source-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.source-map |
 | ChainConeMap.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.target |
@@ -526,6 +528,59 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | CollapseSequence.steps | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, greedy reduction, exhaustive bounded collapse search and composite integral chain/cochain witnesses; native operation CollapseSequence.steps |
 | CollapseSequence.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, greedy reduction, exhaustive bounded collapse search and composite integral chain/cochain witnesses; native operation CollapseSequence.target |
 | CollapseSequence.then | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered compatible elementary-collapse sequences, greedy reduction, exhaustive bounded collapse search and composite integral chain/cochain witnesses; native operation CollapseSequence.then |
+| ConeChain.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps; native operation ConeChain.add |
+| ConeChain.basis-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps; native operation ConeChain.basis-on |
+| ConeChain.boundary | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps; native operation ConeChain.boundary |
+| ConeChain.bounding-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps; native operation ConeChain.bounding-chain |
+| ConeChain.bounding-coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps; native operation ConeChain.bounding-coordinates |
+| ConeChain.class-of | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps; native operation ConeChain.class-of |
+| ConeChain.cone | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps; native operation ConeChain.cone |
+| ConeChain.coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps; native operation ConeChain.coordinates |
+| ConeChain.cycle-generators | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps; native operation ConeChain.cycle-generators |
+| ConeChain.degree | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps; native operation ConeChain.degree |
+| ConeChain.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps; native operation ConeChain.equal |
+| ConeChain.homologous | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps; native operation ConeChain.homologous |
+| ConeChain.homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps; native operation ConeChain.homology |
+| ConeChain.include-target | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps; native operation ConeChain.include-target |
+| ConeChain.is-boundary | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps; native operation ConeChain.is-boundary |
+| ConeChain.is-cycle | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps; native operation ConeChain.is-cycle |
+| ConeChain.is-zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps; native operation ConeChain.is-zero |
+| ConeChain.lift-source | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps; native operation ConeChain.lift-source |
+| ConeChain.negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps; native operation ConeChain.negate |
+| ConeChain.representative | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps; native operation ConeChain.representative |
+| ConeChain.scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps; native operation ConeChain.scale |
+| ConeChain.source-part | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps; native operation ConeChain.source-part |
+| ConeChain.subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps; native operation ConeChain.subtract |
+| ConeChain.target-part | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps; native operation ConeChain.target-part |
+| ConeChain.with-coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps; native operation ConeChain.with-coordinates |
+| ConeChain.zero-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps; native operation ConeChain.zero-on |
+| ConeCochain.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.add |
+| ConeCochain.basis-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.basis-on |
+| ConeCochain.class-of | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.class-of |
+| ConeCochain.coboundary | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.coboundary |
+| ConeCochain.cobounding-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.cobounding-cochain |
+| ConeCochain.cobounding-coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.cobounding-coordinates |
+| ConeCochain.cocycle-generators | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.cocycle-generators |
+| ConeCochain.cohomologous | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.cohomologous |
+| ConeCochain.cohomology | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.cohomology |
+| ConeCochain.cone | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.cone |
+| ConeCochain.coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.coordinates |
+| ConeCochain.degree | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.degree |
+| ConeCochain.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.equal |
+| ConeCochain.evaluate | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.evaluate |
+| ConeCochain.include-source | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.include-source |
+| ConeCochain.is-coboundary | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.is-coboundary |
+| ConeCochain.is-cocycle | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.is-cocycle |
+| ConeCochain.is-zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.is-zero |
+| ConeCochain.lift-target | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.lift-target |
+| ConeCochain.negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.negate |
+| ConeCochain.representative | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.representative |
+| ConeCochain.scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.scale |
+| ConeCochain.source-part | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.source-part |
+| ConeCochain.subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.subtract |
+| ConeCochain.target-part | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.target-part |
+| ConeCochain.with-coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.with-coordinates |
+| ConeCochain.zero-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.zero-on |
 | CoverMap.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with covariant homology, contravariant cohomology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.compose |
 | CoverMap.contiguous | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with covariant homology, contravariant cohomology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.contiguous |
 | CoverMap.corestrict-image | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with covariant homology, contravariant cohomology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.corestrict-image |
@@ -940,6 +995,8 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | IntegerVectorFamily | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer coordinate vectors with retained nonnegative dimension |
 | IntegralChainConeMapAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps |
 | IntegralChainMappingConeAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences |
+| IntegralConeChainAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps |
+| IntegralConeCochainAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing |
 | IntegralHomology.as-type | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.as-type |
 | IntegralHomology.at-degree | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.at-degree |
 | IntegralHomology.betti-number | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.betti-number |

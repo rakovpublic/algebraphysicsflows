@@ -40,6 +40,8 @@ import mathematics.topology.SimplicialChainEquivalence;
 import mathematics.topology.IntegralHomology;
 import mathematics.topology.IntegralChainMappingCone;
 import mathematics.topology.IntegralChainConeMap;
+import mathematics.topology.IntegralConeChain;
+import mathematics.topology.IntegralConeCochain;
 import mathematics.topology.FiniteSimplicialMap;
 import mathematics.topology.RelativeSimplicialComplex;
 import mathematics.topology.RelativeSimplicialMap;
@@ -142,6 +144,21 @@ public final class ConcreteAlgebrasExample {
                 .<AbelianGroupType>performFlatAlgebraTransfer("cohomology-types").collect());
         System.out.println("Doubling a point is an integral quasi-isomorphism: "+math.flow(math.chainMaps,Collections.singletonList(doublingPoint))
                 .<Boolean>performAlgebraTransfer("is-quasi-isomorphism").collect());
+        System.out.println("Typed cone cycle generators retain their order-two classes: "+math.flow(math.chainMaps,Collections.singletonList(doublingPoint))
+                .<IntegralChainMappingCone>performAlgebraTransfer("ChainCone.from-map")
+                .<IntegralConeChain,BigInteger>performAlgebraUnsafe("ConeChain.zero-on",BigInteger.ZERO)
+                .performOneOperandFlatOperation("cycle-generators").<AbelianGroupElement>performAlgebraTransfer("class-of")
+                .<BigInteger>performAlgebraTransfer("order").collect());
+        System.out.println("A typed cone primitive of twice the point has coordinates: "+math.flow(math.chainMaps,Collections.singletonList(doublingPoint))
+                .<IntegralChainMappingCone>performAlgebraTransfer("ChainCone.from-map")
+                .<IntegralConeChain,BigInteger>performAlgebraUnsafe("ConeChain.zero-on",BigInteger.ZERO)
+                .performCustomMemberOperation("with-coordinates",new IntegerVector(BigInteger.valueOf(2)))
+                .performOneOperandOperation("bounding-chain").<IntegerVector>performAlgebraTransfer("coordinates").collect());
+        System.out.println("Typed cone cocycle generators retain order two in degree one: "+math.flow(math.chainMaps,Collections.singletonList(doublingPoint))
+                .<IntegralChainMappingCone>performAlgebraTransfer("ChainCone.from-map")
+                .<IntegralConeCochain,BigInteger>performAlgebraUnsafe("ConeCochain.zero-on",BigInteger.ONE)
+                .performOneOperandFlatOperation("cocycle-generators").<AbelianGroupElement>performAlgebraTransfer("class-of")
+                .<BigInteger>performAlgebraTransfer("order").collect());
         SimplicialChainMap homotopyStart=new SimplicialChainMap(homotopyPoint,circlePair,Arrays.asList(new IntegerMatrix(new BigInteger[][]{{BigInteger.ONE},{BigInteger.ZERO},{BigInteger.ZERO}}),IntegerMatrix.zero(3,0))),
                 homotopyEnd=new SimplicialChainMap(homotopyPoint,circlePair,Arrays.asList(new IntegerMatrix(new BigInteger[][]{{BigInteger.ZERO},{BigInteger.ZERO},{BigInteger.ONE}}),IntegerMatrix.zero(3,0)));
         RelativeSimplicialChain homotopyVertex=new RelativeSimplicialChain(homotopyPoint,BigInteger.ZERO,new IntegerVector(BigInteger.ONE));

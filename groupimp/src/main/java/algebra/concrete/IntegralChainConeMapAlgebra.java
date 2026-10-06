@@ -35,4 +35,13 @@ public final class IntegralChainConeMapAlgebra extends ConcreteAlgebra<IntegralC
         law("Composition applies the right operand first and retains b_after H_before + H_after a_before. It is associative and unital on actual witnesses. Chosen homotopies can change the induced cone homology maps.");
         law("Integral homology is covariant, cohomology is contravariant, and both long exact sequences are natural with exact retained presentations. No canonical choice from homotopy classes alone is asserted.");
     }
+    public IntegralChainConeMapAlgebra(IntegralChainMappingConeAlgebra cones,SimplicialChainMapAlgebra maps,SimplicialChainHomotopyAlgebra homotopies,
+            IntegerMatrixFamily matrices,AbelianGroupHomomorphismAlgebra homomorphisms,NaturalSemiring naturals,BooleanAlgebra truth,
+            IntegralConeChainAlgebra chains,IntegralConeCochainAlgebra cochains) {
+        this(cones,maps,homotopies,matrices,homomorphisms,naturals,truth);
+        binary("on-chain",algebra(),chains.algebra(),chains.algebra(),true,IntegralChainConeMap::onChain);
+        binary("on-cochain",algebra(),cochains.algebra(),cochains.algebra(),true,IntegralChainConeMap::onCochain);
+        law("Typed pushforward and contravariant pullback use the actual second carrier's wrapper, check exact cone contexts, commute with differentials and preserve evaluation.");
+    }
+
 }
