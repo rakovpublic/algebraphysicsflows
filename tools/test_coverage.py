@@ -71,6 +71,12 @@ class CoverageTest(unittest.TestCase):
 
     def test_operation_conditions_are_scoped_to_the_algebra(self):
         records = {r.get("runtime_operation_id"): r for r in self.data["concepts"] if r.get("runtime_operation_id")}
+        self.assertIn("bF->Ga", " ".join(records["ChainConeMap.from-data"]["required_invariants"]))
+        self.assertIn("-H_(n-1)", " ".join(records["ChainConeMap.from-homotopy"]["required_invariants"]))
+        self.assertIn("b_after H_before", " ".join(records["ChainConeMap.compose"]["required_invariants"]))
+        self.assertIn("negative-degree source presentations", " ".join(records["ChainConeMap.homology-naturality-maps"]["required_invariants"]))
+        self.assertIn("contravariant vertical maps", " ".join(records["ChainConeMap.cohomology-naturality-maps"]["required_invariants"]))
+        self.assertIn("5000000", " ".join(records["ChainConeMap.homology-maps"]["known_limitations"]))
         self.assertIn("negative source boundary", " ".join(records["ChainCone.boundary-matrix"]["required_invariants"]))
         self.assertIn("ILeftProjectionOperation", " ".join(records["ChainCone.chain-rank"]["required_invariants"]))
         self.assertIn("negative-degree zero presentation", " ".join(records["ChainCone.projection-homology-map"]["required_invariants"]))

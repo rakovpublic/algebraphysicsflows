@@ -21,7 +21,7 @@ public final class IntegralChainMappingCone implements Serializable {
         int sourceTop=source().ambient().dimension(); return Math.max(target().ambient().dimension(),sourceTop<0?-1:sourceTop+1);
     }
     private static void requireDegree(BigInteger degree) { if(degree.signum()<0) throw MathFailure.undefined("Mapping-cone degrees must be nonnegative"); }
-    private int rank(BigInteger degree) {
+    int rank(BigInteger degree) {
         int size=target().basis(degree).size()+source().basis(degree.subtract(BigInteger.ONE)).size();
         if(size>256) throw new MathFailure(MathFailure.Kind.IMPLEMENTATION_FAILURE,"Mapping-cone groups allow at most 256 total target and shifted source coordinates per degree");
         return size;
@@ -58,11 +58,11 @@ public final class IntegralChainMappingCone implements Serializable {
     public IntegerMatrix inclusionMatrix(BigInteger degree) { requireDegree(degree); return inclusion(degree,new Computation()); }
     public IntegerMatrix projectionMatrix(BigInteger degree) { requireDegree(degree); return projection(degree,new Computation()); }
     private static IntegerMatrix transpose(IntegerMatrix matrix,Computation work) { work.use((long)matrix.rows()*matrix.columns()); return matrix.transpose(); }
-    private IntegralHomology homology(BigInteger degree,boolean dual,Computation work) {
+    IntegralHomology homology(BigInteger degree,boolean dual,Computation work) {
         IntegerMatrix outgoing=boundary(degree,work),incoming=boundary(degree.add(BigInteger.ONE),work);
         return dual?new IntegralHomology(transpose(incoming,work),transpose(outgoing,work),work):new IntegralHomology(outgoing,incoming,work);
     }
-    private static IntegralHomology endpoint(RelativeSimplicialComplex pair,BigInteger degree,boolean dual,Computation work) {
+    static IntegralHomology endpoint(RelativeSimplicialComplex pair,BigInteger degree,boolean dual,Computation work) {
         // Retain adjacent zero shapes even at degree -1, as in the existing relative-triple algebra.
         IntegerMatrix outgoing=pair.boundaryMatrix(degree,work),incoming=pair.boundaryMatrix(degree.add(BigInteger.ONE),work);
         return dual?new IntegralHomology(transpose(incoming,work),transpose(outgoing,work),work):new IntegralHomology(outgoing,incoming,work);

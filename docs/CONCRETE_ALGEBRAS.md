@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1568 native operations from 68 algebra builders.
+The default initializer currently installs 1589 native operations from 69 algebra builders.
 
 ## Existing API usage
 
@@ -2443,6 +2443,57 @@ List<String> segment = math.flow(math.chainCones, Collections.singletonList(cone
 
 Public degrees are natural numbers. Degreewise lists include degrees zero through `max(dim(T), dim(S)+1)`, retaining zero slots of diagonal relative pairs; an empty source contributes no shifted ambient degree. Two empty endpoints have dimension -1 and empty lists. Differentials immediately above the top degree retain their rows and zero columns. At degree zero, the homological projection retains the negative endpoint presentation with zero generators and `rank(S_0)` zero relations; its dual endpoint has a zero-by-zero presentation.
 
-Construction retains the map without eager matrix assembly or Smith reduction. Each required quotient basis is bounded by 256 after filtering, and each combined cone group has at most **256 target plus shifted-source coordinates**. Each complete list, exact segment or acyclicity decision shares **one 5000000-unit computation budget**, including its reductions and induced maps. A scalar degree calculation can succeed while the complete list exceeds that budget. Acyclicity checks all combined ranks before reducing degrees. The carrier does not add a general chain-complex algebra, maps between cones, or a geometric realization.
+Construction retains the map without eager matrix assembly or Smith reduction. Each required quotient basis is bounded by 256 after filtering, and each combined cone group has at most **256 target plus shifted-source coordinates**. Each complete list, exact segment or acyclicity decision shares **one 5000000-unit computation budget**, including its reductions and induced maps. A scalar degree calculation can succeed while the complete list exceeds that budget. Acyclicity checks all combined ranks before reducing degrees. The carrier does not add a general chain-complex algebra or a geometric realization. Maps between cones with supplied square witnesses are provided by `ChainConeMap` below.
 
 `NativeIntegralChainConeTest` checks 125 signed interval maps and 625 point matrices against independent integer oracles; both exact sequences; rectangular, empty and filtered pairs; 1025-bit torsion and explicit bounding chains; and integral extensions from projective-plane maps whose induced homology maps coincide while their cones differ. It also checks quasi-isomorphism beyond inverse-search bounds, whole-degree and exact-segment budget failures, actual second-carrier wrappers and serialized repeatable scalar/flat flows.
+
+## Maps between integral cones with retained homotopies
+
+`IntegralChainConeMapAlgebra` registers `ChainConeMap` in MathTool. For defining maps `F:S->T` and `G:Sprime->Tprime`, supply vertical maps `a:S->Sprime`, `b:T->Tprime` and an actual `ChainHomotopy` from `bF` to `Ga`. The existing witness convention gives `dH+Hd=Ga-bF`, so the cone-map matrix in degree `n` is `[[b_n,-H_(n-1)],[0,a_(n-1)]]`. It commutes with cone boundaries, inclusion and shifted projection. This implements the [construction from a square commuting up to homotopy](https://stacks.math.columbia.edu/tag/014D), with homological indexing and the repository's witness orientation.
+
+The chosen homotopy is part of the value. Even a stationary square can have nonzero loop witnesses that change the induced cone homology map. Composition applies the right operand first and transports witnesses as `b_after H_before + H_after a_before`. Equality retains all this data; composition is associative and unital.
+
+| Operation aliases | Result |
+| --- | --- |
+| `from-data`, `data` | Validate or recover immutable `ChainConeMap.data` with both cones, both vertical maps and the chosen homotopy. |
+| `identity-on`, `from-homotopy` | Build a cone identity, or a cone isomorphism from an existing `ChainHomotopy`. |
+| `source`, `target`, `source-map`, `target-map`, `homotopy` | Recover exact cone contexts, vertical maps `a,b`, or the witness `H:bF->Ga`. |
+| `equal`, `compose` | Compare all retained data or compose maps with the exact joining cone. |
+| `chain-matrix`, `cochain-matrix`, `chain-matrices`, `cochain-matrices` | One degree matrix or the complete list; cochain pullback uses transposes. |
+| `homology-map`, `cohomology-map`, `homology-maps`, `cohomology-maps` | Induced integral maps in one degree or every formal degree. |
+| `homology-naturality-maps`, `cohomology-naturality-maps` | The four vertical maps between the corresponding exact sequence segments. |
+
+These 21 operations use the existing `operations/simple` and `operations/flat` interfaces. The homology naturality list is `[H_n(a), H_n(b), H_n(cone map), H_(n-1)(a)]`. The cohomology list is `[H^n(cone map), H^n(b), H^n(a), H^(n+1)(cone map)]`, running from the target segment back to the source segment. All three squares commute in each diagram, with equality of the actual presentations at their joins.
+
+The example below retains a nonzero loop from a point into the circle. Its cone map changes homology even though both vertical chain maps are identities:
+
+```java
+ConcreteMathematics math = new ConcreteMathematics();
+RelativeSimplicialComplex point = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))));
+RelativeSimplicialComplex circle = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0, 1), FiniteSet.of(0, 2), FiniteSet.of(1, 2))));
+SimplicialChainMap zero = SimplicialChainMap.zero(point, circle);
+SimplicialChainHomotopy loop = new SimplicialChainHomotopy(zero, zero, Arrays.asList(
+        new IntegerMatrix(new BigInteger[][] {{BigInteger.ONE}, {BigInteger.ONE.negate()}, {BigInteger.ONE}}),
+        IntegerMatrix.zero(0, 0)));
+IntegralChainConeMap map = math.chainHomotopies.algebra().buildAlgebraItem(loop)
+        .<IntegralChainConeMap>performAlgebraTransfer("ChainConeMap.from-homotopy").perform().getResult();
+List<String> matrix = math.flow(math.chainConeMaps, Collections.singletonList(map))
+        .<IntegerMatrix, BigInteger>performAlgebraUnsafe("chain-matrix", BigInteger.ONE).collect();
+// [ZMatrix(4x4)[[1, 0, 0, -1], [0, 1, 0, 1], [0, 0, 1, -1], [0, 0, 0, 1]]]
+List<String> identity = math.flow(math.chainConeMaps, Collections.singletonList(map))
+        .<AbelianGroupHomomorphism, BigInteger>performAlgebraUnsafe("homology-map", BigInteger.ONE)
+        .<Boolean>performCustomResultOperation("equal", AbelianGroupHomomorphism.identity(map.source().homology(BigInteger.ONE).group())).collect();
+// [false]
+List<String> isomorphisms = math.flow(math.chainConeMaps, Collections.singletonList(map))
+        .<AbelianGroupHomomorphism, BigInteger>performFlatAlgebraUnsafe("cohomology-naturality-maps", BigInteger.ZERO)
+        .<Boolean>performAlgebraTransfer("is-isomorphism").collect();
+// [true, true, true, true]
+```
+
+Converting the reverse homotopy gives a strict inverse to `from-homotopy`, including its retained witness data. General squares need a `Data` value and `ChainConeMap.from-data`; this validates all four full labelled endpoint pairs and both witness composites. Merely equal homology groups, matching dimensions or an oppositely oriented witness are insufficient. Supplied component objects are immutable and individually valid, while `Data` membership does not assert their mutual compatibility.
+
+Public degrees are nonnegative. Lists run through the larger formal cone dimension, retaining zero slots and rectangular zero shapes; both empty cones give empty lists. The degree-zero homology naturality list retains the adjacent negative endpoint presentations. Each required quotient basis and combined cone rank is at most **256**. A single **5000000-unit budget** covers each full constructor, composition with both witness transports and validation, induced map with both cone reductions, whole-degree list, or four-map naturality list. Valid data may exceed later evaluation limits; exhaustion raises `IMPLEMENTATION_FAILURE`. Integer coefficients have no bit-length cap. This carrier does not add arbitrary cone-map matrix input, typed cone chains, a geometric realization, or a homotopy-independent choice of cone morphism.
+
+`NativeIntegralChainConeMapTest` adds 17 tests covering 125 signed interval homotopies, 729 independent witness compositions and 6,561 point-matrix compositions. Further cases check associativity, both variances, all six naturality squares, projective-plane torsion, relative degree shifts, empty and filtered pairs, negative endpoint presentations, 1025-bit coefficients, shared composition/list/naturality budgets, actual wrappers and serialized repeatable flows.

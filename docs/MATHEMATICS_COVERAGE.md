@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 2043 |
-| DIRECTLY_SUPPORTED | 1800 |
+| Scoped records | 2065 |
+| DIRECTLY_SUPPORTED | 1822 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1659 |
+| IMPLEMENTED | 1681 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1727 |
+| MACHINE_TESTED | 1749 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1636 | 1636 | 0 | 0 | 0 | 1636 | 0 | 0 |
+| Concrete MathTool algebras | 1658 | 1658 | 0 | 0 | 0 | 1658 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -311,6 +311,27 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | ChainCone.projection-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.projection-matrix |
 | ChainCone.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.source |
 | ChainCone.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.target |
+| ChainConeMap.chain-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.chain-matrices |
+| ChainConeMap.chain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.chain-matrix |
+| ChainConeMap.cochain-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.cochain-matrices |
+| ChainConeMap.cochain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.cochain-matrix |
+| ChainConeMap.cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.cohomology-map |
+| ChainConeMap.cohomology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.cohomology-maps |
+| ChainConeMap.cohomology-naturality-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.cohomology-naturality-maps |
+| ChainConeMap.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.compose |
+| ChainConeMap.data | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.data |
+| ChainConeMap.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.equal |
+| ChainConeMap.from-data | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.from-data |
+| ChainConeMap.from-homotopy | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.from-homotopy |
+| ChainConeMap.homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.homology-map |
+| ChainConeMap.homology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.homology-maps |
+| ChainConeMap.homology-naturality-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.homology-naturality-maps |
+| ChainConeMap.homotopy | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.homotopy |
+| ChainConeMap.identity-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.identity-on |
+| ChainConeMap.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.source |
+| ChainConeMap.source-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.source-map |
+| ChainConeMap.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.target |
+| ChainConeMap.target-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.target-map |
 | ChainEquivalence.backward | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.backward |
 | ChainEquivalence.backward-class | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.backward-class |
 | ChainEquivalence.cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.cohomology-map |
@@ -917,6 +938,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | IntegerRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient |
 | IntegerSetAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets |
 | IntegerVectorFamily | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer coordinate vectors with retained nonnegative dimension |
+| IntegralChainConeMapAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps |
 | IntegralChainMappingConeAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences |
 | IntegralHomology.as-type | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.as-type |
 | IntegralHomology.at-degree | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.at-degree |

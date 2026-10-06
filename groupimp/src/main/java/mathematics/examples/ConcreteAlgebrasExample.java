@@ -39,6 +39,7 @@ import mathematics.topology.SimplicialChainMapClass;
 import mathematics.topology.SimplicialChainEquivalence;
 import mathematics.topology.IntegralHomology;
 import mathematics.topology.IntegralChainMappingCone;
+import mathematics.topology.IntegralChainConeMap;
 import mathematics.topology.FiniteSimplicialMap;
 import mathematics.topology.RelativeSimplicialComplex;
 import mathematics.topology.RelativeSimplicialMap;
@@ -177,6 +178,11 @@ public final class ConcreteAlgebrasExample {
         System.out.println("Both inverse homotopies for its singular representative: "+math.flow(math.chainMaps,Collections.singletonList(intervalIdentityClass.representative()))
                 .<SimplicialChainHomotopy>performFlatAlgebraTransfer("ChainHomotopy.inverse-homotopies").collect().size());
         SimplicialChainEquivalence retainedInverse=SimplicialChainEquivalence.fromMap(intervalIdentityClass.representative());
+        System.out.println("A supplied chain homotopy induces isomorphisms between all cone homology groups: "+math.flow(math.chainEquivalences,Collections.singletonList(retainedInverse))
+                .<SimplicialChainHomotopy>performAlgebraTransfer("source-homotopy")
+                .<IntegralChainConeMap>performAlgebraTransfer("ChainConeMap.from-homotopy")
+                .<AbelianGroupHomomorphism>performFlatAlgebraTransfer("homology-maps")
+                .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
         System.out.println("A retained equivalence exposes two inverse integral maps: "+math.flow(math.chainMaps,Collections.singletonList(intervalIdentityClass.representative()))
                 .<SimplicialChainEquivalence>performAlgebraTransfer("ChainEquivalence.from-map")
                 .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("homology-maps",BigInteger.ZERO)

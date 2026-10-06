@@ -10,6 +10,7 @@ DATABASE = ROOT / "mathematics-coverage.json"
 MANIFEST = ROOT / "groupimp/src/test/resources/mathematics/concrete-catalog.tsv"
 DATE = "2026-10-06"
 OWNERS = {
+    "IntegralChainConeMapAlgebra": ("ChainConeMap", "Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps"),
     "IntegralChainMappingConeAlgebra": ("ChainCone", "Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences"),
     "SimplicialChainEquivalenceAlgebra": ("ChainEquivalence", "Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions"),
     "SimplicialChainMapClassAlgebra": ("ChainMapClass", "Integral chain-homotopy classes with full labelled endpoints, additive arithmetic, direct composition, deterministic representatives and functorial integral maps"),
@@ -96,6 +97,7 @@ INTERFACES = {
     "IUnsafeFlatOperation": "flat/MixedFlatOperation",
 }
 EXTRA_TESTS = {
+    "IntegralChainConeMapAlgebra": "NativeIntegralChainConeMapTest",
     "IntegralChainMappingConeAlgebra": "NativeIntegralChainConeTest",
     "SimplicialChainEquivalenceAlgebra": "NativeSimplicialChainEquivalenceTest",
     "SimplicialChainMapClassAlgebra": "NativeSimplicialChainMapClassTest",
@@ -193,6 +195,29 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "IntegralChainConeMapAlgebra": {
+        "from-data": "Validate all four full labelled endpoints and the exact supplied witness H:bF->Ga. Data membership only asserts individually valid nonnull components. Construction shares the two composite calculations and rejects incompatible maps or reversed witnesses as OPERATION_UNDEFINED; it does not eagerly reduce cone homology.",
+        "data": "Return immutable source and target cones, both vertical chain maps a and b, and the exact chosen integral homotopy H. No witness normalization or replacement is performed.",
+        "identity-on": "Construct the identity of the supplied exact cone with identity vertical maps and the stationary zero homotopy on its defining map. Construction and validation share one budget.",
+        "from-homotopy": "For a supplied H:F->G use identity vertical maps and the retained H to map Cone(F) to Cone(G). The degree n matrix has -H_(n-1) in its upper-right block. Conversion of the reverse homotopy gives a strict inverse cone map; no homotopy search is used.",
+        "source": "Return the full source cone, including its exact defining chain map F.",
+        "target": "Return the full target cone, including its exact defining chain map G.",
+        "source-map": "Return the retained vertical chain map a between the sources of F and G.",
+        "target-map": "Return the retained vertical chain map b between the targets of F and G.",
+        "homotopy": "Return the actual witness H:bF->Ga. Nonzero loops remain observable even when the square commutes strictly.",
+        "equal": "Compare source and target cone contexts, both vertical maps and the full chosen homotopy. Abstract cone homology or equality of square maps alone does not imply equality.",
+        "compose": "Apply the right operand first, requiring the exact defining map at the joining cone. Compose vertical maps and retain b_after H_before + H_after a_before by chronological witness transport. The whole operation, including both transports and final validation, shares one budget.",
+        "chain-matrix": "For natural degree n return [[b_n,-H_(n-1)],[0,a_(n-1)]], with target coordinates before shifted source coordinates in each cone. Retain rectangular and zero shapes; degree zero omits the shifted blocks.",
+        "cochain-matrix": "Return the transpose of the degree n cone map; pullback goes from target cone cochains to source cone cochains. Assembly and transpose share one budget.",
+        "chain-matrices": "Return all cone-map matrices in increasing degrees zero through the maximum formal dimension of the two cones, including zero slots. Both empty cones give an empty list. Share one budget over the complete list.",
+        "cochain-matrices": "Return the transposes of every chain matrix in increasing degree under one shared list budget. Retain empty rectangular shapes and zero formal degree slots.",
+        "homology-map": "Induce H_n(Cone(F))->H_n(Cone(G)) with the actual integral cycle bases and quotient presentations, preserving torsion. Matrix assembly, both cone reductions and induction share one budget.",
+        "cohomology-map": "Induce H^n(Cone(G))->H^n(Cone(F)) using the transposed matrix. Both reductions and induction share one budget; composition reverses order.",
+        "homology-maps": "Return the covariant integral homology map in every formal degree through the maximum cone dimension, preserving zero groups and exact presentations. One budget covers the entire list.",
+        "cohomology-maps": "Return the contravariant integral cohomology map in every formal degree under one shared list budget, including zero groups.",
+        "homology-naturality-maps": "Return exactly [H_n(a),H_n(b),H_n(cone map),H_(n-1)(a)], the four vertical maps between the two homological long exact segments. At degree zero retain the negative-degree source presentations, including zero relations. All reductions and four induced maps share one budget.",
+        "cohomology-naturality-maps": "Return exactly [H^n(cone map),H^n(b),H^n(a),H^(n+1)(cone map)], the four contravariant vertical maps from the target exact cohomology segment to the source segment. All reductions and four maps share one budget.",
+    },
     "IntegralChainMappingConeAlgebra": {
         "from-map": "Retain the supplied validated integral ChainMap F:S->T and both full labelled pairs. Context construction does not evaluate cone matrices or assert that later bounded computations will fit.",
         "map": "Return the exact defining ChainMap, not a representative of its homotopy class.",
@@ -1651,6 +1676,10 @@ OWNER_CONDITIONS["RationalMatrixFamily"]["companion"] = "The polynomial has posi
 
 def record(identifier, owner, concept, paths, operation=None):
     carrier, scope = OWNERS[owner]
+    if owner == "IntegralChainConeMapAlgebra":
+        paths = paths + ["groupimp/src/main/java/mathematics/topology/" + name + ".java" for name in
+                         ("IntegralChainConeMap", "IntegralChainMappingCone", "SimplicialChainMap", "SimplicialChainHomotopy", "IntegralHomology", "RelativeSimplicialComplex")]
+        paths += ["groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java", "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
     if owner == "IntegralChainMappingConeAlgebra":
         paths = paths + ["groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
                          "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
@@ -1991,10 +2020,15 @@ def record(identifier, owner, concept, paths, operation=None):
             value["known_limitations"].append("Iteration is capped at 10000 steps; exceeding it is IMPLEMENTATION_FAILURE. Exact values can still grow rapidly within this limit.")
         if operation_name in ("argmin", "argmax", "minimum", "maximum", "minimizers", "maximizers"):
             value["known_limitations"].append("Optimality is relative only to the explicit finite feasible set, not all integers or reals.")
+    if owner == "IntegralChainConeMapAlgebra":
+        value["required_invariants"].append("Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations.")
+        value["known_limitations"] += ["Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. No arbitrary cone-map matrices, typed cone chains, geometric realization or general chain-complex carrier are added.",
+            "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."]
+        value["references"].append("https://stacks.math.columbia.edu/tag/014D")
     if owner == "IntegralChainMappingConeAlgebra" or (operation and operation["id"] == "ChainMap.is-quasi-isomorphism"):
         value["required_invariants"].append("Cone(F)_n=T_n direct-sum S_(n-1), ordered target then source, with signed block differential [[d_T,F],[0,-d_S]]. Consecutive boundaries vanish; inclusion and projection give exact integral homology and contravariant cohomology sequences. Actual contexts, presentations, integral torsion and negative-degree adjacent zero shapes are retained.")
         value["known_limitations"] += ["Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-            "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted."]
+            "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted."]
         value["references"] += ["https://stacks.math.columbia.edu/tag/0621", "https://stacks.math.columbia.edu/tag/014D"]
     if owner == "SimplicialChainEquivalenceAlgebra":
         value["required_invariants"].append("Constructive conversions preserve supplied maps and witnesses without inverse search. Geometric identity-to-composite prisms are negated as matrices; collapse/sequence retractions have zero target witnesses, while signed subdivision has a zero source witness. Strict-isomorphism conversion requires degreewise unimodularity. All construction and validation stages share one computation budget.")
@@ -2304,6 +2338,12 @@ def synchronize(data, rows):
             if unchanged == old:
                 value["provenance"]["date"] = old["provenance"]["date"]
     descriptors = [
+        ("ChainConeMap", "Integral maps between retained mapping cones", "mathematics.topology.IntegralChainConeMap",
+         ["Exact source and target defining maps and four labelled pairs retained", "Vertical maps and chosen homotopy H:bF->Ga checked", "Signed matrices [[b,-H],[0,a]] preserve cone differentials", "Composition retains transported witnesses", "Chosen homotopies can change integral homology maps", "Compound reductions, lists and composition share resource budgets"],
+         ["ChainConeMap.data", "ChainCone", "ChainMap", "ChainHomotopy", "Mat(Z)", "AbelianGroupHomomorphism", "N", "Boolean"]),
+        ("ChainConeMap.data", "Supplied cone square and integral homotopy", "mathematics.topology.IntegralChainConeMap.Data",
+         ["Two nonnull cone contexts, two validated vertical maps and one validated homotopy", "Membership does not imply matching labelled endpoints or witness composites", "ChainConeMap.from-data checks complete square compatibility"],
+         ["ChainConeMap", "ChainCone", "ChainMap", "ChainHomotopy"]),
         ("ChainCone", "Integral mapping cones of retained chain maps", "mathematics.topology.IntegralChainMappingCone",
          ["Full validated defining chain map and labelled endpoint pairs retained", "Target-first plus shifted-source coordinates with boundary [[d_T,F],[0,-d_S]]", "Formal ambient degree range, including diagonal zero slots and dimension -1 for two empty endpoints", "Integral homology and cohomology retain presentations and torsion", "Inclusion and shifted projection yield exact integral comparison maps", "Context membership does not assert bounded reductions will fit; whole lists and exact segments share budgets"],
          ["ChainMap", "RelativeComplex", "Mat(Z)", "IntegralHomology", "AbelianGroupType", "AbelianGroupHomomorphism", "Z", "N", "Boolean"]),

@@ -26389,6 +26389,78 @@
       "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
     },
     {
+      "id": "concrete-algebra.IntegralChainConeMapAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralChainConeMapAlgebra",
+      "concept": "IntegralChainConeMapAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "ChainConeMap",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralChainConeMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. No arbitrary cone-map matrices, typed cone chains, geometric realization or general chain-complex carrier are added.",
+        "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-06",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
       "id": "concrete-algebra.IntegralChainMappingConeAlgebra",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "IntegralChainMappingConeAlgebra",
@@ -26435,7 +26507,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted."
+        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted."
       ],
       "required_extension": null,
       "references": [
@@ -137027,7 +137099,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted.",
+        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted.",
         "At most 4096 nonempty simplices per pair component and at most 256 simplices in each quotient basis, filtered before the bound. One 5000000-unit budget covers each construction, conversion, composite or inverse including final validation, and each complete integral map list. Resource exhaustion raises IMPLEMENTATION_FAILURE without partial results or false predicates. Integer coefficient bit lengths are unbounded.",
         "Degree-zero maps over Z on finite simplicial quotient chains only. Raw ChainMap.data is immutable supplied data, not a validated map. Matrix and integral map degrees are nonnegative; typed chains allow negative zero groups. Absolute actions require both subcomplexes empty. Arbitrary chain maps need not preserve augmentation or cup products, come from continuous or simplicial vertex maps, extend to compatible ambient/subcomplex maps, or give a homotopy equivalence. ChainHomotopy separately represents supplied integral homotopy data and solves bounded integral homotopy systems between parallel maps. Geometric homotopy search, other coefficients and persistent homology remain outside scope."
       ],
@@ -146816,7 +146888,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted."
+        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted."
       ],
       "required_extension": null,
       "references": [
@@ -146895,7 +146967,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted."
+        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted."
       ],
       "required_extension": null,
       "references": [
@@ -146974,7 +147046,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted."
+        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted."
       ],
       "required_extension": null,
       "references": [
@@ -147053,7 +147125,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted."
+        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted."
       ],
       "required_extension": null,
       "references": [
@@ -147132,7 +147204,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted."
+        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted."
       ],
       "required_extension": null,
       "references": [
@@ -147211,7 +147283,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted."
+        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted."
       ],
       "required_extension": null,
       "references": [
@@ -147290,7 +147362,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted."
+        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted."
       ],
       "required_extension": null,
       "references": [
@@ -147369,7 +147441,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted."
+        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted."
       ],
       "required_extension": null,
       "references": [
@@ -147449,7 +147521,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted."
+        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted."
       ],
       "required_extension": null,
       "references": [
@@ -147528,7 +147600,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted."
+        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted."
       ],
       "required_extension": null,
       "references": [
@@ -147607,7 +147679,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted."
+        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted."
       ],
       "required_extension": null,
       "references": [
@@ -147687,7 +147759,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted."
+        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted."
       ],
       "required_extension": null,
       "references": [
@@ -147766,7 +147838,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted."
+        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted."
       ],
       "required_extension": null,
       "references": [
@@ -147845,7 +147917,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted."
+        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted."
       ],
       "required_extension": null,
       "references": [
@@ -147925,7 +147997,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted."
+        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted."
       ],
       "required_extension": null,
       "references": [
@@ -148004,7 +148076,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted."
+        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted."
       ],
       "required_extension": null,
       "references": [
@@ -148083,7 +148155,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted."
+        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted."
       ],
       "required_extension": null,
       "references": [
@@ -148162,7 +148234,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted."
+        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted."
       ],
       "required_extension": null,
       "references": [
@@ -148241,7 +148313,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted."
+        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted."
       ],
       "required_extension": null,
       "references": [
@@ -148320,7 +148392,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted."
+        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted."
       ],
       "required_extension": null,
       "references": [
@@ -148399,7 +148471,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted."
+        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted."
       ],
       "required_extension": null,
       "references": [
@@ -148479,7 +148551,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted."
+        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted."
       ],
       "required_extension": null,
       "references": [
@@ -148559,7 +148631,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted."
+        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted."
       ],
       "required_extension": null,
       "references": [
@@ -148638,7 +148710,7 @@
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
         "Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",
-        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier, cone functor on arbitrary squares, or higher triangulated-category structure is asserted."
+        "Public degrees are nonnegative. Whole degree lists use the formal ambient range, including zero slots of diagonal pairs; both empty endpoints give dimension -1 and empty lists. Degree-zero projection maps retain the adjacent degree -1 zero presentations. No inverse-solving equation/unknown bounds are imposed, but per-degree cone ranks can exceed the original chain-map ranks. Acyclicity is an integral homology-isomorphism decision, not a constructed inverse or geometric equivalence. No simplicial cone realization, general finite-chain-complex carrier or higher triangulated-category structure is asserted. ChainConeMap separately implements supplied homotopy-commutative squares with retained witnesses; no canonical cone morphism from homotopy classes alone is asserted."
       ],
       "required_extension": null,
       "references": [
@@ -148667,6 +148739,1671 @@
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "is-acyclic",
       "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainConeMap.from-data",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralChainConeMapAlgebra",
+      "concept": "ChainConeMap.from-data",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap.data",
+      "domain_B": null,
+      "domain_C": "ChainConeMap",
+      "operation_signature": "ChainConeMap.data -> ChainConeMap",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.from-data",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Validate all four full labelled endpoints and the exact supplied witness H:bF->Ga. Data membership only asserts individually valid nonnull components. Construction shares the two composite calculations and rejects incompatible maps or reversed witnesses as OPERATION_UNDEFINED; it does not eagerly reduce cone homology.",
+        "Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralChainConeMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. No arbitrary cone-map matrices, typed cone chains, geometric realization or general chain-complex carrier are added.",
+        "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-06",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ChainConeMap.from-data",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ChainConeMap.from-data",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainConeMap.data",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralChainConeMapAlgebra",
+      "concept": "ChainConeMap.data",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap",
+      "domain_B": null,
+      "domain_C": "ChainConeMap.data",
+      "operation_signature": "ChainConeMap -> ChainConeMap.data",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.data",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return immutable source and target cones, both vertical chain maps a and b, and the exact chosen integral homotopy H. No witness normalization or replacement is performed.",
+        "Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralChainConeMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. No arbitrary cone-map matrices, typed cone chains, geometric realization or general chain-complex carrier are added.",
+        "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-06",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainConeMap.data",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "data",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainConeMap.identity-on",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralChainConeMapAlgebra",
+      "concept": "ChainConeMap.identity-on",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainCone",
+      "domain_B": null,
+      "domain_C": "ChainConeMap",
+      "operation_signature": "ChainCone -> ChainConeMap",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.identity-on",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Construct the identity of the supplied exact cone with identity vertical maps and the stationary zero homotopy on its defining map. Construction and validation share one budget.",
+        "Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralChainConeMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. No arbitrary cone-map matrices, typed cone chains, geometric realization or general chain-complex carrier are added.",
+        "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-06",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainConeMap.identity-on",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ChainConeMap.identity-on",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainConeMap.from-homotopy",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralChainConeMapAlgebra",
+      "concept": "ChainConeMap.from-homotopy",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainHomotopy",
+      "domain_B": null,
+      "domain_C": "ChainConeMap",
+      "operation_signature": "ChainHomotopy -> ChainConeMap",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.from-homotopy",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "For a supplied H:F->G use identity vertical maps and the retained H to map Cone(F) to Cone(G). The degree n matrix has -H_(n-1) in its upper-right block. Conversion of the reverse homotopy gives a strict inverse cone map; no homotopy search is used.",
+        "Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralChainConeMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. No arbitrary cone-map matrices, typed cone chains, geometric realization or general chain-complex carrier are added.",
+        "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-06",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainConeMap.from-homotopy",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ChainConeMap.from-homotopy",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainConeMap.source",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralChainConeMapAlgebra",
+      "concept": "ChainConeMap.source",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap",
+      "domain_B": null,
+      "domain_C": "ChainCone",
+      "operation_signature": "ChainConeMap -> ChainCone",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.source",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the full source cone, including its exact defining chain map F.",
+        "Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralChainConeMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. No arbitrary cone-map matrices, typed cone chains, geometric realization or general chain-complex carrier are added.",
+        "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-06",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainConeMap.source",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "source",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainConeMap.target",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralChainConeMapAlgebra",
+      "concept": "ChainConeMap.target",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap",
+      "domain_B": null,
+      "domain_C": "ChainCone",
+      "operation_signature": "ChainConeMap -> ChainCone",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.target",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the full target cone, including its exact defining chain map G.",
+        "Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralChainConeMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. No arbitrary cone-map matrices, typed cone chains, geometric realization or general chain-complex carrier are added.",
+        "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-06",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainConeMap.target",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "target",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainConeMap.source-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralChainConeMapAlgebra",
+      "concept": "ChainConeMap.source-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap",
+      "domain_B": null,
+      "domain_C": "ChainMap",
+      "operation_signature": "ChainConeMap -> ChainMap",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.source-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the retained vertical chain map a between the sources of F and G.",
+        "Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralChainConeMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. No arbitrary cone-map matrices, typed cone chains, geometric realization or general chain-complex carrier are added.",
+        "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-06",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainConeMap.source-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "source-map",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainConeMap.target-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralChainConeMapAlgebra",
+      "concept": "ChainConeMap.target-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap",
+      "domain_B": null,
+      "domain_C": "ChainMap",
+      "operation_signature": "ChainConeMap -> ChainMap",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.target-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the retained vertical chain map b between the targets of F and G.",
+        "Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralChainConeMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. No arbitrary cone-map matrices, typed cone chains, geometric realization or general chain-complex carrier are added.",
+        "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-06",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainConeMap.target-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "target-map",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainConeMap.homotopy",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralChainConeMapAlgebra",
+      "concept": "ChainConeMap.homotopy",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap",
+      "domain_B": null,
+      "domain_C": "ChainHomotopy",
+      "operation_signature": "ChainConeMap -> ChainHomotopy",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.homotopy",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the actual witness H:bF->Ga. Nonzero loops remain observable even when the square commutes strictly.",
+        "Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralChainConeMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. No arbitrary cone-map matrices, typed cone chains, geometric realization or general chain-complex carrier are added.",
+        "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-06",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainConeMap.homotopy",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "homotopy",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainConeMap.equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralChainConeMapAlgebra",
+      "concept": "ChainConeMap.equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap",
+      "domain_B": "ChainConeMap",
+      "domain_C": "Boolean",
+      "operation_signature": "ChainConeMap x ChainConeMap -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Compare source and target cone contexts, both vertical maps and the full chosen homotopy. Abstract cone homology or equality of square maps alone does not imply equality.",
+        "Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralChainConeMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. No arbitrary cone-map matrices, typed cone chains, geometric realization or general chain-complex carrier are added.",
+        "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-06",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainConeMap.equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.ChainConeMap.compose",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralChainConeMapAlgebra",
+      "concept": "ChainConeMap.compose",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap",
+      "domain_B": "ChainConeMap",
+      "domain_C": "ChainConeMap",
+      "operation_signature": "ChainConeMap x ChainConeMap -> ChainConeMap",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.compose",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Apply the right operand first, requiring the exact defining map at the joining cone. Compose vertical maps and retain b_after H_before + H_after a_before by chronological witness transport. The whole operation, including both transports and final validation, shares one budget.",
+        "Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralChainConeMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. No arbitrary cone-map matrices, typed cone chains, geometric realization or general chain-complex carrier are added.",
+        "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-06",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ChainConeMap.compose",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "compose",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.ChainConeMap.chain-matrix",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralChainConeMapAlgebra",
+      "concept": "ChainConeMap.chain-matrix",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap",
+      "domain_B": "N",
+      "domain_C": "Mat(Z)",
+      "operation_signature": "ChainConeMap x N -> Mat(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.chain-matrix",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "For natural degree n return [[b_n,-H_(n-1)],[0,a_(n-1)]], with target coordinates before shifted source coordinates in each cone. Retain rectangular and zero shapes; degree zero omits the shifted blocks.",
+        "Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralChainConeMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. No arbitrary cone-map matrices, typed cone chains, geometric realization or general chain-complex carrier are added.",
+        "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-06",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainConeMap.chain-matrix",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "chain-matrix",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.ChainConeMap.cochain-matrix",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralChainConeMapAlgebra",
+      "concept": "ChainConeMap.cochain-matrix",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap",
+      "domain_B": "N",
+      "domain_C": "Mat(Z)",
+      "operation_signature": "ChainConeMap x N -> Mat(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.cochain-matrix",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the transpose of the degree n cone map; pullback goes from target cone cochains to source cone cochains. Assembly and transpose share one budget.",
+        "Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralChainConeMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. No arbitrary cone-map matrices, typed cone chains, geometric realization or general chain-complex carrier are added.",
+        "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-06",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainConeMap.cochain-matrix",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "cochain-matrix",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.ChainConeMap.chain-matrices",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralChainConeMapAlgebra",
+      "concept": "ChainConeMap.chain-matrices",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap",
+      "domain_B": null,
+      "domain_C": "Mat(Z)",
+      "operation_signature": "ChainConeMap -> List(Mat(Z))",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.chain-matrices",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return all cone-map matrices in increasing degrees zero through the maximum formal dimension of the two cones, including zero slots. Both empty cones give an empty list. Share one budget over the complete list.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralChainConeMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. No arbitrary cone-map matrices, typed cone chains, geometric realization or general chain-complex carrier are added.",
+        "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-06",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainConeMap.chain-matrices",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "chain-matrices",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.ChainConeMap.cochain-matrices",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralChainConeMapAlgebra",
+      "concept": "ChainConeMap.cochain-matrices",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap",
+      "domain_B": null,
+      "domain_C": "Mat(Z)",
+      "operation_signature": "ChainConeMap -> List(Mat(Z))",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.cochain-matrices",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the transposes of every chain matrix in increasing degree under one shared list budget. Retain empty rectangular shapes and zero formal degree slots.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralChainConeMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. No arbitrary cone-map matrices, typed cone chains, geometric realization or general chain-complex carrier are added.",
+        "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-06",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainConeMap.cochain-matrices",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "cochain-matrices",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.ChainConeMap.homology-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralChainConeMapAlgebra",
+      "concept": "ChainConeMap.homology-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "ChainConeMap x N -> AbelianGroupHomomorphism",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.homology-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Induce H_n(Cone(F))->H_n(Cone(G)) with the actual integral cycle bases and quotient presentations, preserving torsion. Matrix assembly, both cone reductions and induction share one budget.",
+        "Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralChainConeMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. No arbitrary cone-map matrices, typed cone chains, geometric realization or general chain-complex carrier are added.",
+        "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-06",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainConeMap.homology-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "homology-map",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.ChainConeMap.cohomology-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralChainConeMapAlgebra",
+      "concept": "ChainConeMap.cohomology-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "ChainConeMap x N -> AbelianGroupHomomorphism",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.cohomology-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Induce H^n(Cone(G))->H^n(Cone(F)) using the transposed matrix. Both reductions and induction share one budget; composition reverses order.",
+        "Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralChainConeMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. No arbitrary cone-map matrices, typed cone chains, geometric realization or general chain-complex carrier are added.",
+        "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-06",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainConeMap.cohomology-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "cohomology-map",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.ChainConeMap.homology-maps",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralChainConeMapAlgebra",
+      "concept": "ChainConeMap.homology-maps",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap",
+      "domain_B": null,
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "ChainConeMap -> List(AbelianGroupHomomorphism)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.homology-maps",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the covariant integral homology map in every formal degree through the maximum cone dimension, preserving zero groups and exact presentations. One budget covers the entire list.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralChainConeMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. No arbitrary cone-map matrices, typed cone chains, geometric realization or general chain-complex carrier are added.",
+        "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-06",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainConeMap.homology-maps",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "homology-maps",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.ChainConeMap.cohomology-maps",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralChainConeMapAlgebra",
+      "concept": "ChainConeMap.cohomology-maps",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap",
+      "domain_B": null,
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "ChainConeMap -> List(AbelianGroupHomomorphism)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.cohomology-maps",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the contravariant integral cohomology map in every formal degree under one shared list budget, including zero groups.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralChainConeMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. No arbitrary cone-map matrices, typed cone chains, geometric realization or general chain-complex carrier are added.",
+        "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-06",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainConeMap.cohomology-maps",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "cohomology-maps",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.ChainConeMap.homology-naturality-maps",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralChainConeMapAlgebra",
+      "concept": "ChainConeMap.homology-naturality-maps",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "ChainConeMap x N -> List(AbelianGroupHomomorphism)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.homology-naturality-maps",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return exactly [H_n(a),H_n(b),H_n(cone map),H_(n-1)(a)], the four vertical maps between the two homological long exact segments. At degree zero retain the negative-degree source presentations, including zero relations. All reductions and four induced maps share one budget.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "groupimp/src/main/java/operations/flat/MixedFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralChainConeMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. No arbitrary cone-map matrices, typed cone chains, geometric realization or general chain-complex carrier are added.",
+        "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-06",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainConeMap.homology-naturality-maps",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "homology-naturality-maps",
+      "legacy_operation_interface": "IUnsafeFlatOperation"
+    },
+    {
+      "id": "concrete-operation.ChainConeMap.cohomology-naturality-maps",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralChainConeMapAlgebra",
+      "concept": "ChainConeMap.cohomology-naturality-maps",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "ChainConeMap x N -> List(AbelianGroupHomomorphism)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.cohomology-naturality-maps",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return exactly [H^n(cone map),H^n(b),H^n(a),H^(n+1)(cone map)], the four contravariant vertical maps from the target exact cohomology segment to the source segment. All reductions and four maps share one budget.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "groupimp/src/main/java/operations/flat/MixedFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralChainConeMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. No arbitrary cone-map matrices, typed cone chains, geometric realization or general chain-complex carrier are added.",
+        "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-06",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainConeMap.cohomology-naturality-maps",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "cohomology-naturality-maps",
+      "legacy_operation_interface": "IUnsafeFlatOperation"
     },
     {
       "id": "concrete-operation.Z/5Z.add",
@@ -149294,6 +151031,12 @@
         "ChainCone.projection-cohomology-map",
         "ChainCone.projection-homology-map",
         "ChainCone.projection-matrix",
+        "ChainConeMap.chain-matrix",
+        "ChainConeMap.cochain-matrix",
+        "ChainConeMap.cohomology-map",
+        "ChainConeMap.cohomology-naturality-maps",
+        "ChainConeMap.homology-map",
+        "ChainConeMap.homology-naturality-maps",
         "ChainEquivalence.cohomology-map",
         "ChainEquivalence.cohomology-maps",
         "ChainEquivalence.homology-map",
@@ -150080,6 +151823,7 @@
         "Boolean.zero",
         "ChainCone.equal",
         "ChainCone.is-acyclic",
+        "ChainConeMap.equal",
         "ChainEquivalence.equal",
         "ChainHomotopy.are-homotopic",
         "ChainHomotopy.equal",
@@ -153034,6 +154778,10 @@
         "ChainCone.boundary-matrix",
         "ChainCone.inclusion-matrix",
         "ChainCone.projection-matrix",
+        "ChainConeMap.chain-matrices",
+        "ChainConeMap.chain-matrix",
+        "ChainConeMap.cochain-matrices",
+        "ChainConeMap.cochain-matrix",
         "ChainHomotopy.chain-matrices",
         "ChainHomotopy.chain-matrix",
         "ChainHomotopy.cochain-matrices",
@@ -153391,6 +155139,12 @@
         "ChainCone.long-exact-segment",
         "ChainCone.projection-cohomology-map",
         "ChainCone.projection-homology-map",
+        "ChainConeMap.cohomology-map",
+        "ChainConeMap.cohomology-maps",
+        "ChainConeMap.cohomology-naturality-maps",
+        "ChainConeMap.homology-map",
+        "ChainConeMap.homology-maps",
+        "ChainConeMap.homology-naturality-maps",
         "ChainEquivalence.cohomology-map",
         "ChainEquivalence.cohomology-maps",
         "ChainEquivalence.homology-map",
@@ -155636,6 +157390,8 @@
       "supported_operations": [
         "ChainCone.from-map",
         "ChainCone.map",
+        "ChainConeMap.source-map",
+        "ChainConeMap.target-map",
         "ChainEquivalence.backward",
         "ChainEquivalence.forward",
         "ChainEquivalence.from-isomorphism",
@@ -155797,6 +157553,8 @@
         "AbelianGroupHomomorphism"
       ],
       "supported_operations": [
+        "ChainConeMap.from-homotopy",
+        "ChainConeMap.homotopy",
         "ChainEquivalence.homotopies",
         "ChainEquivalence.source-homotopy",
         "ChainEquivalence.target-homotopy",
@@ -156217,7 +157975,10 @@
         "ChainCone.projection-homology-map",
         "ChainCone.projection-matrix",
         "ChainCone.source",
-        "ChainCone.target"
+        "ChainCone.target",
+        "ChainConeMap.identity-on",
+        "ChainConeMap.source",
+        "ChainConeMap.target"
       ],
       "invariants": [
         "Full validated defining chain map and labelled endpoint pairs retained",
@@ -156226,6 +157987,117 @@
         "Integral homology and cohomology retain presentations and torsion",
         "Inclusion and shifted projection yield exact integral comparison maps",
         "Context membership does not assert bounded reductions will fit; whole lists and exact segments share budgets"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-10-06"
+      }
+    },
+    {
+      "id": "ChainConeMap",
+      "name": "Integral maps between retained mapping cones",
+      "description": "Integral maps between retained mapping cones",
+      "member_representation": "mathematics.topology.IntegralChainConeMap",
+      "membership_rules": [
+        "Exact source and target defining maps and four labelled pairs retained",
+        "Vertical maps and chosen homotopy H:bF->Ga checked",
+        "Signed matrices [[b,-H],[0,a]] preserve cone differentials",
+        "Composition retains transported witnesses",
+        "Chosen homotopies can change integral homology maps",
+        "Compound reductions, lists and composition share resource budgets"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "ChainConeMap.data",
+        "ChainCone",
+        "ChainMap",
+        "ChainHomotopy",
+        "Mat(Z)",
+        "AbelianGroupHomomorphism",
+        "N",
+        "Boolean"
+      ],
+      "supported_operations": [
+        "ChainConeMap.chain-matrices",
+        "ChainConeMap.chain-matrix",
+        "ChainConeMap.cochain-matrices",
+        "ChainConeMap.cochain-matrix",
+        "ChainConeMap.cohomology-map",
+        "ChainConeMap.cohomology-maps",
+        "ChainConeMap.cohomology-naturality-maps",
+        "ChainConeMap.compose",
+        "ChainConeMap.data",
+        "ChainConeMap.equal",
+        "ChainConeMap.from-data",
+        "ChainConeMap.from-homotopy",
+        "ChainConeMap.homology-map",
+        "ChainConeMap.homology-maps",
+        "ChainConeMap.homology-naturality-maps",
+        "ChainConeMap.homotopy",
+        "ChainConeMap.identity-on",
+        "ChainConeMap.source",
+        "ChainConeMap.source-map",
+        "ChainConeMap.target",
+        "ChainConeMap.target-map"
+      ],
+      "invariants": [
+        "Exact source and target defining maps and four labelled pairs retained",
+        "Vertical maps and chosen homotopy H:bF->Ga checked",
+        "Signed matrices [[b,-H],[0,a]] preserve cone differentials",
+        "Composition retains transported witnesses",
+        "Chosen homotopies can change integral homology maps",
+        "Compound reductions, lists and composition share resource budgets"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-10-06"
+      }
+    },
+    {
+      "id": "ChainConeMap.data",
+      "name": "Supplied cone square and integral homotopy",
+      "description": "Supplied cone square and integral homotopy",
+      "member_representation": "mathematics.topology.IntegralChainConeMap.Data",
+      "membership_rules": [
+        "Two nonnull cone contexts, two validated vertical maps and one validated homotopy",
+        "Membership does not imply matching labelled endpoints or witness composites",
+        "ChainConeMap.from-data checks complete square compatibility"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "ChainConeMap",
+        "ChainCone",
+        "ChainMap",
+        "ChainHomotopy"
+      ],
+      "supported_operations": [
+        "ChainConeMap.data",
+        "ChainConeMap.from-data"
+      ],
+      "invariants": [
+        "Two nonnull cone contexts, two validated vertical maps and one validated homotopy",
+        "Membership does not imply matching labelled endpoints or witness composites",
+        "ChainConeMap.from-data checks complete square compatibility"
       ],
       "references": [
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"

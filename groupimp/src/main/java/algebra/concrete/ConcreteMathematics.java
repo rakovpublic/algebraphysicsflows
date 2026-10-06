@@ -69,6 +69,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final SimplicialChainMapClassAlgebra chainMapClasses;
     public final SimplicialChainEquivalenceAlgebra chainEquivalences;
     public final IntegralChainMappingConeAlgebra chainCones;
+    public final IntegralChainConeMapAlgebra chainConeMaps;
     public final RationalAffineSpaceAlgebra affineSpaces;
     public final FiniteMarkovAlgebra markovKernels;
     public final RationalTensorAlgebra tensors;
@@ -121,6 +122,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         chainMapClasses=new SimplicialChainMapClassAlgebra(chainMapSpaces,chainMaps,relativeComplexes,abelianGroupElements,integers,naturals,booleans,abelianHomomorphisms);
         chainEquivalences=new SimplicialChainEquivalenceAlgebra(chainMaps,chainHomotopies,chainMapClasses,relativeComplexes,relativeChains,relativeCochains,abelianHomomorphisms,naturals,booleans,homotopyEquivalences,collapses,collapseSequences,subdivisions);
         chainCones=new IntegralChainMappingConeAlgebra(chainMaps,relativeComplexes,integerMatrices,integralHomology,abelianGroups,abelianHomomorphisms,integers,naturals,booleans);
+        chainConeMaps=new IntegralChainConeMapAlgebra(chainCones,chainMaps,chainHomotopies,integerMatrices,abelianHomomorphisms,naturals,booleans);
         affineSpaces=new RationalAffineSpaceAlgebra(rectangularMatrices,finiteVectors,naturals,booleans);
         markovKernels=new FiniteMarkovAlgebra(integers,integerSets,integerProbabilities,integerFunctions,rectangularMatrices,finiteVectors,rationals,naturals,booleans);
         tensors=new RationalTensorAlgebra(rationals,finiteVectors,rectangularMatrices,naturals,booleans);
@@ -172,6 +174,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         values.add(chainMapClasses);
         values.add(chainEquivalences);
         values.add(chainCones);
+        values.add(chainConeMaps);
         values.addAll(fields); algebras=Collections.unmodifiableList(values);
         for(ConcreteAlgebra<?> algebra : algebras) {
             algebra.register(mathTool);
