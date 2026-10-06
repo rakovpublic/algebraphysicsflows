@@ -71,6 +71,14 @@ class CoverageTest(unittest.TestCase):
 
     def test_operation_conditions_are_scoped_to_the_algebra(self):
         records = {r.get("runtime_operation_id"): r for r in self.data["concepts"] if r.get("runtime_operation_id")}
+        self.assertIn("negative source boundary", " ".join(records["ChainCone.boundary-matrix"]["required_invariants"]))
+        self.assertIn("ILeftProjectionOperation", " ".join(records["ChainCone.chain-rank"]["required_invariants"]))
+        self.assertIn("negative-degree zero presentation", " ".join(records["ChainCone.projection-homology-map"]["required_invariants"]))
+        self.assertIn("all four reductions", " ".join(records["ChainCone.long-exact-segment"]["required_invariants"]))
+        self.assertIn("n+1", " ".join(records["ChainCone.long-exact-cohomology-segment"]["required_invariants"]))
+        self.assertIn("combined cone degree rank", " ".join(records["ChainCone.homology"]["known_limitations"]))
+        self.assertIn("5000000", " ".join(records["ChainMap.is-quasi-isomorphism"]["known_limitations"]))
+        self.assertIn("does not invoke simultaneous inverse solving", " ".join(records["ChainMap.is-quasi-isomorphism"]["required_invariants"]))
         self.assertIn("negate the actual accumulated prism matrices", " ".join(records["ChainEquivalence.from-homotopy-equivalence"]["required_invariants"]))
         self.assertIn("square and unimodular", " ".join(records["ChainEquivalence.from-isomorphism"]["required_invariants"]))
         self.assertIn("zero target homotopy", " ".join(records["ChainEquivalence.from-collapse"]["required_invariants"]))

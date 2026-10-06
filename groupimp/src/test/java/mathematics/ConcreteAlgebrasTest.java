@@ -51,6 +51,7 @@ import mathematics.topology.SimplicialChainHomotopy;
 import mathematics.topology.SimplicialChainMapSpace;
 import mathematics.topology.SimplicialChainMapClass;
 import mathematics.topology.SimplicialChainEquivalence;
+import mathematics.topology.IntegralChainMappingCone;
 import mathematics.topology.RelativeSimplicialCochain;
 import mathematics.examples.ConcreteAlgebrasExample;
 import mathematics.probability.FiniteMarkovKernel;
@@ -62,7 +63,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all1543RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all1568RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String discrete="Complex[[0], [1]]",emptyComplex="Complex[]";
@@ -126,7 +127,7 @@ public class ConcreteAlgebrasTest {
                 absolutePoint,absolutePoint,"ChainMapData(source="+absolutePoint+", target="+absolutePoint+", matrices=[ZMatrix(1x1)[[1]]])","true","false","true",
                 chainDouble,chainMapPrefix+"-1]]])",chainZero,chainDouble,chainIdentity,"true",chainIdentity,"ZMatrix(1x1)[[1]]","ZMatrix(1x1)[[1]]",
                 "[ZMatrix(1x1)[[1]]]","[ZMatrix(1x1)[[1]]]",relativeZeroChain,relativeZeroCochain,zeroChain,zeroCochain,
-                identityOneMap,identityOneMap,"["+identityOneMap+"]","["+identityOneMap+"]","true",chainIdentity));
+                identityOneMap,identityOneMap,"["+identityOneMap+"]","["+identityOneMap+"]","true",chainIdentity,"true"));
         String chainHomotopy="ChainHomotopy(from="+chainIdentity+", to="+chainIdentity+", matrices=[ZMatrix(0x1)[]])",
                 doubledHomotopy="ChainHomotopy(from="+chainDouble+", to="+chainDouble+", matrices=[ZMatrix(0x1)[]])",
                 edgeMapPrefix="ChainMap(source="+collapsePair+", target="+collapsePair+", matrices=",
@@ -157,6 +158,16 @@ public class ConcreteAlgebrasTest {
                 identityOneMap,identityOneMap,"["+identityOneMap+", "+identityOneMap+"]",identityOneMap,identityOneMap,"["+identityOneMap+", "+identityOneMap+"]",
                 relativeZeroChain,relativeZeroChain,relativeZeroCochain,relativeZeroCochain,identityClass,identityClass,
                 chainEquivalence,pointZeroOneChain,pointZeroOneChain,relativeZeroCochain,relativeZeroCochain,chainEquivalence,collapseEquivalence,collapseEquivalence,chainEquivalence));
+        String killedOne="PresentedAbelianGroup(ZMatrix(1x1)[[1]])",negativePointGroup="PresentedAbelianGroup(ZMatrix(0x1)[])",
+                coneH0="IntegralHomology(outgoing=ZMatrix(0x1)[], incoming=ZMatrix(1x1)[[1]])",
+                coneCo0="IntegralHomology(outgoing=ZMatrix(1x1)[[1]], incoming=ZMatrix(1x0)[[]])",
+                coneZeroType="AbelianGroup(rank=0, torsion=[])",coneValue="ChainCone(map="+chainIdentity+")",
+                coneIncludeH=homString(freeOne,killedOne,"ZMatrix(1x1)[[0]]"),coneProjectH=homString(killedOne,negativePointGroup,"ZMatrix(0x1)[]"),
+                coneIncludeCo=homString(emptyGroup,freeOne,"ZMatrix(1x0)[[]]"),coneProjectCo=homString(emptyGroup,emptyGroup,"ZMatrix(0x0)[]");
+        expected.put("IntegralChainMappingConeAlgebra",String.join("|",coneValue,chainIdentity,absolutePoint,absolutePoint,"true","1","1","ZMatrix(0x1)[]",
+                "[ZMatrix(0x1)[], ZMatrix(1x1)[[1]]]",coneH0,coneZeroType,"["+coneZeroType+", "+coneZeroType+"]",coneCo0,coneZeroType,"["+coneZeroType+", "+coneZeroType+"]",
+                "ZMatrix(1x1)[[1]]","ZMatrix(0x1)[]",coneIncludeH,coneProjectH,coneIncludeCo,coneProjectCo,
+                "["+identityOneMap+", "+coneIncludeH+", "+coneProjectH+"]","["+coneIncludeCo+", "+identityOneMap+", "+coneIncludeH+"]","true"));
         expected.put("SimplicialChainMapSpaceAlgebra",String.join("|",chainMapSpace,absolutePoint,absolutePoint,"true",chainZero,pointHomology,freeOne,
                 "AbelianGroup(rank=1, torsion=[])","["+chainIdentity+"]","AbelianElement(group="+freeOne+", smith=[1])",chainIdentity,"["+chainIdentity+"]",
                 chainMapSpace,chainMapSpace,identityOneMap,identityOneMap,"[ZMatrix(0x0)[], ZMatrix(1x1)[[1]], ZMatrix(0x0)[]]","[ZMatrix(0x0)[], ZMatrix(1x1)[[1]], ZMatrix(0x0)[]]"));
@@ -416,7 +427,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(1543,count);
+        assertEquals(1568,count);
     }
     private static String homString(String source,String target,String matrix) { return "AbelianHom(source="+source+", target="+target+", smith="+matrix+")"; }
     private static String simplicialString(String source,String target,String vertices) { return "SimplicialMap(source="+source+", target="+target+", vertices="+vertices+")"; }
@@ -444,7 +455,7 @@ public class ConcreteAlgebrasTest {
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
         Algebra source=math.mathTool.getAlgebra(entry.first.getAlgebraName());
         IAlgebraItem item=source.buildAlgebraItem(sample(math,source.getAlgebraName(),0));
-        if(owner instanceof SimplicialChainMapAlgebra || owner instanceof SimplicialChainMapSpaceAlgebra || owner instanceof SimplicialChainMapClassAlgebra || owner instanceof SimplicialChainEquivalenceAlgebra) {
+        if(owner instanceof SimplicialChainMapAlgebra || owner instanceof SimplicialChainMapSpaceAlgebra || owner instanceof SimplicialChainMapClassAlgebra || owner instanceof SimplicialChainEquivalenceAlgebra || owner instanceof IntegralChainMappingConeAlgebra) {
             if(source==math.relativeComplexes.algebra()) item=source.buildAlgebraItem(relativeCochainTestPair());
             if(source==math.relativeMaps.algebra()) item=source.buildAlgebraItem(RelativeSimplicialMap.identity(relativeCochainTestPair()));
             if(source==math.simplicialMaps.algebra()) item=source.buildAlgebraItem(FiniteSimplicialMap.identity(coverTestPoint()));
@@ -547,7 +558,7 @@ public class ConcreteAlgebrasTest {
         if(operation instanceof IOneOperandOperation) return item.performOneOperandOperation(alias).perform().getResult().toString();
         if(operation instanceof ITransferOperation) return item.performAlgebraTransfer(alias).perform().getResult().toString();
         Object second=entry.second==null?null:sample(math,entry.second.getAlgebraName(),1);
-        if(owner instanceof SimplicialChainMapSpaceAlgebra || owner instanceof SimplicialChainMapClassAlgebra || owner instanceof SimplicialChainEquivalenceAlgebra) {
+        if(owner instanceof SimplicialChainMapSpaceAlgebra || owner instanceof SimplicialChainMapClassAlgebra || owner instanceof SimplicialChainEquivalenceAlgebra || owner instanceof IntegralChainMappingConeAlgebra) {
             if(entry.second==math.relativeComplexes.algebra()) second=relativeCochainTestPair();
             if(entry.second==math.abelianGroupElements.algebra()) second=new PresentedAbelianGroup(IntegerMatrix.zero(1,0)).project(new IntegerVector(BigInteger.ONE));
             if(entry.second==math.naturals.algebra()) second=BigInteger.ZERO;
@@ -723,6 +734,7 @@ public class ConcreteAlgebrasTest {
             case "SimplicialSubdivision": return new SimplicialSubdivision(relativeCochainTestPair());
             case "SimplicialCollapse": return elementaryCollapse();
             case "CollapseSequence": return SimplicialCollapseSequence.fromCollapse(elementaryCollapse());
+            case "ChainCone": return new IntegralChainMappingCone(SimplicialChainMap.identity(relativeCochainTestPair()));
             case "ChainEquivalence": return SimplicialChainEquivalence.identity(relativeCochainTestPair());
             case "ChainEquivalence.data": return SimplicialChainEquivalence.identity(relativeCochainTestPair()).data();
             case "ChainMap": return SimplicialChainMap.identity(relativeCochainTestPair());

@@ -49,6 +49,7 @@ public final class SimplicialChainMapAlgebra extends ConcreteAlgebra<SimplicialC
         unaryFlat("cohomology-maps",algebra(),homomorphisms.algebra(),false,SimplicialChainMap::cohomologyMaps);
         unary("is-homotopy-equivalence",algebra(),truth.algebra(),false,SimplicialChainInverseSolver::isHomotopyEquivalence);
         unary("homotopy-inverse",algebra(),algebra(),true,SimplicialChainInverseSolver::inverse);
+        unary("is-quasi-isomorphism",algebra(),truth.algebra(),false,SimplicialChainMap::isQuasiIsomorphism);
         law("Every degree matrix satisfies d_target F = F d_source on integral quotient chains; all full labelled endpoints are retained.");
         law("Parallel maps form abelian groups under addition; composition is bilinear and applies the right operand first. Strict inversion requires degreewise unimodularity over Z; homotopy-inverse solves for a chain inverse and both integral homotopies simultaneously.");
         law("Homology is covariant and additive; transpose pullback on cohomology reverses composition. Arbitrary chain maps need not preserve cup products or arise from vertex maps.");

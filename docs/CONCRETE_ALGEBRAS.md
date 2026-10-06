@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1543 native operations from 67 algebra builders.
+The default initializer currently installs 1568 native operations from 68 algebra builders.
 
 ## Existing API usage
 
@@ -2391,3 +2391,58 @@ List<String> inverseMaps = math.flow(math.collapses, Collections.singletonList(c
 None of these five conversions invokes the simultaneous inverse solver or its aggregate equation/unknown limits. For example, a strict identity on twelve points and a supplied contraction of a twelve-edge interval convert successfully beyond those search bounds. Each conversion still shares **one 5000000-unit budget** across both map constructions, both witnesses, and final bundle validation; strict conversion also includes integral matrix inversion. Individually successful components can exceed this budget when combined. Every required quotient basis remains bounded by **256 simplices**, after filtering. Exhaustion raises `IMPLEMENTATION_FAILURE`, with no replacement witnesses or partial bundle. The original geometric objects retain their own construction limits. Exact chain witnesses do not assert new geometric homotopy equivalences or higher coherence.
 
 `NativeChainEquivalenceConversionsTest` adds 15 tests: 625 independent strict inverse decisions, signed interval fillings and relative projection, preserved nonzero geometric loops, all simplex facets through dimension five, chronological collapse composition, all 148 three-label relative subdivisions, extreme labels and 1025-bit coefficients, projective-plane torsion, both typed differential identities, exact-context and degree failures, empty and filtered diagonal pairs, conversion beyond solver bounds, shared-budget failures for all five converters, actual wrappers, and serialized repeatable flows.
+
+## Integral mapping cones and quasi-isomorphisms
+
+`IntegralChainMappingConeAlgebra` registers `ChainCone` directly in MathTool. Its immutable value retains a validated integral chain map `F: S -> T` with both full labelled relative pairs. Equality compares this defining map. The chain groups are `Cone(F)_n = T_n + S_(n-1)`, with target coordinates first and differential `[[d_T, F], [0, -d_S]]`. Inclusion is `j(t)=(t,0)` and shifted projection is `p(t,s)=s`. The minus sign gives `D*D=0`; projection anticommutes with the unshifted source differential. See the [homological cone convention](https://stacks.math.columbia.edu/tag/0621) and [cones and split exact sequences](https://stacks.math.columbia.edu/tag/014D).
+
+The 24 operations use the existing interfaces in `operations/simple` and `operations/flat`:
+
+| Operation aliases | Result |
+| --- | --- |
+| `from-map`, `map`, `source`, `target` | Construct a cone from a `ChainMap`, or recover its defining map and pairs. |
+| `equal`, `dimension`, `chain-rank` | Compare exact data, obtain the formal top degree, or count coordinates at a natural degree. |
+| `boundary-matrix`, `boundary-matrices` | Signed differential in one degree, or the complete ordered list. |
+| `homology`, `homology-type`, `homology-types` | Constructive `IntegralHomology`, its abelian type, or all degreewise types. |
+| `cohomology`, `cohomology-type`, `cohomology-types` | The corresponding calculations for transposed differentials. |
+| `inclusion-matrix`, `projection-matrix` | Matrices of `j_n: T_n -> Cone_n` and `p_n: Cone_n -> S_(n-1)`. |
+| `inclusion-homology-map`, `projection-homology-map` | `H_n(T) -> H_n(Cone)` and `H_n(Cone) -> H_(n-1)(S)`. |
+| `inclusion-cohomology-map`, `projection-cohomology-map` | `H^n(Cone) -> H^n(T)` and `H^(n-1)(S) -> H^n(Cone)`. |
+| `long-exact-segment`, `long-exact-cohomology-segment` | Three composable homomorphisms in the orders below. |
+| `is-acyclic` | Whether every integral cone homology group vanishes. |
+
+At degree `n`, the homology segment returns `[H_n(F), j_*, p_*]`, with endpoints `H_n(S) -> H_n(T) -> H_n(Cone) -> H_(n-1)(S)`. The cohomology segment returns `[j^*, H^n(F), p^* at n+1]`, with endpoints `H^n(Cone) -> H^n(T) -> H^n(S) -> H^(n+1)(Cone)`. Presentations at each shared endpoint agree exactly. Constructive homology exposes cycle/cocycle representatives, quotient classes and bounding chains through the existing `IntegralHomology` algebra.
+
+```java
+ConcreteMathematics math = new ConcreteMathematics();
+RelativeSimplicialComplex point = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))));
+SimplicialChainMap doubling = SimplicialChainMap.identity(point).scale(BigInteger.valueOf(2));
+IntegralChainMappingCone cone = math.chainMaps.algebra().buildAlgebraItem(doubling)
+        .<IntegralChainMappingCone>performAlgebraTransfer("ChainCone.from-map")
+        .perform().getResult();
+List<String> homology = math.flow(math.chainCones, Collections.singletonList(cone))
+        .<AbelianGroupType>performFlatAlgebraTransfer("homology-types").collect();
+// [AbelianGroup(rank=0, torsion=[2]), AbelianGroup(rank=0, torsion=[])]
+List<String> cohomology = math.flow(math.chainCones, Collections.singletonList(cone))
+        .<AbelianGroupType>performFlatAlgebraTransfer("cohomology-types").collect();
+// [AbelianGroup(rank=0, torsion=[]), AbelianGroup(rank=0, torsion=[2])]
+List<String> ranks = math.flow(math.chainCones, Collections.singletonList(cone))
+        .performLeftProjectionOperation("chain-rank", BigInteger.ONE).collect();
+// [1], using the actual N wrapper for the second operand's carrier.
+List<String> quasi = math.flow(math.chainMaps, Collections.singletonList(doubling))
+        .<Boolean>performAlgebraTransfer("is-quasi-isomorphism").collect();
+// [false]
+List<String> segment = math.flow(math.chainCones, Collections.singletonList(cone))
+        .<AbelianGroupHomomorphism, BigInteger>performFlatAlgebraUnsafe("long-exact-segment", BigInteger.ZERO)
+        .<Boolean>performAlgebraTransfer("is-surjective").collect();
+// [false, true, true]: Z --2--> Z --> Z/2 --> 0.
+```
+
+`ChainMap.is-quasi-isomorphism` tests cone acyclicity under one shared budget. It returns true only after every cone degree has zero integral homology; a nonzero degree gives false. It does not construct inverse witnesses or invoke the simultaneous inverse solver. For example, the identity on twelve points passes beyond that solver's equation/unknown bounds. Resource exhaustion remains `IMPLEMENTATION_FAILURE`, rather than a negative decision.
+
+Public degrees are natural numbers. Degreewise lists include degrees zero through `max(dim(T), dim(S)+1)`, retaining zero slots of diagonal relative pairs; an empty source contributes no shifted ambient degree. Two empty endpoints have dimension -1 and empty lists. Differentials immediately above the top degree retain their rows and zero columns. At degree zero, the homological projection retains the negative endpoint presentation with zero generators and `rank(S_0)` zero relations; its dual endpoint has a zero-by-zero presentation.
+
+Construction retains the map without eager matrix assembly or Smith reduction. Each required quotient basis is bounded by 256 after filtering, and each combined cone group has at most **256 target plus shifted-source coordinates**. Each complete list, exact segment or acyclicity decision shares **one 5000000-unit computation budget**, including its reductions and induced maps. A scalar degree calculation can succeed while the complete list exceeds that budget. Acyclicity checks all combined ranks before reducing degrees. The carrier does not add a general chain-complex algebra, maps between cones, or a geometric realization.
+
+`NativeIntegralChainConeTest` checks 125 signed interval maps and 625 point matrices against independent integer oracles; both exact sequences; rectangular, empty and filtered pairs; 1025-bit torsion and explicit bounding chains; and integral extensions from projective-plane maps whose induced homology maps coincide while their cones differ. It also checks quasi-isomorphism beyond inverse-search bounds, whole-degree and exact-segment budget failures, actual second-carrier wrappers and serialized repeatable scalar/flat flows.

@@ -38,6 +38,7 @@ import mathematics.topology.SimplicialChainMapSpace;
 import mathematics.topology.SimplicialChainMapClass;
 import mathematics.topology.SimplicialChainEquivalence;
 import mathematics.topology.IntegralHomology;
+import mathematics.topology.IntegralChainMappingCone;
 import mathematics.topology.FiniteSimplicialMap;
 import mathematics.topology.RelativeSimplicialComplex;
 import mathematics.topology.RelativeSimplicialMap;
@@ -131,6 +132,15 @@ public final class ConcreteAlgebrasExample {
                 .<SimplicialChainHomotopy>performAlgebraTransfer("ChainHomotopy.from-collapse-sequence")
                 .performLeftProjectionOperation("on-absolute-chain",vertexOne).<IntegerVector>performAlgebraTransfer("coordinates").collect());
         RelativeSimplicialComplex homotopyPoint=RelativeSimplicialComplex.absolute(new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))));
+        SimplicialChainMap doublingPoint=SimplicialChainMap.identity(homotopyPoint).scale(BigInteger.valueOf(2));
+        System.out.println("Cone of doubling a point has integral homology Z/2 in degree zero: "+math.flow(math.chainMaps,Collections.singletonList(doublingPoint))
+                .<IntegralChainMappingCone>performAlgebraTransfer("ChainCone.from-map")
+                .<AbelianGroupType>performFlatAlgebraTransfer("homology-types").collect());
+        System.out.println("Its integral cohomology has Z/2 in degree one: "+math.flow(math.chainMaps,Collections.singletonList(doublingPoint))
+                .<IntegralChainMappingCone>performAlgebraTransfer("ChainCone.from-map")
+                .<AbelianGroupType>performFlatAlgebraTransfer("cohomology-types").collect());
+        System.out.println("Doubling a point is an integral quasi-isomorphism: "+math.flow(math.chainMaps,Collections.singletonList(doublingPoint))
+                .<Boolean>performAlgebraTransfer("is-quasi-isomorphism").collect());
         SimplicialChainMap homotopyStart=new SimplicialChainMap(homotopyPoint,circlePair,Arrays.asList(new IntegerMatrix(new BigInteger[][]{{BigInteger.ONE},{BigInteger.ZERO},{BigInteger.ZERO}}),IntegerMatrix.zero(3,0))),
                 homotopyEnd=new SimplicialChainMap(homotopyPoint,circlePair,Arrays.asList(new IntegerMatrix(new BigInteger[][]{{BigInteger.ZERO},{BigInteger.ZERO},{BigInteger.ONE}}),IntegerMatrix.zero(3,0)));
         RelativeSimplicialChain homotopyVertex=new RelativeSimplicialChain(homotopyPoint,BigInteger.ZERO,new IntegerVector(BigInteger.ONE));

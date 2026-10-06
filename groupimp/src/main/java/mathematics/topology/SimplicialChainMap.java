@@ -145,6 +145,7 @@ public final class SimplicialChainMap implements Serializable {
         }
         return true;
     }
+    public boolean isQuasiIsomorphism() { return new IntegralChainMappingCone(this).isAcyclic(); }
     public SimplicialChainMap inverse() { return inverse(new Computation()); }
     SimplicialChainMap inverse(Computation work) {
         return build(target,source,work,d -> work.inverseUnimodular(matrixAt(d)));

@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 2017 |
-| DIRECTLY_SUPPORTED | 1774 |
+| Scoped records | 2043 |
+| DIRECTLY_SUPPORTED | 1800 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1633 |
+| IMPLEMENTED | 1659 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1701 |
+| MACHINE_TESTED | 1727 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1610 | 1610 | 0 | 0 | 0 | 1610 | 0 | 0 |
+| Concrete MathTool algebras | 1636 | 1636 | 0 | 0 | 0 | 1636 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -287,6 +287,30 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Boolean.xor | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.xor |
 | Boolean.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.zero |
 | BooleanAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations |
+| ChainCone.boundary-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.boundary-matrices |
+| ChainCone.boundary-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.boundary-matrix |
+| ChainCone.chain-rank | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.chain-rank |
+| ChainCone.cohomology | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.cohomology |
+| ChainCone.cohomology-type | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.cohomology-type |
+| ChainCone.cohomology-types | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.cohomology-types |
+| ChainCone.dimension | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.dimension |
+| ChainCone.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.equal |
+| ChainCone.from-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.from-map |
+| ChainCone.homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.homology |
+| ChainCone.homology-type | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.homology-type |
+| ChainCone.homology-types | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.homology-types |
+| ChainCone.inclusion-cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.inclusion-cohomology-map |
+| ChainCone.inclusion-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.inclusion-homology-map |
+| ChainCone.inclusion-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.inclusion-matrix |
+| ChainCone.is-acyclic | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.is-acyclic |
+| ChainCone.long-exact-cohomology-segment | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.long-exact-cohomology-segment |
+| ChainCone.long-exact-segment | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.long-exact-segment |
+| ChainCone.map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.map |
+| ChainCone.projection-cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.projection-cohomology-map |
+| ChainCone.projection-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.projection-homology-map |
+| ChainCone.projection-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.projection-matrix |
+| ChainCone.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.source |
+| ChainCone.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.target |
 | ChainEquivalence.backward | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.backward |
 | ChainEquivalence.backward-class | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.backward-class |
 | ChainEquivalence.cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral chain equivalences with retained opposite maps and both inverse homotopies, supplied-data validation, witness composition and typed actions; native operation ChainEquivalence.cohomology-map |
@@ -380,6 +404,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | ChainMap.is-homotopy-equivalence | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.is-homotopy-equivalence |
 | ChainMap.is-identity | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.is-identity |
 | ChainMap.is-isomorphism | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.is-isomorphism |
+| ChainMap.is-quasi-isomorphism | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.is-quasi-isomorphism |
 | ChainMap.is-zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.is-zero |
 | ChainMap.negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.negate |
 | ChainMap.on-absolute-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary integral degree-zero chain maps between labelled simplicial pairs, with checked degree matrices, additive composition, typed actions and induced integral maps; native operation ChainMap.on-absolute-chain |
@@ -892,6 +917,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | IntegerRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient |
 | IntegerSetAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets |
 | IntegerVectorFamily | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer coordinate vectors with retained nonnegative dimension |
+| IntegralChainMappingConeAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences |
 | IntegralHomology.as-type | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.as-type |
 | IntegralHomology.at-degree | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.at-degree |
 | IntegralHomology.betti-number | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.betti-number |
