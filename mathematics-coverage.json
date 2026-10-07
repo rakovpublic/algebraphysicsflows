@@ -26677,6 +26677,81 @@
       "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
     },
     {
+      "id": "concrete-algebra.IntegralConeHomotopyAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "IntegralConeHomotopyAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "ConeHomotopy",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
       "id": "concrete-algebra.IntegralHomologyAlgebra",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "IntegralHomologyAlgebra",
@@ -155796,6 +155871,1896 @@
       "legacy_operation_interface": "IUnsafeOperation"
     },
     {
+      "id": "concrete-operation.ConeHomotopy.from-data",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.from-data",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeHomotopy.data",
+      "domain_B": null,
+      "domain_C": "ConeHomotopy",
+      "operation_signature": "ConeHomotopy.data -> ConeHomotopy",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.from-data",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require identical full source and target cones and one matrix K_n through the maximum formal cone dimension. Validate shifted shapes and D K + K D = to - from in every degree under one shared budget. Data membership alone does not assert equations or evaluable combined ranks.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ConeHomotopy.from-data",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ConeHomotopy.from-data",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.stationary",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.stationary",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap",
+      "domain_B": null,
+      "domain_C": "ConeHomotopy",
+      "operation_signature": "ChainConeMap -> ConeHomotopy",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.stationary",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Retain the exact same endpoint cone map and choose zero witness matrices in every formal degree, with all rectangular and terminal zero shapes. Zero witnesses are not substituted for other supplied loops.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ConeHomotopy.stationary",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ConeHomotopy.stationary",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.contract-isomorphism",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.contract-isomorphism",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainCone",
+      "domain_B": null,
+      "domain_C": "ConeHomotopy",
+      "operation_signature": "ChainCone -> ConeHomotopy",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.contract-isomorphism",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require the defining chain map F to be degreewise unimodular. Construct a homotopy from the zero cone map to identity with K(t,s)=(0,F^-1 t). A single budget includes inversion, both endpoint constructions and complete witness validation. Acyclicity alone does not meet this operation's strict isomorphism precondition.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ConeHomotopy.contract-isomorphism",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ConeHomotopy.contract-isomorphism",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.from",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.from",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeHomotopy",
+      "domain_B": null,
+      "domain_C": "ChainConeMap",
+      "operation_signature": "ConeHomotopy -> ChainConeMap",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.from",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the exact starting cone map including both vertical maps and its original square witness.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ConeHomotopy.from",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "from",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.to",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.to",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeHomotopy",
+      "domain_B": null,
+      "domain_C": "ChainConeMap",
+      "operation_signature": "ConeHomotopy -> ChainConeMap",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.to",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the exact finishing cone map including both vertical maps and its original square witness.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ConeHomotopy.to",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.source",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.source",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeHomotopy",
+      "domain_B": null,
+      "domain_C": "ChainCone",
+      "operation_signature": "ConeHomotopy -> ChainCone",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.source",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the full common source cone, including its exact defining chain map and labelled relative pairs.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ConeHomotopy.source",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "source",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.target",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.target",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeHomotopy",
+      "domain_B": null,
+      "domain_C": "ChainCone",
+      "operation_signature": "ConeHomotopy -> ChainCone",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.target",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the full common target cone, including its exact defining chain map and labelled relative pairs.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ConeHomotopy.target",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "target",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.data",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.data",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeHomotopy",
+      "domain_B": null,
+      "domain_C": "ConeHomotopy.data",
+      "operation_signature": "ConeHomotopy -> ConeHomotopy.data",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.data",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return immutable endpoint maps and every actual degree-raising integral witness matrix. No quotient by higher homotopy or witness normalization is applied.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ConeHomotopy.data",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "data",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.reverse",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.reverse",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeHomotopy",
+      "domain_B": null,
+      "domain_C": "ConeHomotopy",
+      "operation_signature": "ConeHomotopy -> ConeHomotopy",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.reverse",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Swap the retained endpoint maps and negate every K_n under one shared validation budget; reversing twice gives the original witness.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ConeHomotopy.reverse",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "reverse",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.then",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.then",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeHomotopy",
+      "domain_B": "ConeHomotopy",
+      "domain_C": "ConeHomotopy",
+      "operation_signature": "ConeHomotopy x ConeHomotopy -> ConeHomotopy",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.then",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Chronologically concatenate homotopies only when the exact joining cone map, including its square witness, agrees. Add the actual K matrices; concatenation is associative and has stationary zero witnesses as units.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ConeHomotopy.then",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "then",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.add",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.add",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeHomotopy",
+      "domain_B": "ConeHomotopy",
+      "domain_C": "ConeHomotopy",
+      "operation_signature": "ConeHomotopy x ConeHomotopy -> ConeHomotopy",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.add",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require identical full source and target cones, then add both endpoint maps and actual K matrices. Share one budget across both endpoint sums and full witness validation.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ConeHomotopy.add",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "add",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.scale",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.scale",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeHomotopy",
+      "domain_B": "Z",
+      "domain_C": "ConeHomotopy",
+      "operation_signature": "ConeHomotopy x Z -> ConeHomotopy",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.scale",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Scale both endpoint cone maps and all K matrices by an arbitrary integer. ICustomMemberOperation returns the first ConeHomotopy carrier wrapper; both endpoint calculations and validation share one budget.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ConeHomotopy.scale",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "scale",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.precompose",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.precompose",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeHomotopy",
+      "domain_B": "ChainConeMap",
+      "domain_C": "ConeHomotopy",
+      "operation_signature": "ConeHomotopy x ChainConeMap -> ConeHomotopy",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.precompose",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require the before-map target to equal the exact source cone. Compose both endpoints and use K_n B_n with one budget across both compositions, matrix transport and final validation.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ConeHomotopy.precompose",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "precompose",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.postcompose",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.postcompose",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeHomotopy",
+      "domain_B": "ChainConeMap",
+      "domain_C": "ConeHomotopy",
+      "operation_signature": "ConeHomotopy x ChainConeMap -> ConeHomotopy",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.postcompose",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require the after-map source to equal the exact target cone. Compose both endpoints and use A_(n+1) K_n with one budget across both compositions, shifted transport and final validation.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ConeHomotopy.postcompose",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "postcompose",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeHomotopy",
+      "domain_B": "ConeHomotopy",
+      "domain_C": "Boolean",
+      "operation_signature": "ConeHomotopy x ConeHomotopy -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Compare both exact endpoint cone maps and every actual witness matrix; equal endpoints need not imply equal witnesses.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ConeHomotopy.equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.chain-matrix",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.chain-matrix",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeHomotopy",
+      "domain_B": "N",
+      "domain_C": "Mat(Z)",
+      "operation_signature": "ConeHomotopy x N -> Mat(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.chain-matrix",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "For a nonnegative degree n return K_n from source cone degree n to target degree n+1. Preserve shaped zero matrices outside the retained formal range.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ConeHomotopy.chain-matrix",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "chain-matrix",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.cochain-matrix",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.cochain-matrix",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeHomotopy",
+      "domain_B": "N",
+      "domain_C": "Mat(Z)",
+      "operation_signature": "ConeHomotopy x N -> Mat(Z)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.cochain-matrix",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "For a nonnegative degree n return the transpose of K_(n-1), from target cone cochains in degree n to source degree n-1. At n=0 retain the 0-by-target-rank zero shape despite the absence of negative typed cochains.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ConeHomotopy.cochain-matrix",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "cochain-matrix",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.chain-matrices",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.chain-matrices",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeHomotopy",
+      "domain_B": null,
+      "domain_C": "Mat(Z)",
+      "operation_signature": "ConeHomotopy -> List(Mat(Z))",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.chain-matrices",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the immutable complete retained list K_0 through K_D, D the maximum formal cone dimension. Both empty cones give an empty list. Formal zero slots are retained.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ConeHomotopy.chain-matrices",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "chain-matrices",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.cochain-matrices",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.cochain-matrices",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeHomotopy",
+      "domain_B": null,
+      "domain_C": "Mat(Z)",
+      "operation_signature": "ConeHomotopy -> List(Mat(Z))",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.cochain-matrices",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return shifted transposes in degrees 0 through D+1 under one shared list budget, including initial and terminal shaped zeros. When both cones are empty the list contains one 0-by-0 matrix.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ConeHomotopy.cochain-matrices",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "cochain-matrices",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.on-chain",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.on-chain",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeHomotopy",
+      "domain_B": "ConeChain",
+      "domain_C": "ConeChain",
+      "operation_signature": "ConeHomotopy x ConeChain -> ConeChain",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.on-chain",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require the exact source cone. Apply K_n and return a ConeChain on the target in degree n+1 through ILeftProjectionOperation using the actual second carrier wrapper. Negative zero chains are allowed. D K(c) + K D(c) = to(c) - from(c); on cycles this gives a typed filling.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ConeHomotopy.on-chain",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "on-chain",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.on-cochain",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.on-cochain",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeHomotopy",
+      "domain_B": "ConeCochain",
+      "domain_C": "ConeCochain",
+      "operation_signature": "ConeHomotopy x ConeCochain -> ConeCochain",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.on-cochain",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require the exact target cone and positive degree n. Apply transpose K_(n-1) and return a ConeCochain on the source in degree n-1 through ILeftProjectionOperation using the actual second carrier wrapper. Delta K* + K* Delta = to* - from*. Degree zero uses cochain-matrix instead.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ConeHomotopy.on-cochain",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "on-cochain",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.homology-maps",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.homology-maps",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeHomotopy",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "ConeHomotopy x N -> List(AbelianGroupHomomorphism)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.homology-maps",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return exactly [H_n(from),H_n(to)] on retained integral presentations. The two homomorphisms agree and retain torsion; all four endpoint reductions and both inductions share one budget.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/flat/MixedFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ConeHomotopy.homology-maps",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "homology-maps",
+      "legacy_operation_interface": "IUnsafeFlatOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.cohomology-maps",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.cohomology-maps",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeHomotopy",
+      "domain_B": "N",
+      "domain_C": "AbelianGroupHomomorphism",
+      "operation_signature": "ConeHomotopy x N -> List(AbelianGroupHomomorphism)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.cohomology-maps",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return exactly [H^n(from),H^n(to)] as equal contravariant homomorphisms with exact target-to-source integral presentations and torsion. All four reductions and both inductions share one budget.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/flat/MixedFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ConeHomotopy.cohomology-maps",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "cohomology-maps",
+      "legacy_operation_interface": "IUnsafeFlatOperation"
+    },
+    {
       "id": "concrete-operation.Z/5Z.add",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "PrimeField",
@@ -156458,6 +158423,10 @@
         "ConeCochain.basis-on",
         "ConeCochain.degree",
         "ConeCochain.zero-on",
+        "ConeHomotopy.chain-matrix",
+        "ConeHomotopy.cochain-matrix",
+        "ConeHomotopy.cohomology-maps",
+        "ConeHomotopy.homology-maps",
         "CoverMap.intersection-cohomology-map",
         "CoverMap.intersection-homology-map",
         "CoverMap.left-cohomology-map",
@@ -156759,6 +158728,7 @@
         "ConeChain.zero-on",
         "ConeCochain.evaluate",
         "ConeCochain.scale",
+        "ConeHomotopy.scale",
         "FiniteAdjunction.transpose",
         "FiniteAdjunction.untranspose",
         "FiniteCategory.compose",
@@ -157258,6 +159228,7 @@
         "ConeCochain.is-coboundary",
         "ConeCochain.is-cocycle",
         "ConeCochain.is-zero",
+        "ConeHomotopy.equal",
         "CoverMap.contiguous",
         "CoverMap.equal",
         "CoverMap.is-isomorphism",
@@ -160220,6 +162191,10 @@
         "CollapseSequence.cochain-homotopy-matrix",
         "CollapseSequence.cochain-matrices",
         "CollapseSequence.cochain-matrix",
+        "ConeHomotopy.chain-matrices",
+        "ConeHomotopy.chain-matrix",
+        "ConeHomotopy.cochain-matrices",
+        "ConeHomotopy.cochain-matrix",
         "CoverMap.sum-chain-matrices",
         "CoverMap.sum-chain-matrix",
         "CoverMap.sum-cochain-matrices",
@@ -160593,6 +162568,8 @@
         "CollapseSequence.homology-maps",
         "CollapseSequence.inverse-cohomology-map",
         "CollapseSequence.inverse-homology-map",
+        "ConeHomotopy.cohomology-maps",
+        "ConeHomotopy.homology-maps",
         "CoverMap.intersection-cohomology-map",
         "CoverMap.intersection-homology-map",
         "CoverMap.left-cohomology-map",
@@ -163423,7 +165400,10 @@
         "ConeCochain.cone",
         "ConeCochain.include-source",
         "ConeCochain.lift-target",
-        "ConeCochain.zero-on"
+        "ConeCochain.zero-on",
+        "ConeHomotopy.contract-isomorphism",
+        "ConeHomotopy.source",
+        "ConeHomotopy.target"
       ],
       "invariants": [
         "Full validated defining chain map and labelled endpoint pairs retained",
@@ -163506,7 +165486,12 @@
         "ChainConeMap.target",
         "ChainConeMap.target-map",
         "ChainConeMap.zero-between",
-        "ChainConeMap.zero-like"
+        "ChainConeMap.zero-like",
+        "ConeHomotopy.from",
+        "ConeHomotopy.postcompose",
+        "ConeHomotopy.precompose",
+        "ConeHomotopy.stationary",
+        "ConeHomotopy.to"
       ],
       "invariants": [
         "Exact source and target defining maps and four labelled pairs retained",
@@ -163624,7 +165609,8 @@
         "ConeChain.target-part",
         "ConeChain.with-coordinates",
         "ConeChain.zero-on",
-        "ConeCochain.evaluate"
+        "ConeCochain.evaluate",
+        "ConeHomotopy.on-chain"
       ],
       "invariants": [
         "Exact defining cone map and integer homogeneous degree",
@@ -163701,7 +165687,8 @@
         "ConeCochain.subtract",
         "ConeCochain.target-part",
         "ConeCochain.with-coordinates",
-        "ConeCochain.zero-on"
+        "ConeCochain.zero-on",
+        "ConeHomotopy.on-cochain"
       ],
       "invariants": [
         "Exact defining cone map and natural homogeneous degree",
@@ -163722,6 +165709,120 @@
         "review_date": null,
         "review_notes": "No human review performed",
         "date": "2026-10-06"
+      }
+    },
+    {
+      "id": "ConeHomotopy",
+      "name": "Integral homotopies between retained cone maps",
+      "description": "Integral homotopies between retained cone maps",
+      "member_representation": "mathematics.topology.IntegralConeHomotopy",
+      "membership_rules": [
+        "Exact parallel cone-map endpoints and immutable actual degree-raising matrices",
+        "D K + K D = to - from in every formal degree",
+        "Witnesses can mix the target and shifted-source cone components",
+        "Chronological concatenation checks the exact joining square map; reversal negates matrices",
+        "Typed actions retain shifted degree, exact contexts and second-carrier wrappers",
+        "Whole constructions, endpoint transports and paired integral maps share bounded computation"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "ConeHomotopy.data",
+        "ChainConeMap",
+        "ChainCone",
+        "ConeChain",
+        "ConeCochain",
+        "Mat(Z)",
+        "AbelianGroupHomomorphism",
+        "N",
+        "Z",
+        "Boolean"
+      ],
+      "supported_operations": [
+        "ConeHomotopy.add",
+        "ConeHomotopy.chain-matrices",
+        "ConeHomotopy.chain-matrix",
+        "ConeHomotopy.cochain-matrices",
+        "ConeHomotopy.cochain-matrix",
+        "ConeHomotopy.cohomology-maps",
+        "ConeHomotopy.contract-isomorphism",
+        "ConeHomotopy.data",
+        "ConeHomotopy.equal",
+        "ConeHomotopy.from",
+        "ConeHomotopy.from-data",
+        "ConeHomotopy.homology-maps",
+        "ConeHomotopy.on-chain",
+        "ConeHomotopy.on-cochain",
+        "ConeHomotopy.postcompose",
+        "ConeHomotopy.precompose",
+        "ConeHomotopy.reverse",
+        "ConeHomotopy.scale",
+        "ConeHomotopy.source",
+        "ConeHomotopy.stationary",
+        "ConeHomotopy.target",
+        "ConeHomotopy.then",
+        "ConeHomotopy.to"
+      ],
+      "invariants": [
+        "Exact parallel cone-map endpoints and immutable actual degree-raising matrices",
+        "D K + K D = to - from in every formal degree",
+        "Witnesses can mix the target and shifted-source cone components",
+        "Chronological concatenation checks the exact joining square map; reversal negates matrices",
+        "Typed actions retain shifted degree, exact contexts and second-carrier wrappers",
+        "Whole constructions, endpoint transports and paired integral maps share bounded computation"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-10-07"
+      }
+    },
+    {
+      "id": "ConeHomotopy.data",
+      "name": "Supplied cone maps and complete homotopy matrices",
+      "description": "Supplied cone maps and complete homotopy matrices",
+      "member_representation": "mathematics.topology.IntegralConeHomotopy.Data",
+      "membership_rules": [
+        "Two nonnull cone maps and an immutable list of integer matrices",
+        "One matrix per degree through the first map's maximum formal cone dimension",
+        "Membership does not assert parallel contexts, shifted shapes, homotopy equations or bounded evaluation; ConeHomotopy.from-data validates these"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "ConeHomotopy",
+        "ChainConeMap",
+        "Mat(Z)"
+      ],
+      "supported_operations": [
+        "ConeHomotopy.data",
+        "ConeHomotopy.from-data"
+      ],
+      "invariants": [
+        "Two nonnull cone maps and an immutable list of integer matrices",
+        "One matrix per degree through the first map's maximum formal cone dimension",
+        "Membership does not assert parallel contexts, shifted shapes, homotopy equations or bounded evaluation; ConeHomotopy.from-data validates these"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-10-07"
       }
     }
   ]

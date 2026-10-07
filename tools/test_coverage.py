@@ -71,6 +71,14 @@ class CoverageTest(unittest.TestCase):
 
     def test_operation_conditions_are_scoped_to_the_algebra(self):
         records = {r.get("runtime_operation_id"): r for r in self.data["concepts"] if r.get("runtime_operation_id")}
+        self.assertIn("D K + K D = to - from", " ".join(records["ConeHomotopy.from-data"]["required_invariants"]))
+        self.assertIn("K(t,s)=(0,F^-1 t)", " ".join(records["ConeHomotopy.contract-isomorphism"]["required_invariants"]))
+        self.assertIn("A_(n+1) K_n", " ".join(records["ConeHomotopy.postcompose"]["required_invariants"]))
+        self.assertIn("positive degree", " ".join(records["ConeHomotopy.on-cochain"]["required_invariants"]))
+        self.assertIn("ILeftProjectionOperation", " ".join(records["ConeHomotopy.on-chain"]["required_invariants"]))
+        self.assertIn("all four endpoint reductions", " ".join(records["ConeHomotopy.homology-maps"]["required_invariants"]))
+        self.assertIn("5000000", " ".join(records["ConeHomotopy.precompose"]["known_limitations"]))
+        self.assertIn("no general cone-homotopy existence solver", " ".join(records["ConeHomotopy.from-data"]["known_limitations"]))
         self.assertIn("negative group", " ".join(records["ConeChain.zero-on"]["required_invariants"]))
         self.assertIn("include(Fs)-lift(ds)", " ".join(records["ConeChain.lift-source"]["required_invariants"]))
         self.assertIn("positive degree", " ".join(records["ConeCochain.cobounding-cochain"]["required_invariants"]))

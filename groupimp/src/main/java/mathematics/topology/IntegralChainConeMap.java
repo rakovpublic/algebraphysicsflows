@@ -44,8 +44,8 @@ public final class IntegralChainConeMap implements Serializable {
         if(!homotopy().from().equals(targetMap().compose(source().map(),work)) || !homotopy().to().equals(target().map().compose(sourceMap(),work)))
             throw MathFailure.undefined("Cone square witness must run from b after F to G after a");
     }
-    public static IntegralChainConeMap identity(IntegralChainMappingCone cone) {
-        Computation work=new Computation();
+    public static IntegralChainConeMap identity(IntegralChainMappingCone cone) { return identity(cone,new Computation()); }
+    static IntegralChainConeMap identity(IntegralChainMappingCone cone,Computation work) {
         return new IntegralChainConeMap(new Data(cone,cone,SimplicialChainMap.identity(cone.source(),work),SimplicialChainMap.identity(cone.target(),work),SimplicialChainHomotopy.stationary(cone.map(),work)),work);
     }
     public static IntegralChainConeMap fromHomotopy(SimplicialChainHomotopy homotopy) {
@@ -53,8 +53,8 @@ public final class IntegralChainConeMap implements Serializable {
         return new IntegralChainConeMap(new Data(new IntegralChainMappingCone(homotopy.from()),new IntegralChainMappingCone(homotopy.to()),
                 SimplicialChainMap.identity(homotopy.source(),work),SimplicialChainMap.identity(homotopy.target(),work),homotopy),work);
     }
-    public static IntegralChainConeMap zero(IntegralChainMappingCone source,IntegralChainMappingCone target) {
-        Computation work=new Computation();
+    public static IntegralChainConeMap zero(IntegralChainMappingCone source,IntegralChainMappingCone target) { return zero(source,target,new Computation()); }
+    static IntegralChainConeMap zero(IntegralChainMappingCone source,IntegralChainMappingCone target,Computation work) {
         SimplicialChainMap a=SimplicialChainMap.zero(source.source(),target.source(),work),b=SimplicialChainMap.zero(source.target(),target.target(),work);
         SimplicialChainHomotopy h=SimplicialChainHomotopy.stationary(SimplicialChainMap.zero(source.source(),target.target(),work),work);
         return new IntegralChainConeMap(new Data(source,target,a,b,h),work);
@@ -69,7 +69,7 @@ public final class IntegralChainConeMap implements Serializable {
     private void requireParallel(IntegralChainConeMap other) {
         if(!source().equals(other.source()) || !target().equals(other.target())) throw MathFailure.undefined("Cone-map arithmetic requires identical full source and target defining maps");
     }
-    private IntegralChainConeMap add(IntegralChainConeMap other,Computation work) {
+    IntegralChainConeMap add(IntegralChainConeMap other,Computation work) {
         requireParallel(other);
         return new IntegralChainConeMap(new Data(source(),target(),sourceMap().add(other.sourceMap(),work),targetMap().add(other.targetMap(),work),homotopy().add(other.homotopy(),work)),work);
     }
@@ -77,7 +77,7 @@ public final class IntegralChainConeMap implements Serializable {
     public IntegralChainConeMap subtract(IntegralChainConeMap other) {
         requireParallel(other); Computation work=new Computation(); return add(other.scale(BigInteger.ONE.negate(),work),work);
     }
-    private IntegralChainConeMap scale(BigInteger scalar,Computation work) {
+    IntegralChainConeMap scale(BigInteger scalar,Computation work) {
         return new IntegralChainConeMap(new Data(source(),target(),sourceMap().scale(scalar,work),targetMap().scale(scalar,work),homotopy().scale(scalar,work)),work);
     }
     public IntegralChainConeMap scale(BigInteger scalar) { return scale(scalar,new Computation()); }
@@ -108,9 +108,9 @@ public final class IntegralChainConeMap implements Serializable {
     public SimplicialChainMap targetMap() { return data.targetMap; }
     public SimplicialChainHomotopy homotopy() { return data.homotopy; }
     /** This after before: transported witness b_after H_before + H_after a_before. */
-    public IntegralChainConeMap compose(IntegralChainConeMap before) {
+    public IntegralChainConeMap compose(IntegralChainConeMap before) { return compose(before,new Computation()); }
+    IntegralChainConeMap compose(IntegralChainConeMap before,Computation work) {
         if(!source().equals(before.target())) throw MathFailure.undefined("Cone-map composition requires the exact defining map at the joining cone");
-        Computation work=new Computation();
         SimplicialChainMap a=sourceMap().compose(before.sourceMap(),work),b=targetMap().compose(before.targetMap(),work);
         SimplicialChainHomotopy h=before.homotopy().postcompose(targetMap(),work).then(homotopy().precompose(before.sourceMap(),work),work);
         return new IntegralChainConeMap(new Data(before.source(),target(),a,b,h),work);
@@ -121,7 +121,7 @@ public final class IntegralChainConeMap implements Serializable {
         work.use((long)matrix.rows()*matrix.columns());
         for(int r=0;r<matrix.rows();r++) for(int c=0;c<matrix.columns();c++) into[row+r][column+c]=negate?matrix.get(r,c).negate():matrix.get(r,c);
     }
-    private IntegerMatrix matrix(BigInteger degree,Computation work) {
+    IntegerMatrix matrix(BigInteger degree,Computation work) {
         int rows=target().rank(degree),columns=source().rank(degree),targetOffset=target().target().basis(degree).size(),sourceOffset=source().target().basis(degree).size();
         work.use((long)rows*columns); BigInteger[][] entries=new BigInteger[rows][columns]; for(BigInteger[] row : entries) Arrays.fill(row,BigInteger.ZERO);
         block(entries,targetMap().chainMatrix(degree),0,0,false,work);
@@ -141,7 +141,7 @@ public final class IntegralChainConeMap implements Serializable {
     }
     public List<IntegerMatrix> chainMatrices() { return matrices(false); }
     public List<IntegerMatrix> cochainMatrices() { return matrices(true); }
-    private AbelianGroupHomomorphism induced(BigInteger degree,boolean dual,Computation work) {
+    AbelianGroupHomomorphism induced(BigInteger degree,boolean dual,Computation work) {
         IntegerMatrix m=matrix(degree,work);
         IntegralHomology a=source().homology(degree,dual,work),b=target().homology(degree,dual,work);
         return dual?b.inducedMap(a,transpose(m,work),work):a.inducedMap(b,m,work);

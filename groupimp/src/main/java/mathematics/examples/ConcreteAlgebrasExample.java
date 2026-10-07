@@ -40,6 +40,7 @@ import mathematics.topology.SimplicialChainEquivalence;
 import mathematics.topology.IntegralHomology;
 import mathematics.topology.IntegralChainMappingCone;
 import mathematics.topology.IntegralChainConeMap;
+import mathematics.topology.IntegralConeHomotopy;
 import mathematics.topology.IntegralConeChain;
 import mathematics.topology.IntegralConeCochain;
 import mathematics.topology.FiniteSimplicialMap;
@@ -210,6 +211,16 @@ public final class ConcreteAlgebrasExample {
         System.out.println("Square inverses feed native flat integral-map flows: "+math.flow(math.chainConeMaps,Collections.singletonList(retainedConeMap))
                 .performOneOperandOperation("inverse-square").<AbelianGroupHomomorphism>performFlatAlgebraTransfer("homology-maps")
                 .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
+        IntegralChainMappingCone contractibleCone=new IntegralChainMappingCone(SimplicialChainMap.identity(circlePair));
+        IntegralConeChain coneCycle=IntegralConeChain.includeTarget(contractibleCone,RelativeSimplicialChain.absolute(orientedCircle));
+        System.out.println("An explicit cone contraction fills the included circle cycle: "+math.flow(math.chainCones,Collections.singletonList(contractibleCone))
+                .<IntegralConeHomotopy>performAlgebraTransfer("ConeHomotopy.contract-isomorphism")
+                .performLeftProjectionOperation("on-chain",coneCycle).performOneOperandOperation("boundary")
+                .<Boolean>performCustomResultOperation("equal",coneCycle).collect());
+        System.out.println("Cone homotopies expose both equal induced homology maps: "+math.flow(math.chainCones,Collections.singletonList(contractibleCone))
+                .<IntegralConeHomotopy>performAlgebraTransfer("ConeHomotopy.contract-isomorphism")
+                .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("homology-maps",BigInteger.ONE)
+                .<Boolean>performAlgebraTransfer("is-zero").collect());
         System.out.println("A retained equivalence exposes two inverse integral maps: "+math.flow(math.chainMaps,Collections.singletonList(intervalIdentityClass.representative()))
                 .<SimplicialChainEquivalence>performAlgebraTransfer("ChainEquivalence.from-map")
                 .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("homology-maps",BigInteger.ZERO)

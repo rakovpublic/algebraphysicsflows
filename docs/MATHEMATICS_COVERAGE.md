@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 2133 |
-| DIRECTLY_SUPPORTED | 1890 |
+| Scoped records | 2157 |
+| DIRECTLY_SUPPORTED | 1914 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1749 |
+| IMPLEMENTED | 1773 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1817 |
+| MACHINE_TESTED | 1841 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1726 | 1726 | 0 | 0 | 0 | 1726 | 0 | 0 |
+| Concrete MathTool algebras | 1750 | 1750 | 0 | 0 | 0 | 1750 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -592,6 +592,29 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | ConeCochain.target-part | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.target-part |
 | ConeCochain.with-coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.with-coordinates |
 | ConeCochain.zero-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.zero-on |
+| ConeHomotopy.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.add |
+| ConeHomotopy.chain-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.chain-matrices |
+| ConeHomotopy.chain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.chain-matrix |
+| ConeHomotopy.cochain-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.cochain-matrices |
+| ConeHomotopy.cochain-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.cochain-matrix |
+| ConeHomotopy.cohomology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.cohomology-maps |
+| ConeHomotopy.contract-isomorphism | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.contract-isomorphism |
+| ConeHomotopy.data | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.data |
+| ConeHomotopy.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.equal |
+| ConeHomotopy.from | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.from |
+| ConeHomotopy.from-data | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.from-data |
+| ConeHomotopy.homology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.homology-maps |
+| ConeHomotopy.on-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.on-chain |
+| ConeHomotopy.on-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.on-cochain |
+| ConeHomotopy.postcompose | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.postcompose |
+| ConeHomotopy.precompose | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.precompose |
+| ConeHomotopy.reverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.reverse |
+| ConeHomotopy.scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.scale |
+| ConeHomotopy.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.source |
+| ConeHomotopy.stationary | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.stationary |
+| ConeHomotopy.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.target |
+| ConeHomotopy.then | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.then |
+| ConeHomotopy.to | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.to |
 | CoverMap.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with covariant homology, contravariant cohomology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.compose |
 | CoverMap.contiguous | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with covariant homology, contravariant cohomology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.contiguous |
 | CoverMap.corestrict-image | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with covariant homology, contravariant cohomology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.corestrict-image |
@@ -1008,6 +1031,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | IntegralChainMappingConeAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences |
 | IntegralConeChainAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps |
 | IntegralConeCochainAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing |
+| IntegralConeHomotopyAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms |
 | IntegralHomology.as-type | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.as-type |
 | IntegralHomology.at-degree | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.at-degree |
 | IntegralHomology.betti-number | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.betti-number |
