@@ -10,6 +10,7 @@ DATABASE = ROOT / "mathematics-coverage.json"
 MANIFEST = ROOT / "groupimp/src/test/resources/mathematics/concrete-catalog.tsv"
 DATE = "2026-10-07"
 OWNERS = {
+    "IntegralConeEquivalenceAlgebra": ("ConeEquivalence", "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps"),
     "IntegralConeHomotopyAlgebra": ("ConeHomotopy", "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions"),
     "IntegralConeChainAlgebra": ("ConeChain", "Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps"),
     "IntegralConeCochainAlgebra": ("ConeCochain", "Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing"),
@@ -100,6 +101,7 @@ INTERFACES = {
     "IUnsafeFlatOperation": "flat/MixedFlatOperation",
 }
 EXTRA_TESTS = {
+    "IntegralConeEquivalenceAlgebra": "NativeIntegralConeEquivalenceTest",
     "IntegralConeHomotopyAlgebra": "NativeIntegralConeHomotopyTest",
     "IntegralConeChainAlgebra": "NativeIntegralConeElementsTest",
     "IntegralConeCochainAlgebra": "NativeIntegralConeElementsTest",
@@ -201,6 +203,37 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "IntegralConeEquivalenceAlgebra": {
+        "from-data": "Require opposite maps between identical full defining cones and exact witnesses GF -> id_source and FG -> id_target. Both square witnesses and both actual degree-raising homotopies are retained. Homotopic but unequal endpoint maps cannot replace these exact composites. Raw Data membership does not assert mutual compatibility.",
+        "identity-on": "Construct the full cone identity square in both directions with stationary zero witnesses, retaining every formal zero degree.",
+        "from-square-isomorphism": "Both vertical chain maps must be square and unimodular in every degree. Invert the actual witnessed square, preserving its transported chosen homotopy, and attach stationary homotopies to both identity composites. Total cone-matrix invertibility alone is insufficient. The complete conversion shares one budget without inverse search.",
+        "compose": "This after before; require the exact defining middle cone. For before=(F,G,H,K), after=(A,B,J,L), retain maps AF, GB and witnesses GJF+H, AKB+L. Transport and concatenate actual supplied witnesses without inverse search, sharing all intermediate and final validations. Composition is associative and unital on retained data.",
+        "inverse": "Swap forward/backward maps and source/target homotopies; do not negate witnesses or solve again. Involution holds, but composing with the inverse need not give stationary identity witness data or fix raw chains.",
+        "equal": "Compare full defining cones, actual opposite squares and both homotopy matrix families; nonzero witness loops remain distinct.",
+        "source": "Return the exact defining source cone, including all labelled relative pairs and the defining chain map.",
+        "target": "Return the exact defining target cone, including all labelled relative pairs and the defining chain map.",
+        "forward": "Return the supplied forward square with its actual chosen square homotopy.",
+        "backward": "Return the supplied opposite square with its actual chosen square homotopy.",
+        "source-homotopy": "Return the actual homotopy from backward after forward to the source cone identity.",
+        "target-homotopy": "Return the actual homotopy from forward after backward to the target cone identity.",
+        "data": "Return immutable references to both opposite cone maps and both validated integral homotopies.",
+        "maps": "Return [forward, backward] as two ordered ChainConeMap wrappers, retaining equal entries.",
+        "homotopies": "Return [source-homotopy, target-homotopy] as two ordered ConeHomotopy wrappers, retaining equal entries.",
+        "homology-map": "Return the forward covariant integral homology map in the supplied nonnegative degree, retaining presentations and torsion.",
+        "inverse-homology-map": "Return the backward covariant integral homology map, the inverse of the forward map with full presentations retained.",
+        "homology-maps": "Return [forward, backward] induced homology maps under one shared budget across all four endpoint reductions. They are mutual inverses with presentations and torsion retained.",
+        "cohomology-map": "Return the forward square's contravariant integral cohomology map from target to source in the supplied nonnegative degree.",
+        "inverse-cohomology-map": "Return the backward square's contravariant integral cohomology map from source to target; it is inverse to the forward pullback.",
+        "cohomology-maps": "Return [forward pullback, backward pullback] under one shared budget across all four endpoint reductions, with contravariant direction, presentations and torsion retained.",
+        "on-chain": "Require the exact source cone and push the chain forward, including negative zero degrees. ILeftProjectionOperation returns the actual second ConeChain carrier wrapper.",
+        "inverse-on-chain": "Require the exact target cone and push the chain backward. ILeftProjectionOperation returns the actual second ConeChain carrier wrapper; raw chains need not round-trip identically.",
+        "on-cochain": "Require the exact target cone and pull the cochain to the source, including degree zero. ILeftProjectionOperation returns the actual second ConeCochain carrier wrapper.",
+        "inverse-on-cochain": "Require the exact source cone and pull the cochain to the target, including degree zero. ILeftProjectionOperation returns the actual second ConeCochain carrier wrapper.",
+        "source-homotopy-on-chain": "Act by the retained source H, raising chain degree: DH(c)+H(Dc)=c-GF(c). Require the exact source cone; return the actual second ConeChain wrapper through ILeftProjectionOperation.",
+        "target-homotopy-on-chain": "Act by the retained target K, raising chain degree: DK(c)+K(Dc)=c-FG(c). Require the exact target cone; return the actual second ConeChain wrapper through ILeftProjectionOperation.",
+        "source-homotopy-on-cochain": "Require the exact source cone and positive degree. Apply the shifted transpose of the retained source H, lowering degree and satisfying the dual inverse identity through the actual ILeftProjectionOperation second carrier wrapper.",
+        "target-homotopy-on-cochain": "Require the exact target cone and positive degree. Apply the shifted transpose of the retained target K, lowering degree and satisfying the dual inverse identity through the actual ILeftProjectionOperation second carrier wrapper.",
+    },
     "IntegralConeHomotopyAlgebra": {
         "are-homotopic": "Require identical full source and target defining cones and solve all equations D K + K D = to - from simultaneously over Z. A Smith divisibility or consistency obstruction returns false; resource exhaustion raises IMPLEMENTATION_FAILURE. Equality of all induced homology and cohomology maps is not sufficient.",
         "between": "Solve the complete integral cone homotopy system with free Smith coordinates zero. Return one validated witness retaining the exact endpoint squares. Integer inconsistency raises OPERATION_UNDEFINED; solving and reconstruction share one budget.",
@@ -1782,6 +1815,10 @@ OWNER_CONDITIONS["RationalMatrixFamily"]["companion"] = "The polynomial has posi
 
 def record(identifier, owner, concept, paths, operation=None):
     carrier, scope = OWNERS[owner]
+    if owner == "IntegralConeEquivalenceAlgebra":
+        paths += ["groupimp/src/main/java/mathematics/topology/" + name + ".java" for name in
+                  ("IntegralConeEquivalence", "IntegralConeHomotopy", "IntegralChainConeMap", "IntegralChainMappingCone", "IntegralConeChain", "IntegralConeCochain", "SimplicialChainMap", "SimplicialChainHomotopy", "IntegralHomology")]
+        paths += ["groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java", "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"]
     if owner == "IntegralConeHomotopyAlgebra":
         paths += ["groupimp/src/main/java/mathematics/topology/" + name + ".java" for name in
                   ("IntegralConeHomotopy", "IntegralChainConeMap", "IntegralChainMappingCone", "IntegralConeChain", "IntegralConeCochain", "SimplicialChainMap", "SimplicialChainHomotopy", "IntegralHomology")]
@@ -2145,6 +2182,12 @@ def record(identifier, owner, concept, paths, operation=None):
             value["known_limitations"].append("Iteration is capped at 10000 steps; exceeding it is IMPLEMENTATION_FAILURE. Exact values can still grow rapidly within this limit.")
         if operation_name in ("argmin", "argmax", "minimum", "maximum", "minimizers", "maximizers"):
             value["known_limitations"].append("Optimality is relative only to the explicit finite feasible set, not all integers or reals.")
+    if owner == "IntegralConeEquivalenceAlgebra":
+        value["required_invariants"].append("Retain the exact defining cones, forward and backward witnessed squares, and actual homotopies GF -> identity and FG -> identity. The square witnesses and inverse homotopies are separate data. Composition transports both supplied inverse witnesses; integral maps are mutual inverses, with cohomology contravariant. Equality includes all choices, including nonzero loops.")
+        value["known_limitations"] += ["Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+            "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
+            "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."]
+        value["references"].append("https://stacks.math.columbia.edu/tag/014D")
     if owner == "IntegralConeHomotopyAlgebra":
         value["required_invariants"].append("Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion.")
         value["known_limitations"] += ["Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
@@ -2480,6 +2523,10 @@ def synchronize(data, rows):
             if unchanged == old:
                 value["provenance"]["date"] = old["provenance"]["date"]
     descriptors = [
+        ("ConeEquivalence", "Retained integral equivalences between cones", "mathematics.topology.IntegralConeEquivalence",
+         ["Exact full defining cones and opposite witnessed cone maps", "Validated retained homotopies GF to source identity and FG to target identity", "Composition transports actual witnesses; equality retains nonzero loops"], ["ChainCone", "ChainConeMap", "ConeHomotopy", "ConeChain", "ConeCochain", "AbelianGroupHomomorphism", "N"]),
+        ("ConeEquivalence.data", "Supplied cone maps and inverse homotopies", "mathematics.topology.IntegralConeEquivalence.Data",
+         ["Immutable references to two individually valid cone maps and homotopies", "Mutual compatibility and exact composite endpoints are checked by from-data"], ["ConeEquivalence", "ChainConeMap", "ConeHomotopy"]),
         ("ConeHomotopy", "Integral homotopies between retained cone maps", "mathematics.topology.IntegralConeHomotopy",
          ["Exact parallel cone-map endpoints and immutable actual degree-raising matrices", "D K + K D = to - from in every formal degree", "Witnesses can mix the target and shifted-source cone components", "Chronological concatenation checks the exact joining square map; reversal negates matrices", "Typed actions retain shifted degree, exact contexts and second-carrier wrappers", "Whole constructions, endpoint transports and paired integral maps share bounded computation"],
          ["ConeHomotopy.data", "ChainConeMap", "ChainCone", "ConeChain", "ConeCochain", "Mat(Z)", "AbelianGroupHomomorphism", "N", "Z", "Boolean"]),

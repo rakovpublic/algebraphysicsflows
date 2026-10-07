@@ -74,8 +74,9 @@ public final class IntegralConeHomotopy implements Serializable {
     private static IntegerMatrix sum(IntegerMatrix a,IntegerMatrix b,Computation work) { work.use((long)a.rows()*a.columns()); return a.add(b); }
     private static IntegerMatrix times(IntegerMatrix a,BigInteger scalar,Computation work) { work.use((long)a.rows()*a.columns()); return a.scale(scalar); }
     private static IntegerMatrix transpose(IntegerMatrix a,Computation work) { work.use((long)a.rows()*a.columns()); return a.transpose(); }
-    public static IntegralConeHomotopy stationary(IntegralChainConeMap map) {
-        Computation work=new Computation(); return build(map,map,work,d -> zero(map.target().rank(d.add(BigInteger.ONE)),map.source().rank(d),work));
+    public static IntegralConeHomotopy stationary(IntegralChainConeMap map) { return stationary(map,new Computation()); }
+    static IntegralConeHomotopy stationary(IntegralChainConeMap map,Computation work) {
+        return build(map,map,work,d -> zero(map.target().rank(d.add(BigInteger.ONE)),map.source().rank(d),work));
     }
     /** Contract Cone(F) from zero to identity when F is an integral chain isomorphism: K(t,s)=(0,F^-1 t). */
     public static IntegralConeHomotopy contractIsomorphism(IntegralChainMappingCone cone) {
@@ -92,9 +93,10 @@ public final class IntegralConeHomotopy implements Serializable {
         Computation work=new Computation(); return build(to(),from(),work,d -> times(matrixAt(d,work),BigInteger.ONE.negate(),work));
     }
     /** Chronological concatenation, retaining the exact common cone map and both witnesses. */
-    public IntegralConeHomotopy then(IntegralConeHomotopy next) {
+    public IntegralConeHomotopy then(IntegralConeHomotopy next) { return then(next,new Computation()); }
+    IntegralConeHomotopy then(IntegralConeHomotopy next,Computation work) {
         if(!to().equals(next.from())) throw MathFailure.undefined("Cone homotopy concatenation requires the exact joining cone map including its square witness");
-        Computation work=new Computation(); return build(from(),next.to(),work,d -> sum(matrixAt(d,work),next.matrixAt(d,work),work));
+        return build(from(),next.to(),work,d -> sum(matrixAt(d,work),next.matrixAt(d,work),work));
     }
     public IntegralConeHomotopy add(IntegralConeHomotopy other) {
         requireParallel(from(),other.from()); Computation work=new Computation();
@@ -103,11 +105,13 @@ public final class IntegralConeHomotopy implements Serializable {
     public IntegralConeHomotopy scale(BigInteger scalar) {
         Computation work=new Computation(); return build(from().scale(scalar,work),to().scale(scalar,work),work,d -> times(matrixAt(d,work),scalar,work));
     }
-    public IntegralConeHomotopy precompose(IntegralChainConeMap before) {
-        Computation work=new Computation(); return build(from().compose(before,work),to().compose(before,work),work,d -> work.multiply(matrixAt(d,work),before.matrix(d,work)));
+    public IntegralConeHomotopy precompose(IntegralChainConeMap before) { return precompose(before,new Computation()); }
+    IntegralConeHomotopy precompose(IntegralChainConeMap before,Computation work) {
+        return build(from().compose(before,work),to().compose(before,work),work,d -> work.multiply(matrixAt(d,work),before.matrix(d,work)));
     }
-    public IntegralConeHomotopy postcompose(IntegralChainConeMap after) {
-        Computation work=new Computation(); return build(after.compose(from(),work),after.compose(to(),work),work,d -> work.multiply(after.matrix(d.add(BigInteger.ONE),work),matrixAt(d,work)));
+    public IntegralConeHomotopy postcompose(IntegralChainConeMap after) { return postcompose(after,new Computation()); }
+    IntegralConeHomotopy postcompose(IntegralChainConeMap after,Computation work) {
+        return build(after.compose(from(),work),after.compose(to(),work),work,d -> work.multiply(after.matrix(d.add(BigInteger.ONE),work),matrixAt(d,work)));
     }
     private static void requireDegree(BigInteger degree) { if(degree.signum()<0) throw MathFailure.undefined("Cone homotopy matrix and integral-map degrees must be nonnegative"); }
     public IntegerMatrix chainMatrix(BigInteger degree) { requireDegree(degree); return matrixAt(degree,new Computation()); }

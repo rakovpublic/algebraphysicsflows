@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 2162 |
-| DIRECTLY_SUPPORTED | 1919 |
+| Scoped records | 2192 |
+| DIRECTLY_SUPPORTED | 1949 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1778 |
+| IMPLEMENTED | 1808 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1846 |
+| MACHINE_TESTED | 1876 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1755 | 1755 | 0 | 0 | 0 | 1755 | 0 | 0 |
+| Concrete MathTool algebras | 1785 | 1785 | 0 | 0 | 0 | 1785 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -592,6 +592,35 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | ConeCochain.target-part | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.target-part |
 | ConeCochain.with-coordinates | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.with-coordinates |
 | ConeCochain.zero-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing; native operation ConeCochain.zero-on |
+| ConeEquivalence.backward | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.backward |
+| ConeEquivalence.cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.cohomology-map |
+| ConeEquivalence.cohomology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.cohomology-maps |
+| ConeEquivalence.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.compose |
+| ConeEquivalence.data | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.data |
+| ConeEquivalence.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.equal |
+| ConeEquivalence.forward | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.forward |
+| ConeEquivalence.from-data | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.from-data |
+| ConeEquivalence.from-square-isomorphism | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.from-square-isomorphism |
+| ConeEquivalence.homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.homology-map |
+| ConeEquivalence.homology-maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.homology-maps |
+| ConeEquivalence.homotopies | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.homotopies |
+| ConeEquivalence.identity-on | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.identity-on |
+| ConeEquivalence.inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.inverse |
+| ConeEquivalence.inverse-cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.inverse-cohomology-map |
+| ConeEquivalence.inverse-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.inverse-homology-map |
+| ConeEquivalence.inverse-on-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.inverse-on-chain |
+| ConeEquivalence.inverse-on-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.inverse-on-cochain |
+| ConeEquivalence.maps | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.maps |
+| ConeEquivalence.on-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.on-chain |
+| ConeEquivalence.on-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.on-cochain |
+| ConeEquivalence.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.source |
+| ConeEquivalence.source-homotopy | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.source-homotopy |
+| ConeEquivalence.source-homotopy-on-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.source-homotopy-on-chain |
+| ConeEquivalence.source-homotopy-on-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.source-homotopy-on-cochain |
+| ConeEquivalence.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.target |
+| ConeEquivalence.target-homotopy | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.target-homotopy |
+| ConeEquivalence.target-homotopy-on-chain | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.target-homotopy-on-chain |
+| ConeEquivalence.target-homotopy-on-cochain | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.target-homotopy-on-cochain |
 | ConeHomotopy.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.add |
 | ConeHomotopy.are-homotopic | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.are-homotopic |
 | ConeHomotopy.between | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.between |
@@ -1036,6 +1065,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | IntegralChainMappingConeAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences |
 | IntegralConeChainAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps |
 | IntegralConeCochainAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing |
+| IntegralConeEquivalenceAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps |
 | IntegralConeHomotopyAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions |
 | IntegralHomology.as-type | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.as-type |
 | IntegralHomology.at-degree | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.at-degree |

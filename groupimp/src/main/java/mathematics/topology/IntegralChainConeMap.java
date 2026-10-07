@@ -86,8 +86,9 @@ public final class IntegralChainConeMap implements Serializable {
     public boolean isSquareIsomorphism() {
         Computation work=new Computation(); return sourceMap().isIsomorphism(work) && targetMap().isIsomorphism(work);
     }
-    public IntegralChainConeMap inverseSquare() {
-        Computation work=new Computation(); SimplicialChainMap a=sourceMap().inverse(work),b=targetMap().inverse(work);
+    public IntegralChainConeMap inverseSquare() { return inverseSquare(new Computation()); }
+    IntegralChainConeMap inverseSquare(Computation work) {
+        SimplicialChainMap a=sourceMap().inverse(work),b=targetMap().inverse(work);
         SimplicialChainHomotopy h=homotopy().precompose(a,work).postcompose(b,work).reverse(work);
         return new IntegralChainConeMap(new Data(target(),source(),a,b,h),work);
     }

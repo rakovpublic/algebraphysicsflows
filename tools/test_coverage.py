@@ -71,6 +71,14 @@ class CoverageTest(unittest.TestCase):
 
     def test_operation_conditions_are_scoped_to_the_algebra(self):
         records = {r.get("runtime_operation_id"): r for r in self.data["concepts"] if r.get("runtime_operation_id")}
+        self.assertIn("GJF+H, AKB+L", " ".join(records["ConeEquivalence.compose"]["required_invariants"]))
+        self.assertIn("do not negate witnesses", " ".join(records["ConeEquivalence.inverse"]["required_invariants"]))
+        self.assertIn("Total cone-matrix invertibility alone is insufficient", " ".join(records["ConeEquivalence.from-square-isomorphism"]["required_invariants"]))
+        self.assertIn("ILeftProjectionOperation", " ".join(records["ConeEquivalence.on-chain"]["required_invariants"]))
+        self.assertIn("positive degree", " ".join(records["ConeEquivalence.source-homotopy-on-cochain"]["required_invariants"]))
+        self.assertIn("all four endpoint reductions", " ".join(records["ConeEquivalence.cohomology-maps"]["required_invariants"]))
+        self.assertIn("5000000", " ".join(records["ConeEquivalence.compose"]["known_limitations"]))
+        self.assertIn("No general homotopy-inverse search", " ".join(records["ConeEquivalence.from-data"]["known_limitations"]))
         self.assertIn("D K + K D = to - from", " ".join(records["ConeHomotopy.from-data"]["required_invariants"]))
         self.assertIn("K(t,s)=(0,F^-1 t)", " ".join(records["ConeHomotopy.contract-isomorphism"]["required_invariants"]))
         self.assertIn("A_(n+1) K_n", " ".join(records["ConeHomotopy.postcompose"]["required_invariants"]))

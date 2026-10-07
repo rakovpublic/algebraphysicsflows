@@ -55,6 +55,7 @@ import mathematics.topology.IntegralChainMappingCone;
 import mathematics.topology.IntegralChainConeMap;
 import mathematics.topology.IntegralConeChain;
 import mathematics.topology.IntegralConeHomotopy;
+import mathematics.topology.IntegralConeEquivalence;
 import mathematics.topology.IntegralConeCochain;
 import mathematics.topology.RelativeSimplicialCochain;
 import mathematics.examples.ConcreteAlgebrasExample;
@@ -67,7 +68,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all1683RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all1712RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String discrete="Complex[[0], [1]]",emptyComplex="Complex[]";
@@ -203,6 +204,12 @@ public class ConcreteAlgebrasTest {
                 coneHomotopyValue,coneHomotopyValue,doubleConeHomotopy,doubleConeHomotopy,coneHomotopyValue,coneHomotopyValue,"true",
                 "ZMatrix(1x1)[[0]]","ZMatrix(0x1)[]","[ZMatrix(1x1)[[0]], ZMatrix(0x1)[]]","[ZMatrix(0x1)[], ZMatrix(1x1)[[0]], ZMatrix(1x0)[[]]]",
                 coneChainNext,coneCochainZero,"["+killedIdentity+", "+killedIdentity+"]","["+emptyIdentity+", "+emptyIdentity+"]","true",coneHomotopyValue,"["+coneHomotopyValue+"]","true",coneContraction));
+        String coneEquivalenceContents="forward="+coneMapValue+", backward="+coneMapValue+", source-homotopy="+coneHomotopyValue+", target-homotopy="+coneHomotopyValue,
+                coneEquivalenceValue="ConeEquivalence("+coneEquivalenceContents+")";
+        expected.put("IntegralConeEquivalenceAlgebra",String.join("|",coneEquivalenceValue,coneEquivalenceValue,coneValue,coneValue,coneMapValue,coneMapValue,coneHomotopyValue,coneHomotopyValue,
+                "ConeEquivalenceData("+coneEquivalenceContents+")",coneEquivalenceValue,coneEquivalenceValue,"true","["+coneHomotopyValue+", "+coneHomotopyValue+"]","["+coneMapValue+", "+coneMapValue+"]",
+                killedIdentity,killedIdentity,"["+killedIdentity+", "+killedIdentity+"]",emptyIdentity,emptyIdentity,"["+emptyIdentity+", "+emptyIdentity+"]",
+                coneChainZero,coneChainZero,coneCochainZero,coneCochainZero,coneEquivalenceValue,coneChainNext,coneChainNext,coneCochainZero,coneCochainZero));
         expected.put("SimplicialChainMapSpaceAlgebra",String.join("|",chainMapSpace,absolutePoint,absolutePoint,"true",chainZero,pointHomology,freeOne,
                 "AbelianGroup(rank=1, torsion=[])","["+chainIdentity+"]","AbelianElement(group="+freeOne+", smith=[1])",chainIdentity,"["+chainIdentity+"]",
                 chainMapSpace,chainMapSpace,identityOneMap,identityOneMap,"[ZMatrix(0x0)[], ZMatrix(1x1)[[1]], ZMatrix(0x0)[]]","[ZMatrix(0x0)[], ZMatrix(1x1)[[1]], ZMatrix(0x0)[]]"));
@@ -462,7 +469,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(1683,count);
+        assertEquals(1712,count);
     }
     private static String homString(String source,String target,String matrix) { return "AbelianHom(source="+source+", target="+target+", smith="+matrix+")"; }
     private static String simplicialString(String source,String target,String vertices) { return "SimplicialMap(source="+source+", target="+target+", vertices="+vertices+")"; }
@@ -607,6 +614,10 @@ public class ConcreteAlgebrasTest {
             if(entry.second==math.relativeComplexes.algebra()) second=relativeCochainTestPair();
             if(entry.second==math.abelianGroupElements.algebra()) second=new PresentedAbelianGroup(IntegerMatrix.zero(1,0)).project(new IntegerVector(BigInteger.ONE));
             if(entry.second==math.naturals.algebra()) second=BigInteger.ZERO;
+        }
+        if(owner instanceof IntegralConeEquivalenceAlgebra) {
+            if(entry.second==math.naturals.algebra()) second=BigInteger.ZERO;
+            if(name.endsWith("homotopy-on-cochain")) second=IntegralConeCochain.zero((IntegralChainMappingCone)sample(math,"ChainCone",0),BigInteger.ONE);
         }
         if(owner instanceof IntegralConeHomotopyAlgebra) {
             if(entry.second==math.integers.algebra()) second=BigInteger.valueOf(2);
@@ -787,6 +798,8 @@ public class ConcreteAlgebrasTest {
             case "CollapseSequence": return SimplicialCollapseSequence.fromCollapse(elementaryCollapse());
             case "ConeChain": return IntegralConeChain.zero((IntegralChainMappingCone)sample(math,"ChainCone",0),BigInteger.ZERO);
             case "ConeCochain": return IntegralConeCochain.zero((IntegralChainMappingCone)sample(math,"ChainCone",0),BigInteger.ZERO);
+            case "ConeEquivalence": return IntegralConeEquivalence.identity((IntegralChainMappingCone)sample(math,"ChainCone",0));
+            case "ConeEquivalence.data": return IntegralConeEquivalence.identity((IntegralChainMappingCone)sample(math,"ChainCone",0)).data();
             case "ConeHomotopy": return IntegralConeHomotopy.stationary((IntegralChainConeMap)sample(math,"ChainConeMap",0));
             case "ConeHomotopy.data": return IntegralConeHomotopy.stationary((IntegralChainConeMap)sample(math,"ChainConeMap",0)).data();
             case "ChainConeMap": return IntegralChainConeMap.identity((IntegralChainMappingCone)sample(math,"ChainCone",0));
