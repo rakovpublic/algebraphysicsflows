@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1716 native operations from 73 algebra builders.
+The default initializer currently installs 1728 native operations from 74 algebra builders.
 
 ## Existing API usage
 
@@ -2815,3 +2815,64 @@ This decision is deliberately restricted to the actual `ChainConeMap` carrier. A
 Let `s_n` and `t_n` be the two total cone ranks. The dense system allows at most **256 total equations**, counting `sum_n(s_n^2 + t_n^2 + s_(n-1)*t_n)`, including identically zero equations. It also allows at most **256 total unknown coefficients**: the allowed entries of `G` plus `sum_n(s_(n+1)*s_n + t_(n+1)*t_n)`. Each combined cone rank is at most 256 after relative filtering. One **5000000-unit budget** spans system assembly, Smith reduction, decoding and all validation required by the selected result. A decision or reverse map can fit without the stronger returned result fitting; no partial witness list or equivalence is returned. Coefficient bit lengths remain unbounded. Strict square inversion and supplied equivalences avoid these aggregate solving bounds.
 
 `NativeIntegralConeInverseTest` adds 16 tests, including 625 determinant/adjugate cases, 169 scalar gcd cases, compatible two-term maps against independent cyclic/free-group criteria, 125 overlapping-degree shears, noncommuting block inverses, both identity obligations, 25 noninvertible interval maps, relative and changing dimensions, empty formal slots, 1025-bit coefficients, typed inverse corrections, rank/system/work limits and serialized native scalar/flat flows. Complete registration expectations cover all four new entry points.
+
+## Retained cone-map lattices and homotopy classes
+
+`IntegralConeMapSpaceAlgebra` registers `ConeMapSpace` in the original MathTool with 12 operations. A space retains exact source and target defining cones. It represents the additive lattice of their retained square maps and the quotient by integral cone homotopy. Homotopies may mix the two cone components, while maps remain in the existing upper-triangular `ChainConeMap` carrier.
+
+| Operation | Result |
+| --- | --- |
+| `from-cones` | Retain two defining cones without eager algebraic reduction |
+| `source`, `target`, `equal` | Read or compare the full cone contexts |
+| `zero` | The zero retained square with its actual zero witness |
+| `homology` | A constructive `IntegralHomology` presentation of the restricted quotient |
+| `homotopy-group`, `homotopy-type` | Exact presented group or canonical free rank and torsion factors |
+| `map-generators` | A complete integral basis of all retained maps, including null-homotopic maps |
+| `class-of` | The additive homotopy class of a map with these exact defining cones |
+| `representative` | A validated retained map lifting an element of this exact group presentation |
+| `representatives` | Maps lifting the nonzero minimal Smith generators, torsion first and then free |
+
+The quotient must account for the restricted map carrier. On the full cone Hom coordinates, write `d0(T)=DT-TD` and `d1(K)=DK+KD`. Let `E` include the allowed degree-zero entries, and let `P` select the forbidden lower-left entries. Compute an integral basis `B` for `ker(P*d1)`. The returned `IntegralHomology` has outgoing matrix `d0*E` and incoming matrix `allowedRows(d1)*B`. Thus its cycles are retained maps and its boundaries are exactly the unrestricted homotopy boundaries that belong to that carrier. Selecting the allowed entries of every arbitrary boundary would instead create false class equalities.
+
+Allowed coordinates are ordered by increasing degree, row and column, omitting forbidden entries. The incoming matrix uses coordinates in the chosen integral basis `B`, not raw homotopy coordinates. Decoding a map reconstructs both vertical chain maps and the negative upper-right square homotopy, and validates all equations through the existing constructors. This decoder is shared with the retained inverse solver.
+
+`class-of` is additive and detects precisely when two maps in the same space are integrally homotopic, including torsion invisible to both induced homology and cohomology maps. `representative` is a deterministic section on sets; it need not preserve addition. Generic `AbelianGroupElement` values retain their full presentation rather than geometric provenance, so the space supplies the cone context when lifting. No contextual class composition or composition action is added in this increment.
+
+For the cone of multiplication by six, the identity map has additive homotopy order six. Its full map lattice has one generator, whereas its class group is cyclic of order six:
+
+```java
+ConcreteMathematics math = new ConcreteMathematics();
+RelativeSimplicialComplex point = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))));
+IntegralChainMappingCone cone = new IntegralChainMappingCone(
+        SimplicialChainMap.identity(point).scale(BigInteger.valueOf(6)));
+IntegralChainConeMap identity = IntegralChainConeMap.identity(cone);
+IntegralConeMapSpace space = math.chainCones.algebra().buildAlgebraItem(cone)
+        .<IntegralConeMapSpace>performCustomResultOperation("ConeMapSpace.from-cones", cone)
+        .perform().getResult();
+List<String> order = math.flow(math.coneMapSpaces, Collections.singletonList(space))
+        .<AbelianGroupElement, IntegralChainConeMap>performAlgebraUnsafe("class-of", identity)
+        .<BigInteger>performAlgebraTransfer("order").collect();
+// [6]
+AbelianGroupElement value = math.coneMapSpaces.algebra().buildAlgebraItem(space)
+        .<AbelianGroupElement, IntegralChainConeMap>performUnsafeOperation("class-of", identity)
+        .perform().getResult();
+IntegralChainConeMap representative = math.coneMapSpaces.algebra().buildAlgebraItem(space)
+        .<IntegralChainConeMap, AbelianGroupElement>performUnsafeOperation("representative", value)
+        .perform().getResult();
+// space.classOf(representative).equals(value)
+List<String> basis = math.flow(math.coneMapSpaces, Collections.singletonList(space))
+        .<IntegralChainConeMap>performFlatAlgebraTransfer("map-generators")
+        .<IntegerMatrix, BigInteger>performAlgebraUnsafe("chain-matrix", BigInteger.ONE).collect();
+// [ZMatrix(1x1)[[1]]]
+List<String> nonzeroRepresentatives = math.flow(math.coneMapSpaces, Collections.singletonList(space))
+        .<IntegralChainConeMap>performFlatAlgebraTransfer("representatives")
+        .<Boolean>performAlgebraTransfer("is-zero").collect();
+// [false]
+```
+
+On the cone of multiplication by one, the identity is null-homotopic. `map-generators` still returns its one map-lattice generator, while `representatives` returns an empty list. The homotopy killing the identity maps the target component into the shifted source component; restricting homotopies themselves to upper-triangular blocks would give the wrong quotient.
+
+Each required combined cone rank is bounded by **256** after relative filtering. The full Hom coefficient counts are separately bounded by **256** in degrees `-1`, `0` and `1`, including degree-zero entries forbidden in the retained carrier. One **5000000-unit budget** spans both differentials, the forbidden-boundary kernel, the quotient reduction, projection or lifting, and validation of every returned map. A group and its individual representative lifts can fit while the complete representative list exceeds the shared budget. Resource failures raise `IMPLEMENTATION_FAILURE`, never a false zero group or partial basis. Context construction, equality and endpoint access avoid these reductions; `zero` uses ordinary cone-map construction bounds. Coefficient bit lengths remain unbounded.
+
+`NativeIntegralConeMapSpaceTest` adds 16 tests: 625 independent point matrices, 81 two-term gcd groups and primitive map lattices, 567 congruence comparisons, 49 cross-degree gcd groups, torsion invisible to both induced integral maps, 125 shears, a projective-plane example where discarding forbidden boundary entries would falsely kill a free class, 25 relative interval contexts, nonadditive representatives, large coefficients, empty/filtered presentations, separate Hom and cone-rank bounds, shared whole-list budgets and serialized native flows. All 12 registrations are also exercised against independent literal expectations.

@@ -26843,6 +26843,79 @@
       "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
     },
     {
+      "id": "concrete-algebra.IntegralConeMapSpaceAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeMapSpaceAlgebra",
+      "concept": "IntegralConeMapSpaceAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "ConeMapSpace",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Full defining source and target cones determine all coordinates. The allowed degree-zero maps have zero lower-left blocks. The full Hom differentials use d0(T)=DT-TD and d1(K)=DK+KD. The quotient uses all unrestricted homotopies whose boundaries have zero forbidden blocks, via an integral kernel basis of the forbidden-row differential. This intersection must precede projection to allowed coordinates. Torsion and actual square witnesses survive class projection and decoding."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeMapSpaceAlgebra.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeMapSpaceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required combined cone rank is at most 256 after relative filtering. Full Hom coefficient counts are separately bounded by 256 in degrees -1, 0 and 1, including forbidden degree-zero entries. One 5000000-unit budget spans all differentials, the forbidden-boundary kernel, the full quotient reduction, projection or lifting, and validation of every map in each complete flat result. Exhaustion is IMPLEMENTATION_FAILURE without a false zero group, empty basis or partial list. Coefficient bit lengths are unbounded. Context/source/target/equality avoid reductions; zero uses ordinary cone-map bounds.",
+        "Only additive homotopy classes of retained square maps over Z are represented. The allowed carrier is generally smaller than all cone chain maps; homotopies may mix cone blocks. The incoming homology matrix uses coordinates in a chosen integral kernel basis, not raw homotopy coordinates. Generic class elements retain exact presentations rather than full cone provenance. Representatives are not generally additive or canonical under basis changes. Direct contextual class composition, composition actions, higher Hom homology, geometric realization and other coefficient rings are outside this increment."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeMapSpaceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
       "id": "concrete-algebra.IntegralHomologyAlgebra",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "IntegralHomologyAlgebra",
@@ -161029,6 +161102,968 @@
       "legacy_operation_interface": "ITransferOperation"
     },
     {
+      "id": "concrete-operation.ConeMapSpace.from-cones",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeMapSpaceAlgebra",
+      "concept": "ConeMapSpace.from-cones",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainCone",
+      "domain_B": "ChainCone",
+      "domain_C": "ConeMapSpace",
+      "operation_signature": "ChainCone x ChainCone -> ConeMapSpace",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares; native operation ConeMapSpace.from-cones",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Retain the exact full source and target defining cones without eager reduction or Hom-rank checks. Algebraic queries impose their resource bounds separately.",
+        "Full defining source and target cones determine all coordinates. The allowed degree-zero maps have zero lower-left blocks. The full Hom differentials use d0(T)=DT-TD and d1(K)=DK+KD. The quotient uses all unrestricted homotopies whose boundaries have zero forbidden blocks, via an integral kernel basis of the forbidden-row differential. This intersection must precede projection to allowed coordinates. Torsion and actual square witnesses survive class projection and decoding."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeMapSpaceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeMapSpaceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required combined cone rank is at most 256 after relative filtering. Full Hom coefficient counts are separately bounded by 256 in degrees -1, 0 and 1, including forbidden degree-zero entries. One 5000000-unit budget spans all differentials, the forbidden-boundary kernel, the full quotient reduction, projection or lifting, and validation of every map in each complete flat result. Exhaustion is IMPLEMENTATION_FAILURE without a false zero group, empty basis or partial list. Coefficient bit lengths are unbounded. Context/source/target/equality avoid reductions; zero uses ordinary cone-map bounds.",
+        "Only additive homotopy classes of retained square maps over Z are represented. The allowed carrier is generally smaller than all cone chain maps; homotopies may mix cone blocks. The incoming homology matrix uses coordinates in a chosen integral kernel basis, not raw homotopy coordinates. Generic class elements retain exact presentations rather than full cone provenance. Representatives are not generally additive or canonical under basis changes. Direct contextual class composition, composition actions, higher Hom homology, geometric realization and other coefficient rings are outside this increment."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeMapSpaceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ConeMapSpace.from-cones",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ConeMapSpace.from-cones",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.ConeMapSpace.source",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeMapSpaceAlgebra",
+      "concept": "ConeMapSpace.source",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeMapSpace",
+      "domain_B": null,
+      "domain_C": "ChainCone",
+      "operation_signature": "ConeMapSpace -> ChainCone",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares; native operation ConeMapSpace.source",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the full source cone, including its defining chain map and both labelled relative pairs.",
+        "Full defining source and target cones determine all coordinates. The allowed degree-zero maps have zero lower-left blocks. The full Hom differentials use d0(T)=DT-TD and d1(K)=DK+KD. The quotient uses all unrestricted homotopies whose boundaries have zero forbidden blocks, via an integral kernel basis of the forbidden-row differential. This intersection must precede projection to allowed coordinates. Torsion and actual square witnesses survive class projection and decoding."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeMapSpaceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeMapSpaceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required combined cone rank is at most 256 after relative filtering. Full Hom coefficient counts are separately bounded by 256 in degrees -1, 0 and 1, including forbidden degree-zero entries. One 5000000-unit budget spans all differentials, the forbidden-boundary kernel, the full quotient reduction, projection or lifting, and validation of every map in each complete flat result. Exhaustion is IMPLEMENTATION_FAILURE without a false zero group, empty basis or partial list. Coefficient bit lengths are unbounded. Context/source/target/equality avoid reductions; zero uses ordinary cone-map bounds.",
+        "Only additive homotopy classes of retained square maps over Z are represented. The allowed carrier is generally smaller than all cone chain maps; homotopies may mix cone blocks. The incoming homology matrix uses coordinates in a chosen integral kernel basis, not raw homotopy coordinates. Generic class elements retain exact presentations rather than full cone provenance. Representatives are not generally additive or canonical under basis changes. Direct contextual class composition, composition actions, higher Hom homology, geometric realization and other coefficient rings are outside this increment."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeMapSpaceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ConeMapSpace.source",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "source",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ConeMapSpace.target",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeMapSpaceAlgebra",
+      "concept": "ConeMapSpace.target",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeMapSpace",
+      "domain_B": null,
+      "domain_C": "ChainCone",
+      "operation_signature": "ConeMapSpace -> ChainCone",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares; native operation ConeMapSpace.target",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the full target cone, including its defining chain map and both labelled relative pairs.",
+        "Full defining source and target cones determine all coordinates. The allowed degree-zero maps have zero lower-left blocks. The full Hom differentials use d0(T)=DT-TD and d1(K)=DK+KD. The quotient uses all unrestricted homotopies whose boundaries have zero forbidden blocks, via an integral kernel basis of the forbidden-row differential. This intersection must precede projection to allowed coordinates. Torsion and actual square witnesses survive class projection and decoding."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeMapSpaceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeMapSpaceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required combined cone rank is at most 256 after relative filtering. Full Hom coefficient counts are separately bounded by 256 in degrees -1, 0 and 1, including forbidden degree-zero entries. One 5000000-unit budget spans all differentials, the forbidden-boundary kernel, the full quotient reduction, projection or lifting, and validation of every map in each complete flat result. Exhaustion is IMPLEMENTATION_FAILURE without a false zero group, empty basis or partial list. Coefficient bit lengths are unbounded. Context/source/target/equality avoid reductions; zero uses ordinary cone-map bounds.",
+        "Only additive homotopy classes of retained square maps over Z are represented. The allowed carrier is generally smaller than all cone chain maps; homotopies may mix cone blocks. The incoming homology matrix uses coordinates in a chosen integral kernel basis, not raw homotopy coordinates. Generic class elements retain exact presentations rather than full cone provenance. Representatives are not generally additive or canonical under basis changes. Direct contextual class composition, composition actions, higher Hom homology, geometric realization and other coefficient rings are outside this increment."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeMapSpaceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ConeMapSpace.target",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "target",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ConeMapSpace.equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeMapSpaceAlgebra",
+      "concept": "ConeMapSpace.equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeMapSpace",
+      "domain_B": "ConeMapSpace",
+      "domain_C": "Boolean",
+      "operation_signature": "ConeMapSpace x ConeMapSpace -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares; native operation ConeMapSpace.equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Compare both full defining cones; equal ranks or abstract homotopy groups do not identify contexts.",
+        "Full defining source and target cones determine all coordinates. The allowed degree-zero maps have zero lower-left blocks. The full Hom differentials use d0(T)=DT-TD and d1(K)=DK+KD. The quotient uses all unrestricted homotopies whose boundaries have zero forbidden blocks, via an integral kernel basis of the forbidden-row differential. This intersection must precede projection to allowed coordinates. Torsion and actual square witnesses survive class projection and decoding."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeMapSpaceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeMapSpaceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required combined cone rank is at most 256 after relative filtering. Full Hom coefficient counts are separately bounded by 256 in degrees -1, 0 and 1, including forbidden degree-zero entries. One 5000000-unit budget spans all differentials, the forbidden-boundary kernel, the full quotient reduction, projection or lifting, and validation of every map in each complete flat result. Exhaustion is IMPLEMENTATION_FAILURE without a false zero group, empty basis or partial list. Coefficient bit lengths are unbounded. Context/source/target/equality avoid reductions; zero uses ordinary cone-map bounds.",
+        "Only additive homotopy classes of retained square maps over Z are represented. The allowed carrier is generally smaller than all cone chain maps; homotopies may mix cone blocks. The incoming homology matrix uses coordinates in a chosen integral kernel basis, not raw homotopy coordinates. Generic class elements retain exact presentations rather than full cone provenance. Representatives are not generally additive or canonical under basis changes. Direct contextual class composition, composition actions, higher Hom homology, geometric realization and other coefficient rings are outside this increment."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeMapSpaceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ConeMapSpace.equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.ConeMapSpace.zero",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeMapSpaceAlgebra",
+      "concept": "ConeMapSpace.zero",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeMapSpace",
+      "domain_B": null,
+      "domain_C": "ChainConeMap",
+      "operation_signature": "ConeMapSpace -> ChainConeMap",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares; native operation ConeMapSpace.zero",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Construct the zero retained square between the two cones, including both zero vertical maps and the zero square homotopy; use ordinary cone-map construction bounds without a Hom quotient reduction.",
+        "Full defining source and target cones determine all coordinates. The allowed degree-zero maps have zero lower-left blocks. The full Hom differentials use d0(T)=DT-TD and d1(K)=DK+KD. The quotient uses all unrestricted homotopies whose boundaries have zero forbidden blocks, via an integral kernel basis of the forbidden-row differential. This intersection must precede projection to allowed coordinates. Torsion and actual square witnesses survive class projection and decoding."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeMapSpaceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeMapSpaceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required combined cone rank is at most 256 after relative filtering. Full Hom coefficient counts are separately bounded by 256 in degrees -1, 0 and 1, including forbidden degree-zero entries. One 5000000-unit budget spans all differentials, the forbidden-boundary kernel, the full quotient reduction, projection or lifting, and validation of every map in each complete flat result. Exhaustion is IMPLEMENTATION_FAILURE without a false zero group, empty basis or partial list. Coefficient bit lengths are unbounded. Context/source/target/equality avoid reductions; zero uses ordinary cone-map bounds.",
+        "Only additive homotopy classes of retained square maps over Z are represented. The allowed carrier is generally smaller than all cone chain maps; homotopies may mix cone blocks. The incoming homology matrix uses coordinates in a chosen integral kernel basis, not raw homotopy coordinates. Generic class elements retain exact presentations rather than full cone provenance. Representatives are not generally additive or canonical under basis changes. Direct contextual class composition, composition actions, higher Hom homology, geometric realization and other coefficient rings are outside this increment."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeMapSpaceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ConeMapSpace.zero",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "zero",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ConeMapSpace.homology",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeMapSpaceAlgebra",
+      "concept": "ConeMapSpace.homology",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeMapSpace",
+      "domain_B": null,
+      "domain_C": "IntegralHomology",
+      "operation_signature": "ConeMapSpace -> IntegralHomology",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares; native operation ConeMapSpace.homology",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Let E include the allowed degree-zero coordinates and P project onto forbidden lower-left coordinates. With full Hom differentials d0 and d1, compute a full integral kernel basis B of P*d1, then retain outgoing d0*E and incoming allowedRows(d1)*B. Intersect homotopy boundaries with the retained carrier before quotienting; projecting arbitrary boundaries would create false class equalities. Degree-zero coordinates follow increasing degree, row and column with forbidden entries omitted.",
+        "Full defining source and target cones determine all coordinates. The allowed degree-zero maps have zero lower-left blocks. The full Hom differentials use d0(T)=DT-TD and d1(K)=DK+KD. The quotient uses all unrestricted homotopies whose boundaries have zero forbidden blocks, via an integral kernel basis of the forbidden-row differential. This intersection must precede projection to allowed coordinates. Torsion and actual square witnesses survive class projection and decoding."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeMapSpaceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeMapSpaceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required combined cone rank is at most 256 after relative filtering. Full Hom coefficient counts are separately bounded by 256 in degrees -1, 0 and 1, including forbidden degree-zero entries. One 5000000-unit budget spans all differentials, the forbidden-boundary kernel, the full quotient reduction, projection or lifting, and validation of every map in each complete flat result. Exhaustion is IMPLEMENTATION_FAILURE without a false zero group, empty basis or partial list. Coefficient bit lengths are unbounded. Context/source/target/equality avoid reductions; zero uses ordinary cone-map bounds.",
+        "Only additive homotopy classes of retained square maps over Z are represented. The allowed carrier is generally smaller than all cone chain maps; homotopies may mix cone blocks. The incoming homology matrix uses coordinates in a chosen integral kernel basis, not raw homotopy coordinates. Generic class elements retain exact presentations rather than full cone provenance. Representatives are not generally additive or canonical under basis changes. Direct contextual class composition, composition actions, higher Hom homology, geometric realization and other coefficient rings are outside this increment."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeMapSpaceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ConeMapSpace.homology",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "homology",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ConeMapSpace.homotopy-group",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeMapSpaceAlgebra",
+      "concept": "ConeMapSpace.homotopy-group",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeMapSpace",
+      "domain_B": null,
+      "domain_C": "PresentedAbelianGroup",
+      "operation_signature": "ConeMapSpace -> PresentedAbelianGroup",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares; native operation ConeMapSpace.homotopy-group",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the exact presented additive quotient of retained cone-map cycles by all unrestricted homotopy boundaries which land in that carrier. Keep integral torsion and the full presentation.",
+        "Full defining source and target cones determine all coordinates. The allowed degree-zero maps have zero lower-left blocks. The full Hom differentials use d0(T)=DT-TD and d1(K)=DK+KD. The quotient uses all unrestricted homotopies whose boundaries have zero forbidden blocks, via an integral kernel basis of the forbidden-row differential. This intersection must precede projection to allowed coordinates. Torsion and actual square witnesses survive class projection and decoding."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeMapSpaceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeMapSpaceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required combined cone rank is at most 256 after relative filtering. Full Hom coefficient counts are separately bounded by 256 in degrees -1, 0 and 1, including forbidden degree-zero entries. One 5000000-unit budget spans all differentials, the forbidden-boundary kernel, the full quotient reduction, projection or lifting, and validation of every map in each complete flat result. Exhaustion is IMPLEMENTATION_FAILURE without a false zero group, empty basis or partial list. Coefficient bit lengths are unbounded. Context/source/target/equality avoid reductions; zero uses ordinary cone-map bounds.",
+        "Only additive homotopy classes of retained square maps over Z are represented. The allowed carrier is generally smaller than all cone chain maps; homotopies may mix cone blocks. The incoming homology matrix uses coordinates in a chosen integral kernel basis, not raw homotopy coordinates. Generic class elements retain exact presentations rather than full cone provenance. Representatives are not generally additive or canonical under basis changes. Direct contextual class composition, composition actions, higher Hom homology, geometric realization and other coefficient rings are outside this increment."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeMapSpaceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ConeMapSpace.homotopy-group",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "homotopy-group",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ConeMapSpace.homotopy-type",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeMapSpaceAlgebra",
+      "concept": "ConeMapSpace.homotopy-type",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeMapSpace",
+      "domain_B": null,
+      "domain_C": "AbelianGroupType",
+      "operation_signature": "ConeMapSpace -> AbelianGroupType",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares; native operation ConeMapSpace.homotopy-type",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the canonical free rank and nontrivial torsion invariant factors of the restricted integral homotopy quotient.",
+        "Full defining source and target cones determine all coordinates. The allowed degree-zero maps have zero lower-left blocks. The full Hom differentials use d0(T)=DT-TD and d1(K)=DK+KD. The quotient uses all unrestricted homotopies whose boundaries have zero forbidden blocks, via an integral kernel basis of the forbidden-row differential. This intersection must precede projection to allowed coordinates. Torsion and actual square witnesses survive class projection and decoding."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeMapSpaceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeMapSpaceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required combined cone rank is at most 256 after relative filtering. Full Hom coefficient counts are separately bounded by 256 in degrees -1, 0 and 1, including forbidden degree-zero entries. One 5000000-unit budget spans all differentials, the forbidden-boundary kernel, the full quotient reduction, projection or lifting, and validation of every map in each complete flat result. Exhaustion is IMPLEMENTATION_FAILURE without a false zero group, empty basis or partial list. Coefficient bit lengths are unbounded. Context/source/target/equality avoid reductions; zero uses ordinary cone-map bounds.",
+        "Only additive homotopy classes of retained square maps over Z are represented. The allowed carrier is generally smaller than all cone chain maps; homotopies may mix cone blocks. The incoming homology matrix uses coordinates in a chosen integral kernel basis, not raw homotopy coordinates. Generic class elements retain exact presentations rather than full cone provenance. Representatives are not generally additive or canonical under basis changes. Direct contextual class composition, composition actions, higher Hom homology, geometric realization and other coefficient rings are outside this increment."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeMapSpaceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ConeMapSpace.homotopy-type",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "homotopy-type",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ConeMapSpace.map-generators",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeMapSpaceAlgebra",
+      "concept": "ConeMapSpace.map-generators",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeMapSpace",
+      "domain_B": null,
+      "domain_C": "ChainConeMap",
+      "operation_signature": "ConeMapSpace -> List(ChainConeMap)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares; native operation ConeMapSpace.map-generators",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return a complete integral basis of all retained cone maps, not merely homotopy classes. Decode each allowed cycle into two vertical maps and the negative upper-right square homotopy. One shared budget spans all reductions and every returned map validation.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Full defining source and target cones determine all coordinates. The allowed degree-zero maps have zero lower-left blocks. The full Hom differentials use d0(T)=DT-TD and d1(K)=DK+KD. The quotient uses all unrestricted homotopies whose boundaries have zero forbidden blocks, via an integral kernel basis of the forbidden-row differential. This intersection must precede projection to allowed coordinates. Torsion and actual square witnesses survive class projection and decoding."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeMapSpaceAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeMapSpaceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required combined cone rank is at most 256 after relative filtering. Full Hom coefficient counts are separately bounded by 256 in degrees -1, 0 and 1, including forbidden degree-zero entries. One 5000000-unit budget spans all differentials, the forbidden-boundary kernel, the full quotient reduction, projection or lifting, and validation of every map in each complete flat result. Exhaustion is IMPLEMENTATION_FAILURE without a false zero group, empty basis or partial list. Coefficient bit lengths are unbounded. Context/source/target/equality avoid reductions; zero uses ordinary cone-map bounds.",
+        "Only additive homotopy classes of retained square maps over Z are represented. The allowed carrier is generally smaller than all cone chain maps; homotopies may mix cone blocks. The incoming homology matrix uses coordinates in a chosen integral kernel basis, not raw homotopy coordinates. Generic class elements retain exact presentations rather than full cone provenance. Representatives are not generally additive or canonical under basis changes. Direct contextual class composition, composition actions, higher Hom homology, geometric realization and other coefficient rings are outside this increment."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeMapSpaceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ConeMapSpace.map-generators",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "map-generators",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.ConeMapSpace.class-of",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeMapSpaceAlgebra",
+      "concept": "ConeMapSpace.class-of",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeMapSpace",
+      "domain_B": "ChainConeMap",
+      "domain_C": "AbelianGroupElement",
+      "operation_signature": "ConeMapSpace x ChainConeMap -> AbelianGroupElement",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares; native operation ConeMapSpace.class-of",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require the map's exact source and target defining cones. Flatten allowed total matrix coordinates and project to the integral quotient. This is additive and two maps have equal classes exactly when they admit an unrestricted integral cone homotopy, including torsion effects invisible to induced homology and cohomology.",
+        "Full defining source and target cones determine all coordinates. The allowed degree-zero maps have zero lower-left blocks. The full Hom differentials use d0(T)=DT-TD and d1(K)=DK+KD. The quotient uses all unrestricted homotopies whose boundaries have zero forbidden blocks, via an integral kernel basis of the forbidden-row differential. This intersection must precede projection to allowed coordinates. Torsion and actual square witnesses survive class projection and decoding."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeMapSpaceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeMapSpaceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required combined cone rank is at most 256 after relative filtering. Full Hom coefficient counts are separately bounded by 256 in degrees -1, 0 and 1, including forbidden degree-zero entries. One 5000000-unit budget spans all differentials, the forbidden-boundary kernel, the full quotient reduction, projection or lifting, and validation of every map in each complete flat result. Exhaustion is IMPLEMENTATION_FAILURE without a false zero group, empty basis or partial list. Coefficient bit lengths are unbounded. Context/source/target/equality avoid reductions; zero uses ordinary cone-map bounds.",
+        "Only additive homotopy classes of retained square maps over Z are represented. The allowed carrier is generally smaller than all cone chain maps; homotopies may mix cone blocks. The incoming homology matrix uses coordinates in a chosen integral kernel basis, not raw homotopy coordinates. Generic class elements retain exact presentations rather than full cone provenance. Representatives are not generally additive or canonical under basis changes. Direct contextual class composition, composition actions, higher Hom homology, geometric realization and other coefficient rings are outside this increment."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeMapSpaceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ConeMapSpace.class-of",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "class-of",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.ConeMapSpace.representative",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeMapSpaceAlgebra",
+      "concept": "ConeMapSpace.representative",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeMapSpace",
+      "domain_B": "AbelianGroupElement",
+      "domain_C": "ChainConeMap",
+      "operation_signature": "ConeMapSpace x AbelianGroupElement -> ChainConeMap",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares; native operation ConeMapSpace.representative",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require an element with this exact retained group presentation and lift it to a validated retained square in this space. This is a deterministic set-theoretic section, not generally an additive section. Generic AbelianGroupElement retains its presentation rather than geometric provenance.",
+        "Full defining source and target cones determine all coordinates. The allowed degree-zero maps have zero lower-left blocks. The full Hom differentials use d0(T)=DT-TD and d1(K)=DK+KD. The quotient uses all unrestricted homotopies whose boundaries have zero forbidden blocks, via an integral kernel basis of the forbidden-row differential. This intersection must precede projection to allowed coordinates. Torsion and actual square witnesses survive class projection and decoding."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IUnsafeOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeMapSpaceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/MixedOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeMapSpaceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required combined cone rank is at most 256 after relative filtering. Full Hom coefficient counts are separately bounded by 256 in degrees -1, 0 and 1, including forbidden degree-zero entries. One 5000000-unit budget spans all differentials, the forbidden-boundary kernel, the full quotient reduction, projection or lifting, and validation of every map in each complete flat result. Exhaustion is IMPLEMENTATION_FAILURE without a false zero group, empty basis or partial list. Coefficient bit lengths are unbounded. Context/source/target/equality avoid reductions; zero uses ordinary cone-map bounds.",
+        "Only additive homotopy classes of retained square maps over Z are represented. The allowed carrier is generally smaller than all cone chain maps; homotopies may mix cone blocks. The incoming homology matrix uses coordinates in a chosen integral kernel basis, not raw homotopy coordinates. Generic class elements retain exact presentations rather than full cone provenance. Representatives are not generally additive or canonical under basis changes. Direct contextual class composition, composition actions, higher Hom homology, geometric realization and other coefficient rings are outside this increment."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeMapSpaceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ConeMapSpace.representative",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "representative",
+      "legacy_operation_interface": "IUnsafeOperation"
+    },
+    {
+      "id": "concrete-operation.ConeMapSpace.representatives",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeMapSpaceAlgebra",
+      "concept": "ConeMapSpace.representatives",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ConeMapSpace",
+      "domain_B": null,
+      "domain_C": "ChainConeMap",
+      "operation_signature": "ConeMapSpace -> List(ChainConeMap)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares; native operation ConeMapSpace.representatives",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return retained maps representing the nonzero minimal Smith generators: torsion first, then free. A zero quotient returns an empty list even when the full map lattice is nonzero. One budget covers every reduction, lift and square validation; no truncated list is returned.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Full defining source and target cones determine all coordinates. The allowed degree-zero maps have zero lower-left blocks. The full Hom differentials use d0(T)=DT-TD and d1(K)=DK+KD. The quotient uses all unrestricted homotopies whose boundaries have zero forbidden blocks, via an integral kernel basis of the forbidden-row differential. This intersection must precede projection to allowed coordinates. Torsion and actual square witnesses survive class projection and decoding."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeMapSpaceAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeMapSpace.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeMapSpaceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Each required combined cone rank is at most 256 after relative filtering. Full Hom coefficient counts are separately bounded by 256 in degrees -1, 0 and 1, including forbidden degree-zero entries. One 5000000-unit budget spans all differentials, the forbidden-boundary kernel, the full quotient reduction, projection or lifting, and validation of every map in each complete flat result. Exhaustion is IMPLEMENTATION_FAILURE without a false zero group, empty basis or partial list. Coefficient bit lengths are unbounded. Context/source/target/equality avoid reductions; zero uses ordinary cone-map bounds.",
+        "Only additive homotopy classes of retained square maps over Z are represented. The allowed carrier is generally smaller than all cone chain maps; homotopies may mix cone blocks. The incoming homology matrix uses coordinates in a chosen integral kernel basis, not raw homotopy coordinates. Generic class elements retain exact presentations rather than full cone provenance. Representatives are not generally additive or canonical under basis changes. Direct contextual class composition, composition actions, higher Hom homology, geometric realization and other coefficient rings are outside this increment."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeMapSpaceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ConeMapSpace.representatives",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "representatives",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
       "id": "concrete-operation.Z/5Z.add",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "PrimeField",
@@ -162507,6 +163542,7 @@
         "ConeHomotopy.are-homotopic",
         "ConeHomotopy.equal",
         "ConeHomotopy.is-contractible",
+        "ConeMapSpace.equal",
         "CoverMap.contiguous",
         "CoverMap.equal",
         "CoverMap.is-isomorphism",
@@ -165294,6 +166330,7 @@
         "ChainCone.homology-type",
         "ChainCone.homology-types",
         "ChainMapSpace.homotopy-type",
+        "ConeMapSpace.homotopy-type",
         "FiniteComplex.integral-homology",
         "FiniteComplex.integral-homology-groups",
         "IntegralHomology.as-type",
@@ -165635,6 +166672,7 @@
         "AbelianGroupHomomorphism.target",
         "AbelianGroupHomomorphism.zero-between",
         "ChainMapSpace.homotopy-group",
+        "ConeMapSpace.homotopy-group",
         "IntegralHomology.group",
         "PresentedAbelianGroup.as-type",
         "PresentedAbelianGroup.direct-sum",
@@ -165720,6 +166758,8 @@
         "ConeChain.representative",
         "ConeCochain.class-of",
         "ConeCochain.representative",
+        "ConeMapSpace.class-of",
+        "ConeMapSpace.representative",
         "IntegralHomology.class-of",
         "IntegralHomology.representative",
         "IntegralHomology.zero-class",
@@ -166036,6 +167076,7 @@
         "ChainMapSpace.homology",
         "ConeChain.homology",
         "ConeCochain.cohomology",
+        "ConeMapSpace.homology",
         "CoverMap.source-sum-cohomology",
         "CoverMap.source-sum-homology",
         "CoverMap.target-sum-cohomology",
@@ -168692,7 +169733,10 @@
         "ConeHomotopy.contract-isomorphism",
         "ConeHomotopy.is-contractible",
         "ConeHomotopy.source",
-        "ConeHomotopy.target"
+        "ConeHomotopy.target",
+        "ConeMapSpace.from-cones",
+        "ConeMapSpace.source",
+        "ConeMapSpace.target"
       ],
       "invariants": [
         "Full validated defining chain map and labelled endpoint pairs retained",
@@ -168791,7 +169835,12 @@
         "ConeHomotopy.precompose",
         "ConeHomotopy.solution-generators",
         "ConeHomotopy.stationary",
-        "ConeHomotopy.to"
+        "ConeHomotopy.to",
+        "ConeMapSpace.class-of",
+        "ConeMapSpace.map-generators",
+        "ConeMapSpace.representative",
+        "ConeMapSpace.representatives",
+        "ConeMapSpace.zero"
       ],
       "invariants": [
         "Exact source and target defining maps and four labelled pairs retained",
@@ -169235,6 +170284,61 @@
       "invariants": [
         "Immutable references to two individually valid cone maps and homotopies",
         "Mutual compatibility and exact composite endpoints are checked by from-data"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-10-07"
+      }
+    },
+    {
+      "id": "ConeMapSpace",
+      "name": "Additive retained cone maps modulo integral homotopy",
+      "description": "Additive retained cone maps modulo integral homotopy",
+      "member_representation": "mathematics.topology.IntegralConeMapSpace",
+      "membership_rules": [
+        "Exact full defining source and target cones",
+        "Allowed upper-triangular degree-zero maps satisfy every chain equation",
+        "Homotopy boundaries are intersected with the retained carrier before quotienting",
+        "Integral torsion and full presentations survive projection and lifting"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "ChainCone",
+        "ChainConeMap",
+        "IntegralHomology",
+        "PresentedAbelianGroup",
+        "AbelianGroupType",
+        "AbelianGroupElement"
+      ],
+      "supported_operations": [
+        "ConeMapSpace.class-of",
+        "ConeMapSpace.equal",
+        "ConeMapSpace.from-cones",
+        "ConeMapSpace.homology",
+        "ConeMapSpace.homotopy-group",
+        "ConeMapSpace.homotopy-type",
+        "ConeMapSpace.map-generators",
+        "ConeMapSpace.representative",
+        "ConeMapSpace.representatives",
+        "ConeMapSpace.source",
+        "ConeMapSpace.target",
+        "ConeMapSpace.zero"
+      ],
+      "invariants": [
+        "Exact full defining source and target cones",
+        "Allowed upper-triangular degree-zero maps satisfy every chain equation",
+        "Homotopy boundaries are intersected with the retained carrier before quotienting",
+        "Integral torsion and full presentations survive projection and lifting"
       ],
       "references": [
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"

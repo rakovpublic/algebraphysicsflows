@@ -10,6 +10,7 @@ DATABASE = ROOT / "mathematics-coverage.json"
 MANIFEST = ROOT / "groupimp/src/test/resources/mathematics/concrete-catalog.tsv"
 DATE = "2026-10-07"
 OWNERS = {
+    "IntegralConeMapSpaceAlgebra": ("ConeMapSpace", "Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares"),
     "IntegralConeEquivalenceAlgebra": ("ConeEquivalence", "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps"),
     "IntegralConeHomotopyAlgebra": ("ConeHomotopy", "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions"),
     "IntegralConeChainAlgebra": ("ConeChain", "Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps"),
@@ -101,6 +102,7 @@ INTERFACES = {
     "IUnsafeFlatOperation": "flat/MixedFlatOperation",
 }
 EXTRA_TESTS = {
+    "IntegralConeMapSpaceAlgebra": "NativeIntegralConeMapSpaceTest",
     "IntegralConeEquivalenceAlgebra": "NativeIntegralConeEquivalenceTest",
     "IntegralConeHomotopyAlgebra": "NativeIntegralConeHomotopyTest",
     "IntegralConeChainAlgebra": "NativeIntegralConeElementsTest",
@@ -203,6 +205,20 @@ CONDITIONS = {
 
 
 OWNER_CONDITIONS = {
+    "IntegralConeMapSpaceAlgebra": {
+        "from-cones": "Retain the exact full source and target defining cones without eager reduction or Hom-rank checks. Algebraic queries impose their resource bounds separately.",
+        "source": "Return the full source cone, including its defining chain map and both labelled relative pairs.",
+        "target": "Return the full target cone, including its defining chain map and both labelled relative pairs.",
+        "equal": "Compare both full defining cones; equal ranks or abstract homotopy groups do not identify contexts.",
+        "zero": "Construct the zero retained square between the two cones, including both zero vertical maps and the zero square homotopy; use ordinary cone-map construction bounds without a Hom quotient reduction.",
+        "homology": "Let E include the allowed degree-zero coordinates and P project onto forbidden lower-left coordinates. With full Hom differentials d0 and d1, compute a full integral kernel basis B of P*d1, then retain outgoing d0*E and incoming allowedRows(d1)*B. Intersect homotopy boundaries with the retained carrier before quotienting; projecting arbitrary boundaries would create false class equalities. Degree-zero coordinates follow increasing degree, row and column with forbidden entries omitted.",
+        "homotopy-group": "Return the exact presented additive quotient of retained cone-map cycles by all unrestricted homotopy boundaries which land in that carrier. Keep integral torsion and the full presentation.",
+        "homotopy-type": "Return the canonical free rank and nontrivial torsion invariant factors of the restricted integral homotopy quotient.",
+        "map-generators": "Return a complete integral basis of all retained cone maps, not merely homotopy classes. Decode each allowed cycle into two vertical maps and the negative upper-right square homotopy. One shared budget spans all reductions and every returned map validation.",
+        "class-of": "Require the map's exact source and target defining cones. Flatten allowed total matrix coordinates and project to the integral quotient. This is additive and two maps have equal classes exactly when they admit an unrestricted integral cone homotopy, including torsion effects invisible to induced homology and cohomology.",
+        "representative": "Require an element with this exact retained group presentation and lift it to a validated retained square in this space. This is a deterministic set-theoretic section, not generally an additive section. Generic AbelianGroupElement retains its presentation rather than geometric provenance.",
+        "representatives": "Return retained maps representing the nonzero minimal Smith generators: torsion first, then free. A zero quotient returns an empty list even when the full map lattice is nonzero. One budget covers every reduction, lift and square validation; no truncated list is returned.",
+    },
     "IntegralConeEquivalenceAlgebra": {
         "from-map": "Solve simultaneously for a reverse map in the retained-square carrier and both integral cone inverse homotopies. Return the original forward map, the solved backward square, and exact witnesses GF -> identity_source and FG -> identity_target. Smith inconsistency or divisibility obstruction is OPERATION_UNDEFINED. One budget includes all solving, block decoding, endpoint compositions and complete equivalence validation.",
         "from-data": "Require opposite maps between identical full defining cones and exact witnesses GF -> id_source and FG -> id_target. Both square witnesses and both actual degree-raising homotopies are retained. Homotopic but unequal endpoint maps cannot replace these exact composites. Raw Data membership does not assert mutual compatibility.",
@@ -1819,6 +1835,11 @@ OWNER_CONDITIONS["RationalMatrixFamily"]["companion"] = "The polynomial has posi
 
 def record(identifier, owner, concept, paths, operation=None):
     carrier, scope = OWNERS[owner]
+    if owner == "IntegralConeMapSpaceAlgebra":
+        paths += ["groupimp/src/main/java/mathematics/topology/" + name + ".java" for name in
+                  ("IntegralConeMapSpace", "IntegralChainConeMap", "IntegralChainMappingCone", "SimplicialChainMap", "SimplicialChainHomotopy", "IntegralHomology")]
+        paths += ["groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java", "groupimp/src/main/java/mathematics/structures/PresentedAbelianGroup.java", "groupimp/src/main/java/mathematics/structures/AbelianGroupElement.java"]
+
     if owner == "IntegralConeEquivalenceAlgebra":
         paths += ["groupimp/src/main/java/mathematics/topology/" + name + ".java" for name in
                   ("IntegralConeEquivalence", "IntegralConeHomotopy", "IntegralChainConeMap", "IntegralChainMappingCone", "IntegralConeChain", "IntegralConeCochain", "SimplicialChainMap", "SimplicialChainHomotopy", "IntegralHomology")]
@@ -2195,6 +2216,11 @@ def record(identifier, owner, concept, paths, operation=None):
             "ChainConeMap.has-retained-homotopy-inverse", "ChainConeMap.retained-homotopy-inverse", "ConeHomotopy.inverse-homotopies", "ConeEquivalence.from-map")):
         value["required_invariants"].append("The simultaneous inverse system includes DG-GD=0 and both identities GF+DH+HD=I, FG+DK+KD=I. The reverse G has zero lower-left blocks in target-first cone coordinates; H and K are unrestricted degree-raising matrices. A solution decodes to two vertical chain maps and a negated upper-right square witness, preserving full defining maps and formal degrees. Choices set free Smith coordinates to zero and are deterministic for these labelled bases, not canonical under change of basis.")
         value["known_limitations"].append("Retained-inverse solving caps 256 total equations sum_n(s_n^2+t_n^2+s_(n-1)*t_n) and 256 total unknown coefficients: all allowed upper-triangular entries of G plus sum_n(s_(n+1)*s_n+t_(n+1)*t_n). Zero equations and identity inputs still count. Each combined cone rank is bounded by 256 after relative filtering. One 5000000-unit budget spans assembly, Smith reduction, block reconstruction, square validation, both inverse homotopies and full equivalence validation where requested. Exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial output. An inverse may exist as an unrestricted total cone map while no reverse map is representable in this carrier. Strict square inversion and supplied equivalences avoid these aggregate system limits; neither inverse representatives nor inverse homotopies are canonical. Coefficient bit lengths remain unbounded.")
+    if owner == "IntegralConeMapSpaceAlgebra":
+        value["required_invariants"].append("Full defining source and target cones determine all coordinates. The allowed degree-zero maps have zero lower-left blocks. The full Hom differentials use d0(T)=DT-TD and d1(K)=DK+KD. The quotient uses all unrestricted homotopies whose boundaries have zero forbidden blocks, via an integral kernel basis of the forbidden-row differential. This intersection must precede projection to allowed coordinates. Torsion and actual square witnesses survive class projection and decoding.")
+        value["known_limitations"] += ["Each required combined cone rank is at most 256 after relative filtering. Full Hom coefficient counts are separately bounded by 256 in degrees -1, 0 and 1, including forbidden degree-zero entries. One 5000000-unit budget spans all differentials, the forbidden-boundary kernel, the full quotient reduction, projection or lifting, and validation of every map in each complete flat result. Exhaustion is IMPLEMENTATION_FAILURE without a false zero group, empty basis or partial list. Coefficient bit lengths are unbounded. Context/source/target/equality avoid reductions; zero uses ordinary cone-map bounds.",
+            "Only additive homotopy classes of retained square maps over Z are represented. The allowed carrier is generally smaller than all cone chain maps; homotopies may mix cone blocks. The incoming homology matrix uses coordinates in a chosen integral kernel basis, not raw homotopy coordinates. Generic class elements retain exact presentations rather than full cone provenance. Representatives are not generally additive or canonical under basis changes. Direct contextual class composition, composition actions, higher Hom homology, geometric realization and other coefficient rings are outside this increment."]
+        value["references"].append("https://stacks.math.columbia.edu/tag/014D")
     if owner == "IntegralConeEquivalenceAlgebra":
         value["required_invariants"].append("Retain the exact defining cones, forward and backward witnessed squares, and actual homotopies GF -> identity and FG -> identity. The square witnesses and inverse homotopies are separate data. Composition transports both supplied inverse witnesses; integral maps are mutual inverses, with cohomology contravariant. Equality includes all choices, including nonzero loops.")
         value["known_limitations"] += ["Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
@@ -2536,6 +2562,8 @@ def synchronize(data, rows):
             if unchanged == old:
                 value["provenance"]["date"] = old["provenance"]["date"]
     descriptors = [
+        ("ConeMapSpace", "Additive retained cone maps modulo integral homotopy", "mathematics.topology.IntegralConeMapSpace",
+         ["Exact full defining source and target cones", "Allowed upper-triangular degree-zero maps satisfy every chain equation", "Homotopy boundaries are intersected with the retained carrier before quotienting", "Integral torsion and full presentations survive projection and lifting"], ["ChainCone", "ChainConeMap", "IntegralHomology", "PresentedAbelianGroup", "AbelianGroupType", "AbelianGroupElement"]),
         ("ConeEquivalence", "Retained integral equivalences between cones", "mathematics.topology.IntegralConeEquivalence",
          ["Exact full defining cones and opposite witnessed cone maps", "Validated retained homotopies GF to source identity and FG to target identity", "Composition transports actual witnesses; equality retains nonzero loops"], ["ChainCone", "ChainConeMap", "ConeHomotopy", "ConeChain", "ConeCochain", "AbelianGroupHomomorphism", "N"]),
         ("ConeEquivalence.data", "Supplied cone maps and inverse homotopies", "mathematics.topology.IntegralConeEquivalence.Data",

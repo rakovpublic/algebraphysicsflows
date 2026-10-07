@@ -35,3 +35,5 @@ Checked collapse sequences now compose those steps and perform deterministic gre
 `ConeEquivalence` adds 30 native operations retaining opposite cone maps and both inverse homotopies. Supplied data and strict square isomorphisms construct validated equivalences; composition preserves the chosen witnesses. Typed map and homotopy actions return the actual second carrier wrappers, while flat flows expose both witnesses and mutually inverse integral homology/cohomology maps.
 
 Four operations now solve for a cone map's inverse within the retained-square carrier: a decision, a reverse square, both inverse homotopies, and a complete `ConeEquivalence`. Simultaneous integer equations preserve torsion obstructions and the cone block structure under bounded work.
+
+`ConeMapSpace` adds 12 native operations for integral lattices of retained cone maps and their additive homotopy classes. It computes torsion-aware class groups, full map bases and representative maps, checking that homotopy boundaries belong to the retained-square carrier before forming the quotient. Construction, projection, lifting and flat generators run through the original MathTool and AlgebraFlow APIs.

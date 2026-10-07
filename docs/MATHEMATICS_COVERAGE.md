@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 2196 |
-| DIRECTLY_SUPPORTED | 1953 |
+| Scoped records | 2209 |
+| DIRECTLY_SUPPORTED | 1966 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1812 |
+| IMPLEMENTED | 1825 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1880 |
+| MACHINE_TESTED | 1893 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1789 | 1789 | 0 | 0 | 0 | 1789 | 0 | 0 |
+| Concrete MathTool algebras | 1802 | 1802 | 0 | 0 | 0 | 1802 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -653,6 +653,18 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | ConeHomotopy.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.target |
 | ConeHomotopy.then | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.then |
 | ConeHomotopy.to | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.to |
+| ConeMapSpace.class-of | DIRECTLY_SUPPORTED | IMPLEMENTED | Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares; native operation ConeMapSpace.class-of |
+| ConeMapSpace.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares; native operation ConeMapSpace.equal |
+| ConeMapSpace.from-cones | DIRECTLY_SUPPORTED | IMPLEMENTED | Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares; native operation ConeMapSpace.from-cones |
+| ConeMapSpace.homology | DIRECTLY_SUPPORTED | IMPLEMENTED | Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares; native operation ConeMapSpace.homology |
+| ConeMapSpace.homotopy-group | DIRECTLY_SUPPORTED | IMPLEMENTED | Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares; native operation ConeMapSpace.homotopy-group |
+| ConeMapSpace.homotopy-type | DIRECTLY_SUPPORTED | IMPLEMENTED | Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares; native operation ConeMapSpace.homotopy-type |
+| ConeMapSpace.map-generators | DIRECTLY_SUPPORTED | IMPLEMENTED | Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares; native operation ConeMapSpace.map-generators |
+| ConeMapSpace.representative | DIRECTLY_SUPPORTED | IMPLEMENTED | Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares; native operation ConeMapSpace.representative |
+| ConeMapSpace.representatives | DIRECTLY_SUPPORTED | IMPLEMENTED | Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares; native operation ConeMapSpace.representatives |
+| ConeMapSpace.source | DIRECTLY_SUPPORTED | IMPLEMENTED | Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares; native operation ConeMapSpace.source |
+| ConeMapSpace.target | DIRECTLY_SUPPORTED | IMPLEMENTED | Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares; native operation ConeMapSpace.target |
+| ConeMapSpace.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares; native operation ConeMapSpace.zero |
 | CoverMap.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with covariant homology, contravariant cohomology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.compose |
 | CoverMap.contiguous | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with covariant homology, contravariant cohomology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.contiguous |
 | CoverMap.corestrict-image | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with covariant homology, contravariant cohomology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.corestrict-image |
@@ -1071,6 +1083,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | IntegralConeCochainAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing |
 | IntegralConeEquivalenceAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps |
 | IntegralConeHomotopyAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions |
+| IntegralConeMapSpaceAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares |
 | IntegralHomology.as-type | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.as-type |
 | IntegralHomology.at-degree | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.at-degree |
 | IntegralHomology.betti-number | DIRECTLY_SUPPORTED | IMPLEMENTED | Constructive integral homology in one degree, retaining consecutive boundaries, an integral cycle basis and a quotient presentation; native operation IntegralHomology.betti-number |

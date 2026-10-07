@@ -42,6 +42,7 @@ import mathematics.topology.IntegralChainMappingCone;
 import mathematics.topology.IntegralChainConeMap;
 import mathematics.topology.IntegralConeHomotopy;
 import mathematics.topology.IntegralConeEquivalence;
+import mathematics.topology.IntegralConeMapSpace;
 import mathematics.topology.IntegralConeChain;
 import mathematics.topology.IntegralConeCochain;
 import mathematics.topology.FiniteSimplicialMap;
@@ -231,6 +232,13 @@ public final class ConcreteAlgebrasExample {
                 .<IntegralConeEquivalence>performAlgebraTransfer("ConeEquivalence.from-map")
                 .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("homology-maps",BigInteger.ZERO)
                 .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
+        IntegralConeMapSpace coneMapSpace=new IntegralConeMapSpace(torsionConeMap.source(),torsionConeMap.target());
+        System.out.println("Retained cone-map classes preserve integral torsion: "+math.flow(math.coneMapSpaces,Collections.singletonList(coneMapSpace))
+                .<AbelianGroupElement,IntegralChainConeMap>performAlgebraUnsafe("class-of",torsionConeMap)
+                .<BigInteger>performAlgebraTransfer("order").collect());
+        System.out.println("Cone-map class generators lift to actual retained squares: "+math.flow(math.coneMapSpaces,Collections.singletonList(coneMapSpace))
+                .<IntegralChainConeMap>performFlatAlgebraTransfer("representatives")
+                .<Boolean>performAlgebraTransfer("is-zero").collect());
         IntegralChainMappingCone contractibleCone=new IntegralChainMappingCone(SimplicialChainMap.identity(circlePair));
         IntegralConeChain coneCycle=IntegralConeChain.includeTarget(contractibleCone,RelativeSimplicialChain.absolute(orientedCircle));
         System.out.println("An explicit cone contraction fills the included circle cycle: "+math.flow(math.chainCones,Collections.singletonList(contractibleCone))

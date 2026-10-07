@@ -71,6 +71,13 @@ class CoverageTest(unittest.TestCase):
 
     def test_operation_conditions_are_scoped_to_the_algebra(self):
         records = {r.get("runtime_operation_id"): r for r in self.data["concepts"] if r.get("runtime_operation_id")}
+        self.assertIn("Intersect homotopy boundaries", " ".join(records["ConeMapSpace.homology"]["required_invariants"]))
+        self.assertIn("integral kernel basis", " ".join(records["ConeMapSpace.homotopy-group"]["required_invariants"]))
+        self.assertIn("negative upper-right", " ".join(records["ConeMapSpace.map-generators"]["required_invariants"]))
+        self.assertIn("not generally an additive section", " ".join(records["ConeMapSpace.representative"]["required_invariants"]))
+        self.assertIn("no truncated list", " ".join(records["ConeMapSpace.representatives"]["required_invariants"]))
+        self.assertIn("including forbidden", " ".join(records["ConeMapSpace.class-of"]["known_limitations"]))
+        self.assertIn("5000000", " ".join(records["ConeMapSpace.homotopy-type"]["known_limitations"]))
         self.assertIn("zero lower-left", " ".join(records["ChainConeMap.retained-homotopy-inverse"]["required_invariants"]))
         self.assertIn("may return false", " ".join(records["ChainConeMap.has-retained-homotopy-inverse"]["required_invariants"]))
         self.assertIn("same deterministically solved", " ".join(records["ConeHomotopy.inverse-homotopies"]["required_invariants"]))

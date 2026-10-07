@@ -97,32 +97,10 @@ public final class IntegralConeInverseSolver {
             for(int r=0;r<rows;r++) for(int c=0;c<columns;c++) entries[r][c]=vector.get(offset+r*columns+c);
             return new IntegerMatrix(rows,columns,entries);
         }
-        private IntegerMatrix inverseBlock(IntegerVector vector,int degree,int rowOffset,int columnOffset,int rows,int columns,boolean negate) {
-            work.use((long)rows*columns); BigInteger[][] entries=new BigInteger[rows][columns];
-            for(int r=0;r<rows;r++) for(int c=0;c<columns;c++) {
-                int coordinate=g[degree][rowOffset+r][columnOffset+c];
-                BigInteger value=coordinate<0?BigInteger.ZERO:vector.get(coordinate); entries[r][c]=negate?value.negate():value;
-            }
-            return new IntegerMatrix(rows,columns,entries);
-        }
         IntegralChainConeMap inverse(IntegerVector vector) {
-            RelativeSimplicialComplex as=map.target().source(),at=map.source().source(),bs=map.target().target(),bt=map.source().target();
-            List<IntegerMatrix> a=new ArrayList<>(),b=new ArrayList<>(),witness=new ArrayList<>();
-            for(int d=0;d<=Math.max(as.ambient().dimension(),at.ambient().dimension());d++) {
-                BigInteger degree=BigInteger.valueOf(d);
-                a.add(inverseBlock(vector,d+1,sourceTargetRanks[d+1],targetTargetRanks[d+1],at.basis(degree).size(),as.basis(degree).size(),false));
-            }
-            for(int d=0;d<=Math.max(bs.ambient().dimension(),bt.ambient().dimension());d++) {
-                BigInteger degree=BigInteger.valueOf(d); b.add(inverseBlock(vector,d,0,0,bt.basis(degree).size(),bs.basis(degree).size(),false));
-            }
-            SimplicialChainMap am=new SimplicialChainMap(new SimplicialChainMap.Data(as,at,a),work),bm=new SimplicialChainMap(new SimplicialChainMap.Data(bs,bt,b),work);
-            SimplicialChainMap from=bm.compose(map.target().map(),work),to=map.source().map().compose(am,work);
-            for(int d=0;d<from.chainMatrices().size();d++) {
-                BigInteger degree=BigInteger.valueOf(d);
-                witness.add(inverseBlock(vector,d+1,0,targetTargetRanks[d+1],bt.basis(degree.add(BigInteger.ONE)).size(),as.basis(degree).size(),true));
-            }
-            SimplicialChainHomotopy square=new SimplicialChainHomotopy(new SimplicialChainHomotopy.Data(from,to,witness),work);
-            return new IntegralChainConeMap(new IntegralChainConeMap.Data(map.target(),map.source(),am,bm,square),work);
+            return IntegralChainConeMap.fromBlocks(map.target(),map.source(),(degree,row,column) -> {
+                int coordinate=g[degree][row][column]; return coordinate<0?BigInteger.ZERO:vector.get(coordinate);
+            },work);
         }
         IntegralConeHomotopy witness(IntegerVector vector,IntegralChainConeMap composite,boolean source) {
             int[] ranks=source?s:t,offsets=source?h:k; List<IntegerMatrix> matrices=new ArrayList<>();

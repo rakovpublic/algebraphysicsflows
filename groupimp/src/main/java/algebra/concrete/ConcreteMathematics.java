@@ -72,6 +72,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final IntegralChainConeMapAlgebra chainConeMaps;
     public final IntegralConeHomotopyAlgebra coneHomotopies;
     public final IntegralConeEquivalenceAlgebra coneEquivalences;
+    public final IntegralConeMapSpaceAlgebra coneMapSpaces;
     public final IntegralConeChainAlgebra coneChains;
     public final IntegralConeCochainAlgebra coneCochains;
     public final RationalAffineSpaceAlgebra affineSpaces;
@@ -131,6 +132,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         chainConeMaps=new IntegralChainConeMapAlgebra(chainCones,chainMaps,chainHomotopies,integerMatrices,abelianHomomorphisms,naturals,booleans,coneChains,coneCochains,integers);
         coneHomotopies=new IntegralConeHomotopyAlgebra(chainConeMaps,chainCones,coneChains,coneCochains,integerMatrices,integers,naturals,booleans,abelianHomomorphisms);
         coneEquivalences=new IntegralConeEquivalenceAlgebra(chainConeMaps,coneHomotopies,chainCones,coneChains,coneCochains,abelianHomomorphisms,naturals,booleans);
+        coneMapSpaces=new IntegralConeMapSpaceAlgebra(chainCones,chainConeMaps,integralHomology,presentedAbelianGroups,abelianGroups,abelianGroupElements,booleans);
         affineSpaces=new RationalAffineSpaceAlgebra(rectangularMatrices,finiteVectors,naturals,booleans);
         markovKernels=new FiniteMarkovAlgebra(integers,integerSets,integerProbabilities,integerFunctions,rectangularMatrices,finiteVectors,rationals,naturals,booleans);
         tensors=new RationalTensorAlgebra(rationals,finiteVectors,rectangularMatrices,naturals,booleans);
@@ -187,6 +189,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         values.add(coneCochains);
         values.add(coneHomotopies);
         values.add(coneEquivalences);
+        values.add(coneMapSpaces);
         values.addAll(fields); algebras=Collections.unmodifiableList(values);
         for(ConcreteAlgebra<?> algebra : algebras) {
             algebra.register(mathTool);

@@ -44,6 +44,34 @@ public final class IntegralChainConeMap implements Serializable {
         if(!homotopy().from().equals(targetMap().compose(source().map(),work)) || !homotopy().to().equals(target().map().compose(sourceMap(),work)))
             throw MathFailure.undefined("Cone square witness must run from b after F to G after a");
     }
+    interface MatrixEntry { BigInteger at(int degree,int row,int column); }
+    private static IntegerMatrix block(MatrixEntry entries,int degree,int rowOffset,int columnOffset,int rows,int columns,boolean negate,Computation work) {
+        work.use((long)rows*columns); BigInteger[][] values=new BigInteger[rows][columns];
+        for(int r=0;r<rows;r++) for(int c=0;c<columns;c++) {
+            BigInteger value=entries.at(degree,rowOffset+r,columnOffset+c); values[r][c]=negate?value.negate():value;
+        }
+        return new IntegerMatrix(rows,columns,values);
+    }
+    /** Decode allowed upper-triangular coordinates; validate both vertical maps and the signed square witness. */
+    static IntegralChainConeMap fromBlocks(IntegralChainMappingCone source,IntegralChainMappingCone target,MatrixEntry entries,Computation work) {
+        RelativeSimplicialComplex as=source.source(),at=target.source(),bs=source.target(),bt=target.target();
+        List<IntegerMatrix> a=new ArrayList<>(),b=new ArrayList<>(),witness=new ArrayList<>();
+        for(int d=0;d<=Math.max(as.ambient().dimension(),at.ambient().dimension());d++) {
+            BigInteger degree=BigInteger.valueOf(d),next=degree.add(BigInteger.ONE);
+            a.add(block(entries,d+1,bt.basis(next).size(),bs.basis(next).size(),at.basis(degree).size(),as.basis(degree).size(),false,work));
+        }
+        for(int d=0;d<=Math.max(bs.ambient().dimension(),bt.ambient().dimension());d++) {
+            BigInteger degree=BigInteger.valueOf(d); b.add(block(entries,d,0,0,bt.basis(degree).size(),bs.basis(degree).size(),false,work));
+        }
+        SimplicialChainMap am=new SimplicialChainMap(new SimplicialChainMap.Data(as,at,a),work),bm=new SimplicialChainMap(new SimplicialChainMap.Data(bs,bt,b),work);
+        SimplicialChainMap from=bm.compose(source.map(),work),to=target.map().compose(am,work);
+        for(int d=0;d<from.chainMatrices().size();d++) {
+            BigInteger degree=BigInteger.valueOf(d),next=degree.add(BigInteger.ONE);
+            witness.add(block(entries,d+1,0,bs.basis(next).size(),bt.basis(next).size(),as.basis(degree).size(),true,work));
+        }
+        SimplicialChainHomotopy square=new SimplicialChainHomotopy(new SimplicialChainHomotopy.Data(from,to,witness),work);
+        return new IntegralChainConeMap(new Data(source,target,am,bm,square),work);
+    }
     public static IntegralChainConeMap identity(IntegralChainMappingCone cone) { return identity(cone,new Computation()); }
     static IntegralChainConeMap identity(IntegralChainMappingCone cone,Computation work) {
         return new IntegralChainConeMap(new Data(cone,cone,SimplicialChainMap.identity(cone.source(),work),SimplicialChainMap.identity(cone.target(),work),SimplicialChainHomotopy.stationary(cone.map(),work)),work);
