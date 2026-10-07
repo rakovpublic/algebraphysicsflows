@@ -44,4 +44,22 @@ public final class IntegralChainConeMapAlgebra extends ConcreteAlgebra<IntegralC
         law("Typed pushforward and contravariant pullback use the actual second carrier's wrapper, check exact cone contexts, commute with differentials and preserve evaluation.");
     }
 
+    public IntegralChainConeMapAlgebra(IntegralChainMappingConeAlgebra cones,SimplicialChainMapAlgebra maps,SimplicialChainHomotopyAlgebra homotopies,
+            IntegerMatrixFamily matrices,AbelianGroupHomomorphismAlgebra homomorphisms,NaturalSemiring naturals,BooleanAlgebra truth,
+            IntegralConeChainAlgebra chains,IntegralConeCochainAlgebra cochains,IntegerRing integers) {
+        this(cones,maps,homotopies,matrices,homomorphisms,naturals,truth,chains,cochains);
+        binary("zero-between",cones.algebra(),cones.algebra(),algebra(),false,IntegralChainConeMap::zero);
+        unary("zero-like",algebra(),algebra(),false,IntegralChainConeMap::zeroLike);
+        unary("is-zero",algebra(),truth.algebra(),false,IntegralChainConeMap::isZero);
+        unary("is-identity",algebra(),truth.algebra(),false,IntegralChainConeMap::isIdentity);
+        closed("add",true,IntegralChainConeMap::add);
+        closed("subtract",true,IntegralChainConeMap::subtract);
+        unary("negate",algebra(),algebra(),false,IntegralChainConeMap::negate);
+        binary("scale",algebra(),integers.algebra(),algebra(),false,IntegralChainConeMap::scale);
+        unary("is-square-isomorphism",algebra(),truth.algebra(),false,IntegralChainConeMap::isSquareIsomorphism);
+        unary("inverse-square",algebra(),algebra(),true,IntegralChainConeMap::inverseSquare);
+        unary("is-chain-isomorphism",algebra(),truth.algebra(),false,IntegralChainConeMap::isChainIsomorphism);
+        law("Parallel witnessed cone maps form abelian groups and composition is bilinear. Zero and identity tests include the actual homotopy matrices.");
+        law("Square inversion requires degreewise unimodular a and b and retains -b^-1 H a^-1, giving an exact inverse on both maps and witnesses. Invertibility of the total cone matrices is a separate condition when diagonal blocks are rectangular.");
+    }
 }

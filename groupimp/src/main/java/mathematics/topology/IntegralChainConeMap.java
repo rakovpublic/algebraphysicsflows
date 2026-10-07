@@ -53,6 +53,54 @@ public final class IntegralChainConeMap implements Serializable {
         return new IntegralChainConeMap(new Data(new IntegralChainMappingCone(homotopy.from()),new IntegralChainMappingCone(homotopy.to()),
                 SimplicialChainMap.identity(homotopy.source(),work),SimplicialChainMap.identity(homotopy.target(),work),homotopy),work);
     }
+    public static IntegralChainConeMap zero(IntegralChainMappingCone source,IntegralChainMappingCone target) {
+        Computation work=new Computation();
+        SimplicialChainMap a=SimplicialChainMap.zero(source.source(),target.source(),work),b=SimplicialChainMap.zero(source.target(),target.target(),work);
+        SimplicialChainHomotopy h=SimplicialChainHomotopy.stationary(SimplicialChainMap.zero(source.source(),target.target(),work),work);
+        return new IntegralChainConeMap(new Data(source,target,a,b,h),work);
+    }
+    public IntegralChainConeMap zeroLike() { return zero(source(),target()); }
+    private boolean zeroWitness() {
+        for(IntegerMatrix h : homotopy().chainMatrices()) for(int r=0;r<h.rows();r++) for(int c=0;c<h.columns();c++) if(h.get(r,c).signum()!=0) return false;
+        return true;
+    }
+    public boolean isZero() { return sourceMap().isZero() && targetMap().isZero() && zeroWitness(); }
+    public boolean isIdentity() { return source().equals(target()) && sourceMap().isIdentity() && targetMap().isIdentity() && zeroWitness(); }
+    private void requireParallel(IntegralChainConeMap other) {
+        if(!source().equals(other.source()) || !target().equals(other.target())) throw MathFailure.undefined("Cone-map arithmetic requires identical full source and target defining maps");
+    }
+    private IntegralChainConeMap add(IntegralChainConeMap other,Computation work) {
+        requireParallel(other);
+        return new IntegralChainConeMap(new Data(source(),target(),sourceMap().add(other.sourceMap(),work),targetMap().add(other.targetMap(),work),homotopy().add(other.homotopy(),work)),work);
+    }
+    public IntegralChainConeMap add(IntegralChainConeMap other) { return add(other,new Computation()); }
+    public IntegralChainConeMap subtract(IntegralChainConeMap other) {
+        requireParallel(other); Computation work=new Computation(); return add(other.scale(BigInteger.ONE.negate(),work),work);
+    }
+    private IntegralChainConeMap scale(BigInteger scalar,Computation work) {
+        return new IntegralChainConeMap(new Data(source(),target(),sourceMap().scale(scalar,work),targetMap().scale(scalar,work),homotopy().scale(scalar,work)),work);
+    }
+    public IntegralChainConeMap scale(BigInteger scalar) { return scale(scalar,new Computation()); }
+    public IntegralChainConeMap negate() { return scale(BigInteger.ONE.negate()); }
+    /** Invertibility in the category of squares with chosen homotopies, not just of their total cone matrices. */
+    public boolean isSquareIsomorphism() {
+        Computation work=new Computation(); return sourceMap().isIsomorphism(work) && targetMap().isIsomorphism(work);
+    }
+    public IntegralChainConeMap inverseSquare() {
+        Computation work=new Computation(); SimplicialChainMap a=sourceMap().inverse(work),b=targetMap().inverse(work);
+        SimplicialChainHomotopy h=homotopy().precompose(a,work).postcompose(b,work).reverse(work);
+        return new IntegralChainConeMap(new Data(target(),source(),a,b,h),work);
+    }
+    /** The total cone matrices may be invertible even when their rectangular diagonal blocks are not. */
+    public boolean isChainIsomorphism() {
+        Computation work=new Computation();
+        for(int k=0;k<=dimension();k++) {
+            IntegerMatrix m=matrix(BigInteger.valueOf(k),work); if(m.rows()!=m.columns()) return false;
+            List<BigInteger> factors=work.invariantFactors(m); if(factors.size()!=m.rows()) return false;
+            for(BigInteger factor : factors) if(!factor.equals(BigInteger.ONE)) return false;
+        }
+        return true;
+    }
     public Data data() { return data; }
     public IntegralChainMappingCone source() { return data.source; }
     public IntegralChainMappingCone target() { return data.target; }

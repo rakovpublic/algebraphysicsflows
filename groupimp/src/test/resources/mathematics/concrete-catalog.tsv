@@ -1582,6 +1582,17 @@ ChainConeMap.homology-naturality-maps	IntegralChainConeMapAlgebra	homology-natur
 ChainConeMap.cohomology-naturality-maps	IntegralChainConeMapAlgebra	cohomology-naturality-maps	ChainConeMap	N	AbelianGroupHomomorphism	LIST	TOTAL	IUnsafeFlatOperation
 ChainConeMap.on-chain	IntegralChainConeMapAlgebra	on-chain	ChainConeMap	ConeChain	ConeChain	SCALAR	PARTIAL	ILeftProjectionOperation
 ChainConeMap.on-cochain	IntegralChainConeMapAlgebra	on-cochain	ChainConeMap	ConeCochain	ConeCochain	SCALAR	PARTIAL	ILeftProjectionOperation
+ChainConeMap.zero-between	IntegralChainConeMapAlgebra	ChainConeMap.zero-between	ChainCone	ChainCone	ChainConeMap	SCALAR	TOTAL	ICustomResultOperation
+ChainConeMap.zero-like	IntegralChainConeMapAlgebra	zero-like	ChainConeMap	-	ChainConeMap	SCALAR	TOTAL	IOneOperandOperation
+ChainConeMap.is-zero	IntegralChainConeMapAlgebra	is-zero	ChainConeMap	-	Boolean	SCALAR	TOTAL	ITransferOperation
+ChainConeMap.is-identity	IntegralChainConeMapAlgebra	is-identity	ChainConeMap	-	Boolean	SCALAR	TOTAL	ITransferOperation
+ChainConeMap.add	IntegralChainConeMapAlgebra	add	ChainConeMap	ChainConeMap	ChainConeMap	SCALAR	PARTIAL	IOperation
+ChainConeMap.subtract	IntegralChainConeMapAlgebra	subtract	ChainConeMap	ChainConeMap	ChainConeMap	SCALAR	PARTIAL	IOperation
+ChainConeMap.negate	IntegralChainConeMapAlgebra	negate	ChainConeMap	-	ChainConeMap	SCALAR	TOTAL	IOneOperandOperation
+ChainConeMap.scale	IntegralChainConeMapAlgebra	scale	ChainConeMap	Z	ChainConeMap	SCALAR	TOTAL	ICustomMemberOperation
+ChainConeMap.is-square-isomorphism	IntegralChainConeMapAlgebra	is-square-isomorphism	ChainConeMap	-	Boolean	SCALAR	TOTAL	ITransferOperation
+ChainConeMap.inverse-square	IntegralChainConeMapAlgebra	inverse-square	ChainConeMap	-	ChainConeMap	SCALAR	PARTIAL	IOneOperandOperation
+ChainConeMap.is-chain-isomorphism	IntegralChainConeMapAlgebra	is-chain-isomorphism	ChainConeMap	-	Boolean	SCALAR	TOTAL	ITransferOperation
 ConeChain.zero-on	IntegralConeChainAlgebra	ConeChain.zero-on	ChainCone	Z	ConeChain	SCALAR	TOTAL	IUnsafeOperation
 ConeChain.basis-on	IntegralConeChainAlgebra	ConeChain.basis-on	ChainCone	Z	ConeChain	LIST	TOTAL	IUnsafeFlatOperation
 ConeChain.add	IntegralConeChainAlgebra	add	ConeChain	ConeChain	ConeChain	SCALAR	PARTIAL	IOperation

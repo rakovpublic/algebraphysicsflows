@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1644 native operations from 71 algebra builders.
+The default initializer currently installs 1655 native operations from 71 algebra builders.
 
 ## Existing API usage
 
@@ -2459,12 +2459,16 @@ The chosen homotopy is part of the value. Even a stationary square can have nonz
 | `identity-on`, `from-homotopy` | Build a cone identity, or a cone isomorphism from an existing `ChainHomotopy`. |
 | `source`, `target`, `source-map`, `target-map`, `homotopy` | Recover exact cone contexts, vertical maps `a,b`, or the witness `H:bF->Ga`. |
 | `equal`, `compose` | Compare all retained data or compose maps with the exact joining cone. |
+| `zero-between`, `zero-like`, `is-zero`, `is-identity` | Construct zero maps or test all retained maps and the actual witness. |
+| `add`, `subtract`, `negate`, `scale` | Integral additive arithmetic on maps between identical exact cones, including witness matrices. |
+| `is-square-isomorphism`, `inverse-square` | Test or invert both vertical chain maps and transport the chosen witness. |
+| `is-chain-isomorphism` | Test square unimodularity of every total signed cone matrix. |
 | `chain-matrix`, `cochain-matrix`, `chain-matrices`, `cochain-matrices` | One degree matrix or the complete list; cochain pullback uses transposes. |
 | `homology-map`, `cohomology-map`, `homology-maps`, `cohomology-maps` | Induced integral maps in one degree or every formal degree. |
 | `homology-naturality-maps`, `cohomology-naturality-maps` | The four vertical maps between the corresponding exact sequence segments. |
 | `on-chain`, `on-cochain` | Typed pushforward and contravariant pullback, returning the actual second carrier wrapper. |
 
-These 23 operations use the existing `operations/simple` and `operations/flat` interfaces. The homology naturality list is `[H_n(a), H_n(b), H_n(cone map), H_(n-1)(a)]`. The cohomology list is `[H^n(cone map), H^n(b), H^n(a), H^(n+1)(cone map)]`, running from the target segment back to the source segment. All three squares commute in each diagram, with equality of the actual presentations at their joins.
+These 34 operations use the existing `operations/simple` and `operations/flat` interfaces. The homology naturality list is `[H_n(a), H_n(b), H_n(cone map), H_(n-1)(a)]`. The cohomology list is `[H^n(cone map), H^n(b), H^n(a), H^(n+1)(cone map)]`, running from the target segment back to the source segment. All three squares commute in each diagram, with equality of the actual presentations at their joins.
 
 The example below retains a nonzero loop from a point into the circle. Its cone map changes homology even though both vertical chain maps are identities:
 
@@ -2498,6 +2502,36 @@ Converting the reverse homotopy gives a strict inverse to `from-homotopy`, inclu
 Public degrees are nonnegative. Lists run through the larger formal cone dimension, retaining zero slots and rectangular zero shapes; both empty cones give empty lists. The degree-zero homology naturality list retains the adjacent negative endpoint presentations. Each required quotient basis and combined cone rank is at most **256**. A single **5000000-unit budget** covers each full constructor, composition with both witness transports and validation, induced map with both cone reductions, whole-degree list, or four-map naturality list. Valid data may exceed later evaluation limits; exhaustion raises `IMPLEMENTATION_FAILURE`. Integer coefficients have no bit-length cap. Typed actions on `ConeChain` and `ConeCochain` are described below. This carrier does not add arbitrary cone-map matrix input, a geometric realization, or a homotopy-independent choice of cone morphism.
 
 `NativeIntegralChainConeMapTest` adds 17 tests covering 125 signed interval homotopies, 729 independent witness compositions and 6,561 point-matrix compositions. Further cases check associativity, both variances, all six naturality squares, projective-plane torsion, relative degree shifts, empty and filtered pairs, negative endpoint presentations, 1025-bit coefficients, shared composition/list/naturality budgets, actual wrappers and serialized repeatable flows.
+
+## Arithmetic and inverses of retained cone squares
+
+Parallel `ChainConeMap` values form an abelian group: add both vertical maps and the actual homotopies, with zero witness for the zero map. Composition is bilinear. `add` and `subtract` require identical full source and target defining maps, even if dimensions or homology groups coincide. `is-zero` and `is-identity` inspect the witness; a nonzero homotopy loop can make both tests false. `scale` uses `ICustomMemberOperation` and returns the first carrier's actual `IAlgebraItem` wrapper.
+
+`is-square-isomorphism` tests degreewise unimodularity of both vertical maps `a,b`. `inverse-square` swaps the cones, uses `a^-1,b^-1`, and retains `-b^-1 H a^-1`. Both compositions are literal identity squares, including zero witnesses. The inverse reverses composition order and is involutive. This extends the reverse-homotopy construction to all supplied squares with invertible vertical maps.
+
+`is-chain-isomorphism` separately tests every total cone matrix. These conditions can differ when diagonal blocks are rectangular: take `F: point -> empty` and `G: empty -> (interval, both vertices)`, with zero vertical maps and a witness sending the point to the relative edge. Both cones have just one generator in degree one, and the cone map there is `[-1]`. Its total chain map is invertible, but its retained vertical maps are not; `is-chain-isomorphism` returns true, `is-square-isomorphism` returns false, and `inverse-square` raises `OPERATION_UNDEFINED`.
+
+Continuing the nonzero-loop example above:
+
+```java
+List<String> roundTrip = math.flow(math.chainConeMaps, Collections.singletonList(map))
+        .performOneOperandOperation("inverse-square").performOperation("compose", map)
+        .<Boolean>performAlgebraTransfer("is-identity").collect();
+// [true]
+List<String> additiveZero = math.flow(math.chainConeMaps, Collections.singletonList(map))
+        .performCustomMemberOperation("scale", BigInteger.ONE.negate()).performOperation("add", map)
+        .<Boolean>performAlgebraTransfer("is-zero").collect();
+// [true]
+List<String> inverseMaps = math.flow(math.chainConeMaps, Collections.singletonList(map))
+        .performOneOperandOperation("inverse-square")
+        .<AbelianGroupHomomorphism>performFlatAlgebraTransfer("homology-maps")
+        .<Boolean>performAlgebraTransfer("is-isomorphism").collect();
+// [true, true]
+```
+
+Each complete arithmetic operation, inverse and isomorphism decision shares one **5000000-unit budget** across its components and validation. Subtraction includes intermediate negation; inversion includes both vertical inverses and all witness transports. Exceeding a work or combined-rank bound raises `IMPLEMENTATION_FAILURE`, without reporting false invertibility. The total-matrix predicate also enforces the **256-coordinate** cone bound. Invertibility of the retained square alone does not guarantee that its combined cone matrices fit this bound. Integer coefficients remain unbounded in bit length.
+
+`NativeIntegralConeMapArithmeticTest` adds 16 tests, including 729 independent sum/difference cases, 625 determinant/adjugate cases, signed loop inverses, distinct cone contexts, integer torsion, relative and empty groups, 1025-bit scaling, typed inverse actions, shared resource failures and serialized native scalar/flat flows. No inverse of a general block matrix is added to the square carrier.
 
 ## Typed chains and cochains on integral cones
 

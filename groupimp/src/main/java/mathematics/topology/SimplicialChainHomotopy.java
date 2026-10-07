@@ -105,8 +105,9 @@ public final class SimplicialChainHomotopy implements Serializable {
         for(int k=0;k<=matrices.size();k++) { IntegerMatrix h=matrixAt(BigInteger.valueOf(k-1)); work.use((long)h.rows()*h.columns()); result.add(h.transpose()); }
         return Collections.unmodifiableList(result);
     }
-    public SimplicialChainHomotopy reverse() {
-        Computation work=new Computation(); return build(to,from,work,d -> { IntegerMatrix h=matrixAt(d); work.use((long)h.rows()*h.columns()); return h.scale(BigInteger.ONE.negate()); });
+    public SimplicialChainHomotopy reverse() { return reverse(new Computation()); }
+    SimplicialChainHomotopy reverse(Computation work) {
+        return build(to,from,work,d -> { IntegerMatrix h=matrixAt(d); work.use((long)h.rows()*h.columns()); return h.scale(BigInteger.ONE.negate()); });
     }
     /** Chronological concatenation with equality of the full joining chain map. */
     public SimplicialChainHomotopy then(SimplicialChainHomotopy next) { return then(next,new Computation()); }
@@ -115,12 +116,14 @@ public final class SimplicialChainHomotopy implements Serializable {
         return build(from,next.to,work,d -> sum(matrixAt(d),next.matrixAt(d),work));
     }
     private static IntegerMatrix sum(IntegerMatrix a,IntegerMatrix b,Computation work) { work.use((long)a.rows()*a.columns()); return a.add(b); }
-    public SimplicialChainHomotopy add(SimplicialChainHomotopy other) {
-        requireParallel(from,other.from); Computation work=new Computation();
+    public SimplicialChainHomotopy add(SimplicialChainHomotopy other) { return add(other,new Computation()); }
+    SimplicialChainHomotopy add(SimplicialChainHomotopy other,Computation work) {
+        requireParallel(from,other.from);
         return build(from.add(other.from,work),to.add(other.to,work),work,d -> sum(matrixAt(d),other.matrixAt(d),work));
     }
-    public SimplicialChainHomotopy scale(BigInteger scalar) {
-        Computation work=new Computation(); return build(from.scale(scalar,work),to.scale(scalar,work),work,d -> {
+    public SimplicialChainHomotopy scale(BigInteger scalar) { return scale(scalar,new Computation()); }
+    SimplicialChainHomotopy scale(BigInteger scalar,Computation work) {
+        return build(from.scale(scalar,work),to.scale(scalar,work),work,d -> {
             IntegerMatrix h=matrixAt(d); work.use((long)h.rows()*h.columns()); return h.scale(scalar);
         });
     }

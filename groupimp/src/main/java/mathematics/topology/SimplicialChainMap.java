@@ -135,8 +135,8 @@ public final class SimplicialChainMap implements Serializable {
         if(!source.equals(before.target)) throw MathFailure.undefined("Chain-map composition requires identical full labelled joining pairs");
         return build(before.source,target,work,d -> work.multiply(matrixAt(d),before.matrixAt(d)));
     }
-    public boolean isIsomorphism() {
-        Computation work=new Computation();
+    public boolean isIsomorphism() { return isIsomorphism(new Computation()); }
+    boolean isIsomorphism(Computation work) {
         for(IntegerMatrix matrix : matrices) {
             if(matrix.rows()!=matrix.columns()) return false;
             List<BigInteger> factors=work.invariantFactors(matrix);

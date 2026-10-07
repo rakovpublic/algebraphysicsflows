@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DATABASE = ROOT / "mathematics-coverage.json"
 MANIFEST = ROOT / "groupimp/src/test/resources/mathematics/concrete-catalog.tsv"
-DATE = "2026-10-06"
+DATE = "2026-10-07"
 OWNERS = {
     "IntegralConeChainAlgebra": ("ConeChain", "Typed integral chains on retained mapping cones, signed boundaries, constructive cycle classes, typed primitives and structural coordinate maps"),
     "IntegralConeCochainAlgebra": ("ConeCochain", "Typed integral cochains on retained mapping cones, coboundaries, constructive cocycle classes, typed primitives, shifted structural maps and integral pairing"),
@@ -257,6 +257,17 @@ OWNER_CONDITIONS = {
         "evaluate": "Pair with a ConeChain only when the exact defining cone and degrees coincide. Return the integer dot product; pairing satisfies <delta u,c>=<u,Dc> and is preserved by cone-map pushforward and pullback.",
     },
     "IntegralChainConeMapAlgebra": {
+        "zero-between": "Construct the zero map between any two exact defining cones, with zero vertical maps and stationary zero witness on S->Tprime. All construction and compatibility checks share one budget.",
+        "zero-like": "Return zero-between for the retained exact source and target cones, without changing their defining maps.",
+        "is-zero": "Test both vertical maps and every actual homotopy matrix for zero; nonzero loop witnesses are not zero maps.",
+        "is-identity": "Require equal exact defining cones, identity vertical maps and zero actual homotopy matrices. Zero objects can have identical identity and zero maps.",
+        "add": "Require identical full source and target defining maps, then add both vertical maps and actual witnesses. Parallel maps form an abelian group and composition is bilinear. Construction and final validation share one budget.",
+        "subtract": "Require identical full source and target defining maps and subtract both vertical maps and actual witnesses. One budget covers the complete intermediate negation, addition and validation.",
+        "negate": "Negate both vertical maps and all witness entries under one construction and validation budget; the cone contexts are unchanged.",
+        "scale": "Multiply both vertical maps and the actual witness by any integer, with no coefficient bit-length cap. ICustomMemberOperation returns the first ChainConeMap carrier wrapper. Complete construction and validation share one budget.",
+        "is-square-isomorphism": "Test that both vertical maps a and b are degreewise square and unimodular over Z, sharing one budget across all their Smith reductions. This is invertibility of the retained square and is distinct from total cone-matrix invertibility.",
+        "inverse-square": "Require degreewise unimodular vertical maps; swap the exact cones, invert a and b, and retain the transported reverse witness -b^-1 H a^-1. Both compositions are the exact identities including their chosen witnesses. One budget covers both inverses, all witness transports and final validation. Noninvertible vertical maps raise OPERATION_UNDEFINED even if the total cone matrix is invertible.",
+        "is-chain-isomorphism": "Test every total signed cone matrix through the maximum formal degree for square unimodularity, sharing one budget across assembly and Smith reductions. Rectangular vertical blocks can give invertible total matrices even when the square has no inverse-square. Combined-rank or work exhaustion raises IMPLEMENTATION_FAILURE, never a false mathematical decision.",
         "on-chain": "Require the exact source cone, including its defining map. Apply the signed cone-map matrix to a typed chain and return the actual ConeChain second-carrier wrapper via ILeftProjectionOperation. Preserve degree; negative zero chains map to negative zero chains on the target cone.",
         "on-cochain": "Require the exact target cone and pull back using the transposed signed matrix. Return the actual ConeCochain second-carrier wrapper via ILeftProjectionOperation, on the source cone in the same natural degree. Matrix assembly, transpose and application share one budget.",
         "from-data": "Validate all four full labelled endpoints and the exact supplied witness H:bF->Ga. Data membership only asserts individually valid nonnull components. Construction shares the two composite calculations and rejects incompatible maps or reversed witnesses as OPERATION_UNDEFINED; it does not eagerly reduce cone homology.",
@@ -1864,6 +1875,10 @@ def record(identifier, owner, concept, paths, operation=None):
     if operation and operation["id"] in ("ChainConeMap.on-chain", "ChainConeMap.on-cochain"):
         paths += ["groupimp/src/main/java/mathematics/topology/IntegralConeChain.java", "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java"]
         tests.append("groupimp/src/test/java/operations/NativeIntegralConeElementsTest.java")
+    if owner == "IntegralChainConeMapAlgebra" and operation and operation["id"].split(".")[-1] in (
+            "zero-between", "zero-like", "is-zero", "is-identity", "add", "subtract", "negate", "scale",
+            "is-square-isomorphism", "inverse-square", "is-chain-isomorphism"):
+        tests.append("groupimp/src/test/java/operations/NativeIntegralConeMapArithmeticTest.java")
     if operation and operation["id"] == "ChainMap.is-quasi-isomorphism":
         paths = paths + ["groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java"]
         tests.append("groupimp/src/test/java/operations/NativeIntegralChainConeTest.java")
@@ -2100,6 +2115,10 @@ def record(identifier, owner, concept, paths, operation=None):
         value["known_limitations"] += ["Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. Typed actions use ConeChain and ConeCochain with exact cone checks and second-carrier wrappers. No arbitrary cone-map matrices, geometric realization or general chain-complex carrier are added.",
             "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."]
         value["references"].append("https://stacks.math.columbia.edu/tag/014D")
+    if owner == "IntegralChainConeMapAlgebra" and operation and operation["id"].split(".")[-1] in (
+            "zero-between", "zero-like", "is-zero", "is-identity", "add", "subtract", "negate", "scale",
+            "is-square-isomorphism", "inverse-square", "is-chain-isomorphism"):
+        value["known_limitations"].append("One 5000000-unit budget covers each complete arithmetic operation, each square inverse with all witness transports and validation, and each entire isomorphism decision. Square inversion preserves the retained block decomposition and requires both vertical maps invertible; a total cone-matrix inverse with noninvertible rectangular vertical blocks is not represented by inverse-square. Predicates may short-circuit on an encountered mathematical obstruction; exhaustion is IMPLEMENTATION_FAILURE.")
     if owner == "IntegralChainMappingConeAlgebra" or (operation and operation["id"] == "ChainMap.is-quasi-isomorphism"):
         value["required_invariants"].append("Cone(F)_n=T_n direct-sum S_(n-1), ordered target then source, with signed block differential [[d_T,F],[0,-d_S]]. Consecutive boundaries vanish; inclusion and projection give exact integral homology and contravariant cohomology sequences. Actual contexts, presentations, integral torsion and negative-degree adjacent zero shapes are retained.")
         value["known_limitations"] += ["Finite cones of retained integral simplicial quotient chain maps only. Every required source/target quotient basis and combined cone degree rank is bounded by 256 coordinates, after quotient filtering. The carrier stores the valid defining map without eager cone reduction. One 5000000-unit budget covers each full homology/cohomology calculation, each entire degree list, each structural map, each complete three-map exact segment, and the whole acyclicity decision. Resource exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial lists. Coefficient bit lengths are unbounded.",

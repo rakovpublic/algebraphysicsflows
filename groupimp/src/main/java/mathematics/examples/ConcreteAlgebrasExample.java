@@ -200,6 +200,16 @@ public final class ConcreteAlgebrasExample {
                 .<IntegralChainConeMap>performAlgebraTransfer("ChainConeMap.from-homotopy")
                 .<AbelianGroupHomomorphism>performFlatAlgebraTransfer("homology-maps")
                 .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
+        IntegralChainConeMap retainedConeMap=IntegralChainConeMap.fromHomotopy(retainedInverse.sourceHomotopy());
+        System.out.println("Cone square inversion retains an exact identity witness: "+math.flow(math.chainConeMaps,Collections.singletonList(retainedConeMap))
+                .performOneOperandOperation("inverse-square").performOperation("compose",retainedConeMap)
+                .<Boolean>performAlgebraTransfer("is-identity").collect());
+        System.out.println("Cone maps add to zero with their negated witnesses: "+math.flow(math.chainConeMaps,Collections.singletonList(retainedConeMap))
+                .performCustomMemberOperation("scale",BigInteger.ONE.negate()).performOperation("add",retainedConeMap)
+                .<Boolean>performAlgebraTransfer("is-zero").collect());
+        System.out.println("Square inverses feed native flat integral-map flows: "+math.flow(math.chainConeMaps,Collections.singletonList(retainedConeMap))
+                .performOneOperandOperation("inverse-square").<AbelianGroupHomomorphism>performFlatAlgebraTransfer("homology-maps")
+                .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
         System.out.println("A retained equivalence exposes two inverse integral maps: "+math.flow(math.chainMaps,Collections.singletonList(intervalIdentityClass.representative()))
                 .<SimplicialChainEquivalence>performAlgebraTransfer("ChainEquivalence.from-map")
                 .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("homology-maps",BigInteger.ZERO)

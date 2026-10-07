@@ -126,7 +126,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         chainCones=new IntegralChainMappingConeAlgebra(chainMaps,relativeComplexes,integerMatrices,integralHomology,abelianGroups,abelianHomomorphisms,integers,naturals,booleans);
         coneChains=new IntegralConeChainAlgebra(chainCones,relativeChains,integerVectors,integers,naturals,booleans,integralHomology,abelianGroupElements);
         coneCochains=new IntegralConeCochainAlgebra(chainCones,relativeCochains,integerVectors,integers,naturals,booleans,integralHomology,abelianGroupElements,coneChains);
-        chainConeMaps=new IntegralChainConeMapAlgebra(chainCones,chainMaps,chainHomotopies,integerMatrices,abelianHomomorphisms,naturals,booleans,coneChains,coneCochains);
+        chainConeMaps=new IntegralChainConeMapAlgebra(chainCones,chainMaps,chainHomotopies,integerMatrices,abelianHomomorphisms,naturals,booleans,coneChains,coneCochains,integers);
         affineSpaces=new RationalAffineSpaceAlgebra(rectangularMatrices,finiteVectors,naturals,booleans);
         markovKernels=new FiniteMarkovAlgebra(integers,integerSets,integerProbabilities,integerFunctions,rectangularMatrices,finiteVectors,rationals,naturals,booleans);
         tensors=new RationalTensorAlgebra(rationals,finiteVectors,rectangularMatrices,naturals,booleans);
