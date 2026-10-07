@@ -1593,6 +1593,8 @@ ChainConeMap.scale	IntegralChainConeMapAlgebra	scale	ChainConeMap	Z	ChainConeMap
 ChainConeMap.is-square-isomorphism	IntegralChainConeMapAlgebra	is-square-isomorphism	ChainConeMap	-	Boolean	SCALAR	TOTAL	ITransferOperation
 ChainConeMap.inverse-square	IntegralChainConeMapAlgebra	inverse-square	ChainConeMap	-	ChainConeMap	SCALAR	PARTIAL	IOneOperandOperation
 ChainConeMap.is-chain-isomorphism	IntegralChainConeMapAlgebra	is-chain-isomorphism	ChainConeMap	-	Boolean	SCALAR	TOTAL	ITransferOperation
+ChainConeMap.has-retained-homotopy-inverse	IntegralChainConeMapAlgebra	has-retained-homotopy-inverse	ChainConeMap	-	Boolean	SCALAR	TOTAL	ITransferOperation
+ChainConeMap.retained-homotopy-inverse	IntegralChainConeMapAlgebra	retained-homotopy-inverse	ChainConeMap	-	ChainConeMap	SCALAR	PARTIAL	IOneOperandOperation
 ConeChain.zero-on	IntegralConeChainAlgebra	ConeChain.zero-on	ChainCone	Z	ConeChain	SCALAR	TOTAL	IUnsafeOperation
 ConeChain.basis-on	IntegralConeChainAlgebra	ConeChain.basis-on	ChainCone	Z	ConeChain	LIST	TOTAL	IUnsafeFlatOperation
 ConeChain.add	IntegralConeChainAlgebra	add	ConeChain	ConeChain	ConeChain	SCALAR	PARTIAL	IOperation
@@ -1674,6 +1676,7 @@ ConeHomotopy.between	IntegralConeHomotopyAlgebra	ConeHomotopy.between	ChainConeM
 ConeHomotopy.solution-generators	IntegralConeHomotopyAlgebra	ConeHomotopy.solution-generators	ChainConeMap	ChainConeMap	ConeHomotopy	LIST	PARTIAL	ICustomResultFlatOperation
 ConeHomotopy.is-contractible	IntegralConeHomotopyAlgebra	ConeHomotopy.is-contractible	ChainCone	-	Boolean	SCALAR	TOTAL	ITransferOperation
 ConeHomotopy.contract	IntegralConeHomotopyAlgebra	ConeHomotopy.contract	ChainCone	-	ConeHomotopy	SCALAR	PARTIAL	ITransferOperation
+ConeHomotopy.inverse-homotopies	IntegralConeHomotopyAlgebra	ConeHomotopy.inverse-homotopies	ChainConeMap	-	ConeHomotopy	LIST	PARTIAL	ITransferFlatOperation
 ConeEquivalence.from-data	IntegralConeEquivalenceAlgebra	ConeEquivalence.from-data	ConeEquivalence.data	-	ConeEquivalence	SCALAR	PARTIAL	ITransferOperation
 ConeEquivalence.identity-on	IntegralConeEquivalenceAlgebra	ConeEquivalence.identity-on	ChainCone	-	ConeEquivalence	SCALAR	TOTAL	ITransferOperation
 ConeEquivalence.source	IntegralConeEquivalenceAlgebra	source	ConeEquivalence	-	ChainCone	SCALAR	TOTAL	ITransferOperation
@@ -1703,6 +1706,7 @@ ConeEquivalence.source-homotopy-on-chain	IntegralConeEquivalenceAlgebra	source-h
 ConeEquivalence.target-homotopy-on-chain	IntegralConeEquivalenceAlgebra	target-homotopy-on-chain	ConeEquivalence	ConeChain	ConeChain	SCALAR	PARTIAL	ILeftProjectionOperation
 ConeEquivalence.source-homotopy-on-cochain	IntegralConeEquivalenceAlgebra	source-homotopy-on-cochain	ConeEquivalence	ConeCochain	ConeCochain	SCALAR	PARTIAL	ILeftProjectionOperation
 ConeEquivalence.target-homotopy-on-cochain	IntegralConeEquivalenceAlgebra	target-homotopy-on-cochain	ConeEquivalence	ConeCochain	ConeCochain	SCALAR	PARTIAL	ILeftProjectionOperation
+ConeEquivalence.from-map	IntegralConeEquivalenceAlgebra	ConeEquivalence.from-map	ChainConeMap	-	ConeEquivalence	SCALAR	PARTIAL	ITransferOperation
 Z/5Z.add	PrimeField	add	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL	IOperation
 Z/5Z.subtract	PrimeField	subtract	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL	IOperation
 Z/5Z.multiply	PrimeField	multiply	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL	IOperation

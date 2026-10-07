@@ -36,7 +36,7 @@ public final class IntegralChainConeMap implements Serializable {
         @Override public int hashCode() { return Objects.hash(source,target,sourceMap,targetMap,homotopy); }
     }
     public IntegralChainConeMap(Data data) { this(data,new Computation()); }
-    private IntegralChainConeMap(Data data,Computation work) {
+    IntegralChainConeMap(Data data,Computation work) {
         this.data=Objects.requireNonNull(data);
         if(!sourceMap().source().equals(source().source()) || !sourceMap().target().equals(target().source())
                 || !targetMap().source().equals(source().target()) || !targetMap().target().equals(target().target()))

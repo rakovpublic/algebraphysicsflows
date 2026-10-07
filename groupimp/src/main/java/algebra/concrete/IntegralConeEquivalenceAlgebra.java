@@ -41,6 +41,7 @@ public final class IntegralConeEquivalenceAlgebra extends ConcreteAlgebra<Integr
         binary("target-homotopy-on-chain",algebra(),chains.algebra(),chains.algebra(),true,IntegralConeEquivalence::targetHomotopyOnChain);
         binary("source-homotopy-on-cochain",algebra(),cochains.algebra(),cochains.algebra(),true,IntegralConeEquivalence::sourceHomotopyOnCochain);
         binary("target-homotopy-on-cochain",algebra(),cochains.algebra(),cochains.algebra(),true,IntegralConeEquivalence::targetHomotopyOnCochain);
+        unary("from-map",maps.algebra(),algebra(),true,IntegralConeEquivalence::fromMap);
         law("from-square-isomorphism requires both vertical chain maps to be degreewise unimodular. Total cone-matrix invertibility alone does not produce an inverse retained square.");
         law("Both full defining cone maps, both retained squares and both homotopies are retained. Equality includes witness matrices, even nonzero loops.");
         law("For before=(F,G,H,K) and after=(A,B,J,L), composition has maps AF, GB and witnesses GJF+H, AKB+L. Composition is associative and unital on the retained data; inversion swaps maps and witnesses.");

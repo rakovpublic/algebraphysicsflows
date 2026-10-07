@@ -71,6 +71,14 @@ class CoverageTest(unittest.TestCase):
 
     def test_operation_conditions_are_scoped_to_the_algebra(self):
         records = {r.get("runtime_operation_id"): r for r in self.data["concepts"] if r.get("runtime_operation_id")}
+        self.assertIn("zero lower-left", " ".join(records["ChainConeMap.retained-homotopy-inverse"]["required_invariants"]))
+        self.assertIn("may return false", " ".join(records["ChainConeMap.has-retained-homotopy-inverse"]["required_invariants"]))
+        self.assertIn("same deterministically solved", " ".join(records["ConeHomotopy.inverse-homotopies"]["required_invariants"]))
+        self.assertIn("Smith inconsistency", " ".join(records["ConeEquivalence.from-map"]["required_invariants"]))
+        self.assertIn("256 total equations", " ".join(records["ConeEquivalence.from-map"]["known_limitations"]))
+        self.assertIn("256 total unknown", " ".join(records["ConeEquivalence.from-map"]["known_limitations"]))
+        self.assertIn("5000000", " ".join(records["ConeEquivalence.from-map"]["known_limitations"]))
+        self.assertIn("NativeIntegralConeInverseTest.java", " ".join(records["ConeHomotopy.inverse-homotopies"]["tests"]))
         self.assertIn("GJF+H, AKB+L", " ".join(records["ConeEquivalence.compose"]["required_invariants"]))
         self.assertIn("do not negate witnesses", " ".join(records["ConeEquivalence.inverse"]["required_invariants"]))
         self.assertIn("Total cone-matrix invertibility alone is insufficient", " ".join(records["ConeEquivalence.from-square-isomorphism"]["required_invariants"]))
@@ -78,7 +86,7 @@ class CoverageTest(unittest.TestCase):
         self.assertIn("positive degree", " ".join(records["ConeEquivalence.source-homotopy-on-cochain"]["required_invariants"]))
         self.assertIn("all four endpoint reductions", " ".join(records["ConeEquivalence.cohomology-maps"]["required_invariants"]))
         self.assertIn("5000000", " ".join(records["ConeEquivalence.compose"]["known_limitations"]))
-        self.assertIn("No general homotopy-inverse search", " ".join(records["ConeEquivalence.from-data"]["known_limitations"]))
+        self.assertIn("bounded retained-inverse solving", " ".join(records["ConeEquivalence.from-data"]["known_limitations"]))
         self.assertIn("D K + K D = to - from", " ".join(records["ConeHomotopy.from-data"]["required_invariants"]))
         self.assertIn("K(t,s)=(0,F^-1 t)", " ".join(records["ConeHomotopy.contract-isomorphism"]["required_invariants"]))
         self.assertIn("A_(n+1) K_n", " ".join(records["ConeHomotopy.postcompose"]["required_invariants"]))

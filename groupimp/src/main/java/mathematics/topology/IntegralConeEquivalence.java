@@ -49,6 +49,7 @@ public final class IntegralConeEquivalence implements Serializable {
     private static void requireWitnessPair(IntegralConeHomotopy h,IntegralChainMappingCone pair) {
         if(!pair.equals(h.source()) || !pair.equals(h.target())) throw MathFailure.undefined("Each cone-equivalence witness must retain its full defining cone map");
     }
+    public static IntegralConeEquivalence fromMap(IntegralChainConeMap map) { return IntegralConeInverseSolver.equivalence(map,new Computation()); }
     public static IntegralConeEquivalence identity(IntegralChainMappingCone pair) {
         Computation work=new Computation(); IntegralChainConeMap id=IntegralChainConeMap.identity(pair,work); IntegralConeHomotopy h=IntegralConeHomotopy.stationary(id,work);
         return new IntegralConeEquivalence(new Data(id,id,h,h),work);

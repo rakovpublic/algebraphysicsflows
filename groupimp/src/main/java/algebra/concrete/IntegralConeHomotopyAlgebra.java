@@ -3,6 +3,7 @@ package algebra.concrete;
 import algebra.imp.Algebra;
 import mathematics.topology.IntegralConeHomotopy;
 import mathematics.topology.IntegralConeHomotopySolver;
+import mathematics.topology.IntegralConeInverseSolver;
 
 /** Validated cone homotopies using the original scalar, unary and flat operation contracts. */
 public final class IntegralConeHomotopyAlgebra extends ConcreteAlgebra<IntegralConeHomotopy> {
@@ -40,6 +41,7 @@ public final class IntegralConeHomotopyAlgebra extends ConcreteAlgebra<IntegralC
         flat("solution-generators",maps.algebra(),maps.algebra(),algebra(),true,IntegralConeHomotopySolver::solutionGenerators);
         unary("is-contractible",cones.algebra(),truth.algebra(),false,IntegralConeHomotopySolver::isContractible);
         unary("contract",cones.algebra(),algebra(),true,IntegralConeHomotopySolver::contract);
+        unaryFlat("inverse-homotopies",maps.algebra(),algebra(),true,IntegralConeInverseSolver::inverseHomotopies);
         law("Bounded integral Smith solving couples every witness degree. A solution family is one particular witness plus integer combinations of zero-to-zero kernel generators. Solved contraction requires a zero-to-identity witness, not invertibility of the defining chain map.");
         law("D K + K D = to - from on total cone coordinates. Witnesses need not preserve the cone block decomposition; endpoint squares and actual witness matrices are retained.");
         law("Concatenation adds witnesses and requires the exact joining map; reversal negates them. Precomposition uses K_n B_n; postcomposition uses A_(n+1) K_n. Both endpoints induce equal integral homology and cohomology maps.");

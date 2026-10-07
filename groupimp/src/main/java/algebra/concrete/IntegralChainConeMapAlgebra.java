@@ -2,6 +2,7 @@ package algebra.concrete;
 
 import algebra.imp.Algebra;
 import mathematics.topology.IntegralChainConeMap;
+import mathematics.topology.IntegralConeInverseSolver;
 
 /** Supplied homotopy-commutative cone squares in the original scalar and flat operation model. */
 public final class IntegralChainConeMapAlgebra extends ConcreteAlgebra<IntegralChainConeMap> {
@@ -59,6 +60,9 @@ public final class IntegralChainConeMapAlgebra extends ConcreteAlgebra<IntegralC
         unary("is-square-isomorphism",algebra(),truth.algebra(),false,IntegralChainConeMap::isSquareIsomorphism);
         unary("inverse-square",algebra(),algebra(),true,IntegralChainConeMap::inverseSquare);
         unary("is-chain-isomorphism",algebra(),truth.algebra(),false,IntegralChainConeMap::isChainIsomorphism);
+        unary("has-retained-homotopy-inverse",algebra(),truth.algebra(),false,IntegralConeInverseSolver::hasRetainedInverse);
+        unary("retained-homotopy-inverse",algebra(),algebra(),true,IntegralConeInverseSolver::inverse);
+        law("Bounded integral inverse solving restricts the reverse map to the retained-square carrier, while its two inverse homotopies may mix cone blocks. Total cone homotopy equivalence alone need not supply such a retained inverse.");
         law("Parallel witnessed cone maps form abelian groups and composition is bilinear. Zero and identity tests include the actual homotopy matrices.");
         law("Square inversion requires degreewise unimodular a and b and retains -b^-1 H a^-1, giving an exact inverse on both maps and witnesses. Invertibility of the total cone matrices is a separate condition when diagonal blocks are rectangular.");
     }

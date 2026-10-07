@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1712 native operations from 73 algebra builders.
+The default initializer currently installs 1716 native operations from 73 algebra builders.
 
 ## Existing API usage
 
@@ -2463,12 +2463,13 @@ The chosen homotopy is part of the value. Even a stationary square can have nonz
 | `add`, `subtract`, `negate`, `scale` | Integral additive arithmetic on maps between identical exact cones, including witness matrices. |
 | `is-square-isomorphism`, `inverse-square` | Test or invert both vertical chain maps and transport the chosen witness. |
 | `is-chain-isomorphism` | Test square unimodularity of every total signed cone matrix. |
+| `has-retained-homotopy-inverse`, `retained-homotopy-inverse` | Decide or solve for a reverse retained square up to integral cone homotopy, within the simultaneous solver bounds. |
 | `chain-matrix`, `cochain-matrix`, `chain-matrices`, `cochain-matrices` | One degree matrix or the complete list; cochain pullback uses transposes. |
 | `homology-map`, `cohomology-map`, `homology-maps`, `cohomology-maps` | Induced integral maps in one degree or every formal degree. |
 | `homology-naturality-maps`, `cohomology-naturality-maps` | The four vertical maps between the corresponding exact sequence segments. |
 | `on-chain`, `on-cochain` | Typed pushforward and contravariant pullback, returning the actual second carrier wrapper. |
 
-These 34 operations use the existing `operations/simple` and `operations/flat` interfaces. The homology naturality list is `[H_n(a), H_n(b), H_n(cone map), H_(n-1)(a)]`. The cohomology list is `[H^n(cone map), H^n(b), H^n(a), H^(n+1)(cone map)]`, running from the target segment back to the source segment. All three squares commute in each diagram, with equality of the actual presentations at their joins.
+These 36 operations use the existing `operations/simple` and `operations/flat` interfaces. The homology naturality list is `[H_n(a), H_n(b), H_n(cone map), H_(n-1)(a)]`. The cohomology list is `[H^n(cone map), H^n(b), H^n(a), H^(n+1)(cone map)]`, running from the target segment back to the source segment. All three squares commute in each diagram, with equality of the actual presentations at their joins.
 
 The example below retains a nonzero loop from a point into the circle. Its cone map changes homology even though both vertical chain maps are identities:
 
@@ -2586,7 +2587,7 @@ The combined cone coordinate rank is bounded by **256** after relative filtering
 
 ## Integral homotopies between cone maps
 
-`IntegralConeHomotopyAlgebra` registers `ConeHomotopy` and the supporting `ConeHomotopy.data` carrier directly in MathTool, with 28 operations. A value retains two exact parallel `ChainConeMap` endpoints and integral matrices `K_n: source_n -> target_(n+1)`. Construction checks every equation `D K + K D = to - from`, with the existing target-first cone coordinates and signed boundary. These matrices can mix the two cone components. The endpoint squares retain their original chosen homotopies separately from this new witness.
+`IntegralConeHomotopyAlgebra` registers `ConeHomotopy` and the supporting `ConeHomotopy.data` carrier directly in MathTool, with 29 operations. A value retains two exact parallel `ChainConeMap` endpoints and integral matrices `K_n: source_n -> target_(n+1)`. Construction checks every equation `D K + K D = to - from`, with the existing target-first cone coordinates and signed boundary. These matrices can mix the two cone components. The endpoint squares retain their original chosen homotopies separately from this new witness.
 
 | Operations | Contract |
 | --- | --- |
@@ -2653,7 +2654,7 @@ The supplied list contains one matrix in every degree from zero through the maxi
 
 Each required combined cone rank is at most **256** after relative filtering. One **5000000-unit budget** covers each entire construction, contraction, arithmetic operation, pre/postcomposition and two-map integral list, including endpoint construction, transport, validation and all reductions. Resource exhaustion is `IMPLEMENTATION_FAILURE`; incompatible contexts, shapes or equations are `OPERATION_UNDEFINED`. Input-data membership checks immutable components and the list length, not the homotopy equations or evaluable ranks. Bounded integral homotopy solving is described below. Infinite solution enumeration and equivalence modulo higher homotopies remain outside this carrier.
 
-`NativeIntegralConeHomotopyTest` adds 20 tests covering 125 integral witness/divisibility cases, 625 determinant/adjugate contraction cases, 81 noncommuting transports, signed interval contractions, nonzero loops, typed differential and pairing identities, torsion, relative/empty/changing degrees, 1025-bit coefficients, actual wrappers, serialized flat flows and shared contraction/arithmetic/transport/reduction limits. The complete registration test invokes all 28 operations against independent literal expectations.
+`NativeIntegralConeHomotopyTest` adds 20 tests covering 125 integral witness/divisibility cases, 625 determinant/adjugate contraction cases, 81 noncommuting transports, signed interval contractions, nonzero loops, typed differential and pairing identities, torsion, relative/empty/changing degrees, 1025-bit coefficients, actual wrappers, serialized flat flows and shared contraction/arithmetic/transport/reduction limits. The complete registration test invokes all 29 operations against independent literal expectations.
 
 ## Solving integral cone homotopies and contractions
 
@@ -2715,7 +2716,7 @@ Every combined cone degree rank is bounded by **256** after relative filtering. 
 
 ## Retained integral cone equivalences
 
-`IntegralConeEquivalenceAlgebra` registers `ConeEquivalence` and `ConeEquivalence.data` directly in MathTool, adding 29 operations. A value retains a forward square `F: C -> E`, a backward square `G: E -> C`, and two actual cone homotopies `H: GF -> id_C`, `K: FG -> id_E`. Validation requires exact full defining cones and exact composite endpoints, including the square witnesses. The degree-raising inverse homotopies are separate from the homotopies already retained by the two squares.
+`IntegralConeEquivalenceAlgebra` registers `ConeEquivalence` and `ConeEquivalence.data` directly in MathTool, adding 30 operations. A value retains a forward square `F: C -> E`, a backward square `G: E -> C`, and two actual cone homotopies `H: GF -> id_C`, `K: FG -> id_E`. Validation requires exact full defining cones and exact composite endpoints, including the square witnesses. The degree-raising inverse homotopies are separate from the homotopies already retained by the two squares.
 
 `from-data` validates supplied maps and witnesses. `identity-on` constructs identity squares with stationary witnesses. `from-square-isomorphism` inverts both vertical chain maps and the actual square witness, then attaches stationary homotopies to the two identity composites. Both vertical maps must be degreewise unimodular: invertibility of total cone matrices alone does not supply an inverse in the retained-square carrier. Supplied equivalences may have noninvertible forward and backward matrices.
 
@@ -2758,6 +2759,59 @@ List<String> strictInverse = math.flow(math.chainConeMaps, Collections.singleton
 
 Eight typed operations apply the forward/backward maps and the source/target homotopies to `ConeChain` and `ConeCochain`. They all use `ILeftProjectionOperation` and return the actual second carrier's `IAlgebraItem` wrapper. Map cochain actions include degree zero. Homotopy cochain actions require positive degree and lower it by one. Chain homotopies raise degree by one, including negative zero groups. All actions require their exact defining cone. For example, `source-homotopy-on-chain` satisfies `DH(c)+H(Dc)=c-GF(c)`.
 
-Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget spans each complete construction, strict conversion, witness composition and paired integral-map reduction. Separate successful component calls do not imply the complete operation fits. Exhaustion raises `IMPLEMENTATION_FAILURE` without partial results. Coefficient bit lengths are unbounded. Supplied construction and strict conversion avoid the homotopy solver's aggregate equation/unknown limits. This carrier does not perform general inverse search, represent arbitrary cone matrices or impose higher coherence on its two inverse homotopies.
+Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget spans each complete construction, strict conversion, witness composition and paired integral-map reduction. Separate successful component calls do not imply the complete operation fits. Exhaustion raises `IMPLEMENTATION_FAILURE` without partial results. Coefficient bit lengths are unbounded. Supplied construction and strict conversion avoid the homotopy solver's aggregate equation/unknown limits. Bounded inverse search is available within the retained-square carrier. Arbitrary cone matrices and higher coherence on the two inverse homotopies are outside its scope.
 
-`NativeIntegralConeEquivalenceTest` adds 18 tests covering 1,296 independent signed loop compositions, noncommuting witness transports, 625 determinant/adjugate conversions, chosen square shears, rectangular total isomorphisms, non-strict maps between different cone dimensions, large torsion coefficients, typed identities, contexts, empty/relative presentations, shared budgets, actual wrappers and serialized scalar/flat flows. The registration test invokes all 29 operations against independently written expected values.
+`NativeIntegralConeEquivalenceTest` adds 18 tests covering 1,296 independent signed loop compositions, noncommuting witness transports, 625 determinant/adjugate conversions, chosen square shears, rectangular total isomorphisms, non-strict maps between different cone dimensions, large torsion coefficients, typed identities, contexts, empty/relative presentations, shared budgets, actual wrappers and serialized scalar/flat flows. The registration test invokes all 30 operations against independently written expected values.
+
+## Solving inverses in the retained cone-map carrier
+
+`IntegralConeInverseSolver` adds four native operations without adding another carrier:
+
+| Operation | Result |
+| --- | --- |
+| `ChainConeMap.has-retained-homotopy-inverse` | Boolean decision for an inverse representable by a retained square |
+| `ChainConeMap.retained-homotopy-inverse` | One solved reverse `ChainConeMap`, using `IOneOperandOperation` |
+| `ConeHomotopy.inverse-homotopies` | Exactly `[GF -> id_source, FG -> id_target]` through the existing flat transfer interface |
+| `ConeEquivalence.from-map` | The original forward map, solved reverse square and both inverse witnesses as one validated value |
+
+For the given total cone map `F`, the solver simultaneously finds `G`, `H` and `K` satisfying `D_source G - G D_target = 0`, `GF + DH + HD = I_source` and `FG + DK + KD = I_target`. The reverse map `G` must have zero lower-left blocks in the target-first cone coordinates. Its diagonal blocks reconstruct the two vertical chain maps; the negative of its upper-right block reconstructs the chosen square homotopy. The inverse homotopies `H` and `K` may mix both components freely. Every reconstructed map, square, homotopy and equivalence is validated through the existing constructors.
+
+The system is linear because the forward map is fixed. Smith divisibility and consistency checks decide integral solvability. Free Smith coordinates are set to zero, giving deterministic choices for these labelled bases. The four entry points use the same solved reverse map whenever their complete computations fit the budget. Choices are not canonical under change of bases. Solving again need not recover supplied witnesses, a strict inverse, or the original map after two inversions.
+
+The decision returns false for an inconsistent system. The other three operations raise `OPERATION_UNDEFINED`; the flat operation does not use an empty list to represent failure. All four preserve resource failures as `IMPLEMENTATION_FAILURE`.
+
+For example, multiplication by five on the cone of multiplication by six has an integral homotopy inverse despite having no strict chain inverse:
+
+```java
+ConcreteMathematics math = new ConcreteMathematics();
+RelativeSimplicialComplex point = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))));
+IntegralChainMappingCone cone = new IntegralChainMappingCone(
+        SimplicialChainMap.identity(point).scale(BigInteger.valueOf(6)));
+IntegralChainConeMap forward = IntegralChainConeMap.identity(cone).scale(BigInteger.valueOf(5));
+List<String> decision = math.flow(math.chainConeMaps, Collections.singletonList(forward))
+        .<Boolean>performAlgebraTransfer("has-retained-homotopy-inverse").collect();
+// [true]
+IntegralConeEquivalence equivalence = math.chainConeMaps.algebra().buildAlgebraItem(forward)
+        .<IntegralConeEquivalence>performAlgebraTransfer("ConeEquivalence.from-map")
+        .perform().getResult();
+List<String> inverseMaps = math.flow(math.chainConeMaps, Collections.singletonList(forward))
+        .<IntegralConeEquivalence>performAlgebraTransfer("ConeEquivalence.from-map")
+        .<AbelianGroupHomomorphism, BigInteger>performFlatAlgebraUnsafe("homology-maps", BigInteger.ZERO)
+        .<Boolean>performAlgebraTransfer("is-isomorphism").collect();
+// [true, true] on the retained order-six homology presentation
+List<String> endpoints = math.flow(math.chainConeMaps, Collections.singletonList(forward))
+        .<IntegralConeHomotopy>performFlatAlgebraTransfer("ConeHomotopy.inverse-homotopies")
+        .<IntegralChainConeMap>performAlgebraTransfer("to")
+        .<Boolean>performAlgebraTransfer("is-identity").collect();
+// [true, true]
+IntegralChainConeMap backward = math.chainConeMaps.algebra().buildAlgebraItem(forward)
+        .performOneOperandOperation("retained-homotopy-inverse").perform().getResult();
+// backward.equals(equivalence.backward())
+```
+
+This decision is deliberately restricted to the actual `ChainConeMap` carrier. A total cone chain isomorphism can have no retained inverse: take the cone of `point -> empty` and the cone of `empty -> (edge, boundary)`. A chosen square homotopy of coefficient one yields a degree-one total map `[-1]`. Its total inverse exists, but would occupy the forbidden lower-left block of the reverse cone map. The new decision returns false even though its induced homology and cohomology maps are isomorphisms. It must not be used as an unrestricted cone chain-homotopy-equivalence predicate.
+
+Let `s_n` and `t_n` be the two total cone ranks. The dense system allows at most **256 total equations**, counting `sum_n(s_n^2 + t_n^2 + s_(n-1)*t_n)`, including identically zero equations. It also allows at most **256 total unknown coefficients**: the allowed entries of `G` plus `sum_n(s_(n+1)*s_n + t_(n+1)*t_n)`. Each combined cone rank is at most 256 after relative filtering. One **5000000-unit budget** spans system assembly, Smith reduction, decoding and all validation required by the selected result. A decision or reverse map can fit without the stronger returned result fitting; no partial witness list or equivalence is returned. Coefficient bit lengths remain unbounded. Strict square inversion and supplied equivalences avoid these aggregate solving bounds.
+
+`NativeIntegralConeInverseTest` adds 16 tests, including 625 determinant/adjugate cases, 169 scalar gcd cases, compatible two-term maps against independent cyclic/free-group criteria, 125 overlapping-degree shears, noncommuting block inverses, both identity obligations, 25 noninvertible interval maps, relative and changing dimensions, empty formal slots, 1025-bit coefficients, typed inverse corrections, rank/system/work limits and serialized native scalar/flat flows. Complete registration expectations cover all four new entry points.

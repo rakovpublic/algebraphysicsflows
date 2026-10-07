@@ -26406,6 +26406,7 @@
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
         "Law descriptions and passing tests are not proofs.",
+        "The simultaneous inverse system includes DG-GD=0 and both identities GF+DH+HD=I, FG+DK+KD=I. The reverse G has zero lower-left blocks in target-first cone coordinates; H and K are unrestricted degree-raising matrices. A solution decodes to two vertical chain maps and a negated upper-right square witness, preserving full defining maps and formal degrees. Choices set free Smith coordinates to zero and are deterministic for these labelled bases, not canonical under change of basis.",
         "Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations."
       ],
       "representation_status": "DIRECTLY_SUPPORTED",
@@ -26420,10 +26421,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
-        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeInverseTest.java",
         "groupimp/src/test/java/operations/NativeIntegralChainConeMapTest.java"
       ],
       "machine_tested": true,
@@ -26435,6 +26438,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Retained-inverse solving caps 256 total equations sum_n(s_n^2+t_n^2+s_(n-1)*t_n) and 256 total unknown coefficients: all allowed upper-triangular entries of G plus sum_n(s_(n+1)*s_n+t_(n+1)*t_n). Zero equations and identity inputs still count. Each combined cone rank is bounded by 256 after relative filtering. One 5000000-unit budget spans assembly, Smith reduction, block reconstruction, square validation, both inverse homotopies and full equivalence validation where requested. Exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial output. An inverse may exist as an unrestricted total cone map while no reverse map is representable in this carrier. Strict square inversion and supplied equivalences avoid these aggregate system limits; neither inverse representatives nor inverse homotopies are canonical. Coefficient bit lengths remain unbounded.",
         "Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. Typed actions use ConeChain and ConeCochain with exact cone checks and second-carrier wrappers. No arbitrary cone-map matrices, geometric realization or general chain-complex carrier are added.",
         "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."
       ],
@@ -26452,7 +26456,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-10-06",
+        "date": "2026-10-07",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -26689,11 +26693,12 @@
       "operation_signature": null,
       "arity": null,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
         "Law descriptions and passing tests are not proofs.",
+        "The simultaneous inverse system includes DG-GD=0 and both identities GF+DH+HD=I, FG+DK+KD=I. The reverse G has zero lower-left blocks in target-first cone coordinates; H and K are unrestricted degree-raising matrices. A solution decodes to two vertical chain maps and a negated upper-right square witness, preserving full defining maps and formal degrees. Choices set free Smith coordinates to zero and are deterministic for these labelled bases, not canonical under change of basis.",
         "Retain the exact defining cones, forward and backward witnessed squares, and actual homotopies GF -> identity and FG -> identity. The square witnesses and inverse homotopies are separate data. Composition transports both supplied inverse witnesses; integral maps are mutual inverses, with cohomology contravariant. Equality includes all choices, including nonzero loops."
       ],
       "representation_status": "DIRECTLY_SUPPORTED",
@@ -26711,10 +26716,12 @@
         "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
-        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeInverseSolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeInverseTest.java",
         "groupimp/src/test/java/operations/NativeIntegralConeEquivalenceTest.java"
       ],
       "machine_tested": true,
@@ -26726,7 +26733,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Retained-inverse solving caps 256 total equations sum_n(s_n^2+t_n^2+s_(n-1)*t_n) and 256 total unknown coefficients: all allowed upper-triangular entries of G plus sum_n(s_(n+1)*s_n+t_(n+1)*t_n). Zero equations and identity inputs still count. Each combined cone rank is bounded by 256 after relative filtering. One 5000000-unit budget spans assembly, Smith reduction, block reconstruction, square validation, both inverse homotopies and full equivalence validation where requested. Exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial output. An inverse may exist as an unrestricted total cone map while no reverse map is representable in this carrier. Strict square inversion and supplied equivalences avoid these aggregate system limits; neither inverse representatives nor inverse homotopies are canonical. Coefficient bit lengths remain unbounded.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -26770,6 +26778,7 @@
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
         "Law descriptions and passing tests are not proofs.",
+        "The simultaneous inverse system includes DG-GD=0 and both identities GF+DH+HD=I, FG+DK+KD=I. The reverse G has zero lower-left blocks in target-first cone coordinates; H and K are unrestricted degree-raising matrices. A solution decodes to two vertical chain maps and a negated upper-right square witness, preserving full defining maps and formal degrees. Choices set free Smith coordinates to zero and are deterministic for these labelled bases, not canonical under change of basis.",
         "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
       ],
       "representation_status": "DIRECTLY_SUPPORTED",
@@ -26787,10 +26796,12 @@
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
         "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeInverseSolver.java",
         "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopySolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeInverseTest.java",
         "groupimp/src/test/java/operations/NativeIntegralConeHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
       ],
@@ -26803,7 +26814,8 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Retained-inverse solving caps 256 total equations sum_n(s_n^2+t_n^2+s_(n-1)*t_n) and 256 total unknown coefficients: all allowed upper-triangular entries of G plus sum_n(s_(n+1)*s_n+t_(n+1)*t_n). Zero equations and identity inputs still count. Each combined cone rank is bounded by 256 after relative filtering. One 5000000-unit budget spans assembly, Smith reduction, block reconstruction, square validation, both inverse homotopies and full equivalence validation where requested. Exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial output. An inverse may exist as an unrestricted total cone map while no reverse map is representable in this carrier. Strict square inversion and supplied equivalences avoid these aggregate system limits; neither inverse representatives nor inverse homotopies are canonical. Coefficient bit lengths remain unbounded.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones.",
         "All required combined cone ranks are bounded by 256. The dense simultaneous system independently allows at most 256 total equations sum_n targetRank(n)*sourceRank(n) and 256 total unknowns sum_n targetRank(n+1)*sourceRank(n). No scalar coefficient bit-length cap is imposed. One 5000000-unit budget includes assembly, Smith solving, endpoint construction where needed, and all returned witness validations. Exhaustion is IMPLEMENTATION_FAILURE even if a supplied witness exists. A complete maximal kernel can contain 256 homogeneous generators plus its particular solution."
@@ -151759,6 +151771,172 @@
       "legacy_operation_interface": "ITransferOperation"
     },
     {
+      "id": "concrete-operation.ChainConeMap.has-retained-homotopy-inverse",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralChainConeMapAlgebra",
+      "concept": "ChainConeMap.has-retained-homotopy-inverse",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "ChainConeMap -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.has-retained-homotopy-inverse",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Decide whether there is an upper-triangular reverse cone map G in the retained-square carrier and unrestricted witnesses GF + DH + HD = identity_source, FG + DK + KD = identity_target. Solve all equations simultaneously over Z with Smith divisibility. This is not a decision for unrestricted total cone chain maps: even a total cone isomorphism may return false. Resource exhaustion raises IMPLEMENTATION_FAILURE.",
+        "The simultaneous inverse system includes DG-GD=0 and both identities GF+DH+HD=I, FG+DK+KD=I. The reverse G has zero lower-left blocks in target-first cone coordinates; H and K are unrestricted degree-raising matrices. A solution decodes to two vertical chain maps and a negated upper-right square witness, preserving full defining maps and formal degrees. Choices set free Smith coordinates to zero and are deterministic for these labelled bases, not canonical under change of basis.",
+        "Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeInverseSolver.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeInverseTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralChainConeMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Retained-inverse solving caps 256 total equations sum_n(s_n^2+t_n^2+s_(n-1)*t_n) and 256 total unknown coefficients: all allowed upper-triangular entries of G plus sum_n(s_(n+1)*s_n+t_(n+1)*t_n). Zero equations and identity inputs still count. Each combined cone rank is bounded by 256 after relative filtering. One 5000000-unit budget spans assembly, Smith reduction, block reconstruction, square validation, both inverse homotopies and full equivalence validation where requested. Exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial output. An inverse may exist as an unrestricted total cone map while no reverse map is representable in this carrier. Strict square inversion and supplied equivalences avoid these aggregate system limits; neither inverse representatives nor inverse homotopies are canonical. Coefficient bit lengths remain unbounded.",
+        "Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. Typed actions use ConeChain and ConeCochain with exact cone checks and second-carrier wrappers. No arbitrary cone-map matrices, geometric realization or general chain-complex carrier are added.",
+        "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ChainConeMap.has-retained-homotopy-inverse",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "has-retained-homotopy-inverse",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ChainConeMap.retained-homotopy-inverse",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralChainConeMapAlgebra",
+      "concept": "ChainConeMap.retained-homotopy-inverse",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap",
+      "domain_B": null,
+      "domain_C": "ChainConeMap",
+      "operation_signature": "ChainConeMap -> ChainConeMap",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps; native operation ChainConeMap.retained-homotopy-inverse",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Solve for one reverse retained square with zero lower-left total matrix blocks and both unrestricted inverse homotopies. Decode the diagonal blocks into vertical chain maps and minus the upper-right block into the actual square witness. Return the same ChainConeMap carrier through IOneOperandOperation. No solution is OPERATION_UNDEFINED; the deterministic inverse need not be a strict inverse or the inverse of its inverse on actual retained data.",
+        "The simultaneous inverse system includes DG-GD=0 and both identities GF+DH+HD=I, FG+DK+KD=I. The reverse G has zero lower-left blocks in target-first cone coordinates; H and K are unrestricted degree-raising matrices. A solution decodes to two vertical chain maps and a negated upper-right square witness, preserving full defining maps and formal degrees. Choices set free Smith coordinates to zero and are deterministic for these labelled bases, not canonical under change of basis.",
+        "Retain F:S->T, G:Sprime->Tprime, a:S->Sprime, b:T->Tprime and H:bF->Ga with dH+Hd=Ga-bF. The signed cone matrix is [[b,-H],[0,a]] at the appropriate shifted degrees. Composition transports the chosen H and is associative and unital. Homology is covariant, cohomology is contravariant, and all three squares in both exact sequences commute with the retained presentations."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/topology/RelativeSimplicialComplex.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeInverseSolver.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeInverseTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralChainConeMapTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Retained-inverse solving caps 256 total equations sum_n(s_n^2+t_n^2+s_(n-1)*t_n) and 256 total unknown coefficients: all allowed upper-triangular entries of G plus sum_n(s_(n+1)*s_n+t_(n+1)*t_n). Zero equations and identity inputs still count. Each combined cone rank is bounded by 256 after relative filtering. One 5000000-unit budget spans assembly, Smith reduction, block reconstruction, square validation, both inverse homotopies and full equivalence validation where requested. Exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial output. An inverse may exist as an unrestricted total cone map while no reverse map is representable in this carrier. Strict square inversion and supplied equivalences avoid these aggregate system limits; neither inverse representatives nor inverse homotopies are canonical. Coefficient bit lengths remain unbounded.",
+        "Supplied homotopy-commutative squares between finite integral simplicial mapping cones only. A chosen homotopy can change the induced cone homology map, including torsion effects; there is no canonical cone functor on unadorned homotopy classes. Typed actions use ConeChain and ConeCochain with exact cone checks and second-carrier wrappers. No arbitrary cone-map matrices, geometric realization or general chain-complex carrier are added.",
+        "Each required quotient basis and each combined cone degree rank is bounded by 256 after quotient filtering. Public degrees are nonnegative; degree lists use the maximum formal cone dimension, including zero slots. Negative homological endpoints retain zero-generator presentations with the adjacent zero relations. Coefficient bit lengths are unbounded. One 5000000-unit budget covers each constructor, each complete composition including witness transport and validation, each induced map including both reductions, each full degree list and each four-map naturality list. IMPLEMENTATION_FAILURE reports exhaustion without partial output. Retaining valid square data does not assert that later cone evaluation fits these limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralChainConeMapAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ChainConeMap.retained-homotopy-inverse",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "retained-homotopy-inverse",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
       "id": "concrete-operation.ConeChain.zero-on",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "IntegralConeChainAlgebra",
@@ -156000,7 +156178,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -156082,7 +156260,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -156164,7 +156342,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -156246,7 +156424,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -156328,7 +156506,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -156410,7 +156588,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -156492,7 +156670,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -156574,7 +156752,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -156656,7 +156834,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -156738,7 +156916,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -156820,7 +156998,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -156902,7 +157080,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -156984,7 +157162,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -157066,7 +157244,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -157148,7 +157326,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -157230,7 +157408,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -157312,7 +157490,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -157395,7 +157573,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -157478,7 +157656,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -157560,7 +157738,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -157642,7 +157820,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -157725,7 +157903,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -157808,7 +157986,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -157892,7 +158070,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones.",
         "All required combined cone ranks are bounded by 256. The dense simultaneous system independently allows at most 256 total equations sum_n targetRank(n)*sourceRank(n) and 256 total unknowns sum_n targetRank(n+1)*sourceRank(n). No scalar coefficient bit-length cap is imposed. One 5000000-unit budget includes assembly, Smith solving, endpoint construction where needed, and all returned witness validations. Exhaustion is IMPLEMENTATION_FAILURE even if a supplied witness exists. A complete maximal kernel can contain 256 homogeneous generators plus its particular solution."
@@ -157977,7 +158155,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones.",
         "All required combined cone ranks are bounded by 256. The dense simultaneous system independently allows at most 256 total equations sum_n targetRank(n)*sourceRank(n) and 256 total unknowns sum_n targetRank(n+1)*sourceRank(n). No scalar coefficient bit-length cap is imposed. One 5000000-unit budget includes assembly, Smith solving, endpoint construction where needed, and all returned witness validations. Exhaustion is IMPLEMENTATION_FAILURE even if a supplied witness exists. A complete maximal kernel can contain 256 homogeneous generators plus its particular solution."
@@ -158063,7 +158241,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones.",
         "All required combined cone ranks are bounded by 256. The dense simultaneous system independently allows at most 256 total equations sum_n targetRank(n)*sourceRank(n) and 256 total unknowns sum_n targetRank(n+1)*sourceRank(n). No scalar coefficient bit-length cap is imposed. One 5000000-unit budget includes assembly, Smith solving, endpoint construction where needed, and all returned witness validations. Exhaustion is IMPLEMENTATION_FAILURE even if a supplied witness exists. A complete maximal kernel can contain 256 homogeneous generators plus its particular solution."
@@ -158148,7 +158326,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones.",
         "All required combined cone ranks are bounded by 256. The dense simultaneous system independently allows at most 256 total equations sum_n targetRank(n)*sourceRank(n) and 256 total unknowns sum_n targetRank(n+1)*sourceRank(n). No scalar coefficient bit-length cap is imposed. One 5000000-unit budget includes assembly, Smith solving, endpoint construction where needed, and all returned witness validations. Exhaustion is IMPLEMENTATION_FAILURE even if a supplied witness exists. A complete maximal kernel can contain 256 homogeneous generators plus its particular solution."
@@ -158233,7 +158411,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones.",
         "All required combined cone ranks are bounded by 256. The dense simultaneous system independently allows at most 256 total equations sum_n targetRank(n)*sourceRank(n) and 256 total unknowns sum_n targetRank(n+1)*sourceRank(n). No scalar coefficient bit-length cap is imposed. One 5000000-unit budget includes assembly, Smith solving, endpoint construction where needed, and all returned witness validations. Exhaustion is IMPLEMENTATION_FAILURE even if a supplied witness exists. A complete maximal kernel can contain 256 homogeneous generators plus its particular solution."
@@ -158266,6 +158444,93 @@
       "legacy_operation_interface": "ITransferOperation"
     },
     {
+      "id": "concrete-operation.ConeHomotopy.inverse-homotopies",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.inverse-homotopies",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap",
+      "domain_B": null,
+      "domain_C": "ConeHomotopy",
+      "operation_signature": "ChainConeMap -> List(ConeHomotopy)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.inverse-homotopies",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return exactly [GF -> identity_source, FG -> identity_target] for the same deterministically solved reverse retained square G. Both witnesses may mix cone blocks; their degree ranges retain their own full cones. Inconsistency raises OPERATION_UNDEFINED rather than an empty list. One shared budget includes solve, square decoding, both composites and both witness validations.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "The simultaneous inverse system includes DG-GD=0 and both identities GF+DH+HD=I, FG+DK+KD=I. The reverse G has zero lower-left blocks in target-first cone coordinates; H and K are unrestricted degree-raising matrices. A solution decodes to two vertical chain maps and a negated upper-right square witness, preserving full defining maps and formal degrees. Choices set free Smith coordinates to zero and are deterministic for these labelled bases, not canonical under change of basis.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeInverseSolver.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeInverseTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Retained-inverse solving caps 256 total equations sum_n(s_n^2+t_n^2+s_(n-1)*t_n) and 256 total unknown coefficients: all allowed upper-triangular entries of G plus sum_n(s_(n+1)*s_n+t_(n+1)*t_n). Zero equations and identity inputs still count. Each combined cone rank is bounded by 256 after relative filtering. One 5000000-unit budget spans assembly, Smith reduction, block reconstruction, square validation, both inverse homotopies and full equivalence validation where requested. Exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial output. An inverse may exist as an unrestricted total cone map while no reverse map is representable in this carrier. Strict square inversion and supplied equivalences avoid these aggregate system limits; neither inverse representatives nor inverse homotopies are canonical. Coefficient bit lengths remain unbounded.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions, and inverse homotopies for a solved reverse retained square. Homotopy-family solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ConeHomotopy.inverse-homotopies",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ConeHomotopy.inverse-homotopies",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
       "id": "concrete-operation.ConeEquivalence.from-data",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "IntegralConeEquivalenceAlgebra",
@@ -158278,7 +158543,7 @@
       "operation_signature": "ConeEquivalence.data -> ConeEquivalence",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.from-data",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.from-data",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -158317,7 +158582,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -158361,7 +158626,7 @@
       "operation_signature": "ChainCone -> ConeEquivalence",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.identity-on",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.identity-on",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -158400,7 +158665,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -158444,7 +158709,7 @@
       "operation_signature": "ConeEquivalence -> ChainCone",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.source",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.source",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -158483,7 +158748,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -158527,7 +158792,7 @@
       "operation_signature": "ConeEquivalence -> ChainCone",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.target",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.target",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -158566,7 +158831,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -158610,7 +158875,7 @@
       "operation_signature": "ConeEquivalence -> ChainConeMap",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.forward",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.forward",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -158649,7 +158914,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -158693,7 +158958,7 @@
       "operation_signature": "ConeEquivalence -> ChainConeMap",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.backward",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.backward",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -158732,7 +158997,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -158776,7 +159041,7 @@
       "operation_signature": "ConeEquivalence -> ConeHomotopy",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.source-homotopy",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.source-homotopy",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -158815,7 +159080,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -158859,7 +159124,7 @@
       "operation_signature": "ConeEquivalence -> ConeHomotopy",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.target-homotopy",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.target-homotopy",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -158898,7 +159163,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -158942,7 +159207,7 @@
       "operation_signature": "ConeEquivalence -> ConeEquivalence.data",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.data",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.data",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -158981,7 +159246,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -159025,7 +159290,7 @@
       "operation_signature": "ConeEquivalence -> ConeEquivalence",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.inverse",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.inverse",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -159064,7 +159329,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -159108,7 +159373,7 @@
       "operation_signature": "ConeEquivalence x ConeEquivalence -> ConeEquivalence",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.compose",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.compose",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -159147,7 +159412,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -159191,7 +159456,7 @@
       "operation_signature": "ConeEquivalence x ConeEquivalence -> Boolean",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.equal",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.equal",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -159230,7 +159495,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -159274,7 +159539,7 @@
       "operation_signature": "ConeEquivalence -> List(ConeHomotopy)",
       "arity": 1,
       "scalar_or_flat": "LIST",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.homotopies",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.homotopies",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -159314,7 +159579,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -159358,7 +159623,7 @@
       "operation_signature": "ConeEquivalence -> List(ChainConeMap)",
       "arity": 1,
       "scalar_or_flat": "LIST",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.maps",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.maps",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -159398,7 +159663,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -159442,7 +159707,7 @@
       "operation_signature": "ConeEquivalence x N -> AbelianGroupHomomorphism",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.homology-map",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.homology-map",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -159481,7 +159746,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -159525,7 +159790,7 @@
       "operation_signature": "ConeEquivalence x N -> AbelianGroupHomomorphism",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.inverse-homology-map",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.inverse-homology-map",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -159564,7 +159829,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -159608,7 +159873,7 @@
       "operation_signature": "ConeEquivalence x N -> List(AbelianGroupHomomorphism)",
       "arity": 2,
       "scalar_or_flat": "LIST",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.homology-maps",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.homology-maps",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -159648,7 +159913,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -159692,7 +159957,7 @@
       "operation_signature": "ConeEquivalence x N -> AbelianGroupHomomorphism",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.cohomology-map",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.cohomology-map",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -159731,7 +159996,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -159775,7 +160040,7 @@
       "operation_signature": "ConeEquivalence x N -> AbelianGroupHomomorphism",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.inverse-cohomology-map",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.inverse-cohomology-map",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -159814,7 +160079,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -159858,7 +160123,7 @@
       "operation_signature": "ConeEquivalence x N -> List(AbelianGroupHomomorphism)",
       "arity": 2,
       "scalar_or_flat": "LIST",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.cohomology-maps",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.cohomology-maps",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -159898,7 +160163,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -159942,7 +160207,7 @@
       "operation_signature": "ConeEquivalence x ConeChain -> ConeChain",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.on-chain",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.on-chain",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -159981,7 +160246,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -160025,7 +160290,7 @@
       "operation_signature": "ConeEquivalence x ConeChain -> ConeChain",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.inverse-on-chain",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.inverse-on-chain",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -160064,7 +160329,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -160108,7 +160373,7 @@
       "operation_signature": "ConeEquivalence x ConeCochain -> ConeCochain",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.on-cochain",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.on-cochain",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -160147,7 +160412,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -160191,7 +160456,7 @@
       "operation_signature": "ConeEquivalence x ConeCochain -> ConeCochain",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.inverse-on-cochain",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.inverse-on-cochain",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -160230,7 +160495,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -160274,7 +160539,7 @@
       "operation_signature": "ChainConeMap -> ConeEquivalence",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.from-square-isomorphism",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.from-square-isomorphism",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -160313,7 +160578,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -160357,7 +160622,7 @@
       "operation_signature": "ConeEquivalence x ConeChain -> ConeChain",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.source-homotopy-on-chain",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.source-homotopy-on-chain",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -160396,7 +160661,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -160440,7 +160705,7 @@
       "operation_signature": "ConeEquivalence x ConeChain -> ConeChain",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.target-homotopy-on-chain",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.target-homotopy-on-chain",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -160479,7 +160744,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -160523,7 +160788,7 @@
       "operation_signature": "ConeEquivalence x ConeCochain -> ConeCochain",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.source-homotopy-on-cochain",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.source-homotopy-on-cochain",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -160562,7 +160827,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -160606,7 +160871,7 @@
       "operation_signature": "ConeEquivalence x ConeCochain -> ConeCochain",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, composition, typed actions and inverse integral maps; native operation ConeEquivalence.target-homotopy-on-cochain",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.target-homotopy-on-cochain",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -160645,7 +160910,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied opposite retained squares and inverse homotopies, identities and strict square-isomorphism conversion only. No general homotopy-inverse search, arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
         "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
         "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
       ],
@@ -160675,6 +160940,93 @@
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "target-homotopy-on-cochain",
       "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.ConeEquivalence.from-map",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeEquivalenceAlgebra",
+      "concept": "ConeEquivalence.from-map",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap",
+      "domain_B": null,
+      "domain_C": "ConeEquivalence",
+      "operation_signature": "ChainConeMap -> ConeEquivalence",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps; native operation ConeEquivalence.from-map",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Solve simultaneously for a reverse map in the retained-square carrier and both integral cone inverse homotopies. Return the original forward map, the solved backward square, and exact witnesses GF -> identity_source and FG -> identity_target. Smith inconsistency or divisibility obstruction is OPERATION_UNDEFINED. One budget includes all solving, block decoding, endpoint compositions and complete equivalence validation.",
+        "The simultaneous inverse system includes DG-GD=0 and both identities GF+DH+HD=I, FG+DK+KD=I. The reverse G has zero lower-left blocks in target-first cone coordinates; H and K are unrestricted degree-raising matrices. A solution decodes to two vertical chain maps and a negated upper-right square witness, preserving full defining maps and formal degrees. Choices set free Smith coordinates to zero and are deterministic for these labelled bases, not canonical under change of basis.",
+        "Retain the exact defining cones, forward and backward witnessed squares, and actual homotopies GF -> identity and FG -> identity. The square witnesses and inverse homotopies are separate data. Composition transports both supplied inverse witnesses; integral maps are mutual inverses, with cohomology contravariant. Equality includes all choices, including nonzero loops."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeEquivalenceAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeEquivalence.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeInverseSolver.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeInverseTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeEquivalenceTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Retained-inverse solving caps 256 total equations sum_n(s_n^2+t_n^2+s_(n-1)*t_n) and 256 total unknown coefficients: all allowed upper-triangular entries of G plus sum_n(s_(n+1)*s_n+t_(n+1)*t_n). Zero equations and identity inputs still count. Each combined cone rank is bounded by 256 after relative filtering. One 5000000-unit budget spans assembly, Smith reduction, block reconstruction, square validation, both inverse homotopies and full equivalence validation where requested. Exhaustion raises IMPLEMENTATION_FAILURE without false decisions or partial output. An inverse may exist as an unrestricted total cone map while no reverse map is representable in this carrier. Strict square inversion and supplied equivalences avoid these aggregate system limits; neither inverse representatives nor inverse homotopies are canonical. Coefficient bit lengths remain unbounded.",
+        "Supplied opposite retained squares and inverse homotopies, identities, strict square-isomorphism conversion and bounded retained-inverse solving. The solver restricts reverse maps to upper-triangular cone matrices while both inverse witnesses are unrestricted. No arbitrary total cone-matrix inverse, geometric equivalence decision, higher coherence or quotient of witnesses is supplied. Supplied non-strict equivalences are supported.",
+        "Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget covers each complete construction, square conversion, composition and two-map integral list, including all intermediate endpoint operations, witness validation and reductions. Exhaustion raises IMPLEMENTATION_FAILURE without partial results. Supplied construction and strict conversion do not impose the homotopy solver's aggregate equation/unknown limits. Coefficient bit lengths are unbounded.",
+        "Integral-map degrees are nonnegative. Typed chains allow negative zero groups; cochains allow degree zero for map actions but homotopy actions require positive degree. Full labelled relative contexts and formal zero slots remain part of the data; raw Data membership alone does not check mutual compatibility."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeEquivalenceAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ConeEquivalence.from-map",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ConeEquivalence.from-map",
+      "legacy_operation_interface": "ITransferOperation"
     },
     {
       "id": "concrete-operation.Z/5Z.add",
@@ -162116,6 +162468,7 @@
         "ChainCone.equal",
         "ChainCone.is-acyclic",
         "ChainConeMap.equal",
+        "ChainConeMap.has-retained-homotopy-inverse",
         "ChainConeMap.is-chain-isomorphism",
         "ChainConeMap.is-identity",
         "ChainConeMap.is-square-isomorphism",
@@ -168402,6 +168755,7 @@
         "ChainConeMap.equal",
         "ChainConeMap.from-data",
         "ChainConeMap.from-homotopy",
+        "ChainConeMap.has-retained-homotopy-inverse",
         "ChainConeMap.homology-map",
         "ChainConeMap.homology-maps",
         "ChainConeMap.homology-naturality-maps",
@@ -168415,6 +168769,7 @@
         "ChainConeMap.negate",
         "ChainConeMap.on-chain",
         "ChainConeMap.on-cochain",
+        "ChainConeMap.retained-homotopy-inverse",
         "ChainConeMap.scale",
         "ChainConeMap.source",
         "ChainConeMap.source-map",
@@ -168425,11 +168780,13 @@
         "ChainConeMap.zero-like",
         "ConeEquivalence.backward",
         "ConeEquivalence.forward",
+        "ConeEquivalence.from-map",
         "ConeEquivalence.from-square-isomorphism",
         "ConeEquivalence.maps",
         "ConeHomotopy.are-homotopic",
         "ConeHomotopy.between",
         "ConeHomotopy.from",
+        "ConeHomotopy.inverse-homotopies",
         "ConeHomotopy.postcompose",
         "ConeHomotopy.precompose",
         "ConeHomotopy.solution-generators",
@@ -168707,6 +169064,7 @@
         "ConeHomotopy.from",
         "ConeHomotopy.from-data",
         "ConeHomotopy.homology-maps",
+        "ConeHomotopy.inverse-homotopies",
         "ConeHomotopy.on-chain",
         "ConeHomotopy.on-cochain",
         "ConeHomotopy.postcompose",
@@ -168812,6 +169170,7 @@
         "ConeEquivalence.equal",
         "ConeEquivalence.forward",
         "ConeEquivalence.from-data",
+        "ConeEquivalence.from-map",
         "ConeEquivalence.from-square-isomorphism",
         "ConeEquivalence.homology-map",
         "ConeEquivalence.homology-maps",

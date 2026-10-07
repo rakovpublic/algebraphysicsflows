@@ -220,6 +220,17 @@ public final class ConcreteAlgebrasExample {
         System.out.println("Cone-equivalence composition retains two actual inverse homotopies: "+math.flow(math.coneEquivalences,Collections.singletonList(coneEquivalence))
                 .performOneOperandOperation("inverse").performOperation("compose",coneEquivalence)
                 .<IntegralConeHomotopy>performFlatAlgebraTransfer("homotopies").collect().size());
+        RelativeSimplicialComplex inversePoint=RelativeSimplicialComplex.absolute(new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))));
+        IntegralChainConeMap torsionConeMap=IntegralChainConeMap.identity(new IntegralChainMappingCone(SimplicialChainMap.identity(inversePoint).scale(BigInteger.valueOf(6)))).scale(BigInteger.valueOf(5));
+        System.out.println("A non-strict torsion cone map has a solved retained inverse: "+math.flow(math.chainConeMaps,Collections.singletonList(torsionConeMap))
+                .<Boolean>performAlgebraTransfer("has-retained-homotopy-inverse").collect());
+        System.out.println("Solved cone inverse homotopies end at both exact identities: "+math.flow(math.chainConeMaps,Collections.singletonList(torsionConeMap))
+                .<IntegralConeHomotopy>performFlatAlgebraTransfer("ConeHomotopy.inverse-homotopies")
+                .<IntegralChainConeMap>performAlgebraTransfer("to").<Boolean>performAlgebraTransfer("is-identity").collect());
+        System.out.println("Solved cone equivalences expose inverse torsion maps: "+math.flow(math.chainConeMaps,Collections.singletonList(torsionConeMap))
+                .<IntegralConeEquivalence>performAlgebraTransfer("ConeEquivalence.from-map")
+                .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("homology-maps",BigInteger.ZERO)
+                .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
         IntegralChainMappingCone contractibleCone=new IntegralChainMappingCone(SimplicialChainMap.identity(circlePair));
         IntegralConeChain coneCycle=IntegralConeChain.includeTarget(contractibleCone,RelativeSimplicialChain.absolute(orientedCircle));
         System.out.println("An explicit cone contraction fills the included circle cycle: "+math.flow(math.chainCones,Collections.singletonList(contractibleCone))
