@@ -4,7 +4,7 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1678 native operations from 72 algebra builders.
+The default initializer currently installs 1683 native operations from 72 algebra builders.
 
 ## Existing API usage
 
@@ -2586,7 +2586,7 @@ The combined cone coordinate rank is bounded by **256** after relative filtering
 
 ## Integral homotopies between cone maps
 
-`IntegralConeHomotopyAlgebra` registers `ConeHomotopy` and the supporting `ConeHomotopy.data` carrier directly in MathTool, with 23 operations. A value retains two exact parallel `ChainConeMap` endpoints and integral matrices `K_n: source_n -> target_(n+1)`. Construction checks every equation `D K + K D = to - from`, with the existing target-first cone coordinates and signed boundary. These matrices can mix the two cone components. The endpoint squares retain their original chosen homotopies separately from this new witness.
+`IntegralConeHomotopyAlgebra` registers `ConeHomotopy` and the supporting `ConeHomotopy.data` carrier directly in MathTool, with 28 operations. A value retains two exact parallel `ChainConeMap` endpoints and integral matrices `K_n: source_n -> target_(n+1)`. Construction checks every equation `D K + K D = to - from`, with the existing target-first cone coordinates and signed boundary. These matrices can mix the two cone components. The endpoint squares retain their original chosen homotopies separately from this new witness.
 
 | Operations | Contract |
 | --- | --- |
@@ -2601,6 +2601,8 @@ The combined cone coordinate rank is bounded by **256** after relative filtering
 | `chain-matrices`, `cochain-matrices` | Return complete ordered lists of the retained matrices or shifted transposes. |
 | `on-chain`, `on-cochain` | Raise chain degree or lower positive cochain degree, returning actual second-carrier wrappers. |
 | `homology-maps`, `cohomology-maps` | Return the two equal induced homomorphisms, preserving exact presentations and torsion. |
+| `are-homotopic`, `between`, `solution-generators` | Solve the simultaneous integral equations for a decision, one witness, or a complete affine family. |
+| `is-contractible`, `contract` | Decide or construct a zero-to-identity homotopy without requiring the defining map to be strictly invertible. |
 
 For an invertible defining map, the explicit contraction is `K(t,s)=(0,F^-1 t)`. The two differential terms cancel their source/target differential contributions and sum to `(t,s)`. The identity case is the cone contraction used in the [Stacks Project's split sequence construction](https://stacks.math.columbia.edu/tag/014D). The implementation constructs the inverse and validates the resulting witness. `contract-isomorphism` requires strict degreewise unimodularity; it does not construct a contraction for every acyclic cone.
 
@@ -2649,6 +2651,64 @@ boolean equal = maps.get(0).equals(maps.get(1));
 
 The supplied list contains one matrix in every degree from zero through the maximum formal cone dimension `D`. Both empty cones therefore give an empty chain list; the dual list covers degrees zero through `D+1`, giving one `0 x 0` matrix in this case. Relative zero slots and shaped terminal matrices remain present. Matrix and integral-map degree arguments are nonnegative; coefficient bit lengths are unbounded.
 
-Each required combined cone rank is at most **256** after relative filtering. One **5000000-unit budget** covers each entire construction, contraction, arithmetic operation, pre/postcomposition and two-map integral list, including endpoint construction, transport, validation and all reductions. Resource exhaustion is `IMPLEMENTATION_FAILURE`; incompatible contexts, shapes or equations are `OPERATION_UNDEFINED`. Input-data membership checks immutable components and the list length, not the homotopy equations or evaluable ranks. General homotopy solving, solution enumeration and equivalence modulo higher homotopies remain outside this carrier.
+Each required combined cone rank is at most **256** after relative filtering. One **5000000-unit budget** covers each entire construction, contraction, arithmetic operation, pre/postcomposition and two-map integral list, including endpoint construction, transport, validation and all reductions. Resource exhaustion is `IMPLEMENTATION_FAILURE`; incompatible contexts, shapes or equations are `OPERATION_UNDEFINED`. Input-data membership checks immutable components and the list length, not the homotopy equations or evaluable ranks. Bounded integral homotopy solving is described below. Infinite solution enumeration and equivalence modulo higher homotopies remain outside this carrier.
 
-`NativeIntegralConeHomotopyTest` adds 20 tests covering 125 integral witness/divisibility cases, 625 determinant/adjugate contraction cases, 81 noncommuting transports, signed interval contractions, nonzero loops, typed differential and pairing identities, torsion, relative/empty/changing degrees, 1025-bit coefficients, actual wrappers, serialized flat flows and shared contraction/arithmetic/transport/reduction limits. The complete registration test also invokes all 23 operations against independent literal expectations.
+`NativeIntegralConeHomotopyTest` adds 20 tests covering 125 integral witness/divisibility cases, 625 determinant/adjugate contraction cases, 81 noncommuting transports, signed interval contractions, nonzero loops, typed differential and pairing identities, torsion, relative/empty/changing degrees, 1025-bit coefficients, actual wrappers, serialized flat flows and shared contraction/arithmetic/transport/reduction limits. The complete registration test invokes all 28 operations against independent literal expectations.
+
+## Solving integral cone homotopies and contractions
+
+`IntegralConeHomotopySolver` supplies five additional native operations in the existing `ConeHomotopy` builder. It forms a single integer system for all entries of all `K_n`. The degree `n` equation includes both `D_(n+1) K_n` and `K_(n-1) D_n`, so adjacent witness degrees are solved together. Smith reduction decides exact integral consistency and divisibility, then reconstructs a witness and validates it against the original full cone maps.
+
+`ConeHomotopy.are-homotopic` returns a Boolean. `ConeHomotopy.between` returns one validated witness or raises `OPERATION_UNDEFINED` when no integral solution exists. `ConeHomotopy.solution-generators` returns an empty list for an inconsistent system; otherwise its first entry is a particular witness and the remaining entries form a complete integral basis of homogeneous witnesses from the exact zero cone map to itself. Every solution has the form `particular + sum(integer_i * generator_i)`. The particular solution sets free Smith coordinates to zero; it is deterministic for these matrices, not a canonical choice invariant under changes of bases. The flat result parametrizes all witnesses without enumerating an infinite set.
+
+All three operations require identical full source and target defining cones. They retain and compare the actual cone-map matrices, including contributions from the original square homotopies. Equal induced maps do not decide homotopy existence: between the two-term complex `Z --2--> Z` in degrees one and zero and its shift to degrees two and one, a map with sole degree-one coefficient `c` has a homotopy to zero exactly when `2*x + 2*y = c` has an integer solution. Odd `c` fails even though every induced homology and cohomology map is zero.
+
+This example solves the homotopy between the identity and multiplication by three on the cone of multiplication by two:
+
+```java
+ConcreteMathematics math = new ConcreteMathematics();
+RelativeSimplicialComplex point = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))));
+IntegralChainMappingCone cone = new IntegralChainMappingCone(
+        SimplicialChainMap.identity(point).scale(BigInteger.valueOf(2)));
+IntegralChainConeMap from = IntegralChainConeMap.identity(cone);
+IntegralChainConeMap to = from.scale(BigInteger.valueOf(3));
+List<String> decision = math.flow(math.chainConeMaps, Collections.singletonList(from))
+        .<Boolean>performCustomResultOperation("ConeHomotopy.are-homotopic", to).collect();
+// [true]
+List<String> witnessMatrices = math.flow(math.chainConeMaps, Collections.singletonList(from))
+        .<IntegralConeHomotopy>performCustomResultOperation("ConeHomotopy.between", to)
+        .<IntegerMatrix>performFlatAlgebraTransfer("chain-matrices").collect();
+// [ZMatrix(1x1)[[1]], ZMatrix(0x1)[]]
+List<String> affineFamily = math.flow(math.chainConeMaps, Collections.singletonList(from))
+        .<IntegralConeHomotopy>performFlatCustomResultOperation("ConeHomotopy.solution-generators", to)
+        .<IntegerMatrix>performFlatAlgebraTransfer("chain-matrices").collect();
+// [ZMatrix(1x1)[[1]], ZMatrix(0x1)[]] -- this witness is unique
+```
+
+`ConeHomotopy.is-contractible` decides existence of an integral homotopy from zero to identity, and `ConeHomotopy.contract` constructs one. These use the same full system, with one budget spanning endpoint construction, solving and witness validation. The existing `contract-isomorphism` remains the direct construction for strictly invertible defining maps and avoids the solver's aggregate equation/unknown limits.
+
+For example, the interval's constant map is not invertible as a chain map, but its cone has a solved contraction:
+
+```java
+RelativeSimplicialComplex interval = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0, 1))));
+SimplicialChainMap constant = new SimplicialChainMap(interval, interval, Arrays.asList(
+        new IntegerMatrix(new BigInteger[][] {{BigInteger.ONE, BigInteger.ONE},
+                {BigInteger.ZERO, BigInteger.ZERO}}), IntegerMatrix.zero(1, 1)));
+IntegralChainMappingCone singularCone = new IntegralChainMappingCone(constant);
+IntegralConeChain cycle = new IntegralConeChain(singularCone, BigInteger.ZERO,
+        new IntegerVector(BigInteger.valueOf(3), BigInteger.valueOf(-7)));
+List<String> contractible = math.flow(math.chainCones, Collections.singletonList(singularCone))
+        .<Boolean>performAlgebraTransfer("ConeHomotopy.is-contractible").collect();
+// [true]
+List<String> filled = math.flow(math.chainCones, Collections.singletonList(singularCone))
+        .<IntegralConeHomotopy>performAlgebraTransfer("ConeHomotopy.contract")
+        .performLeftProjectionOperation("on-chain", cycle).performOneOperandOperation("boundary")
+        .<IntegerVector>performAlgebraTransfer("coordinates").collect();
+// [[3, -7]]
+```
+
+Every combined cone degree rank is bounded by **256** after relative filtering. The dense solver independently limits the full system to **256 equations** (`sum targetRank(n)*sourceRank(n)`) and **256 unknown coefficients** (`sum targetRank(n+1)*sourceRank(n)`). One **5000000-unit budget** covers assembly, Smith transformations, reconstruction and validation of the entire result, including every homogeneous generator. A maximal free kernel can return 257 witnesses: one particular solution plus 256 generators. A decision or individual witness can succeed while the full family exhausts the shared budget. Resource limits raise `IMPLEMENTATION_FAILURE`, never false, an empty family or a truncated family. Coefficient bit lengths remain unbounded.
+
+`NativeIntegralConeHomotopySolverTest` adds 16 tests: 729 point-map divisibility cases, 441 coupled gcd cases, complete bounded affine-family checks, invisible integral parity obstructions, 1025-bit coefficients, 125 interval contraction cases, 25 chosen-square-loop comparisons, typed cycle/cocycle fillings, full contexts, filtered and empty shapes, both aggregate bounds, maximal kernels, shared work exhaustion and serialized native scalar/flat flows.

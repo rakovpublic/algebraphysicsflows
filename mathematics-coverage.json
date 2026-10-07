@@ -26689,7 +26689,7 @@
       "operation_signature": null,
       "arity": null,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -26710,10 +26710,12 @@
         "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
         "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
         "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
-        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java"
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopySolver.java"
       ],
       "tests": [
         "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopySolverTest.java",
         "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
       ],
       "machine_tested": true,
@@ -26725,9 +26727,10 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
-        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones.",
+        "All required combined cone ranks are bounded by 256. The dense simultaneous system independently allows at most 256 total equations sum_n targetRank(n)*sourceRank(n) and 256 total unknowns sum_n targetRank(n+1)*sourceRank(n). No scalar coefficient bit-length cap is imposed. One 5000000-unit budget includes assembly, Smith solving, endpoint construction where needed, and all returned witness validations. Exhaustion is IMPLEMENTATION_FAILURE even if a supplied witness exists. A complete maximal kernel can contain 256 homogeneous generators plus its particular solution."
       ],
       "required_extension": null,
       "references": [
@@ -155883,7 +155886,7 @@
       "operation_signature": "ConeHomotopy.data -> ConeHomotopy",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.from-data",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.from-data",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -155921,7 +155924,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -155965,7 +155968,7 @@
       "operation_signature": "ChainConeMap -> ConeHomotopy",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.stationary",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.stationary",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -156003,7 +156006,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -156047,7 +156050,7 @@
       "operation_signature": "ChainCone -> ConeHomotopy",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.contract-isomorphism",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.contract-isomorphism",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -156085,7 +156088,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -156129,7 +156132,7 @@
       "operation_signature": "ConeHomotopy -> ChainConeMap",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.from",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.from",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -156167,7 +156170,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -156211,7 +156214,7 @@
       "operation_signature": "ConeHomotopy -> ChainConeMap",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.to",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.to",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -156249,7 +156252,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -156293,7 +156296,7 @@
       "operation_signature": "ConeHomotopy -> ChainCone",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.source",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.source",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -156331,7 +156334,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -156375,7 +156378,7 @@
       "operation_signature": "ConeHomotopy -> ChainCone",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.target",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.target",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -156413,7 +156416,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -156457,7 +156460,7 @@
       "operation_signature": "ConeHomotopy -> ConeHomotopy.data",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.data",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.data",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -156495,7 +156498,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -156539,7 +156542,7 @@
       "operation_signature": "ConeHomotopy -> ConeHomotopy",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.reverse",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.reverse",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -156577,7 +156580,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -156621,7 +156624,7 @@
       "operation_signature": "ConeHomotopy x ConeHomotopy -> ConeHomotopy",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.then",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.then",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -156659,7 +156662,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -156703,7 +156706,7 @@
       "operation_signature": "ConeHomotopy x ConeHomotopy -> ConeHomotopy",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.add",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.add",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -156741,7 +156744,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -156785,7 +156788,7 @@
       "operation_signature": "ConeHomotopy x Z -> ConeHomotopy",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.scale",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.scale",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -156823,7 +156826,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -156867,7 +156870,7 @@
       "operation_signature": "ConeHomotopy x ChainConeMap -> ConeHomotopy",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.precompose",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.precompose",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -156905,7 +156908,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -156949,7 +156952,7 @@
       "operation_signature": "ConeHomotopy x ChainConeMap -> ConeHomotopy",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.postcompose",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.postcompose",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -156987,7 +156990,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -157031,7 +157034,7 @@
       "operation_signature": "ConeHomotopy x ConeHomotopy -> Boolean",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.equal",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.equal",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -157069,7 +157072,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -157113,7 +157116,7 @@
       "operation_signature": "ConeHomotopy x N -> Mat(Z)",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.chain-matrix",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.chain-matrix",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -157151,7 +157154,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -157195,7 +157198,7 @@
       "operation_signature": "ConeHomotopy x N -> Mat(Z)",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.cochain-matrix",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.cochain-matrix",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -157233,7 +157236,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -157277,7 +157280,7 @@
       "operation_signature": "ConeHomotopy -> List(Mat(Z))",
       "arity": 1,
       "scalar_or_flat": "LIST",
-      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.chain-matrices",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.chain-matrices",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -157316,7 +157319,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -157360,7 +157363,7 @@
       "operation_signature": "ConeHomotopy -> List(Mat(Z))",
       "arity": 1,
       "scalar_or_flat": "LIST",
-      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.cochain-matrices",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.cochain-matrices",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -157399,7 +157402,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -157443,7 +157446,7 @@
       "operation_signature": "ConeHomotopy x ConeChain -> ConeChain",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.on-chain",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.on-chain",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -157481,7 +157484,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -157525,7 +157528,7 @@
       "operation_signature": "ConeHomotopy x ConeCochain -> ConeCochain",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.on-cochain",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.on-cochain",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -157563,7 +157566,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -157607,7 +157610,7 @@
       "operation_signature": "ConeHomotopy x N -> List(AbelianGroupHomomorphism)",
       "arity": 2,
       "scalar_or_flat": "LIST",
-      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.homology-maps",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.homology-maps",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -157646,7 +157649,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -157690,7 +157693,7 @@
       "operation_signature": "ConeHomotopy x N -> List(AbelianGroupHomomorphism)",
       "arity": 2,
       "scalar_or_flat": "LIST",
-      "representation_scope": "Supplied integral homotopies between retained cone maps, exact witness composition, typed chain/cochain actions and explicit contractions for cones of strict isomorphisms; native operation ConeHomotopy.cohomology-maps",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.cohomology-maps",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -157729,7 +157732,7 @@
       "known_limitations": [
         "Only this concrete carrier is implemented, not every structure in its mathematical field.",
         "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
-        "Supplied witnesses and an explicit contraction for cones of strict integral chain isomorphisms only. There is no general cone-homotopy existence solver, solution enumeration, higher-homotopy quotient, or automatic contraction of every acyclic cone. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
         "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
         "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones."
       ],
@@ -157759,6 +157762,432 @@
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "cohomology-maps",
       "legacy_operation_interface": "IUnsafeFlatOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.are-homotopic",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.are-homotopic",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap",
+      "domain_B": "ChainConeMap",
+      "domain_C": "Boolean",
+      "operation_signature": "ChainConeMap x ChainConeMap -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.are-homotopic",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require identical full source and target defining cones and solve all equations D K + K D = to - from simultaneously over Z. A Smith divisibility or consistency obstruction returns false; resource exhaustion raises IMPLEMENTATION_FAILURE. Equality of all induced homology and cohomology maps is not sufficient.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopySolver.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopySolverTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones.",
+        "All required combined cone ranks are bounded by 256. The dense simultaneous system independently allows at most 256 total equations sum_n targetRank(n)*sourceRank(n) and 256 total unknowns sum_n targetRank(n+1)*sourceRank(n). No scalar coefficient bit-length cap is imposed. One 5000000-unit budget includes assembly, Smith solving, endpoint construction where needed, and all returned witness validations. Exhaustion is IMPLEMENTATION_FAILURE even if a supplied witness exists. A complete maximal kernel can contain 256 homogeneous generators plus its particular solution."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ConeHomotopy.are-homotopic",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ConeHomotopy.are-homotopic",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.between",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.between",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap",
+      "domain_B": "ChainConeMap",
+      "domain_C": "ConeHomotopy",
+      "operation_signature": "ChainConeMap x ChainConeMap -> ConeHomotopy",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.between",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Solve the complete integral cone homotopy system with free Smith coordinates zero. Return one validated witness retaining the exact endpoint squares. Integer inconsistency raises OPERATION_UNDEFINED; solving and reconstruction share one budget.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopySolver.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopySolverTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones.",
+        "All required combined cone ranks are bounded by 256. The dense simultaneous system independently allows at most 256 total equations sum_n targetRank(n)*sourceRank(n) and 256 total unknowns sum_n targetRank(n+1)*sourceRank(n). No scalar coefficient bit-length cap is imposed. One 5000000-unit budget includes assembly, Smith solving, endpoint construction where needed, and all returned witness validations. Exhaustion is IMPLEMENTATION_FAILURE even if a supplied witness exists. A complete maximal kernel can contain 256 homogeneous generators plus its particular solution."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ConeHomotopy.between",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ConeHomotopy.between",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.solution-generators",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.solution-generators",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainConeMap",
+      "domain_B": "ChainConeMap",
+      "domain_C": "ConeHomotopy",
+      "operation_signature": "ChainConeMap x ChainConeMap -> List(ConeHomotopy)",
+      "arity": 2,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.solution-generators",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return one particular homotopy followed by a full integral basis of zero-to-zero homogeneous witnesses. Every solution is the particular witness plus arbitrary integer combinations of the remaining entries; this is an affine parametrization, not an enumeration. Inconsistent systems return an empty list. Solve, zero-endpoint construction and every generator validation share one budget; no truncated family is returned.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/flat/CustomResultFlatOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopySolver.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopySolverTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones.",
+        "All required combined cone ranks are bounded by 256. The dense simultaneous system independently allows at most 256 total equations sum_n targetRank(n)*sourceRank(n) and 256 total unknowns sum_n targetRank(n+1)*sourceRank(n). No scalar coefficient bit-length cap is imposed. One 5000000-unit budget includes assembly, Smith solving, endpoint construction where needed, and all returned witness validations. Exhaustion is IMPLEMENTATION_FAILURE even if a supplied witness exists. A complete maximal kernel can contain 256 homogeneous generators plus its particular solution."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ConeHomotopy.solution-generators",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ConeHomotopy.solution-generators",
+      "legacy_operation_interface": "ICustomResultFlatOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.is-contractible",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.is-contractible",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainCone",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "ChainCone -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.is-contractible",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Construct the zero and identity cone maps and decide whether an integral zero-to-identity homotopy exists. Endpoint construction and the whole solve share one budget. This does not require the defining chain map to be strictly invertible. Equation, unknown or work limits raise IMPLEMENTATION_FAILURE rather than false.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopySolver.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopySolverTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones.",
+        "All required combined cone ranks are bounded by 256. The dense simultaneous system independently allows at most 256 total equations sum_n targetRank(n)*sourceRank(n) and 256 total unknowns sum_n targetRank(n+1)*sourceRank(n). No scalar coefficient bit-length cap is imposed. One 5000000-unit budget includes assembly, Smith solving, endpoint construction where needed, and all returned witness validations. Exhaustion is IMPLEMENTATION_FAILURE even if a supplied witness exists. A complete maximal kernel can contain 256 homogeneous generators plus its particular solution."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "ConeHomotopy.is-contractible",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ConeHomotopy.is-contractible",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.ConeHomotopy.contract",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "IntegralConeHomotopyAlgebra",
+      "concept": "ConeHomotopy.contract",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "ChainCone",
+      "domain_B": null,
+      "domain_C": "ConeHomotopy",
+      "operation_signature": "ChainCone -> ConeHomotopy",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Integral homotopies between retained cone maps, bounded integral solving and complete affine generators, exact witness composition, typed actions and explicit or solved contractions; native operation ConeHomotopy.contract",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Construct a validated integral zero-to-identity cone homotopy by solving all coupled degree equations. The defining map need not be a strict isomorphism. A contraction fills cycles and dual cocycles through the existing typed actions. An obstructed system raises OPERATION_UNDEFINED. Endpoint construction, solving and witness validation share one budget.",
+        "Full cone contexts and actual endpoint square maps are retained. K raises total cone degree and satisfies D K + K D = to - from; shifted transposes give the dual identity. K need not preserve the cone block decomposition. Concatenation checks the exact joining square map; arithmetic and transports preserve the actual witnesses. Both endpoints induce equal integral maps with torsion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainConeMap.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralChainMappingCone.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeChain.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeCochain.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainMap.java",
+        "groupimp/src/main/java/mathematics/topology/SimplicialChainHomotopy.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralHomology.java",
+        "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java",
+        "groupimp/src/main/java/mathematics/structures/AbelianGroupHomomorphism.java",
+        "groupimp/src/main/java/mathematics/topology/IntegralConeHomotopySolver.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopySolverTest.java",
+        "groupimp/src/test/java/operations/NativeIntegralConeHomotopyTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "Supplied witnesses, explicit strict-isomorphism contractions and bounded integral Smith solving for general cone homotopies and contractions. Solver output gives affine generators, not enumeration of infinitely many solutions. No higher-homotopy quotient is represented. Cone-map endpoint squares retain their own homotopies, separately from K.",
+        "Each required combined cone degree rank is at most 256 after relative filtering. Coefficients have no bit-length cap. One 5000000-unit budget covers each complete construction, contraction, arithmetic operation, pre/postcomposition including both endpoint compositions and validation, and each two-map integral list with all reductions. Exhaustion is IMPLEMENTATION_FAILURE without partial output. Data membership retains immutable inputs and degree count, not evaluable shapes or equations.",
+        "Public matrix and integral-map degrees are nonnegative. Chain actions allow negative zero degrees and raise degree by one. Typed cochain actions require positive degree. Complete chain lists retain degrees 0 through the maximum formal cone dimension D; dual lists include 0 through D+1, giving one empty matrix for two empty cones.",
+        "All required combined cone ranks are bounded by 256. The dense simultaneous system independently allows at most 256 total equations sum_n targetRank(n)*sourceRank(n) and 256 total unknowns sum_n targetRank(n+1)*sourceRank(n). No scalar coefficient bit-length cap is imposed. One 5000000-unit budget includes assembly, Smith solving, endpoint construction where needed, and all returned witness validations. Exhaustion is IMPLEMENTATION_FAILURE even if a supplied witness exists. A complete maximal kernel can contain 256 homogeneous generators plus its particular solution."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://stacks.math.columbia.edu/tag/014D"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/IntegralConeHomotopyAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-10-07",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "ConeHomotopy.contract",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "ConeHomotopy.contract",
+      "legacy_operation_interface": "ITransferOperation"
     },
     {
       "id": "concrete-operation.Z/5Z.add",
@@ -159228,7 +159657,9 @@
         "ConeCochain.is-coboundary",
         "ConeCochain.is-cocycle",
         "ConeCochain.is-zero",
+        "ConeHomotopy.are-homotopic",
         "ConeHomotopy.equal",
+        "ConeHomotopy.is-contractible",
         "CoverMap.contiguous",
         "CoverMap.equal",
         "CoverMap.is-isomorphism",
@@ -165401,7 +165832,9 @@
         "ConeCochain.include-source",
         "ConeCochain.lift-target",
         "ConeCochain.zero-on",
+        "ConeHomotopy.contract",
         "ConeHomotopy.contract-isomorphism",
+        "ConeHomotopy.is-contractible",
         "ConeHomotopy.source",
         "ConeHomotopy.target"
       ],
@@ -165487,9 +165920,12 @@
         "ChainConeMap.target-map",
         "ChainConeMap.zero-between",
         "ChainConeMap.zero-like",
+        "ConeHomotopy.are-homotopic",
+        "ConeHomotopy.between",
         "ConeHomotopy.from",
         "ConeHomotopy.postcompose",
         "ConeHomotopy.precompose",
+        "ConeHomotopy.solution-generators",
         "ConeHomotopy.stationary",
         "ConeHomotopy.to"
       ],
@@ -165740,11 +166176,13 @@
       ],
       "supported_operations": [
         "ConeHomotopy.add",
+        "ConeHomotopy.between",
         "ConeHomotopy.chain-matrices",
         "ConeHomotopy.chain-matrix",
         "ConeHomotopy.cochain-matrices",
         "ConeHomotopy.cochain-matrix",
         "ConeHomotopy.cohomology-maps",
+        "ConeHomotopy.contract",
         "ConeHomotopy.contract-isomorphism",
         "ConeHomotopy.data",
         "ConeHomotopy.equal",
@@ -165757,6 +166195,7 @@
         "ConeHomotopy.precompose",
         "ConeHomotopy.reverse",
         "ConeHomotopy.scale",
+        "ConeHomotopy.solution-generators",
         "ConeHomotopy.source",
         "ConeHomotopy.stationary",
         "ConeHomotopy.target",

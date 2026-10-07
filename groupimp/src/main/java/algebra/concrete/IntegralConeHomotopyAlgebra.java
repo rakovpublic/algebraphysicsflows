@@ -2,6 +2,7 @@ package algebra.concrete;
 
 import algebra.imp.Algebra;
 import mathematics.topology.IntegralConeHomotopy;
+import mathematics.topology.IntegralConeHomotopySolver;
 
 /** Validated cone homotopies using the original scalar, unary and flat operation contracts. */
 public final class IntegralConeHomotopyAlgebra extends ConcreteAlgebra<IntegralConeHomotopy> {
@@ -34,6 +35,12 @@ public final class IntegralConeHomotopyAlgebra extends ConcreteAlgebra<IntegralC
         binary("on-cochain",algebra(),cochains.algebra(),cochains.algebra(),true,IntegralConeHomotopy::onCochain);
         flat("homology-maps",algebra(),naturals.algebra(),homomorphisms.algebra(),false,IntegralConeHomotopy::homologyMaps);
         flat("cohomology-maps",algebra(),naturals.algebra(),homomorphisms.algebra(),false,IntegralConeHomotopy::cohomologyMaps);
+        binary("are-homotopic",maps.algebra(),maps.algebra(),truth.algebra(),true,IntegralConeHomotopySolver::areHomotopic);
+        binary("between",maps.algebra(),maps.algebra(),algebra(),true,IntegralConeHomotopySolver::between);
+        flat("solution-generators",maps.algebra(),maps.algebra(),algebra(),true,IntegralConeHomotopySolver::solutionGenerators);
+        unary("is-contractible",cones.algebra(),truth.algebra(),false,IntegralConeHomotopySolver::isContractible);
+        unary("contract",cones.algebra(),algebra(),true,IntegralConeHomotopySolver::contract);
+        law("Bounded integral Smith solving couples every witness degree. A solution family is one particular witness plus integer combinations of zero-to-zero kernel generators. Solved contraction requires a zero-to-identity witness, not invertibility of the defining chain map.");
         law("D K + K D = to - from on total cone coordinates. Witnesses need not preserve the cone block decomposition; endpoint squares and actual witness matrices are retained.");
         law("Concatenation adds witnesses and requires the exact joining map; reversal negates them. Precomposition uses K_n B_n; postcomposition uses A_(n+1) K_n. Both endpoints induce equal integral homology and cohomology maps.");
         law("For an integral chain isomorphism F, Cone(F) contracts by K(t,s)=(0,F^-1 t). Typed actions raise chain degree or lower positive cochain degree and return the second carrier's actual wrapper.");

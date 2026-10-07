@@ -221,6 +221,12 @@ public final class ConcreteAlgebrasExample {
                 .<IntegralConeHomotopy>performAlgebraTransfer("ConeHomotopy.contract-isomorphism")
                 .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("homology-maps",BigInteger.ONE)
                 .<Boolean>performAlgebraTransfer("is-zero").collect());
+        IntegralChainMappingCone singularCone=new IntegralChainMappingCone(intervalIdentityClass.representative());
+        System.out.println("A cone of a noninvertible interval map admits a solved contraction: "+math.flow(math.chainCones,Collections.singletonList(singularCone))
+                .<Boolean>performAlgebraTransfer("ConeHomotopy.is-contractible").collect());
+        System.out.println("The solved contraction retains its exact identity endpoint: "+math.flow(math.chainCones,Collections.singletonList(singularCone))
+                .<IntegralConeHomotopy>performAlgebraTransfer("ConeHomotopy.contract")
+                .<IntegralChainConeMap>performAlgebraTransfer("to").<Boolean>performAlgebraTransfer("is-identity").collect());
         System.out.println("A retained equivalence exposes two inverse integral maps: "+math.flow(math.chainMaps,Collections.singletonList(intervalIdentityClass.representative()))
                 .<SimplicialChainEquivalence>performAlgebraTransfer("ChainEquivalence.from-map")
                 .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("homology-maps",BigInteger.ZERO)

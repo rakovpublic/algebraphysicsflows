@@ -34,7 +34,7 @@ public final class IntegralConeHomotopy implements Serializable {
     }
     public IntegralConeHomotopy(IntegralChainConeMap from,IntegralChainConeMap to,List<IntegerMatrix> matrices) { this(new Data(from,to,matrices)); }
     public IntegralConeHomotopy(Data data) { this(data,new Computation()); }
-    private IntegralConeHomotopy(Data data,Computation work) {
+    IntegralConeHomotopy(Data data,Computation work) {
         this.data=Objects.requireNonNull(data); requireParallel(from(),to());
         for(int k=0;k<data.matrices.size();k++) {
             BigInteger degree=BigInteger.valueOf(k); IntegerMatrix h=data.matrices.get(k);
