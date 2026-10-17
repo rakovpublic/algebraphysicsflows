@@ -17,6 +17,7 @@ public final class IntegerRing extends ConcreteAlgebra<BigInteger> {
         closed("remainder",true,(a,b) -> { nonzero(b); return a.remainder(b); });
         unary("negate",algebra(),algebra(),false,BigInteger::negate);
         unary("to-rational",algebra(),rationals.algebra(),false,Rational::of);
+        unary("to-boolean",algebra(),truth.algebra(),true,n -> BooleanAlgebra.decode(n.signum()==0,n.equals(BigInteger.ONE),"Z"));
         binary("divide-rational",algebra(),algebra(),rationals.algebra(),true,(a,b) -> new Rational(a,b));
         binary("greater",algebra(),algebra(),truth.algebra(),false,(a,b) -> a.compareTo(b)>0);
         binary("equal",algebra(),algebra(),truth.algebra(),false,BigInteger::equals);
@@ -24,6 +25,7 @@ public final class IntegerRing extends ConcreteAlgebra<BigInteger> {
         constant("zero",BigInteger.ZERO); constant("one",BigInteger.ONE);
         law("Z is a commutative unital ring with no zero divisors; it is not a field.");
         law("For b != 0, a = b*quotient(a,b)+remainder(a,b); quotient truncates toward zero.");
+        law("Boolean decoding is defined exactly on the distinguished integers zero and one.");
     }
     private static void nonzero(BigInteger value) {
         if(value.signum()==0) throw MathFailure.undefined("Integer division by zero");

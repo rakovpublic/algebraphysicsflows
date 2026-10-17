@@ -36,7 +36,15 @@ import mathematics.topology.SimplicialChainMap;
 import mathematics.topology.SimplicialChainHomotopy;
 import mathematics.topology.SimplicialChainMapSpace;
 import mathematics.topology.SimplicialChainMapClass;
+import mathematics.topology.SimplicialChainEquivalence;
 import mathematics.topology.IntegralHomology;
+import mathematics.topology.IntegralChainMappingCone;
+import mathematics.topology.IntegralChainConeMap;
+import mathematics.topology.IntegralConeHomotopy;
+import mathematics.topology.IntegralConeEquivalence;
+import mathematics.topology.IntegralConeMapSpace;
+import mathematics.topology.IntegralConeChain;
+import mathematics.topology.IntegralConeCochain;
 import mathematics.topology.FiniteSimplicialMap;
 import mathematics.topology.RelativeSimplicialComplex;
 import mathematics.topology.RelativeSimplicialMap;
@@ -70,6 +78,8 @@ public final class ConcreteAlgebrasExample {
             return;
         }
         System.out.println("MathTool: "+math.mathTool.getName()+", concrete algebras: "+math.algebras().size()+", operations: "+math.operations().size());
+        System.out.println("Boolean scalar encodings round trip only 0 and 1: "+math.flow(math.booleans,Arrays.asList(false,true))
+                .<Rational>performAlgebraTransfer("to-rational").<Boolean>performAlgebraTransfer("to-boolean").collect());
         IntegerMatrix equation=new IntegerMatrix(new BigInteger[][]{{BigInteger.valueOf(2),BigInteger.valueOf(3)}});
         System.out.println("Integer solutions of 2*x+3*y=1: particular then kernel basis: "+math.flow(math.integerMatrices,Collections.singletonList(equation))
                 .performLeftProjectionFlatOperation("solve-generators",new IntegerVector(BigInteger.ONE)).collect());
@@ -130,6 +140,30 @@ public final class ConcreteAlgebrasExample {
                 .<SimplicialChainHomotopy>performAlgebraTransfer("ChainHomotopy.from-collapse-sequence")
                 .performLeftProjectionOperation("on-absolute-chain",vertexOne).<IntegerVector>performAlgebraTransfer("coordinates").collect());
         RelativeSimplicialComplex homotopyPoint=RelativeSimplicialComplex.absolute(new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))));
+        SimplicialChainMap doublingPoint=SimplicialChainMap.identity(homotopyPoint).scale(BigInteger.valueOf(2));
+        System.out.println("Cone of doubling a point has integral homology Z/2 in degree zero: "+math.flow(math.chainMaps,Collections.singletonList(doublingPoint))
+                .<IntegralChainMappingCone>performAlgebraTransfer("ChainCone.from-map")
+                .<AbelianGroupType>performFlatAlgebraTransfer("homology-types").collect());
+        System.out.println("Its integral cohomology has Z/2 in degree one: "+math.flow(math.chainMaps,Collections.singletonList(doublingPoint))
+                .<IntegralChainMappingCone>performAlgebraTransfer("ChainCone.from-map")
+                .<AbelianGroupType>performFlatAlgebraTransfer("cohomology-types").collect());
+        System.out.println("Doubling a point is an integral quasi-isomorphism: "+math.flow(math.chainMaps,Collections.singletonList(doublingPoint))
+                .<Boolean>performAlgebraTransfer("is-quasi-isomorphism").collect());
+        System.out.println("Typed cone cycle generators retain their order-two classes: "+math.flow(math.chainMaps,Collections.singletonList(doublingPoint))
+                .<IntegralChainMappingCone>performAlgebraTransfer("ChainCone.from-map")
+                .<IntegralConeChain,BigInteger>performAlgebraUnsafe("ConeChain.zero-on",BigInteger.ZERO)
+                .performOneOperandFlatOperation("cycle-generators").<AbelianGroupElement>performAlgebraTransfer("class-of")
+                .<BigInteger>performAlgebraTransfer("order").collect());
+        System.out.println("A typed cone primitive of twice the point has coordinates: "+math.flow(math.chainMaps,Collections.singletonList(doublingPoint))
+                .<IntegralChainMappingCone>performAlgebraTransfer("ChainCone.from-map")
+                .<IntegralConeChain,BigInteger>performAlgebraUnsafe("ConeChain.zero-on",BigInteger.ZERO)
+                .performCustomMemberOperation("with-coordinates",new IntegerVector(BigInteger.valueOf(2)))
+                .performOneOperandOperation("bounding-chain").<IntegerVector>performAlgebraTransfer("coordinates").collect());
+        System.out.println("Typed cone cocycle generators retain order two in degree one: "+math.flow(math.chainMaps,Collections.singletonList(doublingPoint))
+                .<IntegralChainMappingCone>performAlgebraTransfer("ChainCone.from-map")
+                .<IntegralConeCochain,BigInteger>performAlgebraUnsafe("ConeCochain.zero-on",BigInteger.ONE)
+                .performOneOperandFlatOperation("cocycle-generators").<AbelianGroupElement>performAlgebraTransfer("class-of")
+                .<BigInteger>performAlgebraTransfer("order").collect());
         SimplicialChainMap homotopyStart=new SimplicialChainMap(homotopyPoint,circlePair,Arrays.asList(new IntegerMatrix(new BigInteger[][]{{BigInteger.ONE},{BigInteger.ZERO},{BigInteger.ZERO}}),IntegerMatrix.zero(3,0))),
                 homotopyEnd=new SimplicialChainMap(homotopyPoint,circlePair,Arrays.asList(new IntegerMatrix(new BigInteger[][]{{BigInteger.ZERO},{BigInteger.ZERO},{BigInteger.ONE}}),IntegerMatrix.zero(3,0)));
         RelativeSimplicialChain homotopyVertex=new RelativeSimplicialChain(homotopyPoint,BigInteger.ZERO,new IntegerVector(BigInteger.ONE));
@@ -157,6 +191,88 @@ public final class ConcreteAlgebrasExample {
                 .<IntegerMatrix>performAlgebraTransfer("smith-matrix").collect());
         System.out.println("Circle map space has two contextual homotopy-class generators: "+math.flow(math.chainMapSpaces,Collections.singletonList(circleMapSpace))
                 .<SimplicialChainMapClass>performFlatAlgebraTransfer("ChainMapClass.generators-in").collect().size());
+        System.out.println("A degree-three circle map has an integral homotopy inverse: "+math.flow(math.chainMaps,Collections.singletonList(degreeThree))
+                .<Boolean>performAlgebraTransfer("is-homotopy-equivalence").collect());
+        SimplicialChainMapClass intervalIdentityClass=SimplicialChainMapClass.identityOn(RelativeSimplicialComplex.absolute(
+                new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0,1)))));
+        System.out.println("The inverse interval class composes to the identity: "+math.flow(math.chainMapClasses,Collections.singletonList(intervalIdentityClass))
+                .performOneOperandOperation("inverse").performOperation("compose",intervalIdentityClass).<Boolean>performAlgebraTransfer("is-identity").collect());
+        System.out.println("Both inverse homotopies for its singular representative: "+math.flow(math.chainMaps,Collections.singletonList(intervalIdentityClass.representative()))
+                .<SimplicialChainHomotopy>performFlatAlgebraTransfer("ChainHomotopy.inverse-homotopies").collect().size());
+        SimplicialChainEquivalence retainedInverse=SimplicialChainEquivalence.fromMap(intervalIdentityClass.representative());
+        System.out.println("A supplied chain homotopy induces isomorphisms between all cone homology groups: "+math.flow(math.chainEquivalences,Collections.singletonList(retainedInverse))
+                .<SimplicialChainHomotopy>performAlgebraTransfer("source-homotopy")
+                .<IntegralChainConeMap>performAlgebraTransfer("ChainConeMap.from-homotopy")
+                .<AbelianGroupHomomorphism>performFlatAlgebraTransfer("homology-maps")
+                .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
+        IntegralChainConeMap retainedConeMap=IntegralChainConeMap.fromHomotopy(retainedInverse.sourceHomotopy());
+        System.out.println("Cone square inversion retains an exact identity witness: "+math.flow(math.chainConeMaps,Collections.singletonList(retainedConeMap))
+                .performOneOperandOperation("inverse-square").performOperation("compose",retainedConeMap)
+                .<Boolean>performAlgebraTransfer("is-identity").collect());
+        System.out.println("Cone maps add to zero with their negated witnesses: "+math.flow(math.chainConeMaps,Collections.singletonList(retainedConeMap))
+                .performCustomMemberOperation("scale",BigInteger.ONE.negate()).performOperation("add",retainedConeMap)
+                .<Boolean>performAlgebraTransfer("is-zero").collect());
+        System.out.println("Square inverses feed native flat integral-map flows: "+math.flow(math.chainConeMaps,Collections.singletonList(retainedConeMap))
+                .performOneOperandOperation("inverse-square").<AbelianGroupHomomorphism>performFlatAlgebraTransfer("homology-maps")
+                .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
+        IntegralConeEquivalence coneEquivalence=IntegralConeEquivalence.fromSquareIsomorphism(retainedConeMap);
+        System.out.println("A native cone equivalence exposes inverse integral maps: "+math.flow(math.chainConeMaps,Collections.singletonList(retainedConeMap))
+                .<IntegralConeEquivalence>performAlgebraTransfer("ConeEquivalence.from-square-isomorphism")
+                .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("homology-maps",BigInteger.ONE)
+                .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
+        System.out.println("Cone-equivalence composition retains two actual inverse homotopies: "+math.flow(math.coneEquivalences,Collections.singletonList(coneEquivalence))
+                .performOneOperandOperation("inverse").performOperation("compose",coneEquivalence)
+                .<IntegralConeHomotopy>performFlatAlgebraTransfer("homotopies").collect().size());
+        RelativeSimplicialComplex inversePoint=RelativeSimplicialComplex.absolute(new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))));
+        IntegralChainConeMap torsionConeMap=IntegralChainConeMap.identity(new IntegralChainMappingCone(SimplicialChainMap.identity(inversePoint).scale(BigInteger.valueOf(6)))).scale(BigInteger.valueOf(5));
+        System.out.println("A non-strict torsion cone map has a solved retained inverse: "+math.flow(math.chainConeMaps,Collections.singletonList(torsionConeMap))
+                .<Boolean>performAlgebraTransfer("has-retained-homotopy-inverse").collect());
+        System.out.println("Solved cone inverse homotopies end at both exact identities: "+math.flow(math.chainConeMaps,Collections.singletonList(torsionConeMap))
+                .<IntegralConeHomotopy>performFlatAlgebraTransfer("ConeHomotopy.inverse-homotopies")
+                .<IntegralChainConeMap>performAlgebraTransfer("to").<Boolean>performAlgebraTransfer("is-identity").collect());
+        System.out.println("Solved cone equivalences expose inverse torsion maps: "+math.flow(math.chainConeMaps,Collections.singletonList(torsionConeMap))
+                .<IntegralConeEquivalence>performAlgebraTransfer("ConeEquivalence.from-map")
+                .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("homology-maps",BigInteger.ZERO)
+                .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
+        IntegralConeMapSpace coneMapSpace=new IntegralConeMapSpace(torsionConeMap.source(),torsionConeMap.target());
+        System.out.println("Retained cone-map classes preserve integral torsion: "+math.flow(math.coneMapSpaces,Collections.singletonList(coneMapSpace))
+                .<AbelianGroupElement,IntegralChainConeMap>performAlgebraUnsafe("class-of",torsionConeMap)
+                .<BigInteger>performAlgebraTransfer("order").collect());
+        System.out.println("Cone-map class generators lift to actual retained squares: "+math.flow(math.coneMapSpaces,Collections.singletonList(coneMapSpace))
+                .<IntegralChainConeMap>performFlatAlgebraTransfer("representatives")
+                .<Boolean>performAlgebraTransfer("is-zero").collect());
+        IntegralChainMappingCone contractibleCone=new IntegralChainMappingCone(SimplicialChainMap.identity(circlePair));
+        IntegralConeChain coneCycle=IntegralConeChain.includeTarget(contractibleCone,RelativeSimplicialChain.absolute(orientedCircle));
+        System.out.println("An explicit cone contraction fills the included circle cycle: "+math.flow(math.chainCones,Collections.singletonList(contractibleCone))
+                .<IntegralConeHomotopy>performAlgebraTransfer("ConeHomotopy.contract-isomorphism")
+                .performLeftProjectionOperation("on-chain",coneCycle).performOneOperandOperation("boundary")
+                .<Boolean>performCustomResultOperation("equal",coneCycle).collect());
+        System.out.println("Cone homotopies expose both equal induced homology maps: "+math.flow(math.chainCones,Collections.singletonList(contractibleCone))
+                .<IntegralConeHomotopy>performAlgebraTransfer("ConeHomotopy.contract-isomorphism")
+                .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("homology-maps",BigInteger.ONE)
+                .<Boolean>performAlgebraTransfer("is-zero").collect());
+        IntegralChainMappingCone singularCone=new IntegralChainMappingCone(intervalIdentityClass.representative());
+        System.out.println("A cone of a noninvertible interval map admits a solved contraction: "+math.flow(math.chainCones,Collections.singletonList(singularCone))
+                .<Boolean>performAlgebraTransfer("ConeHomotopy.is-contractible").collect());
+        System.out.println("The solved contraction retains its exact identity endpoint: "+math.flow(math.chainCones,Collections.singletonList(singularCone))
+                .<IntegralConeHomotopy>performAlgebraTransfer("ConeHomotopy.contract")
+                .<IntegralChainConeMap>performAlgebraTransfer("to").<Boolean>performAlgebraTransfer("is-identity").collect());
+        System.out.println("A retained equivalence exposes two inverse integral maps: "+math.flow(math.chainMaps,Collections.singletonList(intervalIdentityClass.representative()))
+                .<SimplicialChainEquivalence>performAlgebraTransfer("ChainEquivalence.from-map")
+                .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("homology-maps",BigInteger.ZERO)
+                .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
+        System.out.println("Composed equivalences retain both transported inverse homotopies: "+math.flow(math.chainEquivalences,Collections.singletonList(retainedInverse))
+                .performOneOperandOperation("inverse").performOperation("compose",retainedInverse)
+                .<SimplicialChainHomotopy>performFlatAlgebraTransfer("homotopies").collect().size());
+        System.out.println("Subdivision converts directly to inverse integral circle maps: "+math.flow(math.subdivisions,Collections.singletonList(new SimplicialSubdivision(circlePair)))
+                .<SimplicialChainEquivalence>performAlgebraTransfer("ChainEquivalence.from-subdivision")
+                .<AbelianGroupHomomorphism,BigInteger>performFlatAlgebraUnsafe("homology-maps",BigInteger.ONE)
+                .<Boolean>performAlgebraTransfer("is-isomorphism").collect());
+        System.out.println("A converted collapse witness fills vertex one minus vertex two: "+math.flow(math.complexes,Collections.singletonList(filledTriangle))
+                .<SimplicialCollapseSequence>performAlgebraTransfer("CollapseSequence.reduce-absolute")
+                .<SimplicialChainEquivalence>performAlgebraTransfer("ChainEquivalence.from-collapse-sequence")
+                .performLeftProjectionOperation("source-homotopy-on-chain",RelativeSimplicialChain.absolute(vertexOne))
+                .performOneOperandOperation("boundary").<IntegerVector>performAlgebraTransfer("coordinates").collect());
         System.out.println("Subdividing the oriented circle retains an integral cycle: "+math.flow(math.complexes,Collections.singletonList(circle))
                 .<SimplicialSubdivision>performAlgebraTransfer("SimplicialSubdivision.from-complex")
                 .performLeftProjectionOperation("on-absolute-chain",orientedCircle).<Boolean>performAlgebraTransfer("is-cycle").collect());

@@ -16,11 +16,11 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final RationalField rationals=new RationalField(booleans);
     public final IntegerRing integers=new IntegerRing(rationals,booleans);
     public final ResidueRing residues=new ResidueRing(java.math.BigInteger.valueOf(6),integers,booleans);
-    public final NaturalSemiring naturals=new NaturalSemiring(integers);
+    public final NaturalSemiring naturals=new NaturalSemiring(integers,booleans);
     public final SymmetricGroup permutations=new SymmetricGroup(3,naturals,integers,booleans);
     public final AbelianGroupTypeAlgebra abelianGroups=new AbelianGroupTypeAlgebra(naturals,booleans);
     public final FiniteSimplicialAlgebra complexes;
-    public final RationalPolynomialRing polynomials=new RationalPolynomialRing(rationals,naturals);
+    public final RationalPolynomialRing polynomials=new RationalPolynomialRing(rationals,naturals,booleans);
     public final RationalFunctionField rationalFunctions=new RationalFunctionField(polynomials,rationals,booleans);
     public final IntegerSetAlgebra integerSets=new IntegerSetAlgebra(integers,booleans,naturals,rationals,polynomials);
     public final FiniteIntegerRelationAlgebra integerRelations=new FiniteIntegerRelationAlgebra(integers,integerSets,booleans,naturals);
@@ -34,7 +34,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final FiniteCoconeAlgebra cocones=new FiniteCoconeAlgebra(cones,functors,naturalTransformations,integerFunctions,integers,booleans);
     public final RationalSampleAlgebra samples=new RationalSampleAlgebra(rationals,naturals);
     public final FiniteProbabilityAlgebra<java.math.BigInteger> integerProbabilities=new FiniteProbabilityAlgebra<>("FiniteDistribution(Z)",integers.algebra(),integerSets,rationals,booleans,naturals,mathematics.numbers.Rational::of);
-    public final RationalComplexField complexRationals=new RationalComplexField(rationals);
+    public final RationalComplexField complexRationals=new RationalComplexField(rationals,booleans);
     public final RationalVectorSpace vectors;
     public final RationalMatrixAlgebra matrices;
     public final RationalVectorFamily finiteVectors;
@@ -67,6 +67,14 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final SimplicialChainHomotopyAlgebra chainHomotopies;
     public final SimplicialChainMapSpaceAlgebra chainMapSpaces;
     public final SimplicialChainMapClassAlgebra chainMapClasses;
+    public final SimplicialChainEquivalenceAlgebra chainEquivalences;
+    public final IntegralChainMappingConeAlgebra chainCones;
+    public final IntegralChainConeMapAlgebra chainConeMaps;
+    public final IntegralConeHomotopyAlgebra coneHomotopies;
+    public final IntegralConeEquivalenceAlgebra coneEquivalences;
+    public final IntegralConeMapSpaceAlgebra coneMapSpaces;
+    public final IntegralConeChainAlgebra coneChains;
+    public final IntegralConeCochainAlgebra coneCochains;
     public final RationalAffineSpaceAlgebra affineSpaces;
     public final FiniteMarkovAlgebra markovKernels;
     public final RationalTensorAlgebra tensors;
@@ -117,6 +125,14 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         chainHomotopies=new SimplicialChainHomotopyAlgebra(chainMaps,simplicialHomotopies,homotopyPaths,collapses,collapseSequences,subdivisions,relativeComplexes,integerMatrices,integers,naturals,booleans,relativeChains,relativeCochains,simplicialChains,cochains,abelianHomomorphisms);
         chainMapSpaces=new SimplicialChainMapSpaceAlgebra(relativeComplexes,chainMaps,integralHomology,presentedAbelianGroups,abelianGroups,abelianGroupElements,booleans,abelianHomomorphisms,integerMatrices);
         chainMapClasses=new SimplicialChainMapClassAlgebra(chainMapSpaces,chainMaps,relativeComplexes,abelianGroupElements,integers,naturals,booleans,abelianHomomorphisms);
+        chainEquivalences=new SimplicialChainEquivalenceAlgebra(chainMaps,chainHomotopies,chainMapClasses,relativeComplexes,relativeChains,relativeCochains,abelianHomomorphisms,naturals,booleans,homotopyEquivalences,collapses,collapseSequences,subdivisions);
+        chainCones=new IntegralChainMappingConeAlgebra(chainMaps,relativeComplexes,integerMatrices,integralHomology,abelianGroups,abelianHomomorphisms,integers,naturals,booleans);
+        coneChains=new IntegralConeChainAlgebra(chainCones,relativeChains,integerVectors,integers,naturals,booleans,integralHomology,abelianGroupElements);
+        coneCochains=new IntegralConeCochainAlgebra(chainCones,relativeCochains,integerVectors,integers,naturals,booleans,integralHomology,abelianGroupElements,coneChains);
+        chainConeMaps=new IntegralChainConeMapAlgebra(chainCones,chainMaps,chainHomotopies,integerMatrices,abelianHomomorphisms,naturals,booleans,coneChains,coneCochains,integers);
+        coneHomotopies=new IntegralConeHomotopyAlgebra(chainConeMaps,chainCones,coneChains,coneCochains,integerMatrices,integers,naturals,booleans,abelianHomomorphisms);
+        coneEquivalences=new IntegralConeEquivalenceAlgebra(chainConeMaps,coneHomotopies,chainCones,coneChains,coneCochains,abelianHomomorphisms,naturals,booleans);
+        coneMapSpaces=new IntegralConeMapSpaceAlgebra(chainCones,chainConeMaps,integralHomology,presentedAbelianGroups,abelianGroups,abelianGroupElements,booleans);
         affineSpaces=new RationalAffineSpaceAlgebra(rectangularMatrices,finiteVectors,naturals,booleans);
         markovKernels=new FiniteMarkovAlgebra(integers,integerSets,integerProbabilities,integerFunctions,rectangularMatrices,finiteVectors,rationals,naturals,booleans);
         tensors=new RationalTensorAlgebra(rationals,finiteVectors,rectangularMatrices,naturals,booleans);
@@ -131,9 +147,11 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         Set<Integer> seen=new HashSet<>();
         for(int prime : primes) {
             if(!seen.add(prime)) throw new IllegalArgumentException("Duplicate prime field: "+prime);
-            fields.add(new PrimeField(unit,prime));
+            fields.add(new PrimeField(unit,prime,booleans));
         }
         primeFields=Collections.unmodifiableList(fields);
+        booleans.connectScalars(naturals,integers,rationals,complexRationals,quaternions,polynomials,rationalFunctions,
+                tensors,matrices,residues,primeFields);
         List<ConcreteAlgebra<?>> values=new ArrayList<>(Arrays.asList(booleans,naturals,integers,rationals,complexRationals,vectors,matrices,finiteVectors,rectangularMatrices,affineSpaces,tensors,exterior,quaternions,polynomials,rationalFunctions,integerSets,samples,integerProbabilities,complexes,integerRelations,permutations,residues,integerFunctions,categories,functors,naturalTransformations,equivalences,adjunctions,cones,cocones));
         values.add(multivariatePolynomials); values.add(polynomialMaps);
         values.add(polynomialForms);
@@ -166,6 +184,14 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         values.add(chainHomotopies);
         values.add(chainMapSpaces);
         values.add(chainMapClasses);
+        values.add(chainEquivalences);
+        values.add(chainCones);
+        values.add(chainConeMaps);
+        values.add(coneChains);
+        values.add(coneCochains);
+        values.add(coneHomotopies);
+        values.add(coneEquivalences);
+        values.add(coneMapSpaces);
         values.addAll(fields); algebras=Collections.unmodifiableList(values);
         for(ConcreteAlgebra<?> algebra : algebras) {
             algebra.register(mathTool);

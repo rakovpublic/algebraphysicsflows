@@ -14,6 +14,7 @@ public final class RationalField extends ConcreteAlgebra<Rational> {
         closed("multiply",false,Rational::multiply); closed("divide",true,Rational::divide);
         unary("negate",algebra(),algebra(),false,Rational::negate);
         unary("inverse",algebra(),algebra(),true,q -> Rational.ONE.divide(q));
+        unary("to-boolean",algebra(),truth.algebra(),true,q -> BooleanAlgebra.decode(q.equals(Rational.ZERO),q.equals(Rational.ONE),"Q"));
         binary("greater",algebra(),algebra(),truth.algebra(),false,(a,b) -> a.compareTo(b)>0);
         binary("equal",algebra(),algebra(),truth.algebra(),false,Rational::equals);
         flat("add-subtract",algebra(),algebra(),algebra(),false,(a,b) -> Arrays.asList(a.add(b),a.subtract(b)));
@@ -21,6 +22,7 @@ public final class RationalField extends ConcreteAlgebra<Rational> {
         law("Addition is an abelian group with zero and negation.");
         law("Multiplication is commutative, associative and distributive over addition, with identity one.");
         law("Every nonzero rational has a multiplicative inverse; division by zero is undefined.");
+        law("Boolean decoding is defined exactly on the distinguished rationals zero and one.");
     }
     public Rational zero() { return Rational.ZERO; }
     public Rational one() { return Rational.ONE; }

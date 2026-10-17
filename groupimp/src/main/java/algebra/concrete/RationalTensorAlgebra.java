@@ -30,6 +30,7 @@ public final class RationalTensorAlgebra extends ConcreteAlgebra<RationalTensor>
         unary("norm-squared",algebra(),rationals.algebra(),false,t -> t.dot(t));
         binary("dot",algebra(),algebra(),rationals.algebra(),true,RationalTensor::dot);
         binary("equal",algebra(),algebra(),truth.algebra(),false,RationalTensor::equals);
+        unary("to-boolean",algebra(),truth.algebra(),true,t -> BooleanAlgebra.decode(t.equals(RationalTensor.scalar(Rational.ZERO)),t.equals(RationalTensor.scalar(Rational.ONE)),"Tensor(Q)"));
         binary("swap-axes",algebra(),axisPairs,algebra(),true,(t,p) -> t.swapAxes(axis(t,p.first),axis(t,p.second)));
         binary("contract",algebra(),axisPairs,algebra(),true,(t,p) -> t.contract(axis(t,p.first),axis(t,p.second)));
         unary("from-scalar",rationals.algebra(),algebra(),false,RationalTensor::scalar);
@@ -44,6 +45,7 @@ public final class RationalTensorAlgebra extends ConcreteAlgebra<RationalTensor>
         law("Contraction sums along matching coordinates of two distinct equal-sized axes in standard coordinate bases, retaining other axes in order.");
         law("Scalars have order zero and one entry. Zero-sized axes are retained, and their contraction is an empty sum of zero.");
         law("This is a family of coordinate tensor spaces, not an implementation of arbitrary tensor bundles or variance-aware abstract tensors.");
+        law("Boolean decoding is defined exactly on scalar tensors zero and one.");
     }
     private static int axis(RationalTensor tensor,BigInteger value) {
         if(value.signum()<0 || value.compareTo(BigInteger.valueOf(tensor.order()))>=0) throw MathFailure.undefined("Tensor axis is outside its order");

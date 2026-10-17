@@ -62,6 +62,11 @@ public final class SimplicialChainMapClass implements Serializable {
         if(!source().equals(before.target())) throw MathFailure.undefined("Chain-class composition requires identical full labelled joining pairs");
         Computation work=new Computation(); return fromMap(representative.compose(before.representative,work),work);
     }
+    public boolean isIsomorphism() { return SimplicialChainInverseSolver.isHomotopyEquivalence(representative); }
+    /** Inverse in the homotopy category, with the full labelled endpoints reversed. */
+    public SimplicialChainMapClass inverse() {
+        Computation work=new Computation(); return fromMap(SimplicialChainInverseSolver.inverse(representative,work),work);
+    }
     public AbelianGroupHomomorphism homologyMap(BigInteger degree) { return representative.homologyMap(degree); }
     public AbelianGroupHomomorphism cohomologyMap(BigInteger degree) { return representative.cohomologyMap(degree); }
     public List<AbelianGroupHomomorphism> homologyMaps() { return representative.homologyMaps(); }

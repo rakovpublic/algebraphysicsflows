@@ -135,8 +135,8 @@ public final class SimplicialChainMap implements Serializable {
         if(!source.equals(before.target)) throw MathFailure.undefined("Chain-map composition requires identical full labelled joining pairs");
         return build(before.source,target,work,d -> work.multiply(matrixAt(d),before.matrixAt(d)));
     }
-    public boolean isIsomorphism() {
-        Computation work=new Computation();
+    public boolean isIsomorphism() { return isIsomorphism(new Computation()); }
+    boolean isIsomorphism(Computation work) {
         for(IntegerMatrix matrix : matrices) {
             if(matrix.rows()!=matrix.columns()) return false;
             List<BigInteger> factors=work.invariantFactors(matrix);
@@ -145,8 +145,10 @@ public final class SimplicialChainMap implements Serializable {
         }
         return true;
     }
-    public SimplicialChainMap inverse() {
-        Computation work=new Computation(); return build(target,source,work,d -> work.inverseUnimodular(matrixAt(d)));
+    public boolean isQuasiIsomorphism() { return new IntegralChainMappingCone(this).isAcyclic(); }
+    public SimplicialChainMap inverse() { return inverse(new Computation()); }
+    SimplicialChainMap inverse(Computation work) {
+        return build(target,source,work,d -> work.inverseUnimodular(matrixAt(d)));
     }
     public RelativeSimplicialChain onChain(RelativeSimplicialChain chain) {
         if(!source.equals(chain.pair())) throw MathFailure.undefined("Chain-map pushforward requires the full source pair");

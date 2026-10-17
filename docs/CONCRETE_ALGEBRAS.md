@@ -4,7 +4,9 @@
 
 `new ConcreteMathematics(3, 5, 7)` instead uses dimension three and includes both prime fields. Dimension must be positive for the matrix algebra. Each prime is checked exactly; composite or duplicate field parameters are rejected.
 
-The default initializer currently installs 1502 native operations from 66 algebra builders.
+The default initializer currently installs 1756 native operations from 74 algebra builders.
+
+Boolean has the usual six additional derived operations: `nand`, `nor`, `equivalent`, `difference`, `less-or-equal`, and `greater-or-equal`. It also encodes `false` and `true` as the distinguished `0` and `1` values of N, Z, Q, Q(i), H(Q), Q[x], Q(x), Tensor(Q), Mat2(Q), Z/6Z, and each configured prime field. Each reverse `to-boolean` transition is partial and accepts exactly those two values; it rejects all other values rather than assigning a generic truth value. For tensors this means scalar tensors, and for matrices it means the zero and identity matrices.
 
 ## Existing API usage
 
@@ -74,20 +76,20 @@ List<String> values = math.flow(math.naturals,
 | FiniteMarkovAlgebra / FiniteMarkov(Z) | typed compose; equality -> Boolean | domain/codomain; counts; row distributions; deterministic function and matrix conversions; communicating/recurrent classes; stationary extremes and unique stationary law | apply to a distribution -> second carrier; powers; flat marginal orbits; transition probabilities; time reversal; detailed balance; absorbing events; hitting probabilities and mean times -> Vec(Q) |
 | IntegerSetAlgebra (extends FiniteSetAlgebra) / FiniteSet(Z) | union, intersection, difference, symmetric-difference, complement-in | cardinality -> N | subset/equal -> Boolean; contains; insert/remove; unary flat subsets; flat transfer elements -> Z |
 | NaturalSemiring / N | add, multiply | successor, to-integer | None |
-| IntegerRing / Z | add, subtract, multiply, gcd, lcm, quotient, remainder | negate, to-rational | greater/equal -> Boolean; divide-rational -> Q; flat quotient-remainder |
-| RationalField / Q | add, subtract, multiply, divide | negate, inverse | greater/equal -> Boolean; flat add-subtract |
-| PrimeField / Z/pZ | add, subtract, multiply, divide | negate, inverse | Fixed prime membership, exact residues |
-| ResidueRing / Z/nZ | add, subtract, multiply, unit-only divide | negate, unit-only inverse, is-unit, is-zero-divisor, lift to Z | integer powers; reduction from Z; flat solve-multiply; enumeration |
-| RationalFunctionField / Q(x) | add, subtract, multiply, divide, compose | negate, inverse, derivative, numerator/denominator | evaluate at Q; equality; polynomial embedding |
+| IntegerRing / Z | add, subtract, multiply, gcd, lcm, quotient, remainder | negate, to-rational, exact 0/1 to-boolean | greater/equal -> Boolean; divide-rational -> Q; flat quotient-remainder |
+| RationalField / Q | add, subtract, multiply, divide | negate, inverse, exact 0/1 to-boolean | greater/equal -> Boolean; flat add-subtract |
+| PrimeField / Z/pZ | add, subtract, multiply, divide | negate, inverse, exact 0/1 to-boolean | Fixed prime membership, exact residues |
+| ResidueRing / Z/nZ | add, subtract, multiply, unit-only divide | negate, unit-only inverse, is-unit, is-zero-divisor, exact 0/1 to-boolean, lift to Z | integer powers; reduction from Z; flat solve-multiply; enumeration |
+| RationalFunctionField / Q(x) | add, subtract, multiply, divide, compose | negate, inverse, derivative, numerator/denominator, exact 0/1 to-boolean | evaluate at Q; equality; polynomial embedding |
 | RationalMultivariatePolynomialAlgebra / Poly(Q) | dimension-checked add, subtract, multiply; equality -> Boolean | negate; degree -> Z; variable/term counts -> N; Laplacian; constant-part -> Q; flat partials, variables, terms and coefficients | partial, primitive by variable index; rational scale; natural powers; evaluate at Vec(Q) -> Q; directional derivative; gradient-at -> second vector carrier; hessian-at -> Mat(Q); Q[x] conversions |
 | RationalPolynomialMapAlgebra / PolynomialMap(Q) | shape-checked add, subtract, compose; equality -> Boolean | negate; input/output dimensions; flat components; divergence -> Poly(Q); curl; constant-part -> Vec(Q); linear-part -> Mat(Q) | evaluate -> second vector carrier; jacobian-at -> Mat(Q); partial/component by index; rational scale; scalar gradient and embedding; matrix embedding; simultaneous substitution into a scalar polynomial |
 | PolynomialDifferentialFormAlgebra / PolynomialForm(Q) | dimension-checked add, subtract, wedge; equality -> Boolean | exterior-derivative; Hodge star; grade involution; scalar-part -> Poly(Q); flat terms, coefficients, masks, degrees and coordinate differentials | rational/polynomial scaling; pullback, insertion and Lie derivative by PolynomialMap(Q); evaluation -> Exterior(Q); grade selection; polynomial, exterior and vector-field conversions |
 | PolynomialCellAlgebra / PolynomialCell(Q) | oriented product; equality -> Boolean | parameter/ambient dimensions; flat faces and vertices; map/point conversions | lower/upper faces by axis; segment from two vectors; evaluation -> second Vec(Q) carrier; polynomial pushforward; form integration -> Q |
 | PolynomialChainAlgebra / PolynomialChain(Q) | dimension/degree-checked add, subtract; oriented product; equality -> Boolean | negate; boundary; integer degree; ambient dimension; cell count; flat cells and coefficients; cell embedding/boundary | rational scale; coefficient lookup; polynomial pushforward; homogeneous-form integration -> Q |
 | SymmetricGroup / Sn | compose | inverse, order, sign, fixed-point-count, flat cycles | apply and flat orbit at N; integer powers; equality; enumeration |
-| BooleanAlgebra / Boolean | and, or, xor, implies, equal | not | None |
-| RationalComplexField / Q(i) | add, subtract, multiply, divide | negate, conjugate, norm-squared -> Q | Q(i).embed-rational on Q -> Q(i) |
-| RationalQuaternionAlgebra / H(Q) | add, subtract, Hamilton multiply, left/right division; equal/same-rotation -> Boolean | negate, conjugate, inverse; norm-squared/real-part -> Q; imaginary-part -> Vec(Q); flat components -> Q | rational/complex embeddings; pure vector conversions; rotations -> Vec(Q); exact rotation matrix conversions; zero/one/i/j/k |
+| BooleanAlgebra / Boolean | and, or, xor, implies, equal, nand, nor, equivalent, difference, less-or-equal, greater-or-equal | not; exact 0/1 encodings | transfers to N, Z, Q, Q(i), H(Q), Q[x], Q(x), Tensor(Q), Mat2(Q), residues and configured prime fields |
+| RationalComplexField / Q(i) | add, subtract, multiply, divide | negate, conjugate, norm-squared -> Q; exact 0/1 to-boolean | Q(i).embed-rational on Q -> Q(i) |
+| RationalQuaternionAlgebra / H(Q) | add, subtract, Hamilton multiply, left/right division; equal/same-rotation -> Boolean | negate, conjugate, inverse; norm-squared/real-part -> Q; imaginary-part -> Vec(Q); exact 0/1 to-boolean; flat components -> Q | rational/complex embeddings; pure vector conversions; rotations -> Vec(Q); exact rotation matrix conversions; zero/one/i/j/k |
 | RationalVectorSpace / Q^n | add, subtract | negate | scale by Q -> Q^n; dot -> Q; flat scale-flat and scale-signs |
 | RationalMatrixAlgebra / Matn(Q) | add, subtract, multiply | negate, transpose, inverse, determinant -> Q, trace -> Q, rank -> N; characteristic/minimal polynomials; flat rational eigenvalues and diagonalization | scale by Q; apply to Q^n; solve with nonsingular matrix; polynomial evaluation; natural powers; ordinary/generalized eigenspace bases and eigenvalue multiplicity |
 | RationalVectorFamily / Vec(Q) | partial add, subtract, dot -> Q | negate; dimension -> N; flat entries -> Q; zero-like | scale by Q; fixed-carrier conversions; empty vector constant |
@@ -95,7 +97,7 @@ List<String> values = math.flow(math.naturals,
 | IntegerMatrixFamily / Mat(Z) | shape-checked add, subtract, multiply; equality -> Boolean | transpose; shape counts; flat rows/columns; Smith form and flat [U,D,V] decomposition; integral kernel/image bases; cokernel -> AbelianGroupType; rank/nullity; unimodular inverse | integer scale; apply/solve-particular -> second Vec(Z) carrier; flat solve-generators; solvability -> Boolean; exact rational conversions |
 | RationalMatrixFamily / Mat(Q) | partial add, subtract, multiply; equal -> Boolean | transpose, RREF, pseudoinverse, row/column projectors; rank/nullity -> N; flat pivot columns and linear-space bases; rows, columns, shape counts; characteristic/minimal polynomials; rational spectra and diagonalization | scale; apply/project-column/least-squares-minimum-norm/least-squares-residual -> Vec(Q); least-squares-error -> Q; fixed-carrier conversions; zero-like; square inverse/determinant/trace; matrix polynomial evaluation, powers, companion matrices, eigenspace bases and multiplicity |
 | RationalAffineSpaceAlgebra / Affine(Q) | equal -> Boolean | particular/minimum-norm -> Vec(Q); flat directions -> Vec(Q); dimension/ambient-dimension -> N; is-empty/is-unique | solve/least-squares Mat(Q) x Vec(Q) -> Affine(Q); contains -> Boolean; at/closest-point -> Vec(Q) |
-| RationalTensorAlgebra / Tensor(Q) | add, subtract, Hadamard and tensor products; dot -> Q; equal -> Boolean | negate; order/size -> N; flat shape -> N; flat entries -> Q; norm-squared -> Q; zero-like | scale by Q; axis-pair swap/contraction; scalar/vector/matrix conversions; tensor-product unit |
+| RationalTensorAlgebra / Tensor(Q) | add, subtract, Hadamard and tensor products; dot -> Q; equal -> Boolean | negate; order/size -> N; flat shape -> N; flat entries -> Q; norm-squared -> Q; exact scalar 0/1 to-boolean; zero-like | scale by Q; axis-pair swap/contraction; scalar/vector/matrix conversions; tensor-product unit |
 | RationalExteriorAlgebra / Exterior(Q) | add, subtract, wedge; dot -> Q; equal -> Boolean | negate, grade involution, reverse, Hodge star; dimension/term count -> N; flat degrees/masks -> N, coefficients -> Q, terms -> Exterior(Q); scalar/vector transfers | scale; grade selection; vector insertion; induced matrix action; dimension-indexed zero/unit/volume |
 | RationalPolynomialRing / Q[x] | add, subtract, multiply | negate, derivative; flat rational roots | derivative-order with N; evaluate at Q -> Q; primitive/integrate; iterate and flat orbit with Pair(Q,N); rational-root multiplicity -> N |
 
@@ -2202,7 +2204,7 @@ Context changes check endpoints without running reductions. Matrix lists check a
 
 ## Contextual chain-homotopy classes
 
-`math.chainMapClasses` installs 24 native operations on `SimplicialChainMapClass`. A value retains its full labelled source and target pairs, its canonical element of `H_0(Hom)`, and a validated deterministic representative chain map. This makes direct composition of classes available through the existing closed operation interface. The definition and well-definedness of composition follow the [chain-complex conventions](https://stacks.math.columbia.edu/tag/010V) and [Hom-complex construction](https://stacks.math.columbia.edu/tag/0A8H).
+`math.chainMapClasses` installs 26 native operations on `SimplicialChainMapClass`. A value retains its full labelled source and target pairs, its canonical element of `H_0(Hom)`, and a validated deterministic representative chain map. This makes direct composition of classes available through the existing closed operation interface. The definition and well-definedness of composition follow the [chain-complex conventions](https://stacks.math.columbia.edu/tag/010V) and [Hom-complex construction](https://stacks.math.columbia.edu/tag/0A8H).
 
 | Operations | Behavior |
 | --- | --- |
@@ -2217,6 +2219,7 @@ Context changes check endpoints without running reductions. Matrix lists check a
 | `homology-map`, `cohomology-map` | Degreewise covariant homology and contravariant cohomology homomorphisms for nonnegative degrees |
 | `homology-maps`, `cohomology-maps` | Flat lists from degree zero through the largest endpoint ambient dimension, retaining zero groups and maps |
 | `ChainMapClass.generators-in` | Flat minimal Smith generators as contextual classes, torsion first and then free; empty for a zero quotient |
+| `is-isomorphism`, `inverse` | Decide and construct an inverse in the chain-homotopy category; see bounded solving below |
 
 Construction from a generic element explicitly attaches the supplied context; it cannot recover that element's original geometric provenance. Once attached, class equality and arithmetic retain both complete pairs. Abstractly isomorphic groups, matching matrix sizes, or identical induced homology maps do not identify contextual classes.
 
@@ -2242,6 +2245,636 @@ List<String> generators = math.flow(math.chainMapSpaces, Collections.singletonLi
 
 Composition is associative, unital and additive in both arguments. A representative is a deterministic **set-theoretic section**: it need not preserve addition, composition or identity matrices. For example, the identity class of an interval may have a constant-map representative. In a relative acyclic complex the identity class equals zero. Induced homology and cohomology maps are independent of the representative; arbitrary raw chain or cochain actions are not supplied as class operations.
 
-Hom reductions retain the existing bound of **256 total coefficients in each Hom degree -1, 0 and 1**, after quotient-basis filtering. One **5000000-unit budget** covers a whole construction or arithmetic/composition operation, including representative multiplication, matrix validation, Hom reduction, projection and lifting. Flat generator lists use one reduction and one Smith lift matrix and validate every output under the shared budget. Degreewise integral-map lists likewise share one budget. Shape/work exhaustion is `IMPLEMENTATION_FAILURE`, never a false equality, mathematical nonexistence or partial list. Integer coefficient bit lengths remain unbounded. No inverse-class solver or general geometric homotopy classification is added.
+Hom reductions retain the existing bound of **256 total coefficients in each Hom degree -1, 0 and 1**, after quotient-basis filtering. One **5000000-unit budget** covers a whole construction or arithmetic/composition operation, including representative multiplication, matrix validation, Hom reduction, projection and lifting. Flat generator lists use one reduction and one Smith lift matrix and validate every output under the shared budget. Degreewise integral-map lists likewise share one budget. Shape/work exhaustion is `IMPLEMENTATION_FAILURE`, never a false equality, mathematical nonexistence or partial list. Integer coefficient bit lengths remain unbounded. Bounded inverse solving is described below; general geometric homotopy classification remains outside scope.
 
 `NativeSimplicialChainMapClassTest` covers 6,561 independent point-matrix compositions, noncommuting composition and contravariance, associative and distributive laws, 125 interval maps classified independently by augmentation, circle degree actions, torsion invisible on homology, mixed free/torsion generators, nonadditive lifts, exact full-pair and presentation checks, changing ambient dimensions, empty shapes, aggregate and shared-list limits, actual native wrappers, and serialized repeatable scalar/flat flows.
+
+## Constructive integral homotopy inverses
+
+Five operations now decide and construct inverses up to integral chain homotopy. For a supplied `F:S -> T`, the solver finds a reverse chain map `G:T -> S` and degree-raising operators `H` on `S` and `K` on `T` satisfying
+
+```text
+d_S G = G d_T
+GF + d_S H + H d_S = id_S
+FG + d_T K + K d_T = id_T
+```
+
+These equations are linear in the unknown coefficients of `G`, `H` and `K`, because `F` is fixed. A single Smith decomposition solves them over the integers and sets free Smith coordinates to zero for a deterministic choice. Both inverse identities are required; a left or right inverse alone is insufficient. The witness orientation follows the existing `to - from` convention. This implements the [definition of chain-homotopy equivalence](https://stacks.math.columbia.edu/tag/010V) for the retained finite integral quotient chains.
+
+| Operation | Native result |
+| --- | --- |
+| `ChainMap.is-homotopy-equivalence` | Unary Boolean transfer; `false` precisely for an integral obstruction within the computation bounds |
+| `ChainMap.homotopy-inverse` | Unary closed operation returning one validated `G` with full endpoints reversed |
+| `ChainHomotopy.inverse-homotopies` | Unary flat transfer on a `ChainMap`; exactly `[GF -> id_S, FG -> id_T]` for the same solved `G` |
+| `ChainMapClass.is-isomorphism` | Unary Boolean transfer testing invertibility in the homotopy category |
+| `ChainMapClass.inverse` | Unary closed operation returning the unique inverse class with its canonical representative |
+
+Nonexistence makes the two inverse operations and the flat witness operation `OPERATION_UNDEFINED`. The flat operation never returns an empty or partial list to signal failure. Decisions propagate computation failures. Existing `ChainMap.is-isomorphism` and `ChainMap.inverse` retain their strict degreewise meaning. A constant map of an interval is a homotopy equivalence despite its singular matrices. On a relative complex with only `Z/2` homology, multiplication by any odd integer is a homotopy equivalence. Multiplication by three on the circle is not: rational invertibility does not satisfy the integral equations.
+
+```java
+ConcreteMathematics math = new ConcreteMathematics();
+RelativeSimplicialComplex interval = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0, 1))));
+BigInteger zero = BigInteger.ZERO, one = BigInteger.ONE;
+SimplicialChainMap constant = new SimplicialChainMap(interval, interval, Arrays.asList(
+        new IntegerMatrix(new BigInteger[][] {{one, one}, {zero, zero}}),
+        IntegerMatrix.zero(1, 1)));
+List<String> decision = math.flow(math.chainMaps, Collections.singletonList(constant))
+        .<Boolean>performAlgebraTransfer("is-homotopy-equivalence").collect();
+// [true]
+List<String> witnesses = math.flow(math.chainMaps, Collections.singletonList(constant))
+        .<SimplicialChainHomotopy>performFlatAlgebraTransfer("ChainHomotopy.inverse-homotopies")
+        .collect();
+// Exactly two explicit witnesses, source first and target second.
+SimplicialChainMapClass value = SimplicialChainMapClass.fromMap(constant);
+List<String> identity = math.flow(math.chainMapClasses, Collections.singletonList(value))
+        .performOneOperandOperation("inverse").performOperation("compose", value)
+        .<Boolean>performAlgebraTransfer("is-identity").collect();
+// [true]
+```
+
+With quotient ranks `s_k` and `t_k`, the whole system permits at most **256 equations**, counted as `sum_k(s_k^2 + t_k^2 + s_(k-1)*t_k)`, and **256 unknown coefficients**, counted as `sum_k(s_k*t_k + s_(k+1)*s_k + t_(k+1)*t_k)`. Missing degrees have rank zero. The counts include zero equations and obvious identity maps. Quotient filtering precedes these bounds. The two returned homotopies retain their respective endpoint degree ranges, which can differ.
+
+One **5000000-unit budget** covers matrix assembly, Smith solving, reverse-map validation, composite and identity construction, and both witness validations. Class inversion also shares this budget with the reverse Hom reduction, projection and canonical lift, which keep their existing Hom-rank bounds. Successful standalone stages need not fit when combined. Exhaustion raises `IMPLEMENTATION_FAILURE`, never a false decision, mathematical nonexistence or partial list. Coefficients have no bit-length cap. Representative choices need not be involutive or geometric; inverse **classes** are unique, involutive, and reverse composition order. This does not decide geometric homotopy equivalence of spaces.
+
+`NativeSimplicialChainInverseTest` adds 13 tests covering independent determinants and adjugates for 625 point maps, 125 interval maps, all 25 relative interval contexts, one-sided inverses, 49 independent circle degree pairs, relative `Z/2` units and 1025-bit coefficients, direct boundary checks for both homotopies, different labels and dimensions, empty/acyclic contexts, inverse-class laws, aggregate bounds, shared normalization budgets and serialized native scalar/flat flows.
+
+## Retained integral chain equivalences
+
+`math.chainEquivalences` installs 36 operations on `ChainEquivalence`. A value retains `F:S -> T`, `G:T -> S`, and the actual homotopies `H:GF -> id_S` and `K:FG -> id_T`. Their equations use the existing `dH + Hd = to - from` convention. The carrier implements integral chain-homotopy equivalence as [defined for chain complexes](https://stacks.math.columbia.edu/tag/010V), with explicit witnesses and full labelled relative pairs.
+
+`ChainEquivalence.from-map` solves once and retains the complete bundle. `ChainEquivalence.from-data` validates a `SimplicialChainEquivalence.Data` containing four individually valid inputs: both maps must have opposite full endpoints and each witness must join the exact composite to the exact identity. Homotopic but unequal endpoint maps are rejected. Data-carrier membership alone does not assert these joins. Identity construction and supplied-data validation do not search for an inverse.
+
+| Operations | Native behavior |
+| --- | --- |
+| `from-map`, `from-data`, `identity-on` | Unary transfers from `ChainMap`, `ChainEquivalence.data`, and `RelativeComplex` |
+| `source`, `target`, `forward`, `backward`, `source-homotopy`, `target-homotopy`, `data` | Unary transfers exposing the retained values |
+| `inverse`, `compose`, `equal` | Unary swap of maps and witnesses, binary right-first composition, and equality including witness choices |
+| `maps`, `homotopies` | Unary flat transfers returning exactly `[F,G]` and `[H,K]`, even for empty complexes |
+| `homology-map`, `inverse-homology-map`, `homology-maps` | Scalar and flat mixed operations with a nonnegative degree; the flat result is exactly `[H(F),H(G)]` |
+| `cohomology-map`, `inverse-cohomology-map`, `cohomology-maps` | Contravariant integral maps; the flat result is exactly `[H*(F),H*(G)]` |
+| `on-chain`, `inverse-on-chain`, `on-cochain`, `inverse-on-cochain` | `ILeftProjectionOperation` returning the actual second carrier's `IAlgebraItem` wrapper |
+| `forward-class`, `backward-class` | Unary transfers to mutually inverse contextual `ChainMapClass` values |
+
+For `before=(F,G,H,K)` and `after=(A,B,J,L)`, `after.compose(before)` retains maps `AF`, `GB` and witnesses `GJF+H`, `AKB+L`. In degree `k`, the transported terms are `G_(k+1) J_k F_k` and `A_(k+1) K_k B_k`; the shifted degree matters. Every intermediate map and the final bundle are validated under one budget. This transports the supplied witnesses without running the inverse solver.
+
+Composition is associative and unital on the retained data. Inversion swaps both maps and both witnesses, without negation; it is involutive and reverses composition. Nonzero stationary loops remain distinguishable. Composing with the inverse need not give literal identity witness data or fix raw chains/cochains. The projected homotopy classes and induced integral maps are mutual inverses, including torsion and exact presentations.
+
+```java
+ConcreteMathematics math = new ConcreteMathematics();
+RelativeSimplicialComplex interval = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0, 1))));
+BigInteger zero = BigInteger.ZERO, one = BigInteger.ONE;
+SimplicialChainMap constant = new SimplicialChainMap(interval, interval, Arrays.asList(
+        new IntegerMatrix(new BigInteger[][] {{one, one}, {zero, zero}}),
+        IntegerMatrix.zero(1, 1)));
+SimplicialChainEquivalence value = math.chainMaps.algebra().buildAlgebraItem(constant)
+        .<SimplicialChainEquivalence>performAlgebraTransfer("ChainEquivalence.from-map")
+        .perform().getResult();
+List<String> inverseMaps = math.flow(math.chainEquivalences, Collections.singletonList(value))
+        .<AbelianGroupHomomorphism, BigInteger>performFlatAlgebraUnsafe("homology-maps", zero)
+        .<Boolean>performAlgebraTransfer("is-isomorphism").collect();
+// [true, true]
+List<String> witnesses = math.flow(math.chainEquivalences, Collections.singletonList(value))
+        .performOneOperandOperation("inverse").performOperation("compose", value)
+        .<SimplicialChainHomotopy>performFlatAlgebraTransfer("homotopies").collect();
+// Exactly two retained transported witnesses.
+RelativeSimplicialChain edge = new RelativeSimplicialChain(interval, one, new IntegerVector(one));
+List<String> image = math.flow(math.chainEquivalences, Collections.singletonList(value))
+        .performLeftProjectionOperation("on-chain", edge)
+        .<IntegerVector>performAlgebraTransfer("coordinates").collect();
+// [[0]]: the forward map contracts the edge.
+```
+
+Every required quotient basis is limited to **256 simplices** after filtering. Construction, composition (including all transports and validation), and whole two-map integral lists each share a **5000000-unit budget**. `from-map` additionally retains the inverse solver's aggregate **256-equation/256-unknown** limits, including final bundle validation in the solve budget. Supplied data, identities, swapping and composition do not invoke this search; an identity on twelve points can be supplied and composed even though its inverse-search system exceeds the equation bound. Class projections use the existing Hom-rank limits. Exhaustion raises `IMPLEMENTATION_FAILURE`, never a partial list or a claim of nonexistence. Coefficient bit lengths are unbounded.
+
+Typed chains may have negative degree with zero coordinates. Cochains and integral-map degrees are nonnegative. Actions require exact full pairs. This represents finite integral chain equivalences; no geometric homotopy equivalence, higher coherence or preservation of cochain products is asserted.
+
+`NativeSimplicialChainEquivalenceTest` adds 17 tests: 25 solved interval bundles, 1,296 independent signed circle-witness compositions, retained loops and inverse laws, noncommuting point maps and dual variance, changing dimensions with both boundary identities, exact endpoint rejection, relative torsion with 1025-bit coefficients, typed actions, empty and diagonal pairs, construction beyond solver bounds, shared composition and two-map budgets, actual native wrappers, and serialized repeatable scalar/flat flows.
+
+## Constructive conversions to chain equivalences
+
+Five unary transfers now reuse the witnesses constructed by existing algebras. Their aliases on the input carrier begin with `ChainEquivalence.`. They return the registered `ChainEquivalence` wrapper and can feed the existing scalar or flat operations immediately.
+
+| Conversion | Retained maps and witnesses |
+| --- | --- |
+| `from-isomorphism` on `ChainMap` | The supplied map, its strict integral inverse, and two zero homotopies. Every degree matrix must be square and unimodular. |
+| `from-homotopy-equivalence` on `HomotopyEquivalence` | Both supplied simplicial maps and the negatives of both actual accumulated prism matrices. |
+| `from-collapse` on `SimplicialCollapse` | Retraction `R`, inclusion `i`, the constructed source witness `iR -> id`, and a zero target witness since `Ri=id`. |
+| `from-collapse-sequence` on `CollapseSequence` | Chronological composite retraction, final inclusion, accumulated source homotopy, and a zero target witness. |
+| `from-subdivision` on `SimplicialSubdivision` | Signed subdivision `S`, last-vertex map `L`, a zero source witness since `LS=id`, and the constructed target witness `SL -> id`. |
+
+The geometric `HomotopyEquivalence` convention runs from identity to composite. Conversion negates the actual prism matrices to obtain the opposite orientation required by `ChainEquivalence`; it does not recompute prisms along reversed geometric paths. Nonzero loops and supplied choices remain visible in equality. Conversions retain full labelled relative pairs, quotient projection and integral coefficients. A singular chain map may admit `from-map` but fail `from-isomorphism`, because the latter specifically requires a strict inverse.
+
+Four binary witness actions use `ILeftProjectionOperation` and return the actual second carrier's wrapper: `source-homotopy-on-chain`, `target-homotopy-on-chain`, `source-homotopy-on-cochain`, and `target-homotopy-on-cochain`. For chains they raise degree by one and satisfy the full identities `dH + Hd = id - GF` and `dK + Kd = id - FG`. For cycles the first term alone fills the difference from inverse composition. Shifted transposes lower cochain degree and satisfy the dual identities. Typed cochain homotopy actions require positive degree; degree-zero matrices remain available by transferring to the retained homotopy and using its `cochain-matrix` operation. Typed chain actions allow negative-degree zero chains. All actions require the exact full source or target pair.
+
+```java
+ConcreteMathematics math = new ConcreteMathematics();
+RelativeSimplicialComplex interval = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0, 1))));
+SimplicialCollapse collapse = new SimplicialCollapse(interval, FiniteSet.of(BigInteger.ONE));
+SimplicialChainEquivalence value = math.collapses.algebra().buildAlgebraItem(collapse)
+        .<SimplicialChainEquivalence>performAlgebraTransfer("ChainEquivalence.from-collapse")
+        .perform().getResult();
+RelativeSimplicialChain vertex = new RelativeSimplicialChain(interval, BigInteger.ZERO,
+        new IntegerVector(BigInteger.ZERO, BigInteger.ONE));
+List<String> boundary = math.flow(math.chainEquivalences, Collections.singletonList(value))
+        .performLeftProjectionOperation("source-homotopy-on-chain", vertex)
+        .performOneOperandOperation("boundary")
+        .<IntegerVector>performAlgebraTransfer("coordinates").collect();
+// [[-1, 1]]: vertex one minus its image under inclusion after retraction.
+List<String> inverseMaps = math.flow(math.collapses, Collections.singletonList(collapse))
+        .<SimplicialChainEquivalence>performAlgebraTransfer("ChainEquivalence.from-collapse")
+        .<AbelianGroupHomomorphism, BigInteger>performFlatAlgebraUnsafe("homology-maps", BigInteger.ZERO)
+        .<Boolean>performAlgebraTransfer("is-isomorphism").collect();
+// [true, true]
+```
+
+None of these five conversions invokes the simultaneous inverse solver or its aggregate equation/unknown limits. For example, a strict identity on twelve points and a supplied contraction of a twelve-edge interval convert successfully beyond those search bounds. Each conversion still shares **one 5000000-unit budget** across both map constructions, both witnesses, and final bundle validation; strict conversion also includes integral matrix inversion. Individually successful components can exceed this budget when combined. Every required quotient basis remains bounded by **256 simplices**, after filtering. Exhaustion raises `IMPLEMENTATION_FAILURE`, with no replacement witnesses or partial bundle. The original geometric objects retain their own construction limits. Exact chain witnesses do not assert new geometric homotopy equivalences or higher coherence.
+
+`NativeChainEquivalenceConversionsTest` adds 15 tests: 625 independent strict inverse decisions, signed interval fillings and relative projection, preserved nonzero geometric loops, all simplex facets through dimension five, chronological collapse composition, all 148 three-label relative subdivisions, extreme labels and 1025-bit coefficients, projective-plane torsion, both typed differential identities, exact-context and degree failures, empty and filtered diagonal pairs, conversion beyond solver bounds, shared-budget failures for all five converters, actual wrappers, and serialized repeatable flows.
+
+## Integral mapping cones and quasi-isomorphisms
+
+`IntegralChainMappingConeAlgebra` registers `ChainCone` directly in MathTool. Its immutable value retains a validated integral chain map `F: S -> T` with both full labelled relative pairs. Equality compares this defining map. The chain groups are `Cone(F)_n = T_n + S_(n-1)`, with target coordinates first and differential `[[d_T, F], [0, -d_S]]`. Inclusion is `j(t)=(t,0)` and shifted projection is `p(t,s)=s`. The minus sign gives `D*D=0`; projection anticommutes with the unshifted source differential. See the [homological cone convention](https://stacks.math.columbia.edu/tag/0621) and [cones and split exact sequences](https://stacks.math.columbia.edu/tag/014D).
+
+The 24 operations use the existing interfaces in `operations/simple` and `operations/flat`:
+
+| Operation aliases | Result |
+| --- | --- |
+| `from-map`, `map`, `source`, `target` | Construct a cone from a `ChainMap`, or recover its defining map and pairs. |
+| `equal`, `dimension`, `chain-rank` | Compare exact data, obtain the formal top degree, or count coordinates at a natural degree. |
+| `boundary-matrix`, `boundary-matrices` | Signed differential in one degree, or the complete ordered list. |
+| `homology`, `homology-type`, `homology-types` | Constructive `IntegralHomology`, its abelian type, or all degreewise types. |
+| `cohomology`, `cohomology-type`, `cohomology-types` | The corresponding calculations for transposed differentials. |
+| `inclusion-matrix`, `projection-matrix` | Matrices of `j_n: T_n -> Cone_n` and `p_n: Cone_n -> S_(n-1)`. |
+| `inclusion-homology-map`, `projection-homology-map` | `H_n(T) -> H_n(Cone)` and `H_n(Cone) -> H_(n-1)(S)`. |
+| `inclusion-cohomology-map`, `projection-cohomology-map` | `H^n(Cone) -> H^n(T)` and `H^(n-1)(S) -> H^n(Cone)`. |
+| `long-exact-segment`, `long-exact-cohomology-segment` | Three composable homomorphisms in the orders below. |
+| `is-acyclic` | Whether every integral cone homology group vanishes. |
+
+At degree `n`, the homology segment returns `[H_n(F), j_*, p_*]`, with endpoints `H_n(S) -> H_n(T) -> H_n(Cone) -> H_(n-1)(S)`. The cohomology segment returns `[j^*, H^n(F), p^* at n+1]`, with endpoints `H^n(Cone) -> H^n(T) -> H^n(S) -> H^(n+1)(Cone)`. Presentations at each shared endpoint agree exactly. Constructive homology exposes cycle/cocycle representatives, quotient classes and bounding chains through the existing `IntegralHomology` algebra.
+
+```java
+ConcreteMathematics math = new ConcreteMathematics();
+RelativeSimplicialComplex point = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))));
+SimplicialChainMap doubling = SimplicialChainMap.identity(point).scale(BigInteger.valueOf(2));
+IntegralChainMappingCone cone = math.chainMaps.algebra().buildAlgebraItem(doubling)
+        .<IntegralChainMappingCone>performAlgebraTransfer("ChainCone.from-map")
+        .perform().getResult();
+List<String> homology = math.flow(math.chainCones, Collections.singletonList(cone))
+        .<AbelianGroupType>performFlatAlgebraTransfer("homology-types").collect();
+// [AbelianGroup(rank=0, torsion=[2]), AbelianGroup(rank=0, torsion=[])]
+List<String> cohomology = math.flow(math.chainCones, Collections.singletonList(cone))
+        .<AbelianGroupType>performFlatAlgebraTransfer("cohomology-types").collect();
+// [AbelianGroup(rank=0, torsion=[]), AbelianGroup(rank=0, torsion=[2])]
+List<String> ranks = math.flow(math.chainCones, Collections.singletonList(cone))
+        .performLeftProjectionOperation("chain-rank", BigInteger.ONE).collect();
+// [1], using the actual N wrapper for the second operand's carrier.
+List<String> quasi = math.flow(math.chainMaps, Collections.singletonList(doubling))
+        .<Boolean>performAlgebraTransfer("is-quasi-isomorphism").collect();
+// [false]
+List<String> segment = math.flow(math.chainCones, Collections.singletonList(cone))
+        .<AbelianGroupHomomorphism, BigInteger>performFlatAlgebraUnsafe("long-exact-segment", BigInteger.ZERO)
+        .<Boolean>performAlgebraTransfer("is-surjective").collect();
+// [false, true, true]: Z --2--> Z --> Z/2 --> 0.
+```
+
+`ChainMap.is-quasi-isomorphism` tests cone acyclicity under one shared budget. It returns true only after every cone degree has zero integral homology; a nonzero degree gives false. It does not construct inverse witnesses or invoke the simultaneous inverse solver. For example, the identity on twelve points passes beyond that solver's equation/unknown bounds. Resource exhaustion remains `IMPLEMENTATION_FAILURE`, rather than a negative decision.
+
+Public degrees are natural numbers. Degreewise lists include degrees zero through `max(dim(T), dim(S)+1)`, retaining zero slots of diagonal relative pairs; an empty source contributes no shifted ambient degree. Two empty endpoints have dimension -1 and empty lists. Differentials immediately above the top degree retain their rows and zero columns. At degree zero, the homological projection retains the negative endpoint presentation with zero generators and `rank(S_0)` zero relations; its dual endpoint has a zero-by-zero presentation.
+
+Construction retains the map without eager matrix assembly or Smith reduction. Each required quotient basis is bounded by 256 after filtering, and each combined cone group has at most **256 target plus shifted-source coordinates**. Each complete list, exact segment or acyclicity decision shares **one 5000000-unit computation budget**, including its reductions and induced maps. A scalar degree calculation can succeed while the complete list exceeds that budget. Acyclicity checks all combined ranks before reducing degrees. The carrier does not add a general chain-complex algebra or a geometric realization. Maps between cones with supplied square witnesses are provided by `ChainConeMap` below.
+
+`NativeIntegralChainConeTest` checks 125 signed interval maps and 625 point matrices against independent integer oracles; both exact sequences; rectangular, empty and filtered pairs; 1025-bit torsion and explicit bounding chains; and integral extensions from projective-plane maps whose induced homology maps coincide while their cones differ. It also checks quasi-isomorphism beyond inverse-search bounds, whole-degree and exact-segment budget failures, actual second-carrier wrappers and serialized repeatable scalar/flat flows.
+
+## Maps between integral cones with retained homotopies
+
+`IntegralChainConeMapAlgebra` registers `ChainConeMap` in MathTool. For defining maps `F:S->T` and `G:Sprime->Tprime`, supply vertical maps `a:S->Sprime`, `b:T->Tprime` and an actual `ChainHomotopy` from `bF` to `Ga`. The existing witness convention gives `dH+Hd=Ga-bF`, so the cone-map matrix in degree `n` is `[[b_n,-H_(n-1)],[0,a_(n-1)]]`. It commutes with cone boundaries, inclusion and shifted projection. This implements the [construction from a square commuting up to homotopy](https://stacks.math.columbia.edu/tag/014D), with homological indexing and the repository's witness orientation.
+
+The chosen homotopy is part of the value. Even a stationary square can have nonzero loop witnesses that change the induced cone homology map. Composition applies the right operand first and transports witnesses as `b_after H_before + H_after a_before`. Equality retains all this data; composition is associative and unital.
+
+| Operation aliases | Result |
+| --- | --- |
+| `from-data`, `data` | Validate or recover immutable `ChainConeMap.data` with both cones, both vertical maps and the chosen homotopy. |
+| `identity-on`, `from-homotopy` | Build a cone identity, or a cone isomorphism from an existing `ChainHomotopy`. |
+| `source`, `target`, `source-map`, `target-map`, `homotopy` | Recover exact cone contexts, vertical maps `a,b`, or the witness `H:bF->Ga`. |
+| `equal`, `compose` | Compare all retained data or compose maps with the exact joining cone. |
+| `zero-between`, `zero-like`, `is-zero`, `is-identity` | Construct zero maps or test all retained maps and the actual witness. |
+| `add`, `subtract`, `negate`, `scale` | Integral additive arithmetic on maps between identical exact cones, including witness matrices. |
+| `is-square-isomorphism`, `inverse-square` | Test or invert both vertical chain maps and transport the chosen witness. |
+| `is-chain-isomorphism` | Test square unimodularity of every total signed cone matrix. |
+| `has-retained-homotopy-inverse`, `retained-homotopy-inverse` | Decide or solve for a reverse retained square up to integral cone homotopy, within the simultaneous solver bounds. |
+| `chain-matrix`, `cochain-matrix`, `chain-matrices`, `cochain-matrices` | One degree matrix or the complete list; cochain pullback uses transposes. |
+| `homology-map`, `cohomology-map`, `homology-maps`, `cohomology-maps` | Induced integral maps in one degree or every formal degree. |
+| `homology-naturality-maps`, `cohomology-naturality-maps` | The four vertical maps between the corresponding exact sequence segments. |
+| `on-chain`, `on-cochain` | Typed pushforward and contravariant pullback, returning the actual second carrier wrapper. |
+
+These 36 operations use the existing `operations/simple` and `operations/flat` interfaces. The homology naturality list is `[H_n(a), H_n(b), H_n(cone map), H_(n-1)(a)]`. The cohomology list is `[H^n(cone map), H^n(b), H^n(a), H^(n+1)(cone map)]`, running from the target segment back to the source segment. All three squares commute in each diagram, with equality of the actual presentations at their joins.
+
+The example below retains a nonzero loop from a point into the circle. Its cone map changes homology even though both vertical chain maps are identities:
+
+```java
+ConcreteMathematics math = new ConcreteMathematics();
+RelativeSimplicialComplex point = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))));
+RelativeSimplicialComplex circle = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Arrays.asList(FiniteSet.of(0, 1), FiniteSet.of(0, 2), FiniteSet.of(1, 2))));
+SimplicialChainMap zero = SimplicialChainMap.zero(point, circle);
+SimplicialChainHomotopy loop = new SimplicialChainHomotopy(zero, zero, Arrays.asList(
+        new IntegerMatrix(new BigInteger[][] {{BigInteger.ONE}, {BigInteger.ONE.negate()}, {BigInteger.ONE}}),
+        IntegerMatrix.zero(0, 0)));
+IntegralChainConeMap map = math.chainHomotopies.algebra().buildAlgebraItem(loop)
+        .<IntegralChainConeMap>performAlgebraTransfer("ChainConeMap.from-homotopy").perform().getResult();
+List<String> matrix = math.flow(math.chainConeMaps, Collections.singletonList(map))
+        .<IntegerMatrix, BigInteger>performAlgebraUnsafe("chain-matrix", BigInteger.ONE).collect();
+// [ZMatrix(4x4)[[1, 0, 0, -1], [0, 1, 0, 1], [0, 0, 1, -1], [0, 0, 0, 1]]]
+List<String> identity = math.flow(math.chainConeMaps, Collections.singletonList(map))
+        .<AbelianGroupHomomorphism, BigInteger>performAlgebraUnsafe("homology-map", BigInteger.ONE)
+        .<Boolean>performCustomResultOperation("equal", AbelianGroupHomomorphism.identity(map.source().homology(BigInteger.ONE).group())).collect();
+// [false]
+List<String> isomorphisms = math.flow(math.chainConeMaps, Collections.singletonList(map))
+        .<AbelianGroupHomomorphism, BigInteger>performFlatAlgebraUnsafe("cohomology-naturality-maps", BigInteger.ZERO)
+        .<Boolean>performAlgebraTransfer("is-isomorphism").collect();
+// [true, true, true, true]
+```
+
+Converting the reverse homotopy gives a strict inverse to `from-homotopy`, including its retained witness data. General squares need a `Data` value and `ChainConeMap.from-data`; this validates all four full labelled endpoint pairs and both witness composites. Merely equal homology groups, matching dimensions or an oppositely oriented witness are insufficient. Supplied component objects are immutable and individually valid, while `Data` membership does not assert their mutual compatibility.
+
+Public degrees are nonnegative. Lists run through the larger formal cone dimension, retaining zero slots and rectangular zero shapes; both empty cones give empty lists. The degree-zero homology naturality list retains the adjacent negative endpoint presentations. Each required quotient basis and combined cone rank is at most **256**. A single **5000000-unit budget** covers each full constructor, composition with both witness transports and validation, induced map with both cone reductions, whole-degree list, or four-map naturality list. Valid data may exceed later evaluation limits; exhaustion raises `IMPLEMENTATION_FAILURE`. Integer coefficients have no bit-length cap. Typed actions on `ConeChain` and `ConeCochain` are described below. This carrier does not add arbitrary cone-map matrix input, a geometric realization, or a homotopy-independent choice of cone morphism.
+
+`NativeIntegralChainConeMapTest` adds 17 tests covering 125 signed interval homotopies, 729 independent witness compositions and 6,561 point-matrix compositions. Further cases check associativity, both variances, all six naturality squares, projective-plane torsion, relative degree shifts, empty and filtered pairs, negative endpoint presentations, 1025-bit coefficients, shared composition/list/naturality budgets, actual wrappers and serialized repeatable flows.
+
+## Arithmetic and inverses of retained cone squares
+
+Parallel `ChainConeMap` values form an abelian group: add both vertical maps and the actual homotopies, with zero witness for the zero map. Composition is bilinear. `add` and `subtract` require identical full source and target defining maps, even if dimensions or homology groups coincide. `is-zero` and `is-identity` inspect the witness; a nonzero homotopy loop can make both tests false. `scale` uses `ICustomMemberOperation` and returns the first carrier's actual `IAlgebraItem` wrapper.
+
+`is-square-isomorphism` tests degreewise unimodularity of both vertical maps `a,b`. `inverse-square` swaps the cones, uses `a^-1,b^-1`, and retains `-b^-1 H a^-1`. Both compositions are literal identity squares, including zero witnesses. The inverse reverses composition order and is involutive. This extends the reverse-homotopy construction to all supplied squares with invertible vertical maps.
+
+`is-chain-isomorphism` separately tests every total cone matrix. These conditions can differ when diagonal blocks are rectangular: take `F: point -> empty` and `G: empty -> (interval, both vertices)`, with zero vertical maps and a witness sending the point to the relative edge. Both cones have just one generator in degree one, and the cone map there is `[-1]`. Its total chain map is invertible, but its retained vertical maps are not; `is-chain-isomorphism` returns true, `is-square-isomorphism` returns false, and `inverse-square` raises `OPERATION_UNDEFINED`.
+
+Continuing the nonzero-loop example above:
+
+```java
+List<String> roundTrip = math.flow(math.chainConeMaps, Collections.singletonList(map))
+        .performOneOperandOperation("inverse-square").performOperation("compose", map)
+        .<Boolean>performAlgebraTransfer("is-identity").collect();
+// [true]
+List<String> additiveZero = math.flow(math.chainConeMaps, Collections.singletonList(map))
+        .performCustomMemberOperation("scale", BigInteger.ONE.negate()).performOperation("add", map)
+        .<Boolean>performAlgebraTransfer("is-zero").collect();
+// [true]
+List<String> inverseMaps = math.flow(math.chainConeMaps, Collections.singletonList(map))
+        .performOneOperandOperation("inverse-square")
+        .<AbelianGroupHomomorphism>performFlatAlgebraTransfer("homology-maps")
+        .<Boolean>performAlgebraTransfer("is-isomorphism").collect();
+// [true, true]
+```
+
+Each complete arithmetic operation, inverse and isomorphism decision shares one **5000000-unit budget** across its components and validation. Subtraction includes intermediate negation; inversion includes both vertical inverses and all witness transports. Exceeding a work or combined-rank bound raises `IMPLEMENTATION_FAILURE`, without reporting false invertibility. The total-matrix predicate also enforces the **256-coordinate** cone bound. Invertibility of the retained square alone does not guarantee that its combined cone matrices fit this bound. Integer coefficients remain unbounded in bit length.
+
+`NativeIntegralConeMapArithmeticTest` adds 16 tests, including 729 independent sum/difference cases, 625 determinant/adjugate cases, signed loop inverses, distinct cone contexts, integer torsion, relative and empty groups, 1025-bit scaling, typed inverse actions, shared resource failures and serialized native scalar/flat flows. No inverse of a general block matrix is added to the square carrier.
+
+## Typed chains and cochains on integral cones
+
+`IntegralConeChainAlgebra` and `IntegralConeCochainAlgebra` register `ConeChain` and `ConeCochain`, with 26 and 27 operations. Each immutable value retains the exact defining cone map, a homogeneous degree, and integer coordinates ordered target first and shifted source second. Chain degrees are integers; negative groups contain only zero. Cochain degrees are nonnegative. Context checks use the full defining map and labelled pairs, even when two cones have equal homology groups or equal coordinate ranks.
+
+| Operations on both carriers | Result |
+| --- | --- |
+| `zero-on`, `basis-on` on `ChainCone` | A zero value or the ordered coordinate unit basis at the requested degree. |
+| `add`, `subtract`, `negate`, `scale`, `equal`, `is-zero` | Integral arithmetic or equality on exact contexts and degrees. |
+| `cone`, `degree`, `coordinates`, `with-coordinates` | Context inspection or replacement of correctly sized coordinates. |
+| `class-of`, `representative` | Projection to an integral quotient class, or a typed representative in the chosen cone and degree. |
+| `target-part`, `source-part` | Components on the actual relative target in degree `n` and source in degree `n-1`. |
+
+`ConeChain` additionally supplies `boundary`, `is-cycle`, `is-boundary`, `bounding-coordinates`, `bounding-chain`, `homologous`, `homology`, `cycle-generators`, `include-target`, and `lift-source`. `ConeCochain` supplies `coboundary`, `is-cocycle`, `is-coboundary`, `cobounding-coordinates`, `cobounding-cochain`, `cohomologous`, `cohomology`, `cocycle-generators`, `include-source`, `lift-target`, and `evaluate`. The two generator operations are native unary flat operations and return typed values with the original cone and degree.
+
+For a cone chain `(t,s)`, boundary is `(d_T t + F s, -d_S s)`. Target inclusion `t -> (t,0)` commutes with boundary. The source coordinate lift raises degree and satisfies `D lift(s) = include(Fs) - lift(ds)`; it is generally not a chain map. Dually, coboundary on `(u,v)` is `(delta_T u, F* u - delta_S v)`. Source inclusion raises degree and anticommutes with coboundary, while target lift satisfies `delta lift(u) = lift(delta u) + include(F* u)`. Component extraction preserves these exact relative contexts. Pairing is the integer dot product and satisfies `<delta u,c> = <u,Dc>`.
+
+`ChainConeMap.on-chain` and `on-cochain` use `ILeftProjectionOperation`: the map is the first operand, and the returned `IAlgebraItem` belongs to the second operand's actual `ConeChain` or `ConeCochain` algebra. Pushforward requires the exact source cone; pullback requires the exact target cone. Both preserve degree and commute with differentials, and pairing is preserved under pushforward/pullback. `with-coordinates` and `scale` use `ICustomMemberOperation` and retain the first carrier.
+
+```java
+ConcreteMathematics math = new ConcreteMathematics();
+RelativeSimplicialComplex point = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))));
+IntegralChainMappingCone cone = new IntegralChainMappingCone(
+        SimplicialChainMap.identity(point).scale(BigInteger.valueOf(2)));
+List<String> orders = math.flow(math.chainCones, Collections.singletonList(cone))
+        .<IntegralConeChain, BigInteger>performAlgebraUnsafe("ConeChain.zero-on", BigInteger.ZERO)
+        .performOneOperandFlatOperation("cycle-generators")
+        .<AbelianGroupElement>performAlgebraTransfer("class-of")
+        .<BigInteger>performAlgebraTransfer("order").collect();
+// [2]
+List<String> primitive = math.flow(math.chainCones, Collections.singletonList(cone))
+        .<IntegralConeChain, BigInteger>performAlgebraUnsafe("ConeChain.zero-on", BigInteger.ZERO)
+        .performCustomMemberOperation("with-coordinates", new IntegerVector(BigInteger.valueOf(2)))
+        .performOneOperandOperation("bounding-chain")
+        .<IntegerVector>performAlgebraTransfer("coordinates").collect();
+// [[1]]: the returned chain has degree one, and its boundary is [2].
+IntegralChainConeMap identity = IntegralChainConeMap.identity(cone);
+IntegralConeCochain unit = new IntegralConeCochain(cone, BigInteger.ONE, new IntegerVector(BigInteger.ONE));
+List<String> pulledOrder = math.flow(math.chainConeMaps, Collections.singletonList(identity))
+        .performLeftProjectionOperation("on-cochain", unit)
+        .<AbelianGroupElement>performAlgebraTransfer("class-of")
+        .<BigInteger>performAlgebraTransfer("order").collect();
+// [2], now in cohomological degree one.
+```
+
+A typed primitive is one integer solution, not the complete affine family. `class-of` and (co)homology comparison require (co)cycles; primitives require integral divisibility. `representative` checks the exact abelian presentation and uses its receiver only for the cone and degree. Anonymous abelian classes retain a presentation, not independent geometric provenance. At cochain degree zero, only the zero cochain is a coboundary and its `cobounding-coordinates` are empty. `cobounding-cochain` and cochain `source-part` require positive degree because their results would otherwise need negative typed cochains. Negative chain classes retain adjacent zero presentation shapes.
+
+The combined cone coordinate rank is bounded by **256** after relative filtering. Membership checks the current degree; an adjacent boundary or reduction can still exceed its bounds. Each complete class projection, representative lift or generator list shares **one 5000000-unit budget** with its homology/cohomology reduction. The two cycle checks and solve for (co)homology comparison likewise share one budget. Coefficients have no bit-length cap. Resource exhaustion is `IMPLEMENTATION_FAILURE`, without partial generator lists or false mathematical decisions. No cup or cap product on arbitrary algebraic cones is assumed.
+
+`NativeIntegralConeElementsTest` adds 17 tests: 3,375 independent signed differential cases, 729 independent shear/transpose actions, 243 adjoint pairings, structural inclusion and section signs, integer divisibility and typed primitives, free and torsion class actions, projective-plane generators, negative and relative degrees, full-context rejection, 1025-bit arithmetic, combined-rank and shared class/generator budgets, actual wrappers and serialized repeatable flows.
+
+## Integral homotopies between cone maps
+
+`IntegralConeHomotopyAlgebra` registers `ConeHomotopy` and the supporting `ConeHomotopy.data` carrier directly in MathTool, with 29 operations. A value retains two exact parallel `ChainConeMap` endpoints and integral matrices `K_n: source_n -> target_(n+1)`. Construction checks every equation `D K + K D = to - from`, with the existing target-first cone coordinates and signed boundary. These matrices can mix the two cone components. The endpoint squares retain their original chosen homotopies separately from this new witness.
+
+| Operations | Contract |
+| --- | --- |
+| `from-data`, `data` | Validate supplied endpoint maps and complete matrices, or recover immutable input data. |
+| `stationary` | Choose zero matrices on a retained cone map. |
+| `contract-isomorphism` | Construct a zero-to-identity homotopy on `Cone(F)` when `F` is a strict integral chain isomorphism. |
+| `from`, `to`, `source`, `target` | Recover the exact endpoint maps or their common cones. |
+| `reverse`, `then` | Negate a witness and swap endpoints, or concatenate chronologically at an exact joining map. |
+| `add`, `scale`, `equal` | Add parallel witnesses, scale both endpoints and matrices, or compare all retained data. |
+| `precompose`, `postcompose` | Transport with `K_n B_n` or `A_(n+1) K_n`, including both endpoint compositions. |
+| `chain-matrix`, `cochain-matrix` | Inspect one witness matrix or its shifted transpose. |
+| `chain-matrices`, `cochain-matrices` | Return complete ordered lists of the retained matrices or shifted transposes. |
+| `on-chain`, `on-cochain` | Raise chain degree or lower positive cochain degree, returning actual second-carrier wrappers. |
+| `homology-maps`, `cohomology-maps` | Return the two equal induced homomorphisms, preserving exact presentations and torsion. |
+| `are-homotopic`, `between`, `solution-generators` | Solve the simultaneous integral equations for a decision, one witness, or a complete affine family. |
+| `is-contractible`, `contract` | Decide or construct a zero-to-identity homotopy without requiring the defining map to be strictly invertible. |
+
+For an invertible defining map, the explicit contraction is `K(t,s)=(0,F^-1 t)`. The two differential terms cancel their source/target differential contributions and sum to `(t,s)`. The identity case is the cone contraction used in the [Stacks Project's split sequence construction](https://stacks.math.columbia.edu/tag/014D). The implementation constructs the inverse and validates the resulting witness. `contract-isomorphism` requires strict degreewise unimodularity; it does not construct a contraction for every acyclic cone.
+
+The following native flow fills a cycle in the cone of multiplication by `-1`:
+
+```java
+ConcreteMathematics math = new ConcreteMathematics();
+RelativeSimplicialComplex point = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))));
+IntegralChainMappingCone cone = new IntegralChainMappingCone(SimplicialChainMap.identity(point).negate());
+IntegralConeChain cycle = new IntegralConeChain(cone, BigInteger.ZERO,
+        new IntegerVector(BigInteger.valueOf(7)));
+List<String> primitive = math.flow(math.chainCones, Collections.singletonList(cone))
+        .<IntegralConeHomotopy>performAlgebraTransfer("ConeHomotopy.contract-isomorphism")
+        .performLeftProjectionOperation("on-chain", cycle)
+        .<IntegerVector>performAlgebraTransfer("coordinates").collect();
+// [[-7]]
+List<String> restored = math.flow(math.chainCones, Collections.singletonList(cone))
+        .<IntegralConeHomotopy>performAlgebraTransfer("ConeHomotopy.contract-isomorphism")
+        .performLeftProjectionOperation("on-chain", cycle).performOneOperandOperation("boundary")
+        .<IntegerVector>performAlgebraTransfer("coordinates").collect();
+// [[7]]
+List<String> endpointMaps = math.flow(math.chainCones, Collections.singletonList(cone))
+        .<IntegralConeHomotopy>performAlgebraTransfer("ConeHomotopy.contract-isomorphism")
+        .<AbelianGroupHomomorphism, BigInteger>performFlatAlgebraUnsafe("homology-maps", BigInteger.ZERO)
+        .<Boolean>performAlgebraTransfer("is-zero").collect();
+// [true, true]
+```
+
+Supplied witnesses also work when the defining map is not invertible. For the cone of multiplication by two, the identity and multiplication by three induce the same map on `Z/2`; the integral witness is `K_0=[1]`:
+
+```java
+IntegralChainMappingCone torsionCone = new IntegralChainMappingCone(
+        SimplicialChainMap.identity(point).scale(BigInteger.valueOf(2)));
+IntegralChainConeMap from = IntegralChainConeMap.identity(torsionCone);
+IntegralConeHomotopy.Data supplied = new IntegralConeHomotopy.Data(from, from.scale(BigInteger.valueOf(3)),
+        Arrays.asList(new IntegerMatrix(new BigInteger[][] {{BigInteger.ONE}}), IntegerMatrix.zero(0, 1)));
+IntegralConeHomotopy witness = math.coneHomotopies.inputs.buildAlgebraItem(supplied)
+        .<IntegralConeHomotopy>performAlgebraTransfer("ConeHomotopy.from-data").perform().getResult();
+List<AbelianGroupHomomorphism> maps = witness.homologyMaps(BigInteger.ZERO);
+boolean equal = maps.get(0).equals(maps.get(1));
+// true
+```
+
+`on-chain` satisfies `D K(c) + K D(c) = to(c) - from(c)` and gives a filling of the endpoint difference on cycles. The shifted transpose satisfies the analogous cochain identity and is adjoint under integer pairing. `on-cochain` requires positive degree because negative typed cochains are absent; `cochain-matrix(0)` still returns the shaped zero matrix. Negative zero chains are allowed and their degree is raised by one. Both actions use `ILeftProjectionOperation`; scaling and pre/postcomposition use `ICustomMemberOperation` for the first carrier.
+
+The supplied list contains one matrix in every degree from zero through the maximum formal cone dimension `D`. Both empty cones therefore give an empty chain list; the dual list covers degrees zero through `D+1`, giving one `0 x 0` matrix in this case. Relative zero slots and shaped terminal matrices remain present. Matrix and integral-map degree arguments are nonnegative; coefficient bit lengths are unbounded.
+
+Each required combined cone rank is at most **256** after relative filtering. One **5000000-unit budget** covers each entire construction, contraction, arithmetic operation, pre/postcomposition and two-map integral list, including endpoint construction, transport, validation and all reductions. Resource exhaustion is `IMPLEMENTATION_FAILURE`; incompatible contexts, shapes or equations are `OPERATION_UNDEFINED`. Input-data membership checks immutable components and the list length, not the homotopy equations or evaluable ranks. Bounded integral homotopy solving is described below. Infinite solution enumeration and equivalence modulo higher homotopies remain outside this carrier.
+
+`NativeIntegralConeHomotopyTest` adds 20 tests covering 125 integral witness/divisibility cases, 625 determinant/adjugate contraction cases, 81 noncommuting transports, signed interval contractions, nonzero loops, typed differential and pairing identities, torsion, relative/empty/changing degrees, 1025-bit coefficients, actual wrappers, serialized flat flows and shared contraction/arithmetic/transport/reduction limits. The complete registration test invokes all 29 operations against independent literal expectations.
+
+## Solving integral cone homotopies and contractions
+
+`IntegralConeHomotopySolver` supplies five additional native operations in the existing `ConeHomotopy` builder. It forms a single integer system for all entries of all `K_n`. The degree `n` equation includes both `D_(n+1) K_n` and `K_(n-1) D_n`, so adjacent witness degrees are solved together. Smith reduction decides exact integral consistency and divisibility, then reconstructs a witness and validates it against the original full cone maps.
+
+`ConeHomotopy.are-homotopic` returns a Boolean. `ConeHomotopy.between` returns one validated witness or raises `OPERATION_UNDEFINED` when no integral solution exists. `ConeHomotopy.solution-generators` returns an empty list for an inconsistent system; otherwise its first entry is a particular witness and the remaining entries form a complete integral basis of homogeneous witnesses from the exact zero cone map to itself. Every solution has the form `particular + sum(integer_i * generator_i)`. The particular solution sets free Smith coordinates to zero; it is deterministic for these matrices, not a canonical choice invariant under changes of bases. The flat result parametrizes all witnesses without enumerating an infinite set.
+
+All three operations require identical full source and target defining cones. They retain and compare the actual cone-map matrices, including contributions from the original square homotopies. Equal induced maps do not decide homotopy existence: between the two-term complex `Z --2--> Z` in degrees one and zero and its shift to degrees two and one, a map with sole degree-one coefficient `c` has a homotopy to zero exactly when `2*x + 2*y = c` has an integer solution. Odd `c` fails even though every induced homology and cohomology map is zero.
+
+This example solves the homotopy between the identity and multiplication by three on the cone of multiplication by two:
+
+```java
+ConcreteMathematics math = new ConcreteMathematics();
+RelativeSimplicialComplex point = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))));
+IntegralChainMappingCone cone = new IntegralChainMappingCone(
+        SimplicialChainMap.identity(point).scale(BigInteger.valueOf(2)));
+IntegralChainConeMap from = IntegralChainConeMap.identity(cone);
+IntegralChainConeMap to = from.scale(BigInteger.valueOf(3));
+List<String> decision = math.flow(math.chainConeMaps, Collections.singletonList(from))
+        .<Boolean>performCustomResultOperation("ConeHomotopy.are-homotopic", to).collect();
+// [true]
+List<String> witnessMatrices = math.flow(math.chainConeMaps, Collections.singletonList(from))
+        .<IntegralConeHomotopy>performCustomResultOperation("ConeHomotopy.between", to)
+        .<IntegerMatrix>performFlatAlgebraTransfer("chain-matrices").collect();
+// [ZMatrix(1x1)[[1]], ZMatrix(0x1)[]]
+List<String> affineFamily = math.flow(math.chainConeMaps, Collections.singletonList(from))
+        .<IntegralConeHomotopy>performFlatCustomResultOperation("ConeHomotopy.solution-generators", to)
+        .<IntegerMatrix>performFlatAlgebraTransfer("chain-matrices").collect();
+// [ZMatrix(1x1)[[1]], ZMatrix(0x1)[]] -- this witness is unique
+```
+
+`ConeHomotopy.is-contractible` decides existence of an integral homotopy from zero to identity, and `ConeHomotopy.contract` constructs one. These use the same full system, with one budget spanning endpoint construction, solving and witness validation. The existing `contract-isomorphism` remains the direct construction for strictly invertible defining maps and avoids the solver's aggregate equation/unknown limits.
+
+For example, the interval's constant map is not invertible as a chain map, but its cone has a solved contraction:
+
+```java
+RelativeSimplicialComplex interval = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0, 1))));
+SimplicialChainMap constant = new SimplicialChainMap(interval, interval, Arrays.asList(
+        new IntegerMatrix(new BigInteger[][] {{BigInteger.ONE, BigInteger.ONE},
+                {BigInteger.ZERO, BigInteger.ZERO}}), IntegerMatrix.zero(1, 1)));
+IntegralChainMappingCone singularCone = new IntegralChainMappingCone(constant);
+IntegralConeChain cycle = new IntegralConeChain(singularCone, BigInteger.ZERO,
+        new IntegerVector(BigInteger.valueOf(3), BigInteger.valueOf(-7)));
+List<String> contractible = math.flow(math.chainCones, Collections.singletonList(singularCone))
+        .<Boolean>performAlgebraTransfer("ConeHomotopy.is-contractible").collect();
+// [true]
+List<String> filled = math.flow(math.chainCones, Collections.singletonList(singularCone))
+        .<IntegralConeHomotopy>performAlgebraTransfer("ConeHomotopy.contract")
+        .performLeftProjectionOperation("on-chain", cycle).performOneOperandOperation("boundary")
+        .<IntegerVector>performAlgebraTransfer("coordinates").collect();
+// [[3, -7]]
+```
+
+Every combined cone degree rank is bounded by **256** after relative filtering. The dense solver independently limits the full system to **256 equations** (`sum targetRank(n)*sourceRank(n)`) and **256 unknown coefficients** (`sum targetRank(n+1)*sourceRank(n)`). One **5000000-unit budget** covers assembly, Smith transformations, reconstruction and validation of the entire result, including every homogeneous generator. A maximal free kernel can return 257 witnesses: one particular solution plus 256 generators. A decision or individual witness can succeed while the full family exhausts the shared budget. Resource limits raise `IMPLEMENTATION_FAILURE`, never false, an empty family or a truncated family. Coefficient bit lengths remain unbounded.
+
+`NativeIntegralConeHomotopySolverTest` adds 16 tests: 729 point-map divisibility cases, 441 coupled gcd cases, complete bounded affine-family checks, invisible integral parity obstructions, 1025-bit coefficients, 125 interval contraction cases, 25 chosen-square-loop comparisons, typed cycle/cocycle fillings, full contexts, filtered and empty shapes, both aggregate bounds, maximal kernels, shared work exhaustion and serialized native scalar/flat flows.
+
+## Retained integral cone equivalences
+
+`IntegralConeEquivalenceAlgebra` registers `ConeEquivalence` and `ConeEquivalence.data` directly in MathTool, adding 30 operations. A value retains a forward square `F: C -> E`, a backward square `G: E -> C`, and two actual cone homotopies `H: GF -> id_C`, `K: FG -> id_E`. Validation requires exact full defining cones and exact composite endpoints, including the square witnesses. The degree-raising inverse homotopies are separate from the homotopies already retained by the two squares.
+
+`from-data` validates supplied maps and witnesses. `identity-on` constructs identity squares with stationary witnesses. `from-square-isomorphism` inverts both vertical chain maps and the actual square witness, then attaches stationary homotopies to the two identity composites. Both vertical maps must be degreewise unimodular: invertibility of total cone matrices alone does not supply an inverse in the retained-square carrier. Supplied equivalences may have noninvertible forward and backward matrices.
+
+For `before=(F,G,H,K)` and `after=(A,B,J,L)`, `after.compose(before)` retains maps `AF`, `GB` and witnesses `GJF+H`, `AKB+L`. Composition is associative and unital on the retained data. `inverse` swaps maps and witnesses without negating them. Its square is the original value, but composing an equivalence with its inverse need not yield the stationary identity data or fix raw chain coordinates. Both induced integral maps are mutual inverses. Equality preserves nonzero loops and all chosen witnesses.
+
+`source`, `target`, `forward`, `backward`, `source-homotopy`, `target-homotopy` and `data` expose the retained components. Flat `maps` returns `[forward, backward]`; `homotopies` returns `[source-homotopy, target-homotopy]`. Scalar `homology-map`, `inverse-homology-map`, `cohomology-map`, `inverse-cohomology-map` and flat `homology-maps`/`cohomology-maps` retain exact presentations and torsion. Forward cohomology pulls target to source; backward cohomology pulls source to target.
+
+The following example supplies an equivalence on the cone of multiplication by six. Multiplication by seven is invertible on its order-six homology, although its chain matrices have no integral strict inverse. The supplied inverse homotopy has coefficient `(1 - 49) / 6 = -8`.
+
+```java
+ConcreteMathematics math = new ConcreteMathematics();
+RelativeSimplicialComplex point = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))));
+IntegralChainMappingCone cone = new IntegralChainMappingCone(
+        SimplicialChainMap.identity(point).scale(BigInteger.valueOf(6)));
+IntegralChainConeMap identity = IntegralChainConeMap.identity(cone);
+IntegralChainConeMap forward = identity.scale(BigInteger.valueOf(7));
+IntegralConeHomotopy h = IntegralConeHomotopySolver.between(forward.compose(forward), identity);
+IntegralConeEquivalence.Data data = new IntegralConeEquivalence.Data(forward, forward, h, h);
+IntegralConeEquivalence equivalence = math.coneEquivalences.inputs.buildAlgebraItem(data)
+        .<IntegralConeEquivalence>performAlgebraTransfer("ConeEquivalence.from-data")
+        .perform().getResult();
+List<String> inverseMaps = math.flow(math.coneEquivalences, Collections.singletonList(equivalence))
+        .<AbelianGroupHomomorphism, BigInteger>performFlatAlgebraUnsafe("homology-maps", BigInteger.ZERO)
+        .<Boolean>performAlgebraTransfer("is-isomorphism").collect();
+// [true, true]
+IntegralConeChain cycle = new IntegralConeChain(cone, BigInteger.ZERO,
+        new IntegerVector(BigInteger.valueOf(3)));
+List<String> correction = math.flow(math.coneEquivalences, Collections.singletonList(equivalence))
+        .performLeftProjectionOperation("source-homotopy-on-chain", cycle)
+        .<IntegerVector>performAlgebraTransfer("coordinates").collect();
+// [[-24]]; its boundary is cycle - backward(forward(cycle))
+List<String> strictInverse = math.flow(math.chainConeMaps, Collections.singletonList(identity.negate()))
+        .<IntegralConeEquivalence>performAlgebraTransfer("ConeEquivalence.from-square-isomorphism")
+        .performOneOperandOperation("inverse")
+        .<IntegralChainConeMap>performFlatAlgebraTransfer("maps")
+        .<Boolean>performAlgebraTransfer("is-square-isomorphism").collect();
+// [true, true]
+```
+
+Eight typed operations apply the forward/backward maps and the source/target homotopies to `ConeChain` and `ConeCochain`. They all use `ILeftProjectionOperation` and return the actual second carrier's `IAlgebraItem` wrapper. Map cochain actions include degree zero. Homotopy cochain actions require positive degree and lower it by one. Chain homotopies raise degree by one, including negative zero groups. All actions require their exact defining cone. For example, `source-homotopy-on-chain` satisfies `DH(c)+H(Dc)=c-GF(c)`.
+
+Each required combined cone rank is at most 256 after relative filtering. One 5000000-unit budget spans each complete construction, strict conversion, witness composition and paired integral-map reduction. Separate successful component calls do not imply the complete operation fits. Exhaustion raises `IMPLEMENTATION_FAILURE` without partial results. Coefficient bit lengths are unbounded. Supplied construction and strict conversion avoid the homotopy solver's aggregate equation/unknown limits. Bounded inverse search is available within the retained-square carrier. Arbitrary cone matrices and higher coherence on the two inverse homotopies are outside its scope.
+
+`NativeIntegralConeEquivalenceTest` adds 18 tests covering 1,296 independent signed loop compositions, noncommuting witness transports, 625 determinant/adjugate conversions, chosen square shears, rectangular total isomorphisms, non-strict maps between different cone dimensions, large torsion coefficients, typed identities, contexts, empty/relative presentations, shared budgets, actual wrappers and serialized scalar/flat flows. The registration test invokes all 30 operations against independently written expected values.
+
+## Solving inverses in the retained cone-map carrier
+
+`IntegralConeInverseSolver` adds four native operations without adding another carrier:
+
+| Operation | Result |
+| --- | --- |
+| `ChainConeMap.has-retained-homotopy-inverse` | Boolean decision for an inverse representable by a retained square |
+| `ChainConeMap.retained-homotopy-inverse` | One solved reverse `ChainConeMap`, using `IOneOperandOperation` |
+| `ConeHomotopy.inverse-homotopies` | Exactly `[GF -> id_source, FG -> id_target]` through the existing flat transfer interface |
+| `ConeEquivalence.from-map` | The original forward map, solved reverse square and both inverse witnesses as one validated value |
+
+For the given total cone map `F`, the solver simultaneously finds `G`, `H` and `K` satisfying `D_source G - G D_target = 0`, `GF + DH + HD = I_source` and `FG + DK + KD = I_target`. The reverse map `G` must have zero lower-left blocks in the target-first cone coordinates. Its diagonal blocks reconstruct the two vertical chain maps; the negative of its upper-right block reconstructs the chosen square homotopy. The inverse homotopies `H` and `K` may mix both components freely. Every reconstructed map, square, homotopy and equivalence is validated through the existing constructors.
+
+The system is linear because the forward map is fixed. Smith divisibility and consistency checks decide integral solvability. Free Smith coordinates are set to zero, giving deterministic choices for these labelled bases. The four entry points use the same solved reverse map whenever their complete computations fit the budget. Choices are not canonical under change of bases. Solving again need not recover supplied witnesses, a strict inverse, or the original map after two inversions.
+
+The decision returns false for an inconsistent system. The other three operations raise `OPERATION_UNDEFINED`; the flat operation does not use an empty list to represent failure. All four preserve resource failures as `IMPLEMENTATION_FAILURE`.
+
+For example, multiplication by five on the cone of multiplication by six has an integral homotopy inverse despite having no strict chain inverse:
+
+```java
+ConcreteMathematics math = new ConcreteMathematics();
+RelativeSimplicialComplex point = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))));
+IntegralChainMappingCone cone = new IntegralChainMappingCone(
+        SimplicialChainMap.identity(point).scale(BigInteger.valueOf(6)));
+IntegralChainConeMap forward = IntegralChainConeMap.identity(cone).scale(BigInteger.valueOf(5));
+List<String> decision = math.flow(math.chainConeMaps, Collections.singletonList(forward))
+        .<Boolean>performAlgebraTransfer("has-retained-homotopy-inverse").collect();
+// [true]
+IntegralConeEquivalence equivalence = math.chainConeMaps.algebra().buildAlgebraItem(forward)
+        .<IntegralConeEquivalence>performAlgebraTransfer("ConeEquivalence.from-map")
+        .perform().getResult();
+List<String> inverseMaps = math.flow(math.chainConeMaps, Collections.singletonList(forward))
+        .<IntegralConeEquivalence>performAlgebraTransfer("ConeEquivalence.from-map")
+        .<AbelianGroupHomomorphism, BigInteger>performFlatAlgebraUnsafe("homology-maps", BigInteger.ZERO)
+        .<Boolean>performAlgebraTransfer("is-isomorphism").collect();
+// [true, true] on the retained order-six homology presentation
+List<String> endpoints = math.flow(math.chainConeMaps, Collections.singletonList(forward))
+        .<IntegralConeHomotopy>performFlatAlgebraTransfer("ConeHomotopy.inverse-homotopies")
+        .<IntegralChainConeMap>performAlgebraTransfer("to")
+        .<Boolean>performAlgebraTransfer("is-identity").collect();
+// [true, true]
+IntegralChainConeMap backward = math.chainConeMaps.algebra().buildAlgebraItem(forward)
+        .performOneOperandOperation("retained-homotopy-inverse").perform().getResult();
+// backward.equals(equivalence.backward())
+```
+
+This decision is deliberately restricted to the actual `ChainConeMap` carrier. A total cone chain isomorphism can have no retained inverse: take the cone of `point -> empty` and the cone of `empty -> (edge, boundary)`. A chosen square homotopy of coefficient one yields a degree-one total map `[-1]`. Its total inverse exists, but would occupy the forbidden lower-left block of the reverse cone map. The new decision returns false even though its induced homology and cohomology maps are isomorphisms. It must not be used as an unrestricted cone chain-homotopy-equivalence predicate.
+
+Let `s_n` and `t_n` be the two total cone ranks. The dense system allows at most **256 total equations**, counting `sum_n(s_n^2 + t_n^2 + s_(n-1)*t_n)`, including identically zero equations. It also allows at most **256 total unknown coefficients**: the allowed entries of `G` plus `sum_n(s_(n+1)*s_n + t_(n+1)*t_n)`. Each combined cone rank is at most 256 after relative filtering. One **5000000-unit budget** spans system assembly, Smith reduction, decoding and all validation required by the selected result. A decision or reverse map can fit without the stronger returned result fitting; no partial witness list or equivalence is returned. Coefficient bit lengths remain unbounded. Strict square inversion and supplied equivalences avoid these aggregate solving bounds.
+
+`NativeIntegralConeInverseTest` adds 16 tests, including 625 determinant/adjugate cases, 169 scalar gcd cases, compatible two-term maps against independent cyclic/free-group criteria, 125 overlapping-degree shears, noncommuting block inverses, both identity obligations, 25 noninvertible interval maps, relative and changing dimensions, empty formal slots, 1025-bit coefficients, typed inverse corrections, rank/system/work limits and serialized native scalar/flat flows. Complete registration expectations cover all four new entry points.
+
+## Retained cone-map lattices and homotopy classes
+
+`IntegralConeMapSpaceAlgebra` registers `ConeMapSpace` in the original MathTool with 12 operations. A space retains exact source and target defining cones. It represents the additive lattice of their retained square maps and the quotient by integral cone homotopy. Homotopies may mix the two cone components, while maps remain in the existing upper-triangular `ChainConeMap` carrier.
+
+| Operation | Result |
+| --- | --- |
+| `from-cones` | Retain two defining cones without eager algebraic reduction |
+| `source`, `target`, `equal` | Read or compare the full cone contexts |
+| `zero` | The zero retained square with its actual zero witness |
+| `homology` | A constructive `IntegralHomology` presentation of the restricted quotient |
+| `homotopy-group`, `homotopy-type` | Exact presented group or canonical free rank and torsion factors |
+| `map-generators` | A complete integral basis of all retained maps, including null-homotopic maps |
+| `class-of` | The additive homotopy class of a map with these exact defining cones |
+| `representative` | A validated retained map lifting an element of this exact group presentation |
+| `representatives` | Maps lifting the nonzero minimal Smith generators, torsion first and then free |
+
+The quotient must account for the restricted map carrier. On the full cone Hom coordinates, write `d0(T)=DT-TD` and `d1(K)=DK+KD`. Let `E` include the allowed degree-zero entries, and let `P` select the forbidden lower-left entries. Compute an integral basis `B` for `ker(P*d1)`. The returned `IntegralHomology` has outgoing matrix `d0*E` and incoming matrix `allowedRows(d1)*B`. Thus its cycles are retained maps and its boundaries are exactly the unrestricted homotopy boundaries that belong to that carrier. Selecting the allowed entries of every arbitrary boundary would instead create false class equalities.
+
+Allowed coordinates are ordered by increasing degree, row and column, omitting forbidden entries. The incoming matrix uses coordinates in the chosen integral basis `B`, not raw homotopy coordinates. Decoding a map reconstructs both vertical chain maps and the negative upper-right square homotopy, and validates all equations through the existing constructors. This decoder is shared with the retained inverse solver.
+
+`class-of` is additive and detects precisely when two maps in the same space are integrally homotopic, including torsion invisible to both induced homology and cohomology maps. `representative` is a deterministic section on sets; it need not preserve addition. Generic `AbelianGroupElement` values retain their full presentation rather than geometric provenance, so the space supplies the cone context when lifting. No contextual class composition or composition action is added in this increment.
+
+For the cone of multiplication by six, the identity map has additive homotopy order six. Its full map lattice has one generator, whereas its class group is cyclic of order six:
+
+```java
+ConcreteMathematics math = new ConcreteMathematics();
+RelativeSimplicialComplex point = RelativeSimplicialComplex.absolute(
+        new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0))));
+IntegralChainMappingCone cone = new IntegralChainMappingCone(
+        SimplicialChainMap.identity(point).scale(BigInteger.valueOf(6)));
+IntegralChainConeMap identity = IntegralChainConeMap.identity(cone);
+IntegralConeMapSpace space = math.chainCones.algebra().buildAlgebraItem(cone)
+        .<IntegralConeMapSpace>performCustomResultOperation("ConeMapSpace.from-cones", cone)
+        .perform().getResult();
+List<String> order = math.flow(math.coneMapSpaces, Collections.singletonList(space))
+        .<AbelianGroupElement, IntegralChainConeMap>performAlgebraUnsafe("class-of", identity)
+        .<BigInteger>performAlgebraTransfer("order").collect();
+// [6]
+AbelianGroupElement value = math.coneMapSpaces.algebra().buildAlgebraItem(space)
+        .<AbelianGroupElement, IntegralChainConeMap>performUnsafeOperation("class-of", identity)
+        .perform().getResult();
+IntegralChainConeMap representative = math.coneMapSpaces.algebra().buildAlgebraItem(space)
+        .<IntegralChainConeMap, AbelianGroupElement>performUnsafeOperation("representative", value)
+        .perform().getResult();
+// space.classOf(representative).equals(value)
+List<String> basis = math.flow(math.coneMapSpaces, Collections.singletonList(space))
+        .<IntegralChainConeMap>performFlatAlgebraTransfer("map-generators")
+        .<IntegerMatrix, BigInteger>performAlgebraUnsafe("chain-matrix", BigInteger.ONE).collect();
+// [ZMatrix(1x1)[[1]]]
+List<String> nonzeroRepresentatives = math.flow(math.coneMapSpaces, Collections.singletonList(space))
+        .<IntegralChainConeMap>performFlatAlgebraTransfer("representatives")
+        .<Boolean>performAlgebraTransfer("is-zero").collect();
+// [false]
+```
+
+On the cone of multiplication by one, the identity is null-homotopic. `map-generators` still returns its one map-lattice generator, while `representatives` returns an empty list. The homotopy killing the identity maps the target component into the shifted source component; restricting homotopies themselves to upper-triangular blocks would give the wrong quotient.
+
+Each required combined cone rank is bounded by **256** after relative filtering. The full Hom coefficient counts are separately bounded by **256** in degrees `-1`, `0` and `1`, including degree-zero entries forbidden in the retained carrier. One **5000000-unit budget** spans both differentials, the forbidden-boundary kernel, the quotient reduction, projection or lifting, and validation of every returned map. A group and its individual representative lifts can fit while the complete representative list exceeds the shared budget. Resource failures raise `IMPLEMENTATION_FAILURE`, never a false zero group or partial basis. Context construction, equality and endpoint access avoid these reductions; `zero` uses ordinary cone-map construction bounds. Coefficient bit lengths remain unbounded.
+
+`NativeIntegralConeMapSpaceTest` adds 16 tests: 625 independent point matrices, 81 two-term gcd groups and primitive map lattices, 567 congruence comparisons, 49 cross-degree gcd groups, torsion invisible to both induced integral maps, 125 shears, a projective-plane example where discarding forbidden boundary entries would falsely kill a free class, 25 relative interval contexts, nonadditive representatives, large coefficients, empty/filtered presentations, separate Hom and cone-rank bounds, shared whole-list budgets and serialized native flows. All 12 registrations are also exercised against independent literal expectations.
