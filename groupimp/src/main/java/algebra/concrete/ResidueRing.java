@@ -19,6 +19,7 @@ public final class ResidueRing extends ConcreteAlgebra<ModularInteger> {
         unary("inverse",algebra(),algebra(),true,ModularInteger::inverse);
         unary("is-unit",algebra(),truth.algebra(),false,ModularInteger::isUnit);
         unary("is-zero-divisor",algebra(),truth.algebra(),false,ModularInteger::isZeroDivisor);
+        unary("to-boolean",algebra(),truth.algebra(),true,a -> BooleanAlgebra.decode(a.value.signum()==0,a.value.equals(BigInteger.ONE),"Z/"+modulus+"Z"));
         unary("lift",algebra(),integers.algebra(),false,a -> a.value);
         unary("reduce",integers.algebra(),algebra(),false,n -> new ModularInteger(n,modulus));
         flat("solve-multiply",algebra(),algebra(),algebra(),false,ModularInteger::solveMultiply);
@@ -35,6 +36,7 @@ public final class ResidueRing extends ConcreteAlgebra<ModularInteger> {
         law("Z/nZ is a commutative unital ring; nonzero elements need not be units for composite n.");
         law("Inverses and division require gcd(value,n)=1; negative powers require a unit base.");
         law("a*x=b has gcd(a,n) solutions exactly when that gcd divides b; all solutions have canonical representatives.");
+        law("Boolean decoding is defined exactly on the zero and one residue classes.");
     }
     public ModularInteger member(BigInteger value) { return new ModularInteger(value,modulus); }
     public ModularInteger member(long value) { return member(BigInteger.valueOf(value)); }

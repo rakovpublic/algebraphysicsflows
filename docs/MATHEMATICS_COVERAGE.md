@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 2209 |
-| DIRECTLY_SUPPORTED | 1966 |
+| Scoped records | 2237 |
+| DIRECTLY_SUPPORTED | 1994 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1825 |
+| IMPLEMENTED | 1853 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1893 |
+| MACHINE_TESTED | 1921 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1802 | 1802 | 0 | 0 | 0 | 1802 | 0 | 0 |
+| Concrete MathTool algebras | 1830 | 1830 | 0 | 0 | 0 | 1830 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -278,15 +278,32 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Affine(Q).minimum-norm | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).minimum-norm |
 | Affine(Q).particular | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).particular |
 | Affine(Q).solve | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension; native operation Affine(Q).solve |
-| Boolean.and | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.and |
-| Boolean.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.equal |
-| Boolean.implies | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.implies |
-| Boolean.not | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.not |
-| Boolean.one | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.one |
-| Boolean.or | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.or |
-| Boolean.xor | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.xor |
-| Boolean.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations; native operation Boolean.zero |
-| BooleanAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values with Boolean operations |
+| Boolean.and | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.and |
+| Boolean.difference | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.difference |
+| Boolean.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.equal |
+| Boolean.equivalent | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.equivalent |
+| Boolean.greater-or-equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.greater-or-equal |
+| Boolean.implies | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.implies |
+| Boolean.less-or-equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.less-or-equal |
+| Boolean.nand | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.nand |
+| Boolean.nor | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.nor |
+| Boolean.not | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.not |
+| Boolean.one | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.one |
+| Boolean.or | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.or |
+| Boolean.to-complex | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-complex |
+| Boolean.to-integer | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-integer |
+| Boolean.to-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-matrix |
+| Boolean.to-natural | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-natural |
+| Boolean.to-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-polynomial |
+| Boolean.to-prime-5 | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-prime-5 |
+| Boolean.to-quaternion | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-quaternion |
+| Boolean.to-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-rational |
+| Boolean.to-rational-function | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-rational-function |
+| Boolean.to-residue-6 | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-residue-6 |
+| Boolean.to-tensor | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-tensor |
+| Boolean.xor | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.xor |
+| Boolean.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.zero |
+| BooleanAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings |
 | ChainCone.boundary-matrices | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.boundary-matrices |
 | ChainCone.boundary-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.boundary-matrix |
 | ChainCone.chain-rank | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral mapping cones of full simplicial quotient chain maps, with signed block boundaries, constructive homology and cohomology, and exact integral comparison sequences; native operation ChainCone.chain-rank |
@@ -994,35 +1011,36 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | FiniteSet(Z).union | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets; native operation FiniteSet(Z).union |
 | FiniteSimplicialAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite abstract simplicial complexes with integer labels, unreduced integral homology types and coefficient-specific Betti numbers |
 | FiniteSimplicialMapAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Total simplex-preserving vertex maps between labelled finite complexes, with oriented integral chain matrices and induced homology maps |
-| H(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).add |
-| H(Q).components | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).components |
-| H(Q).conjugate | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).conjugate |
-| H(Q).divide-left | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).divide-left |
-| H(Q).divide-right | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).divide-right |
-| H(Q).embed-complex | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).embed-complex |
-| H(Q).embed-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).embed-rational |
-| H(Q).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).equal |
-| H(Q).from-rotation-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).from-rotation-matrix |
-| H(Q).from-vector | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).from-vector |
-| H(Q).i | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).i |
-| H(Q).imaginary-part | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).imaginary-part |
-| H(Q).inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).inverse |
-| H(Q).j | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).j |
-| H(Q).k | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).k |
-| H(Q).multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).multiply |
-| H(Q).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).negate |
-| H(Q).norm-squared | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).norm-squared |
-| H(Q).one | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).one |
-| H(Q).real-part | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).real-part |
-| H(Q).rotate | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).rotate |
-| H(Q).same-rotation | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).same-rotation |
-| H(Q).scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).scale |
-| H(Q).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).subtract |
-| H(Q).to-complex | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).to-complex |
-| H(Q).to-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).to-rational |
-| H(Q).to-rotation-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).to-rotation-matrix |
-| H(Q).to-vector | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).to-vector |
-| H(Q).zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations; native operation H(Q).zero |
+| H(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).add |
+| H(Q).components | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).components |
+| H(Q).conjugate | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).conjugate |
+| H(Q).divide-left | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).divide-left |
+| H(Q).divide-right | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).divide-right |
+| H(Q).embed-complex | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).embed-complex |
+| H(Q).embed-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).embed-rational |
+| H(Q).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).equal |
+| H(Q).from-rotation-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).from-rotation-matrix |
+| H(Q).from-vector | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).from-vector |
+| H(Q).i | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).i |
+| H(Q).imaginary-part | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).imaginary-part |
+| H(Q).inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).inverse |
+| H(Q).j | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).j |
+| H(Q).k | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).k |
+| H(Q).multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).multiply |
+| H(Q).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).negate |
+| H(Q).norm-squared | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).norm-squared |
+| H(Q).one | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).one |
+| H(Q).real-part | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).real-part |
+| H(Q).rotate | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).rotate |
+| H(Q).same-rotation | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).same-rotation |
+| H(Q).scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).scale |
+| H(Q).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).subtract |
+| H(Q).to-boolean | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).to-boolean |
+| H(Q).to-complex | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).to-complex |
+| H(Q).to-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).to-rational |
+| H(Q).to-rotation-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).to-rotation-matrix |
+| H(Q).to-vector | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).to-vector |
+| H(Q).zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).zero |
 | HomotopyEquivalence.backward | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied paths or strong collapses, with absolute strong-type decisions through core isomorphisms and inverse integral maps; native operation HomotopyEquivalence.backward |
 | HomotopyEquivalence.backward-cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied paths or strong collapses, with absolute strong-type decisions through core isomorphisms and inverse integral maps; native operation HomotopyEquivalence.backward-cohomology-map |
 | HomotopyEquivalence.backward-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied paths or strong collapses, with absolute strong-type decisions through core isomorphisms and inverse integral maps; native operation HomotopyEquivalence.backward-homology-map |
@@ -1074,7 +1092,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | HomotopyPath.then | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.then |
 | HomotopyPath.to | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms; native operation HomotopyPath.to |
 | IntegerMatrixFamily | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses |
-| IntegerRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient |
+| IntegerRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations, truncated quotient, and exact 0/1 Boolean decoding |
 | IntegerSetAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets |
 | IntegerVectorFamily | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer coordinate vectors with retained nonnegative dimension |
 | IntegralChainConeMapAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps between integral mapping cones retaining a homotopy-commutative square, chosen witnesses, associative composition and natural integral homology/cohomology maps |
@@ -1185,38 +1203,40 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Mat(Z).to-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).to-rational |
 | Mat(Z).transpose | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).transpose |
 | Mat(Z).zero-like | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses; native operation Mat(Z).zero-like |
-| Mat2(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).add |
-| Mat2(Q).apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).apply |
-| Mat2(Q).characteristic-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).characteristic-polynomial |
-| Mat2(Q).determinant | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).determinant |
-| Mat2(Q).diagonalize-over-q | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).diagonalize-over-q |
-| Mat2(Q).eigenspace-basis | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).eigenspace-basis |
-| Mat2(Q).eigenvalue-multiplicity | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).eigenvalue-multiplicity |
-| Mat2(Q).evaluate-at-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).evaluate-at-matrix |
-| Mat2(Q).evaluate-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).evaluate-polynomial |
-| Mat2(Q).generalized-eigenspace-basis | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).generalized-eigenspace-basis |
-| Mat2(Q).inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).inverse |
-| Mat2(Q).is-diagonalizable-over-q | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).is-diagonalizable-over-q |
-| Mat2(Q).minimal-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).minimal-polynomial |
-| Mat2(Q).multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).multiply |
-| Mat2(Q).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).negate |
-| Mat2(Q).one | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).one |
-| Mat2(Q).pow | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).pow |
-| Mat2(Q).rank | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).rank |
-| Mat2(Q).rational-eigenvalues | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).rational-eigenvalues |
-| Mat2(Q).scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).scale |
-| Mat2(Q).solve | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).solve |
-| Mat2(Q).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).subtract |
-| Mat2(Q).trace | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).trace |
-| Mat2(Q).transpose | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).transpose |
-| Mat2(Q).zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two; native operation Mat2(Q).zero |
-| N.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Nonnegative arbitrary precision integers with addition and multiplication; native operation N.add |
-| N.multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Nonnegative arbitrary precision integers with addition and multiplication; native operation N.multiply |
-| N.one | DIRECTLY_SUPPORTED | IMPLEMENTED | Nonnegative arbitrary precision integers with addition and multiplication; native operation N.one |
-| N.successor | DIRECTLY_SUPPORTED | IMPLEMENTED | Nonnegative arbitrary precision integers with addition and multiplication; native operation N.successor |
-| N.to-integer | DIRECTLY_SUPPORTED | IMPLEMENTED | Nonnegative arbitrary precision integers with addition and multiplication; native operation N.to-integer |
-| N.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Nonnegative arbitrary precision integers with addition and multiplication; native operation N.zero |
-| NaturalSemiring | DIRECTLY_SUPPORTED | IMPLEMENTED | Nonnegative arbitrary precision integers with addition and multiplication |
+| Mat2(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding; native operation Mat2(Q).add |
+| Mat2(Q).apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding; native operation Mat2(Q).apply |
+| Mat2(Q).characteristic-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding; native operation Mat2(Q).characteristic-polynomial |
+| Mat2(Q).determinant | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding; native operation Mat2(Q).determinant |
+| Mat2(Q).diagonalize-over-q | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding; native operation Mat2(Q).diagonalize-over-q |
+| Mat2(Q).eigenspace-basis | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding; native operation Mat2(Q).eigenspace-basis |
+| Mat2(Q).eigenvalue-multiplicity | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding; native operation Mat2(Q).eigenvalue-multiplicity |
+| Mat2(Q).evaluate-at-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding; native operation Mat2(Q).evaluate-at-matrix |
+| Mat2(Q).evaluate-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding; native operation Mat2(Q).evaluate-polynomial |
+| Mat2(Q).generalized-eigenspace-basis | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding; native operation Mat2(Q).generalized-eigenspace-basis |
+| Mat2(Q).inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding; native operation Mat2(Q).inverse |
+| Mat2(Q).is-diagonalizable-over-q | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding; native operation Mat2(Q).is-diagonalizable-over-q |
+| Mat2(Q).minimal-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding; native operation Mat2(Q).minimal-polynomial |
+| Mat2(Q).multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding; native operation Mat2(Q).multiply |
+| Mat2(Q).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding; native operation Mat2(Q).negate |
+| Mat2(Q).one | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding; native operation Mat2(Q).one |
+| Mat2(Q).pow | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding; native operation Mat2(Q).pow |
+| Mat2(Q).rank | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding; native operation Mat2(Q).rank |
+| Mat2(Q).rational-eigenvalues | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding; native operation Mat2(Q).rational-eigenvalues |
+| Mat2(Q).scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding; native operation Mat2(Q).scale |
+| Mat2(Q).solve | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding; native operation Mat2(Q).solve |
+| Mat2(Q).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding; native operation Mat2(Q).subtract |
+| Mat2(Q).to-boolean | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding; native operation Mat2(Q).to-boolean |
+| Mat2(Q).trace | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding; native operation Mat2(Q).trace |
+| Mat2(Q).transpose | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding; native operation Mat2(Q).transpose |
+| Mat2(Q).zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding; native operation Mat2(Q).zero |
+| N.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Nonnegative arbitrary precision integers with addition, multiplication, and exact 0/1 Boolean decoding; native operation N.add |
+| N.multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Nonnegative arbitrary precision integers with addition, multiplication, and exact 0/1 Boolean decoding; native operation N.multiply |
+| N.one | DIRECTLY_SUPPORTED | IMPLEMENTED | Nonnegative arbitrary precision integers with addition, multiplication, and exact 0/1 Boolean decoding; native operation N.one |
+| N.successor | DIRECTLY_SUPPORTED | IMPLEMENTED | Nonnegative arbitrary precision integers with addition, multiplication, and exact 0/1 Boolean decoding; native operation N.successor |
+| N.to-boolean | DIRECTLY_SUPPORTED | IMPLEMENTED | Nonnegative arbitrary precision integers with addition, multiplication, and exact 0/1 Boolean decoding; native operation N.to-boolean |
+| N.to-integer | DIRECTLY_SUPPORTED | IMPLEMENTED | Nonnegative arbitrary precision integers with addition, multiplication, and exact 0/1 Boolean decoding; native operation N.to-integer |
+| N.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Nonnegative arbitrary precision integers with addition, multiplication, and exact 0/1 Boolean decoding; native operation N.zero |
+| NaturalSemiring | DIRECTLY_SUPPORTED | IMPLEMENTED | Nonnegative arbitrary precision integers with addition, multiplication, and exact 0/1 Boolean decoding |
 | Poly(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).add |
 | Poly(Q).coefficients | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).coefficients |
 | Poly(Q).constant-part | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).constant-part |
@@ -1355,65 +1375,69 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | PresentedAbelianGroup.relation-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps; native operation PresentedAbelianGroup.relation-matrix |
 | PresentedAbelianGroup.trivial | DIRECTLY_SUPPORTED | IMPLEMENTED | Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps; native operation PresentedAbelianGroup.trivial |
 | PresentedAbelianGroupAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Quotients of finite free integer modules by retained relation matrices, with explicit Smith-coordinate maps |
-| PrimeField | DIRECTLY_SUPPORTED | IMPLEMENTED | Residues in the default prime field F5; configurable exactly checked prime int modulus |
-| Q(i).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers; native operation Q(i).add |
-| Q(i).conjugate | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers; native operation Q(i).conjugate |
-| Q(i).divide | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers; native operation Q(i).divide |
-| Q(i).embed-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers; native operation Q(i).embed-rational |
-| Q(i).multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers; native operation Q(i).multiply |
-| Q(i).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers; native operation Q(i).negate |
-| Q(i).norm-squared | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers; native operation Q(i).norm-squared |
-| Q(i).one | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers; native operation Q(i).one |
-| Q(i).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers; native operation Q(i).subtract |
-| Q(i).zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers; native operation Q(i).zero |
-| Q(x).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).add |
-| Q(x).compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).compose |
-| Q(x).denominator | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).denominator |
-| Q(x).derivative | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).derivative |
-| Q(x).divide | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).divide |
-| Q(x).embed-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).embed-polynomial |
-| Q(x).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).equal |
-| Q(x).evaluate | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).evaluate |
-| Q(x).inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).inverse |
-| Q(x).multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).multiply |
-| Q(x).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).negate |
-| Q(x).numerator | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).numerator |
-| Q(x).one | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).one |
-| Q(x).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).subtract |
-| Q(x).zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator; native operation Q(x).zero |
-| Q.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field; native operation Q.add |
-| Q.add-subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field; native operation Q.add-subtract |
-| Q.divide | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field; native operation Q.divide |
-| Q.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field; native operation Q.equal |
-| Q.greater | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field; native operation Q.greater |
-| Q.inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field; native operation Q.inverse |
-| Q.multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field; native operation Q.multiply |
-| Q.negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field; native operation Q.negate |
-| Q.one | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field; native operation Q.one |
-| Q.subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field; native operation Q.subtract |
-| Q.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field; native operation Q.zero |
-| Q[x].add | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].add |
-| Q[x].compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].compose |
-| Q[x].derivative | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].derivative |
-| Q[x].derivative-order | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].derivative-order |
-| Q[x].divide-exact | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].divide-exact |
-| Q[x].evaluate | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].evaluate |
-| Q[x].gcd | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].gcd |
-| Q[x].integrate | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].integrate |
-| Q[x].iterate | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].iterate |
-| Q[x].monic | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].monic |
-| Q[x].multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].multiply |
-| Q[x].negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].negate |
-| Q[x].one | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].one |
-| Q[x].orbit | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].orbit |
-| Q[x].primitive | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].primitive |
-| Q[x].quotient | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].quotient |
-| Q[x].quotient-remainder | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].quotient-remainder |
-| Q[x].rational-roots | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].rational-roots |
-| Q[x].remainder | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].remainder |
-| Q[x].root-multiplicity | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].root-multiplicity |
-| Q[x].subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].subtract |
-| Q[x].zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients; native operation Q[x].zero |
+| PrimeField | DIRECTLY_SUPPORTED | IMPLEMENTED | Residues in the default prime field F5; configurable exactly checked prime int modulus with exact 0/1 Boolean decoding |
+| Q(i).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers with exact 0/1 Boolean decoding; native operation Q(i).add |
+| Q(i).conjugate | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers with exact 0/1 Boolean decoding; native operation Q(i).conjugate |
+| Q(i).divide | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers with exact 0/1 Boolean decoding; native operation Q(i).divide |
+| Q(i).embed-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers with exact 0/1 Boolean decoding; native operation Q(i).embed-rational |
+| Q(i).multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers with exact 0/1 Boolean decoding; native operation Q(i).multiply |
+| Q(i).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers with exact 0/1 Boolean decoding; native operation Q(i).negate |
+| Q(i).norm-squared | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers with exact 0/1 Boolean decoding; native operation Q(i).norm-squared |
+| Q(i).one | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers with exact 0/1 Boolean decoding; native operation Q(i).one |
+| Q(i).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers with exact 0/1 Boolean decoding; native operation Q(i).subtract |
+| Q(i).to-boolean | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers with exact 0/1 Boolean decoding; native operation Q(i).to-boolean |
+| Q(i).zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers with exact 0/1 Boolean decoding; native operation Q(i).zero |
+| Q(x).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator and exact 0/1 Boolean decoding; native operation Q(x).add |
+| Q(x).compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator and exact 0/1 Boolean decoding; native operation Q(x).compose |
+| Q(x).denominator | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator and exact 0/1 Boolean decoding; native operation Q(x).denominator |
+| Q(x).derivative | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator and exact 0/1 Boolean decoding; native operation Q(x).derivative |
+| Q(x).divide | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator and exact 0/1 Boolean decoding; native operation Q(x).divide |
+| Q(x).embed-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator and exact 0/1 Boolean decoding; native operation Q(x).embed-polynomial |
+| Q(x).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator and exact 0/1 Boolean decoding; native operation Q(x).equal |
+| Q(x).evaluate | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator and exact 0/1 Boolean decoding; native operation Q(x).evaluate |
+| Q(x).inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator and exact 0/1 Boolean decoding; native operation Q(x).inverse |
+| Q(x).multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator and exact 0/1 Boolean decoding; native operation Q(x).multiply |
+| Q(x).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator and exact 0/1 Boolean decoding; native operation Q(x).negate |
+| Q(x).numerator | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator and exact 0/1 Boolean decoding; native operation Q(x).numerator |
+| Q(x).one | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator and exact 0/1 Boolean decoding; native operation Q(x).one |
+| Q(x).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator and exact 0/1 Boolean decoding; native operation Q(x).subtract |
+| Q(x).to-boolean | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator and exact 0/1 Boolean decoding; native operation Q(x).to-boolean |
+| Q(x).zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator and exact 0/1 Boolean decoding; native operation Q(x).zero |
+| Q.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field with exact 0/1 Boolean decoding; native operation Q.add |
+| Q.add-subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field with exact 0/1 Boolean decoding; native operation Q.add-subtract |
+| Q.divide | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field with exact 0/1 Boolean decoding; native operation Q.divide |
+| Q.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field with exact 0/1 Boolean decoding; native operation Q.equal |
+| Q.greater | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field with exact 0/1 Boolean decoding; native operation Q.greater |
+| Q.inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field with exact 0/1 Boolean decoding; native operation Q.inverse |
+| Q.multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field with exact 0/1 Boolean decoding; native operation Q.multiply |
+| Q.negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field with exact 0/1 Boolean decoding; native operation Q.negate |
+| Q.one | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field with exact 0/1 Boolean decoding; native operation Q.one |
+| Q.subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field with exact 0/1 Boolean decoding; native operation Q.subtract |
+| Q.to-boolean | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field with exact 0/1 Boolean decoding; native operation Q.to-boolean |
+| Q.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field with exact 0/1 Boolean decoding; native operation Q.zero |
+| Q[x].add | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients and exact constant 0/1 Boolean decoding; native operation Q[x].add |
+| Q[x].compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients and exact constant 0/1 Boolean decoding; native operation Q[x].compose |
+| Q[x].derivative | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients and exact constant 0/1 Boolean decoding; native operation Q[x].derivative |
+| Q[x].derivative-order | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients and exact constant 0/1 Boolean decoding; native operation Q[x].derivative-order |
+| Q[x].divide-exact | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients and exact constant 0/1 Boolean decoding; native operation Q[x].divide-exact |
+| Q[x].evaluate | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients and exact constant 0/1 Boolean decoding; native operation Q[x].evaluate |
+| Q[x].gcd | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients and exact constant 0/1 Boolean decoding; native operation Q[x].gcd |
+| Q[x].integrate | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients and exact constant 0/1 Boolean decoding; native operation Q[x].integrate |
+| Q[x].iterate | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients and exact constant 0/1 Boolean decoding; native operation Q[x].iterate |
+| Q[x].monic | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients and exact constant 0/1 Boolean decoding; native operation Q[x].monic |
+| Q[x].multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients and exact constant 0/1 Boolean decoding; native operation Q[x].multiply |
+| Q[x].negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients and exact constant 0/1 Boolean decoding; native operation Q[x].negate |
+| Q[x].one | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients and exact constant 0/1 Boolean decoding; native operation Q[x].one |
+| Q[x].orbit | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients and exact constant 0/1 Boolean decoding; native operation Q[x].orbit |
+| Q[x].primitive | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients and exact constant 0/1 Boolean decoding; native operation Q[x].primitive |
+| Q[x].quotient | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients and exact constant 0/1 Boolean decoding; native operation Q[x].quotient |
+| Q[x].quotient-remainder | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients and exact constant 0/1 Boolean decoding; native operation Q[x].quotient-remainder |
+| Q[x].rational-roots | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients and exact constant 0/1 Boolean decoding; native operation Q[x].rational-roots |
+| Q[x].remainder | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients and exact constant 0/1 Boolean decoding; native operation Q[x].remainder |
+| Q[x].root-multiplicity | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients and exact constant 0/1 Boolean decoding; native operation Q[x].root-multiplicity |
+| Q[x].subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients and exact constant 0/1 Boolean decoding; native operation Q[x].subtract |
+| Q[x].to-boolean | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients and exact constant 0/1 Boolean decoding; native operation Q[x].to-boolean |
+| Q[x].zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients and exact constant 0/1 Boolean decoding; native operation Q[x].zero |
 | Q^2.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed-dimensional rational vectors; default dimension two; native operation Q^2.add |
 | Q^2.dot | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed-dimensional rational vectors; default dimension two; native operation Q^2.dot |
 | Q^2.negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed-dimensional rational vectors; default dimension two; native operation Q^2.negate |
@@ -1425,18 +1449,18 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Q^2.subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed-dimensional rational vectors; default dimension two; native operation Q^2.subtract |
 | Q^2.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed-dimensional rational vectors; default dimension two; native operation Q^2.zero |
 | RationalAffineSpaceAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension |
-| RationalComplexField | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers |
+| RationalComplexField | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers with exact 0/1 Boolean decoding |
 | RationalExteriorAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension |
-| RationalField | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field |
-| RationalFunctionField | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator |
-| RationalMatrixAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two |
+| RationalField | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field with exact 0/1 Boolean decoding |
+| RationalFunctionField | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator and exact 0/1 Boolean decoding |
+| RationalMatrixAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding |
 | RationalMatrixFamily | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases |
 | RationalMultivariatePolynomialAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension |
 | RationalPolynomialMapAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions |
-| RationalPolynomialRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients |
-| RationalQuaternionAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations |
+| RationalPolynomialRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients and exact constant 0/1 Boolean decoding |
+| RationalQuaternionAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding |
 | RationalSampleAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations |
-| RationalTensorAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction |
+| RationalTensorAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding |
 | RationalVectorFamily | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations |
 | RationalVectorSpace | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed-dimensional rational vectors; default dimension two |
 | RelativeCap.boundary | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral relative cap products with independently supplied cochain and target subcomplexes, retaining a chain context and inducing homology and cohomology maps; native operation RelativeCap.boundary |
@@ -1618,7 +1642,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | RelativeTriple.restriction-cohomology | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.restriction-cohomology |
 | RelativeTriple.restriction-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.restriction-matrix |
 | RelativeTriple.total-pair | DIRECTLY_SUPPORTED | IMPLEMENTED | Nested labelled simplicial triples with constructive integral homology and cohomology exact sequences and typed connecting representatives; native operation RelativeTriple.total-pair |
-| ResidueRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one |
+| ResidueRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one with exact 0/1 Boolean decoding |
 | S3.apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree; native operation S3.apply |
 | S3.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree; native operation S3.compose |
 | S3.cycles | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree; native operation S3.cycles |
@@ -1878,29 +1902,30 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | SimplicialSubdivision.vertex-faces | DIRECTLY_SUPPORTED | IMPLEMENTED | Barycentric subdivisions of labelled pairs with face dictionaries, functorial maps, signed chain operators, chain/cochain inverse witnesses and integral comparison maps; native operation SimplicialSubdivision.vertex-faces |
 | SimplicialSubdivisionAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Barycentric subdivisions of labelled pairs with face dictionaries, functorial maps, signed chain operators, chain/cochain inverse witnesses and integral comparison maps |
 | SymmetricGroup | DIRECTLY_SUPPORTED | IMPLEMENTED | Symmetric group on the zero-based labels 0,1,2; configurable fixed nonnegative degree |
-| Tensor(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).add |
-| Tensor(Q).contract | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).contract |
-| Tensor(Q).dot | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).dot |
-| Tensor(Q).entries | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).entries |
-| Tensor(Q).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).equal |
-| Tensor(Q).from-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).from-matrix |
-| Tensor(Q).from-scalar | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).from-scalar |
-| Tensor(Q).from-vector | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).from-vector |
-| Tensor(Q).hadamard | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).hadamard |
-| Tensor(Q).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).negate |
-| Tensor(Q).norm-squared | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).norm-squared |
-| Tensor(Q).one | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).one |
-| Tensor(Q).order | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).order |
-| Tensor(Q).scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).scale |
-| Tensor(Q).shape | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).shape |
-| Tensor(Q).size | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).size |
-| Tensor(Q).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).subtract |
-| Tensor(Q).swap-axes | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).swap-axes |
-| Tensor(Q).tensor-product | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).tensor-product |
-| Tensor(Q).to-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).to-matrix |
-| Tensor(Q).to-scalar | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).to-scalar |
-| Tensor(Q).to-vector | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).to-vector |
-| Tensor(Q).zero-like | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction; native operation Tensor(Q).zero-like |
+| Tensor(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding; native operation Tensor(Q).add |
+| Tensor(Q).contract | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding; native operation Tensor(Q).contract |
+| Tensor(Q).dot | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding; native operation Tensor(Q).dot |
+| Tensor(Q).entries | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding; native operation Tensor(Q).entries |
+| Tensor(Q).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding; native operation Tensor(Q).equal |
+| Tensor(Q).from-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding; native operation Tensor(Q).from-matrix |
+| Tensor(Q).from-scalar | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding; native operation Tensor(Q).from-scalar |
+| Tensor(Q).from-vector | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding; native operation Tensor(Q).from-vector |
+| Tensor(Q).hadamard | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding; native operation Tensor(Q).hadamard |
+| Tensor(Q).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding; native operation Tensor(Q).negate |
+| Tensor(Q).norm-squared | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding; native operation Tensor(Q).norm-squared |
+| Tensor(Q).one | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding; native operation Tensor(Q).one |
+| Tensor(Q).order | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding; native operation Tensor(Q).order |
+| Tensor(Q).scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding; native operation Tensor(Q).scale |
+| Tensor(Q).shape | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding; native operation Tensor(Q).shape |
+| Tensor(Q).size | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding; native operation Tensor(Q).size |
+| Tensor(Q).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding; native operation Tensor(Q).subtract |
+| Tensor(Q).swap-axes | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding; native operation Tensor(Q).swap-axes |
+| Tensor(Q).tensor-product | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding; native operation Tensor(Q).tensor-product |
+| Tensor(Q).to-boolean | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding; native operation Tensor(Q).to-boolean |
+| Tensor(Q).to-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding; native operation Tensor(Q).to-matrix |
+| Tensor(Q).to-scalar | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding; native operation Tensor(Q).to-scalar |
+| Tensor(Q).to-vector | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding; native operation Tensor(Q).to-vector |
+| Tensor(Q).zero-like | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding; native operation Tensor(Q).zero-like |
 | TripleMap.ambient-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.ambient-map |
 | TripleMap.compose | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.compose |
 | TripleMap.contiguous | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial maps preserving both nested subcomplexes, with covariant homology, contravariant cohomology and natural exact-sequence diagrams; native operation TripleMap.contiguous |
@@ -1949,45 +1974,48 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Vec(Z).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).subtract |
 | Vec(Z).to-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).to-rational |
 | Vec(Z).zero-like | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite integer coordinate vectors with retained nonnegative dimension; native operation Vec(Z).zero-like |
-| Z.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient; native operation Z.add |
-| Z.divide-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient; native operation Z.divide-rational |
-| Z.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient; native operation Z.equal |
-| Z.gcd | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient; native operation Z.gcd |
-| Z.greater | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient; native operation Z.greater |
-| Z.lcm | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient; native operation Z.lcm |
-| Z.multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient; native operation Z.multiply |
-| Z.negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient; native operation Z.negate |
-| Z.one | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient; native operation Z.one |
-| Z.quotient | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient; native operation Z.quotient |
-| Z.quotient-remainder | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient; native operation Z.quotient-remainder |
-| Z.remainder | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient; native operation Z.remainder |
-| Z.subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient; native operation Z.subtract |
-| Z.to-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient; native operation Z.to-rational |
-| Z.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations and truncated quotient; native operation Z.zero |
-| Z/5Z.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Residues in the default prime field F5; configurable exactly checked prime int modulus; native operation Z/5Z.add |
-| Z/5Z.divide | DIRECTLY_SUPPORTED | IMPLEMENTED | Residues in the default prime field F5; configurable exactly checked prime int modulus; native operation Z/5Z.divide |
-| Z/5Z.inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Residues in the default prime field F5; configurable exactly checked prime int modulus; native operation Z/5Z.inverse |
-| Z/5Z.multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Residues in the default prime field F5; configurable exactly checked prime int modulus; native operation Z/5Z.multiply |
-| Z/5Z.negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Residues in the default prime field F5; configurable exactly checked prime int modulus; native operation Z/5Z.negate |
-| Z/5Z.one | DIRECTLY_SUPPORTED | IMPLEMENTED | Residues in the default prime field F5; configurable exactly checked prime int modulus; native operation Z/5Z.one |
-| Z/5Z.subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Residues in the default prime field F5; configurable exactly checked prime int modulus; native operation Z/5Z.subtract |
-| Z/5Z.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Residues in the default prime field F5; configurable exactly checked prime int modulus; native operation Z/5Z.zero |
-| Z/6Z.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.add |
-| Z/6Z.divide | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.divide |
-| Z/6Z.elements | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.elements |
-| Z/6Z.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.equal |
-| Z/6Z.inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.inverse |
-| Z/6Z.is-unit | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.is-unit |
-| Z/6Z.is-zero-divisor | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.is-zero-divisor |
-| Z/6Z.lift | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.lift |
-| Z/6Z.multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.multiply |
-| Z/6Z.negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.negate |
-| Z/6Z.one | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.one |
-| Z/6Z.power | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.power |
-| Z/6Z.reduce | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.reduce |
-| Z/6Z.solve-multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.solve-multiply |
-| Z/6Z.subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.subtract |
-| Z/6Z.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one; native operation Z/6Z.zero |
+| Z.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations, truncated quotient, and exact 0/1 Boolean decoding; native operation Z.add |
+| Z.divide-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations, truncated quotient, and exact 0/1 Boolean decoding; native operation Z.divide-rational |
+| Z.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations, truncated quotient, and exact 0/1 Boolean decoding; native operation Z.equal |
+| Z.gcd | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations, truncated quotient, and exact 0/1 Boolean decoding; native operation Z.gcd |
+| Z.greater | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations, truncated quotient, and exact 0/1 Boolean decoding; native operation Z.greater |
+| Z.lcm | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations, truncated quotient, and exact 0/1 Boolean decoding; native operation Z.lcm |
+| Z.multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations, truncated quotient, and exact 0/1 Boolean decoding; native operation Z.multiply |
+| Z.negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations, truncated quotient, and exact 0/1 Boolean decoding; native operation Z.negate |
+| Z.one | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations, truncated quotient, and exact 0/1 Boolean decoding; native operation Z.one |
+| Z.quotient | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations, truncated quotient, and exact 0/1 Boolean decoding; native operation Z.quotient |
+| Z.quotient-remainder | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations, truncated quotient, and exact 0/1 Boolean decoding; native operation Z.quotient-remainder |
+| Z.remainder | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations, truncated quotient, and exact 0/1 Boolean decoding; native operation Z.remainder |
+| Z.subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations, truncated quotient, and exact 0/1 Boolean decoding; native operation Z.subtract |
+| Z.to-boolean | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations, truncated quotient, and exact 0/1 Boolean decoding; native operation Z.to-boolean |
+| Z.to-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations, truncated quotient, and exact 0/1 Boolean decoding; native operation Z.to-rational |
+| Z.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Arbitrary precision integers with ring operations, truncated quotient, and exact 0/1 Boolean decoding; native operation Z.zero |
+| Z/5Z.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Residues in the default prime field F5; configurable exactly checked prime int modulus with exact 0/1 Boolean decoding; native operation Z/5Z.add |
+| Z/5Z.divide | DIRECTLY_SUPPORTED | IMPLEMENTED | Residues in the default prime field F5; configurable exactly checked prime int modulus with exact 0/1 Boolean decoding; native operation Z/5Z.divide |
+| Z/5Z.inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Residues in the default prime field F5; configurable exactly checked prime int modulus with exact 0/1 Boolean decoding; native operation Z/5Z.inverse |
+| Z/5Z.multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Residues in the default prime field F5; configurable exactly checked prime int modulus with exact 0/1 Boolean decoding; native operation Z/5Z.multiply |
+| Z/5Z.negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Residues in the default prime field F5; configurable exactly checked prime int modulus with exact 0/1 Boolean decoding; native operation Z/5Z.negate |
+| Z/5Z.one | DIRECTLY_SUPPORTED | IMPLEMENTED | Residues in the default prime field F5; configurable exactly checked prime int modulus with exact 0/1 Boolean decoding; native operation Z/5Z.one |
+| Z/5Z.subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Residues in the default prime field F5; configurable exactly checked prime int modulus with exact 0/1 Boolean decoding; native operation Z/5Z.subtract |
+| Z/5Z.to-boolean | DIRECTLY_SUPPORTED | IMPLEMENTED | Residues in the default prime field F5; configurable exactly checked prime int modulus with exact 0/1 Boolean decoding; native operation Z/5Z.to-boolean |
+| Z/5Z.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Residues in the default prime field F5; configurable exactly checked prime int modulus with exact 0/1 Boolean decoding; native operation Z/5Z.zero |
+| Z/6Z.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one with exact 0/1 Boolean decoding; native operation Z/6Z.add |
+| Z/6Z.divide | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one with exact 0/1 Boolean decoding; native operation Z/6Z.divide |
+| Z/6Z.elements | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one with exact 0/1 Boolean decoding; native operation Z/6Z.elements |
+| Z/6Z.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one with exact 0/1 Boolean decoding; native operation Z/6Z.equal |
+| Z/6Z.inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one with exact 0/1 Boolean decoding; native operation Z/6Z.inverse |
+| Z/6Z.is-unit | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one with exact 0/1 Boolean decoding; native operation Z/6Z.is-unit |
+| Z/6Z.is-zero-divisor | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one with exact 0/1 Boolean decoding; native operation Z/6Z.is-zero-divisor |
+| Z/6Z.lift | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one with exact 0/1 Boolean decoding; native operation Z/6Z.lift |
+| Z/6Z.multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one with exact 0/1 Boolean decoding; native operation Z/6Z.multiply |
+| Z/6Z.negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one with exact 0/1 Boolean decoding; native operation Z/6Z.negate |
+| Z/6Z.one | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one with exact 0/1 Boolean decoding; native operation Z/6Z.one |
+| Z/6Z.power | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one with exact 0/1 Boolean decoding; native operation Z/6Z.power |
+| Z/6Z.reduce | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one with exact 0/1 Boolean decoding; native operation Z/6Z.reduce |
+| Z/6Z.solve-multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one with exact 0/1 Boolean decoding; native operation Z/6Z.solve-multiply |
+| Z/6Z.subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one with exact 0/1 Boolean decoding; native operation Z/6Z.subtract |
+| Z/6Z.to-boolean | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one with exact 0/1 Boolean decoding; native operation Z/6Z.to-boolean |
+| Z/6Z.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one with exact 0/1 Boolean decoding; native operation Z/6Z.zero |
 
 ### Cross-domain operations
 

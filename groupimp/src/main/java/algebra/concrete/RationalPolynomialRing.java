@@ -11,13 +11,14 @@ import java.util.*;
 
 public final class RationalPolynomialRing extends ConcreteAlgebra<Polynomial> {
     public final Algebra<Pair<Rational,Rational>> integrationBounds;
-    public RationalPolynomialRing(RationalField rationals) {
+    public RationalPolynomialRing(RationalField rationals,BooleanAlgebra truth) {
         super(carrier("Q[x]",Polynomial.class,"Univariate rational polynomial ring",p -> true),rationals.unit());
         integrationBounds=boundsCarrier(rationals);
         closed("add",false,Polynomial::add); closed("multiply",false,Polynomial::multiply);
         closed("subtract",false,(a,b) -> a.add(b.multiply(new Polynomial(Rational.of(-1)))));
         unary("negate",algebra(),algebra(),false,p -> p.multiply(new Polynomial(Rational.of(-1))));
         unary("derivative",algebra(),algebra(),false,Polynomial::derivative);
+        unary("to-boolean",algebra(),truth.algebra(),true,p -> BooleanAlgebra.decode(p.equals(Polynomial.ZERO),p.equals(Polynomial.ONE),"Q[x]"));
         binary("evaluate",algebra(),rationals.algebra(),rationals.algebra(),false,Polynomial::evaluate);
         binary("primitive",algebra(),rationals.algebra(),algebra(),false,Polynomial::primitive);
         binary("integrate",algebra(),integrationBounds,rationals.algebra(),false,(p,bounds) -> p.integrate(bounds.first,bounds.second));
@@ -35,9 +36,10 @@ public final class RationalPolynomialRing extends ConcreteAlgebra<Polynomial> {
         law("Q[x] is a commutative unital ring; polynomial multiplication distributes over addition.");
         law("The derivative is Q-linear and satisfies the product rule; primitive uses an explicit rational constant.");
         law("Euclidean division has a remainder of smaller degree; gcd is monic unless both operands are zero.");
+        law("Boolean decoding is defined exactly on the constant polynomials zero and one.");
     }
-    public RationalPolynomialRing(RationalField rationals,NaturalSemiring naturals) {
-        this(rationals);
+    public RationalPolynomialRing(RationalField rationals,NaturalSemiring naturals,BooleanAlgebra truth) {
+        this(rationals,truth);
         binary("derivative-order",algebra(),naturals.algebra(),algebra(),false,(polynomial,order) ->
                 order.compareTo(BigInteger.valueOf(polynomial.degree()))>0
                         ?new Polynomial(Rational.ZERO):polynomial.derivative(order.intValueExact()));

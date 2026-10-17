@@ -16,11 +16,11 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final RationalField rationals=new RationalField(booleans);
     public final IntegerRing integers=new IntegerRing(rationals,booleans);
     public final ResidueRing residues=new ResidueRing(java.math.BigInteger.valueOf(6),integers,booleans);
-    public final NaturalSemiring naturals=new NaturalSemiring(integers);
+    public final NaturalSemiring naturals=new NaturalSemiring(integers,booleans);
     public final SymmetricGroup permutations=new SymmetricGroup(3,naturals,integers,booleans);
     public final AbelianGroupTypeAlgebra abelianGroups=new AbelianGroupTypeAlgebra(naturals,booleans);
     public final FiniteSimplicialAlgebra complexes;
-    public final RationalPolynomialRing polynomials=new RationalPolynomialRing(rationals,naturals);
+    public final RationalPolynomialRing polynomials=new RationalPolynomialRing(rationals,naturals,booleans);
     public final RationalFunctionField rationalFunctions=new RationalFunctionField(polynomials,rationals,booleans);
     public final IntegerSetAlgebra integerSets=new IntegerSetAlgebra(integers,booleans,naturals,rationals,polynomials);
     public final FiniteIntegerRelationAlgebra integerRelations=new FiniteIntegerRelationAlgebra(integers,integerSets,booleans,naturals);
@@ -34,7 +34,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final FiniteCoconeAlgebra cocones=new FiniteCoconeAlgebra(cones,functors,naturalTransformations,integerFunctions,integers,booleans);
     public final RationalSampleAlgebra samples=new RationalSampleAlgebra(rationals,naturals);
     public final FiniteProbabilityAlgebra<java.math.BigInteger> integerProbabilities=new FiniteProbabilityAlgebra<>("FiniteDistribution(Z)",integers.algebra(),integerSets,rationals,booleans,naturals,mathematics.numbers.Rational::of);
-    public final RationalComplexField complexRationals=new RationalComplexField(rationals);
+    public final RationalComplexField complexRationals=new RationalComplexField(rationals,booleans);
     public final RationalVectorSpace vectors;
     public final RationalMatrixAlgebra matrices;
     public final RationalVectorFamily finiteVectors;
@@ -147,9 +147,11 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         Set<Integer> seen=new HashSet<>();
         for(int prime : primes) {
             if(!seen.add(prime)) throw new IllegalArgumentException("Duplicate prime field: "+prime);
-            fields.add(new PrimeField(unit,prime));
+            fields.add(new PrimeField(unit,prime,booleans));
         }
         primeFields=Collections.unmodifiableList(fields);
+        booleans.connectScalars(naturals,integers,rationals,complexRationals,quaternions,polynomials,rationalFunctions,
+                tensors,matrices,residues,primeFields);
         List<ConcreteAlgebra<?>> values=new ArrayList<>(Arrays.asList(booleans,naturals,integers,rationals,complexRationals,vectors,matrices,finiteVectors,rectangularMatrices,affineSpaces,tensors,exterior,quaternions,polynomials,rationalFunctions,integerSets,samples,integerProbabilities,complexes,integerRelations,permutations,residues,integerFunctions,categories,functors,naturalTransformations,equivalences,adjunctions,cones,cocones));
         values.add(multivariatePolynomials); values.add(polynomialMaps);
         values.add(polynomialForms);

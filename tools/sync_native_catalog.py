@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DATABASE = ROOT / "mathematics-coverage.json"
 MANIFEST = ROOT / "groupimp/src/test/resources/mathematics/concrete-catalog.tsv"
-DATE = "2026-10-07"
+DATE = "2026-10-17"
 OWNERS = {
     "IntegralConeMapSpaceAlgebra": ("ConeMapSpace", "Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares"),
     "IntegralConeEquivalenceAlgebra": ("ConeEquivalence", "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps"),
@@ -28,30 +28,30 @@ OWNERS = {
     "SimplicialHomotopyEquivalenceAlgebra": ("HomotopyEquivalence", "Simplicial pair homotopy equivalences from supplied paths or strong collapses, with absolute strong-type decisions through core isomorphisms and inverse integral maps"),
     "SimplicialHomotopyPathAlgebra": ("HomotopyPath", "Finite supplied paths of contiguous simplicial pair maps, chronological concatenation and accumulated integral chain/cochain prisms"),
     "SimplicialHomotopyAlgebra": ("SimplicialHomotopy", "Explicit integral prism witnesses for contiguous absolute and relative simplicial maps, with dual cochain operators"),
-    "BooleanAlgebra": ("Boolean", "Boolean truth values with Boolean operations"),
-    "NaturalSemiring": ("N", "Nonnegative arbitrary precision integers with addition and multiplication"),
-    "IntegerRing": ("Z", "Arbitrary precision integers with ring operations and truncated quotient"),
-    "RationalField": ("Q", "Canonical exact rational field"),
-    "PrimeField": ("Z/5Z", "Residues in the default prime field F5; configurable exactly checked prime int modulus"),
-    "ResidueRing": ("Z/6Z", "Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one"),
-    "RationalComplexField": ("Q(i)", "Pairs of rational coordinates; a proper subfield of the complex numbers"),
-    "RationalQuaternionAlgebra": ("H(Q)", "Hamilton's noncommutative division algebra with four rational coordinates and exact rational three-dimensional rotations"),
+    "BooleanAlgebra": ("Boolean", "Boolean truth values, lattice operations, and exact 0/1 scalar encodings"),
+    "NaturalSemiring": ("N", "Nonnegative arbitrary precision integers with addition, multiplication, and exact 0/1 Boolean decoding"),
+    "IntegerRing": ("Z", "Arbitrary precision integers with ring operations, truncated quotient, and exact 0/1 Boolean decoding"),
+    "RationalField": ("Q", "Canonical exact rational field with exact 0/1 Boolean decoding"),
+    "PrimeField": ("Z/5Z", "Residues in the default prime field F5; configurable exactly checked prime int modulus with exact 0/1 Boolean decoding"),
+    "ResidueRing": ("Z/6Z", "Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one with exact 0/1 Boolean decoding"),
+    "RationalComplexField": ("Q(i)", "Pairs of rational coordinates; a proper subfield of the complex numbers with exact 0/1 Boolean decoding"),
+    "RationalQuaternionAlgebra": ("H(Q)", "Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding"),
     "RationalVectorSpace": ("Q^2", "Fixed-dimensional rational vectors; default dimension two"),
-    "RationalMatrixAlgebra": ("Mat2(Q)", "Fixed positive-dimensional square rational matrices; default dimension two"),
+    "RationalMatrixAlgebra": ("Mat2(Q)", "Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding"),
     "RationalVectorFamily": ("Vec(Q)", "Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations"),
     "RationalMatrixFamily": ("Mat(Q)", "Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases"),
     "IntegerVectorFamily": ("Vec(Z)", "Finite integer coordinate vectors with retained nonnegative dimension"),
     "IntegerMatrixFamily": ("Mat(Z)", "Exact matrices between finite free integer modules, including zero-sized shapes and constructive Smith witnesses"),
     "RationalAffineSpaceAlgebra": ("Affine(Q)", "Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension"),
-    "RationalTensorAlgebra": ("Tensor(Q)", "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions and standard coordinate contraction"),
+    "RationalTensorAlgebra": ("Tensor(Q)", "Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding"),
     "RationalExteriorAlgebra": ("Exterior(Q)", "Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension"),
-    "RationalPolynomialRing": ("Q[x]", "Finite univariate polynomials with canonical rational coefficients"),
+    "RationalPolynomialRing": ("Q[x]", "Finite univariate polynomials with canonical rational coefficients and exact constant 0/1 Boolean decoding"),
     "RationalMultivariatePolynomialAlgebra": ("Poly(Q)", "Sparse exact rational polynomials with an explicit ordered positive input dimension"),
     "RationalPolynomialMapAlgebra": ("PolynomialMap(Q)", "Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions"),
     "PolynomialDifferentialFormAlgebra": ("PolynomialForm(Q)", "Mixed-degree differential forms with rational polynomial coefficients in standard positive-dimensional coordinate spaces"),
     "PolynomialCellAlgebra": ("PolynomialCell(Q)", "Rational polynomial parametrizations of positively oriented real unit cubes, including explicit point cells"),
     "PolynomialChainAlgebra": ("PolynomialChain(Q)", "Finite rational formal sums of polynomial cells with a retained ambient dimension and integer degree"),
-    "RationalFunctionField": ("Q(x)", "Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator"),
+    "RationalFunctionField": ("Q(x)", "Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator and exact 0/1 Boolean decoding"),
     "IntegerSetAlgebra": ("FiniteSet(Z)", "Finite integer sets under canonical equality, with polynomial optimization over explicit feasible sets"),
     "RationalSampleAlgebra": ("Sample(Q)", "Finite ordered rational samples retaining repeated observations"),
     "FiniteProbabilityAlgebra": ("FiniteDistribution(Z)", "Finite integer distributions with exact nonnegative rational masses summing to one"),
@@ -1832,9 +1832,32 @@ for _matrix_owner in ("RationalMatrixAlgebra", "RationalMatrixFamily"):
     OWNER_CONDITIONS.setdefault(_matrix_owner, {}).update(SPECTRAL_CONDITIONS)
 OWNER_CONDITIONS["RationalMatrixFamily"]["companion"] = "The polynomial has positive degree n. Return the n by n column companion matrix with subdiagonal ones and last column minus the lower coefficients divided by the leading coefficient; both characteristic and minimal polynomials equal its monic normalization."
 
+BOOLEAN_TRANSITION_OWNERS = (
+    "BooleanAlgebra", "NaturalSemiring", "IntegerRing", "RationalField", "RationalComplexField",
+    "RationalQuaternionAlgebra", "RationalPolynomialRing", "RationalFunctionField", "RationalTensorAlgebra",
+    "RationalMatrixAlgebra", "ResidueRing", "PrimeField",
+)
+BOOLEAN_SCALAR_DOMAINS = ("N", "Z", "Q", "Q(i)", "H(Q)", "Q[x]", "Q(x)", "Tensor(Q)", "Mat2(Q)", "Z/6Z", "Z/5Z")
+BOOLEAN_DECODER_CONDITION = "Defined exactly for the distinguished values 0 and 1; every other carrier value raises OPERATION_UNDEFINED rather than using truthiness."
+for _owner in BOOLEAN_TRANSITION_OWNERS[1:]:
+    OWNER_CONDITIONS.setdefault(_owner, {})["to-boolean"] = BOOLEAN_DECODER_CONDITION
+OWNER_CONDITIONS.setdefault("BooleanAlgebra", {}).update({
+    "nand": "Boolean Sheffer stroke: return not(a and b).",
+    "nor": "Boolean Peirce arrow: return not(a or b).",
+    "equivalent": "Return true exactly when both Boolean operands have the same value.",
+    "difference": "Return a and not b, the Boolean relative complement of b in a.",
+    "less-or-equal": "Return the Boolean lattice order a implies b.",
+    "greater-or-equal": "Return the Boolean lattice order b implies a.",
+})
+for _name in ("to-natural", "to-integer", "to-rational", "to-complex", "to-quaternion", "to-polynomial",
+              "to-rational-function", "to-tensor", "to-matrix", "to-residue-6", "to-prime-5"):
+    OWNER_CONDITIONS.setdefault("BooleanAlgebra", {})[_name] = "Encode false as the carrier's exact zero and true as its exact one; this is a 0/1 encoding, not a claim of ordinary additive-homomorphism preservation."
+
 
 def record(identifier, owner, concept, paths, operation=None):
     carrier, scope = OWNERS[owner]
+    if owner in BOOLEAN_TRANSITION_OWNERS and owner != "BooleanAlgebra":
+        paths = paths + ["groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"]
     if owner == "IntegralConeMapSpaceAlgebra":
         paths += ["groupimp/src/main/java/mathematics/topology/" + name + ".java" for name in
                   ("IntegralConeMapSpace", "IntegralChainConeMap", "IntegralChainMappingCone", "SimplicialChainMap", "SimplicialChainHomotopy", "IntegralHomology")]
@@ -1970,6 +1993,8 @@ def record(identifier, owner, concept, paths, operation=None):
                          "groupimp/src/main/java/mathematics/topology/RelativeSimplicialCochain.java",
                          "groupimp/src/main/java/mathematics/linear/IntegerSmithNormalForm.java"]
     tests = ["groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java"]
+    if owner in BOOLEAN_TRANSITION_OWNERS:
+        tests.append("groupimp/src/test/java/operations/NativeBooleanTransitionTest.java")
     if owner in ("IntegralChainConeMapAlgebra", "IntegralConeHomotopyAlgebra", "IntegralConeEquivalenceAlgebra") and (not operation or operation["id"] in (
             "ChainConeMap.has-retained-homotopy-inverse", "ChainConeMap.retained-homotopy-inverse", "ConeHomotopy.inverse-homotopies", "ConeEquivalence.from-map")):
         paths.append("groupimp/src/main/java/mathematics/topology/IntegralConeInverseSolver.java")
@@ -2756,6 +2781,16 @@ def synchronize(data, rows):
             "provenance": {"definition_source": "docs/CONCRETE_ALGEBRAS.md", "reviewer": None,
                            "review_date": None, "review_notes": "No human review performed", "date": DATE}
         })
+    for domain in data["domains"]:
+        if domain["id"] == "Boolean":
+            domain["related_domains"] = list(BOOLEAN_SCALAR_DOMAINS)
+            domain["membership_rules"] = [
+                "Exactly the two Java Boolean values false and true",
+                "Scalar transitions use false=0 and true=1; inverse decoders are partial outside those values",
+            ]
+            domain["invariants"] = list(domain["membership_rules"])
+        elif domain["id"] in BOOLEAN_SCALAR_DOMAINS:
+            domain["related_domains"] = sorted(set(domain["related_domains"] + ["Boolean"]))
     runtime = [r for r in data["concepts"] if r.get("runtime_operation_id")]
     for domain in data["domains"]:
         # Participation is exact domain equality, never substring matching (Q != QxQ.bounds).

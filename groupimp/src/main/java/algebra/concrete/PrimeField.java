@@ -9,6 +9,9 @@ import mathematics.numbers.*;
 public final class PrimeField extends ConcreteAlgebra<ModularInteger> {
     public final int prime;
     public PrimeField(Algebra<Unit> unit,int prime) {
+        this(unit,prime,null);
+    }
+    public PrimeField(Algebra<Unit> unit,int prime,BooleanAlgebra truth) {
         super(primeCarrier(prime),unit);
         this.prime=prime;
         closed("add",false,ModularInteger::add);
@@ -17,8 +20,10 @@ public final class PrimeField extends ConcreteAlgebra<ModularInteger> {
         closed("divide",true,(a,b) -> a.multiply(b.inverse()));
         unary("negate",algebra(),algebra(),false,ModularInteger::negate);
         unary("inverse",algebra(),algebra(),true,ModularInteger::inverse);
+        if(truth!=null)
+            unary("to-boolean",algebra(),truth.algebra(),true,a -> BooleanAlgebra.decode(a.value.signum()==0,a.value.equals(java.math.BigInteger.ONE),"Z/"+prime+"Z"));
         constant("zero",zero()); constant("one",one());
-        law("Residues modulo the specified prime form a field; each nonzero residue is a unit.");
+        law("Residues modulo the specified prime form a field; each nonzero residue is a unit. When connected to Boolean, decoding is defined exactly on zero and one.");
     }
     private static Algebra<ModularInteger> primeCarrier(int prime) {
         if(!NumberTheory.isPrime(prime)) throw MathFailure.invalid("Field modulus must be prime");

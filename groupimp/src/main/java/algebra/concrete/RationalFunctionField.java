@@ -14,6 +14,7 @@ public final class RationalFunctionField extends ConcreteAlgebra<RationalFunctio
         unary("negate",algebra(),algebra(),false,RationalFunction::negate);
         unary("inverse",algebra(),algebra(),true,RationalFunction::inverse);
         unary("derivative",algebra(),algebra(),false,RationalFunction::derivative);
+        unary("to-boolean",algebra(),truth.algebra(),true,f -> BooleanAlgebra.decode(f.equals(RationalFunction.ZERO),f.equals(RationalFunction.ONE),"Q(x)"));
         binary("evaluate",algebra(),rationals.algebra(),rationals.algebra(),true,RationalFunction::evaluate);
         unary("numerator",algebra(),polynomials.algebra(),false,RationalFunction::numerator);
         unary("denominator",algebra(),polynomials.algebra(),false,RationalFunction::denominator);
@@ -23,5 +24,6 @@ public final class RationalFunctionField extends ConcreteAlgebra<RationalFunctio
         law("Q(x) is a field of formal fractions; denominator is nonzero, coprime to the numerator and monic.");
         law("Derivative satisfies the quotient rule; evaluation is undefined at poles of the reduced denominator.");
         law("compose means f(g(x)); substituting a constant pole is undefined. Cancelled factors do not retain domain exclusions.");
+        law("Boolean decoding is defined exactly on the constant functions zero and one.");
     }
 }

@@ -69,7 +69,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all1728RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all1756RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String discrete="Complex[[0], [1]]",emptyComplex="Complex[]";
@@ -436,33 +436,33 @@ public class ConcreteAlgebrasTest {
         expected.put("FiniteFunctorAlgebra",String.join("|",swapFunctor,swapFunctor,swapFunctor,category12,category12,"1","1",
                 "true","true","true","true","true","Function[1, 2]->[1, 2]{1=2, 2=1}","Function[1, 2]->[1, 2]{1=2, 2=1}",
                 "[2, 1]","[2, 1]","[1]","[1]","false",identityFunctor,cycleFunctor,emptyFunctor,constantTwo,emptyDiagram));
-        expected.put("BooleanAlgebra","false|true|true|false|false|false|false|true");
-        expected.put("NaturalSemiring","8|12|7|6|0|1");
-        expected.put("IntegerRing","8|4|12|2|6|3|0|-6|6|3|true|false|[3, 0]|0|1");
-        expected.put("RationalField","8|4|12|3|-6|1/6|true|false|[8, 4]|0|1");
-        expected.put("RationalComplexField","(4)+(3)i|(-2)+(1)i|(1)+(7)i|(1/2)+(1/2)i|(-1)+(-2)i|(1)+(-2)i|5|(6)+(0)i|(0)+(0)i|(1)+(0)i");
-        expected.put("RationalQuaternionAlgebra","Quaternion[3, 1, 4, 7]|Quaternion[-1, 3, 2, 1]|Quaternion[-11, 8, -3, 16]|Quaternion[1, 0, 1, 0]|Quaternion[1, 2/3, -1/3, 2/3]|Quaternion[-1, -2, -3, -4]|Quaternion[1, -2, -3, -4]|Quaternion[1/30, -1/15, -1/10, -2/15]|30|1|[2, 3, 4]|[1, 2, 3, 4]|Quaternion[2, 4, 6, 8]|false|false|Quaternion[6, 0, 0, 0]|6|Quaternion[1, 2, 0, 0]|(1)+(2)i|Quaternion[0, 1, 2, 3]|[1, 2, 3]|[-1, 2, 3]|[[-2/3, 2/15, 11/15], [2/3, -1/3, 2/3], [1/3, 14/15, 2/15]]|Quaternion[1, 0, 0, 1]|Quaternion[0, 0, 0, 0]|Quaternion[1, 0, 0, 0]|Quaternion[0, 1, 0, 0]|Quaternion[0, 0, 1, 0]|Quaternion[0, 0, 0, 1]");
+        expected.put("BooleanAlgebra","false|true|true|false|false|true|false|false|true|false|true|false|false|true|1|1|1|(1)+(0)i|Quaternion[1, 0, 0, 0]|Q[x][1]|Q(x)(Q[x][1])/(Q[x][1])|Tensor(shape=[], entries=[1])|[[1, 0], [0, 1]]|1 (mod 6)|1 (mod 5)");
+        expected.put("NaturalSemiring","8|12|7|6|false|0|1");
+        expected.put("IntegerRing","8|4|12|2|6|3|0|-6|6|false|3|true|false|[3, 0]|0|1");
+        expected.put("RationalField","8|4|12|3|-6|1/6|false|true|false|[8, 4]|0|1");
+        expected.put("RationalComplexField","(4)+(3)i|(-2)+(1)i|(1)+(7)i|(1/2)+(1/2)i|(-1)+(-2)i|(1)+(-2)i|5|false|(6)+(0)i|(0)+(0)i|(1)+(0)i");
+        expected.put("RationalQuaternionAlgebra","Quaternion[3, 1, 4, 7]|Quaternion[-1, 3, 2, 1]|Quaternion[-11, 8, -3, 16]|Quaternion[1, 0, 1, 0]|Quaternion[1, 2/3, -1/3, 2/3]|Quaternion[-1, -2, -3, -4]|Quaternion[1, -2, -3, -4]|Quaternion[1/30, -1/15, -1/10, -2/15]|30|1|false|[2, 3, 4]|[1, 2, 3, 4]|Quaternion[2, 4, 6, 8]|false|false|Quaternion[6, 0, 0, 0]|6|Quaternion[1, 2, 0, 0]|(1)+(2)i|Quaternion[0, 1, 2, 3]|[1, 2, 3]|[-1, 2, 3]|[[-2/3, 2/15, 11/15], [2/3, -1/3, 2/3], [1/3, 14/15, 2/15]]|Quaternion[1, 0, 0, 1]|Quaternion[0, 0, 0, 0]|Quaternion[1, 0, 0, 0]|Quaternion[0, 1, 0, 0]|Quaternion[0, 0, 1, 0]|Quaternion[0, 0, 0, 1]");
         expected.put("RationalVectorSpace","[4, 6]|[-2, -2]|[-1, -2]|[2, 4]|[18, 24]|[[18, 24]]|11|[[2, 4]]|[[2, 4], [-2, -4]]|[0, 0]");
         expected.put("RationalMatrixAlgebra","[[3, 2], [3, 6]]|[[2, 4], [6, 8]]|[[-1, 2], [3, 2]]|[[-1, -2], [-3, -4]]|[[1, 3], [2, 4]]|[[-2, 1], [3/2, -1/2]]|-2|5|[[2, 4], [6, 8]]|[11, 25]|[-2, 5/2]|[[0, 0], [0, 0]]|[[1, 0], [0, 1]]|2");
         expected.put("RationalVectorFamily","[4, 4, 4]|[-2, 0, 2]|[-1, -2, -3]|[2, 4, 6]|10|3|[1, 2, 3]|[0, 0, 0]|[1, 2]|[1, 2]|[]");
         expected.put("RationalMatrixFamily","[[4, 4, 4], [2, 5, 6]]|[[-2, 0, 2], [2, 3, 6]]|[[4, 5], [8, 10]]|[[-1, -2, -3], [-2, -4, -6]]|[[1, 2], [2, 4], [3, 6]]|[[2, 4, 6], [4, 8, 12]]|[10, 20]|[[1, 2, 3], [0, 0, 0]]|1|2|[0]|[[-2, 1, 0], [-3, 0, 1]]|[[1, 2, 3]]|[[1, 2]]|[[1, 2, 3], [2, 4, 6]]|[[1, 2], [2, 4], [3, 6]]|2|3|false|[[1, 2], [3, 4]]|[[1, 2], [3, 4]]|[[0, 0, 0], [0, 0, 0]]|[[-2, 1], [3/2, -1/2]]|-2|5|[[1/70, 1/35], [1/35, 2/35], [3/70, 3/35]]|[[1/5, 2/5], [2/5, 4/5]]|[[1/14, 1/7, 3/14], [1/7, 2/7, 3/7], [3/14, 3/7, 9/14]]|[7/5, 14/5]|[1/10, 1/5, 3/10]|[-2/5, 1/5]|1/5");
         expected.put("RationalAffineSpaceAlgebra","Affine(particular=[1, 0, 0], directions=[[-2, 1, 0], [-3, 0, 1]])|[1, 0, 0]|[[-2, 1, 0], [-3, 0, 1]]|2|3|false|false|false|[-3, -1, 2]|false|Affine(particular=[7/5, 0, 0], directions=[[-2, 1, 0], [-3, 0, 1]])|[33/14, 5/7, -13/14]|[1/14, 1/7, 3/14]");
-        expected.put("RationalTensorAlgebra","Tensor(shape=[2, 2], entries=[6, 8, 10, 12])|Tensor(shape=[2, 2], entries=[-4, -4, -4, -4])|Tensor(shape=[2, 2], entries=[5, 12, 21, 32])|Tensor(shape=[2, 2, 2, 2], entries=[5, 6, 7, 8, 10, 12, 14, 16, 15, 18, 21, 24, 20, 24, 28, 32])|Tensor(shape=[2, 2], entries=[-1, -2, -3, -4])|Tensor(shape=[2, 2], entries=[2, 4, 6, 8])|2|4|[2, 2]|[1, 2, 3, 4]|30|70|false|Tensor(shape=[2, 2], entries=[1, 3, 2, 4])|Tensor(shape=[], entries=[5])|Tensor(shape=[], entries=[6])|6|Tensor(shape=[3], entries=[1, 2, 3])|[1, 2, 3]|Tensor(shape=[2, 3], entries=[1, 2, 3, 2, 4, 6])|[[1, 2], [3, 4]]|Tensor(shape=[2, 2], entries=[0, 0, 0, 0])|Tensor(shape=[], entries=[1])");
+        expected.put("RationalTensorAlgebra","Tensor(shape=[2, 2], entries=[6, 8, 10, 12])|Tensor(shape=[2, 2], entries=[-4, -4, -4, -4])|Tensor(shape=[2, 2], entries=[5, 12, 21, 32])|Tensor(shape=[2, 2, 2, 2], entries=[5, 6, 7, 8, 10, 12, 14, 16, 15, 18, 21, 24, 20, 24, 28, 32])|Tensor(shape=[2, 2], entries=[-1, -2, -3, -4])|Tensor(shape=[2, 2], entries=[2, 4, 6, 8])|2|4|[2, 2]|[1, 2, 3, 4]|30|70|false|false|Tensor(shape=[2, 2], entries=[1, 3, 2, 4])|Tensor(shape=[], entries=[5])|Tensor(shape=[], entries=[6])|6|Tensor(shape=[3], entries=[1, 2, 3])|[1, 2, 3]|Tensor(shape=[2, 3], entries=[1, 2, 3, 2, 4, 6])|[[1, 2], [3, 4]]|Tensor(shape=[2, 2], entries=[0, 0, 0, 0])|Tensor(shape=[], entries=[1])");
         expected.put("RationalExteriorAlgebra","Exterior(Q^3){0=3, 1=1, 2=2, 3=3, 4=1}|Exterior(Q^3){0=1, 1=1, 2=-2, 3=3, 4=-1}|Exterior(Q^3){0=2, 1=1, 2=4, 3=5, 4=2, 5=1, 7=3}|Exterior(Q^3){0=-2, 1=-1, 3=-3}|Exterior(Q^3){0=4, 1=2, 3=6}|Exterior(Q^3){0=2, 1=-1, 3=3}|Exterior(Q^3){0=2, 1=1, 3=-3}|Exterior(Q^3){4=3, 6=1, 7=2}|3|3|[0, 1, 2]|[Exterior(Q^3){0=2}, Exterior(Q^3){1=1}, Exterior(Q^3){3=3}]|[2, 1, 3]|[0, 1, 3]|Exterior(Q^3){3=3}|Exterior(Q^3){0=3, 1=-6, 2=9}|2|14|false|false|2|2|[1, 2, 3]|Exterior(Q^3){1=1, 2=2, 4=3}|Exterior(Q^2){0=1, 1=7, 2=14}|Exterior(Q^6){}|Exterior(Q^6){0=1}|Exterior(Q^6){63=1}");
-        expected.put("RationalPolynomialRing","Q[x][3, 3, 1]|Q[x][2, 5, 4, 1]|Q[x][-1, 1, 1]|Q[x][-1, -2, -1]|Q[x][2, 2]|9|Q[x][2, 1, 1, 1/3]|7/3|Q[x][0]|Q[x][1]|Q[x][0, 1]|Q[x][1]|Q[x][1, 1]|Q[x][1]|Q[x][9, 6, 1]|Q[x][1, 2, 1]|[Q[x][0, 1], Q[x][1]]|Q[x][2]|4|[0, 1, 4]");
-        expected.put("PrimeField","0 (mod 5)|1 (mod 5)|1 (mod 5)|4 (mod 5)|2 (mod 5)|2 (mod 5)|0 (mod 5)|1 (mod 5)");
+        expected.put("RationalPolynomialRing","Q[x][3, 3, 1]|Q[x][2, 5, 4, 1]|Q[x][-1, 1, 1]|Q[x][-1, -2, -1]|Q[x][2, 2]|false|9|Q[x][2, 1, 1, 1/3]|7/3|Q[x][0]|Q[x][1]|Q[x][0, 1]|Q[x][1]|Q[x][1, 1]|Q[x][1]|Q[x][9, 6, 1]|Q[x][1, 2, 1]|[Q[x][0, 1], Q[x][1]]|Q[x][2]|4|[0, 1, 4]");
+        expected.put("PrimeField","0 (mod 5)|1 (mod 5)|1 (mod 5)|4 (mod 5)|2 (mod 5)|2 (mod 5)|false|0 (mod 5)|1 (mod 5)");
         expected.put("IntegerSetAlgebra","[1, 2, 3]|[1, 2]|[]|[3]|true|false|true|[1, 2]|[1]|2|[1, 2]|[[], [1], [2], [1, 2]]|[3]|[]|[1]|[2]|3|4|[1]|[2]");
         expected.put("RationalSampleAlgebra","Sample[1, 2, 3, 2, 4, 6]|3|2|2/3|1|Sample[-1, 0, 1]|4/3|2|Sample[2, 4, 6]|[1, 2, 3]|Sample[]");
         expected.put("FiniteProbabilityAlgebra","1|0|Distribution{1=1/4, 3=3/4}|[1, 3]|2|[1, 3]|false|Distribution{6=1}|5/2|3/4");
         expected.put("FiniteSimplicialAlgebra","Complex[[0], [1], [2], [0, 1], [0, 2], [1, 2], [0, 1, 2]]|Complex[[0], [1], [2], [0, 1], [0, 2], [1, 2]]|false|true|1|0|3|0|0|Complex[[0], [1], [2], [0, 1], [0, 2], [1, 2]]|[1, 1]|Complex[]|AbelianGroup(rank=0, torsion=[])|[AbelianGroup(rank=1, torsion=[]), AbelianGroup(rank=1, torsion=[])]|0|[1, 1]|[]|ZMatrix(3x0)[[], [], []]");
         expected.put("FiniteIntegerRelationAlgebra","Relation[(1,2), (2,3), (2,4), (3,5)]|Relation[]|Relation[(1,4), (2,5)]|Relation[(2,1), (3,2)]|Relation[(1,2), (2,3), (1,3)]|false|false|[1, 2]|[2, 3]|2|true|[2, 3]|[1, 2]|false|Relation[]|Relation[(1,1), (2,2)]");
-        expected.put("RationalFunctionField","Q(x)(Q[x][1, 1, 1])/(Q[x][0, 1])|Q(x)(Q[x][1, -1, -1])/(Q[x][0, 1])|Q(x)(Q[x][1, 1])/(Q[x][0, 1])|Q(x)(Q[x][1])/(Q[x][0, 1, 1])|Q(x)(Q[x][1])/(Q[x][1, 1])|Q(x)(Q[x][-1])/(Q[x][0, 1])|Q(x)(Q[x][0, 1])/(Q[x][1])|Q(x)(Q[x][-1])/(Q[x][0, 0, 1])|1/2|Q[x][1]|Q[x][0, 1]|Q(x)(Q[x][1, 2, 1])/(Q[x][1])|false|Q(x)(Q[x][0])/(Q[x][1])|Q(x)(Q[x][1])/(Q[x][1])");
+        expected.put("RationalFunctionField","Q(x)(Q[x][1, 1, 1])/(Q[x][0, 1])|Q(x)(Q[x][1, -1, -1])/(Q[x][0, 1])|Q(x)(Q[x][1, 1])/(Q[x][0, 1])|Q(x)(Q[x][1])/(Q[x][0, 1, 1])|Q(x)(Q[x][1])/(Q[x][1, 1])|Q(x)(Q[x][-1])/(Q[x][0, 1])|Q(x)(Q[x][0, 1])/(Q[x][1])|Q(x)(Q[x][-1])/(Q[x][0, 0, 1])|false|1/2|Q[x][1]|Q[x][0, 1]|Q(x)(Q[x][1, 2, 1])/(Q[x][1])|false|Q(x)(Q[x][0])/(Q[x][1])|Q(x)(Q[x][1])/(Q[x][1])");
         expected.put("SymmetricGroup","Perm[2, 1, 0]|Perm[2, 0, 1]|false|3|1|0|0|Perm[2, 0, 1]|[2, 0, 1]|[Perm[1, 2, 0]]|Perm[0, 1, 2]|[Perm[0, 1, 2], Perm[0, 2, 1], Perm[1, 0, 2], Perm[1, 2, 0], Perm[2, 0, 1], Perm[2, 1, 0]]");
-        expected.put("ResidueRing","0 (mod 6)|4 (mod 6)|5 (mod 6)|5 (mod 6)|1 (mod 6)|5 (mod 6)|true|false|5|0 (mod 6)|[5 (mod 6)]|1 (mod 6)|false|0 (mod 6)|1 (mod 6)|[0 (mod 6), 1 (mod 6), 2 (mod 6), 3 (mod 6), 4 (mod 6), 5 (mod 6)]");
+        expected.put("ResidueRing","0 (mod 6)|4 (mod 6)|5 (mod 6)|5 (mod 6)|1 (mod 6)|5 (mod 6)|true|false|false|5|0 (mod 6)|[5 (mod 6)]|1 (mod 6)|false|0 (mod 6)|1 (mod 6)|[0 (mod 6), 1 (mod 6), 2 (mod 6), 3 (mod 6), 4 (mod 6), 5 (mod 6)]");
         expected.put("FiniteIntegerFunctionAlgebra","Function[1, 2, 3]->[1, 2, 3]{1=3, 2=2, 3=1}|Function[1, 2, 3]->[1, 2, 3]{1=3, 2=1, 3=2}|[1, 2, 3]|[1, 2, 3]|[2, 3, 1]|Relation[(1,2), (2,3), (3,1)]|3|true|true|true|3|[2, 3, 1]|[1, 2, 3]|Function[1, 2, 3]->[1, 2, 3]{1=2, 2=3, 3=1}|[2, 3, 1]|[1]|false|Function[1, 2]->[1, 2]{1=1, 2=2}|Function[1, 2]->[2, 3]{1=2, 2=3}|Function[]->[]{}");
         expected.put("FiniteCategoryAlgebra","Category(objects=[1, 2], arrows={1=(1,1), 2=(2,2)}, identities={1=1, 2=2}, composition={(1,1)=1, (2,2)=2})|[1, 2]|[1, 2]|2|2|true|true|2|2|2|2|[2]|[2]|true|[2]|[1, 2]|false|Category(objects=[1, 2], arrows={1=(1,1), 2=(2,2)}, identities={1=1, 2=2}, composition={(1,1)=1, (2,2)=2})|Category(objects=[1, 2], arrows={0=(1,1), 1=(2,2)}, identities={1=0, 2=1}, composition={(0,0)=0, (1,1)=1})|Relation[(1,1), (2,2)]|[]|[]|Category(objects=[], arrows={}, identities={}, composition={})");
         String spectral="Q[x][6, -5, 1]|Q[x][6, -5, 1]|[[4, 1], [0, 5]]|[[9, 7], [0, 16]]|[2, 3]|[[1, 0]]|[[1, 0]]|1|true|[[[1, 1], [0, 1]], [[2, 0], [0, 3]]]|[[4, 5], [0, 9]]";
-        expected.put("RationalMatrixAlgebra",expected.get("RationalMatrixAlgebra")+"|"+spectral);
+        expected.put("RationalMatrixAlgebra",expected.get("RationalMatrixAlgebra")+"|"+spectral+"|false");
         expected.put("RationalMatrixFamily",expected.get("RationalMatrixFamily")+"|"+spectral+"|[[0, -1], [1, -2]]");
         expected.put("RationalPolynomialRing",expected.get("RationalPolynomialRing")+"|[-1]|0");
         int count=0;
@@ -474,7 +474,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(1728,count);
+        assertEquals(1756,count);
     }
     private static String homString(String source,String target,String matrix) { return "AbelianHom(source="+source+", target="+target+", smith="+matrix+")"; }
     private static String simplicialString(String source,String target,String vertices) { return "SimplicialMap(source="+source+", target="+target+", vertices="+vertices+")"; }
@@ -502,6 +502,7 @@ public class ConcreteAlgebrasTest {
     private String invokeRegistered(ConcreteMathematics math,ConcreteAlgebra<?> owner,String name,OperationRegistration entry) {
         Algebra source=math.mathTool.getAlgebra(entry.first.getAlgebraName());
         IAlgebraItem item=source.buildAlgebraItem(sample(math,source.getAlgebraName(),0));
+        if(name.equals("to-boolean")) item=source.buildAlgebraItem(booleanDecodingZero(math,owner,source));
         if(owner instanceof IntegralConeCochainAlgebra && (name.equals("source-part") || name.equals("cobounding-cochain")))
             item=source.buildAlgebraItem(IntegralConeCochain.zero((IntegralChainMappingCone)sample(math,"ChainCone",0),BigInteger.ONE));
         if(owner instanceof SimplicialChainMapAlgebra || owner instanceof SimplicialChainMapSpaceAlgebra || owner instanceof SimplicialChainMapClassAlgebra || owner instanceof SimplicialChainEquivalenceAlgebra || owner instanceof IntegralChainMappingConeAlgebra || owner instanceof IntegralChainConeMapAlgebra) {
@@ -783,6 +784,19 @@ public class ConcreteAlgebrasTest {
         else if(operation instanceof ILeftProjectionOperation) result=item.performLeftProjectionOperation(alias,second);
         else result=item.performUnsafeOperation(alias,second);
         return result.perform().getResult().toString();
+    }
+    private Object booleanDecodingZero(ConcreteMathematics math,ConcreteAlgebra<?> owner,Algebra source) {
+        if(source==math.naturals.algebra() || source==math.integers.algebra()) return BigInteger.ZERO;
+        if(source==math.rationals.algebra()) return Rational.ZERO;
+        if(source==math.complexRationals.algebra()) return new RationalComplex(Rational.ZERO,Rational.ZERO);
+        if(source==math.quaternions.algebra()) return RationalQuaternion.ZERO;
+        if(source==math.polynomials.algebra()) return Polynomial.ZERO;
+        if(source==math.rationalFunctions.algebra()) return mathematics.calculus.RationalFunction.ZERO;
+        if(source==math.tensors.algebra()) return RationalTensor.scalar(Rational.ZERO);
+        if(source==math.matrices.algebra()) return RationalMatrix.identity(math.matrices.dimension).scale(Rational.ZERO);
+        if(source==math.residues.algebra()) return math.residues.member(BigInteger.ZERO);
+        if(owner instanceof PrimeField) return ((PrimeField)owner).zero();
+        throw new AssertionError("No Boolean decoder zero for "+source.getAlgebraName());
     }
     private static SimplicialCollapse elementaryCollapse() { return SimplicialCollapse.absolute(new FiniteSimplicialComplex(Collections.singletonList(FiniteSet.of(0,1))),FiniteSet.of(BigInteger.ONE)); }
     private Object sample(ConcreteMathematics math,String domain,int index) {

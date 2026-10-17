@@ -4,13 +4,31 @@ Boolean.or	BooleanAlgebra	or	Boolean	Boolean	Boolean	SCALAR	TOTAL	IOperation
 Boolean.xor	BooleanAlgebra	xor	Boolean	Boolean	Boolean	SCALAR	TOTAL	IOperation
 Boolean.implies	BooleanAlgebra	implies	Boolean	Boolean	Boolean	SCALAR	TOTAL	IOperation
 Boolean.equal	BooleanAlgebra	equal	Boolean	Boolean	Boolean	SCALAR	TOTAL	IOperation
+Boolean.nand	BooleanAlgebra	nand	Boolean	Boolean	Boolean	SCALAR	TOTAL	IOperation
+Boolean.nor	BooleanAlgebra	nor	Boolean	Boolean	Boolean	SCALAR	TOTAL	IOperation
+Boolean.equivalent	BooleanAlgebra	equivalent	Boolean	Boolean	Boolean	SCALAR	TOTAL	IOperation
+Boolean.difference	BooleanAlgebra	difference	Boolean	Boolean	Boolean	SCALAR	TOTAL	IOperation
+Boolean.less-or-equal	BooleanAlgebra	less-or-equal	Boolean	Boolean	Boolean	SCALAR	TOTAL	IOperation
+Boolean.greater-or-equal	BooleanAlgebra	greater-or-equal	Boolean	Boolean	Boolean	SCALAR	TOTAL	IOperation
 Boolean.not	BooleanAlgebra	not	Boolean	-	Boolean	SCALAR	TOTAL	IOneOperandOperation
 Boolean.zero	BooleanAlgebra	Boolean.zero	Unit	-	Boolean	SCALAR	TOTAL	ITransferOperation
 Boolean.one	BooleanAlgebra	Boolean.one	Unit	-	Boolean	SCALAR	TOTAL	ITransferOperation
+Boolean.to-natural	BooleanAlgebra	to-natural	Boolean	-	N	SCALAR	TOTAL	ITransferOperation
+Boolean.to-integer	BooleanAlgebra	to-integer	Boolean	-	Z	SCALAR	TOTAL	ITransferOperation
+Boolean.to-rational	BooleanAlgebra	to-rational	Boolean	-	Q	SCALAR	TOTAL	ITransferOperation
+Boolean.to-complex	BooleanAlgebra	to-complex	Boolean	-	Q(i)	SCALAR	TOTAL	ITransferOperation
+Boolean.to-quaternion	BooleanAlgebra	to-quaternion	Boolean	-	H(Q)	SCALAR	TOTAL	ITransferOperation
+Boolean.to-polynomial	BooleanAlgebra	to-polynomial	Boolean	-	Q[x]	SCALAR	TOTAL	ITransferOperation
+Boolean.to-rational-function	BooleanAlgebra	to-rational-function	Boolean	-	Q(x)	SCALAR	TOTAL	ITransferOperation
+Boolean.to-tensor	BooleanAlgebra	to-tensor	Boolean	-	Tensor(Q)	SCALAR	TOTAL	ITransferOperation
+Boolean.to-matrix	BooleanAlgebra	to-matrix	Boolean	-	Mat2(Q)	SCALAR	TOTAL	ITransferOperation
+Boolean.to-residue-6	BooleanAlgebra	to-residue-6	Boolean	-	Z/6Z	SCALAR	TOTAL	ITransferOperation
+Boolean.to-prime-5	BooleanAlgebra	to-prime-5	Boolean	-	Z/5Z	SCALAR	TOTAL	ITransferOperation
 N.add	NaturalSemiring	add	N	N	N	SCALAR	TOTAL	IOperation
 N.multiply	NaturalSemiring	multiply	N	N	N	SCALAR	TOTAL	IOperation
 N.successor	NaturalSemiring	successor	N	-	N	SCALAR	TOTAL	IOneOperandOperation
 N.to-integer	NaturalSemiring	to-integer	N	-	Z	SCALAR	TOTAL	ITransferOperation
+N.to-boolean	NaturalSemiring	to-boolean	N	-	Boolean	SCALAR	PARTIAL	ITransferOperation
 N.zero	NaturalSemiring	N.zero	Unit	-	N	SCALAR	TOTAL	ITransferOperation
 N.one	NaturalSemiring	N.one	Unit	-	N	SCALAR	TOTAL	ITransferOperation
 Z.add	IntegerRing	add	Z	Z	Z	SCALAR	TOTAL	IOperation
@@ -22,6 +40,7 @@ Z.quotient	IntegerRing	quotient	Z	Z	Z	SCALAR	PARTIAL	IOperation
 Z.remainder	IntegerRing	remainder	Z	Z	Z	SCALAR	PARTIAL	IOperation
 Z.negate	IntegerRing	negate	Z	-	Z	SCALAR	TOTAL	IOneOperandOperation
 Z.to-rational	IntegerRing	to-rational	Z	-	Q	SCALAR	TOTAL	ITransferOperation
+Z.to-boolean	IntegerRing	to-boolean	Z	-	Boolean	SCALAR	PARTIAL	ITransferOperation
 Z.divide-rational	IntegerRing	divide-rational	Z	Z	Q	SCALAR	PARTIAL	ICustomResultOperation
 Z.greater	IntegerRing	greater	Z	Z	Boolean	SCALAR	TOTAL	ICustomResultOperation
 Z.equal	IntegerRing	equal	Z	Z	Boolean	SCALAR	TOTAL	ICustomResultOperation
@@ -34,6 +53,7 @@ Q.multiply	RationalField	multiply	Q	Q	Q	SCALAR	TOTAL	IOperation
 Q.divide	RationalField	divide	Q	Q	Q	SCALAR	PARTIAL	IOperation
 Q.negate	RationalField	negate	Q	-	Q	SCALAR	TOTAL	IOneOperandOperation
 Q.inverse	RationalField	inverse	Q	-	Q	SCALAR	PARTIAL	IOneOperandOperation
+Q.to-boolean	RationalField	to-boolean	Q	-	Boolean	SCALAR	PARTIAL	ITransferOperation
 Q.greater	RationalField	greater	Q	Q	Boolean	SCALAR	TOTAL	ICustomResultOperation
 Q.equal	RationalField	equal	Q	Q	Boolean	SCALAR	TOTAL	ICustomResultOperation
 Q.add-subtract	RationalField	add-subtract	Q	Q	Q	LIST	TOTAL	IFlatOperation
@@ -46,6 +66,7 @@ Q(i).divide	RationalComplexField	divide	Q(i)	Q(i)	Q(i)	SCALAR	PARTIAL	IOperation
 Q(i).negate	RationalComplexField	negate	Q(i)	-	Q(i)	SCALAR	TOTAL	IOneOperandOperation
 Q(i).conjugate	RationalComplexField	conjugate	Q(i)	-	Q(i)	SCALAR	TOTAL	IOneOperandOperation
 Q(i).norm-squared	RationalComplexField	norm-squared	Q(i)	-	Q	SCALAR	TOTAL	ITransferOperation
+Q(i).to-boolean	RationalComplexField	to-boolean	Q(i)	-	Boolean	SCALAR	PARTIAL	ITransferOperation
 Q(i).embed-rational	RationalComplexField	Q(i).embed-rational	Q	-	Q(i)	SCALAR	TOTAL	ITransferOperation
 Q(i).zero	RationalComplexField	Q(i).zero	Unit	-	Q(i)	SCALAR	TOTAL	ITransferOperation
 Q(i).one	RationalComplexField	Q(i).one	Unit	-	Q(i)	SCALAR	TOTAL	ITransferOperation
@@ -84,6 +105,7 @@ Mat2(Q).eigenvalue-multiplicity	RationalMatrixAlgebra	eigenvalue-multiplicity	Ma
 Mat2(Q).is-diagonalizable-over-q	RationalMatrixAlgebra	is-diagonalizable-over-q	Mat2(Q)	-	Boolean	SCALAR	TOTAL	ITransferOperation
 Mat2(Q).diagonalize-over-q	RationalMatrixAlgebra	diagonalize-over-q	Mat2(Q)	-	Mat2(Q)	LIST	PARTIAL	IOneOperandFlatOperation
 Mat2(Q).pow	RationalMatrixAlgebra	pow	Mat2(Q)	N	Mat2(Q)	SCALAR	TOTAL	ICustomMemberOperation
+Mat2(Q).to-boolean	RationalMatrixAlgebra	to-boolean	Mat2(Q)	-	Boolean	SCALAR	PARTIAL	ITransferOperation
 Vec(Q).add	RationalVectorFamily	add	Vec(Q)	Vec(Q)	Vec(Q)	SCALAR	PARTIAL	IOperation
 Vec(Q).subtract	RationalVectorFamily	subtract	Vec(Q)	Vec(Q)	Vec(Q)	SCALAR	PARTIAL	IOperation
 Vec(Q).negate	RationalVectorFamily	negate	Vec(Q)	-	Vec(Q)	SCALAR	TOTAL	IOneOperandOperation
@@ -165,6 +187,7 @@ Tensor(Q).entries	RationalTensorAlgebra	entries	Tensor(Q)	-	Q	LIST	TOTAL	ITransf
 Tensor(Q).norm-squared	RationalTensorAlgebra	norm-squared	Tensor(Q)	-	Q	SCALAR	TOTAL	ITransferOperation
 Tensor(Q).dot	RationalTensorAlgebra	dot	Tensor(Q)	Tensor(Q)	Q	SCALAR	PARTIAL	ICustomResultOperation
 Tensor(Q).equal	RationalTensorAlgebra	equal	Tensor(Q)	Tensor(Q)	Boolean	SCALAR	TOTAL	ICustomResultOperation
+Tensor(Q).to-boolean	RationalTensorAlgebra	to-boolean	Tensor(Q)	-	Boolean	SCALAR	PARTIAL	ITransferOperation
 Tensor(Q).swap-axes	RationalTensorAlgebra	swap-axes	Tensor(Q)	NxN.tensor-axes	Tensor(Q)	SCALAR	PARTIAL	ICustomMemberOperation
 Tensor(Q).contract	RationalTensorAlgebra	contract	Tensor(Q)	NxN.tensor-axes	Tensor(Q)	SCALAR	PARTIAL	ICustomMemberOperation
 Tensor(Q).from-scalar	RationalTensorAlgebra	Tensor(Q).from-scalar	Q	-	Tensor(Q)	SCALAR	TOTAL	ITransferOperation
@@ -213,6 +236,7 @@ H(Q).conjugate	RationalQuaternionAlgebra	conjugate	H(Q)	-	H(Q)	SCALAR	TOTAL	IOne
 H(Q).inverse	RationalQuaternionAlgebra	inverse	H(Q)	-	H(Q)	SCALAR	PARTIAL	IOneOperandOperation
 H(Q).norm-squared	RationalQuaternionAlgebra	norm-squared	H(Q)	-	Q	SCALAR	TOTAL	ITransferOperation
 H(Q).real-part	RationalQuaternionAlgebra	real-part	H(Q)	-	Q	SCALAR	TOTAL	ITransferOperation
+H(Q).to-boolean	RationalQuaternionAlgebra	to-boolean	H(Q)	-	Boolean	SCALAR	PARTIAL	ITransferOperation
 H(Q).imaginary-part	RationalQuaternionAlgebra	imaginary-part	H(Q)	-	Vec(Q)	SCALAR	TOTAL	ITransferOperation
 H(Q).components	RationalQuaternionAlgebra	components	H(Q)	-	Q	LIST	TOTAL	ITransferFlatOperation
 H(Q).scale	RationalQuaternionAlgebra	scale	H(Q)	Q	H(Q)	SCALAR	TOTAL	ICustomMemberOperation
@@ -237,6 +261,7 @@ Q[x].multiply	RationalPolynomialRing	multiply	Q[x]	Q[x]	Q[x]	SCALAR	TOTAL	IOpera
 Q[x].subtract	RationalPolynomialRing	subtract	Q[x]	Q[x]	Q[x]	SCALAR	TOTAL	IOperation
 Q[x].negate	RationalPolynomialRing	negate	Q[x]	-	Q[x]	SCALAR	TOTAL	IOneOperandOperation
 Q[x].derivative	RationalPolynomialRing	derivative	Q[x]	-	Q[x]	SCALAR	TOTAL	IOneOperandOperation
+Q[x].to-boolean	RationalPolynomialRing	to-boolean	Q[x]	-	Boolean	SCALAR	PARTIAL	ITransferOperation
 Q[x].evaluate	RationalPolynomialRing	evaluate	Q[x]	Q	Q	SCALAR	TOTAL	ILeftProjectionOperation
 Q[x].primitive	RationalPolynomialRing	primitive	Q[x]	Q	Q[x]	SCALAR	TOTAL	ICustomMemberOperation
 Q[x].integrate	RationalPolynomialRing	integrate	Q[x]	QxQ.bounds	Q	SCALAR	TOTAL	IUnsafeOperation
@@ -262,6 +287,7 @@ Q(x).compose	RationalFunctionField	compose	Q(x)	Q(x)	Q(x)	SCALAR	PARTIAL	IOperat
 Q(x).negate	RationalFunctionField	negate	Q(x)	-	Q(x)	SCALAR	TOTAL	IOneOperandOperation
 Q(x).inverse	RationalFunctionField	inverse	Q(x)	-	Q(x)	SCALAR	PARTIAL	IOneOperandOperation
 Q(x).derivative	RationalFunctionField	derivative	Q(x)	-	Q(x)	SCALAR	TOTAL	IOneOperandOperation
+Q(x).to-boolean	RationalFunctionField	to-boolean	Q(x)	-	Boolean	SCALAR	PARTIAL	ITransferOperation
 Q(x).evaluate	RationalFunctionField	evaluate	Q(x)	Q	Q	SCALAR	PARTIAL	ILeftProjectionOperation
 Q(x).numerator	RationalFunctionField	numerator	Q(x)	-	Q[x]	SCALAR	TOTAL	ITransferOperation
 Q(x).denominator	RationalFunctionField	denominator	Q(x)	-	Q[x]	SCALAR	TOTAL	ITransferOperation
@@ -364,6 +390,7 @@ Z/6Z.negate	ResidueRing	negate	Z/6Z	-	Z/6Z	SCALAR	TOTAL	IOneOperandOperation
 Z/6Z.inverse	ResidueRing	inverse	Z/6Z	-	Z/6Z	SCALAR	PARTIAL	IOneOperandOperation
 Z/6Z.is-unit	ResidueRing	is-unit	Z/6Z	-	Boolean	SCALAR	TOTAL	ITransferOperation
 Z/6Z.is-zero-divisor	ResidueRing	is-zero-divisor	Z/6Z	-	Boolean	SCALAR	TOTAL	ITransferOperation
+Z/6Z.to-boolean	ResidueRing	to-boolean	Z/6Z	-	Boolean	SCALAR	PARTIAL	ITransferOperation
 Z/6Z.lift	ResidueRing	lift	Z/6Z	-	Z	SCALAR	TOTAL	ITransferOperation
 Z/6Z.reduce	ResidueRing	Z/6Z.reduce	Z	-	Z/6Z	SCALAR	TOTAL	ITransferOperation
 Z/6Z.solve-multiply	ResidueRing	solve-multiply	Z/6Z	Z/6Z	Z/6Z	LIST	TOTAL	IFlatOperation
@@ -1725,5 +1752,6 @@ Z/5Z.multiply	PrimeField	multiply	Z/5Z	Z/5Z	Z/5Z	SCALAR	TOTAL	IOperation
 Z/5Z.divide	PrimeField	divide	Z/5Z	Z/5Z	Z/5Z	SCALAR	PARTIAL	IOperation
 Z/5Z.negate	PrimeField	negate	Z/5Z	-	Z/5Z	SCALAR	TOTAL	IOneOperandOperation
 Z/5Z.inverse	PrimeField	inverse	Z/5Z	-	Z/5Z	SCALAR	PARTIAL	IOneOperandOperation
+Z/5Z.to-boolean	PrimeField	to-boolean	Z/5Z	-	Boolean	SCALAR	PARTIAL	ITransferOperation
 Z/5Z.zero	PrimeField	Z/5Z.zero	Unit	-	Z/5Z	SCALAR	TOTAL	ITransferOperation
 Z/5Z.one	PrimeField	Z/5Z.one	Unit	-	Z/5Z	SCALAR	TOTAL	ITransferOperation

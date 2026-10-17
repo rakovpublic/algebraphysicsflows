@@ -35,6 +35,8 @@ public final class RationalMatrixAlgebra extends ConcreteAlgebra<RationalMatrix>
                                  RationalPolynomialRing polynomials,BooleanAlgebra truth) {
         this(rationals,vectors,naturals);
         MatrixSpectralOperations.install(this,vectors.algebra(),rationals,polynomials,naturals,truth,false);
+        unary("to-boolean",algebra(),truth.algebra(),true,m -> BooleanAlgebra.decode(m.equals(RationalMatrix.identity(dimension).scale(Rational.ZERO)),m.equals(RationalMatrix.identity(dimension)),"Mat"+dimension+"(Q)"));
+        law("Boolean decoding is defined exactly on the zero and identity matrices.");
     }
     private static Algebra<RationalMatrix> carrier(int n) {
         if(n<=0) throw MathFailure.invalid("Matrix dimension must be positive");

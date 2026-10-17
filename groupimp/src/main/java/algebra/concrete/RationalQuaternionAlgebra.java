@@ -17,6 +17,7 @@ public final class RationalQuaternionAlgebra extends ConcreteAlgebra<RationalQua
         unary("inverse",algebra(),algebra(),true,RationalQuaternion::inverse);
         unary("norm-squared",algebra(),rationals.algebra(),false,RationalQuaternion::normSquared);
         unary("real-part",algebra(),rationals.algebra(),false,q -> q.real);
+        unary("to-boolean",algebra(),truth.algebra(),true,q -> BooleanAlgebra.decode(q.equals(RationalQuaternion.ZERO),q.equals(RationalQuaternion.ONE),"H(Q)"));
         unary("imaginary-part",algebra(),vectors.algebra(),false,RationalQuaternion::imaginaryPart);
         unaryFlat("components",algebra(),rationals.algebra(),false,RationalQuaternion::components);
         binary("scale",algebra(),rationals.algebra(),algebra(),false,RationalQuaternion::scale);
@@ -37,5 +38,6 @@ public final class RationalQuaternionAlgebra extends ConcreteAlgebra<RationalQua
         law("Squared norm is a nonnegative rational and multiplicative; conjugation reverses multiplication order.");
         law("Rotation uses q*(0,v)*q^-1 on column vectors; every nonzero rational scalar multiple gives the same rotation.");
         law("Rotation matrix inversion selects a rational projective quaternion with first nonzero component one, not a unit quaternion.");
+        law("Boolean decoding is defined exactly on scalar quaternion zero and one.");
     }
 }
