@@ -2,7 +2,7 @@
   "schema_version": 1,
   "title": "AlgebraPhysicsFlows mathematical coverage",
   "baseline_commit": "ef1a9a548aea4ea75fc98d6798952f373de48da9",
-  "survey_date": "2026-10-17",
+  "survey_date": "2026-11-04",
   "scope": "An initial, explicitly scoped survey and tested implementation. Not a census of all mathematics and not a proof of universality.",
   "classification_basis": "Representation status applies only to each record's explicit scope. Catalog-only rows are initial triage, not established minimality results. Native registrations use Algebra and the existing operations interfaces; the optional Domain/Structure prototype does not execute those registrations. Implementation, empirical testing and mathematical proof are independent axes.",
   "sources": [
@@ -27691,6 +27691,68 @@
       "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
     },
     {
+      "id": "concrete-algebra.RationalImaginaryAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalImaginaryAlgebra",
+      "concept": "RationalImaginaryAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "iQ",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeImaginaryAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-04",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
       "id": "concrete-algebra.RationalMatrixAlgebra",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "RationalMatrixAlgebra",
@@ -31366,6 +31428,73 @@
       "legacy_operation_interface": "ITransferOperation"
     },
     {
+      "id": "concrete-operation.Boolean.to-imaginary",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "BooleanAlgebra",
+      "concept": "Boolean.to-imaginary",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Boolean",
+      "domain_B": null,
+      "domain_C": "iQ",
+      "operation_signature": "Boolean -> iQ",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-imaginary",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Encode false as 0*i and true as the designated generator i. The pure-imaginary carrier has no multiplicative unit, so this is a distinguished Boolean encoding rather than a 0/1 field embedding."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-04",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Boolean.to-imaginary",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-imaginary",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
       "id": "concrete-operation.Boolean.to-polynomial",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "BooleanAlgebra",
@@ -34860,6 +34989,1378 @@
       "runtime_operation_id": "Q(i).one",
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "Q(i).one",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.iQ.add",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalImaginaryAlgebra",
+      "concept": "iQ.add",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "iQ",
+      "domain_B": "iQ",
+      "domain_C": "iQ",
+      "operation_signature": "iQ x iQ -> iQ",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.add",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeImaginaryAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-04",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "iQ.add",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "add",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.iQ.subtract",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalImaginaryAlgebra",
+      "concept": "iQ.subtract",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "iQ",
+      "domain_B": "iQ",
+      "domain_C": "iQ",
+      "operation_signature": "iQ x iQ -> iQ",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.subtract",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeImaginaryAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-04",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "iQ.subtract",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "subtract",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.iQ.negate",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalImaginaryAlgebra",
+      "concept": "iQ.negate",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "iQ",
+      "domain_B": null,
+      "domain_C": "iQ",
+      "operation_signature": "iQ -> iQ",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.negate",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeImaginaryAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-04",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "iQ.negate",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "negate",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.iQ.conjugate",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalImaginaryAlgebra",
+      "concept": "iQ.conjugate",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "iQ",
+      "domain_B": null,
+      "domain_C": "iQ",
+      "operation_signature": "iQ -> iQ",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.conjugate",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeImaginaryAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-04",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "iQ.conjugate",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "conjugate",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.iQ.multiply",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalImaginaryAlgebra",
+      "concept": "iQ.multiply",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "iQ",
+      "domain_B": "iQ",
+      "domain_C": "Q",
+      "operation_signature": "iQ x iQ -> Q",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.multiply",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return -(a*b) in Q for (a*i)*(b*i); pure imaginary values are not closed under ordinary multiplication."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeImaginaryAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-04",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "iQ.multiply",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "multiply",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.iQ.divide",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalImaginaryAlgebra",
+      "concept": "iQ.divide",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "iQ",
+      "domain_B": "iQ",
+      "domain_C": "Q",
+      "operation_signature": "iQ x iQ -> Q",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.divide",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The second imaginary coefficient must be nonzero; return a/b in Q for (a*i)/(b*i)."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeImaginaryAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-04",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "iQ.divide",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "divide",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.iQ.norm-squared",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalImaginaryAlgebra",
+      "concept": "iQ.norm-squared",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "iQ",
+      "domain_B": null,
+      "domain_C": "Q",
+      "operation_signature": "iQ -> Q",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.norm-squared",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return a^2 in Q for a*i."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeImaginaryAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-04",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "iQ.norm-squared",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "norm-squared",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.iQ.square",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalImaginaryAlgebra",
+      "concept": "iQ.square",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "iQ",
+      "domain_B": null,
+      "domain_C": "Q",
+      "operation_signature": "iQ -> Q",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.square",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return -a^2 in Q for (a*i)^2."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeImaginaryAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-04",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "iQ.square",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "square",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.iQ.coefficient",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalImaginaryAlgebra",
+      "concept": "iQ.coefficient",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "iQ",
+      "domain_B": null,
+      "domain_C": "Q",
+      "operation_signature": "iQ -> Q",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.coefficient",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the exact rational coefficient a of a*i."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeImaginaryAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-04",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "iQ.coefficient",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "coefficient",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.iQ.scale",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalImaginaryAlgebra",
+      "concept": "iQ.scale",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "iQ",
+      "domain_B": "Q",
+      "domain_C": "iQ",
+      "operation_signature": "iQ x Q -> iQ",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.scale",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Multiply the pure-imaginary coefficient by the rational second operand and return the first iQ wrapper."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeImaginaryAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-04",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "iQ.scale",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "scale",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.iQ.scale-left",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalImaginaryAlgebra",
+      "concept": "iQ.scale-left",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q",
+      "domain_B": "iQ",
+      "domain_C": "iQ",
+      "operation_signature": "Q x iQ -> iQ",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.scale-left",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Multiply the rational first operand by the pure-imaginary second operand and return the actual second iQ wrapper through ILeftProjectionOperation."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ILeftProjectionOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/SecondResultOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeImaginaryAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-04",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "iQ.scale-left",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "iQ.scale-left",
+      "legacy_operation_interface": "ILeftProjectionOperation"
+    },
+    {
+      "id": "concrete-operation.iQ.equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalImaginaryAlgebra",
+      "concept": "iQ.equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "iQ",
+      "domain_B": "iQ",
+      "domain_C": "Boolean",
+      "operation_signature": "iQ x iQ -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeImaginaryAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-04",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "iQ.equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.iQ.to-boolean",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalImaginaryAlgebra",
+      "concept": "iQ.to-boolean",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "iQ",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "iQ -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.to-boolean",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeImaginaryAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-04",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "iQ.to-boolean",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-boolean",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.iQ.from-rational",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalImaginaryAlgebra",
+      "concept": "iQ.from-rational",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q",
+      "domain_B": null,
+      "domain_C": "iQ",
+      "operation_signature": "Q -> iQ",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.from-rational",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed a rational a as a*i in iQ; this is an additive coordinate embedding, not a multiplicative homomorphism."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeImaginaryAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-04",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "iQ.from-rational",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "iQ.from-rational",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.iQ.to-complex",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalImaginaryAlgebra",
+      "concept": "iQ.to-complex",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "iQ",
+      "domain_B": null,
+      "domain_C": "Q(i)",
+      "operation_signature": "iQ -> Q(i)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.to-complex",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed a*i as the exact complex value 0+a*i."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeImaginaryAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-04",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "iQ.to-complex",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-complex",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.iQ.from-complex",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalImaginaryAlgebra",
+      "concept": "iQ.from-complex",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(i)",
+      "domain_B": null,
+      "domain_C": "iQ",
+      "operation_signature": "Q(i) -> iQ",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.from-complex",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The complex input must have zero real coordinate; retain its imaginary coordinate."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeImaginaryAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-04",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "iQ.from-complex",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "iQ.from-complex",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.iQ.to-quaternion",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalImaginaryAlgebra",
+      "concept": "iQ.to-quaternion",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "iQ",
+      "domain_B": null,
+      "domain_C": "H(Q)",
+      "operation_signature": "iQ -> H(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.to-quaternion",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed a*i as the selected quaternion i-axis value (0,a,0,0)."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeImaginaryAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-04",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "iQ.to-quaternion",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-quaternion",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.iQ.from-quaternion",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalImaginaryAlgebra",
+      "concept": "iQ.from-quaternion",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "H(Q)",
+      "domain_B": null,
+      "domain_C": "iQ",
+      "operation_signature": "H(Q) -> iQ",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.from-quaternion",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The quaternion input must have zero real, j and k coordinates; retain its i coordinate."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeImaginaryAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-04",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "iQ.from-quaternion",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "iQ.from-quaternion",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.iQ.zero",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalImaginaryAlgebra",
+      "concept": "iQ.zero",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "iQ",
+      "operation_signature": "Unit -> iQ",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.zero",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeImaginaryAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-04",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "iQ.zero",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "iQ.zero",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.iQ.i",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalImaginaryAlgebra",
+      "concept": "iQ.i",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "iQ",
+      "operation_signature": "Unit -> iQ",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.i",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeImaginaryAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalImaginaryAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-04",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "iQ.i",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "iQ.i",
       "legacy_operation_interface": "ITransferOperation"
     },
     {
@@ -165602,6 +167103,14 @@
         "det-Mat2Q",
         "dot-Q2",
         "evaluate-polynomial",
+        "iQ.coefficient",
+        "iQ.divide",
+        "iQ.from-rational",
+        "iQ.multiply",
+        "iQ.norm-squared",
+        "iQ.scale",
+        "iQ.scale-left",
+        "iQ.square",
         "rational-add",
         "rational-divide",
         "rational-zero",
@@ -165727,7 +167236,9 @@
         "Q(i).subtract",
         "Q(i).to-boolean",
         "Q(i).zero",
-        "Q-to-Qi"
+        "Q-to-Qi",
+        "iQ.from-complex",
+        "iQ.to-complex"
       ],
       "invariants": [
         "real and imaginary parts in Q"
@@ -165797,6 +167308,7 @@
         "Z",
         "Q",
         "Q(i)",
+        "iQ",
         "H(Q)",
         "Q[x]",
         "Q(x)",
@@ -165837,6 +167349,7 @@
         "Boolean.one",
         "Boolean.or",
         "Boolean.to-complex",
+        "Boolean.to-imaginary",
         "Boolean.to-integer",
         "Boolean.to-matrix",
         "Boolean.to-natural",
@@ -166026,6 +167539,8 @@
         "Z/6Z.is-unit",
         "Z/6Z.is-zero-divisor",
         "Z/6Z.to-boolean",
+        "iQ.equal",
+        "iQ.to-boolean",
         "integer-greater"
       ],
       "invariants": [
@@ -166104,6 +167619,8 @@
         "Z/6Z.one",
         "Z/6Z.zero",
         "betti-F2",
+        "iQ.i",
+        "iQ.zero",
         "rational-zero"
       ],
       "invariants": [
@@ -168145,7 +169662,9 @@
         "H(Q).to-rational",
         "H(Q).to-rotation-matrix",
         "H(Q).to-vector",
-        "H(Q).zero"
+        "H(Q).zero",
+        "iQ.from-quaternion",
+        "iQ.to-quaternion"
       ],
       "invariants": [
         "Four canonical rational coefficients in scalar,i,j,k order",
@@ -172736,6 +174255,68 @@
         "review_date": null,
         "review_notes": "No human review performed",
         "date": "2026-10-07"
+      }
+    },
+    {
+      "id": "iQ",
+      "name": "Pure imaginary rational scalars",
+      "description": "Pure imaginary rational scalars",
+      "member_representation": "mathematics.numbers.RationalImaginary",
+      "membership_rules": [
+        "Exactly one rational coefficient a, representing a*i",
+        "Closed under additive and rational scalar operations",
+        "Ordinary products and quotients of two values belong to Q, not iQ",
+        "Canonical embeddings retain the i axis of Q(i) and H(Q); Boolean uses 0i and i"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "Boolean",
+        "H(Q)",
+        "Q",
+        "Q(i)"
+      ],
+      "supported_operations": [
+        "Boolean.to-imaginary",
+        "iQ.add",
+        "iQ.coefficient",
+        "iQ.conjugate",
+        "iQ.divide",
+        "iQ.equal",
+        "iQ.from-complex",
+        "iQ.from-quaternion",
+        "iQ.from-rational",
+        "iQ.i",
+        "iQ.multiply",
+        "iQ.negate",
+        "iQ.norm-squared",
+        "iQ.scale",
+        "iQ.scale-left",
+        "iQ.square",
+        "iQ.subtract",
+        "iQ.to-boolean",
+        "iQ.to-complex",
+        "iQ.to-quaternion",
+        "iQ.zero"
+      ],
+      "invariants": [
+        "Exactly one rational coefficient a, representing a*i",
+        "Closed under additive and rational scalar operations",
+        "Ordinary products and quotients of two values belong to Q, not iQ",
+        "Canonical embeddings retain the i axis of Q(i) and H(Q); Boolean uses 0i and i"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-11-04"
       }
     }
   ]

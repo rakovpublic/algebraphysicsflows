@@ -62,6 +62,7 @@ import mathematics.linear.RationalAffineSpace;
 import mathematics.linear.RationalTensor;
 import mathematics.linear.RationalExterior;
 import mathematics.numbers.Rational;
+import mathematics.numbers.RationalImaginary;
 import mathematics.numbers.RationalQuaternion;
 import mathematics.probability.FiniteMarkovKernel;
 import mathematics.probability.FiniteDistribution;
@@ -80,6 +81,8 @@ public final class ConcreteAlgebrasExample {
         System.out.println("MathTool: "+math.mathTool.getName()+", concrete algebras: "+math.algebras().size()+", operations: "+math.operations().size());
         System.out.println("Boolean scalar encodings round trip only 0 and 1: "+math.flow(math.booleans,Arrays.asList(false,true))
                 .<Rational>performAlgebraTransfer("to-rational").<Boolean>performAlgebraTransfer("to-boolean").collect());
+        System.out.println("Pure imaginary products return rationals: "+math.flow(math.imaginaries,Collections.singletonList(new RationalImaginary(Rational.of(2))))
+                .<Rational>performCustomResultOperation("multiply",new RationalImaginary(Rational.of(3))).collect());
         IntegerMatrix equation=new IntegerMatrix(new BigInteger[][]{{BigInteger.valueOf(2),BigInteger.valueOf(3)}});
         System.out.println("Integer solutions of 2*x+3*y=1: particular then kernel basis: "+math.flow(math.integerMatrices,Collections.singletonList(equation))
                 .performLeftProjectionFlatOperation("solve-generators",new IntegerVector(BigInteger.ONE)).collect());
