@@ -69,7 +69,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all1756RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all1777RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String discrete="Complex[[0], [1]]",emptyComplex="Complex[]";
@@ -436,11 +436,12 @@ public class ConcreteAlgebrasTest {
         expected.put("FiniteFunctorAlgebra",String.join("|",swapFunctor,swapFunctor,swapFunctor,category12,category12,"1","1",
                 "true","true","true","true","true","Function[1, 2]->[1, 2]{1=2, 2=1}","Function[1, 2]->[1, 2]{1=2, 2=1}",
                 "[2, 1]","[2, 1]","[1]","[1]","false",identityFunctor,cycleFunctor,emptyFunctor,constantTwo,emptyDiagram));
-        expected.put("BooleanAlgebra","false|true|true|false|false|true|false|false|true|false|true|false|false|true|1|1|1|(1)+(0)i|Quaternion[1, 0, 0, 0]|Q[x][1]|Q(x)(Q[x][1])/(Q[x][1])|Tensor(shape=[], entries=[1])|[[1, 0], [0, 1]]|1 (mod 6)|1 (mod 5)");
+        expected.put("BooleanAlgebra","false|true|true|false|false|true|false|false|true|false|true|false|false|true|1|1|1|(1)+(0)i|Quaternion[1, 0, 0, 0]|(1)i|Q[x][1]|Q(x)(Q[x][1])/(Q[x][1])|Tensor(shape=[], entries=[1])|[[1, 0], [0, 1]]|1 (mod 6)|1 (mod 5)");
         expected.put("NaturalSemiring","8|12|7|6|false|0|1");
         expected.put("IntegerRing","8|4|12|2|6|3|0|-6|6|false|3|true|false|[3, 0]|0|1");
         expected.put("RationalField","8|4|12|3|-6|1/6|false|true|false|[8, 4]|0|1");
         expected.put("RationalComplexField","(4)+(3)i|(-2)+(1)i|(1)+(7)i|(1/2)+(1/2)i|(-1)+(-2)i|(1)+(-2)i|5|false|(6)+(0)i|(0)+(0)i|(1)+(0)i");
+        expected.put("RationalImaginaryAlgebra","(3)i|(-1)i|(-1)i|(-1)i|-2|1/2|1|-1|1|(2)i|(12)i|false|false|(6)i|(0)+(1)i|(2)i|Quaternion[0, 1, 0, 0]|(2)i|(0)i|(1)i");
         expected.put("RationalQuaternionAlgebra","Quaternion[3, 1, 4, 7]|Quaternion[-1, 3, 2, 1]|Quaternion[-11, 8, -3, 16]|Quaternion[1, 0, 1, 0]|Quaternion[1, 2/3, -1/3, 2/3]|Quaternion[-1, -2, -3, -4]|Quaternion[1, -2, -3, -4]|Quaternion[1/30, -1/15, -1/10, -2/15]|30|1|false|[2, 3, 4]|[1, 2, 3, 4]|Quaternion[2, 4, 6, 8]|false|false|Quaternion[6, 0, 0, 0]|6|Quaternion[1, 2, 0, 0]|(1)+(2)i|Quaternion[0, 1, 2, 3]|[1, 2, 3]|[-1, 2, 3]|[[-2/3, 2/15, 11/15], [2/3, -1/3, 2/3], [1/3, 14/15, 2/15]]|Quaternion[1, 0, 0, 1]|Quaternion[0, 0, 0, 0]|Quaternion[1, 0, 0, 0]|Quaternion[0, 1, 0, 0]|Quaternion[0, 0, 1, 0]|Quaternion[0, 0, 0, 1]");
         expected.put("RationalVectorSpace","[4, 6]|[-2, -2]|[-1, -2]|[2, 4]|[18, 24]|[[18, 24]]|11|[[2, 4]]|[[2, 4], [-2, -4]]|[0, 0]");
         expected.put("RationalMatrixAlgebra","[[3, 2], [3, 6]]|[[2, 4], [6, 8]]|[[-1, 2], [3, 2]]|[[-1, -2], [-3, -4]]|[[1, 3], [2, 4]]|[[-2, 1], [3/2, -1/2]]|-2|5|[[2, 4], [6, 8]]|[11, 25]|[-2, 5/2]|[[0, 0], [0, 0]]|[[1, 0], [0, 1]]|2");
@@ -474,7 +475,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(1756,count);
+        assertEquals(1777,count);
     }
     private static String homString(String source,String target,String matrix) { return "AbelianHom(source="+source+", target="+target+", smith="+matrix+")"; }
     private static String simplicialString(String source,String target,String vertices) { return "SimplicialMap(source="+source+", target="+target+", vertices="+vertices+")"; }
@@ -503,6 +504,8 @@ public class ConcreteAlgebrasTest {
         Algebra source=math.mathTool.getAlgebra(entry.first.getAlgebraName());
         IAlgebraItem item=source.buildAlgebraItem(sample(math,source.getAlgebraName(),0));
         if(name.equals("to-boolean")) item=source.buildAlgebraItem(booleanDecodingZero(math,owner,source));
+        if(entry.id.equals("iQ.from-complex")) item=source.buildAlgebraItem(new RationalComplex(Rational.ZERO,Rational.of(2)));
+        if(entry.id.equals("iQ.from-quaternion")) item=source.buildAlgebraItem(new RationalQuaternion(Rational.ZERO,Rational.of(2),Rational.ZERO,Rational.ZERO));
         if(owner instanceof IntegralConeCochainAlgebra && (name.equals("source-part") || name.equals("cobounding-cochain")))
             item=source.buildAlgebraItem(IntegralConeCochain.zero((IntegralChainMappingCone)sample(math,"ChainCone",0),BigInteger.ONE));
         if(owner instanceof SimplicialChainMapAlgebra || owner instanceof SimplicialChainMapSpaceAlgebra || owner instanceof SimplicialChainMapClassAlgebra || owner instanceof SimplicialChainEquivalenceAlgebra || owner instanceof IntegralChainMappingConeAlgebra || owner instanceof IntegralChainConeMapAlgebra) {
@@ -789,6 +792,7 @@ public class ConcreteAlgebrasTest {
         if(source==math.naturals.algebra() || source==math.integers.algebra()) return BigInteger.ZERO;
         if(source==math.rationals.algebra()) return Rational.ZERO;
         if(source==math.complexRationals.algebra()) return new RationalComplex(Rational.ZERO,Rational.ZERO);
+        if(source==math.imaginaries.algebra()) return RationalImaginary.ZERO;
         if(source==math.quaternions.algebra()) return RationalQuaternion.ZERO;
         if(source==math.polynomials.algebra()) return Polynomial.ZERO;
         if(source==math.rationalFunctions.algebra()) return mathematics.calculus.RationalFunction.ZERO;
@@ -871,6 +875,7 @@ public class ConcreteAlgebrasTest {
             case "N": case "Z": return BigInteger.valueOf(index==0?6:2);
             case "Q": return Rational.of(index==0?6:2);
             case "Q(i)": return index==0?new RationalComplex(Rational.ONE,Rational.of(2)):new RationalComplex(Rational.of(3),Rational.ONE);
+            case "iQ": return new RationalImaginary(index==0?Rational.ONE:Rational.of(2));
             case "H(Q)": return index==0?new RationalQuaternion(Rational.ONE,Rational.of(2),Rational.of(3),Rational.of(4))
                     :new RationalQuaternion(Rational.of(2),Rational.of(-1),Rational.ONE,Rational.of(3));
             case "Q^2": return index==0?new RationalVector(Rational.ONE,Rational.of(2)):new RationalVector(Rational.of(3),Rational.of(4));

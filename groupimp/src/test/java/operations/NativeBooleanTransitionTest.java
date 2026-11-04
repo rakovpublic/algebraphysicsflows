@@ -42,6 +42,7 @@ public final class NativeBooleanTransitionTest {
         assertEquals(Arrays.asList("false","true"),math.flow(math.booleans,BITS).<Rational>performAlgebraTransfer("to-rational").<Boolean>performAlgebraTransfer("to-boolean").collect());
         assertEquals(Arrays.asList("false","true"),math.flow(math.booleans,BITS).<RationalComplex>performAlgebraTransfer("to-complex").<Boolean>performAlgebraTransfer("to-boolean").collect());
         assertEquals(Arrays.asList("false","true"),math.flow(math.booleans,BITS).<RationalQuaternion>performAlgebraTransfer("to-quaternion").<Boolean>performAlgebraTransfer("to-boolean").collect());
+        assertEquals(Arrays.asList("false","true"),math.flow(math.booleans,BITS).<RationalImaginary>performAlgebraTransfer("to-imaginary").<Boolean>performAlgebraTransfer("to-boolean").collect());
         assertEquals(Arrays.asList("false","true"),math.flow(math.booleans,BITS).<Polynomial>performAlgebraTransfer("to-polynomial").<Boolean>performAlgebraTransfer("to-boolean").collect());
         assertEquals(Arrays.asList("false","true"),math.flow(math.booleans,BITS).<RationalFunction>performAlgebraTransfer("to-rational-function").<Boolean>performAlgebraTransfer("to-boolean").collect());
         assertEquals(Arrays.asList("false","true"),math.flow(math.booleans,BITS).<RationalTensor>performAlgebraTransfer("to-tensor").<Boolean>performAlgebraTransfer("to-boolean").collect());
@@ -55,6 +56,7 @@ public final class NativeBooleanTransitionTest {
         undefined(() -> math.rationals.algebra().buildAlgebraItem(Rational.of(1,2)).performAlgebraTransfer("to-boolean"));
         undefined(() -> math.complexRationals.algebra().buildAlgebraItem(new RationalComplex(Rational.ONE,Rational.ONE)).performAlgebraTransfer("to-boolean"));
         undefined(() -> math.quaternions.algebra().buildAlgebraItem(RationalQuaternion.I).performAlgebraTransfer("to-boolean"));
+        undefined(() -> math.imaginaries.algebra().buildAlgebraItem(new RationalImaginary(Rational.of(2))).performAlgebraTransfer("to-boolean"));
         undefined(() -> math.polynomials.algebra().buildAlgebraItem(new Polynomial(Rational.ZERO,Rational.ONE)).performAlgebraTransfer("to-boolean"));
         undefined(() -> math.rationalFunctions.algebra().buildAlgebraItem(RationalFunction.of(new Polynomial(Rational.ZERO,Rational.ONE))).performAlgebraTransfer("to-boolean"));
         undefined(() -> math.tensors.algebra().buildAlgebraItem(new RationalTensor(new int[]{1},Rational.ONE)).performAlgebraTransfer("to-boolean"));
