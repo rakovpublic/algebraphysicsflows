@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 2297 |
-| DIRECTLY_SUPPORTED | 2054 |
+| Scoped records | 2328 |
+| DIRECTLY_SUPPORTED | 2085 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1913 |
+| IMPLEMENTED | 1944 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1981 |
+| MACHINE_TESTED | 2012 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1890 | 1890 | 0 | 0 | 0 | 1890 | 0 | 0 |
+| Concrete MathTool algebras | 1921 | 1921 | 0 | 0 | 0 | 1921 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -291,6 +291,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Boolean.one | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.one |
 | Boolean.or | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.or |
 | Boolean.to-complex | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-complex |
+| Boolean.to-dixon-z2 | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-dixon-z2 |
 | Boolean.to-imaginary | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-imaginary |
 | Boolean.to-integer | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-integer |
 | Boolean.to-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-matrix |
@@ -727,6 +728,35 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | CoverMap.union-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with covariant homology, contravariant cohomology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.union-homology-map |
 | CoverMap.union-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with covariant homology, contravariant cohomology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.union-map |
 | CoverMap.union-relative-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Maps of ordered two-subcomplex covers with covariant homology, contravariant cohomology, natural Mayer-Vietoris sequences and excision diagrams; native operation CoverMap.union-relative-map |
+| DixonZ2(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).add |
+| DixonZ2(Q).components | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).components |
+| DixonZ2(Q).embed-complex | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).embed-complex |
+| DixonZ2(Q).embed-imaginary | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).embed-imaginary |
+| DixonZ2(Q).embed-octonion | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).embed-octonion |
+| DixonZ2(Q).embed-quaternion | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).embed-quaternion |
+| DixonZ2(Q).embed-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).embed-rational |
+| DixonZ2(Q).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).equal |
+| DixonZ2(Q).equal-zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).equal-zero |
+| DixonZ2(Q).even-part | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).even-part |
+| DixonZ2(Q).from-left-multiplication-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).from-left-multiplication-matrix |
+| DixonZ2(Q).from-vector | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).from-vector |
+| DixonZ2(Q).grading-involution | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).grading-involution |
+| DixonZ2(Q).group-generator | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).group-generator |
+| DixonZ2(Q).left-multiplication-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).left-multiplication-matrix |
+| DixonZ2(Q).multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).multiply |
+| DixonZ2(Q).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).negate |
+| DixonZ2(Q).not-equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).not-equal |
+| DixonZ2(Q).odd-part | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).odd-part |
+| DixonZ2(Q).one | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).one |
+| DixonZ2(Q).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).subtract |
+| DixonZ2(Q).to-boolean | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).to-boolean |
+| DixonZ2(Q).to-complex | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).to-complex |
+| DixonZ2(Q).to-imaginary | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).to-imaginary |
+| DixonZ2(Q).to-octonion | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).to-octonion |
+| DixonZ2(Q).to-quaternion | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).to-quaternion |
+| DixonZ2(Q).to-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).to-rational |
+| DixonZ2(Q).to-vector | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).to-vector |
+| DixonZ2(Q).zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).zero |
 | Exterior(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).add |
 | Exterior(Q).ambient-dimension | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).ambient-dimension |
 | Exterior(Q).apply | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension; native operation Exterior(Q).apply |
@@ -1488,6 +1518,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Q^2.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed-dimensional rational vectors; default dimension two; native operation Q^2.zero |
 | RationalAffineSpaceAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical affine solution sets of finite rational linear systems, including empty sets with retained ambient dimension |
 | RationalComplexField | DIRECTLY_SUPPORTED | IMPLEMENTED | Pairs of rational coordinates; a proper subfield of the complex numbers with exact 0/1 Boolean decoding |
+| RationalDixonZ2Algebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action |
 | RationalExteriorAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension |
 | RationalField | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field with exact 0/1 Boolean decoding |
 | RationalFunctionField | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator and exact 0/1 Boolean decoding |

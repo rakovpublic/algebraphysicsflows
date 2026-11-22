@@ -4,7 +4,7 @@ Concrete exact algebras are available through `algebra.concrete.ConcreteMathemat
 
 Boolean now provides the standard derived lattice operations and exact `0`/`1` transitions to and from native scalar carriers. A reverse `to-boolean` conversion accepts only the exact zero and one of its carrier, so it never applies arbitrary truthiness to a number, polynomial, tensor, or matrix. The pure-imaginary carrier `iQ` represents `a*i`; its Boolean encoding is deliberately `false -> 0i`, `true -> i`, because that additive line has no multiplicative unit.
 
-The rational octonions `O(Q)` register the Cayley product, norm, inverse and both division orders, with exact Q, Q(i), iQ and H(Q) subalgebras, seven-dimensional imaginary vectors, Boolean encoding and 8 by 8 left-multiplication matrices.
+The rational octonions `O(Q)` register the Cayley product, norm, inverse and both division orders, with exact Q, Q(i), iQ and H(Q) subalgebras, seven-dimensional imaginary vectors, Boolean encoding and 8 by 8 left-multiplication matrices. `DixonZ2(Q)` adds the exact 64-coordinate crossed product `(Q(i) tensor H(Q) tensor O(Q)) semidirect C2`, with its canonical octonion parity action, grading projections, checked maps to and from Q, Q(i), iQ, H(Q), O(Q), and Boolean, 128-dimensional rational vectors and checked 128 by 128 left multiplication matrices.
 
 See [concrete algebras and usage](docs/CONCRETE_ALGEBRAS.md). Same-algebra unary operations now use `IOneOperandOperation` and `performOneOperandOperation(name)` on items and flows. `ICustomMemberOperation` returns the first operand type; `ILeftProjectionOperation` returns the second operand type, wrapped in `IAlgebraItem`.
 

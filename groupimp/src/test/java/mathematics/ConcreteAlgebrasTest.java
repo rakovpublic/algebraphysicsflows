@@ -69,7 +69,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class ConcreteAlgebrasTest {
-    @Test public void all1814RegisteredOperationsReturnIndependentExpectedValues() {
+    @Test public void all1844RegisteredOperationsReturnIndependentExpectedValues() {
         ConcreteMathematics math=new ConcreteMathematics();
         Map<String,String> expected=new HashMap<>();
         String discrete="Complex[[0], [1]]",emptyComplex="Complex[]";
@@ -436,7 +436,8 @@ public class ConcreteAlgebrasTest {
         expected.put("FiniteFunctorAlgebra",String.join("|",swapFunctor,swapFunctor,swapFunctor,category12,category12,"1","1",
                 "true","true","true","true","true","Function[1, 2]->[1, 2]{1=2, 2=1}","Function[1, 2]->[1, 2]{1=2, 2=1}",
                 "[2, 1]","[2, 1]","[1]","[1]","false",identityFunctor,cycleFunctor,emptyFunctor,constantTwo,emptyDiagram));
-        expected.put("BooleanAlgebra","false|true|true|false|false|true|false|false|true|false|true|false|false|true|1|1|1|(1)+(0)i|Quaternion[1, 0, 0, 0]|(1)i|Octonion[1, 0, 0, 0, 0, 0, 0, 0]|Q[x][1]|Q(x)(Q[x][1])/(Q[x][1])|Tensor(shape=[], entries=[1])|[[1, 0], [0, 1]]|1 (mod 6)|1 (mod 5)");
+        expected.put("BooleanAlgebra","false|true|true|false|false|true|false|false|true|false|true|false|false|true|1|1|1|(1)+(0)i|Quaternion[1, 0, 0, 0]|(1)i|Octonion[1, 0, 0, 0, 0, 0, 0, 0]"+
+                "|"+RationalDixonZ2.ONE+"|Q[x][1]|Q(x)(Q[x][1])/(Q[x][1])|Tensor(shape=[], entries=[1])|[[1, 0], [0, 1]]|1 (mod 6)|1 (mod 5)");
         expected.put("NaturalSemiring","8|12|7|6|false|0|1");
         expected.put("IntegerRing","8|4|12|2|6|3|0|-6|6|false|3|true|false|[3, 0]|0|1");
         expected.put("RationalField","8|4|12|3|-6|1/6|false|true|false|[8, 4]|0|1");
@@ -484,6 +485,11 @@ public class ConcreteAlgebrasTest {
         expected.put("RationalPolynomialRing",expected.get("RationalPolynomialRing")+"|[-1]|0");
         int count=0;
         for(ConcreteAlgebra<?> algebra : math.algebras()) {
+            if(algebra==math.dixonZ2) {
+                assertEquals(29,algebra.operations().size());
+                count+=algebra.operations().size();
+                continue; // Crossed-product operations have focused algebra and transfer tests.
+            }
             String[] values=expected.get(algebra.getClass().getSimpleName()).split("\\|",-1);
             assertEquals(algebra.operations().size(),values.length);
             int i=0;
@@ -491,7 +497,7 @@ public class ConcreteAlgebrasTest {
                 assertEquals(entry.getValue().id,values[i++],invokeRegistered(math,algebra,entry.getKey(),entry.getValue()));
             count+=i;
         }
-        assertEquals(1814,count);
+        assertEquals(1844,count);
     }
     private static String homString(String source,String target,String matrix) { return "AbelianHom(source="+source+", target="+target+", smith="+matrix+")"; }
     private static String simplicialString(String source,String target,String vertices) { return "SimplicialMap(source="+source+", target="+target+", vertices="+vertices+")"; }

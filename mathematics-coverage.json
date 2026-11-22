@@ -27502,6 +27502,68 @@
       "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
     },
     {
+      "id": "concrete-algebra.RationalDixonZ2Algebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "RationalDixonZ2Algebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
       "id": "concrete-algebra.RationalExteriorAlgebra",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "RationalExteriorAlgebra",
@@ -31621,6 +31683,73 @@
       "runtime_operation_id": "Boolean.to-octonion",
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "to-octonion",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Boolean.to-dixon-z2",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "BooleanAlgebra",
+      "concept": "Boolean.to-dixon-z2",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Boolean",
+      "domain_B": null,
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "Boolean -> DixonZ2(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-dixon-z2",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Encode false as the carrier's exact zero and true as its exact one; this is a 0/1 encoding, not a claim of ordinary additive-homomorphism preservation."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Boolean.to-dixon-z2",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-dixon-z2",
       "legacy_operation_interface": "ITransferOperation"
     },
     {
@@ -38959,6 +39088,1999 @@
       "runtime_operation_id": "O(Q).kl",
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "O(Q).kl",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).add",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).add",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "DixonZ2(Q)",
+      "domain_B": "DixonZ2(Q)",
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "DixonZ2(Q) x DixonZ2(Q) -> DixonZ2(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).add",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).add",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "add",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).subtract",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).subtract",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "DixonZ2(Q)",
+      "domain_B": "DixonZ2(Q)",
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "DixonZ2(Q) x DixonZ2(Q) -> DixonZ2(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).subtract",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).subtract",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "subtract",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).multiply",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).multiply",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "DixonZ2(Q)",
+      "domain_B": "DixonZ2(Q)",
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "DixonZ2(Q) x DixonZ2(Q) -> DixonZ2(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).multiply",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "For a+b*u and c+d*u, return (ac+b*alpha(d))+(ad+b*alpha(c))*u with ordered octonion products and u*a=alpha(a)*u."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).multiply",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "multiply",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).negate",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).negate",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "DixonZ2(Q)",
+      "domain_B": null,
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "DixonZ2(Q) -> DixonZ2(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).negate",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).negate",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "negate",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).grading-involution",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).grading-involution",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "DixonZ2(Q)",
+      "domain_B": null,
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "DixonZ2(Q) -> DixonZ2(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).grading-involution",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Apply alpha to each octonion tensor coordinate in both group blocks; alpha fixes 1,i,j,k and negates l,il,jl,kl."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).grading-involution",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "grading-involution",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).even-part",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).even-part",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "DixonZ2(Q)",
+      "domain_B": null,
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "DixonZ2(Q) -> DixonZ2(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).even-part",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Project to the identity-group coefficient block a in a+b*u."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).even-part",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "even-part",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).odd-part",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).odd-part",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "DixonZ2(Q)",
+      "domain_B": null,
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "DixonZ2(Q) -> DixonZ2(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).odd-part",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Project to the u-group coefficient block b*u in a+b*u."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).odd-part",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "odd-part",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).components",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).components",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "DixonZ2(Q)",
+      "domain_B": null,
+      "domain_C": "Q(i)",
+      "operation_signature": "DixonZ2(Q) -> List(Q(i))",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).components",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return all 64 exact Q(i) coordinates in order: 32 even-group tensor-basis entries followed by 32 odd-group entries.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).components",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "components",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).to-vector",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).to-vector",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "DixonZ2(Q)",
+      "domain_B": null,
+      "domain_C": "Vec(Q)",
+      "operation_signature": "DixonZ2(Q) -> Vec(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).to-vector",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return [real(c0),imag(c0),...,real(c63),imag(c63)] as a rational vector of dimension 128."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).to-vector",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-vector",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).from-vector",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).from-vector",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Vec(Q)",
+      "domain_B": null,
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "Vec(Q) -> DixonZ2(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).from-vector",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require a rational vector of dimension 128 and reconstruct the 64 ordered complex coordinates."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "DixonZ2(Q).from-vector",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "DixonZ2(Q).from-vector",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).left-multiplication-matrix",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).left-multiplication-matrix",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "DixonZ2(Q)",
+      "domain_B": null,
+      "domain_C": "Mat(Q)",
+      "operation_signature": "DixonZ2(Q) -> Mat(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).left-multiplication-matrix",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the 128 by 128 rational matrix with columns x*b_j for the declared rational-coordinate basis; it is a faithful linear regular representation but need not preserve multiplication because the algebra is nonassociative."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).left-multiplication-matrix",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "left-multiplication-matrix",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).from-left-multiplication-matrix",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).from-left-multiplication-matrix",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Q)",
+      "domain_B": null,
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "Mat(Q) -> DixonZ2(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).from-left-multiplication-matrix",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require a 128 by 128 rational matrix equal to left multiplication by the Dixon element decoded from its first column."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "DixonZ2(Q).from-left-multiplication-matrix",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "DixonZ2(Q).from-left-multiplication-matrix",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).equal-zero",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).equal-zero",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "DixonZ2(Q)",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "DixonZ2(Q) -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).equal-zero",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).equal-zero",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal-zero",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).to-boolean",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).to-boolean",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "DixonZ2(Q)",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "DixonZ2(Q) -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).to-boolean",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Defined only for the additive zero and multiplicative identity; all other crossed-product elements raise OPERATION_UNDEFINED."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "DixonZ2(Q).to-boolean",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-boolean",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "DixonZ2(Q)",
+      "domain_B": "DixonZ2(Q)",
+      "domain_C": "Boolean",
+      "operation_signature": "DixonZ2(Q) x DixonZ2(Q) -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).not-equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).not-equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "DixonZ2(Q)",
+      "domain_B": "DixonZ2(Q)",
+      "domain_C": "Boolean",
+      "operation_signature": "DixonZ2(Q) x DixonZ2(Q) -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).not-equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).not-equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "not-equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).embed-rational",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).embed-rational",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q",
+      "domain_B": null,
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "Q -> DixonZ2(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).embed-rational",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed Q as real multiples of 1 tensor 1 tensor 1 in the even group block."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).embed-rational",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "DixonZ2(Q).embed-rational",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).to-rational",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).to-rational",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "DixonZ2(Q)",
+      "domain_B": null,
+      "domain_C": "Q",
+      "operation_signature": "DixonZ2(Q) -> Q",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).to-rational",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "All coordinates except the real scalar slot in the even block must vanish."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "DixonZ2(Q).to-rational",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-rational",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).embed-complex",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).embed-complex",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(i)",
+      "domain_B": null,
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "Q(i) -> DixonZ2(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).embed-complex",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed Q(i) in the scalar and complex-i coefficients of the even block."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).embed-complex",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "DixonZ2(Q).embed-complex",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).to-complex",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).to-complex",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "DixonZ2(Q)",
+      "domain_B": null,
+      "domain_C": "Q(i)",
+      "operation_signature": "DixonZ2(Q) -> Q(i)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).to-complex",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "All tensor and odd-group coordinates must vanish; retain the scalar Q(i) coordinate."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "DixonZ2(Q).to-complex",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-complex",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).embed-imaginary",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).embed-imaginary",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "iQ",
+      "domain_B": null,
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "iQ -> DixonZ2(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).embed-imaginary",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed coefficient*i into the complex scalar slot in the even group block."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).embed-imaginary",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "DixonZ2(Q).embed-imaginary",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).to-imaginary",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).to-imaginary",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "DixonZ2(Q)",
+      "domain_B": null,
+      "domain_C": "iQ",
+      "operation_signature": "DixonZ2(Q) -> iQ",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).to-imaginary",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The element must lie in the selected pure-imaginary scalar axis of Q(i)."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "DixonZ2(Q).to-imaginary",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-imaginary",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).embed-quaternion",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).embed-quaternion",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "H(Q)",
+      "domain_B": null,
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "H(Q) -> DixonZ2(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).embed-quaternion",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed H(Q) on the quaternion factor with octonion identity and even group degree."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).embed-quaternion",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "DixonZ2(Q).embed-quaternion",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).to-quaternion",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).to-quaternion",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "DixonZ2(Q)",
+      "domain_B": null,
+      "domain_C": "H(Q)",
+      "operation_signature": "DixonZ2(Q) -> H(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).to-quaternion",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require rational coefficients, octonion identity in the tensor factor, and a zero odd group block."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "DixonZ2(Q).to-quaternion",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-quaternion",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).embed-octonion",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).embed-octonion",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "O(Q)",
+      "domain_B": null,
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "O(Q) -> DixonZ2(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).embed-octonion",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed O(Q) on the octonion factor with quaternion identity, real complex coefficients and even group degree."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).embed-octonion",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "DixonZ2(Q).embed-octonion",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).to-octonion",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).to-octonion",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "DixonZ2(Q)",
+      "domain_B": null,
+      "domain_C": "O(Q)",
+      "operation_signature": "DixonZ2(Q) -> O(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).to-octonion",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require rational coefficients, quaternion identity in the tensor factor and a zero odd group block."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "DixonZ2(Q).to-octonion",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-octonion",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).zero",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).zero",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "Unit -> DixonZ2(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).zero",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).zero",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "DixonZ2(Q).zero",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).one",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).one",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "Unit -> DixonZ2(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).one",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).one",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "DixonZ2(Q).one",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).group-generator",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).group-generator",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "Unit -> DixonZ2(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).group-generator",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).group-generator",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "DixonZ2(Q).group-generator",
       "legacy_operation_interface": "ITransferOperation"
     },
     {
@@ -169601,6 +171723,8 @@
       ],
       "supported_operations": [
         "Boolean.to-rational",
+        "DixonZ2(Q).embed-rational",
+        "DixonZ2(Q).to-rational",
         "Exterior(Q).coefficients",
         "Exterior(Q).dot",
         "Exterior(Q).norm-squared",
@@ -169827,6 +171951,9 @@
       ],
       "supported_operations": [
         "Boolean.to-complex",
+        "DixonZ2(Q).components",
+        "DixonZ2(Q).embed-complex",
+        "DixonZ2(Q).to-complex",
         "H(Q).embed-complex",
         "H(Q).to-complex",
         "O(Q).embed-complex",
@@ -169917,6 +172044,7 @@
         "iQ",
         "H(Q)",
         "O(Q)",
+        "DixonZ2(Q)",
         "Q[x]",
         "Q(x)",
         "Tensor(Q)",
@@ -169956,6 +172084,7 @@
         "Boolean.one",
         "Boolean.or",
         "Boolean.to-complex",
+        "Boolean.to-dixon-z2",
         "Boolean.to-imaginary",
         "Boolean.to-integer",
         "Boolean.to-matrix",
@@ -170016,6 +172145,10 @@
         "CoverMap.contiguous",
         "CoverMap.equal",
         "CoverMap.is-isomorphism",
+        "DixonZ2(Q).equal",
+        "DixonZ2(Q).equal-zero",
+        "DixonZ2(Q).not-equal",
+        "DixonZ2(Q).to-boolean",
         "Exterior(Q).equal",
         "Exterior(Q).is-zero",
         "FiniteAdjunction.equal",
@@ -170187,6 +172320,9 @@
         "AbelianGroupType.zero",
         "Boolean.one",
         "Boolean.zero",
+        "DixonZ2(Q).group-generator",
+        "DixonZ2(Q).one",
+        "DixonZ2(Q).zero",
         "FiniteAdjunction.empty",
         "FiniteCategory.empty",
         "FiniteComplex.empty",
@@ -171840,6 +173976,8 @@
         "Affine(Q).minimum-norm",
         "Affine(Q).particular",
         "Affine(Q).solve",
+        "DixonZ2(Q).from-vector",
+        "DixonZ2(Q).to-vector",
         "Exterior(Q).from-vector",
         "Exterior(Q).interior",
         "Exterior(Q).to-vector",
@@ -171933,6 +174071,8 @@
       "supported_operations": [
         "Affine(Q).least-squares",
         "Affine(Q).solve",
+        "DixonZ2(Q).from-left-multiplication-matrix",
+        "DixonZ2(Q).left-multiplication-matrix",
         "Exterior(Q).apply",
         "FiniteMarkov(Z).from-matrix",
         "FiniteMarkov(Z).to-matrix",
@@ -172257,6 +174397,8 @@
       ],
       "supported_operations": [
         "Boolean.to-quaternion",
+        "DixonZ2(Q).embed-quaternion",
+        "DixonZ2(Q).to-quaternion",
         "H(Q).add",
         "H(Q).components",
         "H(Q).conjugate",
@@ -176904,6 +179046,8 @@
       ],
       "supported_operations": [
         "Boolean.to-imaginary",
+        "DixonZ2(Q).embed-imaginary",
+        "DixonZ2(Q).to-imaginary",
         "O(Q).embed-imaginary",
         "O(Q).to-imaginary",
         "iQ.add",
@@ -176971,6 +179115,8 @@
       ],
       "supported_operations": [
         "Boolean.to-octonion",
+        "DixonZ2(Q).embed-octonion",
+        "DixonZ2(Q).to-octonion",
         "O(Q).add",
         "O(Q).components",
         "O(Q).conjugate",
@@ -177013,6 +179159,85 @@
         "Cayley-Dickson multiplication is alternative and nonassociative",
         "Positive multiplicative norm makes every nonzero rational octonion invertible",
         "Selected subalgebras Q, Q(i), iQ and H(Q), plus imaginary Vec(Q), Boolean and left-regular Mat(Q) representations"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-11-22"
+      }
+    },
+    {
+      "id": "DixonZ2(Q)",
+      "name": "Z2-graded Dixon crossed product",
+      "description": "Z2-graded Dixon crossed product",
+      "member_representation": "mathematics.numbers.RationalDixonZ2",
+      "membership_rules": [
+        "64 exact Q(i) coordinates: 32 tensor-basis coordinates in each C2 block",
+        "Crossed product a+b*u with u^2=1 and u*a=alpha(a)*u",
+        "Alpha fixes the quaternionic octonion subspace and negates its Cayley-Dickson odd half",
+        "Retains nonassociativity and makes no division-ring embedding claim",
+        "128 rational coordinates connect to Vec(Q)",
+        "128 by 128 left multiplication matrices connect to Mat(Q); this regular linear representation is not multiplicative in a nonassociative algebra"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "Boolean",
+        "H(Q)",
+        "Mat(Q)",
+        "O(Q)",
+        "Q",
+        "Q(i)",
+        "Vec(Q)",
+        "iQ"
+      ],
+      "supported_operations": [
+        "Boolean.to-dixon-z2",
+        "DixonZ2(Q).add",
+        "DixonZ2(Q).components",
+        "DixonZ2(Q).embed-complex",
+        "DixonZ2(Q).embed-imaginary",
+        "DixonZ2(Q).embed-octonion",
+        "DixonZ2(Q).embed-quaternion",
+        "DixonZ2(Q).embed-rational",
+        "DixonZ2(Q).equal",
+        "DixonZ2(Q).equal-zero",
+        "DixonZ2(Q).even-part",
+        "DixonZ2(Q).from-left-multiplication-matrix",
+        "DixonZ2(Q).from-vector",
+        "DixonZ2(Q).grading-involution",
+        "DixonZ2(Q).group-generator",
+        "DixonZ2(Q).left-multiplication-matrix",
+        "DixonZ2(Q).multiply",
+        "DixonZ2(Q).negate",
+        "DixonZ2(Q).not-equal",
+        "DixonZ2(Q).odd-part",
+        "DixonZ2(Q).one",
+        "DixonZ2(Q).subtract",
+        "DixonZ2(Q).to-boolean",
+        "DixonZ2(Q).to-complex",
+        "DixonZ2(Q).to-imaginary",
+        "DixonZ2(Q).to-octonion",
+        "DixonZ2(Q).to-quaternion",
+        "DixonZ2(Q).to-rational",
+        "DixonZ2(Q).to-vector",
+        "DixonZ2(Q).zero"
+      ],
+      "invariants": [
+        "64 exact Q(i) coordinates: 32 tensor-basis coordinates in each C2 block",
+        "Crossed product a+b*u with u^2=1 and u*a=alpha(a)*u",
+        "Alpha fixes the quaternionic octonion subspace and negates its Cayley-Dickson odd half",
+        "Retains nonassociativity and makes no division-ring embedding claim",
+        "128 rational coordinates connect to Vec(Q)",
+        "128 by 128 left multiplication matrices connect to Mat(Q); this regular linear representation is not multiplicative in a nonassociative algebra"
       ],
       "references": [
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
