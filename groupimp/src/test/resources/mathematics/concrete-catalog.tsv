@@ -711,6 +711,7 @@ HMN(H(Q);Z^N,sigma,tau).has-dark-matter-residue	RationalTwistedLatticeAlgebraFam
 HMN(H(Q);Z^N,sigma,tau).leading-coefficient	RationalTwistedLatticeAlgebraFamily	leading-coefficient	HMN(H(Q);Z^N,sigma,tau)	-	H(Q)	SCALAR	PARTIAL	ITransferOperation
 HMN(H(Q);Z^N,sigma,tau).to-quaternion	RationalTwistedLatticeAlgebraFamily	to-quaternion	HMN(H(Q);Z^N,sigma,tau)	-	H(Q)	SCALAR	PARTIAL	ITransferOperation
 HMN(H(Q);Z^N,sigma,tau).to-boolean	RationalTwistedLatticeAlgebraFamily	to-boolean	HMN(H(Q);Z^N,sigma,tau)	-	Boolean	SCALAR	PARTIAL	ITransferOperation
+HMN(H(Q);Z^N,sigma,tau).parity-fold-to-dixon-boundary	RationalTwistedLatticeAlgebraFamily	parity-fold-to-dixon-boundary	HMN(H(Q);Z^N,sigma,tau)	-	DixonZ2(Q)	SCALAR	PARTIAL	ITransferOperation
 HMN(H(Q);Z^N,sigma,tau).equal	RationalTwistedLatticeAlgebraFamily	equal	HMN(H(Q);Z^N,sigma,tau)	HMN(H(Q);Z^N,sigma,tau)	Boolean	SCALAR	TOTAL	ICustomResultOperation
 HMN(H(Q);Z^N,sigma,tau).embed-quaternion	RationalTwistedLatticeAlgebraFamily	HMN(H(Q);Z^N,sigma,tau).embed-quaternion	H(Q)	-	HMN(H(Q);Z^N,sigma,tau)	SCALAR	TOTAL	ITransferOperation
 HMN(H(Q);Z^N,sigma,tau).group-basis	RationalTwistedLatticeAlgebraFamily	HMN(H(Q);Z^N,sigma,tau).group-basis	Vec(Z)	-	HMN(H(Q);Z^N,sigma,tau)	SCALAR	PARTIAL	ITransferOperation
