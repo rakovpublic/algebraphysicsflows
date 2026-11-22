@@ -39,7 +39,7 @@ OWNERS = {
     "RationalOctonionAlgebra": ("O(Q)", "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras"),
     "RationalDixonZ2Algebra": ("DixonZ2(Q)", "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action"),
     "RationalTwistedHahnMalcevNeumannAlgebra": ("HMN(H(Q);Z,sigma,1)", "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1"),
-    "RationalTwistedLatticeAlgebraFamily": ("HMN(H(Q);Z^3,sigma,tau)", "Finite-support H(Q)-valued skew group algebra on lexicographically ordered Z^3 with a sign 2-cocycle and non-surjective BSM1 endomorphism"),
+    "RationalTwistedLatticeAlgebraFamily": ("HMN(H(Q);Z^N,sigma,tau)", "Finite-support H(Q)-valued skew group algebra on lexicographically ordered runtime-rank Z^N with an alternating sign 2-cocycle and conditional BSM1 endomorphism"),
     "RationalCyclotomicAlgebra": ("Q(zeta_12)", "Exact cyclotomic field arithmetic modulo Phi_12 with selected Q(i) and decimal-evaluation bridges"),
     "RationalQuaternionAlgebra": ("H(Q)", "Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding"),
     "RationalVectorSpace": ("Q^2", "Fixed-dimensional rational vectors; default dimension two"),
@@ -1849,7 +1849,7 @@ BOOLEAN_TRANSITION_OWNERS = (
     "RationalImaginaryAlgebra", "RationalOctonionAlgebra", "RationalDixonZ2Algebra", "RationalTwistedHahnMalcevNeumannAlgebra", "RationalTwistedLatticeAlgebraFamily", "RationalCyclotomicAlgebra", "RationalQuaternionAlgebra", "RationalPolynomialRing", "RationalFunctionField", "RationalTensorAlgebra",
     "RationalMatrixAlgebra", "ResidueRing", "PrimeField",
 )
-BOOLEAN_SCALAR_DOMAINS = ("N", "Z", "Q", "Q(i)", "iQ", "H(Q)", "O(Q)", "DixonZ2(Q)", "HMN(H(Q);Z,sigma,1)", "HMN(H(Q);Z^3,sigma,tau)", "Q(zeta_12)", "Q[x]", "Q(x)", "Tensor(Q)", "Mat2(Q)", "Z/6Z", "Z/5Z")
+BOOLEAN_SCALAR_DOMAINS = ("N", "Z", "Q", "Q(i)", "iQ", "H(Q)", "O(Q)", "DixonZ2(Q)", "HMN(H(Q);Z,sigma,1)", "HMN(H(Q);Z^N,sigma,tau)", "Q(zeta_12)", "Q[x]", "Q(x)", "Tensor(Q)", "Mat2(Q)", "Z/6Z", "Z/5Z")
 BOOLEAN_DECODER_CONDITION = "Defined exactly for the distinguished values 0 and 1; every other carrier value raises OPERATION_UNDEFINED rather than using truthiness."
 for _owner in BOOLEAN_TRANSITION_OWNERS[1:]:
     OWNER_CONDITIONS.setdefault(_owner, {})["to-boolean"] = BOOLEAN_DECODER_CONDITION
@@ -2843,7 +2843,7 @@ def synchronize(data, rows):
          ["64 exact Q(i) coordinates: 32 tensor-basis coordinates in each C2 block", "Crossed product a+b*u with u^2=1 and u*a=alpha(a)*u", "Alpha fixes the quaternionic octonion subspace and negates its Cayley-Dickson odd half", "Retains nonassociativity and makes no division-ring embedding claim", "128 rational coordinates connect to Vec(Q)", "128 by 128 left multiplication matrices connect to Mat(Q); this regular linear representation is not multiplicative in a nonassociative algebra"], ["Q", "Q(i)", "iQ", "H(Q)", "O(Q)", "Vec(Q)", "Mat(Q)", "Boolean"]),
         ("HMN(H(Q);Z,sigma,1)", "Twisted Hahn-Mal'cev-Neumann rational division subring", "mathematics.numbers.RationalTwistedHahnSeries",
          ["K=H(Q), G=Z with its usual order, sigma=Ad(i), and normalized tau=1", "Group generator X satisfies Xq=sigma(q)X and central t=i^-1 X", "Exact representation as H(Q(t)) with quaternion conjugate/norm inverse", "Valuation and leading coefficient agree with the induced formal Laurent expansion", "This rational subring embeds in the full completion but does not represent every well-ordered support", "H(Q) and its Q, Q(i), iQ slices embed as constants", "O(Q) and DixonZ2(Q) connect only through their selected H(Q) subalgebra"], ["Q", "Q[x]", "Q(x)", "Q(i)", "iQ", "H(Q)", "O(Q)", "DixonZ2(Q)", "Boolean"]),
-        ("HMN(H(Q);Z^3,sigma,tau)", "Finite-support twisted lattice algebra", "mathematics.numbers.RationalTwistedLatticeAlgebra",
+        ("HMN(H(Q);Z^N,sigma,tau)", "Finite-support runtime-rank twisted lattice algebra", "mathematics.numbers.RationalTwistedLatticeAlgebra",
          ["Finite supports on lexicographically ordered Z^3", "Quaternion coefficient action sigma_g=Ad(i)^(g_1)", "Normalized nontrivial sign 2-cocycle tau(g,h)=(-1)^(g_1*h_2)", "Non-surjective BSM1 group/algebra endomorphism doubles g_0 and maps odd first-coordinate residues into the even subgroup", "H(Q) embeds at the identity exponent; full Hahn completions are not represented"], ["H(Q)", "DixonZ2(Q)", "Boolean"]),
         ("Q(zeta_12)", "Exact cyclotomic number field", "mathematics.numbers.RationalCyclotomic",
          ["Exact arithmetic modulo Phi_12(x)=x^4-x^2+1", "Extended-Euclid inverses in Q[x]/(Phi_12)", "Selected Q(i) subfield via i=zeta_12^3, with partial projections", "BigDecimal approximation of zeta powers at requested precision", "Koide ratio and CKM Jarlskog evaluators accept decimal inputs and a cyclotomic phase"], ["Q", "Q(i)", "Boolean", "H(Q)", "O(Q)", "DixonZ2(Q)", "HMN(H(Q);Z,sigma,1)"]),
