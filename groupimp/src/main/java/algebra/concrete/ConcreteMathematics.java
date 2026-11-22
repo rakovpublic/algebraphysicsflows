@@ -150,7 +150,8 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         dixonZ2=new RationalDixonZ2Algebra(rationals,complexRationals,imaginaries,quaternions,octonions,finiteVectors,rectangularMatrices,booleans);
         twistedHahnMalcevNeumann=new RationalTwistedHahnMalcevNeumannAlgebra(rationals,polynomials,rationalFunctions,integers,
                 complexRationals,imaginaries,quaternions,octonions,dixonZ2,booleans);
-        twistedLattice=new RationalTwistedLatticeAlgebraFamily(quaternions,booleans,rationals);
+        twistedLattice=new RationalTwistedLatticeAlgebraFamily(RationalTwistedLatticeAlgebraFamily.RANK,quaternions,booleans,rationals,
+                complexRationals,imaginaries,octonions,dixonZ2,twistedHahnMalcevNeumann,cyclotomics,integerVectors);
         multivariatePolynomials=new RationalMultivariatePolynomialAlgebra(rationals,naturals,integers,booleans,finiteVectors,rectangularMatrices,polynomials);
         polynomialMaps=new RationalPolynomialMapAlgebra(multivariatePolynomials,rationals,naturals,booleans,finiteVectors,rectangularMatrices);
         polynomialForms=new PolynomialDifferentialFormAlgebra(multivariatePolynomials,polynomialMaps,exterior,rationals,finiteVectors,naturals,booleans);

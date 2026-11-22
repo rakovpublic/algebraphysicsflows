@@ -67,7 +67,7 @@ public final class BooleanAlgebra extends ConcreteAlgebra<Boolean> {
         unary("to-hmn",algebra(),hahnMalcevNeumann.algebra(),false,RationalTwistedHahnSeries::fromBoolean);
         unary("to-cyclotomic",algebra(),cyclotomics.algebra(),false,value -> value?RationalCyclotomic.one(RationalCyclotomicAlgebra.ORDER):RationalCyclotomic.zero(RationalCyclotomicAlgebra.ORDER));
         unary("to-twisted-lattice",algebra(),twistedLattice.algebra(),false,value -> RationalTwistedLatticeAlgebra.fromQuaternion(
-                RationalTwistedLatticeAlgebraFamily.RANK,value?RationalQuaternion.ONE:RationalQuaternion.ZERO));
+                twistedLattice.defaultRank(),value?RationalQuaternion.ONE:RationalQuaternion.ZERO));
         unary("to-polynomial",algebra(),polynomials.algebra(),false,value -> value?Polynomial.ONE:Polynomial.ZERO);
         unary("to-rational-function",algebra(),functions.algebra(),false,value -> value?RationalFunction.ONE:RationalFunction.ZERO);
         unary("to-tensor",algebra(),tensors.algebra(),false,value -> RationalTensor.scalar(value?Rational.ONE:Rational.ZERO));

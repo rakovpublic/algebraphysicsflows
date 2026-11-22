@@ -1,6 +1,7 @@
 package mathematics.numbers;
 
 import mathematics.core.MathFailure;
+import mathematics.linear.IntegerVector;
 import java.io.Serializable;
 import java.util.*;
 
@@ -12,6 +13,7 @@ import java.util.*;
 public final class RationalTwistedLatticeAlgebra implements Serializable {
     private static final long serialVersionUID = 1L;
     private final int rank;
+    private final int[][] cocycle;
     private final NavigableMap<Exponent,RationalQuaternion> terms;
 
     public static final class Exponent implements Comparable<Exponent>, Serializable {
@@ -41,55 +43,89 @@ public final class RationalTwistedLatticeAlgebra implements Serializable {
     }
 
     public RationalTwistedLatticeAlgebra(int rank, Map<Exponent,RationalQuaternion> input) {
+        this(rank,defaultCocycle(rank),input);
+    }
+    public RationalTwistedLatticeAlgebra(int rank,int[][] cocycleMatrix,Map<Exponent,RationalQuaternion> input) {
         if(rank<1) throw new IllegalArgumentException("Lattice rank must be positive");
-        this.rank=rank; TreeMap<Exponent,RationalQuaternion> copy=new TreeMap<>();
+        this.rank=rank;this.cocycle=validateCocycle(rank,cocycleMatrix);TreeMap<Exponent,RationalQuaternion> copy=new TreeMap<>();
         for(Map.Entry<Exponent,RationalQuaternion> e:input.entrySet()){
             if(e.getKey().rank()!=rank)throw new IllegalArgumentException("Support exponent has wrong rank");
             put(copy,e.getKey(),Objects.requireNonNull(e.getValue()));
         }
         terms=Collections.unmodifiableNavigableMap(copy);
     }
+    private static int[][] defaultCocycle(int rank){
+        if(rank<1)throw new IllegalArgumentException("Lattice rank must be positive");int[][] m=new int[rank][rank];if(rank>2){m[1][2]=1;m[2][1]=1;}return m;
+    }
+    private static int[][] validateCocycle(int rank,int[][] input){
+        if(input==null||input.length!=rank)throw new IllegalArgumentException("Cocycle matrix must be rank by rank");int[][] out=new int[rank][rank];
+        for(int i=0;i<rank;i++){
+            if(input[i]==null||input[i].length!=rank)throw new IllegalArgumentException("Cocycle matrix must be rank by rank");
+            for(int j=0;j<rank;j++){
+                if((input[i][j]&~1)!=0)throw new IllegalArgumentException("Cocycle entries must be 0 or 1 in F_2");
+                if(i==j&&input[i][j]!=0)throw new IllegalArgumentException("Alternating cocycle matrix must have zero diagonal");
+                out[i][j]=input[i][j];
+            }
+        }
+        for(int i=0;i<rank;i++)for(int j=0;j<rank;j++)if(out[i][j]!=out[j][i])
+            throw new IllegalArgumentException("Sign cocycle matrix must be antisymmetric over F_2 (symmetric entries with zero diagonal)");
+        return out;
+    }
     private static void put(Map<Exponent,RationalQuaternion> out,Exponent e,RationalQuaternion q){
         RationalQuaternion sum=out.containsKey(e)?out.get(e).add(q):q;
         if(sum.equals(RationalQuaternion.ZERO))out.remove(e);else out.put(e,sum);
     }
     public static RationalTwistedLatticeAlgebra zero(int rank){return new RationalTwistedLatticeAlgebra(rank,Collections.emptyMap());}
+    public static RationalTwistedLatticeAlgebra zero(int rank,int[][] cocycle){return new RationalTwistedLatticeAlgebra(rank,cocycle,Collections.emptyMap());}
     public static RationalTwistedLatticeAlgebra basis(int rank,Exponent e,RationalQuaternion coefficient){return new RationalTwistedLatticeAlgebra(rank,Collections.singletonMap(e,coefficient));}
+    public static RationalTwistedLatticeAlgebra basis(int rank,int[][] cocycle,Exponent e,RationalQuaternion coefficient){return new RationalTwistedLatticeAlgebra(rank,cocycle,Collections.singletonMap(e,coefficient));}
     public static RationalTwistedLatticeAlgebra fromQuaternion(int rank,RationalQuaternion q){return basis(rank,new Exponent(Collections.nCopies(rank,java.math.BigInteger.ZERO)),q);}
+    public static RationalTwistedLatticeAlgebra fromQuaternion(int rank,int[][] cocycle,RationalQuaternion q){return basis(rank,cocycle,new Exponent(Collections.nCopies(rank,java.math.BigInteger.ZERO)),q);}
+    public static RationalTwistedLatticeAlgebra groupBasis(IntegerVector exponent){
+        if(exponent.dimension()<1)throw MathFailure.undefined("A lattice exponent must have positive runtime rank");
+        return basis(exponent.dimension(),new Exponent(exponent.entries()),RationalQuaternion.ONE);
+    }
     public int rank(){return rank;}
+    public int[][] cocycleMatrix(){int[][] result=new int[rank][rank];for(int i=0;i<rank;i++)result[i]=cocycle[i].clone();return result;}
     public NavigableMap<Exponent,RationalQuaternion> terms(){return terms;}
     public boolean isZero(){return terms.isEmpty();}
     public Exponent valuation(){if(isZero())throw MathFailure.undefined("Zero has no lattice valuation");return terms.firstKey();}
     public RationalQuaternion leadingCoefficient(){if(isZero())throw MathFailure.undefined("Zero has no leading coefficient");return terms.get(terms.firstKey());}
-    public RationalTwistedLatticeAlgebra add(RationalTwistedLatticeAlgebra b){sameRank(b);TreeMap<Exponent,RationalQuaternion> out=new TreeMap<>(terms);for(Map.Entry<Exponent,RationalQuaternion> e:b.terms.entrySet())put(out,e.getKey(),e.getValue());return new RationalTwistedLatticeAlgebra(rank,out);}
-    public RationalTwistedLatticeAlgebra negate(){TreeMap<Exponent,RationalQuaternion> out=new TreeMap<>();for(Map.Entry<Exponent,RationalQuaternion> e:terms.entrySet())out.put(e.getKey(),e.getValue().negate());return new RationalTwistedLatticeAlgebra(rank,out);}
+    public RationalTwistedLatticeAlgebra add(RationalTwistedLatticeAlgebra b){sameRank(b);TreeMap<Exponent,RationalQuaternion> out=new TreeMap<>(terms);for(Map.Entry<Exponent,RationalQuaternion> e:b.terms.entrySet())put(out,e.getKey(),e.getValue());return new RationalTwistedLatticeAlgebra(rank,cocycle,out);}
+    public RationalTwistedLatticeAlgebra negate(){TreeMap<Exponent,RationalQuaternion> out=new TreeMap<>();for(Map.Entry<Exponent,RationalQuaternion> e:terms.entrySet())out.put(e.getKey(),e.getValue().negate());return new RationalTwistedLatticeAlgebra(rank,cocycle,out);}
     public RationalTwistedLatticeAlgebra subtract(RationalTwistedLatticeAlgebra b){return add(b.negate());}
-    /** A normalized sign 2-cocycle on the last N-1 coordinates, with a nontrivial 1-2 interaction when rank >= 3. */
+    /** A normalized bilinear sign 2-cocycle induced by an alternating F2 matrix. */
     public static int tau(Exponent g,Exponent h){
+        return tau(g,h,defaultCocycle(g.rank()));
+    }
+    public static int tau(Exponent g,Exponent h,int[][] signMatrix){
         if(g.rank()!=h.rank())throw new IllegalArgumentException("Lattice ranks differ");
+        int[][] matrix=validateCocycle(g.rank(),signMatrix);
         int parity=0;
-        for(int i=1;i<g.rank();i++)for(int j=i+1;j<g.rank();j++)
-            if(g.coordinate(i).testBit(0)&&h.coordinate(j).testBit(0))parity^=1;
+        for(int i=0;i<g.rank();i++)for(int j=i+1;j<g.rank();j++)
+            if(matrix[i][j]!=0&&g.coordinate(i).testBit(0)&&h.coordinate(j).testBit(0))parity^=1;
         return parity==0?1:-1;
     }
     private static RationalQuaternion sigma(Exponent g,RationalQuaternion q){
-        // sigma_g=Ad(i)^(g_1), an automorphism of H(Q). It is invariant under
-        // the BSM map g_0 -> 2g_0, so that map remains an algebra endomorphism.
+        // sigma_g=Ad(i)^(g[1]), an automorphism of H(Q). It is invariant under
+        // the BSM map g[0] -> 2g[0], so that map remains an algebra endomorphism.
         return g.rank()>1&&g.coordinate(1).testBit(0)?new RationalQuaternion(q.real,q.i,q.j.negate(),q.k.negate()):q;
     }
     public RationalTwistedLatticeAlgebra multiply(RationalTwistedLatticeAlgebra b){
         sameRank(b);TreeMap<Exponent,RationalQuaternion> out=new TreeMap<>();
         for(Map.Entry<Exponent,RationalQuaternion> x:terms.entrySet())for(Map.Entry<Exponent,RationalQuaternion> y:b.terms.entrySet()){
             Exponent exponent=x.getKey().add(y.getKey());RationalQuaternion coefficient=x.getValue().multiply(sigma(x.getKey(),y.getValue()));
-            if(tau(x.getKey(),y.getKey())<0)coefficient=coefficient.negate();put(out,exponent,coefficient);
+            if(tau(x.getKey(),y.getKey(),cocycle)<0)coefficient=coefficient.negate();put(out,exponent,coefficient);
         }
-        return new RationalTwistedLatticeAlgebra(rank,out);
+        return new RationalTwistedLatticeAlgebra(rank,cocycle,out);
     }
     /** BSM-style non-surjective mode: g_0 -> 2g_0. Odd first-coordinate residue classes map to the even subgroup. */
     public RationalTwistedLatticeAlgebra darkMatterEndomorphism(){
+        for(int j=0;j<rank;j++)if(cocycle[0][j]!=0)
+            throw MathFailure.undefined("The first-coordinate doubling map preserves this algebra only when the cocycle is trivial on coordinate 0");
         TreeMap<Exponent,RationalQuaternion> out=new TreeMap<>();
         for(Map.Entry<Exponent,RationalQuaternion> e:terms.entrySet())put(out,e.getKey().doubleFirstCoordinate(),e.getValue());
-        return new RationalTwistedLatticeAlgebra(rank,out);
+        return new RationalTwistedLatticeAlgebra(rank,cocycle,out);
     }
     public boolean hasOddFirstCoordinateSupport(){for(Exponent e:terms.keySet())if(e.firstCoordinateOdd())return true;return false;}
     public RationalQuaternion toQuaternion(){
@@ -99,8 +135,8 @@ public final class RationalTwistedLatticeAlgebra implements Serializable {
         return terms.firstEntry().getValue();
     }
     public boolean toBoolean(){RationalQuaternion q=toQuaternion();if(q.equals(RationalQuaternion.ZERO))return false;if(q.equals(RationalQuaternion.ONE))return true;throw MathFailure.undefined("Only embedded zero and one map to Boolean");}
-    private void sameRank(RationalTwistedLatticeAlgebra b){if(rank!=b.rank)throw new IllegalArgumentException("Lattice ranks differ");}
-    @Override public boolean equals(Object o){return o instanceof RationalTwistedLatticeAlgebra&&rank==((RationalTwistedLatticeAlgebra)o).rank&&terms.equals(((RationalTwistedLatticeAlgebra)o).terms);}
-    @Override public int hashCode(){return Objects.hash(rank,terms);}
+    private void sameRank(RationalTwistedLatticeAlgebra b){if(rank!=b.rank)throw new IllegalArgumentException("Lattice ranks differ");if(!Arrays.deepEquals(cocycle,b.cocycle))throw new IllegalArgumentException("Lattice sign cocycles differ");}
+    @Override public boolean equals(Object o){return o instanceof RationalTwistedLatticeAlgebra&&rank==((RationalTwistedLatticeAlgebra)o).rank&&Arrays.deepEquals(cocycle,((RationalTwistedLatticeAlgebra)o).cocycle)&&terms.equals(((RationalTwistedLatticeAlgebra)o).terms);}
+    @Override public int hashCode(){return Objects.hash(rank,Arrays.deepHashCode(cocycle),terms);}
     @Override public String toString(){return "H(Q)*_{sigma,tau}Z^"+rank+terms;}
 }

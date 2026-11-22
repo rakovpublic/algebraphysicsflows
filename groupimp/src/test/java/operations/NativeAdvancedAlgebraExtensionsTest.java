@@ -32,6 +32,25 @@ public class NativeAdvancedAlgebraExtensionsTest {
         RationalTwistedLatticeAlgebra a=residue.add(x).add(y),b=x.add(y).add(residue);
         assertEquals(a.multiply(b).darkMatterEndomorphism(),a.darkMatterEndomorphism().multiply(b.darkMatterEndomorphism()));
     }
+    @Test public void arbitraryRankCocyclesAreValidatedAndDarkMatterMapChecksItsDomain(){
+        int rank=4;int[][] signs=new int[rank][rank];signs[1][3]=signs[3][1]=1;signs[0][2]=signs[2][0]=1;
+        RationalTwistedLatticeAlgebra.Exponent a=new RationalTwistedLatticeAlgebra.Exponent(1,0,1,0),
+                b=new RationalTwistedLatticeAlgebra.Exponent(0,1,0,1),
+                c=new RationalTwistedLatticeAlgebra.Exponent(1,1,0,0);
+        RationalTwistedLatticeAlgebra x=RationalTwistedLatticeAlgebra.basis(rank,signs,a,RationalQuaternion.I),
+                y=RationalTwistedLatticeAlgebra.basis(rank,signs,b,RationalQuaternion.J),
+                z=RationalTwistedLatticeAlgebra.basis(rank,signs,c,RationalQuaternion.K);
+        assertEquals(x.multiply(y).multiply(z),x.multiply(y.multiply(z)));
+        assertTrue(java.util.Arrays.deepEquals(signs,x.add(y).cocycleMatrix()));
+        assertThrows(RuntimeException.class,x::darkMatterEndomorphism);
+        int[][] safe=new int[rank][rank];safe[1][3]=safe[3][1]=1;
+        RationalTwistedLatticeAlgebra safeX=RationalTwistedLatticeAlgebra.basis(rank,safe,a,RationalQuaternion.I),
+                safeY=RationalTwistedLatticeAlgebra.basis(rank,safe,b,RationalQuaternion.J);
+        assertTrue(java.util.Arrays.deepEquals(safe,safeX.negate().cocycleMatrix()));
+        assertEquals(safeX.multiply(safeY).darkMatterEndomorphism(),safeX.darkMatterEndomorphism().multiply(safeY.darkMatterEndomorphism()));
+        int[][] malformed=new int[2][2];malformed[0][1]=1;
+        assertThrows(IllegalArgumentException.class,() -> RationalTwistedLatticeAlgebra.zero(2,malformed));
+    }
     @Test public void dixonProjectorsAreIdempotentAndComplementary(){
         RationalDixonZ2 gp=RationalDixonZ2.groupIdempotent(true),gm=RationalDixonZ2.groupIdempotent(false);
         RationalDixonZ2 wp=RationalDixonZ2.wittIdempotent(true),wm=RationalDixonZ2.wittIdempotent(false);
@@ -66,7 +85,7 @@ public class NativeAdvancedAlgebraExtensionsTest {
     private static final class RationalMatrixIdentity2 {static mathematics.linear.RationalMatrix negate(){return new mathematics.linear.RationalMatrix(new Rational[][]{{Rational.of(-1),Rational.ZERO},{Rational.ZERO,Rational.of(-1)}});}}
     @Test public void chiTriggerAndRegisteredBridgesWork(){
         ConcreteMathematics m=new ConcreteMathematics();
-        assertTrue(m.operations().containsKey("HMN(H(Q);Z^3,sigma,tau).dark-matter-endomorphism"));
+        assertTrue(m.operations().containsKey("HMN(H(Q);Z^N,sigma,tau).dark-matter-endomorphism"));
         assertTrue(m.operations().containsKey("Q(zeta_12).embed-complex"));
         assertEquals(java.util.Collections.singletonList("Q(zeta_12)Q[x][1]"),m.flow(m.booleans,java.util.Collections.singletonList(true))
                 .<RationalCyclotomic>performAlgebraTransfer("to-cyclotomic").collect());
