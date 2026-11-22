@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DATABASE = ROOT / "mathematics-coverage.json"
 MANIFEST = ROOT / "groupimp/src/test/resources/mathematics/concrete-catalog.tsv"
-DATE = "2026-11-04"
+DATE = "2026-11-22"
 OWNERS = {
     "IntegralConeMapSpaceAlgebra": ("ConeMapSpace", "Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares"),
     "IntegralConeEquivalenceAlgebra": ("ConeEquivalence", "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps"),
@@ -35,7 +35,8 @@ OWNERS = {
     "PrimeField": ("Z/5Z", "Residues in the default prime field F5; configurable exactly checked prime int modulus with exact 0/1 Boolean decoding"),
     "ResidueRing": ("Z/6Z", "Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one with exact 0/1 Boolean decoding"),
     "RationalComplexField": ("Q(i)", "Pairs of rational coordinates; a proper subfield of the complex numbers with exact 0/1 Boolean decoding"),
-    "RationalImaginaryAlgebra": ("iQ", "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations"),
+    "RationalImaginaryAlgebra": ("iQ", "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations"),
+    "RationalOctonionAlgebra": ("O(Q)", "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras"),
     "RationalQuaternionAlgebra": ("H(Q)", "Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding"),
     "RationalVectorSpace": ("Q^2", "Fixed-dimensional rational vectors; default dimension two"),
     "RationalMatrixAlgebra": ("Mat2(Q)", "Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding"),
@@ -130,6 +131,7 @@ EXTRA_TESTS = {
     "RationalExteriorAlgebra": "NativeExteriorTest",
     "RationalQuaternionAlgebra": "NativeQuaternionTest",
     "RationalImaginaryAlgebra": "NativeImaginaryAlgebraTest",
+    "RationalOctonionAlgebra": "NativeOctonionAlgebraTest",
     "IntegerSetAlgebra": "NativeFlatAndSetTest",
     "RationalPolynomialRing": "NativeDynamicsTest",
     "RationalMultivariatePolynomialAlgebra": "NativeMultivariateCalculusTest",
@@ -1836,10 +1838,10 @@ OWNER_CONDITIONS["RationalMatrixFamily"]["companion"] = "The polynomial has posi
 
 BOOLEAN_TRANSITION_OWNERS = (
     "BooleanAlgebra", "NaturalSemiring", "IntegerRing", "RationalField", "RationalComplexField",
-    "RationalImaginaryAlgebra", "RationalQuaternionAlgebra", "RationalPolynomialRing", "RationalFunctionField", "RationalTensorAlgebra",
+    "RationalImaginaryAlgebra", "RationalOctonionAlgebra", "RationalQuaternionAlgebra", "RationalPolynomialRing", "RationalFunctionField", "RationalTensorAlgebra",
     "RationalMatrixAlgebra", "ResidueRing", "PrimeField",
 )
-BOOLEAN_SCALAR_DOMAINS = ("N", "Z", "Q", "Q(i)", "iQ", "H(Q)", "Q[x]", "Q(x)", "Tensor(Q)", "Mat2(Q)", "Z/6Z", "Z/5Z")
+BOOLEAN_SCALAR_DOMAINS = ("N", "Z", "Q", "Q(i)", "iQ", "H(Q)", "O(Q)", "Q[x]", "Q(x)", "Tensor(Q)", "Mat2(Q)", "Z/6Z", "Z/5Z")
 BOOLEAN_DECODER_CONDITION = "Defined exactly for the distinguished values 0 and 1; every other carrier value raises OPERATION_UNDEFINED rather than using truthiness."
 for _owner in BOOLEAN_TRANSITION_OWNERS[1:]:
     OWNER_CONDITIONS.setdefault(_owner, {})["to-boolean"] = BOOLEAN_DECODER_CONDITION
@@ -1851,10 +1853,11 @@ OWNER_CONDITIONS.setdefault("BooleanAlgebra", {}).update({
     "less-or-equal": "Return the Boolean lattice order a implies b.",
     "greater-or-equal": "Return the Boolean lattice order b implies a.",
 })
-for _name in ("to-natural", "to-integer", "to-rational", "to-complex", "to-imaginary", "to-quaternion", "to-polynomial",
+for _name in ("to-natural", "to-integer", "to-rational", "to-complex", "to-imaginary", "to-quaternion", "to-octonion", "to-polynomial",
               "to-rational-function", "to-tensor", "to-matrix", "to-residue-6", "to-prime-5"):
     OWNER_CONDITIONS.setdefault("BooleanAlgebra", {})[_name] = "Encode false as the carrier's exact zero and true as its exact one; this is a 0/1 encoding, not a claim of ordinary additive-homomorphism preservation."
 OWNER_CONDITIONS["BooleanAlgebra"]["to-imaginary"] = "Encode false as 0*i and true as the designated generator i. The pure-imaginary carrier has no multiplicative unit, so this is a distinguished Boolean encoding rather than a 0/1 field embedding."
+OWNER_CONDITIONS["BooleanAlgebra"]["to-octonion"] = "Encode false and true as the rational octonion zero and multiplicative identity, respectively; reverse decoding accepts only those two values."
 OWNER_CONDITIONS["RationalImaginaryAlgebra"] = {
     "multiply": "Return -(a*b) in Q for (a*i)*(b*i); pure imaginary values are not closed under ordinary multiplication.",
     "divide": "The second imaginary coefficient must be nonzero; return a/b in Q for (a*i)/(b*i).",
@@ -1868,6 +1871,28 @@ OWNER_CONDITIONS["RationalImaginaryAlgebra"] = {
     "from-complex": "The complex input must have zero real coordinate; retain its imaginary coordinate.",
     "to-quaternion": "Embed a*i as the selected quaternion i-axis value (0,a,0,0).",
     "from-quaternion": "The quaternion input must have zero real, j and k coordinates; retain its i coordinate.",
+}
+OWNER_CONDITIONS["RationalOctonionAlgebra"] = {
+    "multiply": "Use (a,b)(c,d)=(ac-conj(d)b, da+b conj(c)) in H(Q) pairs; preserve operand order because the product is noncommutative and nonassociative.",
+    "divide-right": "The divisor is nonzero; return x*inverse(y), the solution z to z*y=x under the octonion inverse property.",
+    "divide-left": "The divisor is nonzero; return inverse(y)*x, the solution z to y*z=x under the octonion inverse property.",
+    "inverse": "Zero has no inverse; return conjugate(x)/norm-squared(x) for nonzero x.",
+    "norm-squared": "Return the sum of all eight rational coordinate squares; the norm is multiplicative.",
+    "to-rational": "All seven imaginary coordinates must vanish; return the real coordinate.",
+    "to-boolean": "Defined only on octonion zero and one; all other octonions raise OPERATION_UNDEFINED.",
+    "imaginary-part": "Return the seven coordinates after the real coordinate as the actual Vec(Q) wrapper.",
+    "to-vector": "The real coordinate must vanish; return the seven imaginary coordinates as Vec(Q).",
+    "from-vector": "The vector must have dimension seven; insert its coordinates after a zero real coordinate.",
+    "scale": "Scale all eight rational coordinates by the rational second operand and return the first O(Q) wrapper.",
+    "embed-rational": "Embed a rational on the real scalar axis.",
+    "embed-complex": "Embed Q(i) in the declared first complex coordinate plane.",
+    "to-complex": "Coordinates j,k,l,il,jl,kl must vanish; retain the real and i coordinates.",
+    "embed-imaginary": "Embed iQ on the selected octonion i axis.",
+    "to-imaginary": "Only the selected i axis may be nonzero and the real coordinate must vanish.",
+    "embed-quaternion": "Embed H(Q) on the first four coordinates, retaining its chosen i,j,k basis.",
+    "to-quaternion": "Coordinates l,il,jl,kl must vanish; return the first four coordinates in the actual H(Q) wrapper.",
+    "left-multiplication-matrix": "Return the 8 by 8 rational matrix whose columns are x times each declared basis element.",
+    "from-left-multiplication-matrix": "Require an 8 by 8 matrix equal to the full left-regular representation of the octonion decoded from its first column.",
 }
 
 
@@ -2731,7 +2756,9 @@ def synchronize(data, rows):
         ("PolynomialMap(Q)", "Exact rational polynomial maps", "mathematics.calculus.PolynomialMap",
          ["Positive explicit input and output dimensions", "Ordered scalar polynomial components share an input dimension", "Composition checks the common middle dimension; Jacobian rows are output components"], ["Poly(Q)", "Vec(Q)", "Mat(Q)", "Q", "N"]),
         ("iQ", "Pure imaginary rational scalars", "mathematics.numbers.RationalImaginary",
-         ["Exactly one rational coefficient a, representing a*i", "Closed under additive and rational scalar operations", "Ordinary products and quotients of two values belong to Q, not iQ", "Canonical embeddings retain the i axis of Q(i) and H(Q); Boolean uses 0i and i"], ["Q", "Q(i)", "H(Q)", "Boolean"]),
+         ["Exactly one rational coefficient a, representing a*i", "Closed under additive and rational scalar operations", "Ordinary products and quotients of two values belong to Q, not iQ", "Canonical embeddings retain the i axis of Q(i), H(Q) and O(Q); Boolean uses 0i and i"], ["Q", "Q(i)", "H(Q)", "O(Q)", "Boolean"]),
+        ("O(Q)", "Rational octonion division algebra", "mathematics.numbers.RationalOctonion",
+         ["Eight exact rational coordinates in basis 1,i,j,k,l,il,jl,kl", "Cayley-Dickson multiplication is alternative and nonassociative", "Positive multiplicative norm makes every nonzero rational octonion invertible", "Selected subalgebras Q, Q(i), iQ and H(Q), plus imaginary Vec(Q), Boolean and left-regular Mat(Q) representations"], ["Q", "Q(i)", "iQ", "H(Q)", "Vec(Q)", "Mat(Q)", "Boolean"]),
         ("H(Q)", "Rational Hamilton quaternion algebra", "mathematics.numbers.RationalQuaternion",
          ["Four canonical rational coefficients in scalar,i,j,k order", "Hamilton multiplication with i*j=k and j*i=-k", "Rotation actions use standard right-handed coordinates and require a nonzero quaternion"], ["Q", "Q(i)", "Vec(Q)", "Mat(Q)"]),
         ("Exterior(Q)", "Rational coordinate exterior algebras", "mathematics.linear.RationalExterior",

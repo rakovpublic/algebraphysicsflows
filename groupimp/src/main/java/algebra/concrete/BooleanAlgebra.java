@@ -11,6 +11,7 @@ import mathematics.numbers.Rational;
 import mathematics.numbers.RationalComplex;
 import mathematics.numbers.RationalQuaternion;
 import mathematics.numbers.RationalImaginary;
+import mathematics.numbers.RationalOctonion;
 import java.math.BigInteger;
 import java.util.*;
 
@@ -43,6 +44,7 @@ public final class BooleanAlgebra extends ConcreteAlgebra<Boolean> {
     public void connectScalars(NaturalSemiring naturals,IntegerRing integers,RationalField rationals,
                                RationalComplexField complex,RationalQuaternionAlgebra quaternions,
                                RationalImaginaryAlgebra imaginaries,
+                               RationalOctonionAlgebra octonions,
                                RationalPolynomialRing polynomials,RationalFunctionField functions,
                                RationalTensorAlgebra tensors,RationalMatrixAlgebra matrices,
                                ResidueRing residues,List<PrimeField> primeFields) {
@@ -53,6 +55,7 @@ public final class BooleanAlgebra extends ConcreteAlgebra<Boolean> {
         unary("to-complex",algebra(),complex.algebra(),false,value -> new RationalComplex(value?Rational.ONE:Rational.ZERO,Rational.ZERO));
         unary("to-quaternion",algebra(),quaternions.algebra(),false,value -> RationalQuaternion.scalar(value?Rational.ONE:Rational.ZERO));
         unary("to-imaginary",algebra(),imaginaries.algebra(),false,value -> value?RationalImaginary.I:RationalImaginary.ZERO);
+        unary("to-octonion",algebra(),octonions.algebra(),false,value -> value?RationalOctonion.ONE:RationalOctonion.ZERO);
         unary("to-polynomial",algebra(),polynomials.algebra(),false,value -> value?Polynomial.ONE:Polynomial.ZERO);
         unary("to-rational-function",algebra(),functions.algebra(),false,value -> value?RationalFunction.ONE:RationalFunction.ZERO);
         unary("to-tensor",algebra(),tensors.algebra(),false,value -> RationalTensor.scalar(value?Rational.ONE:Rational.ZERO));

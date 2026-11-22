@@ -63,6 +63,7 @@ import mathematics.linear.RationalTensor;
 import mathematics.linear.RationalExterior;
 import mathematics.numbers.Rational;
 import mathematics.numbers.RationalImaginary;
+import mathematics.numbers.RationalOctonion;
 import mathematics.numbers.RationalQuaternion;
 import mathematics.probability.FiniteMarkovKernel;
 import mathematics.probability.FiniteDistribution;
@@ -83,6 +84,8 @@ public final class ConcreteAlgebrasExample {
                 .<Rational>performAlgebraTransfer("to-rational").<Boolean>performAlgebraTransfer("to-boolean").collect());
         System.out.println("Pure imaginary products return rationals: "+math.flow(math.imaginaries,Collections.singletonList(new RationalImaginary(Rational.of(2))))
                 .<Rational>performCustomResultOperation("multiply",new RationalImaginary(Rational.of(3))).collect());
+        RationalOctonion octI=RationalOctonion.I,octJ=RationalOctonion.J,octL=RationalOctonion.L;
+        System.out.println("Octonion associator (i*j)*l - i*(j*l): "+octI.multiply(octJ).multiply(octL).subtract(octI.multiply(octJ.multiply(octL))));
         IntegerMatrix equation=new IntegerMatrix(new BigInteger[][]{{BigInteger.valueOf(2),BigInteger.valueOf(3)}});
         System.out.println("Integer solutions of 2*x+3*y=1: particular then kernel basis: "+math.flow(math.integerMatrices,Collections.singletonList(equation))
                 .performLeftProjectionFlatOperation("solve-generators",new IntegerVector(BigInteger.ONE)).collect());

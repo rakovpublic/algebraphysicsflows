@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 2259 |
-| DIRECTLY_SUPPORTED | 2016 |
+| Scoped records | 2297 |
+| DIRECTLY_SUPPORTED | 2054 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1875 |
+| IMPLEMENTED | 1913 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 1943 |
+| MACHINE_TESTED | 1981 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1852 | 1852 | 0 | 0 | 0 | 1852 | 0 | 0 |
+| Concrete MathTool algebras | 1890 | 1890 | 0 | 0 | 0 | 1890 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -295,6 +295,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Boolean.to-integer | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-integer |
 | Boolean.to-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-matrix |
 | Boolean.to-natural | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-natural |
+| Boolean.to-octonion | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-octonion |
 | Boolean.to-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-polynomial |
 | Boolean.to-prime-5 | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-prime-5 |
 | Boolean.to-quaternion | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-quaternion |
@@ -1238,6 +1239,42 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | N.to-integer | DIRECTLY_SUPPORTED | IMPLEMENTED | Nonnegative arbitrary precision integers with addition, multiplication, and exact 0/1 Boolean decoding; native operation N.to-integer |
 | N.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Nonnegative arbitrary precision integers with addition, multiplication, and exact 0/1 Boolean decoding; native operation N.zero |
 | NaturalSemiring | DIRECTLY_SUPPORTED | IMPLEMENTED | Nonnegative arbitrary precision integers with addition, multiplication, and exact 0/1 Boolean decoding |
+| O(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).add |
+| O(Q).components | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).components |
+| O(Q).conjugate | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).conjugate |
+| O(Q).divide-left | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).divide-left |
+| O(Q).divide-right | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).divide-right |
+| O(Q).embed-complex | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).embed-complex |
+| O(Q).embed-imaginary | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).embed-imaginary |
+| O(Q).embed-quaternion | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).embed-quaternion |
+| O(Q).embed-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).embed-rational |
+| O(Q).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).equal |
+| O(Q).from-left-multiplication-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).from-left-multiplication-matrix |
+| O(Q).from-vector | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).from-vector |
+| O(Q).i | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).i |
+| O(Q).il | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).il |
+| O(Q).imaginary-part | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).imaginary-part |
+| O(Q).inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).inverse |
+| O(Q).j | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).j |
+| O(Q).jl | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).jl |
+| O(Q).k | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).k |
+| O(Q).kl | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).kl |
+| O(Q).l | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).l |
+| O(Q).left-multiplication-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).left-multiplication-matrix |
+| O(Q).multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).multiply |
+| O(Q).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).negate |
+| O(Q).norm-squared | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).norm-squared |
+| O(Q).one | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).one |
+| O(Q).real-part | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).real-part |
+| O(Q).scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).scale |
+| O(Q).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).subtract |
+| O(Q).to-boolean | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).to-boolean |
+| O(Q).to-complex | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).to-complex |
+| O(Q).to-imaginary | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).to-imaginary |
+| O(Q).to-quaternion | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).to-quaternion |
+| O(Q).to-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).to-rational |
+| O(Q).to-vector | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).to-vector |
+| O(Q).zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).zero |
 | Poly(Q).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).add |
 | Poly(Q).coefficients | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).coefficients |
 | Poly(Q).constant-part | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension; native operation Poly(Q).constant-part |
@@ -1454,10 +1491,11 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | RationalExteriorAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse graded exterior elements over standard oriented rational coordinate spaces with retained ambient dimension |
 | RationalField | DIRECTLY_SUPPORTED | IMPLEMENTED | Canonical exact rational field with exact 0/1 Boolean decoding |
 | RationalFunctionField | DIRECTLY_SUPPORTED | IMPLEMENTED | Formal univariate rational functions over Q, normalized to coprime polynomials with monic denominator and exact 0/1 Boolean decoding |
-| RationalImaginaryAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations |
+| RationalImaginaryAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations |
 | RationalMatrixAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding |
 | RationalMatrixFamily | DIRECTLY_SUPPORTED | IMPLEMENTED | Positive rectangular rational matrices with shape-checked operations and exact row-reduction bases |
 | RationalMultivariatePolynomialAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Sparse exact rational polynomials with an explicit ordered positive input dimension |
+| RationalOctonionAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras |
 | RationalPolynomialMapAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Ordered tuples of exact rational polynomials representing maps between explicit positive coordinate dimensions |
 | RationalPolynomialRing | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite univariate polynomials with canonical rational coefficients and exact constant 0/1 Boolean decoding |
 | RationalQuaternionAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding |
@@ -2018,26 +2056,26 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Z/6Z.subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one with exact 0/1 Boolean decoding; native operation Z/6Z.subtract |
 | Z/6Z.to-boolean | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one with exact 0/1 Boolean decoding; native operation Z/6Z.to-boolean |
 | Z/6Z.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one with exact 0/1 Boolean decoding; native operation Z/6Z.zero |
-| iQ.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.add |
-| iQ.coefficient | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.coefficient |
-| iQ.conjugate | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.conjugate |
-| iQ.divide | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.divide |
-| iQ.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.equal |
-| iQ.from-complex | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.from-complex |
-| iQ.from-quaternion | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.from-quaternion |
-| iQ.from-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.from-rational |
-| iQ.i | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.i |
-| iQ.multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.multiply |
-| iQ.negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.negate |
-| iQ.norm-squared | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.norm-squared |
-| iQ.scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.scale |
-| iQ.scale-left | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.scale-left |
-| iQ.square | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.square |
-| iQ.subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.subtract |
-| iQ.to-boolean | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.to-boolean |
-| iQ.to-complex | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.to-complex |
-| iQ.to-quaternion | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.to-quaternion |
-| iQ.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.zero |
+| iQ.add | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.add |
+| iQ.coefficient | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.coefficient |
+| iQ.conjugate | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.conjugate |
+| iQ.divide | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.divide |
+| iQ.equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.equal |
+| iQ.from-complex | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.from-complex |
+| iQ.from-quaternion | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.from-quaternion |
+| iQ.from-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.from-rational |
+| iQ.i | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.i |
+| iQ.multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.multiply |
+| iQ.negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.negate |
+| iQ.norm-squared | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.norm-squared |
+| iQ.scale | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.scale |
+| iQ.scale-left | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.scale-left |
+| iQ.square | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.square |
+| iQ.subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.subtract |
+| iQ.to-boolean | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.to-boolean |
+| iQ.to-complex | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.to-complex |
+| iQ.to-quaternion | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.to-quaternion |
+| iQ.zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.zero |
 
 ### Cross-domain operations
 

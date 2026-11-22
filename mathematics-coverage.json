@@ -2,7 +2,7 @@
   "schema_version": 1,
   "title": "AlgebraPhysicsFlows mathematical coverage",
   "baseline_commit": "ef1a9a548aea4ea75fc98d6798952f373de48da9",
-  "survey_date": "2026-11-04",
+  "survey_date": "2026-11-22",
   "scope": "An initial, explicitly scoped survey and tested implementation. Not a census of all mathematics and not a proof of universality.",
   "classification_basis": "Representation status applies only to each record's explicit scope. Catalog-only rows are initial triage, not established minimality results. Native registrations use Algebra and the existing operations interfaces; the optional Domain/Structure prototype does not execute those registrations. Implementation, empirical testing and mathematical proof are independent axes.",
   "sources": [
@@ -27703,7 +27703,7 @@
       "operation_signature": null,
       "arity": null,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -27744,7 +27744,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-11-04",
+        "date": "2026-11-22",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -27955,6 +27955,68 @@
         "reviewed_by": null,
         "version": "2",
         "date": "2026-09-28",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
+      "id": "concrete-algebra.RationalOctonionAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "RationalOctonionAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "O(Q)",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -31495,6 +31557,73 @@
       "legacy_operation_interface": "ITransferOperation"
     },
     {
+      "id": "concrete-operation.Boolean.to-octonion",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "BooleanAlgebra",
+      "concept": "Boolean.to-octonion",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Boolean",
+      "domain_B": null,
+      "domain_C": "O(Q)",
+      "operation_signature": "Boolean -> O(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-octonion",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Encode false and true as the rational octonion zero and multiplicative identity, respectively; reverse decoding accepts only those two values."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Boolean.to-octonion",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-octonion",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
       "id": "concrete-operation.Boolean.to-polynomial",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "BooleanAlgebra",
@@ -35004,7 +35133,7 @@
       "operation_signature": "iQ x iQ -> iQ",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.add",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.add",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -35046,7 +35175,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-11-04",
+        "date": "2026-11-22",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -35072,7 +35201,7 @@
       "operation_signature": "iQ x iQ -> iQ",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.subtract",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.subtract",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -35114,7 +35243,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-11-04",
+        "date": "2026-11-22",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -35140,7 +35269,7 @@
       "operation_signature": "iQ -> iQ",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.negate",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.negate",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -35182,7 +35311,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-11-04",
+        "date": "2026-11-22",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -35208,7 +35337,7 @@
       "operation_signature": "iQ -> iQ",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.conjugate",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.conjugate",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -35250,7 +35379,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-11-04",
+        "date": "2026-11-22",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -35276,7 +35405,7 @@
       "operation_signature": "iQ x iQ -> Q",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.multiply",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.multiply",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -35319,7 +35448,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-11-04",
+        "date": "2026-11-22",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -35345,7 +35474,7 @@
       "operation_signature": "iQ x iQ -> Q",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.divide",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.divide",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -35388,7 +35517,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-11-04",
+        "date": "2026-11-22",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -35414,7 +35543,7 @@
       "operation_signature": "iQ -> Q",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.norm-squared",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.norm-squared",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -35457,7 +35586,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-11-04",
+        "date": "2026-11-22",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -35483,7 +35612,7 @@
       "operation_signature": "iQ -> Q",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.square",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.square",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -35526,7 +35655,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-11-04",
+        "date": "2026-11-22",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -35552,7 +35681,7 @@
       "operation_signature": "iQ -> Q",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.coefficient",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.coefficient",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -35595,7 +35724,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-11-04",
+        "date": "2026-11-22",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -35621,7 +35750,7 @@
       "operation_signature": "iQ x Q -> iQ",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.scale",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.scale",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -35664,7 +35793,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-11-04",
+        "date": "2026-11-22",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -35690,7 +35819,7 @@
       "operation_signature": "Q x iQ -> iQ",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.scale-left",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.scale-left",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -35733,7 +35862,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-11-04",
+        "date": "2026-11-22",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -35759,7 +35888,7 @@
       "operation_signature": "iQ x iQ -> Boolean",
       "arity": 2,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.equal",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.equal",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -35801,7 +35930,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-11-04",
+        "date": "2026-11-22",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -35827,7 +35956,7 @@
       "operation_signature": "iQ -> Boolean",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.to-boolean",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.to-boolean",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -35869,7 +35998,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-11-04",
+        "date": "2026-11-22",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -35895,7 +36024,7 @@
       "operation_signature": "Q -> iQ",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.from-rational",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.from-rational",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -35938,7 +36067,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-11-04",
+        "date": "2026-11-22",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -35964,7 +36093,7 @@
       "operation_signature": "iQ -> Q(i)",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.to-complex",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.to-complex",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -36007,7 +36136,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-11-04",
+        "date": "2026-11-22",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -36033,7 +36162,7 @@
       "operation_signature": "Q(i) -> iQ",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.from-complex",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.from-complex",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -36076,7 +36205,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-11-04",
+        "date": "2026-11-22",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -36102,7 +36231,7 @@
       "operation_signature": "iQ -> H(Q)",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.to-quaternion",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.to-quaternion",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -36145,7 +36274,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-11-04",
+        "date": "2026-11-22",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -36171,7 +36300,7 @@
       "operation_signature": "H(Q) -> iQ",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.from-quaternion",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.from-quaternion",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -36214,7 +36343,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-11-04",
+        "date": "2026-11-22",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -36240,7 +36369,7 @@
       "operation_signature": "Unit -> iQ",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.zero",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.zero",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -36282,7 +36411,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-11-04",
+        "date": "2026-11-22",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -36308,7 +36437,7 @@
       "operation_signature": "Unit -> iQ",
       "arity": 1,
       "scalar_or_flat": "SCALAR",
-      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations; native operation iQ.i",
+      "representation_scope": "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations; native operation iQ.i",
       "required_invariants": [
         "Operands and results satisfy membership in the actual Algebra instances.",
         "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
@@ -36350,7 +36479,7 @@
         "generated_by_model": "not recorded",
         "reviewed_by": null,
         "version": "2",
-        "date": "2026-11-04",
+        "date": "2026-11-22",
         "assumptions": [
           "Classification is scoped; passing tests do not prove laws."
         ],
@@ -36361,6 +36490,2475 @@
       "runtime_operation_id": "iQ.i",
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "iQ.i",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).add",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).add",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "O(Q)",
+      "domain_B": "O(Q)",
+      "domain_C": "O(Q)",
+      "operation_signature": "O(Q) x O(Q) -> O(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).add",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "O(Q).add",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "add",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).subtract",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).subtract",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "O(Q)",
+      "domain_B": "O(Q)",
+      "domain_C": "O(Q)",
+      "operation_signature": "O(Q) x O(Q) -> O(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).subtract",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "O(Q).subtract",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "subtract",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).multiply",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).multiply",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "O(Q)",
+      "domain_B": "O(Q)",
+      "domain_C": "O(Q)",
+      "operation_signature": "O(Q) x O(Q) -> O(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).multiply",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Use (a,b)(c,d)=(ac-conj(d)b, da+b conj(c)) in H(Q) pairs; preserve operand order because the product is noncommutative and nonassociative."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "O(Q).multiply",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "multiply",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).divide-right",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).divide-right",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "O(Q)",
+      "domain_B": "O(Q)",
+      "domain_C": "O(Q)",
+      "operation_signature": "O(Q) x O(Q) -> O(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).divide-right",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The divisor is nonzero; return x*inverse(y), the solution z to z*y=x under the octonion inverse property."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "O(Q).divide-right",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "divide-right",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).divide-left",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).divide-left",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "O(Q)",
+      "domain_B": "O(Q)",
+      "domain_C": "O(Q)",
+      "operation_signature": "O(Q) x O(Q) -> O(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).divide-left",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The divisor is nonzero; return inverse(y)*x, the solution z to y*z=x under the octonion inverse property."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "O(Q).divide-left",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "divide-left",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).negate",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).negate",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "O(Q)",
+      "domain_B": null,
+      "domain_C": "O(Q)",
+      "operation_signature": "O(Q) -> O(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).negate",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "O(Q).negate",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "negate",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).conjugate",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).conjugate",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "O(Q)",
+      "domain_B": null,
+      "domain_C": "O(Q)",
+      "operation_signature": "O(Q) -> O(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).conjugate",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "O(Q).conjugate",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "conjugate",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).inverse",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).inverse",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "O(Q)",
+      "domain_B": null,
+      "domain_C": "O(Q)",
+      "operation_signature": "O(Q) -> O(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).inverse",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Zero has no inverse; return conjugate(x)/norm-squared(x) for nonzero x."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "O(Q).inverse",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "inverse",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).norm-squared",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).norm-squared",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "O(Q)",
+      "domain_B": null,
+      "domain_C": "Q",
+      "operation_signature": "O(Q) -> Q",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).norm-squared",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the sum of all eight rational coordinate squares; the norm is multiplicative."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "O(Q).norm-squared",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "norm-squared",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).real-part",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).real-part",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "O(Q)",
+      "domain_B": null,
+      "domain_C": "Q",
+      "operation_signature": "O(Q) -> Q",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).real-part",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "O(Q).real-part",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "real-part",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).to-rational",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).to-rational",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "O(Q)",
+      "domain_B": null,
+      "domain_C": "Q",
+      "operation_signature": "O(Q) -> Q",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).to-rational",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "All seven imaginary coordinates must vanish; return the real coordinate."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "O(Q).to-rational",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-rational",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).to-boolean",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).to-boolean",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "O(Q)",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "O(Q) -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).to-boolean",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Defined only on octonion zero and one; all other octonions raise OPERATION_UNDEFINED."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "O(Q).to-boolean",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-boolean",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).components",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).components",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "O(Q)",
+      "domain_B": null,
+      "domain_C": "Q",
+      "operation_signature": "O(Q) -> List(Q)",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).components",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "O(Q).components",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "components",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).imaginary-part",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).imaginary-part",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "O(Q)",
+      "domain_B": null,
+      "domain_C": "Vec(Q)",
+      "operation_signature": "O(Q) -> Vec(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).imaginary-part",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the seven coordinates after the real coordinate as the actual Vec(Q) wrapper."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "O(Q).imaginary-part",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "imaginary-part",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).to-vector",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).to-vector",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "O(Q)",
+      "domain_B": null,
+      "domain_C": "Vec(Q)",
+      "operation_signature": "O(Q) -> Vec(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).to-vector",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The real coordinate must vanish; return the seven imaginary coordinates as Vec(Q)."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "O(Q).to-vector",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-vector",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).from-vector",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).from-vector",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Vec(Q)",
+      "domain_B": null,
+      "domain_C": "O(Q)",
+      "operation_signature": "Vec(Q) -> O(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).from-vector",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The vector must have dimension seven; insert its coordinates after a zero real coordinate."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "O(Q).from-vector",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "O(Q).from-vector",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).scale",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).scale",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "O(Q)",
+      "domain_B": "Q",
+      "domain_C": "O(Q)",
+      "operation_signature": "O(Q) x Q -> O(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).scale",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Scale all eight rational coordinates by the rational second operand and return the first O(Q) wrapper."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomMemberOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomMemberOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "O(Q).scale",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "scale",
+      "legacy_operation_interface": "ICustomMemberOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "O(Q)",
+      "domain_B": "O(Q)",
+      "domain_C": "Boolean",
+      "operation_signature": "O(Q) x O(Q) -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "O(Q).equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).embed-rational",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).embed-rational",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q",
+      "domain_B": null,
+      "domain_C": "O(Q)",
+      "operation_signature": "Q -> O(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).embed-rational",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed a rational on the real scalar axis."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "O(Q).embed-rational",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "O(Q).embed-rational",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).embed-complex",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).embed-complex",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(i)",
+      "domain_B": null,
+      "domain_C": "O(Q)",
+      "operation_signature": "Q(i) -> O(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).embed-complex",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed Q(i) in the declared first complex coordinate plane."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "O(Q).embed-complex",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "O(Q).embed-complex",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).to-complex",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).to-complex",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "O(Q)",
+      "domain_B": null,
+      "domain_C": "Q(i)",
+      "operation_signature": "O(Q) -> Q(i)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).to-complex",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Coordinates j,k,l,il,jl,kl must vanish; retain the real and i coordinates."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "O(Q).to-complex",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-complex",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).embed-imaginary",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).embed-imaginary",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "iQ",
+      "domain_B": null,
+      "domain_C": "O(Q)",
+      "operation_signature": "iQ -> O(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).embed-imaginary",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed iQ on the selected octonion i axis."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "O(Q).embed-imaginary",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "O(Q).embed-imaginary",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).to-imaginary",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).to-imaginary",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "O(Q)",
+      "domain_B": null,
+      "domain_C": "iQ",
+      "operation_signature": "O(Q) -> iQ",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).to-imaginary",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Only the selected i axis may be nonzero and the real coordinate must vanish."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "O(Q).to-imaginary",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-imaginary",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).embed-quaternion",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).embed-quaternion",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "H(Q)",
+      "domain_B": null,
+      "domain_C": "O(Q)",
+      "operation_signature": "H(Q) -> O(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).embed-quaternion",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed H(Q) on the first four coordinates, retaining its chosen i,j,k basis."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "O(Q).embed-quaternion",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "O(Q).embed-quaternion",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).to-quaternion",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).to-quaternion",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "O(Q)",
+      "domain_B": null,
+      "domain_C": "H(Q)",
+      "operation_signature": "O(Q) -> H(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).to-quaternion",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Coordinates l,il,jl,kl must vanish; return the first four coordinates in the actual H(Q) wrapper."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "O(Q).to-quaternion",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-quaternion",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).left-multiplication-matrix",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).left-multiplication-matrix",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "O(Q)",
+      "domain_B": null,
+      "domain_C": "Mat(Q)",
+      "operation_signature": "O(Q) -> Mat(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).left-multiplication-matrix",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the 8 by 8 rational matrix whose columns are x times each declared basis element."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "O(Q).left-multiplication-matrix",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "left-multiplication-matrix",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).from-left-multiplication-matrix",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).from-left-multiplication-matrix",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Mat(Q)",
+      "domain_B": null,
+      "domain_C": "O(Q)",
+      "operation_signature": "Mat(Q) -> O(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).from-left-multiplication-matrix",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require an 8 by 8 matrix equal to the full left-regular representation of the octonion decoded from its first column."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "O(Q).from-left-multiplication-matrix",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "O(Q).from-left-multiplication-matrix",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).zero",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).zero",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "O(Q)",
+      "operation_signature": "Unit -> O(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).zero",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "O(Q).zero",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "O(Q).zero",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).one",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).one",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "O(Q)",
+      "operation_signature": "Unit -> O(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).one",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "O(Q).one",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "O(Q).one",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).i",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).i",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "O(Q)",
+      "operation_signature": "Unit -> O(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).i",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "O(Q).i",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "O(Q).i",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).j",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).j",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "O(Q)",
+      "operation_signature": "Unit -> O(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).j",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "O(Q).j",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "O(Q).j",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).k",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).k",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "O(Q)",
+      "operation_signature": "Unit -> O(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).k",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "O(Q).k",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "O(Q).k",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).l",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).l",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "O(Q)",
+      "operation_signature": "Unit -> O(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).l",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "O(Q).l",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "O(Q).l",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).il",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).il",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "O(Q)",
+      "operation_signature": "Unit -> O(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).il",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "O(Q).il",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "O(Q).il",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).jl",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).jl",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "O(Q)",
+      "operation_signature": "Unit -> O(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).jl",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "O(Q).jl",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "O(Q).jl",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.O(Q).kl",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).kl",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "O(Q)",
+      "operation_signature": "Unit -> O(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).kl",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "O(Q).kl",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "O(Q).kl",
       "legacy_operation_interface": "ITransferOperation"
     },
     {
@@ -167037,6 +169635,12 @@
         "Mat2(Q).rational-eigenvalues",
         "Mat2(Q).scale",
         "Mat2(Q).trace",
+        "O(Q).components",
+        "O(Q).embed-rational",
+        "O(Q).norm-squared",
+        "O(Q).real-part",
+        "O(Q).scale",
+        "O(Q).to-rational",
         "Poly(Q).coefficients",
         "Poly(Q).constant-part",
         "Poly(Q).evaluate",
@@ -167225,6 +169829,8 @@
         "Boolean.to-complex",
         "H(Q).embed-complex",
         "H(Q).to-complex",
+        "O(Q).embed-complex",
+        "O(Q).to-complex",
         "Q(i).add",
         "Q(i).conjugate",
         "Q(i).divide",
@@ -167310,6 +169916,7 @@
         "Q(i)",
         "iQ",
         "H(Q)",
+        "O(Q)",
         "Q[x]",
         "Q(x)",
         "Tensor(Q)",
@@ -167353,6 +169960,7 @@
         "Boolean.to-integer",
         "Boolean.to-matrix",
         "Boolean.to-natural",
+        "Boolean.to-octonion",
         "Boolean.to-polynomial",
         "Boolean.to-prime-5",
         "Boolean.to-quaternion",
@@ -167467,6 +170075,8 @@
         "Mat2(Q).is-diagonalizable-over-q",
         "Mat2(Q).to-boolean",
         "N.to-boolean",
+        "O(Q).equal",
+        "O(Q).to-boolean",
         "Poly(Q).equal",
         "Poly(Q).is-zero",
         "PolynomialCell(Q).equal",
@@ -167595,6 +170205,15 @@
         "Mat2(Q).zero",
         "N.one",
         "N.zero",
+        "O(Q).i",
+        "O(Q).il",
+        "O(Q).j",
+        "O(Q).jl",
+        "O(Q).k",
+        "O(Q).kl",
+        "O(Q).l",
+        "O(Q).one",
+        "O(Q).zero",
         "PresentedAbelianGroup.trivial",
         "Q(i).one",
         "Q(i).zero",
@@ -169242,6 +171861,9 @@
         "Mat(Q).project-column",
         "Mat(Q).row-space-basis",
         "Mat(Q).rows",
+        "O(Q).from-vector",
+        "O(Q).imaginary-part",
+        "O(Q).to-vector",
         "Poly(Q).directional",
         "Poly(Q).evaluate",
         "Poly(Q).gradient-at",
@@ -169362,6 +171984,8 @@
         "Mat(Q).zero-like",
         "Mat(Z).from-rational",
         "Mat(Z).to-rational",
+        "O(Q).from-left-multiplication-matrix",
+        "O(Q).left-multiplication-matrix",
         "Poly(Q).hessian-at",
         "PolynomialMap(Q).from-matrix",
         "PolynomialMap(Q).jacobian-at",
@@ -169663,6 +172287,8 @@
         "H(Q).to-rotation-matrix",
         "H(Q).to-vector",
         "H(Q).zero",
+        "O(Q).embed-quaternion",
+        "O(Q).to-quaternion",
         "iQ.from-quaternion",
         "iQ.to-quaternion"
       ],
@@ -174278,6 +176904,8 @@
       ],
       "supported_operations": [
         "Boolean.to-imaginary",
+        "O(Q).embed-imaginary",
+        "O(Q).to-imaginary",
         "iQ.add",
         "iQ.coefficient",
         "iQ.conjugate",
@@ -174317,6 +176945,87 @@
         "review_date": null,
         "review_notes": "No human review performed",
         "date": "2026-11-04"
+      }
+    },
+    {
+      "id": "O(Q)",
+      "name": "Rational octonion division algebra",
+      "description": "Rational octonion division algebra",
+      "member_representation": "mathematics.numbers.RationalOctonion",
+      "membership_rules": [
+        "Eight exact rational coordinates in basis 1,i,j,k,l,il,jl,kl",
+        "Cayley-Dickson multiplication is alternative and nonassociative",
+        "Positive multiplicative norm makes every nonzero rational octonion invertible",
+        "Selected subalgebras Q, Q(i), iQ and H(Q), plus imaginary Vec(Q), Boolean and left-regular Mat(Q) representations"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "Boolean",
+        "H(Q)",
+        "Mat(Q)",
+        "Q",
+        "Q(i)",
+        "Vec(Q)",
+        "iQ"
+      ],
+      "supported_operations": [
+        "Boolean.to-octonion",
+        "O(Q).add",
+        "O(Q).components",
+        "O(Q).conjugate",
+        "O(Q).divide-left",
+        "O(Q).divide-right",
+        "O(Q).embed-complex",
+        "O(Q).embed-imaginary",
+        "O(Q).embed-quaternion",
+        "O(Q).embed-rational",
+        "O(Q).equal",
+        "O(Q).from-left-multiplication-matrix",
+        "O(Q).from-vector",
+        "O(Q).i",
+        "O(Q).il",
+        "O(Q).imaginary-part",
+        "O(Q).inverse",
+        "O(Q).j",
+        "O(Q).jl",
+        "O(Q).k",
+        "O(Q).kl",
+        "O(Q).l",
+        "O(Q).left-multiplication-matrix",
+        "O(Q).multiply",
+        "O(Q).negate",
+        "O(Q).norm-squared",
+        "O(Q).one",
+        "O(Q).real-part",
+        "O(Q).scale",
+        "O(Q).subtract",
+        "O(Q).to-boolean",
+        "O(Q).to-complex",
+        "O(Q).to-imaginary",
+        "O(Q).to-quaternion",
+        "O(Q).to-rational",
+        "O(Q).to-vector",
+        "O(Q).zero"
+      ],
+      "invariants": [
+        "Eight exact rational coordinates in basis 1,i,j,k,l,il,jl,kl",
+        "Cayley-Dickson multiplication is alternative and nonassociative",
+        "Positive multiplicative norm makes every nonzero rational octonion invertible",
+        "Selected subalgebras Q, Q(i), iQ and H(Q), plus imaginary Vec(Q), Boolean and left-regular Mat(Q) representations"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-11-22"
       }
     }
   ]
