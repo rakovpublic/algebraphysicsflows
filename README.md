@@ -6,6 +6,8 @@ Boolean now provides the standard derived lattice operations and exact `0`/`1` t
 
 The rational octonions `O(Q)` register the Cayley product, norm, inverse and both division orders, with exact Q, Q(i), iQ and H(Q) subalgebras, seven-dimensional imaginary vectors, Boolean encoding and 8 by 8 left-multiplication matrices. `DixonZ2(Q)` adds the exact 64-coordinate crossed product `(Q(i) tensor H(Q) tensor O(Q)) semidirect C2`, with its canonical octonion parity action, grading projections, checked maps to and from Q, Q(i), iQ, H(Q), O(Q), and Boolean, 128-dimensional rational vectors and checked 128 by 128 left multiplication matrices.
 
+`HMN(H(Q);Z,sigma,1)` adds the exact rational-function division subring `H(Q)(t)` of a twisted Hahn–Mal'cev–Neumann completion, with ordered group `Z`, `sigma(q)=i*q*i^-1`, `tau=1`, and group generator `X=i*t`. It connects to Q, Q[x], Q(x), Q(i), iQ, H(Q), Boolean, and to the selected H(Q) slices of O(Q) and `DixonZ2(Q)`. The full Dixon algebra remains nonassociative and therefore has no embedding into this associative division ring.
+
 See [concrete algebras and usage](docs/CONCRETE_ALGEBRAS.md). Same-algebra unary operations now use `IOneOperandOperation` and `performOneOperandOperation(name)` on items and flows. `ICustomMemberOperation` returns the first operand type; `ILeftProjectionOperation` returns the second operand type, wrapped in `IAlgebraItem`.
 
 Run the tests with `mvn -f groupimp/pom.xml test`.

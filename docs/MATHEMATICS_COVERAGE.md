@@ -10,15 +10,15 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 
 | Measure | Count |
 | --- | --- |
-| Scoped records | 2328 |
-| DIRECTLY_SUPPORTED | 2085 |
+| Scoped records | 2365 |
+| DIRECTLY_SUPPORTED | 2122 |
 | SUPPORTED_WITH_COMPOSITION | 14 |
 | REQUIRES_EXTENSION | 226 |
 | NOT_FAITHFULLY_REPRESENTABLE | 3 |
-| IMPLEMENTED | 1944 |
+| IMPLEMENTED | 1981 |
 | PARTIAL | 68 |
 | CATALOG_ONLY | 316 |
-| MACHINE_TESTED | 2012 |
+| MACHINE_TESTED | 2049 |
 | HUMAN_REVIEWED | 0 |
 | FORMALLY_VERIFIED | 0 |
 
@@ -32,7 +32,7 @@ Each row is a scoped assessment, not a unit of all known mathematics. No univers
 | Calculus | 10 | 2 | 0 | 8 | 0 | 2 | 0 | 0 |
 | Category theory | 17 | 0 | 0 | 17 | 0 | 0 | 0 | 0 |
 | Combinatorics and discrete mathematics | 11 | 10 | 0 | 1 | 0 | 0 | 0 | 0 |
-| Concrete MathTool algebras | 1921 | 1921 | 0 | 0 | 0 | 1921 | 0 | 0 |
+| Concrete MathTool algebras | 1958 | 1958 | 0 | 0 | 0 | 1958 | 0 | 0 |
 | Cross-domain operations | 33 | 16 | 1 | 16 | 0 | 16 | 0 | 0 |
 | Dependent domains | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 |
 | Differential equations | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 |
@@ -292,6 +292,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | Boolean.or | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.or |
 | Boolean.to-complex | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-complex |
 | Boolean.to-dixon-z2 | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-dixon-z2 |
+| Boolean.to-hmn | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-hmn |
 | Boolean.to-imaginary | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-imaginary |
 | Boolean.to-integer | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-integer |
 | Boolean.to-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-matrix |
@@ -1073,6 +1074,41 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | H(Q).to-rotation-matrix | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).to-rotation-matrix |
 | H(Q).to-vector | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).to-vector |
 | H(Q).zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).zero |
+| HMN(H(Q);Z,sigma,1).add | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).add |
+| HMN(H(Q);Z,sigma,1).conjugate | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).conjugate |
+| HMN(H(Q);Z,sigma,1).divide-left | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).divide-left |
+| HMN(H(Q);Z,sigma,1).divide-right | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).divide-right |
+| HMN(H(Q);Z,sigma,1).embed-complex | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).embed-complex |
+| HMN(H(Q);Z,sigma,1).embed-dixon-z2 | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).embed-dixon-z2 |
+| HMN(H(Q);Z,sigma,1).embed-imaginary | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).embed-imaginary |
+| HMN(H(Q);Z,sigma,1).embed-octonion | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).embed-octonion |
+| HMN(H(Q);Z,sigma,1).embed-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).embed-polynomial |
+| HMN(H(Q);Z,sigma,1).embed-quaternion | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).embed-quaternion |
+| HMN(H(Q);Z,sigma,1).embed-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).embed-rational |
+| HMN(H(Q);Z,sigma,1).embed-rational-function | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).embed-rational-function |
+| HMN(H(Q);Z,sigma,1).equal | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).equal |
+| HMN(H(Q);Z,sigma,1).group-basis | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).group-basis |
+| HMN(H(Q);Z,sigma,1).group-generator | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).group-generator |
+| HMN(H(Q);Z,sigma,1).group-valuation | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).group-valuation |
+| HMN(H(Q);Z,sigma,1).inverse | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).inverse |
+| HMN(H(Q);Z,sigma,1).leading-coefficient | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).leading-coefficient |
+| HMN(H(Q);Z,sigma,1).multiply | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).multiply |
+| HMN(H(Q);Z,sigma,1).negate | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).negate |
+| HMN(H(Q);Z,sigma,1).norm-squared | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).norm-squared |
+| HMN(H(Q);Z,sigma,1).one | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).one |
+| HMN(H(Q);Z,sigma,1).sigma | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).sigma |
+| HMN(H(Q);Z,sigma,1).subtract | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).subtract |
+| HMN(H(Q);Z,sigma,1).tau-one | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).tau-one |
+| HMN(H(Q);Z,sigma,1).to-boolean | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).to-boolean |
+| HMN(H(Q);Z,sigma,1).to-complex | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).to-complex |
+| HMN(H(Q);Z,sigma,1).to-dixon-z2 | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).to-dixon-z2 |
+| HMN(H(Q);Z,sigma,1).to-imaginary | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).to-imaginary |
+| HMN(H(Q);Z,sigma,1).to-octonion | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).to-octonion |
+| HMN(H(Q);Z,sigma,1).to-polynomial | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).to-polynomial |
+| HMN(H(Q);Z,sigma,1).to-quaternion | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).to-quaternion |
+| HMN(H(Q);Z,sigma,1).to-rational | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).to-rational |
+| HMN(H(Q);Z,sigma,1).to-rational-function | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).to-rational-function |
+| HMN(H(Q);Z,sigma,1).zero | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).zero |
 | HomotopyEquivalence.backward | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied paths or strong collapses, with absolute strong-type decisions through core isomorphisms and inverse integral maps; native operation HomotopyEquivalence.backward |
 | HomotopyEquivalence.backward-cohomology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied paths or strong collapses, with absolute strong-type decisions through core isomorphisms and inverse integral maps; native operation HomotopyEquivalence.backward-cohomology-map |
 | HomotopyEquivalence.backward-homology-map | DIRECTLY_SUPPORTED | IMPLEMENTED | Simplicial pair homotopy equivalences from supplied paths or strong collapses, with absolute strong-type decisions through core isomorphisms and inverse integral maps; native operation HomotopyEquivalence.backward-homology-map |
@@ -1532,6 +1568,7 @@ Full invariants, test links, provenance, unresolved obligations, references and 
 | RationalQuaternionAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding |
 | RationalSampleAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite ordered rational samples retaining repeated observations |
 | RationalTensorAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Dense finite rational coordinate tensors with explicit nonnegative axis dimensions, standard coordinate contraction, and scalar 0/1 Boolean decoding |
+| RationalTwistedHahnMalcevNeumannAlgebra | DIRECTLY_SUPPORTED | IMPLEMENTED | Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1 |
 | RationalVectorFamily | DIRECTLY_SUPPORTED | IMPLEMENTED | Finite rational vectors of varying nonnegative dimensions with checked partial dimension-sensitive operations |
 | RationalVectorSpace | DIRECTLY_SUPPORTED | IMPLEMENTED | Fixed-dimensional rational vectors; default dimension two |
 | RelativeCap.boundary | DIRECTLY_SUPPORTED | IMPLEMENTED | Integral relative cap products with independently supplied cochain and target subcomplexes, retaining a chain context and inducing homology and cohomology maps; native operation RelativeCap.boundary |

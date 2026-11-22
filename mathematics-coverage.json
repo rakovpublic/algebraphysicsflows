@@ -28409,6 +28409,68 @@
       "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
     },
     {
+      "id": "concrete-algebra.RationalTwistedHahnMalcevNeumannAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z,sigma,1)",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
       "id": "concrete-algebra.RationalVectorFamily",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "RationalVectorFamily",
@@ -31750,6 +31812,73 @@
       "runtime_operation_id": "Boolean.to-dixon-z2",
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "to-dixon-z2",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Boolean.to-hmn",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "BooleanAlgebra",
+      "concept": "Boolean.to-hmn",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Boolean",
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z,sigma,1)",
+      "operation_signature": "Boolean -> HMN(H(Q);Z,sigma,1)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-hmn",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Encode false as the carrier's exact zero and true as its exact one; this is a 0/1 encoding, not a claim of ordinary additive-homomorphism preservation."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Boolean.to-hmn",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-hmn",
       "legacy_operation_interface": "ITransferOperation"
     },
     {
@@ -41081,6 +41210,2410 @@
       "runtime_operation_id": "DixonZ2(Q).group-generator",
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "DixonZ2(Q).group-generator",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).add",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).add",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z,sigma,1)",
+      "domain_B": "HMN(H(Q);Z,sigma,1)",
+      "domain_C": "HMN(H(Q);Z,sigma,1)",
+      "operation_signature": "HMN(H(Q);Z,sigma,1) x HMN(H(Q);Z,sigma,1) -> HMN(H(Q);Z,sigma,1)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).add",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).add",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "add",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).subtract",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).subtract",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z,sigma,1)",
+      "domain_B": "HMN(H(Q);Z,sigma,1)",
+      "domain_C": "HMN(H(Q);Z,sigma,1)",
+      "operation_signature": "HMN(H(Q);Z,sigma,1) x HMN(H(Q);Z,sigma,1) -> HMN(H(Q);Z,sigma,1)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).subtract",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).subtract",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "subtract",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).multiply",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).multiply",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z,sigma,1)",
+      "domain_B": "HMN(H(Q);Z,sigma,1)",
+      "domain_C": "HMN(H(Q);Z,sigma,1)",
+      "operation_signature": "HMN(H(Q);Z,sigma,1) x HMN(H(Q);Z,sigma,1) -> HMN(H(Q);Z,sigma,1)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).multiply",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Use the associative Hamilton product over central Q(t), equivalent under X=i*t to X*q=Ad(i)(q)*X with tau(m,n)=1."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).multiply",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "multiply",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).divide-right",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).divide-right",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z,sigma,1)",
+      "domain_B": "HMN(H(Q);Z,sigma,1)",
+      "domain_C": "HMN(H(Q);Z,sigma,1)",
+      "operation_signature": "HMN(H(Q);Z,sigma,1) x HMN(H(Q);Z,sigma,1) -> HMN(H(Q);Z,sigma,1)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).divide-right",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).divide-right",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "divide-right",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).divide-left",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).divide-left",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z,sigma,1)",
+      "domain_B": "HMN(H(Q);Z,sigma,1)",
+      "domain_C": "HMN(H(Q);Z,sigma,1)",
+      "operation_signature": "HMN(H(Q);Z,sigma,1) x HMN(H(Q);Z,sigma,1) -> HMN(H(Q);Z,sigma,1)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).divide-left",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).divide-left",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "divide-left",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).negate",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).negate",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z,sigma,1)",
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z,sigma,1)",
+      "operation_signature": "HMN(H(Q);Z,sigma,1) -> HMN(H(Q);Z,sigma,1)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).negate",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).negate",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "negate",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).conjugate",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).conjugate",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z,sigma,1)",
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z,sigma,1)",
+      "operation_signature": "HMN(H(Q);Z,sigma,1) -> HMN(H(Q);Z,sigma,1)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).conjugate",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).conjugate",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "conjugate",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).inverse",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).inverse",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z,sigma,1)",
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z,sigma,1)",
+      "operation_signature": "HMN(H(Q);Z,sigma,1) -> HMN(H(Q);Z,sigma,1)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).inverse",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Zero is undefined; for nonzero q(t), use quaternion conjugate divided by a nonzero reduced norm in Q(t)."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).inverse",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "inverse",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).sigma",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).sigma",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z,sigma,1)",
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z,sigma,1)",
+      "operation_signature": "HMN(H(Q);Z,sigma,1) -> HMN(H(Q);Z,sigma,1)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).sigma",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Apply Ad(i) coefficientwise: fix real and i coordinates and negate j and k; central t is fixed."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).sigma",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "sigma",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).norm-squared",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).norm-squared",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z,sigma,1)",
+      "domain_B": null,
+      "domain_C": "Q(x)",
+      "operation_signature": "HMN(H(Q);Z,sigma,1) -> Q(x)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).norm-squared",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the reduced quaternion norm a^2+b^2+c^2+d^2 in central Q(t)."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).norm-squared",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "norm-squared",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).group-valuation",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).group-valuation",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z,sigma,1)",
+      "domain_B": null,
+      "domain_C": "Z",
+      "operation_signature": "HMN(H(Q);Z,sigma,1) -> Z",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).group-valuation",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the least Z exponent in the induced formal Laurent expansion at t=0; zero has no valuation."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).group-valuation",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "group-valuation",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).leading-coefficient",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).leading-coefficient",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z,sigma,1)",
+      "domain_B": null,
+      "domain_C": "H(Q)",
+      "operation_signature": "HMN(H(Q);Z,sigma,1) -> H(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).leading-coefficient",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the coefficient in K=H(Q) at the least group exponent, translating t^m to (-i)^m X^m; zero has no leading coefficient."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).leading-coefficient",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "leading-coefficient",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).to-boolean",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).to-boolean",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z,sigma,1)",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "HMN(H(Q);Z,sigma,1) -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).to-boolean",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Defined only for the zero and identity series."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).to-boolean",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-boolean",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z,sigma,1)",
+      "domain_B": "HMN(H(Q);Z,sigma,1)",
+      "domain_C": "Boolean",
+      "operation_signature": "HMN(H(Q);Z,sigma,1) x HMN(H(Q);Z,sigma,1) -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).group-basis",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).group-basis",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Z",
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z,sigma,1)",
+      "operation_signature": "Z -> HMN(H(Q);Z,sigma,1)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).group-basis",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return X^n for the supplied integer n, with X=i*t and valuation n; the finite rational-function representation bounds explicit exponent storage."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).group-basis",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HMN(H(Q);Z,sigma,1).group-basis",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).embed-rational",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).embed-rational",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q",
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z,sigma,1)",
+      "operation_signature": "Q -> HMN(H(Q);Z,sigma,1)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).embed-rational",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed Q as a constant central scalar series."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).embed-rational",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HMN(H(Q);Z,sigma,1).embed-rational",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).to-rational",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).to-rational",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z,sigma,1)",
+      "domain_B": null,
+      "domain_C": "Q",
+      "operation_signature": "HMN(H(Q);Z,sigma,1) -> Q",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).to-rational",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require a t-independent real scalar quaternion; all other coordinates and powers must vanish."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).to-rational",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-rational",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).embed-polynomial",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).embed-polynomial",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q[x]",
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z,sigma,1)",
+      "operation_signature": "Q[x] -> HMN(H(Q);Z,sigma,1)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).embed-polynomial",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed Q[t] into the central rational-function subfield, using t=i^-1*X."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).embed-polynomial",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HMN(H(Q);Z,sigma,1).embed-polynomial",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).to-polynomial",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).to-polynomial",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z,sigma,1)",
+      "domain_B": null,
+      "domain_C": "Q[x]",
+      "operation_signature": "HMN(H(Q);Z,sigma,1) -> Q[x]",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).to-polynomial",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require a central scalar polynomial with denominator one and no quaternionic or nonconstant group-generator component."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).to-polynomial",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-polynomial",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).embed-rational-function",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).embed-rational-function",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(x)",
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z,sigma,1)",
+      "operation_signature": "Q(x) -> HMN(H(Q);Z,sigma,1)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).embed-rational-function",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed Q(t) centrally, where t=i^-1*X is the central parameter associated to the twisted group generator."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).embed-rational-function",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HMN(H(Q);Z,sigma,1).embed-rational-function",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).to-rational-function",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).to-rational-function",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z,sigma,1)",
+      "domain_B": null,
+      "domain_C": "Q(x)",
+      "operation_signature": "HMN(H(Q);Z,sigma,1) -> Q(x)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).to-rational-function",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require zero i,j,k quaternion coordinates; return the exact central Q(t) function."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).to-rational-function",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-rational-function",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).embed-complex",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).embed-complex",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(i)",
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z,sigma,1)",
+      "operation_signature": "Q(i) -> HMN(H(Q);Z,sigma,1)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).embed-complex",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed Q(i) into the constant quaternion subalgebra generated by Hamilton's i."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).embed-complex",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HMN(H(Q);Z,sigma,1).embed-complex",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).to-complex",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).to-complex",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z,sigma,1)",
+      "domain_B": null,
+      "domain_C": "Q(i)",
+      "operation_signature": "HMN(H(Q);Z,sigma,1) -> Q(i)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).to-complex",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require a constant quaternion on the real/i plane."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).to-complex",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-complex",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).embed-imaginary",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).embed-imaginary",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "iQ",
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z,sigma,1)",
+      "operation_signature": "iQ -> HMN(H(Q);Z,sigma,1)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).embed-imaginary",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed a*i as the constant Hamilton i-axis quaternion."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).embed-imaginary",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HMN(H(Q);Z,sigma,1).embed-imaginary",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).to-imaginary",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).to-imaginary",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z,sigma,1)",
+      "domain_B": null,
+      "domain_C": "iQ",
+      "operation_signature": "HMN(H(Q);Z,sigma,1) -> iQ",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).to-imaginary",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require a constant quaternion on the pure i-axis."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).to-imaginary",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-imaginary",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).embed-quaternion",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).embed-quaternion",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "H(Q)",
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z,sigma,1)",
+      "operation_signature": "H(Q) -> HMN(H(Q);Z,sigma,1)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).embed-quaternion",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed H(Q) as constant coefficients in the twisted series division ring."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).embed-quaternion",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HMN(H(Q);Z,sigma,1).embed-quaternion",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).to-quaternion",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).to-quaternion",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z,sigma,1)",
+      "domain_B": null,
+      "domain_C": "H(Q)",
+      "operation_signature": "HMN(H(Q);Z,sigma,1) -> H(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).to-quaternion",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require all four Q(t) coordinates to be constant rational functions."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).to-quaternion",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-quaternion",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).embed-octonion",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).embed-octonion",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "O(Q)",
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z,sigma,1)",
+      "operation_signature": "O(Q) -> HMN(H(Q);Z,sigma,1)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).embed-octonion",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Partial transfer: the octonion must lie in the selected associative H(Q) subalgebra."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).embed-octonion",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HMN(H(Q);Z,sigma,1).embed-octonion",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).to-octonion",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).to-octonion",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z,sigma,1)",
+      "domain_B": null,
+      "domain_C": "O(Q)",
+      "operation_signature": "HMN(H(Q);Z,sigma,1) -> O(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).to-octonion",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed a constant H(Q) coefficient into the canonical quaternion subalgebra of O(Q)."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).to-octonion",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-octonion",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).embed-dixon-z2",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).embed-dixon-z2",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "DixonZ2(Q)",
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z,sigma,1)",
+      "operation_signature": "DixonZ2(Q) -> HMN(H(Q);Z,sigma,1)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).embed-dixon-z2",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Partial transfer through DixonZ2.toQuaternion; only its selected associative H(Q) slice maps because the full algebra is nonassociative."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).embed-dixon-z2",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HMN(H(Q);Z,sigma,1).embed-dixon-z2",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).to-dixon-z2",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).to-dixon-z2",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z,sigma,1)",
+      "domain_B": null,
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "HMN(H(Q);Z,sigma,1) -> DixonZ2(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).to-dixon-z2",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Require a constant H(Q) coefficient and embed it in the selected quaternion slice of DixonZ2(Q); this is not an inverse on the full Dixon algebra."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).to-dixon-z2",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-dixon-z2",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).zero",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).zero",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z,sigma,1)",
+      "operation_signature": "Unit -> HMN(H(Q);Z,sigma,1)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).zero",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).zero",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HMN(H(Q);Z,sigma,1).zero",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).one",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).one",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z,sigma,1)",
+      "operation_signature": "Unit -> HMN(H(Q);Z,sigma,1)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).one",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).one",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HMN(H(Q);Z,sigma,1).one",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).group-generator",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).group-generator",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z,sigma,1)",
+      "operation_signature": "Unit -> HMN(H(Q);Z,sigma,1)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).group-generator",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).group-generator",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HMN(H(Q);Z,sigma,1).group-generator",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).tau-one",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).tau-one",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z,sigma,1)",
+      "operation_signature": "Unit -> HMN(H(Q);Z,sigma,1)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).tau-one",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).tau-one",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HMN(H(Q);Z,sigma,1).tau-one",
       "legacy_operation_interface": "ITransferOperation"
     },
     {
@@ -171623,6 +174156,8 @@
         "FiniteSet(Z).maximizers",
         "FiniteSet(Z).minimizers",
         "FiniteSet(Z).remove",
+        "HMN(H(Q);Z,sigma,1).group-basis",
+        "HMN(H(Q);Z,sigma,1).group-valuation",
         "HomotopyEquivalence.dominated-vertices",
         "HomotopyEquivalence.dominators",
         "Mat(Z).scale",
@@ -171744,6 +174279,8 @@
         "H(Q).real-part",
         "H(Q).scale",
         "H(Q).to-rational",
+        "HMN(H(Q);Z,sigma,1).embed-rational",
+        "HMN(H(Q);Z,sigma,1).to-rational",
         "Mat(Q).determinant",
         "Mat(Q).eigenspace-basis",
         "Mat(Q).eigenvalue-multiplicity",
@@ -171956,6 +174493,8 @@
         "DixonZ2(Q).to-complex",
         "H(Q).embed-complex",
         "H(Q).to-complex",
+        "HMN(H(Q);Z,sigma,1).embed-complex",
+        "HMN(H(Q);Z,sigma,1).to-complex",
         "O(Q).embed-complex",
         "O(Q).to-complex",
         "Q(i).add",
@@ -172045,6 +174584,7 @@
         "H(Q)",
         "O(Q)",
         "DixonZ2(Q)",
+        "HMN(H(Q);Z,sigma,1)",
         "Q[x]",
         "Q(x)",
         "Tensor(Q)",
@@ -172085,6 +174625,7 @@
         "Boolean.or",
         "Boolean.to-complex",
         "Boolean.to-dixon-z2",
+        "Boolean.to-hmn",
         "Boolean.to-imaginary",
         "Boolean.to-integer",
         "Boolean.to-matrix",
@@ -172193,6 +174734,8 @@
         "H(Q).equal",
         "H(Q).same-rotation",
         "H(Q).to-boolean",
+        "HMN(H(Q);Z,sigma,1).equal",
+        "HMN(H(Q);Z,sigma,1).to-boolean",
         "HomotopyEquivalence.equal",
         "HomotopyEquivalence.is-strong-core",
         "HomotopyEquivalence.strongly-equivalent",
@@ -172337,6 +174880,10 @@
         "H(Q).k",
         "H(Q).one",
         "H(Q).zero",
+        "HMN(H(Q);Z,sigma,1).group-generator",
+        "HMN(H(Q);Z,sigma,1).one",
+        "HMN(H(Q);Z,sigma,1).tau-one",
+        "HMN(H(Q);Z,sigma,1).zero",
         "Mat2(Q).one",
         "Mat2(Q).zero",
         "N.one",
@@ -172537,6 +175084,8 @@
         "FiniteSet(Z).maximum",
         "FiniteSet(Z).minimizers",
         "FiniteSet(Z).minimum",
+        "HMN(H(Q);Z,sigma,1).embed-polynomial",
+        "HMN(H(Q);Z,sigma,1).to-polynomial",
         "Mat(Q).characteristic-polynomial",
         "Mat(Q).companion",
         "Mat(Q).evaluate-at-matrix",
@@ -173223,6 +175772,9 @@
       ],
       "supported_operations": [
         "Boolean.to-rational-function",
+        "HMN(H(Q);Z,sigma,1).embed-rational-function",
+        "HMN(H(Q);Z,sigma,1).norm-squared",
+        "HMN(H(Q);Z,sigma,1).to-rational-function",
         "Q(x).add",
         "Q(x).compose",
         "Q(x).denominator",
@@ -174429,6 +176981,9 @@
         "H(Q).to-rotation-matrix",
         "H(Q).to-vector",
         "H(Q).zero",
+        "HMN(H(Q);Z,sigma,1).embed-quaternion",
+        "HMN(H(Q);Z,sigma,1).leading-coefficient",
+        "HMN(H(Q);Z,sigma,1).to-quaternion",
         "O(Q).embed-quaternion",
         "O(Q).to-quaternion",
         "iQ.from-quaternion",
@@ -179048,6 +181603,8 @@
         "Boolean.to-imaginary",
         "DixonZ2(Q).embed-imaginary",
         "DixonZ2(Q).to-imaginary",
+        "HMN(H(Q);Z,sigma,1).embed-imaginary",
+        "HMN(H(Q);Z,sigma,1).to-imaginary",
         "O(Q).embed-imaginary",
         "O(Q).to-imaginary",
         "iQ.add",
@@ -179117,6 +181674,8 @@
         "Boolean.to-octonion",
         "DixonZ2(Q).embed-octonion",
         "DixonZ2(Q).to-octonion",
+        "HMN(H(Q);Z,sigma,1).embed-octonion",
+        "HMN(H(Q);Z,sigma,1).to-octonion",
         "O(Q).add",
         "O(Q).components",
         "O(Q).conjugate",
@@ -179229,7 +181788,9 @@
         "DixonZ2(Q).to-quaternion",
         "DixonZ2(Q).to-rational",
         "DixonZ2(Q).to-vector",
-        "DixonZ2(Q).zero"
+        "DixonZ2(Q).zero",
+        "HMN(H(Q);Z,sigma,1).embed-dixon-z2",
+        "HMN(H(Q);Z,sigma,1).to-dixon-z2"
       ],
       "invariants": [
         "64 exact Q(i) coordinates: 32 tensor-basis coordinates in each C2 block",
@@ -179238,6 +181799,94 @@
         "Retains nonassociativity and makes no division-ring embedding claim",
         "128 rational coordinates connect to Vec(Q)",
         "128 by 128 left multiplication matrices connect to Mat(Q); this regular linear representation is not multiplicative in a nonassociative algebra"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-11-22"
+      }
+    },
+    {
+      "id": "HMN(H(Q);Z,sigma,1)",
+      "name": "Twisted Hahn-Mal'cev-Neumann rational division subring",
+      "description": "Twisted Hahn-Mal'cev-Neumann rational division subring",
+      "member_representation": "mathematics.numbers.RationalTwistedHahnSeries",
+      "membership_rules": [
+        "K=H(Q), G=Z with its usual order, sigma=Ad(i), and normalized tau=1",
+        "Group generator X satisfies Xq=sigma(q)X and central t=i^-1 X",
+        "Exact representation as H(Q(t)) with quaternion conjugate/norm inverse",
+        "Valuation and leading coefficient agree with the induced formal Laurent expansion",
+        "This rational subring embeds in the full completion but does not represent every well-ordered support",
+        "H(Q) and its Q, Q(i), iQ slices embed as constants",
+        "O(Q) and DixonZ2(Q) connect only through their selected H(Q) subalgebra"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "Boolean",
+        "DixonZ2(Q)",
+        "H(Q)",
+        "O(Q)",
+        "Q",
+        "Q(i)",
+        "Q(x)",
+        "Q[x]",
+        "iQ"
+      ],
+      "supported_operations": [
+        "Boolean.to-hmn",
+        "HMN(H(Q);Z,sigma,1).add",
+        "HMN(H(Q);Z,sigma,1).conjugate",
+        "HMN(H(Q);Z,sigma,1).divide-left",
+        "HMN(H(Q);Z,sigma,1).divide-right",
+        "HMN(H(Q);Z,sigma,1).embed-complex",
+        "HMN(H(Q);Z,sigma,1).embed-dixon-z2",
+        "HMN(H(Q);Z,sigma,1).embed-imaginary",
+        "HMN(H(Q);Z,sigma,1).embed-octonion",
+        "HMN(H(Q);Z,sigma,1).embed-polynomial",
+        "HMN(H(Q);Z,sigma,1).embed-quaternion",
+        "HMN(H(Q);Z,sigma,1).embed-rational",
+        "HMN(H(Q);Z,sigma,1).embed-rational-function",
+        "HMN(H(Q);Z,sigma,1).equal",
+        "HMN(H(Q);Z,sigma,1).group-basis",
+        "HMN(H(Q);Z,sigma,1).group-generator",
+        "HMN(H(Q);Z,sigma,1).group-valuation",
+        "HMN(H(Q);Z,sigma,1).inverse",
+        "HMN(H(Q);Z,sigma,1).leading-coefficient",
+        "HMN(H(Q);Z,sigma,1).multiply",
+        "HMN(H(Q);Z,sigma,1).negate",
+        "HMN(H(Q);Z,sigma,1).norm-squared",
+        "HMN(H(Q);Z,sigma,1).one",
+        "HMN(H(Q);Z,sigma,1).sigma",
+        "HMN(H(Q);Z,sigma,1).subtract",
+        "HMN(H(Q);Z,sigma,1).tau-one",
+        "HMN(H(Q);Z,sigma,1).to-boolean",
+        "HMN(H(Q);Z,sigma,1).to-complex",
+        "HMN(H(Q);Z,sigma,1).to-dixon-z2",
+        "HMN(H(Q);Z,sigma,1).to-imaginary",
+        "HMN(H(Q);Z,sigma,1).to-octonion",
+        "HMN(H(Q);Z,sigma,1).to-polynomial",
+        "HMN(H(Q);Z,sigma,1).to-quaternion",
+        "HMN(H(Q);Z,sigma,1).to-rational",
+        "HMN(H(Q);Z,sigma,1).to-rational-function",
+        "HMN(H(Q);Z,sigma,1).zero"
+      ],
+      "invariants": [
+        "K=H(Q), G=Z with its usual order, sigma=Ad(i), and normalized tau=1",
+        "Group generator X satisfies Xq=sigma(q)X and central t=i^-1 X",
+        "Exact representation as H(Q(t)) with quaternion conjugate/norm inverse",
+        "Valuation and leading coefficient agree with the induced formal Laurent expansion",
+        "This rational subring embeds in the full completion but does not represent every well-ordered support",
+        "H(Q) and its Q, Q(i), iQ slices embed as constants",
+        "O(Q) and DixonZ2(Q) connect only through their selected H(Q) subalgebra"
       ],
       "references": [
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"

@@ -13,6 +13,7 @@ import mathematics.numbers.RationalQuaternion;
 import mathematics.numbers.RationalImaginary;
 import mathematics.numbers.RationalOctonion;
 import mathematics.numbers.RationalDixonZ2;
+import mathematics.numbers.RationalTwistedHahnSeries;
 import java.math.BigInteger;
 import java.util.*;
 
@@ -47,6 +48,7 @@ public final class BooleanAlgebra extends ConcreteAlgebra<Boolean> {
                                RationalImaginaryAlgebra imaginaries,
                                RationalOctonionAlgebra octonions,
                                RationalDixonZ2Algebra dixonZ2,
+                               RationalTwistedHahnMalcevNeumannAlgebra hahnMalcevNeumann,
                                RationalPolynomialRing polynomials,RationalFunctionField functions,
                                RationalTensorAlgebra tensors,RationalMatrixAlgebra matrices,
                                ResidueRing residues,List<PrimeField> primeFields) {
@@ -59,6 +61,7 @@ public final class BooleanAlgebra extends ConcreteAlgebra<Boolean> {
         unary("to-imaginary",algebra(),imaginaries.algebra(),false,value -> value?RationalImaginary.I:RationalImaginary.ZERO);
         unary("to-octonion",algebra(),octonions.algebra(),false,value -> value?RationalOctonion.ONE:RationalOctonion.ZERO);
         unary("to-dixon-z2",algebra(),dixonZ2.algebra(),false,RationalDixonZ2::fromBoolean);
+        unary("to-hmn",algebra(),hahnMalcevNeumann.algebra(),false,RationalTwistedHahnSeries::fromBoolean);
         unary("to-polynomial",algebra(),polynomials.algebra(),false,value -> value?Polynomial.ONE:Polynomial.ZERO);
         unary("to-rational-function",algebra(),functions.algebra(),false,value -> value?RationalFunction.ONE:RationalFunction.ZERO);
         unary("to-tensor",algebra(),tensors.algebra(),false,value -> RationalTensor.scalar(value?Rational.ONE:Rational.ZERO));

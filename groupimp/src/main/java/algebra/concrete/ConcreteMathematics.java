@@ -38,6 +38,7 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final RationalImaginaryAlgebra imaginaries;
     public final RationalOctonionAlgebra octonions;
     public final RationalDixonZ2Algebra dixonZ2;
+    public final RationalTwistedHahnMalcevNeumannAlgebra twistedHahnMalcevNeumann;
     public final RationalVectorSpace vectors;
     public final RationalMatrixAlgebra matrices;
     public final RationalVectorFamily finiteVectors;
@@ -144,6 +145,8 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         imaginaries=new RationalImaginaryAlgebra(rationals,complexRationals,quaternions,booleans);
         octonions=new RationalOctonionAlgebra(rationals,complexRationals,imaginaries,quaternions,finiteVectors,rectangularMatrices,booleans);
         dixonZ2=new RationalDixonZ2Algebra(rationals,complexRationals,imaginaries,quaternions,octonions,finiteVectors,rectangularMatrices,booleans);
+        twistedHahnMalcevNeumann=new RationalTwistedHahnMalcevNeumannAlgebra(rationals,polynomials,rationalFunctions,integers,
+                complexRationals,imaginaries,quaternions,octonions,dixonZ2,booleans);
         multivariatePolynomials=new RationalMultivariatePolynomialAlgebra(rationals,naturals,integers,booleans,finiteVectors,rectangularMatrices,polynomials);
         polynomialMaps=new RationalPolynomialMapAlgebra(multivariatePolynomials,rationals,naturals,booleans,finiteVectors,rectangularMatrices);
         polynomialForms=new PolynomialDifferentialFormAlgebra(multivariatePolynomials,polynomialMaps,exterior,rationals,finiteVectors,naturals,booleans);
@@ -156,9 +159,9 @@ public final class ConcreteMathematics implements IMathToolInitializer {
             fields.add(new PrimeField(unit,prime,booleans));
         }
         primeFields=Collections.unmodifiableList(fields);
-        booleans.connectScalars(naturals,integers,rationals,complexRationals,quaternions,imaginaries,octonions,dixonZ2,polynomials,rationalFunctions,
+        booleans.connectScalars(naturals,integers,rationals,complexRationals,quaternions,imaginaries,octonions,dixonZ2,twistedHahnMalcevNeumann,polynomials,rationalFunctions,
                 tensors,matrices,residues,primeFields);
-        List<ConcreteAlgebra<?>> values=new ArrayList<>(Arrays.asList(booleans,naturals,integers,rationals,complexRationals,imaginaries,octonions,dixonZ2,vectors,matrices,finiteVectors,rectangularMatrices,affineSpaces,tensors,exterior,quaternions,polynomials,rationalFunctions,integerSets,samples,integerProbabilities,complexes,integerRelations,permutations,residues,integerFunctions,categories,functors,naturalTransformations,equivalences,adjunctions,cones,cocones));
+        List<ConcreteAlgebra<?>> values=new ArrayList<>(Arrays.asList(booleans,naturals,integers,rationals,complexRationals,imaginaries,octonions,dixonZ2,twistedHahnMalcevNeumann,vectors,matrices,finiteVectors,rectangularMatrices,affineSpaces,tensors,exterior,quaternions,polynomials,rationalFunctions,integerSets,samples,integerProbabilities,complexes,integerRelations,permutations,residues,integerFunctions,categories,functors,naturalTransformations,equivalences,adjunctions,cones,cocones));
         values.add(multivariatePolynomials); values.add(polynomialMaps);
         values.add(polynomialForms);
         values.add(polynomialCells); values.add(polynomialChains);
