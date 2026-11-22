@@ -93,6 +93,15 @@ public final class RationalCyclotomic implements Serializable {
         }
         MathContext output=new MathContext(precision,RoundingMode.HALF_EVEN);return new DecimalComplex(real.round(output),imag.round(output));
     }
+    /** BigDecimal sine for a measured angle in radians; unlike a cyclotomic phase, the angle need not be a rational multiple of pi. */
+    public static BigDecimal sinRadians(BigDecimal angle,int precision){
+        if(precision<1||precision>10000)throw new IllegalArgumentException("Precision must be between 1 and 10000 digits");
+        MathContext mc=new MathContext(precision+12,RoundingMode.HALF_EVEN);BigDecimal pi=pi(mc),twoPi=pi.multiply(BigDecimal.valueOf(2),mc);
+        BigDecimal reduced=angle.remainder(twoPi,mc);
+        if(reduced.compareTo(pi)>0)reduced=reduced.subtract(twoPi,mc);
+        if(reduced.compareTo(pi.negate())<0)reduced=reduced.add(twoPi,mc);
+        return trig(reduced,mc).imaginary.round(new MathContext(precision,RoundingMode.HALF_EVEN));
+    }
     private static DecimalComplex trig(BigDecimal x,MathContext mc){
         BigDecimal x2=x.multiply(x,mc),sin=x,cos=BigDecimal.ONE,st=x,ct=BigDecimal.ONE;
         for(int k=1;k<mc.getPrecision()*2;k++){
