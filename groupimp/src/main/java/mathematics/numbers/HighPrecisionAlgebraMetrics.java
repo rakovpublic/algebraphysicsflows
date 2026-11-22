@@ -18,8 +18,18 @@ public final class HighPrecisionAlgebraMetrics {
             BigDecimal c12,BigDecimal c23,BigDecimal c13,RationalCyclotomic phase,int precision){
         if(!phase.multiply(phase.conjugate()).equals(RationalCyclotomic.one(phase.order())))
             throw new IllegalArgumentException("CKM phase must have exact cyclotomic norm one");
-        MathContext mc=new MathContext(precision+8,RoundingMode.HALF_EVEN);
         BigDecimal sinDelta=phase.evaluate(precision+4).imaginary;
+        return ckmJarlskogWithSine(s12,s23,s13,c12,c23,c13,sinDelta,precision);
+    }
+    /** Jarlskog invariant from measured real mixing-angle factors and a measured phase in radians. */
+    public static BigDecimal ckmJarlskog(BigDecimal s12,BigDecimal s23,BigDecimal s13,
+            BigDecimal c12,BigDecimal c23,BigDecimal c13,BigDecimal deltaRadians,int precision){
+        return ckmJarlskogWithSine(s12,s23,s13,c12,c23,c13,RationalCyclotomic.sinRadians(deltaRadians,precision+4),precision);
+    }
+    private static BigDecimal ckmJarlskogWithSine(BigDecimal s12,BigDecimal s23,BigDecimal s13,
+            BigDecimal c12,BigDecimal c23,BigDecimal c13,BigDecimal sinDelta,int precision){
+        if(precision<1)throw new IllegalArgumentException("Precision must be positive");
+        MathContext mc=new MathContext(precision+8,RoundingMode.HALF_EVEN);
         BigDecimal result=s12.multiply(s23,mc).multiply(s13,mc).multiply(c12,mc).multiply(c23,mc).multiply(c13,mc).multiply(c13,mc).multiply(sinDelta,mc);
         return result.round(new MathContext(precision,RoundingMode.HALF_EVEN));
     }
