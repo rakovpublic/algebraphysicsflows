@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DATABASE = ROOT / "mathematics-coverage.json"
 MANIFEST = ROOT / "groupimp/src/test/resources/mathematics/concrete-catalog.tsv"
-DATE = "2026-11-04"
+DATE = "2026-11-22"
 OWNERS = {
     "IntegralConeMapSpaceAlgebra": ("ConeMapSpace", "Additive lattices of retained cone maps and their integral homotopy quotient, with boundary intersection, torsion, class projection and representative squares"),
     "IntegralConeEquivalenceAlgebra": ("ConeEquivalence", "Integral equivalences between retained cones with opposite witnessed squares, both inverse homotopies, bounded retained-inverse solving, composition, typed actions and inverse integral maps"),
@@ -35,7 +35,10 @@ OWNERS = {
     "PrimeField": ("Z/5Z", "Residues in the default prime field F5; configurable exactly checked prime int modulus with exact 0/1 Boolean decoding"),
     "ResidueRing": ("Z/6Z", "Residue ring modulo six by default; configurable arbitrary-precision modulus greater than one with exact 0/1 Boolean decoding"),
     "RationalComplexField": ("Q(i)", "Pairs of rational coordinates; a proper subfield of the complex numbers with exact 0/1 Boolean decoding"),
-    "RationalImaginaryAlgebra": ("iQ", "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion and Boolean relations"),
+    "RationalImaginaryAlgebra": ("iQ", "Pure imaginary rational scalars coefficient*i, with exact rational, complex, quaternion, octonion and Boolean relations"),
+    "RationalOctonionAlgebra": ("O(Q)", "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras"),
+    "RationalDixonZ2Algebra": ("DixonZ2(Q)", "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action"),
+    "RationalTwistedHahnMalcevNeumannAlgebra": ("HMN(H(Q);Z,sigma,1)", "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1"),
     "RationalQuaternionAlgebra": ("H(Q)", "Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding"),
     "RationalVectorSpace": ("Q^2", "Fixed-dimensional rational vectors; default dimension two"),
     "RationalMatrixAlgebra": ("Mat2(Q)", "Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding"),
@@ -130,6 +133,9 @@ EXTRA_TESTS = {
     "RationalExteriorAlgebra": "NativeExteriorTest",
     "RationalQuaternionAlgebra": "NativeQuaternionTest",
     "RationalImaginaryAlgebra": "NativeImaginaryAlgebraTest",
+    "RationalOctonionAlgebra": "NativeOctonionAlgebraTest",
+    "RationalDixonZ2Algebra": "NativeDixonZ2AlgebraTest",
+    "RationalTwistedHahnMalcevNeumannAlgebra": "NativeTwistedHahnMalcevNeumannTest",
     "IntegerSetAlgebra": "NativeFlatAndSetTest",
     "RationalPolynomialRing": "NativeDynamicsTest",
     "RationalMultivariatePolynomialAlgebra": "NativeMultivariateCalculusTest",
@@ -1836,10 +1842,10 @@ OWNER_CONDITIONS["RationalMatrixFamily"]["companion"] = "The polynomial has posi
 
 BOOLEAN_TRANSITION_OWNERS = (
     "BooleanAlgebra", "NaturalSemiring", "IntegerRing", "RationalField", "RationalComplexField",
-    "RationalImaginaryAlgebra", "RationalQuaternionAlgebra", "RationalPolynomialRing", "RationalFunctionField", "RationalTensorAlgebra",
+    "RationalImaginaryAlgebra", "RationalOctonionAlgebra", "RationalDixonZ2Algebra", "RationalTwistedHahnMalcevNeumannAlgebra", "RationalQuaternionAlgebra", "RationalPolynomialRing", "RationalFunctionField", "RationalTensorAlgebra",
     "RationalMatrixAlgebra", "ResidueRing", "PrimeField",
 )
-BOOLEAN_SCALAR_DOMAINS = ("N", "Z", "Q", "Q(i)", "iQ", "H(Q)", "Q[x]", "Q(x)", "Tensor(Q)", "Mat2(Q)", "Z/6Z", "Z/5Z")
+BOOLEAN_SCALAR_DOMAINS = ("N", "Z", "Q", "Q(i)", "iQ", "H(Q)", "O(Q)", "DixonZ2(Q)", "HMN(H(Q);Z,sigma,1)", "Q[x]", "Q(x)", "Tensor(Q)", "Mat2(Q)", "Z/6Z", "Z/5Z")
 BOOLEAN_DECODER_CONDITION = "Defined exactly for the distinguished values 0 and 1; every other carrier value raises OPERATION_UNDEFINED rather than using truthiness."
 for _owner in BOOLEAN_TRANSITION_OWNERS[1:]:
     OWNER_CONDITIONS.setdefault(_owner, {})["to-boolean"] = BOOLEAN_DECODER_CONDITION
@@ -1851,10 +1857,11 @@ OWNER_CONDITIONS.setdefault("BooleanAlgebra", {}).update({
     "less-or-equal": "Return the Boolean lattice order a implies b.",
     "greater-or-equal": "Return the Boolean lattice order b implies a.",
 })
-for _name in ("to-natural", "to-integer", "to-rational", "to-complex", "to-imaginary", "to-quaternion", "to-polynomial",
+for _name in ("to-natural", "to-integer", "to-rational", "to-complex", "to-imaginary", "to-quaternion", "to-octonion", "to-dixon-z2", "to-hmn", "to-polynomial",
               "to-rational-function", "to-tensor", "to-matrix", "to-residue-6", "to-prime-5"):
     OWNER_CONDITIONS.setdefault("BooleanAlgebra", {})[_name] = "Encode false as the carrier's exact zero and true as its exact one; this is a 0/1 encoding, not a claim of ordinary additive-homomorphism preservation."
 OWNER_CONDITIONS["BooleanAlgebra"]["to-imaginary"] = "Encode false as 0*i and true as the designated generator i. The pure-imaginary carrier has no multiplicative unit, so this is a distinguished Boolean encoding rather than a 0/1 field embedding."
+OWNER_CONDITIONS["BooleanAlgebra"]["to-octonion"] = "Encode false and true as the rational octonion zero and multiplicative identity, respectively; reverse decoding accepts only those two values."
 OWNER_CONDITIONS["RationalImaginaryAlgebra"] = {
     "multiply": "Return -(a*b) in Q for (a*i)*(b*i); pure imaginary values are not closed under ordinary multiplication.",
     "divide": "The second imaginary coefficient must be nonzero; return a/b in Q for (a*i)/(b*i).",
@@ -1868,6 +1875,76 @@ OWNER_CONDITIONS["RationalImaginaryAlgebra"] = {
     "from-complex": "The complex input must have zero real coordinate; retain its imaginary coordinate.",
     "to-quaternion": "Embed a*i as the selected quaternion i-axis value (0,a,0,0).",
     "from-quaternion": "The quaternion input must have zero real, j and k coordinates; retain its i coordinate.",
+}
+OWNER_CONDITIONS["RationalOctonionAlgebra"] = {
+    "multiply": "Use (a,b)(c,d)=(ac-conj(d)b, da+b conj(c)) in H(Q) pairs; preserve operand order because the product is noncommutative and nonassociative.",
+    "divide-right": "The divisor is nonzero; return x*inverse(y), the solution z to z*y=x under the octonion inverse property.",
+    "divide-left": "The divisor is nonzero; return inverse(y)*x, the solution z to y*z=x under the octonion inverse property.",
+    "inverse": "Zero has no inverse; return conjugate(x)/norm-squared(x) for nonzero x.",
+    "norm-squared": "Return the sum of all eight rational coordinate squares; the norm is multiplicative.",
+    "to-rational": "All seven imaginary coordinates must vanish; return the real coordinate.",
+    "to-boolean": "Defined only on octonion zero and one; all other octonions raise OPERATION_UNDEFINED.",
+    "imaginary-part": "Return the seven coordinates after the real coordinate as the actual Vec(Q) wrapper.",
+    "to-vector": "The real coordinate must vanish; return the seven imaginary coordinates as Vec(Q).",
+    "from-vector": "The vector must have dimension seven; insert its coordinates after a zero real coordinate.",
+    "scale": "Scale all eight rational coordinates by the rational second operand and return the first O(Q) wrapper.",
+    "embed-rational": "Embed a rational on the real scalar axis.",
+    "embed-complex": "Embed Q(i) in the declared first complex coordinate plane.",
+    "to-complex": "Coordinates j,k,l,il,jl,kl must vanish; retain the real and i coordinates.",
+    "embed-imaginary": "Embed iQ on the selected octonion i axis.",
+    "to-imaginary": "Only the selected i axis may be nonzero and the real coordinate must vanish.",
+    "embed-quaternion": "Embed H(Q) on the first four coordinates, retaining its chosen i,j,k basis.",
+    "to-quaternion": "Coordinates l,il,jl,kl must vanish; return the first four coordinates in the actual H(Q) wrapper.",
+    "left-multiplication-matrix": "Return the 8 by 8 rational matrix whose columns are x times each declared basis element.",
+    "from-left-multiplication-matrix": "Require an 8 by 8 matrix equal to the full left-regular representation of the octonion decoded from its first column.",
+}
+OWNER_CONDITIONS["RationalDixonZ2Algebra"] = {
+    "multiply": "For a+b*u and c+d*u, return (ac+b*alpha(d))+(ad+b*alpha(c))*u with ordered octonion products and u*a=alpha(a)*u.",
+    "grading-involution": "Apply alpha to each octonion tensor coordinate in both group blocks; alpha fixes 1,i,j,k and negates l,il,jl,kl.",
+    "even-part": "Project to the identity-group coefficient block a in a+b*u.",
+    "odd-part": "Project to the u-group coefficient block b*u in a+b*u.",
+    "to-boolean": "Defined only for the additive zero and multiplicative identity; all other crossed-product elements raise OPERATION_UNDEFINED.",
+    "embed-rational": "Embed Q as real multiples of 1 tensor 1 tensor 1 in the even group block.",
+    "to-rational": "All coordinates except the real scalar slot in the even block must vanish.",
+    "embed-complex": "Embed Q(i) in the scalar and complex-i coefficients of the even block.",
+    "to-complex": "All tensor and odd-group coordinates must vanish; retain the scalar Q(i) coordinate.",
+    "embed-imaginary": "Embed coefficient*i into the complex scalar slot in the even group block.",
+    "to-imaginary": "The element must lie in the selected pure-imaginary scalar axis of Q(i).",
+    "embed-quaternion": "Embed H(Q) on the quaternion factor with octonion identity and even group degree.",
+    "to-quaternion": "Require rational coefficients, octonion identity in the tensor factor, and a zero odd group block.",
+    "embed-octonion": "Embed O(Q) on the octonion factor with quaternion identity, real complex coefficients and even group degree.",
+    "to-octonion": "Require rational coefficients, quaternion identity in the tensor factor and a zero odd group block.",
+    "components": "Return all 64 exact Q(i) coordinates in order: 32 even-group tensor-basis entries followed by 32 odd-group entries.",
+    "to-vector": "Return [real(c0),imag(c0),...,real(c63),imag(c63)] as a rational vector of dimension 128.",
+    "from-vector": "Require a rational vector of dimension 128 and reconstruct the 64 ordered complex coordinates.",
+    "left-multiplication-matrix": "Return the 128 by 128 rational matrix with columns x*b_j for the declared rational-coordinate basis; it is a faithful linear regular representation but need not preserve multiplication because the algebra is nonassociative.",
+    "from-left-multiplication-matrix": "Require a 128 by 128 rational matrix equal to left multiplication by the Dixon element decoded from its first column.",
+}
+OWNER_CONDITIONS["RationalTwistedHahnMalcevNeumannAlgebra"] = {
+    "multiply": "Use the associative Hamilton product over central Q(t), equivalent under X=i*t to X*q=Ad(i)(q)*X with tau(m,n)=1.",
+    "inverse": "Zero is undefined; for nonzero q(t), use quaternion conjugate divided by a nonzero reduced norm in Q(t).",
+    "sigma": "Apply Ad(i) coefficientwise: fix real and i coordinates and negate j and k; central t is fixed.",
+    "group-basis": "Return X^n for the supplied integer n, with X=i*t and valuation n; the finite rational-function representation bounds explicit exponent storage.",
+    "group-valuation": "Return the least Z exponent in the induced formal Laurent expansion at t=0; zero has no valuation.",
+    "leading-coefficient": "Return the coefficient in K=H(Q) at the least group exponent, translating t^m to (-i)^m X^m; zero has no leading coefficient.",
+    "to-boolean": "Defined only for the zero and identity series.",
+    "embed-rational": "Embed Q as a constant central scalar series.",
+    "to-rational": "Require a t-independent real scalar quaternion; all other coordinates and powers must vanish.",
+    "embed-polynomial": "Embed Q[t] into the central rational-function subfield, using t=i^-1*X.",
+    "to-polynomial": "Require a central scalar polynomial with denominator one and no quaternionic or nonconstant group-generator component.",
+    "embed-rational-function": "Embed Q(t) centrally, where t=i^-1*X is the central parameter associated to the twisted group generator.",
+    "to-rational-function": "Require zero i,j,k quaternion coordinates; return the exact central Q(t) function.",
+    "embed-complex": "Embed Q(i) into the constant quaternion subalgebra generated by Hamilton's i.",
+    "to-complex": "Require a constant quaternion on the real/i plane.",
+    "embed-imaginary": "Embed a*i as the constant Hamilton i-axis quaternion.",
+    "to-imaginary": "Require a constant quaternion on the pure i-axis.",
+    "embed-quaternion": "Embed H(Q) as constant coefficients in the twisted series division ring.",
+    "to-quaternion": "Require all four Q(t) coordinates to be constant rational functions.",
+    "embed-octonion": "Partial transfer: the octonion must lie in the selected associative H(Q) subalgebra.",
+    "to-octonion": "Embed a constant H(Q) coefficient into the canonical quaternion subalgebra of O(Q).",
+    "embed-dixon-z2": "Partial transfer through DixonZ2.toQuaternion; only its selected associative H(Q) slice maps because the full algebra is nonassociative.",
+    "to-dixon-z2": "Require a constant H(Q) coefficient and embed it in the selected quaternion slice of DixonZ2(Q); this is not an inverse on the full Dixon algebra.",
+    "norm-squared": "Return the reduced quaternion norm a^2+b^2+c^2+d^2 in central Q(t).",
 }
 
 
@@ -2731,7 +2808,13 @@ def synchronize(data, rows):
         ("PolynomialMap(Q)", "Exact rational polynomial maps", "mathematics.calculus.PolynomialMap",
          ["Positive explicit input and output dimensions", "Ordered scalar polynomial components share an input dimension", "Composition checks the common middle dimension; Jacobian rows are output components"], ["Poly(Q)", "Vec(Q)", "Mat(Q)", "Q", "N"]),
         ("iQ", "Pure imaginary rational scalars", "mathematics.numbers.RationalImaginary",
-         ["Exactly one rational coefficient a, representing a*i", "Closed under additive and rational scalar operations", "Ordinary products and quotients of two values belong to Q, not iQ", "Canonical embeddings retain the i axis of Q(i) and H(Q); Boolean uses 0i and i"], ["Q", "Q(i)", "H(Q)", "Boolean"]),
+         ["Exactly one rational coefficient a, representing a*i", "Closed under additive and rational scalar operations", "Ordinary products and quotients of two values belong to Q, not iQ", "Canonical embeddings retain the i axis of Q(i), H(Q) and O(Q); Boolean uses 0i and i"], ["Q", "Q(i)", "H(Q)", "O(Q)", "Boolean"]),
+        ("O(Q)", "Rational octonion division algebra", "mathematics.numbers.RationalOctonion",
+         ["Eight exact rational coordinates in basis 1,i,j,k,l,il,jl,kl", "Cayley-Dickson multiplication is alternative and nonassociative", "Positive multiplicative norm makes every nonzero rational octonion invertible", "Selected subalgebras Q, Q(i), iQ and H(Q), plus imaginary Vec(Q), Boolean and left-regular Mat(Q) representations"], ["Q", "Q(i)", "iQ", "H(Q)", "Vec(Q)", "Mat(Q)", "Boolean"]),
+        ("DixonZ2(Q)", "Z2-graded Dixon crossed product", "mathematics.numbers.RationalDixonZ2",
+         ["64 exact Q(i) coordinates: 32 tensor-basis coordinates in each C2 block", "Crossed product a+b*u with u^2=1 and u*a=alpha(a)*u", "Alpha fixes the quaternionic octonion subspace and negates its Cayley-Dickson odd half", "Retains nonassociativity and makes no division-ring embedding claim", "128 rational coordinates connect to Vec(Q)", "128 by 128 left multiplication matrices connect to Mat(Q); this regular linear representation is not multiplicative in a nonassociative algebra"], ["Q", "Q(i)", "iQ", "H(Q)", "O(Q)", "Vec(Q)", "Mat(Q)", "Boolean"]),
+        ("HMN(H(Q);Z,sigma,1)", "Twisted Hahn-Mal'cev-Neumann rational division subring", "mathematics.numbers.RationalTwistedHahnSeries",
+         ["K=H(Q), G=Z with its usual order, sigma=Ad(i), and normalized tau=1", "Group generator X satisfies Xq=sigma(q)X and central t=i^-1 X", "Exact representation as H(Q(t)) with quaternion conjugate/norm inverse", "Valuation and leading coefficient agree with the induced formal Laurent expansion", "This rational subring embeds in the full completion but does not represent every well-ordered support", "H(Q) and its Q, Q(i), iQ slices embed as constants", "O(Q) and DixonZ2(Q) connect only through their selected H(Q) subalgebra"], ["Q", "Q[x]", "Q(x)", "Q(i)", "iQ", "H(Q)", "O(Q)", "DixonZ2(Q)", "Boolean"]),
         ("H(Q)", "Rational Hamilton quaternion algebra", "mathematics.numbers.RationalQuaternion",
          ["Four canonical rational coefficients in scalar,i,j,k order", "Hamilton multiplication with i*j=k and j*i=-k", "Rotation actions use standard right-handed coordinates and require a nonzero quaternion"], ["Q", "Q(i)", "Vec(Q)", "Mat(Q)"]),
         ("Exterior(Q)", "Rational coordinate exterior algebras", "mathematics.linear.RationalExterior",
