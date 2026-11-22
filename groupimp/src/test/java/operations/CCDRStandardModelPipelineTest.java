@@ -43,10 +43,18 @@ public class CCDRStandardModelPipelineTest {
         assertTrue(fold.pA30Consistent());
         assertTrue(fold.cl9Consistent());
         assertFalse(fold.isLeftChiral());
+        assertTrue(fold.isRightChiral());
         assertTrue(new CCDRChiralFold(orientation,-1,-orientation,-orientation).isLeftChiral());
         assertTrue(new CCDRChiralFold(-orientation,1,-orientation,-orientation).isLeftChiral());
 
         // Stage 3: Dixon parity, idempotents, regular matrices, and non-associative boundary.
+        RationalDixonZ2 foldedBoundary=bulk5.foldParityClassesToDixonBoundary();
+        assertEquals(foldedBoundary,bulk8.foldParityClassesToDixonBoundary());
+        assertEquals(Collections.singletonList(foldedBoundary.toString()),
+                math.flow(math.twistedLattice,Collections.singletonList(bulk5))
+                        .<RationalDixonZ2>performAlgebraTransfer("parity-fold-to-dixon-boundary").collect());
+        assertEquals(foldedBoundary.oddPart(),fold.projectDixonParity(foldedBoundary));
+
         RationalOctonion l=octonionBasis(4);
         RationalDixonZ2 octonionBoundary=RationalDixonZ2.fromOctonion(l);
         assertEquals(octonionBoundary.negate(),octonionBoundary.gradingInvolution());
@@ -107,10 +115,12 @@ public class CCDRStandardModelPipelineTest {
         RationalCyclotomic.DecimalComplex phase=zeta.evaluate(40);
         assertEquals(Math.sqrt(3)/2,phase.real.doubleValue(),1e-38);
         assertEquals(0.5,phase.imaginary.doubleValue(),1e-38);
+        RationalCyclotomic orientedPhase=fold.orientCyclotomicPhase(zeta);
+        assertTrue(fold.smD8MatchesNu(zeta,new BigDecimal("-0.5"),new BigDecimal("1e-35"),40));
         BigDecimal jarlskog=HighPrecisionAlgebraMetrics.ckmJarlskog(new BigDecimal("0.225"),new BigDecimal("0.041"),new BigDecimal("0.0037"),
-                new BigDecimal("0.9744"),new BigDecimal("0.9992"),new BigDecimal("0.999993"),zeta,30);
-        assertTrue(jarlskog.compareTo(new BigDecimal("0.000016"))>0);
-        assertTrue(jarlskog.compareTo(new BigDecimal("0.000017"))<0);
+                new BigDecimal("0.9744"),new BigDecimal("0.9992"),new BigDecimal("0.999993"),orientedPhase,30);
+        assertTrue(jarlskog.compareTo(new BigDecimal("-0.000017"))>0);
+        assertTrue(jarlskog.compareTo(new BigDecimal("-0.000016"))<0);
         BigDecimal koide=HighPrecisionAlgebraMetrics.koide(new BigDecimal("0.51099895"),new BigDecimal("105.6583755"),new BigDecimal("1776.86"),30);
         assertTrue(koide.subtract(new BigDecimal("0.666666666666666666666666666667")).abs().compareTo(new BigDecimal("0.0001"))<0);
 
@@ -126,6 +136,24 @@ public class CCDRStandardModelPipelineTest {
                         .<SimplicialCollapse,FiniteSet<BigInteger>>performAlgebraUnsafe("SimplicialCollapse.from-absolute-face",face(0,2))
                         .performLeftProjectionOperation("on-absolute-chain",triangleEdge).getCurrentAlgebraName());
         assertEquals(Collections.singletonList(collapse.onAbsoluteChain(triangleEdge).boundary().coordinates().toString()),chainFlow.collect());
+    }
+
+    @Test public void fiveToFourParityProjectionIsSurjectiveAdditiveAndNotMultiplicative(){
+        RationalQuaternion[] qBasis={RationalQuaternion.ONE,RationalQuaternion.I,RationalQuaternion.J,RationalQuaternion.K};
+        for(int coordinate=0;coordinate<128;coordinate++){
+            int parityClass=coordinate/4,component=coordinate%4;long[] exponent=new long[5];
+            for(int axis=0;axis<5;axis++)if((parityClass&(1<<axis))!=0)exponent[axis]=1;
+            RationalTwistedLatticeAlgebra basis=RationalTwistedLatticeAlgebra.basis(5,
+                    new RationalTwistedLatticeAlgebra.Exponent(exponent),qBasis[component]);
+            Rational[] expected=new Rational[128];Arrays.fill(expected,Rational.ZERO);expected[coordinate]=Rational.ONE;
+            assertEquals(new RationalVector(expected),basis.foldParityClassesToDixonBoundary().toVector());
+        }
+        RationalTwistedLatticeAlgebra sourceJ=RationalTwistedLatticeAlgebra.fromQuaternion(5,RationalQuaternion.J),
+                sourceI=RationalTwistedLatticeAlgebra.fromQuaternion(5,RationalQuaternion.I);
+        assertEquals(sourceJ.add(sourceI).foldParityClassesToDixonBoundary(),
+                sourceJ.foldParityClassesToDixonBoundary().add(sourceI.foldParityClassesToDixonBoundary()));
+        assertNotEquals(sourceJ.multiply(sourceI).foldParityClassesToDixonBoundary(),
+                sourceJ.foldParityClassesToDixonBoundary().multiply(sourceI.foldParityClassesToDixonBoundary()));
     }
 
     private static RationalTwistedLatticeAlgebra bulkCascade(int rank,ConcreteMathematics math){

@@ -1,6 +1,7 @@
 package mathematics.numbers;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /** Exact sign bookkeeping for the terminal 5-to-4 fold prediction in Synthesis v3.9. */
 public final class CCDRChiralFold implements Serializable {
@@ -29,8 +30,18 @@ public final class CCDRChiralFold implements Serializable {
     /** CL9 is the three-way sign agreement of the fold, simplex, and CMB prediction. */
     public boolean cl9Consistent(){return smD11Consistent()&&pA30Consistent();}
     public boolean isLeftChiral(){return chiralitySign()>0;}
+    public boolean isRightChiral(){return chiralitySign()<0;}
     /** Selects the corresponding crossed-product group-parity block as a candidate chirality projection. */
     public RationalDixonZ2 projectDixonParity(RationalDixonZ2 value){return isLeftChiral()?value.evenPart():value.oddPart();}
+    /** Orients an exact cyclotomic CP phase by the signed terminal-fold chirality. */
+    public RationalCyclotomic orientCyclotomicPhase(RationalCyclotomic phase){return isLeftChiral()?phase:phase.conjugate();}
+    /** Signed SM-D8 sine proxy from the oriented phase; the model's nu remains an explicit input. */
+    public BigDecimal smD8SignedSine(RationalCyclotomic phase,int precision){return orientCyclotomicPhase(phase).evaluate(precision).imaginary;}
+    /** Checks the stated delta_CP ~ sin(theta_fold) ~ nu relation at caller-selected precision/tolerance. */
+    public boolean smD8MatchesNu(RationalCyclotomic phase,BigDecimal nu,BigDecimal tolerance,int precision){
+        if(tolerance.signum()<0)throw new IllegalArgumentException("SM-D8 tolerance must be nonnegative");
+        return smD8SignedSine(phase,precision).subtract(nu).abs().compareTo(tolerance)<=0;
+    }
     public int epsilon5(){return epsilon5;}
     public int foliationArrow(){return foliationArrow;}
     public int simplexOrientation(){return simplexOrientation;}

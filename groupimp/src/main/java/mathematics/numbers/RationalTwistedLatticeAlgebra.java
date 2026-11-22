@@ -2,6 +2,7 @@ package mathematics.numbers;
 
 import mathematics.core.MathFailure;
 import mathematics.linear.IntegerVector;
+import mathematics.linear.RationalVector;
 import java.io.Serializable;
 import java.util.*;
 
@@ -91,6 +92,29 @@ public final class RationalTwistedLatticeAlgebra implements Serializable {
     public boolean isZero(){return terms.isEmpty();}
     public Exponent valuation(){if(isZero())throw MathFailure.undefined("Zero has no lattice valuation");return terms.firstKey();}
     public RationalQuaternion leadingCoefficient(){if(isZero())throw MathFailure.undefined("Zero has no leading coefficient");return terms.get(terms.firstKey());}
+    /**
+     * Additive finite-quotient projection pi_(5->4) from the first five exponent parities
+     * and H(Q) coefficient coordinates onto the 128 rational coordinates of DixonZ2(Q).
+     * It uses packedIndex=4*parityClass+quaternionComponent in Dixon's
+     * [Re(c0), Im(c0), ..., Re(c63), Im(c63)] rational-vector ordering.
+     * The map is surjective for rank >= 5, but intentionally is not an algebra homomorphism:
+     * an associative bulk algebra cannot map multiplicatively onto a non-associative algebra.
+     * Coordinates beyond the first five do not affect this boundary projection.
+     */
+    public RationalDixonZ2 foldParityClassesToDixonBoundary(){
+        if(rank<5)throw MathFailure.undefined("The Dixon boundary fold requires at least five lattice coordinates");
+        Rational[] coordinates=new Rational[128];Arrays.fill(coordinates,Rational.ZERO);
+        for(Map.Entry<Exponent,RationalQuaternion> term:terms.entrySet()){
+            int parityClass=0;
+            for(int axis=0;axis<5;axis++)if(term.getKey().coordinate(axis).testBit(0))parityClass|=1<<axis;
+            RationalQuaternion q=term.getValue();Rational[] components={q.real,q.i,q.j,q.k};
+            for(int component=0;component<4;component++){
+                int coordinate=parityClass*4+component;
+                coordinates[coordinate]=coordinates[coordinate].add(components[component]);
+            }
+        }
+        return RationalDixonZ2.fromVector(new RationalVector(coordinates));
+    }
     public RationalTwistedLatticeAlgebra add(RationalTwistedLatticeAlgebra b){sameRank(b);TreeMap<Exponent,RationalQuaternion> out=new TreeMap<>(terms);for(Map.Entry<Exponent,RationalQuaternion> e:b.terms.entrySet())put(out,e.getKey(),e.getValue());return new RationalTwistedLatticeAlgebra(rank,cocycle,out);}
     public RationalTwistedLatticeAlgebra negate(){TreeMap<Exponent,RationalQuaternion> out=new TreeMap<>();for(Map.Entry<Exponent,RationalQuaternion> e:terms.entrySet())out.put(e.getKey(),e.getValue().negate());return new RationalTwistedLatticeAlgebra(rank,cocycle,out);}
     public RationalTwistedLatticeAlgebra subtract(RationalTwistedLatticeAlgebra b){return add(b.negate());}

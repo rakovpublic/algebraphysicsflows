@@ -26,6 +26,7 @@ public final class RationalTwistedLatticeAlgebraFamily extends ConcreteAlgebra<R
         unary("leading-coefficient",algebra(),quaternions.algebra(),true,RationalTwistedLatticeAlgebra::leadingCoefficient);
         unary("to-quaternion",algebra(),quaternions.algebra(),true,RationalTwistedLatticeAlgebra::toQuaternion);
         unary("to-boolean",algebra(),truth.algebra(),true,RationalTwistedLatticeAlgebra::toBoolean);
+        if(dixon!=null)unary("parity-fold-to-dixon-boundary",algebra(),dixon.algebra(),true,RationalTwistedLatticeAlgebra::foldParityClassesToDixonBoundary);
         binary("equal",algebra(),algebra(),truth.algebra(),false,RationalTwistedLatticeAlgebra::equals);
         unary("embed-quaternion",quaternions.algebra(),algebra(),false,q -> RationalTwistedLatticeAlgebra.fromQuaternion(defaultRank,q));
         if(integerVectors!=null)unary("group-basis",integerVectors.algebra(),algebra(),true,RationalTwistedLatticeAlgebra::groupBasis);
@@ -59,5 +60,6 @@ public final class RationalTwistedLatticeAlgebraFamily extends ConcreteAlgebra<R
         law("A runtime N by N alternating matrix over F_2 defines tau(g,h)=(-1)^(sum_{i<j} S_ij*g_i*h_j). Its commutator bicharacter is (-1)^(g^T*S*h), and the default rank-three matrix has S_12=1.");
         law("The BSM1 map doubles the first vector coordinate g[0]. It is an algebra endomorphism only when the sign cocycle is trivial on coordinate 0, which is checked at runtime. Odd g[0] support is the residue sector sent into the even subgroup; sigma_g=Ad(i)^(g[1]) uses the second coordinate.");
         law("H(Q) embeds at the identity exponent. Projections to Q, Q(i), iQ, O(Q), DixonZ2(Q), rank-one HMN, and Q(zeta_12) are partial and pass through the constant H(Q) or Q(i) slices; no full algebra embedding is asserted. Boolean conversion is defined only at 0 and 1.");
+        law("For rank N>=5, parity-fold-to-dixon-boundary sums the first-five-coordinate parity classes against the four rational H(Q) coefficients to reach all 128 Q-coordinates of DixonZ2(Q). It is an additive surjection and is deliberately not multiplicative; higher lattice coordinates are forgotten.");
     }
 }

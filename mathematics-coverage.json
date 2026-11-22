@@ -80804,6 +80804,74 @@
       "legacy_operation_interface": "ITransferOperation"
     },
     {
+      "id": "concrete-operation.HMN(H(Q);Z^N,sigma,tau).parity-fold-to-dixon-boundary",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedLatticeAlgebraFamily",
+      "concept": "HMN(H(Q);Z^N,sigma,tau).parity-fold-to-dixon-boundary",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z^N,sigma,tau)",
+      "domain_B": null,
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "HMN(H(Q);Z^N,sigma,tau) -> DixonZ2(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support H(Q)-valued skew group algebra on lexicographically ordered runtime-rank Z^N with an alternating sign 2-cocycle and conditional BSM1 endomorphism; native operation HMN(H(Q);Z^N,sigma,tau).parity-fold-to-dixon-boundary",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "HMN(H(Q);Z^N,sigma,tau).parity-fold-to-dixon-boundary",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "parity-fold-to-dixon-boundary",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
       "id": "concrete-operation.HMN(H(Q);Z^N,sigma,tau).equal",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "RationalTwistedLatticeAlgebraFamily",
@@ -185943,6 +186011,7 @@
         "HMN(H(Q);Z,sigma,1).embed-dixon-z2",
         "HMN(H(Q);Z,sigma,1).to-dixon-z2",
         "HMN(H(Q);Z^N,sigma,tau).embed-dixon-quaternion-slice",
+        "HMN(H(Q);Z^N,sigma,tau).parity-fold-to-dixon-boundary",
         "HMN(H(Q);Z^N,sigma,tau).to-dixon-quaternion-slice"
       ],
       "invariants": [
@@ -186199,6 +186268,7 @@
         "HMN(H(Q);Z^N,sigma,tau).has-dark-matter-residue",
         "HMN(H(Q);Z^N,sigma,tau).leading-coefficient",
         "HMN(H(Q);Z^N,sigma,tau).multiply",
+        "HMN(H(Q);Z^N,sigma,tau).parity-fold-to-dixon-boundary",
         "HMN(H(Q);Z^N,sigma,tau).subtract",
         "HMN(H(Q);Z^N,sigma,tau).to-boolean",
         "HMN(H(Q);Z^N,sigma,tau).to-complex",
