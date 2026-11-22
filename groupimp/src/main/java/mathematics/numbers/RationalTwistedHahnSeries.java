@@ -121,6 +121,18 @@ public final class RationalTwistedHahnSeries implements Serializable {
     public RationalImaginary toImaginary() { return RationalImaginary.fromQuaternion(toQuaternion()); }
     public RationalOctonion toOctonion() { return RationalOctonion.fromQuaternion(toQuaternion()); }
     public RationalDixonZ2 toDixonZ2() { return RationalDixonZ2.fromQuaternion(toQuaternion()); }
+    /** Evaluate the central parameter t at 1 when every coordinate is regular there. */
+    public RationalQuaternion evaluateAt(Rational point) {
+        Rational[] values=new Rational[4]; RationalFunction[] entries=components();
+        for(int n=0;n<4;n++) values[n]=entries[n].evaluate(point);
+        return new RationalQuaternion(values[0],values[1],values[2],values[3]);
+    }
+    /**
+     * The chi_5 -> 1 trigger on the represented rational subring: specialize t=1,
+     * then include H(Q) in the even quaternion slice of DixonZ2(Q). Poles are
+     * outside the map's domain. This is not the valuation/leading-term map.
+     */
+    public RationalDixonZ2 projectChi5ToOneInDixon() { return RationalDixonZ2.fromQuaternion(evaluateAt(Rational.ONE)); }
     public boolean isZero() { return a.isZero() && b.isZero() && c.isZero() && d.isZero(); }
     public boolean isOne() { return equals(ONE_VALUE); }
     public boolean toBoolean() {

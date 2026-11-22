@@ -32,6 +32,10 @@ public final class RationalQuaternionAlgebra extends ConcreteAlgebra<RationalQua
         binary("rotate",algebra(),vectors.algebra(),vectors.algebra(),true,RationalQuaternion::rotate);
         unary("to-rotation-matrix",algebra(),matrices.algebra(),true,RationalQuaternion::toRotationMatrix);
         unary("from-rotation-matrix",matrices.algebra(),algebra(),true,RationalQuaternion::fromRotationMatrix);
+        unaryFlat("su2-adjoint-generators",algebra(),matrices.algebra(),false,
+                ignored -> RationalOctonionDerivations.quaternionAdjointGenerators());
+        unary("u1-complex-phase-generator",rationals.unit(),matrices.algebra(),false,
+                ignored -> RationalOctonionDerivations.complexPhaseGenerator());
         constant("zero",RationalQuaternion.ZERO); constant("one",RationalQuaternion.ONE);
         constant("i",RationalQuaternion.I); constant("j",RationalQuaternion.J); constant("k",RationalQuaternion.K);
         law("i*i=j*j=k*k=i*j*k=-1; multiplication is associative and noncommutative, and every nonzero member is invertible.");

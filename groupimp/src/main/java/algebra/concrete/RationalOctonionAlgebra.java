@@ -34,6 +34,8 @@ public final class RationalOctonionAlgebra extends ConcreteAlgebra<RationalOcton
         unary("embed-quaternion",quaternions.algebra(),algebra(),false,RationalOctonion::fromQuaternion);
         unary("to-quaternion",algebra(),quaternions.algebra(),true,RationalOctonion::toQuaternion);
         unary("left-multiplication-matrix",algebra(),matrices.algebra(),false,RationalOctonion::leftMultiplicationMatrix);
+        unaryFlat("su3-stabilizer-derivations",algebra(),matrices.algebra(),false,
+                ignored -> mathematics.numbers.RationalOctonionDerivations.su3StabilizerCandidates());
         unary("from-left-multiplication-matrix",matrices.algebra(),algebra(),true,RationalOctonion::fromLeftMultiplicationMatrix);
         constant("zero",RationalOctonion.ZERO); constant("one",RationalOctonion.ONE);
         constant("i",RationalOctonion.I); constant("j",RationalOctonion.J); constant("k",RationalOctonion.K);

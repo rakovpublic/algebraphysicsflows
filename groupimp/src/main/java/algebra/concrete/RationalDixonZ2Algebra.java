@@ -15,10 +15,26 @@ public final class RationalDixonZ2Algebra extends ConcreteAlgebra<RationalDixonZ
         closed("add",false,RationalDixonZ2::add);
         closed("subtract",false,RationalDixonZ2::subtract);
         closed("multiply",false,RationalDixonZ2::multiply);
+        binary("commutator",algebra(),algebra(),algebra(),false,RationalDixonZ2::commutator);
         unary("negate",algebra(),algebra(),false,RationalDixonZ2::negate);
         unary("grading-involution",algebra(),algebra(),false,RationalDixonZ2::gradingInvolution);
         unary("even-part",algebra(),algebra(),false,RationalDixonZ2::evenPart);
         unary("odd-part",algebra(),algebra(),false,RationalDixonZ2::oddPart);
+        unary("idempotent",algebra(),truth.algebra(),false,RationalDixonZ2::isIdempotent);
+        constant("group-idempotent-plus",RationalDixonZ2.groupIdempotent(true));
+        constant("group-idempotent-minus",RationalDixonZ2.groupIdempotent(false));
+        constant("witt-element",RationalDixonZ2.wittElement());
+        constant("witt-idempotent-plus",RationalDixonZ2.wittIdempotent(true));
+        constant("witt-idempotent-minus",RationalDixonZ2.wittIdempotent(false));
+        unary("group-idempotent-plus-left-projector",rationals.unit(),matrices.algebra(),false,
+                ignored -> RationalDixonZ2.groupIdempotent(true).leftMultiplicationMatrix());
+        unary("group-idempotent-minus-left-projector",rationals.unit(),matrices.algebra(),false,
+                ignored -> RationalDixonZ2.groupIdempotent(false).leftMultiplicationMatrix());
+        unary("witt-idempotent-plus-left-projector",rationals.unit(),matrices.algebra(),false,
+                ignored -> RationalDixonZ2.wittIdempotent(true).leftMultiplicationMatrix());
+        unary("witt-idempotent-minus-left-projector",rationals.unit(),matrices.algebra(),false,
+                ignored -> RationalDixonZ2.wittIdempotent(false).leftMultiplicationMatrix());
+        unary("u1-complex-phase-generator",rationals.unit(),matrices.algebra(),false,ignored -> RationalDixonZ2.complexPhaseGeneratorMatrix());
         unaryFlat("components",algebra(),complex.algebra(),false,RationalDixonZ2::components);
         unary("to-vector",algebra(),vectors.algebra(),false,RationalDixonZ2::toVector);
         unary("from-vector",vectors.algebra(),algebra(),true,RationalDixonZ2::fromVector);
@@ -45,6 +61,9 @@ public final class RationalDixonZ2Algebra extends ConcreteAlgebra<RationalDixonZ
         law("The C2 action is alpha(q tensor o)=q tensor (o0+o1*i+o2*j+o3*k-o4*l-o5*il-o6*jl-o7*kl); alpha is an involutive automorphism.");
         law("Elements are a+b*u with u^2=1 and u*a=alpha(a)*u; multiplication is (a+b*u)(c+d*u)=(ac+b*alpha(d))+(ad+b*alpha(c))*u.");
         law("The crossed product retains octonion nonassociativity. No associative-division-ring or division-algebra claim is made.");
+        law("The group and Witt idempotents are exact complementary idempotents. They are candidate projectors; primitive/minimal left ideals are not asserted for this nonassociative carrier.");
+        law("Commutators are native bilinear operations. A computed bracket alone does not certify a Lie subalgebra or identify physical gauge generators.");
+        law("The registered U(1)-type phase generator is left multiplication by the central Q(i) unit on Vec(Q)^128; it squares to minus the identity matrix.");
         law("Q, Q(i), iQ, H(Q), O(Q), and Boolean 0/1 have exact coordinate embeddings. Reverse maps are partial coordinate projections.");
         law("There is no canonical order on this noncommutative nonassociative algebra, so order comparisons are intentionally not registered.");
     }

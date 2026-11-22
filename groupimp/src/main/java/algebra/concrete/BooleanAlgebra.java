@@ -14,6 +14,8 @@ import mathematics.numbers.RationalImaginary;
 import mathematics.numbers.RationalOctonion;
 import mathematics.numbers.RationalDixonZ2;
 import mathematics.numbers.RationalTwistedHahnSeries;
+import mathematics.numbers.RationalCyclotomic;
+import mathematics.numbers.RationalTwistedLatticeAlgebra;
 import java.math.BigInteger;
 import java.util.*;
 
@@ -49,6 +51,7 @@ public final class BooleanAlgebra extends ConcreteAlgebra<Boolean> {
                                RationalOctonionAlgebra octonions,
                                RationalDixonZ2Algebra dixonZ2,
                                RationalTwistedHahnMalcevNeumannAlgebra hahnMalcevNeumann,
+                               RationalCyclotomicAlgebra cyclotomics,RationalTwistedLatticeAlgebraFamily twistedLattice,
                                RationalPolynomialRing polynomials,RationalFunctionField functions,
                                RationalTensorAlgebra tensors,RationalMatrixAlgebra matrices,
                                ResidueRing residues,List<PrimeField> primeFields) {
@@ -62,6 +65,9 @@ public final class BooleanAlgebra extends ConcreteAlgebra<Boolean> {
         unary("to-octonion",algebra(),octonions.algebra(),false,value -> value?RationalOctonion.ONE:RationalOctonion.ZERO);
         unary("to-dixon-z2",algebra(),dixonZ2.algebra(),false,RationalDixonZ2::fromBoolean);
         unary("to-hmn",algebra(),hahnMalcevNeumann.algebra(),false,RationalTwistedHahnSeries::fromBoolean);
+        unary("to-cyclotomic",algebra(),cyclotomics.algebra(),false,value -> value?RationalCyclotomic.one(RationalCyclotomicAlgebra.ORDER):RationalCyclotomic.zero(RationalCyclotomicAlgebra.ORDER));
+        unary("to-twisted-lattice",algebra(),twistedLattice.algebra(),false,value -> RationalTwistedLatticeAlgebra.fromQuaternion(
+                RationalTwistedLatticeAlgebraFamily.RANK,value?RationalQuaternion.ONE:RationalQuaternion.ZERO));
         unary("to-polynomial",algebra(),polynomials.algebra(),false,value -> value?Polynomial.ONE:Polynomial.ZERO);
         unary("to-rational-function",algebra(),functions.algebra(),false,value -> value?RationalFunction.ONE:RationalFunction.ZERO);
         unary("to-tensor",algebra(),tensors.algebra(),false,value -> RationalTensor.scalar(value?Rational.ONE:Rational.ZERO));

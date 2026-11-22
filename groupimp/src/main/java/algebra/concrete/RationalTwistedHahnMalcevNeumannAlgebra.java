@@ -25,6 +25,7 @@ public final class RationalTwistedHahnMalcevNeumannAlgebra extends ConcreteAlgeb
         unary("norm-squared",algebra(),functions.algebra(),false,RationalTwistedHahnSeries::normSquared);
         unary("group-valuation",algebra(),integers.algebra(),true,RationalTwistedHahnSeries::groupValuation);
         unary("leading-coefficient",algebra(),quaternions.algebra(),true,RationalTwistedHahnSeries::leadingCoefficient);
+        unary("chi5-to-one-dixon",algebra(),dixon.algebra(),true,RationalTwistedHahnSeries::projectChi5ToOneInDixon);
         unary("to-boolean",algebra(),truth.algebra(),true,RationalTwistedHahnSeries::toBoolean);
         binary("equal",algebra(),algebra(),truth.algebra(),false,RationalTwistedHahnSeries::equals);
 
@@ -54,5 +55,6 @@ public final class RationalTwistedHahnMalcevNeumannAlgebra extends ConcreteAlgeb
         law("A represented value a+b*i+(c+d*i)X has four exact Q(t) coordinates. It embeds into the full formal Hahn-Mal'cev-Neumann division ring, whose arbitrary well-ordered series are not all represented by this rational-function carrier.");
         law("H(Q) embeds as constants; Q, Q(i), iQ and polynomial/rational-function scalars have checked constant projections. O(Q) and DixonZ2(Q) connect only through their selected H(Q) subalgebra; their full nonassociative carriers cannot embed as subrings of an associative division ring.");
         law("Group valuation is the least exponent in the induced formal Laurent expansion; the leading coefficient is returned as an actual H(Q) Algebra item. Zero has no valuation or leading coefficient.");
+        law("chi5-to-one-dixon is the partial specialization t=1 on elements regular there, followed by the H(Q) -> even Dixon inclusion. It is a ring homomorphism on its defined local subring; it is not the valuation/leading-coefficient map.");
     }
 }

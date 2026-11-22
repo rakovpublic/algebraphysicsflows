@@ -99,6 +99,29 @@ public final class RationalDixonZ2 implements Serializable {
     public RationalDixonZ2 add(RationalDixonZ2 b) {
         RationalComplex[] out=new RationalComplex[64]; for(int n=0;n<64;n++) out[n]=coordinate(n).add(b.coordinate(n)); return of(out);
     }
+    /** Scalar multiple over Q; useful for exact idempotent and projector construction. */
+    public RationalDixonZ2 scale(Rational factor) {
+        RationalComplex[] out=new RationalComplex[64];
+        for(int n=0;n<64;n++) out[n]=coordinate(n).multiply(new RationalComplex(factor,Rational.ZERO));
+        return of(out);
+    }
+    public RationalDixonZ2 commutator(RationalDixonZ2 other) { return multiply(other).subtract(other.multiply(this)); }
+    /** Idempotents (1 +/- u)/2 for the crossed-product C2 generator. */
+    public static RationalDixonZ2 groupIdempotent(boolean plus) {
+        return ONE.add(plus?U:U.negate()).scale(Rational.of(1,2));
+    }
+    /** Witt element i_C*l has square one; its two complementary idempotents split the chosen hyperbolic plane. */
+    public static RationalDixonZ2 wittElement() {
+        return scalar(new RationalComplex(Rational.ZERO,Rational.ONE)).multiply(basis(0,4));
+    }
+    public static RationalDixonZ2 wittIdempotent(boolean plus) {
+        RationalDixonZ2 w=wittElement(); return ONE.add(plus?w:w.negate()).scale(Rational.of(1,2));
+    }
+    public boolean isIdempotent() { return multiply(this).equals(this); }
+    /** U(1)-type complex phase action on the full 128-dimensional rational coordinate space. */
+    public static RationalMatrix complexPhaseGeneratorMatrix() {
+        return fromComplex(new RationalComplex(Rational.ZERO,Rational.ONE)).leftMultiplicationMatrix();
+    }
     public RationalDixonZ2 negate() {
         RationalComplex[] out=new RationalComplex[64]; for(int n=0;n<64;n++) out[n]=coordinate(n).negate(); return of(out);
     }

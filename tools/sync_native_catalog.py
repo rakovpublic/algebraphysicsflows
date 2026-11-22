@@ -39,6 +39,8 @@ OWNERS = {
     "RationalOctonionAlgebra": ("O(Q)", "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras"),
     "RationalDixonZ2Algebra": ("DixonZ2(Q)", "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action"),
     "RationalTwistedHahnMalcevNeumannAlgebra": ("HMN(H(Q);Z,sigma,1)", "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1"),
+    "RationalTwistedLatticeAlgebraFamily": ("HMN(H(Q);Z^3,sigma,tau)", "Finite-support H(Q)-valued skew group algebra on lexicographically ordered Z^3 with a sign 2-cocycle and non-surjective BSM1 endomorphism"),
+    "RationalCyclotomicAlgebra": ("Q(zeta_12)", "Exact cyclotomic field arithmetic modulo Phi_12 with selected Q(i) and decimal-evaluation bridges"),
     "RationalQuaternionAlgebra": ("H(Q)", "Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding"),
     "RationalVectorSpace": ("Q^2", "Fixed-dimensional rational vectors; default dimension two"),
     "RationalMatrixAlgebra": ("Mat2(Q)", "Fixed positive-dimensional square rational matrices; default dimension two, with zero/identity Boolean decoding"),
@@ -136,6 +138,8 @@ EXTRA_TESTS = {
     "RationalOctonionAlgebra": "NativeOctonionAlgebraTest",
     "RationalDixonZ2Algebra": "NativeDixonZ2AlgebraTest",
     "RationalTwistedHahnMalcevNeumannAlgebra": "NativeTwistedHahnMalcevNeumannTest",
+    "RationalTwistedLatticeAlgebraFamily": "NativeAdvancedAlgebraExtensionsTest",
+    "RationalCyclotomicAlgebra": "NativeAdvancedAlgebraExtensionsTest",
     "IntegerSetAlgebra": "NativeFlatAndSetTest",
     "RationalPolynomialRing": "NativeDynamicsTest",
     "RationalMultivariatePolynomialAlgebra": "NativeMultivariateCalculusTest",
@@ -1842,10 +1846,10 @@ OWNER_CONDITIONS["RationalMatrixFamily"]["companion"] = "The polynomial has posi
 
 BOOLEAN_TRANSITION_OWNERS = (
     "BooleanAlgebra", "NaturalSemiring", "IntegerRing", "RationalField", "RationalComplexField",
-    "RationalImaginaryAlgebra", "RationalOctonionAlgebra", "RationalDixonZ2Algebra", "RationalTwistedHahnMalcevNeumannAlgebra", "RationalQuaternionAlgebra", "RationalPolynomialRing", "RationalFunctionField", "RationalTensorAlgebra",
+    "RationalImaginaryAlgebra", "RationalOctonionAlgebra", "RationalDixonZ2Algebra", "RationalTwistedHahnMalcevNeumannAlgebra", "RationalTwistedLatticeAlgebraFamily", "RationalCyclotomicAlgebra", "RationalQuaternionAlgebra", "RationalPolynomialRing", "RationalFunctionField", "RationalTensorAlgebra",
     "RationalMatrixAlgebra", "ResidueRing", "PrimeField",
 )
-BOOLEAN_SCALAR_DOMAINS = ("N", "Z", "Q", "Q(i)", "iQ", "H(Q)", "O(Q)", "DixonZ2(Q)", "HMN(H(Q);Z,sigma,1)", "Q[x]", "Q(x)", "Tensor(Q)", "Mat2(Q)", "Z/6Z", "Z/5Z")
+BOOLEAN_SCALAR_DOMAINS = ("N", "Z", "Q", "Q(i)", "iQ", "H(Q)", "O(Q)", "DixonZ2(Q)", "HMN(H(Q);Z,sigma,1)", "HMN(H(Q);Z^3,sigma,tau)", "Q(zeta_12)", "Q[x]", "Q(x)", "Tensor(Q)", "Mat2(Q)", "Z/6Z", "Z/5Z")
 BOOLEAN_DECODER_CONDITION = "Defined exactly for the distinguished values 0 and 1; every other carrier value raises OPERATION_UNDEFINED rather than using truthiness."
 for _owner in BOOLEAN_TRANSITION_OWNERS[1:]:
     OWNER_CONDITIONS.setdefault(_owner, {})["to-boolean"] = BOOLEAN_DECODER_CONDITION
@@ -1858,7 +1862,7 @@ OWNER_CONDITIONS.setdefault("BooleanAlgebra", {}).update({
     "greater-or-equal": "Return the Boolean lattice order b implies a.",
 })
 for _name in ("to-natural", "to-integer", "to-rational", "to-complex", "to-imaginary", "to-quaternion", "to-octonion", "to-dixon-z2", "to-hmn", "to-polynomial",
-              "to-rational-function", "to-tensor", "to-matrix", "to-residue-6", "to-prime-5"):
+              "to-rational-function", "to-tensor", "to-matrix", "to-residue-6", "to-prime-5", "to-cyclotomic", "to-twisted-lattice"):
     OWNER_CONDITIONS.setdefault("BooleanAlgebra", {})[_name] = "Encode false as the carrier's exact zero and true as its exact one; this is a 0/1 encoding, not a claim of ordinary additive-homomorphism preservation."
 OWNER_CONDITIONS["BooleanAlgebra"]["to-imaginary"] = "Encode false as 0*i and true as the designated generator i. The pure-imaginary carrier has no multiplicative unit, so this is a distinguished Boolean encoding rather than a 0/1 field embedding."
 OWNER_CONDITIONS["BooleanAlgebra"]["to-octonion"] = "Encode false and true as the rational octonion zero and multiplicative identity, respectively; reverse decoding accepts only those two values."
@@ -1946,6 +1950,30 @@ OWNER_CONDITIONS["RationalTwistedHahnMalcevNeumannAlgebra"] = {
     "to-dixon-z2": "Require a constant H(Q) coefficient and embed it in the selected quaternion slice of DixonZ2(Q); this is not an inverse on the full Dixon algebra.",
     "norm-squared": "Return the reduced quaternion norm a^2+b^2+c^2+d^2 in central Q(t).",
 }
+OWNER_CONDITIONS["RationalCyclotomicAlgebra"] = {
+    "multiply": "Multiply exactly and reduce modulo the irreducible cyclotomic polynomial Phi_12.",
+    "inverse": "The value is nonzero; compute a polynomial Bezout inverse modulo Phi_12.",
+    "to-rational": "The unique reduced representative is constant.",
+    "to-complex": "The unique reduced representative lies in span_Q(1,zeta_12^3), the selected Q(i) subfield.",
+    "embed-complex": "Embed a+b*i as a+b*zeta_12^3.",
+    "to-boolean": "The value is exactly zero or one.",
+}
+OWNER_CONDITIONS["RationalTwistedLatticeAlgebraFamily"] = {
+    "multiply": "Use (q X^g)(r X^h)=q sigma_g(r) tau(g,h) X^(g+h), with sigma_g=Ad(i)^(g_1) and tau(g,h)=(-1)^(g_1*h_2).",
+    "dark-matter-endomorphism": "Send each support exponent (g_0,g_1,g_2) to (2g_0,g_1,g_2); sigma and tau are invariant under this map, making it an algebra endomorphism with non-surjective image.",
+    "has-dark-matter-residue": "Return true exactly when some support exponent has odd first coordinate.",
+    "to-quaternion": "The finite support is empty or supported only at the identity exponent.",
+    "to-boolean": "Only the identity-supported quaternion zero or one is accepted.",
+}
+OWNER_CONDITIONS["RationalDixonZ2Algebra"].update({
+    "commutator": "Return xy-yx in the declared nonassociative crossed product.",
+    "idempotent": "Check x*x=x exactly; this does not assert primitiveness or a minimal left ideal.",
+    "witt-element": "Return i_C tensor l, whose square is one in the declared model.",
+    "witt-idempotent-plus": "Return (1+i_C*l)/2; verify its idempotence in the native product.",
+    "witt-idempotent-minus": "Return (1-i_C*l)/2; verify its idempotence in the native product.",
+})
+OWNER_CONDITIONS["RationalOctonionAlgebra"]["su3-stabilizer-derivations"] = "Return eight exact, linearly independent inner derivations of O(Q) that annihilate the selected imaginary unit l; this is the rational su(3)-type stabilizer at the octonion-factor level, not a claim that these lift to derivations of the full Dixon crossed product."
+OWNER_CONDITIONS["RationalQuaternionAlgebra"]["su2-adjoint-generators"] = "Return the three exact adjoint commutator matrices for i,j,k on H(Q)."
 
 
 def record(identifier, owner, concept, paths, operation=None):
@@ -2815,6 +2843,10 @@ def synchronize(data, rows):
          ["64 exact Q(i) coordinates: 32 tensor-basis coordinates in each C2 block", "Crossed product a+b*u with u^2=1 and u*a=alpha(a)*u", "Alpha fixes the quaternionic octonion subspace and negates its Cayley-Dickson odd half", "Retains nonassociativity and makes no division-ring embedding claim", "128 rational coordinates connect to Vec(Q)", "128 by 128 left multiplication matrices connect to Mat(Q); this regular linear representation is not multiplicative in a nonassociative algebra"], ["Q", "Q(i)", "iQ", "H(Q)", "O(Q)", "Vec(Q)", "Mat(Q)", "Boolean"]),
         ("HMN(H(Q);Z,sigma,1)", "Twisted Hahn-Mal'cev-Neumann rational division subring", "mathematics.numbers.RationalTwistedHahnSeries",
          ["K=H(Q), G=Z with its usual order, sigma=Ad(i), and normalized tau=1", "Group generator X satisfies Xq=sigma(q)X and central t=i^-1 X", "Exact representation as H(Q(t)) with quaternion conjugate/norm inverse", "Valuation and leading coefficient agree with the induced formal Laurent expansion", "This rational subring embeds in the full completion but does not represent every well-ordered support", "H(Q) and its Q, Q(i), iQ slices embed as constants", "O(Q) and DixonZ2(Q) connect only through their selected H(Q) subalgebra"], ["Q", "Q[x]", "Q(x)", "Q(i)", "iQ", "H(Q)", "O(Q)", "DixonZ2(Q)", "Boolean"]),
+        ("HMN(H(Q);Z^3,sigma,tau)", "Finite-support twisted lattice algebra", "mathematics.numbers.RationalTwistedLatticeAlgebra",
+         ["Finite supports on lexicographically ordered Z^3", "Quaternion coefficient action sigma_g=Ad(i)^(g_1)", "Normalized nontrivial sign 2-cocycle tau(g,h)=(-1)^(g_1*h_2)", "Non-surjective BSM1 group/algebra endomorphism doubles g_0 and maps odd first-coordinate residues into the even subgroup", "H(Q) embeds at the identity exponent; full Hahn completions are not represented"], ["H(Q)", "DixonZ2(Q)", "Boolean"]),
+        ("Q(zeta_12)", "Exact cyclotomic number field", "mathematics.numbers.RationalCyclotomic",
+         ["Exact arithmetic modulo Phi_12(x)=x^4-x^2+1", "Extended-Euclid inverses in Q[x]/(Phi_12)", "Selected Q(i) subfield via i=zeta_12^3, with partial projections", "BigDecimal approximation of zeta powers at requested precision", "Koide ratio and CKM Jarlskog evaluators accept decimal inputs and a cyclotomic phase"], ["Q", "Q(i)", "Boolean", "H(Q)", "O(Q)", "DixonZ2(Q)", "HMN(H(Q);Z,sigma,1)"]),
         ("H(Q)", "Rational Hamilton quaternion algebra", "mathematics.numbers.RationalQuaternion",
          ["Four canonical rational coefficients in scalar,i,j,k order", "Hamilton multiplication with i*j=k and j*i=-k", "Rotation actions use standard right-handed coordinates and require a nonzero quaternion"], ["Q", "Q(i)", "Vec(Q)", "Mat(Q)"]),
         ("Exterior(Q)", "Rational coordinate exterior algebras", "mathematics.linear.RationalExterior",
