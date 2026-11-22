@@ -27502,6 +27502,68 @@
       "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
     },
     {
+      "id": "concrete-algebra.RationalCyclotomicAlgebra",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalCyclotomicAlgebra",
+      "concept": "RationalCyclotomicAlgebra",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "Q(zeta_12)",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact cyclotomic field arithmetic modulo Phi_12 with selected Q(i) and decimal-evaluation bridges",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
       "id": "concrete-algebra.RationalDixonZ2Algebra",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "RationalDixonZ2Algebra",
@@ -28458,6 +28520,68 @@
       "provenance": {
         "definition_source": "docs/CONCRETE_ALGEBRAS.md",
         "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION"
+    },
+    {
+      "id": "concrete-algebra.RationalTwistedLatticeAlgebraFamily",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedLatticeAlgebraFamily",
+      "concept": "RationalTwistedLatticeAlgebraFamily",
+      "specification_section": 0,
+      "record_kind": "DOMAIN_OR_STRUCTURE",
+      "domain_A": null,
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z^3,sigma,tau)",
+      "operation_signature": null,
+      "arity": null,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support H(Q)-valued skew group algebra on lexicographically ordered Z^3 with a sign 2-cocycle and non-surjective BSM1 endomorphism",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "Original Algebra with native operations; ConcreteMathematics installs registrations in the existing MathTool.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
         "implemented_by": "Codex",
         "generated_by_model": "not recorded",
         "reviewed_by": null,
@@ -31879,6 +32003,140 @@
       "runtime_operation_id": "Boolean.to-hmn",
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "to-hmn",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Boolean.to-cyclotomic",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "BooleanAlgebra",
+      "concept": "Boolean.to-cyclotomic",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Boolean",
+      "domain_B": null,
+      "domain_C": "Q(zeta_12)",
+      "operation_signature": "Boolean -> Q(zeta_12)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-cyclotomic",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Encode false as the carrier's exact zero and true as its exact one; this is a 0/1 encoding, not a claim of ordinary additive-homomorphism preservation."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Boolean.to-cyclotomic",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-cyclotomic",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Boolean.to-twisted-lattice",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "BooleanAlgebra",
+      "concept": "Boolean.to-twisted-lattice",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Boolean",
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z^3,sigma,tau)",
+      "operation_signature": "Boolean -> HMN(H(Q);Z^3,sigma,tau)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Boolean truth values, lattice operations, and exact 0/1 scalar encodings; native operation Boolean.to-twisted-lattice",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Encode false as the carrier's exact zero and true as its exact one; this is a 0/1 encoding, not a claim of ordinary additive-homomorphism preservation."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Boolean.to-twisted-lattice",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-twisted-lattice",
       "legacy_operation_interface": "ITransferOperation"
     },
     {
@@ -38539,6 +38797,76 @@
       "legacy_operation_interface": "ITransferOperation"
     },
     {
+      "id": "concrete-operation.O(Q).su3-stabilizer-derivations",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalOctonionAlgebra",
+      "concept": "O(Q).su3-stabilizer-derivations",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "O(Q)",
+      "domain_B": null,
+      "domain_C": "Mat(Q)",
+      "operation_signature": "O(Q) -> List(Mat(Q))",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Rational Cayley division algebra with exact nonassociative product, norm, inverse and canonical subalgebras; native operation O(Q).su3-stabilizer-derivations",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return eight exact, linearly independent inner derivations of O(Q) that annihilate the selected imaginary unit l; this is the rational su(3)-type stabilizer at the octonion-factor level, not a claim that these lift to derivations of the full Dixon crossed product.",
+        "Finite ordered wrapped results; duplicates and empty lists are retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeOctonionAlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalOctonionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "O(Q).su3-stabilizer-derivations",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "su3-stabilizer-derivations",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
       "id": "concrete-operation.O(Q).from-left-multiplication-matrix",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "RationalOctonionAlgebra",
@@ -39425,6 +39753,75 @@
       "legacy_operation_interface": "IOperation"
     },
     {
+      "id": "concrete-operation.DixonZ2(Q).commutator",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).commutator",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "DixonZ2(Q)",
+      "domain_B": "DixonZ2(Q)",
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "DixonZ2(Q) x DixonZ2(Q) -> DixonZ2(Q)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).commutator",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return xy-yx in the declared nonassociative crossed product."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).commutator",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "commutator",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
       "id": "concrete-operation.DixonZ2(Q).negate",
       "mathematical_area": "Concrete MathTool algebras",
       "subfield": "RationalDixonZ2Algebra",
@@ -39698,6 +40095,758 @@
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "odd-part",
       "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).idempotent",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).idempotent",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "DixonZ2(Q)",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "DixonZ2(Q) -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).idempotent",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Check x*x=x exactly; this does not assert primitiveness or a minimal left ideal."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).idempotent",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "idempotent",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).group-idempotent-plus",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).group-idempotent-plus",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "Unit -> DixonZ2(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).group-idempotent-plus",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).group-idempotent-plus",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "DixonZ2(Q).group-idempotent-plus",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).group-idempotent-minus",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).group-idempotent-minus",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "Unit -> DixonZ2(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).group-idempotent-minus",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).group-idempotent-minus",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "DixonZ2(Q).group-idempotent-minus",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).witt-element",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).witt-element",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "Unit -> DixonZ2(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).witt-element",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return i_C tensor l, whose square is one in the declared model."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).witt-element",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "DixonZ2(Q).witt-element",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).witt-idempotent-plus",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).witt-idempotent-plus",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "Unit -> DixonZ2(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).witt-idempotent-plus",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return (1+i_C*l)/2; verify its idempotence in the native product."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).witt-idempotent-plus",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "DixonZ2(Q).witt-idempotent-plus",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).witt-idempotent-minus",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).witt-idempotent-minus",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "Unit -> DixonZ2(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).witt-idempotent-minus",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return (1-i_C*l)/2; verify its idempotence in the native product."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).witt-idempotent-minus",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "DixonZ2(Q).witt-idempotent-minus",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).group-idempotent-plus-left-projector",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).group-idempotent-plus-left-projector",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "Mat(Q)",
+      "operation_signature": "Unit -> Mat(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).group-idempotent-plus-left-projector",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).group-idempotent-plus-left-projector",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "DixonZ2(Q).group-idempotent-plus-left-projector",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).group-idempotent-minus-left-projector",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).group-idempotent-minus-left-projector",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "Mat(Q)",
+      "operation_signature": "Unit -> Mat(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).group-idempotent-minus-left-projector",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).group-idempotent-minus-left-projector",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "DixonZ2(Q).group-idempotent-minus-left-projector",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).witt-idempotent-plus-left-projector",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).witt-idempotent-plus-left-projector",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "Mat(Q)",
+      "operation_signature": "Unit -> Mat(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).witt-idempotent-plus-left-projector",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).witt-idempotent-plus-left-projector",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "DixonZ2(Q).witt-idempotent-plus-left-projector",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).witt-idempotent-minus-left-projector",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).witt-idempotent-minus-left-projector",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "Mat(Q)",
+      "operation_signature": "Unit -> Mat(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).witt-idempotent-minus-left-projector",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).witt-idempotent-minus-left-projector",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "DixonZ2(Q).witt-idempotent-minus-left-projector",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.DixonZ2(Q).u1-complex-phase-generator",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalDixonZ2Algebra",
+      "concept": "DixonZ2(Q).u1-complex-phase-generator",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "Mat(Q)",
+      "operation_signature": "Unit -> Mat(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact 64-coordinate crossed product (Q(i) tensor H(Q) tensor O(Q)) semidirect C2 with the canonical octonion grading action; native operation DixonZ2(Q).u1-complex-phase-generator",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeDixonZ2AlgebraTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalDixonZ2Algebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "DixonZ2(Q).u1-complex-phase-generator",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "DixonZ2(Q).u1-complex-phase-generator",
+      "legacy_operation_interface": "ITransferOperation"
     },
     {
       "id": "concrete-operation.DixonZ2(Q).components",
@@ -42032,6 +43181,74 @@
       "runtime_operation_id": "HMN(H(Q);Z,sigma,1).leading-coefficient",
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "leading-coefficient",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z,sigma,1).chi5-to-one-dixon",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedHahnMalcevNeumannAlgebra",
+      "concept": "HMN(H(Q);Z,sigma,1).chi5-to-one-dixon",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z,sigma,1)",
+      "domain_B": null,
+      "domain_C": "DixonZ2(Q)",
+      "operation_signature": "HMN(H(Q);Z,sigma,1) -> DixonZ2(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact H(Q)(t) rational-function division subring embedded in the twisted Hahn-Mal'cev-Neumann completion with sigma=Ad(i), G=Z and tau=1; native operation HMN(H(Q);Z,sigma,1).chi5-to-one-dixon",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeTwistedHahnMalcevNeumannTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedHahnMalcevNeumannAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "HMN(H(Q);Z,sigma,1).chi5-to-one-dixon",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "chi5-to-one-dixon",
       "legacy_operation_interface": "ITransferOperation"
     },
     {
@@ -57069,6 +58286,150 @@
       "runtime_operation_id": "H(Q).from-rotation-matrix",
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "H(Q).from-rotation-matrix",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).su2-adjoint-generators",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).su2-adjoint-generators",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "H(Q)",
+      "domain_B": null,
+      "domain_C": "Mat(Q)",
+      "operation_signature": "H(Q) -> List(Mat(Q))",
+      "arity": 1,
+      "scalar_or_flat": "LIST",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).su2-adjoint-generators",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return the three exact adjoint commutator matrices for i,j,k on H(Q).",
+        "Finite ordered wrapped results; duplicates and empty lists are retained.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferFlatOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/flat/TransferFlatOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "H(Q).su2-adjoint-generators",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "su2-adjoint-generators",
+      "legacy_operation_interface": "ITransferFlatOperation"
+    },
+    {
+      "id": "concrete-operation.H(Q).u1-complex-phase-generator",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalQuaternionAlgebra",
+      "concept": "H(Q).u1-complex-phase-generator",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "Mat(Q)",
+      "operation_signature": "Unit -> Mat(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Hamilton's noncommutative division algebra with four rational coordinates, exact rational three-dimensional rotations, and exact 0/1 Boolean decoding; native operation H(Q).u1-complex-phase-generator",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "All four Hamilton coefficients are exact rationals. Every nonzero member has positive squared norm and an inverse; noncommutative multiplication order is retained."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeQuaternionTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits.",
+        "This is the rational Hamilton division algebra, not every real quaternion. Rotation recovery returns a projective representative, which need not have unit norm; no irrational normalization, Euler angles or approximate matrix fitting is provided."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html",
+        "https://docs.sympy.org/latest/modules/algebras.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalQuaternionAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "H(Q).u1-complex-phase-generator",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "H(Q).u1-complex-phase-generator",
       "legacy_operation_interface": "ITransferOperation"
     },
     {
@@ -77864,6 +79225,1990 @@
       "runtime_operation_id": "FiniteCocone.opposite-cone",
       "runtime_catalog": "ConcreteMathematics",
       "legacy_operation_name": "FiniteCocone.opposite-cone",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Q(zeta_12).add",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalCyclotomicAlgebra",
+      "concept": "Q(zeta_12).add",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(zeta_12)",
+      "domain_B": "Q(zeta_12)",
+      "domain_C": "Q(zeta_12)",
+      "operation_signature": "Q(zeta_12) x Q(zeta_12) -> Q(zeta_12)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact cyclotomic field arithmetic modulo Phi_12 with selected Q(i) and decimal-evaluation bridges; native operation Q(zeta_12).add",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Q(zeta_12).add",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "add",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.Q(zeta_12).subtract",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalCyclotomicAlgebra",
+      "concept": "Q(zeta_12).subtract",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(zeta_12)",
+      "domain_B": "Q(zeta_12)",
+      "domain_C": "Q(zeta_12)",
+      "operation_signature": "Q(zeta_12) x Q(zeta_12) -> Q(zeta_12)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact cyclotomic field arithmetic modulo Phi_12 with selected Q(i) and decimal-evaluation bridges; native operation Q(zeta_12).subtract",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Q(zeta_12).subtract",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "subtract",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.Q(zeta_12).multiply",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalCyclotomicAlgebra",
+      "concept": "Q(zeta_12).multiply",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(zeta_12)",
+      "domain_B": "Q(zeta_12)",
+      "domain_C": "Q(zeta_12)",
+      "operation_signature": "Q(zeta_12) x Q(zeta_12) -> Q(zeta_12)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact cyclotomic field arithmetic modulo Phi_12 with selected Q(i) and decimal-evaluation bridges; native operation Q(zeta_12).multiply",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Multiply exactly and reduce modulo the irreducible cyclotomic polynomial Phi_12."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Q(zeta_12).multiply",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "multiply",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.Q(zeta_12).divide",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalCyclotomicAlgebra",
+      "concept": "Q(zeta_12).divide",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(zeta_12)",
+      "domain_B": "Q(zeta_12)",
+      "domain_C": "Q(zeta_12)",
+      "operation_signature": "Q(zeta_12) x Q(zeta_12) -> Q(zeta_12)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact cyclotomic field arithmetic modulo Phi_12 with selected Q(i) and decimal-evaluation bridges; native operation Q(zeta_12).divide",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The divisor must be nonzero."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Q(zeta_12).divide",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "divide",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.Q(zeta_12).negate",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalCyclotomicAlgebra",
+      "concept": "Q(zeta_12).negate",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(zeta_12)",
+      "domain_B": null,
+      "domain_C": "Q(zeta_12)",
+      "operation_signature": "Q(zeta_12) -> Q(zeta_12)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact cyclotomic field arithmetic modulo Phi_12 with selected Q(i) and decimal-evaluation bridges; native operation Q(zeta_12).negate",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Q(zeta_12).negate",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "negate",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.Q(zeta_12).inverse",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalCyclotomicAlgebra",
+      "concept": "Q(zeta_12).inverse",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(zeta_12)",
+      "domain_B": null,
+      "domain_C": "Q(zeta_12)",
+      "operation_signature": "Q(zeta_12) -> Q(zeta_12)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact cyclotomic field arithmetic modulo Phi_12 with selected Q(i) and decimal-evaluation bridges; native operation Q(zeta_12).inverse",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The value is nonzero; compute a polynomial Bezout inverse modulo Phi_12."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Q(zeta_12).inverse",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "inverse",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.Q(zeta_12).to-rational",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalCyclotomicAlgebra",
+      "concept": "Q(zeta_12).to-rational",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(zeta_12)",
+      "domain_B": null,
+      "domain_C": "Q",
+      "operation_signature": "Q(zeta_12) -> Q",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact cyclotomic field arithmetic modulo Phi_12 with selected Q(i) and decimal-evaluation bridges; native operation Q(zeta_12).to-rational",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The unique reduced representative is constant."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Q(zeta_12).to-rational",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-rational",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Q(zeta_12).to-complex",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalCyclotomicAlgebra",
+      "concept": "Q(zeta_12).to-complex",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(zeta_12)",
+      "domain_B": null,
+      "domain_C": "Q(i)",
+      "operation_signature": "Q(zeta_12) -> Q(i)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact cyclotomic field arithmetic modulo Phi_12 with selected Q(i) and decimal-evaluation bridges; native operation Q(zeta_12).to-complex",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The unique reduced representative lies in span_Q(1,zeta_12^3), the selected Q(i) subfield."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Q(zeta_12).to-complex",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-complex",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Q(zeta_12).to-boolean",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalCyclotomicAlgebra",
+      "concept": "Q(zeta_12).to-boolean",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(zeta_12)",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "Q(zeta_12) -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact cyclotomic field arithmetic modulo Phi_12 with selected Q(i) and decimal-evaluation bridges; native operation Q(zeta_12).to-boolean",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The value is exactly zero or one."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "Q(zeta_12).to-boolean",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-boolean",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Q(zeta_12).equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalCyclotomicAlgebra",
+      "concept": "Q(zeta_12).equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(zeta_12)",
+      "domain_B": "Q(zeta_12)",
+      "domain_C": "Boolean",
+      "operation_signature": "Q(zeta_12) x Q(zeta_12) -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact cyclotomic field arithmetic modulo Phi_12 with selected Q(i) and decimal-evaluation bridges; native operation Q(zeta_12).equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Q(zeta_12).equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.Q(zeta_12).embed-rational",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalCyclotomicAlgebra",
+      "concept": "Q(zeta_12).embed-rational",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q",
+      "domain_B": null,
+      "domain_C": "Q(zeta_12)",
+      "operation_signature": "Q -> Q(zeta_12)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact cyclotomic field arithmetic modulo Phi_12 with selected Q(i) and decimal-evaluation bridges; native operation Q(zeta_12).embed-rational",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Q(zeta_12).embed-rational",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "Q(zeta_12).embed-rational",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Q(zeta_12).embed-complex",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalCyclotomicAlgebra",
+      "concept": "Q(zeta_12).embed-complex",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q(i)",
+      "domain_B": null,
+      "domain_C": "Q(zeta_12)",
+      "operation_signature": "Q(i) -> Q(zeta_12)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact cyclotomic field arithmetic modulo Phi_12 with selected Q(i) and decimal-evaluation bridges; native operation Q(zeta_12).embed-complex",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Embed a+b*i as a+b*zeta_12^3."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Q(zeta_12).embed-complex",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "Q(zeta_12).embed-complex",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Q(zeta_12).zero",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalCyclotomicAlgebra",
+      "concept": "Q(zeta_12).zero",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "Q(zeta_12)",
+      "operation_signature": "Unit -> Q(zeta_12)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact cyclotomic field arithmetic modulo Phi_12 with selected Q(i) and decimal-evaluation bridges; native operation Q(zeta_12).zero",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Q(zeta_12).zero",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "Q(zeta_12).zero",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Q(zeta_12).one",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalCyclotomicAlgebra",
+      "concept": "Q(zeta_12).one",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "Q(zeta_12)",
+      "operation_signature": "Unit -> Q(zeta_12)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact cyclotomic field arithmetic modulo Phi_12 with selected Q(i) and decimal-evaluation bridges; native operation Q(zeta_12).one",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Q(zeta_12).one",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "Q(zeta_12).one",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.Q(zeta_12).zeta",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalCyclotomicAlgebra",
+      "concept": "Q(zeta_12).zeta",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "Q(zeta_12)",
+      "operation_signature": "Unit -> Q(zeta_12)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Exact cyclotomic field arithmetic modulo Phi_12 with selected Q(i) and decimal-evaluation bridges; native operation Q(zeta_12).zeta",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalCyclotomicAlgebra.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "Q(zeta_12).zeta",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "Q(zeta_12).zeta",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z^3,sigma,tau).add",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedLatticeAlgebraFamily",
+      "concept": "HMN(H(Q);Z^3,sigma,tau).add",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z^3,sigma,tau)",
+      "domain_B": "HMN(H(Q);Z^3,sigma,tau)",
+      "domain_C": "HMN(H(Q);Z^3,sigma,tau)",
+      "operation_signature": "HMN(H(Q);Z^3,sigma,tau) x HMN(H(Q);Z^3,sigma,tau) -> HMN(H(Q);Z^3,sigma,tau)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support H(Q)-valued skew group algebra on lexicographically ordered Z^3 with a sign 2-cocycle and non-surjective BSM1 endomorphism; native operation HMN(H(Q);Z^3,sigma,tau).add",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z^3,sigma,tau).add",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "add",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z^3,sigma,tau).subtract",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedLatticeAlgebraFamily",
+      "concept": "HMN(H(Q);Z^3,sigma,tau).subtract",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z^3,sigma,tau)",
+      "domain_B": "HMN(H(Q);Z^3,sigma,tau)",
+      "domain_C": "HMN(H(Q);Z^3,sigma,tau)",
+      "operation_signature": "HMN(H(Q);Z^3,sigma,tau) x HMN(H(Q);Z^3,sigma,tau) -> HMN(H(Q);Z^3,sigma,tau)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support H(Q)-valued skew group algebra on lexicographically ordered Z^3 with a sign 2-cocycle and non-surjective BSM1 endomorphism; native operation HMN(H(Q);Z^3,sigma,tau).subtract",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z^3,sigma,tau).subtract",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "subtract",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z^3,sigma,tau).multiply",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedLatticeAlgebraFamily",
+      "concept": "HMN(H(Q);Z^3,sigma,tau).multiply",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z^3,sigma,tau)",
+      "domain_B": "HMN(H(Q);Z^3,sigma,tau)",
+      "domain_C": "HMN(H(Q);Z^3,sigma,tau)",
+      "operation_signature": "HMN(H(Q);Z^3,sigma,tau) x HMN(H(Q);Z^3,sigma,tau) -> HMN(H(Q);Z^3,sigma,tau)",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support H(Q)-valued skew group algebra on lexicographically ordered Z^3 with a sign 2-cocycle and non-surjective BSM1 endomorphism; native operation HMN(H(Q);Z^3,sigma,tau).multiply",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Use (q X^g)(r X^h)=q sigma_g(r) tau(g,h) X^(g+h), with sigma_g=Ad(i)^(g_1) and tau(g,h)=(-1)^(g_1*h_2)."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "groupimp/src/main/java/operations/simple/ClosedOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z^3,sigma,tau).multiply",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "multiply",
+      "legacy_operation_interface": "IOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z^3,sigma,tau).dark-matter-endomorphism",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedLatticeAlgebraFamily",
+      "concept": "HMN(H(Q);Z^3,sigma,tau).dark-matter-endomorphism",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z^3,sigma,tau)",
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z^3,sigma,tau)",
+      "operation_signature": "HMN(H(Q);Z^3,sigma,tau) -> HMN(H(Q);Z^3,sigma,tau)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support H(Q)-valued skew group algebra on lexicographically ordered Z^3 with a sign 2-cocycle and non-surjective BSM1 endomorphism; native operation HMN(H(Q);Z^3,sigma,tau).dark-matter-endomorphism",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Send each support exponent (g_0,g_1,g_2) to (2g_0,g_1,g_2); sigma and tau are invariant under this map, making it an algebra endomorphism with non-surjective image."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "IOneOperandOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "groupimp/src/main/java/operations/simple/OneOperandOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z^3,sigma,tau).dark-matter-endomorphism",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "dark-matter-endomorphism",
+      "legacy_operation_interface": "IOneOperandOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z^3,sigma,tau).has-dark-matter-residue",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedLatticeAlgebraFamily",
+      "concept": "HMN(H(Q);Z^3,sigma,tau).has-dark-matter-residue",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z^3,sigma,tau)",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "HMN(H(Q);Z^3,sigma,tau) -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support H(Q)-valued skew group algebra on lexicographically ordered Z^3 with a sign 2-cocycle and non-surjective BSM1 endomorphism; native operation HMN(H(Q);Z^3,sigma,tau).has-dark-matter-residue",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Return true exactly when some support exponent has odd first coordinate."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z^3,sigma,tau).has-dark-matter-residue",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "has-dark-matter-residue",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z^3,sigma,tau).leading-coefficient",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedLatticeAlgebraFamily",
+      "concept": "HMN(H(Q);Z^3,sigma,tau).leading-coefficient",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z^3,sigma,tau)",
+      "domain_B": null,
+      "domain_C": "H(Q)",
+      "operation_signature": "HMN(H(Q);Z^3,sigma,tau) -> H(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support H(Q)-valued skew group algebra on lexicographically ordered Z^3 with a sign 2-cocycle and non-surjective BSM1 endomorphism; native operation HMN(H(Q);Z^3,sigma,tau).leading-coefficient",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "HMN(H(Q);Z^3,sigma,tau).leading-coefficient",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "leading-coefficient",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z^3,sigma,tau).to-quaternion",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedLatticeAlgebraFamily",
+      "concept": "HMN(H(Q);Z^3,sigma,tau).to-quaternion",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z^3,sigma,tau)",
+      "domain_B": null,
+      "domain_C": "H(Q)",
+      "operation_signature": "HMN(H(Q);Z^3,sigma,tau) -> H(Q)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support H(Q)-valued skew group algebra on lexicographically ordered Z^3 with a sign 2-cocycle and non-surjective BSM1 endomorphism; native operation HMN(H(Q);Z^3,sigma,tau).to-quaternion",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "The finite support is empty or supported only at the identity exponent."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "HMN(H(Q);Z^3,sigma,tau).to-quaternion",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-quaternion",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z^3,sigma,tau).to-boolean",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedLatticeAlgebraFamily",
+      "concept": "HMN(H(Q);Z^3,sigma,tau).to-boolean",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z^3,sigma,tau)",
+      "domain_B": null,
+      "domain_C": "Boolean",
+      "operation_signature": "HMN(H(Q);Z^3,sigma,tau) -> Boolean",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support H(Q)-valued skew group algebra on lexicographically ordered Z^3 with a sign 2-cocycle and non-surjective BSM1 endomorphism; native operation HMN(H(Q);Z^3,sigma,tau).to-boolean",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs.",
+        "Only the identity-supported quaternion zero or one is accepted."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "PARTIAL",
+      "runtime_operation_id": "HMN(H(Q);Z^3,sigma,tau).to-boolean",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "to-boolean",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z^3,sigma,tau).equal",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedLatticeAlgebraFamily",
+      "concept": "HMN(H(Q);Z^3,sigma,tau).equal",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "HMN(H(Q);Z^3,sigma,tau)",
+      "domain_B": "HMN(H(Q);Z^3,sigma,tau)",
+      "domain_C": "Boolean",
+      "operation_signature": "HMN(H(Q);Z^3,sigma,tau) x HMN(H(Q);Z^3,sigma,tau) -> Boolean",
+      "arity": 2,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support H(Q)-valued skew group algebra on lexicographically ordered Z^3 with a sign 2-cocycle and non-surjective BSM1 endomorphism; native operation HMN(H(Q);Z^3,sigma,tau).equal",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ICustomResultOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "groupimp/src/main/java/operations/simple/CustomResultOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z^3,sigma,tau).equal",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "equal",
+      "legacy_operation_interface": "ICustomResultOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z^3,sigma,tau).embed-quaternion",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedLatticeAlgebraFamily",
+      "concept": "HMN(H(Q);Z^3,sigma,tau).embed-quaternion",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "H(Q)",
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z^3,sigma,tau)",
+      "operation_signature": "H(Q) -> HMN(H(Q);Z^3,sigma,tau)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support H(Q)-valued skew group algebra on lexicographically ordered Z^3 with a sign 2-cocycle and non-surjective BSM1 endomorphism; native operation HMN(H(Q);Z^3,sigma,tau).embed-quaternion",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z^3,sigma,tau).embed-quaternion",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HMN(H(Q);Z^3,sigma,tau).embed-quaternion",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z^3,sigma,tau).basis-e1",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedLatticeAlgebraFamily",
+      "concept": "HMN(H(Q);Z^3,sigma,tau).basis-e1",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q",
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z^3,sigma,tau)",
+      "operation_signature": "Q -> HMN(H(Q);Z^3,sigma,tau)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support H(Q)-valued skew group algebra on lexicographically ordered Z^3 with a sign 2-cocycle and non-surjective BSM1 endomorphism; native operation HMN(H(Q);Z^3,sigma,tau).basis-e1",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z^3,sigma,tau).basis-e1",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HMN(H(Q);Z^3,sigma,tau).basis-e1",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z^3,sigma,tau).basis-e2",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedLatticeAlgebraFamily",
+      "concept": "HMN(H(Q);Z^3,sigma,tau).basis-e2",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q",
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z^3,sigma,tau)",
+      "operation_signature": "Q -> HMN(H(Q);Z^3,sigma,tau)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support H(Q)-valued skew group algebra on lexicographically ordered Z^3 with a sign 2-cocycle and non-surjective BSM1 endomorphism; native operation HMN(H(Q);Z^3,sigma,tau).basis-e2",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z^3,sigma,tau).basis-e2",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HMN(H(Q);Z^3,sigma,tau).basis-e2",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z^3,sigma,tau).basis-e3",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedLatticeAlgebraFamily",
+      "concept": "HMN(H(Q);Z^3,sigma,tau).basis-e3",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Q",
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z^3,sigma,tau)",
+      "operation_signature": "Q -> HMN(H(Q);Z^3,sigma,tau)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support H(Q)-valued skew group algebra on lexicographically ordered Z^3 with a sign 2-cocycle and non-surjective BSM1 endomorphism; native operation HMN(H(Q);Z^3,sigma,tau).basis-e3",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z^3,sigma,tau).basis-e3",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HMN(H(Q);Z^3,sigma,tau).basis-e3",
+      "legacy_operation_interface": "ITransferOperation"
+    },
+    {
+      "id": "concrete-operation.HMN(H(Q);Z^3,sigma,tau).zero",
+      "mathematical_area": "Concrete MathTool algebras",
+      "subfield": "RationalTwistedLatticeAlgebraFamily",
+      "concept": "HMN(H(Q);Z^3,sigma,tau).zero",
+      "specification_section": 0,
+      "record_kind": "OPERATION",
+      "domain_A": "Unit",
+      "domain_B": null,
+      "domain_C": "HMN(H(Q);Z^3,sigma,tau)",
+      "operation_signature": "Unit -> HMN(H(Q);Z^3,sigma,tau)",
+      "arity": 1,
+      "scalar_or_flat": "SCALAR",
+      "representation_scope": "Finite-support H(Q)-valued skew group algebra on lexicographically ordered Z^3 with a sign 2-cocycle and non-surjective BSM1 endomorphism; native operation HMN(H(Q);Z^3,sigma,tau).zero",
+      "required_invariants": [
+        "Operands and results satisfy membership in the actual Algebra instances.",
+        "Dimension, modulus, normalization and canonical representation are enforced where applicable.",
+        "Law descriptions and passing tests are not proofs."
+      ],
+      "representation_status": "DIRECTLY_SUPPORTED",
+      "framework_mapping": "ITransferOperation installed in the original Algebra registry; invoked by IAlgebraItem and AlgebraFlow.",
+      "implementation_status": "IMPLEMENTED",
+      "implementation_paths": [
+        "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "groupimp/src/main/java/operations/simple/TransferOperation.java",
+        "groupimp/src/main/java/algebra/concrete/BooleanAlgebra.java"
+      ],
+      "tests": [
+        "groupimp/src/test/java/mathematics/ConcreteAlgebrasTest.java",
+        "groupimp/src/test/java/operations/NativeBooleanTransitionTest.java",
+        "groupimp/src/test/java/operations/NativeAdvancedAlgebraExtensionsTest.java"
+      ],
+      "machine_tested": true,
+      "human_review_status": "UNREVIEWED",
+      "reviewer": null,
+      "review_date": null,
+      "review_notes": "No specialist review recorded; scoped implementation has empirical tests.",
+      "formal_verification_status": "UNVERIFIED",
+      "known_limitations": [
+        "Only this concrete carrier is implemented, not every structure in its mathematical field.",
+        "Arbitrary precision computations and eager finite outputs remain subject to memory/time limits."
+      ],
+      "required_extension": null,
+      "references": [
+        "https://msc2020.org/",
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "epistemic_status": "DEFINED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "implementation_source": "groupimp/src/main/java/algebra/concrete/RationalTwistedLatticeAlgebraFamily.java",
+        "implemented_by": "Codex",
+        "generated_by_model": "not recorded",
+        "reviewed_by": null,
+        "version": "2",
+        "date": "2026-11-22",
+        "assumptions": [
+          "Classification is scoped; passing tests do not prove laws."
+        ],
+        "related_concepts": []
+      },
+      "assessment_depth": "TESTED_RESTRICTED_IMPLEMENTATION",
+      "total_or_partial": "TOTAL",
+      "runtime_operation_id": "HMN(H(Q);Z^3,sigma,tau).zero",
+      "runtime_catalog": "ConcreteMathematics",
+      "legacy_operation_name": "HMN(H(Q);Z^3,sigma,tau).zero",
       "legacy_operation_interface": "ITransferOperation"
     },
     {
@@ -174281,6 +177626,9 @@
         "H(Q).to-rational",
         "HMN(H(Q);Z,sigma,1).embed-rational",
         "HMN(H(Q);Z,sigma,1).to-rational",
+        "HMN(H(Q);Z^3,sigma,tau).basis-e1",
+        "HMN(H(Q);Z^3,sigma,tau).basis-e2",
+        "HMN(H(Q);Z^3,sigma,tau).basis-e3",
         "Mat(Q).determinant",
         "Mat(Q).eigenspace-basis",
         "Mat(Q).eigenvalue-multiplicity",
@@ -174319,6 +177667,8 @@
         "Q(i).embed-rational",
         "Q(i).norm-squared",
         "Q(x).evaluate",
+        "Q(zeta_12).embed-rational",
+        "Q(zeta_12).to-rational",
         "Q-to-Qi",
         "Q-to-RealExpression",
         "Q.add",
@@ -174508,6 +177858,8 @@
         "Q(i).subtract",
         "Q(i).to-boolean",
         "Q(i).zero",
+        "Q(zeta_12).embed-complex",
+        "Q(zeta_12).to-complex",
         "Q-to-Qi",
         "iQ.from-complex",
         "iQ.to-complex"
@@ -174585,6 +177937,8 @@
         "O(Q)",
         "DixonZ2(Q)",
         "HMN(H(Q);Z,sigma,1)",
+        "HMN(H(Q);Z^3,sigma,tau)",
+        "Q(zeta_12)",
         "Q[x]",
         "Q(x)",
         "Tensor(Q)",
@@ -174624,6 +177978,7 @@
         "Boolean.one",
         "Boolean.or",
         "Boolean.to-complex",
+        "Boolean.to-cyclotomic",
         "Boolean.to-dixon-z2",
         "Boolean.to-hmn",
         "Boolean.to-imaginary",
@@ -174638,6 +177993,7 @@
         "Boolean.to-rational-function",
         "Boolean.to-residue-6",
         "Boolean.to-tensor",
+        "Boolean.to-twisted-lattice",
         "Boolean.xor",
         "Boolean.zero",
         "ChainCone.equal",
@@ -174688,6 +178044,7 @@
         "CoverMap.is-isomorphism",
         "DixonZ2(Q).equal",
         "DixonZ2(Q).equal-zero",
+        "DixonZ2(Q).idempotent",
         "DixonZ2(Q).not-equal",
         "DixonZ2(Q).to-boolean",
         "Exterior(Q).equal",
@@ -174736,6 +178093,9 @@
         "H(Q).to-boolean",
         "HMN(H(Q);Z,sigma,1).equal",
         "HMN(H(Q);Z,sigma,1).to-boolean",
+        "HMN(H(Q);Z^3,sigma,tau).equal",
+        "HMN(H(Q);Z^3,sigma,tau).has-dark-matter-residue",
+        "HMN(H(Q);Z^3,sigma,tau).to-boolean",
         "HomotopyEquivalence.equal",
         "HomotopyEquivalence.is-strong-core",
         "HomotopyEquivalence.strongly-equivalent",
@@ -174767,6 +178127,8 @@
         "Q(i).to-boolean",
         "Q(x).equal",
         "Q(x).to-boolean",
+        "Q(zeta_12).equal",
+        "Q(zeta_12).to-boolean",
         "Q.equal",
         "Q.greater",
         "Q.to-boolean",
@@ -174864,7 +178226,17 @@
         "Boolean.one",
         "Boolean.zero",
         "DixonZ2(Q).group-generator",
+        "DixonZ2(Q).group-idempotent-minus",
+        "DixonZ2(Q).group-idempotent-minus-left-projector",
+        "DixonZ2(Q).group-idempotent-plus",
+        "DixonZ2(Q).group-idempotent-plus-left-projector",
         "DixonZ2(Q).one",
+        "DixonZ2(Q).u1-complex-phase-generator",
+        "DixonZ2(Q).witt-element",
+        "DixonZ2(Q).witt-idempotent-minus",
+        "DixonZ2(Q).witt-idempotent-minus-left-projector",
+        "DixonZ2(Q).witt-idempotent-plus",
+        "DixonZ2(Q).witt-idempotent-plus-left-projector",
         "DixonZ2(Q).zero",
         "FiniteAdjunction.empty",
         "FiniteCategory.empty",
@@ -174879,11 +178251,13 @@
         "H(Q).j",
         "H(Q).k",
         "H(Q).one",
+        "H(Q).u1-complex-phase-generator",
         "H(Q).zero",
         "HMN(H(Q);Z,sigma,1).group-generator",
         "HMN(H(Q);Z,sigma,1).one",
         "HMN(H(Q);Z,sigma,1).tau-one",
         "HMN(H(Q);Z,sigma,1).zero",
+        "HMN(H(Q);Z^3,sigma,tau).zero",
         "Mat2(Q).one",
         "Mat2(Q).zero",
         "N.one",
@@ -174902,6 +178276,9 @@
         "Q(i).zero",
         "Q(x).one",
         "Q(x).zero",
+        "Q(zeta_12).one",
+        "Q(zeta_12).zero",
+        "Q(zeta_12).zeta",
         "Q.one",
         "Q.zero",
         "Q[x].one",
@@ -176624,12 +180001,19 @@
         "Affine(Q).least-squares",
         "Affine(Q).solve",
         "DixonZ2(Q).from-left-multiplication-matrix",
+        "DixonZ2(Q).group-idempotent-minus-left-projector",
+        "DixonZ2(Q).group-idempotent-plus-left-projector",
         "DixonZ2(Q).left-multiplication-matrix",
+        "DixonZ2(Q).u1-complex-phase-generator",
+        "DixonZ2(Q).witt-idempotent-minus-left-projector",
+        "DixonZ2(Q).witt-idempotent-plus-left-projector",
         "Exterior(Q).apply",
         "FiniteMarkov(Z).from-matrix",
         "FiniteMarkov(Z).to-matrix",
         "H(Q).from-rotation-matrix",
+        "H(Q).su2-adjoint-generators",
         "H(Q).to-rotation-matrix",
+        "H(Q).u1-complex-phase-generator",
         "Mat(Q).add",
         "Mat(Q).apply",
         "Mat(Q).characteristic-polynomial",
@@ -176678,6 +180062,7 @@
         "Mat(Z).to-rational",
         "O(Q).from-left-multiplication-matrix",
         "O(Q).left-multiplication-matrix",
+        "O(Q).su3-stabilizer-derivations",
         "Poly(Q).hessian-at",
         "PolynomialMap(Q).from-matrix",
         "PolynomialMap(Q).jacobian-at",
@@ -176974,6 +180359,7 @@
         "H(Q).rotate",
         "H(Q).same-rotation",
         "H(Q).scale",
+        "H(Q).su2-adjoint-generators",
         "H(Q).subtract",
         "H(Q).to-boolean",
         "H(Q).to-complex",
@@ -176984,6 +180370,9 @@
         "HMN(H(Q);Z,sigma,1).embed-quaternion",
         "HMN(H(Q);Z,sigma,1).leading-coefficient",
         "HMN(H(Q);Z,sigma,1).to-quaternion",
+        "HMN(H(Q);Z^3,sigma,tau).embed-quaternion",
+        "HMN(H(Q);Z^3,sigma,tau).leading-coefficient",
+        "HMN(H(Q);Z^3,sigma,tau).to-quaternion",
         "O(Q).embed-quaternion",
         "O(Q).to-quaternion",
         "iQ.from-quaternion",
@@ -181704,6 +185093,7 @@
         "O(Q).one",
         "O(Q).real-part",
         "O(Q).scale",
+        "O(Q).su3-stabilizer-derivations",
         "O(Q).subtract",
         "O(Q).to-boolean",
         "O(Q).to-complex",
@@ -181761,6 +185151,7 @@
       "supported_operations": [
         "Boolean.to-dixon-z2",
         "DixonZ2(Q).add",
+        "DixonZ2(Q).commutator",
         "DixonZ2(Q).components",
         "DixonZ2(Q).embed-complex",
         "DixonZ2(Q).embed-imaginary",
@@ -181774,6 +185165,9 @@
         "DixonZ2(Q).from-vector",
         "DixonZ2(Q).grading-involution",
         "DixonZ2(Q).group-generator",
+        "DixonZ2(Q).group-idempotent-minus",
+        "DixonZ2(Q).group-idempotent-plus",
+        "DixonZ2(Q).idempotent",
         "DixonZ2(Q).left-multiplication-matrix",
         "DixonZ2(Q).multiply",
         "DixonZ2(Q).negate",
@@ -181788,7 +185182,11 @@
         "DixonZ2(Q).to-quaternion",
         "DixonZ2(Q).to-rational",
         "DixonZ2(Q).to-vector",
+        "DixonZ2(Q).witt-element",
+        "DixonZ2(Q).witt-idempotent-minus",
+        "DixonZ2(Q).witt-idempotent-plus",
         "DixonZ2(Q).zero",
+        "HMN(H(Q);Z,sigma,1).chi5-to-one-dixon",
         "HMN(H(Q);Z,sigma,1).embed-dixon-z2",
         "HMN(H(Q);Z,sigma,1).to-dixon-z2"
       ],
@@ -181844,6 +185242,7 @@
       "supported_operations": [
         "Boolean.to-hmn",
         "HMN(H(Q);Z,sigma,1).add",
+        "HMN(H(Q);Z,sigma,1).chi5-to-one-dixon",
         "HMN(H(Q);Z,sigma,1).conjugate",
         "HMN(H(Q);Z,sigma,1).divide-left",
         "HMN(H(Q);Z,sigma,1).divide-right",
@@ -181887,6 +185286,125 @@
         "This rational subring embeds in the full completion but does not represent every well-ordered support",
         "H(Q) and its Q, Q(i), iQ slices embed as constants",
         "O(Q) and DixonZ2(Q) connect only through their selected H(Q) subalgebra"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-11-22"
+      }
+    },
+    {
+      "id": "HMN(H(Q);Z^3,sigma,tau)",
+      "name": "Finite-support twisted lattice algebra",
+      "description": "Finite-support twisted lattice algebra",
+      "member_representation": "mathematics.numbers.RationalTwistedLatticeAlgebra",
+      "membership_rules": [
+        "Finite supports on lexicographically ordered Z^3",
+        "Quaternion coefficient action sigma_g=Ad(i)^(g_1)",
+        "Normalized nontrivial sign 2-cocycle tau(g,h)=(-1)^(g_1*h_2)",
+        "Non-surjective BSM1 group/algebra endomorphism doubles g_0 and maps odd first-coordinate residues into the even subgroup",
+        "H(Q) embeds at the identity exponent; full Hahn completions are not represented"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "Boolean",
+        "DixonZ2(Q)",
+        "H(Q)"
+      ],
+      "supported_operations": [
+        "Boolean.to-twisted-lattice",
+        "HMN(H(Q);Z^3,sigma,tau).add",
+        "HMN(H(Q);Z^3,sigma,tau).basis-e1",
+        "HMN(H(Q);Z^3,sigma,tau).basis-e2",
+        "HMN(H(Q);Z^3,sigma,tau).basis-e3",
+        "HMN(H(Q);Z^3,sigma,tau).dark-matter-endomorphism",
+        "HMN(H(Q);Z^3,sigma,tau).embed-quaternion",
+        "HMN(H(Q);Z^3,sigma,tau).equal",
+        "HMN(H(Q);Z^3,sigma,tau).has-dark-matter-residue",
+        "HMN(H(Q);Z^3,sigma,tau).leading-coefficient",
+        "HMN(H(Q);Z^3,sigma,tau).multiply",
+        "HMN(H(Q);Z^3,sigma,tau).subtract",
+        "HMN(H(Q);Z^3,sigma,tau).to-boolean",
+        "HMN(H(Q);Z^3,sigma,tau).to-quaternion",
+        "HMN(H(Q);Z^3,sigma,tau).zero"
+      ],
+      "invariants": [
+        "Finite supports on lexicographically ordered Z^3",
+        "Quaternion coefficient action sigma_g=Ad(i)^(g_1)",
+        "Normalized nontrivial sign 2-cocycle tau(g,h)=(-1)^(g_1*h_2)",
+        "Non-surjective BSM1 group/algebra endomorphism doubles g_0 and maps odd first-coordinate residues into the even subgroup",
+        "H(Q) embeds at the identity exponent; full Hahn completions are not represented"
+      ],
+      "references": [
+        "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"
+      ],
+      "implementation_status": "IMPLEMENTED",
+      "human_review_status": "UNREVIEWED",
+      "formal_verification_status": "UNVERIFIED",
+      "provenance": {
+        "definition_source": "docs/CONCRETE_ALGEBRAS.md",
+        "reviewer": null,
+        "review_date": null,
+        "review_notes": "No human review performed",
+        "date": "2026-11-22"
+      }
+    },
+    {
+      "id": "Q(zeta_12)",
+      "name": "Exact cyclotomic number field",
+      "description": "Exact cyclotomic number field",
+      "member_representation": "mathematics.numbers.RationalCyclotomic",
+      "membership_rules": [
+        "Exact arithmetic modulo Phi_12(x)=x^4-x^2+1",
+        "Extended-Euclid inverses in Q[x]/(Phi_12)",
+        "Selected Q(i) subfield via i=zeta_12^3, with partial projections",
+        "BigDecimal approximation of zeta powers at requested precision",
+        "Koide ratio and CKM Jarlskog evaluators accept decimal inputs and a cyclotomic phase"
+      ],
+      "parent_domains": [],
+      "subdomains": [],
+      "related_domains": [
+        "Boolean",
+        "DixonZ2(Q)",
+        "H(Q)",
+        "HMN(H(Q);Z,sigma,1)",
+        "O(Q)",
+        "Q",
+        "Q(i)"
+      ],
+      "supported_operations": [
+        "Boolean.to-cyclotomic",
+        "Q(zeta_12).add",
+        "Q(zeta_12).divide",
+        "Q(zeta_12).embed-complex",
+        "Q(zeta_12).embed-rational",
+        "Q(zeta_12).equal",
+        "Q(zeta_12).inverse",
+        "Q(zeta_12).multiply",
+        "Q(zeta_12).negate",
+        "Q(zeta_12).one",
+        "Q(zeta_12).subtract",
+        "Q(zeta_12).to-boolean",
+        "Q(zeta_12).to-complex",
+        "Q(zeta_12).to-rational",
+        "Q(zeta_12).zero",
+        "Q(zeta_12).zeta"
+      ],
+      "invariants": [
+        "Exact arithmetic modulo Phi_12(x)=x^4-x^2+1",
+        "Extended-Euclid inverses in Q[x]/(Phi_12)",
+        "Selected Q(i) subfield via i=zeta_12^3, with partial projections",
+        "BigDecimal approximation of zeta powers at requested precision",
+        "Koide ratio and CKM Jarlskog evaluators accept decimal inputs and a cyclotomic phase"
       ],
       "references": [
         "https://leanprover-community.github.io/mathlib4_docs/Mathlib.html"

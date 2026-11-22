@@ -8,6 +8,10 @@ The rational octonions `O(Q)` register the Cayley product, norm, inverse and bot
 
 `HMN(H(Q);Z,sigma,1)` adds the exact rational-function division subring `H(Q)(t)` of a twisted Hahn–Mal'cev–Neumann completion, with ordered group `Z`, `sigma(q)=i*q*i^-1`, `tau=1`, and group generator `X=i*t`. It connects to Q, Q[x], Q(x), Q(i), iQ, H(Q), Boolean, and to the selected H(Q) slices of O(Q) and `DixonZ2(Q)`. The full Dixon algebra remains nonassociative and therefore has no embedding into this associative division ring.
 
+The rank-three finite-support carrier `HMN(H(Q);Z^3,sigma,tau)` adds the exact product `(q X^g)(r X^h)=q sigma_g(r) tau(g,h) X^(g+h)` for `sigma_g=Ad(i)^(g_1)` and the normalized sign cocycle `tau(g,h)=(-1)^(g_1*h_2)`. Its BSM1 mode doubles the first exponent coordinate, mapping odd residue support into the even subgroup; this is an algebra endomorphism. The carrier stores finite supports, not arbitrary well-ordered Hahn series.
+
+`Q(zeta_12)` provides exact arithmetic modulo `Phi_12(x)=x^4-x^2+1`, extended-Euclid inverses, and the selected `Q(i)` subfield `i=zeta_12^3`. A precision-controlled `BigDecimal` evaluator supports cyclotomic phases, the CKM Jarlskog invariant, and the Koide ratio. Octonion derivations fixing `l` expose eight exact `su(3)`-type generators on `O(Q)`; quaternion adjoint actions expose three `su(2)` generators. Dixon crossed-product and Witt elements expose complementary idempotents and their left multiplication matrices. These are algebra-level constructions; minimal ideals and physical gauge identifications are not asserted.
+
 See [concrete algebras and usage](docs/CONCRETE_ALGEBRAS.md). Same-algebra unary operations now use `IOneOperandOperation` and `performOneOperandOperation(name)` on items and flows. `ICustomMemberOperation` returns the first operand type; `ILeftProjectionOperation` returns the second operand type, wrapped in `IAlgebraItem`.
 
 Run the tests with `mvn -f groupimp/pom.xml test`.

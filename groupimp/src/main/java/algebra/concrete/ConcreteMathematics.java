@@ -39,6 +39,8 @@ public final class ConcreteMathematics implements IMathToolInitializer {
     public final RationalOctonionAlgebra octonions;
     public final RationalDixonZ2Algebra dixonZ2;
     public final RationalTwistedHahnMalcevNeumannAlgebra twistedHahnMalcevNeumann;
+    public final RationalTwistedLatticeAlgebraFamily twistedLattice;
+    public final RationalCyclotomicAlgebra cyclotomics;
     public final RationalVectorSpace vectors;
     public final RationalMatrixAlgebra matrices;
     public final RationalVectorFamily finiteVectors;
@@ -142,11 +144,13 @@ public final class ConcreteMathematics implements IMathToolInitializer {
         tensors=new RationalTensorAlgebra(rationals,finiteVectors,rectangularMatrices,naturals,booleans);
         exterior=new RationalExteriorAlgebra(rationals,finiteVectors,rectangularMatrices,naturals,booleans);
         quaternions=new RationalQuaternionAlgebra(rationals,complexRationals,finiteVectors,rectangularMatrices,booleans);
+        cyclotomics=new RationalCyclotomicAlgebra(rationals,complexRationals,booleans);
         imaginaries=new RationalImaginaryAlgebra(rationals,complexRationals,quaternions,booleans);
         octonions=new RationalOctonionAlgebra(rationals,complexRationals,imaginaries,quaternions,finiteVectors,rectangularMatrices,booleans);
         dixonZ2=new RationalDixonZ2Algebra(rationals,complexRationals,imaginaries,quaternions,octonions,finiteVectors,rectangularMatrices,booleans);
         twistedHahnMalcevNeumann=new RationalTwistedHahnMalcevNeumannAlgebra(rationals,polynomials,rationalFunctions,integers,
                 complexRationals,imaginaries,quaternions,octonions,dixonZ2,booleans);
+        twistedLattice=new RationalTwistedLatticeAlgebraFamily(quaternions,booleans,rationals);
         multivariatePolynomials=new RationalMultivariatePolynomialAlgebra(rationals,naturals,integers,booleans,finiteVectors,rectangularMatrices,polynomials);
         polynomialMaps=new RationalPolynomialMapAlgebra(multivariatePolynomials,rationals,naturals,booleans,finiteVectors,rectangularMatrices);
         polynomialForms=new PolynomialDifferentialFormAlgebra(multivariatePolynomials,polynomialMaps,exterior,rationals,finiteVectors,naturals,booleans);
@@ -159,9 +163,10 @@ public final class ConcreteMathematics implements IMathToolInitializer {
             fields.add(new PrimeField(unit,prime,booleans));
         }
         primeFields=Collections.unmodifiableList(fields);
-        booleans.connectScalars(naturals,integers,rationals,complexRationals,quaternions,imaginaries,octonions,dixonZ2,twistedHahnMalcevNeumann,polynomials,rationalFunctions,
+        booleans.connectScalars(naturals,integers,rationals,complexRationals,quaternions,imaginaries,octonions,dixonZ2,twistedHahnMalcevNeumann,cyclotomics,twistedLattice,polynomials,rationalFunctions,
                 tensors,matrices,residues,primeFields);
         List<ConcreteAlgebra<?>> values=new ArrayList<>(Arrays.asList(booleans,naturals,integers,rationals,complexRationals,imaginaries,octonions,dixonZ2,twistedHahnMalcevNeumann,vectors,matrices,finiteVectors,rectangularMatrices,affineSpaces,tensors,exterior,quaternions,polynomials,rationalFunctions,integerSets,samples,integerProbabilities,complexes,integerRelations,permutations,residues,integerFunctions,categories,functors,naturalTransformations,equivalences,adjunctions,cones,cocones));
+        values.add(cyclotomics); values.add(twistedLattice);
         values.add(multivariatePolynomials); values.add(polynomialMaps);
         values.add(polynomialForms);
         values.add(polynomialCells); values.add(polynomialChains);
