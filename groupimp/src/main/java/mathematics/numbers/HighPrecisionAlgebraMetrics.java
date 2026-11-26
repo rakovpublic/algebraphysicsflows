@@ -33,6 +33,8 @@ public final class HighPrecisionAlgebraMetrics {
         BigDecimal result=s12.multiply(s23,mc).multiply(s13,mc).multiply(c12,mc).multiply(c23,mc).multiply(c13,mc).multiply(c13,mc).multiply(sinDelta,mc);
         return result.round(new MathContext(precision,RoundingMode.HALF_EVEN));
     }
+    /** One-loop compactification boundary. The electromagnetic inverse coupling is an external datum. */
+    public static OneLoopRGEFlow.Boundary oneLoopCompactification(int precision){return OneLoopRGEFlow.solve(precision);}
     private static BigDecimal sqrt(BigDecimal value,MathContext mc){
         if(value.signum()==0)return BigDecimal.ZERO;
         int decimalExponent=value.precision()-value.scale()-1;

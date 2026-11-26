@@ -95,3 +95,41 @@ mvn -f groupimp/pom.xml test
 The clean step prevents stale Surefire XML reports from affecting totals. The recorded run used Maven 3.9.11 with Java 17.0.4.1 and Surefire 3.2.5. The project targets Java source/bytecode level 8. Maven emitted a platform-encoding warning (Windows Cp1251); it did not affect compilation or test results.
 
 Primary benchmark references: [PDG 2025 lepton summary](https://pdg.lbl.gov/2025/tables/rpp2025-sum-leptons.pdf), [PDG 2025 tau listing](https://pdg.lbl.gov/2025/listings/rpp2025-list-tau.pdf), [PDG 2025 CKM review](https://pdg.lbl.gov/2025/reviews/rpp2025-rev-ckm-matrix.pdf), [PDG 2025 physical constants](https://pdg.lbl.gov/2025/reviews/rpp2025-rev-phys-constants.pdf), and [LZ 4.2 tonne-year paper](https://journals.aps.org/prl/abstract/10.1103/4dyc-z8zf).
+
+## 6. Dynamical Spectral Action and Minimal Left-Ideal Verification
+
+A later clean run, `mvn -f groupimp/pom.xml clean` then `mvn -f groupimp/pom.xml test`, executed **96 test classes and 941 tests: 941 passed, 0 failures, 0 errors, 0 skipped**. Maven reported about 77 seconds. The new class is `CCDRDynamicalDerivationTest` (4 tests). Sections 1–5 above remain the record of the earlier 95-class, 937-test structural and empirical audit. This section does not reopen those non-claims except where the new code changes the scope.
+
+### Rank-16 Witt left ideal
+
+`DixonMinimalLeftIdeal` builds sixteen Dixon vectors as occupation monomials times the Witt idempotent `(1+i_C l)/2`. Over Q their coordinate matrix has rank 16. Each vector is an eigenvector of the self-adjoint hypercharge, T3, and electric-charge operators on that span. The eigenvalues are exactly the one-generation table in `StandardModelWeylGeneration`, including Q=T3+Y, Tr(T3²)=2, and Tr(Q²)=16/3. The weak projector used beside the Witt vacuum is `(1+i_C i_H)/2`: quaternion i_H squares to −1, so the unit that squares to +1 is i_C i_H.
+
+Every octonion-plane element `1/2(−e_u+i e_v)` with distinct imaginary basis units satisfies the canonical relations α²=0 and {α,α†}=1 inside this product. The charge operators are still the occupation-basis operators above. This run does not show that the eight `su(3)` stabilizer matrices and three quaternion adjoint matrices are simultaneously diagonal on these sixteen vectors.
+
+### Finite Dirac operator and spectral traces
+
+On the 128 rational coordinates, γ_F is the octonion grading involution, J_F swaps the two octonion grades and conjugates Q(i), and D_F pairs those grades across the C2 blocks. Exact matrix checks give
+
+J_F² = +1, D_F² = +1, γ_F² = +1, J_F D_F = D_F J_F, J_F γ_F = −γ_F J_F, {D_F, γ_F} = 0.
+
+The first-order condition holds for complex-scalar algebra elements. It is not claimed for a general nonassociative Dixon product. The symmetrized block-odd fluctuation H produces
+
+Tr(D_A⁴) = 128 − 256 φ² + 128 φ⁴ = 128 (φ² − 1)².
+
+The quartic coefficient is +128, so λ>0. The quadratic coefficient is −256, which is the tachyonic −μ²|Φ|² term before the quartic minimum at φ²=1. N_g=1 is the matrix size used here. Three generations are three copies of the 16-state ideal, 48 Weyl states, not a 384-dimensional matrix.
+
+### One-loop weak angle
+
+`OneLoopRGEFlow` uses b1=41/10, b2=−19/6, b3=−7, M_Z=91.1876 GeV, and the external electromagnetic datum α_em⁻¹(M_Z)=127.952. That second datum is not derived by the algebra; without it the unification scale is not fixed by sin²θ_W alone. At 20-digit working precision the solved boundary is
+
+Λ_fold = 1.0310981847430148637×10^13 GeV, log10(Λ_fold)=13.013300022278532513, α_fold=0.023578074326987960369.
+
+Running back, sin²θ_W(M_Z) reconstructs as 0.23122000000000000000, inside 10^−8 of the input 0.23122. The scale sits in the 10^13–10^15 GeV window. Exact beta-function rationals are registered on the `DynamicalSM` algebra and executed through `AlgebraFlow`.
+
+### Triality and the Jarlskog scan
+
+ζ_12⁴ has order 3. The coordinate cycle on il, jl, kl has order 3 and is not claimed to be an octonion automorphism. The 3×3 Yukawa diagonalizer, fed the PDG angles and δ=1.147 rad, returns J=3.11699351480×10^−5, agreeing with `HighPrecisionAlgebraMetrics` to better than 10^−12. The pure ζ_12 phase gives J=1.70975094186×10^−5, still outside the PDG one-sigma band. A grid that keeps the measured mixing angles and varies only the phase finds a nearby J=3.1592125×10^−5 at δ≈1.963 rad. That matches the Jarlskog central value more closely than ζ_12 does; it does not derive the measured phase or the mixing angles.
+
+### Open questions
+
+The embedded charges are eigenvalues of operators defined on this ideal basis. They are not yet the joint spectrum of the historical su(3) stabilizer and quaternion adjoint generators. The first-order condition is verified on Q(i), not on every Dixon element. Yukawa eigenvalue ratios are an ansatz, not a spectrum of D_A. The compactification scale uses an external α_em. Scheme conversion beyond one-loop beta functions is not implemented.

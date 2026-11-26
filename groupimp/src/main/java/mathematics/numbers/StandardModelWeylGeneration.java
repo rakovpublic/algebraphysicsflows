@@ -6,8 +6,8 @@ import java.util.*;
 /**
  * Conventional one-generation left-handed Weyl charge signature under Q=T3+Y.
  * Right-handed Standard Model fields are represented by their left-handed conjugates.
- * This records the physical charge assignment; it deliberately does not identify these
- * states with a minimal left ideal or a Dixon coordinate basis.
+ * This records the physical charge assignment. DixonMinimalLeftIdeal embeds these charges
+ * as eigenvalues on vectors in a Witt left ideal; this class does not store coordinates.
  */
 public final class StandardModelWeylGeneration implements Serializable {
     private static final long serialVersionUID=1L;
