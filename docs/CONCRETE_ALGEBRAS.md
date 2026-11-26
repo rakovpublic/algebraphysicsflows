@@ -129,6 +129,10 @@ List<String> scaled = math.flow(math.vectors, Collections.singletonList(v))
 
 `scale-flat` returns one transformed vector. `scale-signs` returns the ordered pair of positive and negative scaled vectors, preserving duplicates at zero. The opposite-order operation Q x Q^n -> Q^n is registered on Q as `Q^n.scale-left`.
 
+## A x B -> B, the left operations
+
+These use `ILeftProjectionOperation` and `ILeftProjectionFlatOperation`. The pure projections `LeftProjectionOperation` and `LeftProjectionFlatOperation` wrap the second value unchanged. `SecondResultOperation` and `SecondResultFlatOperation` transform it and still return the second carrier. Registration is on the first algebra; the flow then continues in the second algebra. The contract, lookup rule and a direct example are in [left operations](LEFT_OPERATIONS.md). `Q^n.scale-left` is this shape: a rational acting on a vector returns the vector carrier.
+
 Polynomial integration demonstrates three independent carrier types: Q[x] x (Q x Q bounds) -> Q. Bounds are a Pair of exact rationals, so integration does not disguise both inputs as one Java type.
 
 ## Laws, partiality and integration limits

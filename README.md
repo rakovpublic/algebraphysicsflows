@@ -14,7 +14,7 @@ The finite-support carrier `HMN(H(Q);Z^N,sigma,tau)` accepts any positive runtim
 
 `Q(zeta_12)` provides exact arithmetic modulo `Phi_12(x)=x^4-x^2+1`, extended-Euclid inverses, and the selected `Q(i)` subfield `i=zeta_12^3`. A precision-controlled `BigDecimal` evaluator supports cyclotomic phases, the CKM Jarlskog invariant, and the Koide ratio. Octonion derivations fixing `l` expose eight exact `su(3)`-type generators on `O(Q)`; quaternion adjoint actions expose three `su(2)` generators. Dixon crossed-product and Witt elements expose complementary idempotents and their left multiplication matrices. These are algebra-level constructions; minimal ideals and physical gauge identifications are not asserted.
 
-See [concrete algebras and usage](docs/CONCRETE_ALGEBRAS.md). Same-algebra unary operations now use `IOneOperandOperation` and `performOneOperandOperation(name)` on items and flows. `ICustomMemberOperation` returns the first operand type; `ILeftProjectionOperation` returns the second operand type, wrapped in `IAlgebraItem`.
+See [concrete algebras and usage](docs/CONCRETE_ALGEBRAS.md). Same-algebra unary operations now use `IOneOperandOperation` and `performOneOperandOperation(name)` on items and flows. `ICustomMemberOperation` returns the first operand type; `ILeftProjectionOperation` returns the second operand type, wrapped in `IAlgebraItem`. See [left operations](docs/LEFT_OPERATIONS.md).
 
 Run the tests with `mvn -f groupimp/pom.xml test`.
 

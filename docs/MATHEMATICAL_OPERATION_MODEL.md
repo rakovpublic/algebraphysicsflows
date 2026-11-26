@@ -26,7 +26,7 @@ A and B denote carriers; returning A or B can produce a changed value.
 | A x B -> B | ILeftProjectionOperation<A,B>: IAlgebraItem<B> | ILeftProjectionFlatOperation<A,B>: List<IAlgebraItem<B>> |
 | A x B -> C | IUnsafeOperation<A>: IAlgebraItem<C> | IUnsafeFlatOperation<A>: List<IAlgebraItem<C>> |
 
-The historical name ILeftProjectionOperation is retained at the user's request for **A x B -> B**. It can transform the second value, as in rational scalar times vector. The pure projection returns the second value unchanged, wrapped in its Algebra. ICustomMemberOperation continues to provide **A x B -> A**.
+The historical name ILeftProjectionOperation is retained at the user's request for **A x B -> B**. It can transform the second value, as in rational scalar times vector. The pure projection returns the second value unchanged, wrapped in its Algebra. ICustomMemberOperation continues to provide **A x B -> A**. Registration, lookup and examples are in [left operations](LEFT_OPERATIONS.md).
 
 Some original interfaces select B/C through method-level type parameters. Their compile-time guarantees are limited; native implementations retain concrete operand/result algebras and validate their values. A caller can still request a false generic result type through the old API.
 

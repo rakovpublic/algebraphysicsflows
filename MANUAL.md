@@ -3,12 +3,14 @@ Algebra - set rules which defines which elements could be the elements of this a
 
 Operations- incupsulate logic of operations (see package operations)
 
-The reusable left projection operation follows `A op B = A`, where `A` and `B`
-may have different types. `ILeftProjectionOperation<T, V>` returns the original
-first value of type `T`; `ILeftProjectionFlatOperation<T, V>` returns a one-element
-list containing that value as an `IAlgebraItem<T>`. These interfaces have their
-own implementations and registration methods. Supply the second operand's class
-for operation lookup and register either version under a name of your choice:
+Left operations follow `A op B = B`, where `A` and `B` may have different types.
+`ILeftProjectionOperation<T, V>` returns an `IAlgebraItem<V>` in `V`'s algebra.
+`ILeftProjectionFlatOperation<T, V>` returns a list of those items. Register them
+on the first operand's algebra, and pass the second operand's algebra to the
+constructor. `LeftProjectionOperation` returns the second value unchanged.
+`SecondResultOperation` may transform it. `A op B = A` is `ICustomMemberOperation`,
+not a left operation. Details and the flow contract are in
+[Left operations](docs/LEFT_OPERATIONS.md).
 
 ```java
 import algebra.imp.Algebra;
@@ -16,22 +18,22 @@ import operations.simple.LeftProjectionOperation;
 import operations.flat.LeftProjectionFlatOperation;
 
 Algebra<Integer> integers = new Algebra<>("integer", Integer.class, "Integers");
-integers.addLeftProjectionOperation("left", new LeftProjectionOperation<>(integers, String.class));
-integers.addLeftProjectionFlatOperation("left", new LeftProjectionFlatOperation<>(integers, String.class));
+Algebra<String> text = new Algebra<>("text", String.class, "Text");
+integers.addLeftProjectionOperation("left", new LeftProjectionOperation<>(text, String.class));
+integers.addLeftProjectionFlatOperation("left", new LeftProjectionFlatOperation<>(text, String.class));
 
-// 5 op "ignored" = 5
-Integer value = integers.buildAlgebraItem(5)
-        .performLeftProjectionOperation("left", "ignored").getResult();
-// The flat result contains one item with value 5.
-Integer flatValue = integers.buildAlgebraItem(5)
-        .performLeftProjectionFlatOperation("left", "ignored").get(0).getResult();
+// 5 op "kept" = "kept", in the text algebra
+String value = integers.buildAlgebraItem(5)
+        .performLeftProjectionOperation("left", "kept").getResult();
+String flatValue = integers.buildAlgebraItem(5)
+        .performLeftProjectionFlatOperation("left", "kept").get(0).getResult();
 ```
 
-After registering the algebra with `MathTool`, use
-`flow.performLeftProjectionOperation("left", "ignored")` or
-`flow.performLeftProjectionFlatOperation("left", "ignored")` to retain each input
-value. The first operand remains in its original algebra; the second operand does
-not need to belong to that algebra.
+After both algebras are in `MathTool`,
+`flow.performLeftProjectionOperation("left", "kept")` and
+`flow.performLeftProjectionFlatOperation("left", "kept")` switch the flow to the
+text algebra. If that algebra is missing, scheduling fails and the existing plan
+stays unchanged.
 
 MathTool - incupsulate all algebras which will be used in modelling(see mathtool class)
 
