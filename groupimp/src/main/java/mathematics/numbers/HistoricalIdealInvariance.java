@@ -17,6 +17,7 @@ public final class HistoricalIdealInvariance implements Serializable {
     private static final HistoricalIdealInvariance MODEL=compute();
     private final RationalMatrix basis;
     private final RationalMatrix gramInverse;
+    private final RationalMatrix complexStructureCoordinates;
     private final List<GeneratorResidual> residuals;
 
     public static final class GeneratorResidual implements Serializable {
@@ -25,9 +26,10 @@ public final class HistoricalIdealInvariance implements Serializable {
         private final int index;
         private final RationalMatrix residual;
         private final int rank;
+        private final int columnSpanRank;
         private final Rational frobeniusSquared;
-        private GeneratorResidual(String family,int index,RationalMatrix residual){
-            this.family=family;this.index=index;this.residual=residual;this.rank=residual.rank();this.frobeniusSquared=frobenius(residual);
+        private GeneratorResidual(String family,int index,RationalMatrix residual,int columnSpanRank){
+            this.family=family;this.index=index;this.residual=residual;this.rank=residual.rank();this.columnSpanRank=columnSpanRank;this.frobeniusSquared=frobenius(residual);
         }
         public String family(){return family;}
         public int index(){return index;}
@@ -35,6 +37,9 @@ public final class HistoricalIdealInvariance implements Serializable {
         public int rank(){return rank;}
         public Rational frobeniusSquared(){return frobeniusSquared;}
         public boolean invariant(){return frobeniusSquared.equals(Rational.ZERO);}
+        /** rank([B | GB]); invariance is equivalent to this rank being 16. */
+        public int columnSpanRank(){return columnSpanRank;}
+        public boolean columnSpanInvariant(){return columnSpanRank==16;}
     }
 
     public static final class Counterexample implements Serializable {
@@ -53,12 +58,18 @@ public final class HistoricalIdealInvariance implements Serializable {
         }
     }
 
-    private HistoricalIdealInvariance(RationalMatrix basis,RationalMatrix gramInverse,List<GeneratorResidual> residuals){
-        this.basis=basis;this.gramInverse=gramInverse;this.residuals=Collections.unmodifiableList(residuals);
+    private HistoricalIdealInvariance(RationalMatrix basis,RationalMatrix gramInverse,RationalMatrix complexStructureCoordinates,List<GeneratorResidual> residuals){
+        this.basis=basis;this.gramInverse=gramInverse;this.complexStructureCoordinates=complexStructureCoordinates;
+        this.residuals=Collections.unmodifiableList(residuals);
     }
     public static HistoricalIdealInvariance model(){return MODEL;}
     public RationalMatrix basis(){return basis;}
     public RationalMatrix gramInverse(){return gramInverse;}
+    /** Coordinates of the central complex structure i_C restricted to the ideal. */
+    public RationalMatrix complexStructureCoordinates(){return complexStructureCoordinates;}
+    /** Rank 16 means i_C preserves the 16-real-dimensional span, which is therefore complex dimension 8. */
+    public int complexStructureRank(){return complexStructureCoordinates.rank();}
+    public int complexDimension(){return complexStructureRank()/2;}
     public List<GeneratorResidual> residuals(){return residuals;}
     public int invariantGeneratorCount(){
         int count=0; for(GeneratorResidual residual:residuals) if(residual.invariant()) count++; return count;
@@ -102,21 +113,39 @@ public final class HistoricalIdealInvariance implements Serializable {
     private static HistoricalIdealInvariance compute(){
         RationalMatrix basis=columns(DixonMinimalLeftIdeal.model());
         RationalMatrix inverse=basis.transpose().multiply(basis).inverse();
+        RationalMatrix complexCoordinates=inverse.multiply(basis.transpose())
+                .multiply(RationalDixonZ2.complexPhaseGeneratorMatrix()).multiply(basis);
         List<GeneratorResidual> residuals=new ArrayList<GeneratorResidual>();
         List<RationalMatrix> color=RationalOctonionDerivations.su3StabilizerCandidates();
-        for(int index=0;index<color.size();index++) residuals.add(new GeneratorResidual("octonion-stabilizer",index,residual(basis,inverse,color.get(index),true)));
+        for(int index=0;index<color.size();index++) residuals.add(measured("octonion-stabilizer",index,basis,inverse,color.get(index),true));
         List<RationalMatrix> weak=RationalOctonionDerivations.quaternionAdjointGenerators();
-        for(int index=0;index<weak.size();index++) residuals.add(new GeneratorResidual("quaternion-adjoint",index,residual(basis,inverse,weak.get(index),false)));
-        return new HistoricalIdealInvariance(basis,inverse,residuals);
+        for(int index=0;index<weak.size();index++) residuals.add(measured("quaternion-adjoint",index,basis,inverse,weak.get(index),false));
+        return new HistoricalIdealInvariance(basis,inverse,complexCoordinates,residuals);
     }
-    private static RationalMatrix residual(RationalMatrix basis,RationalMatrix inverse,RationalMatrix generator,boolean octonion){
+    private static GeneratorResidual measured(String family,int index,RationalMatrix basis,RationalMatrix inverse,RationalMatrix generator,boolean octonion){
+        RationalMatrix image=imageColumns(basis,generator,octonion);
+        Rational[][] rows=new Rational[128][16];
+        for(int column=0;column<16;column++){
+            RationalVector orthogonal=image.column(column).add(basis.multiply(inverse.multiply(basis.transpose().multiply(image.column(column)))).scale(Rational.ONE.negate()));
+            for(int row=0;row<128;row++) rows[row][column]=orthogonal.get(row);
+        }
+        return new GeneratorResidual(family,index,new RationalMatrix(rows),augmentedRank(basis,image));
+    }
+    private static RationalMatrix imageColumns(RationalMatrix basis,RationalMatrix generator,boolean octonion){
         Rational[][] rows=new Rational[128][16];
         for(int column=0;column<16;column++){
             RationalVector image=octonion?WittGaugeAction.applyOctonion(basis.column(column),generator):WittGaugeAction.applyQuaternion(basis.column(column),generator);
-            RationalVector orthogonal=image.add(basis.multiply(inverse.multiply(basis.transpose().multiply(image))).scale(Rational.ONE.negate()));
-            for(int row=0;row<128;row++) rows[row][column]=orthogonal.get(row);
+            for(int row=0;row<128;row++) rows[row][column]=image.get(row);
         }
         return new RationalMatrix(rows);
+    }
+    private static int augmentedRank(RationalMatrix basis,RationalMatrix image){
+        Rational[][] rows=new Rational[128][32];
+        for(int column=0;column<16;column++) for(int row=0;row<128;row++){
+            rows[row][column]=basis.get(row,column);
+            rows[row][16+column]=image.get(row,column);
+        }
+        return new RationalMatrix(rows).rank();
     }
     private static RationalMatrix columns(DixonMinimalLeftIdeal ideal){
         Rational[][] rows=new Rational[128][16];

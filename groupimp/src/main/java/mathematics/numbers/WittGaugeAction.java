@@ -155,7 +155,8 @@ public final class WittGaugeAction implements Serializable {
         for(int c=0;c<16;c++) for(int r=0;r<128;r++) rows[r][c]=ideal.states().get(c).vector().toVector().get(r);
         return new RationalMatrix(rows);
     }
-    static RationalVector applyOctonion(RationalVector value,RationalMatrix generator){
+    /** Lift of an octonion-index generator to the 128 rational coordinates. */
+    public static RationalVector applyOctonion(RationalVector value,RationalMatrix generator){
         Rational[] out=new Rational[128];
         Arrays.fill(out,Rational.ZERO);
         for(int index=0;index<128;index++) if(value.get(index).signum()!=0){
@@ -169,7 +170,28 @@ public final class WittGaugeAction implements Serializable {
         }
         return new RationalVector(out);
     }
-    static RationalVector applyQuaternion(RationalVector value,RationalMatrix generator){
+    /** Full 128x128 lift of an octonion-index generator. */
+    public static RationalMatrix liftOctonion(RationalMatrix generator){
+        return lift(generator,true);
+    }
+    /** Full 128x128 lift of a quaternion-index generator. */
+    public static RationalMatrix liftQuaternion(RationalMatrix generator){
+        return lift(generator,false);
+    }
+    private static RationalMatrix lift(RationalMatrix generator,boolean octonion){
+        Rational[][] rows=new Rational[128][128];
+        for(int column=0;column<128;column++){
+            Rational[] values=new Rational[128];
+            Arrays.fill(values,Rational.ZERO);
+            values[column]=Rational.ONE;
+            RationalVector image=octonion?applyOctonion(new RationalVector(values),generator)
+                    :applyQuaternion(new RationalVector(values),generator);
+            for(int row=0;row<128;row++) rows[row][column]=image.get(row);
+        }
+        return new RationalMatrix(rows);
+    }
+    /** Lift of a quaternion-index generator to the 128 rational coordinates. */
+    public static RationalVector applyQuaternion(RationalVector value,RationalMatrix generator){
         Rational[] out=new Rational[128];
         Arrays.fill(out,Rational.ZERO);
         for(int index=0;index<128;index++) if(value.get(index).signum()!=0){
