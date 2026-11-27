@@ -6,6 +6,16 @@
 **Build:** Java 17.0.4.1, Apache Maven 3.9.11, JUnit 4 / Surefire 3.2.5  
 **Command:** `mvn -f groupimp/pom.xml test` after `mvn -f groupimp/pom.xml clean`
 
+The header above is only the original 937-test audit on `d577dca`. Later `master` runs are separate:
+
+| Run | Branch | Commit | Tests | Section |
+| --- | --- | --- | --- | --- |
+| Original structural and empirical audit | `codex/ccdr-v710-synthesis-v39-pipeline` | `d577dca` | 95 classes, 937 passed | 1-5 |
+| Dynamical spectral action | `master` | `c2055e2` | 96 classes, 941 passed | 6 |
+| Gauge, triality, and cosmology transfers | `master` | `d25b805` | 97 classes, 948 passed | 7 |
+| Historical-generator invariance | `master` | `b8021d0` plus this audit | 98 classes, 951 passed, 0 failures, about 80 s | 8 |
+
+
 ## 1. Executive Summary and Build Telemetry
 
 The structural pipeline checks execute through exact rational carriers, high-precision numerical carriers, and native algebra flows. The physical-data audit reproduces the PDG CKM Jarlskog central value within its quoted uncertainty, and the PDG tau-mass one-sigma interval for the computed Koide ratio contains 2/3. The audit also records cases where supplied model identifications do not follow from implemented equations or cited measurements.
@@ -177,3 +187,47 @@ k₄ = 3 + (ν π²/6) (0.40)² (N−4)² = 3.02139203855.
 The model anisotropy axis and the model parity axis are both (0,0,1), so their absolute cosine is 1. An externally supplied cosine of 0 against a 3σ threshold 0.5 returns `FAIL_3SIGMA`. This checks the predicate. It is not a measurement of a CMB axis.
 
 The rank-8 BSM1 endomorphism doubles the first exponent coordinate. That algebraic eigenvalue is 2, registered as `bsm1-doubling`. It is not equal to ν. The mass splitting Δ = ν m_DM = 0.508 GeV at the assumed inputs ν=0.00508 and m_DM=100 GeV remains a product of catalogue numbers. Status: **Conditional**.
+
+## 8. Historical generators on the occupation ideal
+
+Starting point: `master` at `b8021d055665b13e67deea34929f88d45daa7fa8`. Java 17.0.4.1, Maven 3.9.11. The fast-forward update was already current. No branch history was rewritten.
+
+`HistoricalIdealInvariance` builds the basis matrix \(B\) with the 16 occupation vectors as columns and the orthogonal projector \(P=B(B^TB)^{-1}B^T\). Exact checks: \(B\) has rank 16, \((B^TB)(B^TB)^{-1}=I_{16}\), \(P\) fixes every column of \(B\), and \(P^2v=Pv\) for every standard basis vector of \(\mathbb{Q}^{128}\). Status of the projector: **Verified**.
+
+For each historical generator \(G\), the residual is the full \(128\times 16\) matrix \(R_G=(I-P)GB\), with its rank and squared Frobenius norm. These are not replaced by their projections.
+
+| Generator | Rank of \(R_G\) | \(\|R_G\|_F^2\) | Invariant |
+| --- | ---: | ---: | --- |
+| Octonion stabilizer 0–7 | 0 | 0 | yes |
+| Quaternion adjoint 0, the adjoint of \(i_H\) | 8 | 16 | no |
+| Quaternion adjoint 1, the adjoint of \(j_H\) | 0 | 0 | yes |
+| Quaternion adjoint 2, the adjoint of \(k_H\) | 8 | 16 | no |
+
+The eight stabilizer residuals are the zero matrix. The two failing residuals each have rank 8 and squared norm 16. Their sum is 32, matching the earlier scalar defect. Nine of the eleven generators preserve the span. Status of full historical invariance: **Falsified for the current formulation**.
+
+Minimal counterexample: quaternion adjoint 0 applied to `e_L` has orthogonal component 1 at rational coordinate 48. So \(R_G\) is not the zero matrix, and the image is not in the ideal.
+
+The occupation basis multiplies the weak bit by quaternion \(j_H\). The adjoint of \(j_H\) preserves that choice. The adjoints of \(i_H\) and \(k_H\) rotate it out of the span. The eight color stabilizers do preserve the span, but that is not eight \(\mathfrak{su}(3)\) generators with verified structure constants on the 16-dimensional space. No Gell-Mann or Pauli matrices were substituted as a derivation.
+
+What is not established:
+
+- Three \(\mathfrak{su}(2)_L\) generators \(T_1,T_2,T_3\) obeying \([T_a,T_b]=i\epsilon_{abc}T_c\) as restrictions of the historical adjoints. Only the \(j_H\) adjoint preserves the ideal. Status: **Not established**.
+- Eight \(\mathfrak{su}(3)_C\) generators and \(C_2(3)=C_2(\bar 3)=4/3\) computed from those generators rather than from occupation labels. The stabilizer matrices preserve the span, but their 16-dimensional commutators and Casimirs were not derived. Status: **Not established**.
+- Hypercharge commuting with a historically induced non-Abelian action. Status: **Not established**.
+- The joint representation emerging from the operators rather than from the occupation dictionary. Status: **Not established**.
+
+The smallest change that would be required, and which was not made, is to enlarge or replace the ideal so that the \(i_H\) and \(k_H\) adjoints preserve it, then recompute the color and weak actions there. Projecting the failed adjoints back onto the current span would not be that derivation.
+
+### Spectral action, flavor, anomalies, and the renormalization scale
+
+The block-odd Higgs direction remains a chosen matrix. `higgsDirectionIsAnsatz()` is true. Its trace polynomial is still the exact identity \(\operatorname{Tr}(D_A^4)=128(\phi^2-1)^2\). Gauge covariance of that direction under the historical adjoints is **Not established**, because two of those adjoints do not preserve the ideal.
+
+`[[D_F,i_C], J_F b J_F^{-1}]` is zero for \(b=i_C\) and \(b=i_H\). That does not extend the first-order condition to the full Dixon algebra or to every element of \(\mathbb{C}\otimes\mathbb{H}\). Status: **Conditional**.
+
+The ν perturbation still gives δ = 0.528678775598, J ≈ 0, and Q = 0.333334404498. Measured CKM and Koide values were not inserted. Status of that flavor mechanism: **Falsified for the current formulation**.
+
+`OneLoopRGEFlow.RESULT_KIND` is `reconstruction`. The scale uses the external electromagnetic coupling and the supplied weak angle. It is not a CCDR prediction. Status: **Conditional**.
+
+Anomaly traces of the occupation matrices are \(\operatorname{Tr} Y=0\), \(\operatorname{Tr} Y^3=0\), and four states have \(T_3=+1/2\), so the doublet count is even. Those numbers describe the encoded assignment. They are not anomalies of a representation induced by the historical generators. Status of CCDR-derived anomaly cancellation: **Not established**.
+
+The cosmological statements in Section 7 are unchanged. The raw sheet value remains about 3.021392, the audit factor remains about 196.33, and the BSM1 doubling remains 2 rather than ν.

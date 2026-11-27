@@ -19,6 +19,8 @@ public final class OneLoopRGEFlow implements Serializable {
     public static final Rational B1=Rational.of(41,10);
     public static final Rational B2=Rational.of(-19,6);
     public static final Rational B3=Rational.of(-7);
+    /** The solved scale uses the supplied electromagnetic coupling and the supplied weak angle. It is not an ab initio prediction. */
+    public static final String RESULT_KIND="reconstruction";
 
     private OneLoopRGEFlow(){}
 

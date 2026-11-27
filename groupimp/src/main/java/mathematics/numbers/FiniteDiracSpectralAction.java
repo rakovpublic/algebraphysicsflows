@@ -25,6 +25,8 @@ public final class FiniteDiracSpectralAction implements Serializable {
     public RationalMatrix realStructure(){return realStructure;}
     public RationalMatrix dirac(){return dirac;}
     public RationalMatrix higgsDirection(){return higgsDirection;}
+    /** The block-odd direction was chosen so the trace polynomial has a positive quartic. It is not derived from a gauge orbit. */
+    public boolean higgsDirectionIsAnsatz(){return true;}
     public int dimension(){return N;}
     /** Coefficient of phi^4 in Tr(D_A^4), with D_A = D + phi H and H the symmetrized Higgs direction. */
     public Rational quarticNumerator(){return quarticNumerator;}
