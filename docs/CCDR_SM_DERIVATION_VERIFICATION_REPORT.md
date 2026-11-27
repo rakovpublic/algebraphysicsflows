@@ -14,6 +14,7 @@ The header above is only the original 937-test audit on `d577dca`. Later `master
 | Dynamical spectral action | `master` | `c2055e2` | 96 classes, 941 passed | 6 |
 | Gauge, triality, and cosmology transfers | `master` | `d25b805` | 97 classes, 948 passed | 7 |
 | Historical-generator invariance | `master` | `b8021d0` plus this audit | 98 classes, 951 passed, 0 failures, about 80 s | 8 |
+| Historical-gauge derivation audit | `master` | `3203e8f9` → `7cbd17e2` | 99 classes, 969 passed, 0 failures | 8 |
 
 
 ## 1. Executive Summary and Build Telemetry
@@ -190,44 +191,127 @@ The rank-8 BSM1 endomorphism doubles the first exponent coordinate. That algebra
 
 ## 8. Historical generators on the occupation ideal
 
-Starting point: `master` at `b8021d055665b13e67deea34929f88d45daa7fa8`. Java 17.0.4.1, Maven 3.9.11. The fast-forward update was already current. No branch history was rewritten.
+Starting point: `master` at `3203e8f9aada9ffda7cfa6f50a78d01aafe34ea4` ("Record the historical-generator invariance obstruction."). Implementation commit: `7cbd17e29b839b06af952eb557f31fe4235acf7e`; this report is committed immediately after it. Java 17.0.4.1, Apache Maven 3.9.11, JUnit 4, Surefire 3.2.5. Baseline `mvn -f groupimp/pom.xml clean test` before any modification: BUILD SUCCESS, **98 test classes, 951 tests, 0 failures, 0 errors, 0 skipped**, Maven total 1:22. Final `mvn -f groupimp/pom.xml clean test` after the change: BUILD SUCCESS, **99 test classes, 969 tests, 0 failures, 0 errors, 0 skipped**, Maven total 2:28. No branch history was rewritten and nothing was force-pushed.
 
-`HistoricalIdealInvariance` builds the basis matrix \(B\) with the 16 occupation vectors as columns and the orthogonal projector \(P=B(B^TB)^{-1}B^T\). Exact checks: \(B\) has rank 16, \((B^TB)(B^TB)^{-1}=I_{16}\), \(P\) fixes every column of \(B\), and \(P^2v=Pv\) for every standard basis vector of \(\mathbb{Q}^{128}\). Status of the projector: **Verified**.
+Changed files in this audit:
 
-For each historical generator \(G\), the residual is the full \(128\times 16\) matrix \(R_G=(I-P)GB\), with its rank and squared Frobenius norm. These are not replaced by their projections.
+- `HistoricalIdealInvariance.java` (modified): column-span rank of every residual and the central complex structure restricted to the ideal.
+- `WittGaugeAction.java` (modified): public full 128x128 lifts `liftOctonion`, `liftQuaternion`.
+- `RestrictedColorStabilizer.java` (new): exact restriction, closure, structure constants, Jacobi, trace form, Casimir, decomposition, commutant.
+- `HistoricalWeakSector.java` (new): adjoint versus left action, Casimir spectra, invariant closures.
+- `DiracGaugeCompatibility.java` (new): commutators with `gamma_F`, `D_F`, `J_F`, and the Higgs direction.
+- `DerivedGaugeObstruction.java` (new): aggregated status, no new projector or redefined generator.
+- `CCDRGaugeResolutionTest.java` (new): 18 exact tests.
 
-| Generator | Rank of \(R_G\) | \(\|R_G\|_F^2\) | Invariant |
-| --- | ---: | ---: | --- |
-| Octonion stabilizer 0–7 | 0 | 0 | yes |
-| Quaternion adjoint 0, the adjoint of \(i_H\) | 8 | 16 | no |
-| Quaternion adjoint 1, the adjoint of \(j_H\) | 0 | 0 | yes |
-| Quaternion adjoint 2, the adjoint of \(k_H\) | 8 | 16 | no |
+No Gell-Mann matrices, no Pauli matrices, and no new free parameters were introduced. The historical generators are used as they are; the only new constructions are the restriction (defined because the residual vanishes) and the exact analysis of the existing lifts.
 
-The eight stabilizer residuals are the zero matrix. The two failing residuals each have rank 8 and squared norm 16. Their sum is 32, matching the earlier scalar defect. Nine of the eleven generators preserve the span. Status of full historical invariance: **Falsified for the current formulation**.
+### 8.1 Exact residual audit
 
-Minimal counterexample: quaternion adjoint 0 applied to `e_L` has orthogonal component 1 at rational coordinate 48. So \(R_G\) is not the zero matrix, and the image is not in the ideal.
+\(B\) is the \(128\times16\) matrix whose columns are the occupation vectors, and \(P=B(B^TB)^{-1}B^T\). Exact checks: \(\operatorname{rank}B=16\), \((B^TB)(B^TB)^{-1}=I_{16}\), \(P\) fixes every column of \(B\), and \(P^2v=Pv\) for all 128 standard basis vectors. Status of the projector: **VERIFIED**.
 
-The occupation basis multiplies the weak bit by quaternion \(j_H\). The adjoint of \(j_H\) preserves that choice. The adjoints of \(i_H\) and \(k_H\) rotate it out of the span. The eight color stabilizers do preserve the span, but that is not eight \(\mathfrak{su}(3)\) generators with verified structure constants on the 16-dimensional space. No Gell-Mann or Pauli matrices were substituted as a derivation.
+For each historical generator \(G\), \(R_G=(I-P)GB\) is kept as the full \(128\times16\) matrix. Invariance is also tested without the projector as \(\operatorname{rank}[B\,|\,GB]=16\). The two tests agree for every generator.
 
-What is not established:
+| Generator | \(\operatorname{rank}R_G\) | \(\|R_G\|_F^2\) | \(\operatorname{rank}[B\,|\,GB]\) | Invariant |
+| --- | ---: | ---: | ---: | --- |
+| Octonion stabilizer 0-7 | 0 | 0 | 16 | yes |
+| Quaternion adjoint 0, \(\operatorname{ad} i_H\) | 8 | 16 | 24 | no |
+| Quaternion adjoint 1, \(\operatorname{ad} j_H\) | 0 | 0 | 16 | yes |
+| Quaternion adjoint 2, \(\operatorname{ad} k_H\) | 8 | 16 | 24 | no |
 
-- Three \(\mathfrak{su}(2)_L\) generators \(T_1,T_2,T_3\) obeying \([T_a,T_b]=i\epsilon_{abc}T_c\) as restrictions of the historical adjoints. Only the \(j_H\) adjoint preserves the ideal. Status: **Not established**.
-- Eight \(\mathfrak{su}(3)_C\) generators and \(C_2(3)=C_2(\bar 3)=4/3\) computed from those generators rather than from occupation labels. The stabilizer matrices preserve the span, but their 16-dimensional commutators and Casimirs were not derived. Status: **Not established**.
-- Hypercharge commuting with a historically induced non-Abelian action. Status: **Not established**.
-- The joint representation emerging from the operators rather than from the occupation dictionary. Status: **Not established**.
+The eight stabilizer residuals vanish. The two failing residuals each have rank 8 and squared norm 16; their sum is 32. Nine of eleven generators preserve the span. Minimal counterexample: \(\operatorname{ad} i_H\) applied to `e_L` has orthogonal component 1 at rational coordinate 48. Status of full historical invariance: **FALSIFIED** (unchanged).
 
-The smallest change that would be required, and which was not made, is to enlarge or replace the ideal so that the \(i_H\) and \(k_H\) adjoints preserve it, then recompute the color and weak actions there. Projecting the failed adjoints back onto the current span would not be that derivation.
+### 8.2 Color: the eight stabilizers form a compact \(\mathfrak{su}(3)\)
 
-### Spectral action, flavor, anomalies, and the renormalization scale
+Because all eight octonion-stabilizer residuals vanish, their restriction to the ideal is well defined:
+\(D_a=(B^TB)^{-1}B^T G_a B\), a \(16\times16\) rational matrix. This is a restriction, not a projection of a failed generator.
 
-The block-odd Higgs direction remains a chosen matrix. `higgsDirectionIsAnsatz()` is true. Its trace polynomial is still the exact identity \(\operatorname{Tr}(D_A^4)=128(\phi^2-1)^2\). Gauge covariance of that direction under the historical adjoints is **Not established**, because two of those adjoints do not preserve the ideal.
+Computed from the eight \(D_a\):
 
-`[[D_F,i_C], J_F b J_F^{-1}]` is zero for \(b=i_C\) and \(b=i_H\). That does not extend the first-order condition to the full Dixon algebra or to every element of \(\mathbb{C}\otimes\mathbb{H}\). Status: **Conditional**.
+- **Independence.** The flattened 8-tuple has rank 8.
+- **Closure.** All 28 commutators lie in the span; the number outside the span is 0.
+- **Structure constants.** The exact tensor \(f_{abc}\) defined by \([D_a,D_b]=\sum_c f_{ab}{}^c D_c\) is computed over \(\mathbb{Q}\). It reproduces every commutator exactly, satisfies \(f_{ab}{}^c+f_{ba}{}^c=0\), satisfies the Jacobi identity for all index quadruples, and the lowered tensor \(f_{abc}=\sum_d f_{ab}{}^d g_{dc}\) is totally antisymmetric, as compactness requires. The full tensor is exposed by `RestrictedColorStabilizer.structureConstants()`.
+- **Trace form.** On the 16-dimensional restriction,
+  \[
+  g=\begin{pmatrix}
+  -96&0&0&48&0&0&0&0\\
+  0&-288&0&0&0&0&0&0\\
+  0&0&-288&0&0&0&0&0\\
+  48&0&0&-96&0&0&0&0\\
+  0&0&0&0&-72&0&0&0\\
+  0&0&0&0&0&-288&0&0\\
+  0&0&0&0&0&0&-288&0\\
+  0&0&0&0&0&0&0&-288
+  \end{pmatrix}.
+  \]
+  Its leading principal minors alternate in sign, so \(g\) is negative definite and the real form is compact. The 8-dimensional octonion trace form is one half of this matrix; its leading minors are \(-48,6912,-995328,\ldots,3851755393646592\).
+- **Center and rank.** Center dimension 0, rank 2. A compact, centerless, 8-dimensional real Lie algebra of rank 2 is \(\mathfrak{su}(3)\) (type \(A_2\)); this identification uses the classification of compact simple Lie algebras, not a matching of matrices to Gell-Mann.
+- **Casimir from the actual restricted matrices.** With the inverse trace form,
+  - on the 8-dimensional octonion module: eigenvalues \(0\) (mult 2) and \(4/3\) (mult 6), trace 8;
+  - on the 16-dimensional occupation module: eigenvalues \(0\) (mult 4) and \(2/3\) (mult 12), trace 8.
+  The 16-dimensional trace form is twice the 8-dimensional one, so the normalized eigenvalue is halved; as an operator the 16-dimensional Casimir is \(\tfrac12(C_8\oplus C_8)\).
+- **Two-copy decomposition.** In the adapted basis \([e_c v\,|\,j e_c v]\), every restricted matrix is block diagonal with two equal \(8\times8\) blocks. The real commutant has dimension 24, the octonion commutant dimension 6, and the common fixed subspace dimension 2.
+- **Complex structure.** The central \(i_C\) preserves the ideal (coordinate rank 16) and commutes with all eight \(D_a\), so the real 16-dimensional module is complex dimension 8. The centralizer of \(i_C\) inside the commutant has dimension 16.
+- **Decomposition without SM labels.** The real 8-dimensional octonion module has Casimir \(0\) on a 2-dimensional part and \(4/3\) on a 6-dimensional part, i.e. \((1\oplus1)\oplus(3\oplus\bar3)\) after complexification. The 16-real module is two copies, so its complexification is \(2\cdot3+2\cdot\bar3+4\cdot1\). The commutant dimension \(24=2^2+2^2+4^2\) is consistent with exactly that multiplicity pattern.
 
-The ν perturbation still gives δ = 0.528678775598, J ≈ 0, and Q = 0.333334404498. Measured CKM and Koide values were not inserted. Status of that flavor mechanism: **Falsified for the current formulation**.
+Status of color: the eight restricted matrices **VERIFIED** to form a compact \(\mathfrak{su}(3)\), with exact structure constants, Jacobi, total antisymmetry, compact trace form, and Casimir \(4/3\) on the octonion triplet. This is a derivation, not a label assignment. The complexification of the occupation module carries the same color multiplicities as one Standard Model generation, \(2\cdot3+2\cdot\bar3+4\cdot1\).
 
-`OneLoopRGEFlow.RESULT_KIND` is `reconstruction`. The scale uses the external electromagnetic coupling and the supplied weak angle. It is not a CCDR prediction. Status: **Conditional**.
+Caveat: the physical real module has complex dimension 8, not 16. The 16 complex states of a generation are not obtained from the 16 real occupation vectors unless one doubles by \(i_C\); that doubling is an additional assumption, not a consequence of the construction.
 
-Anomaly traces of the occupation matrices are \(\operatorname{Tr} Y=0\), \(\operatorname{Tr} Y^3=0\), and four states have \(T_3=+1/2\), so the doublet count is even. Those numbers describe the encoded assignment. They are not anomalies of a representation induced by the historical generators. Status of CCDR-derived anomaly cancellation: **Not established**.
+### 8.3 Weak: the adjoint action cannot contain a doublet
 
-The cosmological statements in Section 7 are unchanged. The raw sheet value remains about 3.021392, the audit factor remains about 196.33, and the BSM1 doubling remains 2 rather than ν.
+The three historical weak generators are \(\operatorname{ad} i_H\), \(\operatorname{ad} j_H\), \(\operatorname{ad} k_H\) on the quaternion factor. Their exact residuals are rank 8/norm 16 for \(i_H\) and \(k_H\), and rank 0/norm 0 for \(j_H\). Only the \(j_H\) adjoint preserves the 16-state ideal. Status of the three-generator action on the ideal: **FALSIFIED**.
+
+The algebraic reason, computed exactly:
+
+- The common kernel of the three adjoints has dimension 1 (the center \(\mathbb{R}\cdot1\)); the image has dimension 3 (\(\operatorname{Im}\mathbb{H}\)).
+- The adjoint Casimir on \(\mathbb{H}\) has eigenvalues \(0\) (mult 1) and \(-8\) (mult 3). This is the real \(1\oplus3\) decomposition. The spin-\(\tfrac12\) Casimir is \(-3\); it does not occur.
+- The adjoint representation of a compact group is integer-spin. Its complexification contains only integer-spin irreps, and tensoring with a commuting color representation cannot create a \(2\). Therefore **no invariant module built from the adjoint action, at any dimension, contains a weak doublet**. This is an exact obstruction, not a numerical accident.
+
+The four routes considered:
+
+- **A. Different idempotent or basis.** Any invertible change of basis of the same 16-state span leaves \(\operatorname{rank}[B\,|\,GB]\) unchanged (tested with a shear). A different idempotent does not change the fact that the adjoint action is \(1\oplus3\). Status: **NOT ESTABLISHED**.
+- **B. Left multiplication by \(\operatorname{Im}\mathbb{H}\)** (the historically natural spinor action on the same quaternion factor). The \(4\times4\) left-multiplication generators have Casimir \(-3\) with multiplicity 4 on \(\mathbb{H}\), i.e. a real four-dimensional spinor whose complexification is \(2\oplus2\). It does contain the spin-\(\tfrac12\) Casimir, but it has no singlet and it does not preserve the 16-state ideal. Its invariant closure has 32 real dimensions with restricted Casimir trace \(-96\), so all 32 real dimensions are doublet-type and there is no singlet. It cannot by itself reproduce the lepton doublet plus charged-lepton singlet. Status: **NOT ESTABLISHED**.
+- **C. Larger invariant module.** The smallest invariant closure of the ideal under the adjoint action has 32 real dimensions (\(=16\) complex). Its restricted adjoint Casimir trace is \(-192\), i.e. 24 triplet dimensions and 8 singlet dimensions (eight copies of \(3\) plus eight copies of \(1\)); there is still no doublet. Under left multiplication the closure is also 32 real dimensions, with 32 doublet dimensions and no singlet. Neither closure yields the Standard Model weak content, and neither is the 16-state ideal. Status: **FALSIFIED for the Standard Model**.
+- **D. Impossibility proof for the historical adjoint generators.** Given above: the adjoint action is \(1\oplus3\), so no invariant module contains a \(2\). Status: **VERIFIED (negative result)**.
+
+### 8.4 Joint representation and hypercharge
+
+- **Cross-sector commutation.** The color derivations act on the octonion factor and the quaternion lifts on the quaternion factor; their 128x128 lifts commute exactly. But the weak adjoint does not act on the 16-state ideal, so there is no joint action there.
+- **Hypercharge.** The occupation-dictionary \(Y\) is diagonal on the 16 states, with \(\operatorname{Tr}Y=0\) and \(\sum Y^3=0\). It fails to commute with **7 of the 8** derived color generators. Hence \(Y\) is not a color-invariant hypercharge for the derived color action, and \(Q=T_3+Y\) is not a derived operator. Status: **FALSIFIED**.
+- **Exact eigenspaces.** The eigenspaces of the dictionary \(Y\) are the encoded charge multiplicities; they are not color singlets of the derived action.
+- **Anomalies.** The symmetrized cubic color anomaly \(\operatorname{Tr}(D_a\{D_b,D_c\})\) vanishes identically and every \(D_a\) is traceless. The dictionary traces \(\operatorname{Tr}Y=0\), \(\operatorname{Tr}Y^3=0\) are the encoded ones, not anomalies of a derived joint representation. Status of derived anomaly cancellation: **NOT ESTABLISHED**.
+- **Joint representation.** Status: **FALSIFIED** on the 16-state module. There is no derived hypercharge and no weak doublet.
+
+### 8.5 Finite Dirac operator, Higgs, and spectral action
+
+- **Color lifts.** For 5 of the 8 generators the lifts fail to commute with \(\gamma_F\), \(D_F\), and \(J_F\): the derivations change the octonion grade. Color gauge covariance of the finite Dirac operator is **FALSIFIED**.
+- **Weak adjoint lifts.** The quaternion adjoints commute with \(\gamma_F\), \(D_F\), and \(J_F\) (0 failures). This compatibility is vacuous for the weak sector because the adjoint carries no doublet.
+- **Higgs direction.** The block-odd Higgs direction has 5 color failures and 0 weak-adjoint failures. It is not covariant under the derived color action. `higgsDirectionIsAnsatz()` remains true.
+- **Spectral action.** The trace identity \(\operatorname{Tr}(D_A^4)=128(\phi^2-1)^2\) and the spectral-action coefficients are unchanged and remain **CONDITIONAL** on the chosen Higgs direction. They are not a consequence of the derived representation.
+- **First-order condition.** \([[D_F,i_C],J_F b J_F^{-1}]=0\) is still verified only for \(b=i_C\) and \(b=i_H\), not for the full Dixon algebra or all of \(\mathbb{C}\otimes\mathbb{H}\). Status: **CONDITIONAL**.
+
+### 8.6 Unresolved physics (unchanged)
+
+- Triality and CP remain unresolved.
+- No measured CKM element, phase, or mass was inserted. The \(\nu\)-perturbed flavor result remains a failure: \(\delta=0.528678775598\), \(J\approx0\), \(Q=0.333334404498\). Status: **FALSIFIED**.
+- P-A26 \(k_4\approx3.02139203855\) against the window \(6.4\)-\(8.0\) remains unresolved. Status: **TENSION**.
+- No 196.33 factor was introduced, no refit, and no relabel.
+
+### 8.7 Overall verdict
+
+| Claim | Status |
+| --- | --- |
+| The eight historical stabilizers restrict to a compact \(\mathfrak{su}(3)\) | **VERIFIED** |
+| Color content \(2\cdot3+2\cdot\bar3+4\cdot1\) | **VERIFIED on the complexification**; the physical module is complex dimension 8 |
+| The three historical weak generators act on the 16-state ideal | **FALSIFIED** (only \(j_H\)) |
+| A weak doublet from the adjoint action | **FALSIFIED** (no invariant module) |
+| The left-multiplication alternative | **NOT ESTABLISHED** (\(2\oplus2\), no singlet) |
+| A joint \(\mathrm{SU}(3)\times\mathrm{SU}(2)\) representation | **FALSIFIED** |
+| Hypercharge commuting with the derived color action | **FALSIFIED** |
+| Anomalies from a derived representation | **NOT ESTABLISHED** |
+| Dirac/Higgs gauge covariance | **FALSIFIED** for color; **CONDITIONAL** for the spectral action |
+| Spectral-action prediction | **CONDITIONAL** |
+
+The historical Dixon/octonion construction does **not** derive the Standard Model \(\mathrm{SU}(3)\times\mathrm{SU}(2)\times\mathrm{U}(1)\) representation on the 16-state Witt occupation ideal. Color is genuinely \(\mathfrak{su}(3)\) and its complexified content matches the color multiplicities of one generation, but the weak adjoint cannot produce a doublet at any module size, the real module is half the required complex size, and the dictionary hypercharge is not color invariant. This is a rigorous negative result, not a numerical shortfall.
+
+The cosmological statements in Section 7 are unchanged. The raw sheet value remains about 3.021392, the audit factor remains about 196.33, and the BSM1 doubling remains 2 rather than \(\nu\).
