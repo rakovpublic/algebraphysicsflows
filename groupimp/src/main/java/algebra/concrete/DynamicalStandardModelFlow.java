@@ -5,10 +5,12 @@ import algebra.imp.MathTool;
 import algebraflow.IAlgebraFlow;
 import algebraflow.imp.AlgebraFlow;
 import algebraflow.imp.ListAlgebraInput;
+import mathematics.numbers.CosmologicalTransfers;
 import mathematics.numbers.DixonMinimalLeftIdeal;
 import mathematics.numbers.FiniteDiracSpectralAction;
 import mathematics.numbers.OneLoopRGEFlow;
 import mathematics.numbers.Rational;
+import mathematics.numbers.WittGaugeAction;
 import operations.simple.OneOperandOperation;
 import java.util.Collections;
 
@@ -25,6 +27,10 @@ public final class DynamicalStandardModelFlow {
         rationals.addOneOperandOperation("ideal-rank",new OneOperandOperation<Rational>("ideal-rank",rationals,ignored -> Rational.of(DixonMinimalLeftIdeal.model().rank())));
         rationals.addOneOperandOperation("quartic-sign",new OneOperandOperation<Rational>("quartic-sign",rationals,
                 ignored -> FiniteDiracSpectralAction.model().quarticIsPositive()?Rational.ONE:Rational.ZERO));
+        rationals.addOneOperandOperation("su2-casimir-doublet",new OneOperandOperation<Rational>("su2-casimir-doublet",rationals,ignored -> WittGaugeAction.model().su2Casimir(0)));
+        rationals.addOneOperandOperation("su3-casimir-triplet",new OneOperandOperation<Rational>("su3-casimir-triplet",rationals,ignored -> WittGaugeAction.model().su3Casimir(2)));
+        rationals.addOneOperandOperation("algebraic-depth",new OneOperandOperation<Rational>("algebraic-depth",rationals,ignored -> Rational.of(CosmologicalTransfers.algebraicDepth(8))));
+        rationals.addOneOperandOperation("bsm1-doubling",new OneOperandOperation<Rational>("bsm1-doubling",rationals,ignored -> CosmologicalTransfers.algebraicDoubling()));
         MathTool tool=new MathTool("dynamical-sm");
         tool.addAlgebra(rationals);
         return tool;

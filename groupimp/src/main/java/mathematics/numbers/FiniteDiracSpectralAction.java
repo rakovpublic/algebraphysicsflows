@@ -101,6 +101,21 @@ public final class FiniteDiracSpectralAction implements Serializable {
         }
         return new RationalMatrix(rows);
     }
+    /** First-order defect of one associative-slice element against complex i, as a squared Frobenius norm. */
+    public static Rational associativeSliceDefect(RationalDixonZ2 element){
+        RationalMatrix dirac=model().dirac();
+        RationalMatrix real=model().realStructure();
+        RationalMatrix left=element.leftMultiplicationMatrix();
+        RationalMatrix scalar=complexScalarMatrix(new RationalComplex(Rational.ZERO,Rational.ONE));
+        RationalMatrix opposite=real.multiply(left).multiply(real);
+        RationalMatrix defect=commutator(commutator(dirac,scalar),opposite);
+        return frobenius(defect);
+    }
+    private static Rational frobenius(RationalMatrix matrix){
+        Rational sum=Rational.ZERO;
+        for(int r=0;r<matrix.rows();r++) for(int c=0;c<matrix.columns();c++) sum=sum.add(matrix.get(r,c).multiply(matrix.get(r,c)));
+        return sum;
+    }
     public static RationalMatrix commutator(RationalMatrix a,RationalMatrix b){
         return a.multiply(b).add(b.multiply(a).scale(Rational.ONE.negate()));
     }

@@ -133,6 +133,15 @@ public final class RationalTwistedHahnSeries implements Serializable {
      * outside the map's domain. This is not the valuation/leading-term map.
      */
     public RationalDixonZ2 projectChi5ToOneInDixon() { return RationalDixonZ2.fromQuaternion(evaluateAt(Rational.ONE)); }
+    /**
+     * Leading-grade piece in the t-adic associated graded ring. For elements whose
+     * leading grades add without cancellation, this projection preserves multiplication.
+     * It is not the t=1 specialization {@link #projectChi5ToOneInDixon()}.
+     */
+    public RationalTwistedHahnSeries leadingTerm() {
+        BigInteger grade=groupValuation();
+        return fromQuaternion(leadingCoefficient()).multiply(groupElement(grade));
+    }
     public boolean isZero() { return a.isZero() && b.isZero() && c.isZero() && d.isZero(); }
     public boolean isOne() { return equals(ONE_VALUE); }
     public boolean toBoolean() {

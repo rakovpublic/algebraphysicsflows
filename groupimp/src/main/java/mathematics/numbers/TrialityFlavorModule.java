@@ -22,6 +22,45 @@ public final class TrialityFlavorModule implements Serializable {
     }
     public static int weylStateCount(){return 3*DixonMinimalLeftIdeal.model().rank();}
 
+    public static final class Perturbation implements Serializable {
+        private static final long serialVersionUID=1L;
+        public final BigDecimal deltaRadians,jarlskog,koide;
+        public final boolean jarlskogInsidePdg,koideInsideTauInterval;
+        public Perturbation(BigDecimal deltaRadians,BigDecimal jarlskog,BigDecimal koide,boolean jarlskogInsidePdg,boolean koideInsideTauInterval){
+            this.deltaRadians=deltaRadians;this.jarlskog=jarlskog;this.koide=koide;this.jarlskogInsidePdg=jarlskogInsidePdg;this.koideInsideTauInterval=koideInsideTauInterval;
+        }
+        @Override public String toString(){return "delta="+deltaRadians.toPlainString()+" J="+jarlskog.toPlainString()+" Q="+koide.toPlainString()+" Jinside="+jarlskogInsidePdg+" Qinside="+koideInsideTauInterval;}
+    }
+    /**
+     * Adds the catalogue residue nu to the cyclotomic phase and to a generation-permutation mass matrix.
+     * This does not insert PDG masses or the measured CP phase.
+     */
+    public static Perturbation perturb(BigDecimal nu,int precision){
+        MathContext mc=new MathContext(precision+6,RoundingMode.HALF_EVEN);
+        BigDecimal pi=OneLoopRGEFlow.pi(mc);
+        BigDecimal delta=pi.divide(BigDecimal.valueOf(6),mc).add(nu,mc);
+        Complex[][] up=zero();
+        Complex phase=Complex.expi(delta,mc);
+        up[0][0]=Complex.ONE; up[1][1]=phase; up[2][2]=phase.multiply(phase,mc);
+        up[0][1]=Complex.real(nu); up[1][2]=Complex.real(nu); up[2][0]=Complex.real(nu);
+        Complex[][] down=zero();
+        down[0][0]=phase; down[1][1]=Complex.ONE; down[2][2]=phase.conjugate();
+        down[0][2]=Complex.real(nu); down[2][1]=Complex.real(nu); down[1][0]=Complex.real(nu);
+        BigDecimal jarlskog=jarlskog(diagonalizeYukawa(up,mc),diagonalizeYukawa(down,mc),mc).round(new MathContext(precision,RoundingMode.HALF_EVEN));
+        Complex[][] mass=zero();
+        Complex omega=Complex.expi(pi.multiply(BigDecimal.valueOf(2),mc).divide(BigDecimal.valueOf(3),mc),mc);
+        mass[0][0]=Complex.ONE; mass[1][1]=omega; mass[2][2]=omega.multiply(omega,mc);
+        mass[0][1]=Complex.real(nu); mass[1][2]=Complex.real(nu); mass[2][0]=Complex.real(nu);
+        BigDecimal[] singular=cubicEigenvalues(hermitianProduct(mass,mc),mc);
+        for(int i=0;i<3;i++) if(singular[i].signum()<0) singular[i]=singular[i].negate();
+        BigDecimal koide=HighPrecisionAlgebraMetrics.koide(sqrt(singular[0],mc),sqrt(singular[1],mc),sqrt(singular[2],mc),precision);
+        BigDecimal jGap=jarlskog.subtract(new BigDecimal("0.0000312"),mc).abs();
+        boolean jInside=jGap.compareTo(new BigDecimal("0.0000012"))<=0;
+        boolean qInside=koide.compareTo(new BigDecimal("0.666659"))>=0&&koide.compareTo(new BigDecimal("0.666670"))<=0;
+        MathContext out=new MathContext(precision,RoundingMode.HALF_EVEN);
+        return new Perturbation(delta.round(out),jarlskog,koide.round(out),jInside,qInside);
+    }
+
     /** Cycles the three octonion units il,jl,kl. Order 3 on coordinates; not an algebra automorphism in general. */
     public static RationalOctonion coordinateTriality(RationalOctonion value){
         return new RationalOctonion(value.coordinate(0),value.coordinate(1),value.coordinate(2),value.coordinate(3),value.coordinate(4),

@@ -108,6 +108,13 @@ public final class RationalOctonion implements Serializable {
         for(int n=2;n<8;n++) if(coordinate(n).signum()!=0) throw MathFailure.undefined("Octonion is outside the chosen i axis");
         return new RationalImaginary(coordinate(1));
     }
+    /**
+     * Order-3 automorphism of the Cayley-Dickson product: i→j→k→i and il→jl→kl→il, fixing 1 and l.
+     * It extends the quaternion automorphism and is not the coordinate cycle of il,jl,kl alone.
+     */
+    public RationalOctonion orderThreeAutomorphism() {
+        return new RationalOctonion(coordinate(0),coordinate(3),coordinate(1),coordinate(2),coordinate(4),coordinate(7),coordinate(5),coordinate(6));
+    }
     public static RationalOctonion fromQuaternion(RationalQuaternion value) {
         return new RationalOctonion(value.real,value.i,value.j,value.k,Rational.ZERO,Rational.ZERO,Rational.ZERO,Rational.ZERO);
     }

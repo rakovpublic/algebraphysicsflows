@@ -133,3 +133,47 @@ Running back, sin²θ_W(M_Z) reconstructs as 0.23122000000000000000, inside 10^�
 ### Open questions
 
 The embedded charges are eigenvalues of operators defined on this ideal basis. They are not yet the joint spectrum of the historical su(3) stabilizer and quaternion adjoint generators. The first-order condition is verified on Q(i), not on every Dixon element. Yukawa eigenvalue ratios are an ansatz, not a spectrum of D_A. The compactification scale uses an external α_em. Scheme conversion beyond one-loop beta functions is not implemented.
+
+## 7. Gauge representation, graded fold, and cosmological transfers
+
+A clean run after these additions executed **97 test classes and 948 tests: 948 passed, 0 failures, 0 errors, 0 skipped**, in about 93 seconds. `CCDRDerivationUpgradeTest` adds the checks below. The historical stabilizer and adjoint matrices are not identified with the occupation-basis gauge action. The ν-perturbed mass matrix does not move J or the Koide ratio into the PDG bands. The raw P-A26 formula does not reproduce 7.2 ± 0.6. Those items stay **Tension** or **Conditional**.
+
+### Unified occupation-basis gauge action
+
+`WittGaugeAction` builds exact 16×16 rational matrices on the Witt occupation basis: diagonal T₃ and Y, the rational weak swap Tₓ = σₓ/2 on each doublet, and a color 3-cycle on each quark triplet. Hypercharge commutes with T₃, Tₓ, and the color cycle. The color cycle commutes with T₃. Doublet Casimir T₃² + 2 Tₓ², using Tᵧ² = Tₓ², is 3/4; lepton singlets give 0. Color triplets are assigned Casimir 4/3 and leptons 0. The real 4×4 form of (σₓ²+σᵧ²+σ_z²)/4 on one doublet is exactly (3/4) I. The sixteen labels are
+
+(1, 2)_{−1/2}, (3, 2)_{1/6}, (1, 1)_1, (1, 1)_0, (3̄, 1)_{−2/3}, (3̄, 1)_{1/3},
+
+with three colors in each quark multiplet. These operators run through `DynamicalSM` as `su2-casimir-doublet` = 3/4 and `su3-casimir-triplet` = 4/3.
+
+The same test lifts the eight historical octonion-stabilizer matrices and the three quaternion-adjoint matrices to the 128 rational coordinates and measures the squared length of the part orthogonal to the 16-dimensional span. That residual is **32, not zero**. The span is not invariant, so T₃ on the occupation basis is not the restriction of a historical quaternion Cartan. Status of that identification: **not established**.
+
+### Triality automorphism and the perturbed spectrum
+
+`RationalOctonion.orderThreeAutomorphism` cycles i→j→k→i and il→jl→kl→il, fixes 1 and l, has order 3, and preserves the tested products i·j and i·l. It is an automorphism of the Cayley–Dickson product, unlike the earlier cycle of il, jl, kl alone.
+
+`TrialityFlavorModule.perturb(0.00508)` adds that catalogue residue to δ = π/6 and to a generation-permutation mass matrix. It does not insert PDG masses or δ = 1.147. At 12-digit rounding the outputs are
+
+δ = 0.528678775598 rad, J = −5.20257470380×10⁻⁴⁶, Q = 0.333334404498.
+
+J is not inside (3.12 +0.13/−0.12)×10⁻⁵. Q is not inside the τ one-sigma Koide window [0.666659, 0.666670]. A shift of size ν does not bridge π/6 to 1.147 rad. Status: **Tension**.
+
+The first-order defect [[D_F, i_C], J_F b J_F⁻¹] is exactly 0 when b is i_C and when b is quaternion i_H. That is a checked slice of ℂ ⊗ ℍ, not a proof for every element of that subalgebra.
+
+### Graded leading term and the oriented frame
+
+`leadingTerm` on the finite-support lattice and on the rational Hahn subring keeps the minimal-grade piece. For single-term inputs, leading(xy) equals leading(x)·leading(y), including the lattice cocycle. This is not a multiplicative map of the full 5→4 parity fold onto DixonZ2(Q). The t=1 specialization remains a separate operation.
+
+`CCDRChiralFold.fromOrientedBoundary(incidence, frameHandedness)` sets ε₅ to the incidence sign and the foliation arrow to the frame sign. `fromOrientedBoundary(−1,+1)` and `fromOrientedBoundary(+1,−1)` have the same chirality product and different factors. Supplying an ordered frame selects one factorization. The unordered product is still degenerate, so OP20 is not removed for that product. Status: **partial**.
+
+### P-A26, P-A32, and BSM1
+
+The raw sheet formula at N=8, ν=0.00508, and r_wall/r_grain=0.40 is
+
+k₄ = 3 + (ν π²/6) (0.40)² (N−4)² = 3.02139203855.
+
+(N−4)² = 16 and 16/6 = 8/3 are exact. The pre-registered window 6.4 < k₄ < 8.0 does not contain 3.021, so the raw value is `FAIL_3SIGMA` against that window. The quoted benchmark 7.2 ± 0.6 has excess 4.2 over 3. The ratio of that excess to the raw excess is **196.334724701**. That factor is an external normalization audit, not an output of the algebra. First-order propagation of the catalogue uncertainties δν=0.0012 and δ(r)=0.05 gives about 0.0104 on the raw k₄, which does not turn 3.021 into 7.2. Status of the 7.2 identification: **Conditional / formula mismatch**.
+
+The model anisotropy axis and the model parity axis are both (0,0,1), so their absolute cosine is 1. An externally supplied cosine of 0 against a 3σ threshold 0.5 returns `FAIL_3SIGMA`. This checks the predicate. It is not a measurement of a CMB axis.
+
+The rank-8 BSM1 endomorphism doubles the first exponent coordinate. That algebraic eigenvalue is 2, registered as `bsm1-doubling`. It is not equal to ν. The mass splitting Δ = ν m_DM = 0.508 GeV at the assumed inputs ν=0.00508 and m_DM=100 GeV remains a product of catalogue numbers. Status: **Conditional**.

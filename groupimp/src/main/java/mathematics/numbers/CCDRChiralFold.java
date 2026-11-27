@@ -42,6 +42,18 @@ public final class CCDRChiralFold implements Serializable {
         if(tolerance.signum()<0)throw new IllegalArgumentException("SM-D8 tolerance must be nonnegative");
         return smD8SignedSine(phase,precision).subtract(nu).abs().compareTo(tolerance)<=0;
     }
+    /**
+     * Fixes one factorization of the chirality product from an oriented boundary.
+     * The incidence sign is epsilon5. The frame handedness is the foliation arrow.
+     * The unordered product epsilon5*arrow stays the same if both signs flip, so OP20
+     * remains for that product; this factory is injective on the ordered frame.
+     */
+    public static CCDRChiralFold fromOrientedBoundary(int incidence,int frameHandedness){
+        int epsilon=sign(incidence,"boundary incidence");
+        int arrow=sign(frameHandedness,"frame handedness");
+        int chirality=epsilon*arrow;
+        return new CCDRChiralFold(epsilon,arrow,chirality,chirality);
+    }
     public int epsilon5(){return epsilon5;}
     public int foliationArrow(){return foliationArrow;}
     public int simplexOrientation(){return simplexOrientation;}

@@ -92,6 +92,13 @@ public final class RationalTwistedLatticeAlgebra implements Serializable {
     public boolean isZero(){return terms.isEmpty();}
     public Exponent valuation(){if(isZero())throw MathFailure.undefined("Zero has no lattice valuation");return terms.firstKey();}
     public RationalQuaternion leadingCoefficient(){if(isZero())throw MathFailure.undefined("Zero has no leading coefficient");return terms.get(terms.firstKey());}
+    /** The associated-graded piece at the minimal exponent. Single-term elements multiply exactly. */
+    public RationalTwistedLatticeAlgebra leadingTerm(){
+        if(isZero())throw MathFailure.undefined("Zero has no leading term");
+        TreeMap<Exponent,RationalQuaternion> only=new TreeMap<Exponent,RationalQuaternion>();
+        only.put(valuation(),leadingCoefficient());
+        return new RationalTwistedLatticeAlgebra(rank,cocycle,only);
+    }
     /**
      * Additive finite-quotient projection pi_(5->4) from the first five exponent parities
      * and H(Q) coefficient coordinates onto the 128 rational coordinates of DixonZ2(Q).
